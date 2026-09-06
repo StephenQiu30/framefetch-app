@@ -1310,6 +1310,12 @@ abstract class AppLocalizations {
   /// **'用户名'**
   String get usernameLabel;
 
+  /// No description provided for @usernameHelp.
+  ///
+  /// In zh, this message translates to:
+  /// **'2–32 个字符，仅支持字母、数字、中文以及 _-. 字符。'**
+  String get usernameHelp;
+
   /// No description provided for @passwordLabel.
   ///
   /// In zh, this message translates to:
@@ -1391,7 +1397,7 @@ abstract class AppLocalizations {
   /// No description provided for @invalidUsername.
   ///
   /// In zh, this message translates to:
-  /// **'用户名需要 2–32 个字符。'**
+  /// **'用户名需为 2–32 个字符，仅支持字母、数字、中文以及 _-. 字符。'**
   String get invalidUsername;
 
   /// No description provided for @invalidPassword.

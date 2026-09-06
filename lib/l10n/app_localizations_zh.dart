@@ -621,6 +621,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get usernameLabel => '用户名';
 
   @override
+  String get usernameHelp => '2–32 个字符，仅支持字母、数字、中文以及 _-. 字符。';
+
+  @override
   String get passwordLabel => '密码';
 
   @override
@@ -660,7 +663,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get invalidEmail => '请输入有效的邮箱地址。';
 
   @override
-  String get invalidUsername => '用户名需要 2–32 个字符。';
+  String get invalidUsername => '用户名需为 2–32 个字符，仅支持字母、数字、中文以及 _-. 字符。';
 
   @override
   String get invalidPassword => '密码至少需要 8 个字符。';

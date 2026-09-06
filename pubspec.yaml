@@ -35,6 +35,7 @@ dependencies:
   package_info_plus: 9.0.1
   share_plus: 12.0.1
   shared_preferences: ^2.5.5
+  unorm_dart: ^0.3.2
   url_launcher: ^6.3.2
   video_server_api:
     path: packages/video_server_api

@@ -668,6 +668,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get usernameLabel => 'Username';
 
   @override
+  String get usernameHelp =>
+      '2–32 characters using letters, numbers, and _-. only.';
+
+  @override
   String get passwordLabel => 'Password';
 
   @override
@@ -707,7 +711,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get invalidEmail => 'Enter a valid email address.';
 
   @override
-  String get invalidUsername => 'Username must contain 2–32 characters.';
+  String get invalidUsername => 'Use 2–32 letters, numbers, or _-. characters.';
 
   @override
   String get invalidPassword => 'Password must contain at least 8 characters.';

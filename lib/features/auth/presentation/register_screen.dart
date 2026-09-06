@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
 import 'package:framegrab/features/auth/application/auth_session_controller.dart';
+import 'package:framegrab/features/auth/domain/username.dart';
 import 'package:framegrab/features/auth/presentation/auth_error_text.dart';
 import 'package:framegrab/features/auth/presentation/auth_failure_message.dart';
 import 'package:framegrab/features/auth/presentation/auth_page_scaffold.dart';
@@ -41,7 +42,7 @@ final class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     final success = await ref
         .read(authSessionProvider.notifier)
         .register(
-          username: _usernameController.text.trim(),
+          username: normalizeUsername(_usernameController.text),
           email: _emailController.text.trim(),
           password: _passwordController.text,
         );
@@ -67,13 +68,11 @@ final class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 controller: _usernameController,
                 textInputAction: TextInputAction.next,
                 autofillHints: const [AutofillHints.newUsername],
-                validator: (value) {
-                  final length = value?.trim().length ?? 0;
-                  return length >= 2 && length <= 32
-                      ? null
-                      : localizations.invalidUsername;
-                },
+                validator: (value) => isValidUsername(value ?? '')
+                    ? null
+                    : localizations.invalidUsername,
                 decoration: InputDecoration(
+                  helperText: localizations.usernameHelp,
                   labelText: localizations.usernameLabel,
                 ),
               ),
