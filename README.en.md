@@ -7,6 +7,7 @@
 [![Platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20Android-111827)](#scope-and-limitations)
 [![Release](https://img.shields.io/github/v/release/StephenQiu30/video-app?color=111827)](https://github.com/StephenQiu30/video-app/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-16a34a.svg)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/StephenQiu30/video-app?style=flat&color=111827)](https://github.com/StephenQiu30/video-app/stargazers)
 
 **FrameFetch is an open-source Flutter client for self-hosted media workflows on iOS and Android.** It connects to [`video-server`](https://github.com/StephenQiu30/video-server) to inspect authorized public-video links, upload local MP4 videos and screenplays, create and track download jobs, access completed media, inspect provider health, and run server-side AI video analysis.
 
@@ -56,11 +57,11 @@ Version `0.1.0+1` is intended for self-hosted evaluation and open-source collabo
 | Video AI analysis | Available | `video-server` runs inference; the app configures jobs and renders results |
 | Screenplay document list | Available | Reads real server data with loading, empty, failure, and refresh states |
 | Local-video and screenplay upload | Available | System picker, streaming SHA-256, bounded multipart PUT, ETag validation, and real completion requests |
-| Document AI and native report export | Available | Screenplay analysis/rewriting, structured reports, and Markdown save/share; see [019 acceptance](docs/design/README.md) |
+| Document AI and native report export | Available | Screenplay analysis/rewriting, structured reports, and Markdown save/share; see [AI analysis and reports](docs/design/08-AI分析与报告.md) (Chinese) |
 | WebSocket token updates | Planned | Active jobs and analyses currently converge through controlled polling |
 | Offline AI, persistent background downloads, offline library | Out of scope for the first release | No mobile extractor or embedded AI model |
 
-See [`docs/design/README.md`](docs/design/README.md) for the App design, including the reviewed App OpenAPI boundary.
+See [`docs/design/README.md`](docs/design/README.md) for the App design, including the reviewed App OpenAPI boundary, and [status and backlog](docs/design/13-状态与待办.md) (Chinese) for progress on each capability.
 
 ## Quick start
 
@@ -150,6 +151,8 @@ Integration tests require a usable server and device/simulator environment. See 
 ## Contributing
 
 Read [`CONTRIBUTING.md`](CONTRIBUTING.md), [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md), and [`SECURITY.md`](SECURITY.md). Use this repository for mobile UI, native-session, and device issues. Report API, Web, provider, queue, storage, or AI Worker issues to [`video-server`](https://github.com/StephenQiu30/video-server/issues).
+
+If FrameFetch is useful to you, please give it a **Star** and watch [Releases](https://github.com/StephenQiu30/video-app/releases). Issues labeled `good first issue` or `help wanted` are a good place to start.
 
 ## Citation
 
