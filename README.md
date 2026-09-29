@@ -7,6 +7,7 @@
 [![Platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20Android-111827)](#支持范围与限制)
 [![Release](https://img.shields.io/github/v/release/StephenQiu30/video-app?color=111827)](https://github.com/StephenQiu30/video-app/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-16a34a.svg)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/StephenQiu30/video-app?style=flat&color=111827)](https://github.com/StephenQiu30/video-app/stargazers)
 
 **FrameFetch（帧取）是面向自托管 `video-server` 的开源 Flutter 移动客户端。** 它让 iOS 与 Android 用户在原生界面中检查有权处理的公开视频、上传本地 MP4 与剧本文档、创建与跟踪下载任务，并按需发起由服务端执行的 AI 视频分析。
 
@@ -71,11 +72,11 @@ App 选择格式并创建下载任务
 | 视频 AI 分析 | 已实现 | 推理由 `video-server` 的 AI Worker 执行，App 负责配置、状态与结果展示 |
 | 剧本文档列表 | 已实现 | 可读取服务端数据并覆盖加载、空态、失败与刷新 |
 | 本地视频与剧本文档上传 | 已实现 | 系统选择器、流式 SHA-256、受限分片 PUT、ETag 校验和真实完成请求 |
-| 剧本文档 AI、分析报告原生导出 | 已接入 | 剧本分析/改写、结构化报告展示与 Markdown 保存/分享；见 [019 验收](docs/design/README.md) |
+| 剧本文档 AI、分析报告原生导出 | 已接入 | 剧本分析/改写、结构化报告展示与 Markdown 保存/分享；见 [AI 分析与报告](docs/design/08-AI分析与报告.md) |
 | WebSocket Token 更新 | 待开放 | 当前活动任务与分析使用受控轮询收敛状态 |
 | 离线 AI、后台常驻下载、离线媒体库 | 不在首期范围 | App 不内置媒体执行器或 AI 模型 |
 
-完整设计（含 App 专用 OpenAPI 边界）见 [`docs/design/README.md`](docs/design/README.md)。
+完整设计（含 App 专用 OpenAPI 边界）见 [`docs/design/README.md`](docs/design/README.md)，各能力的实现进度与待办见[状态与待办](docs/design/13-状态与待办.md)。
 
 ## 5 分钟启动
 
@@ -191,6 +192,8 @@ flutter build ios --simulator --no-codesign
 - 安全策略：[`SECURITY.md`](SECURITY.md)
 - 技术与产品文档：[`docs/design/README.md`](docs/design/README.md)
 - 问题与建议：[GitHub Issues](https://github.com/StephenQiu30/video-app/issues)
+
+如果帧取对你有帮助，欢迎点亮 **Star** 并关注 [Releases](https://github.com/StephenQiu30/video-app/releases)；带有 `good first issue` / `help wanted` 标签的 Issue 适合首次参与。
 
 提交 Issue 前请区分 App 与 Server：移动界面、原生会话和设备行为提交到本仓库；API、Web、Provider、队列、对象存储和 AI Worker 提交到 [`video-server`](https://github.com/StephenQiu30/video-server/issues)。
 
