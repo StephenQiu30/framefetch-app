@@ -1,6 +1,6 @@
 # FrameFetch App
 
-[简体中文](README.md) · [Server / Web](https://github.com/StephenQiu30/video-server) · [Documentation](docs/README.md)
+[简体中文](README.md) · [Server / Web](https://github.com/StephenQiu30/video-server) · [Documentation](docs/design/README.md)
 
 [![Flutter quality](https://github.com/StephenQiu30/video-app/actions/workflows/flutter-quality.yml/badge.svg)](https://github.com/StephenQiu30/video-app/actions/workflows/flutter-quality.yml)
 [![Flutter 3.44.7](https://img.shields.io/badge/Flutter-3.44.7-02569B?logo=flutter)](https://flutter.dev/)
@@ -31,7 +31,7 @@ FrameFetch does not run extractors, transcoders, or AI models on the phone. It d
 </p>
 
 <p align="center">
-  <sub>Public-link intake and server provider health on iPhone Simulator · <a href="docs/images/README.md">capture provenance</a></sub>
+  <sub>Public-link intake and server provider health on iPhone Simulator</sub>
 </p>
 
 ## Workflow
@@ -56,11 +56,11 @@ Version `0.1.0+1` is intended for self-hosted evaluation and open-source collabo
 | Video AI analysis | Available | `video-server` runs inference; the app configures jobs and renders results |
 | Screenplay document list | Available | Reads real server data with loading, empty, failure, and refresh states |
 | Local-video and screenplay upload | Available | System picker, streaming SHA-256, bounded multipart PUT, ETag validation, and real completion requests |
-| Document AI and native report export | Available | Screenplay analysis/rewriting, structured reports, and Markdown save/share; see [019 acceptance](docs/acceptance/019-剧本文档详情与跨端一致性验收.md) |
+| Document AI and native report export | Available | Screenplay analysis/rewriting, structured reports, and Markdown save/share; see [019 acceptance](docs/design/README.md) |
 | WebSocket token updates | Planned | Active jobs and analyses currently converge through controlled polling |
 | Offline AI, persistent background downloads, offline library | Out of scope for the first release | No mobile extractor or embedded AI model |
 
-See [`docs/README.md`](docs/README.md) for the Design → PRD → Plan → Acceptance history and [`docs/contracts/README.md`](docs/contracts/README.md) for the reviewed App OpenAPI boundary.
+See [`docs/design/README.md`](docs/design/README.md) for the App design, including the reviewed App OpenAPI boundary.
 
 ## Quick start
 
