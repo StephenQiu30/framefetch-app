@@ -2,13 +2,12 @@
 
 本仓库负责 Flutter 原生客户端。`video-server` 负责 API、Web 平台、异步任务、Provider、对象存储和 AI Worker；默认只读，不在本仓库复制或修改服务端实现。
 
-Phase 1 Flutter 工程基座已经建立。新增业务能力仍必须在对应 Design/PRD 确认、Plan Ready、Acceptance Defined 后实现；服务端原生鉴权契约未冻结前，不得接入浏览器 Cookie、WebView 登录或宣称真实业务 E2E 已完成。
+Phase 1 Flutter 工程基座已经建立。新增业务能力须先在 `docs/design/README.md` 更新设计后实现；服务端原生鉴权契约未冻结前，不得接入浏览器 Cookie、WebView 登录或宣称真实业务 E2E 已完成。
 
 ## 唯一事实与交付链
 
-- 产品与技术事实以 `docs/` 为准，入口为 `docs/README.md`。
-- 交付固定遵循 `Design → PRD → Plan → Acceptance`。
-- 上游变化先更新全部受影响的下游文档；来源服务端的历史证据不能替代 App 独立证据。
+- 产品与技术事实以 `docs/design/`（索引见 README.md）为准，它是本项目唯一保留的设计文档；不再维护 PRD、Plan、Acceptance 等过程文档，过程记录通过 Git 历史追溯。
+- 行为、契约或边界变化时同步更新 `docs/design/README.md`；来源服务端的历史证据不能替代 App 独立证据。
 - 不从已删除的 Umi/Next.js 实现恢复页面、路由、依赖或视觉方案。
 - 不保存临时计划、工作日志、缓存、构建产物、签名材料或本地环境文件。
 

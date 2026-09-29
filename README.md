@@ -1,6 +1,6 @@
 # FrameFetch（帧取）App
 
-[English](README.en.md) · [服务端 / Web](https://github.com/StephenQiu30/video-server) · [项目文档](docs/README.md)
+[English](README.en.md) · [服务端 / Web](https://github.com/StephenQiu30/video-server) · [项目文档](docs/design/README.md)
 
 [![Flutter quality](https://github.com/StephenQiu30/video-app/actions/workflows/flutter-quality.yml/badge.svg)](https://github.com/StephenQiu30/video-app/actions/workflows/flutter-quality.yml)
 [![Flutter 3.44.7](https://img.shields.io/badge/Flutter-3.44.7-02569B?logo=flutter)](https://flutter.dev/)
@@ -33,7 +33,7 @@ FrameFetch 不在手机上运行提取器、转码器或 AI 模型，也不绕�
 </p>
 
 <p align="center">
-  <sub>左：链接检查与任务入口 · 右：服务端 Provider 状态（iPhone Simulator）· <a href="docs/images/README.md">截图来源</a></sub>
+  <sub>左：链接检查与任务入口 · 右：服务端 Provider 状态（iPhone Simulator）</sub>
 </p>
 
 ## 核心流程
@@ -71,11 +71,11 @@ App 选择格式并创建下载任务
 | 视频 AI 分析 | 已实现 | 推理由 `video-server` 的 AI Worker 执行，App 负责配置、状态与结果展示 |
 | 剧本文档列表 | 已实现 | 可读取服务端数据并覆盖加载、空态、失败与刷新 |
 | 本地视频与剧本文档上传 | 已实现 | 系统选择器、流式 SHA-256、受限分片 PUT、ETag 校验和真实完成请求 |
-| 剧本文档 AI、分析报告原生导出 | 已接入 | 剧本分析/改写、结构化报告展示与 Markdown 保存/分享；见 [019 验收](docs/acceptance/019-剧本文档详情与跨端一致性验收.md) |
+| 剧本文档 AI、分析报告原生导出 | 已接入 | 剧本分析/改写、结构化报告展示与 Markdown 保存/分享；见 [019 验收](docs/design/README.md) |
 | WebSocket Token 更新 | 待开放 | 当前活动任务与分析使用受控轮询收敛状态 |
 | 离线 AI、后台常驻下载、离线媒体库 | 不在首期范围 | App 不内置媒体执行器或 AI 模型 |
 
-完整 Design → PRD → Plan → Acceptance 记录见 [`docs/README.md`](docs/README.md)，App 专用 OpenAPI 边界见 [`docs/contracts/README.md`](docs/contracts/README.md)。
+完整设计（含 App 专用 OpenAPI 边界）见 [`docs/design/README.md`](docs/design/README.md)。
 
 ## 5 分钟启动
 
@@ -150,7 +150,7 @@ packages/video_server_api/    从冻结 OpenAPI 快照生成的 Dart 客户端
 test/                         单元与 Widget 测试
 integration_test/             模拟器/真机关键流程
 tool/                         质量门禁与 OpenAPI 生成入口
-docs/                         Design、PRD、Plan、Acceptance 与契约边界
+docs/                         系统设计文档与 README 截图资源
 ```
 
 ## 安全与隐私
@@ -189,7 +189,7 @@ flutter build ios --simulator --no-codesign
 - 贡献流程：[`CONTRIBUTING.md`](CONTRIBUTING.md)
 - 行为准则：[`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)
 - 安全策略：[`SECURITY.md`](SECURITY.md)
-- 技术与产品文档：[`docs/README.md`](docs/README.md)
+- 技术与产品文档：[`docs/design/README.md`](docs/design/README.md)
 - 问题与建议：[GitHub Issues](https://github.com/StephenQiu30/video-app/issues)
 
 提交 Issue 前请区分 App 与 Server：移动界面、原生会话和设备行为提交到本仓库；API、Web、Provider、队列、对象存储和 AI Worker 提交到 [`video-server`](https://github.com/StephenQiu30/video-server/issues)。

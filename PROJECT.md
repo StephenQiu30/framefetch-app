@@ -1,6 +1,6 @@
 # FrameFetch App 项目规范
 
-核对日期：2026-09-21。本文仅适用于 `video-app` 独立仓库，是后续目录、命名、技术栈与 UI 迁移的基线。协作与交付规则以 [AGENTS.md](AGENTS.md) 为准，产品与验收事实见 [docs/README.md](docs/README.md)，精确依赖版本以 `pubspec.yaml` 和 `pubspec.lock` 为准。
+核对日期：2026-09-21。本文仅适用于 `video-app` 独立仓库，是后续目录、命名、技术栈与 UI 迁移的基线。协作与交付规则以 [AGENTS.md](AGENTS.md) 为准，产品与验收事实见 [docs/design/README.md](docs/design/README.md)，精确依赖版本以 `pubspec.yaml` 和 `pubspec.lock` 为准。
 
 本规范参考 Flutter 官方的 [App architecture guide](https://docs.flutter.dev/app-architecture/guide)、[Architecture recommendations](https://docs.flutter.dev/app-architecture/recommendations)、[Architecture case study](https://docs.flutter.dev/app-architecture/case-study)、Dart 官方的 [Effective Dart: Style](https://dart.dev/effective-dart/style) 与 [Package layout conventions](https://dart.dev/tools/pub/package-layout)。官方建议允许按项目规模调整；本项目固定采用下述 feature-first 混合结构，不直接照搬示例目录。官方文档当前对应的 Flutter 版本高于本项目工具链基线，架构调研不构成 SDK 升级授权。
 
@@ -105,7 +105,7 @@ video-app/
 ├── integration_test/               模拟器/真机端到端用户流程
 ├── tool/                           仓库质量与可复现工具入口
 │   └── openapi/                    OpenAPI 生成配置与工具
-└── docs/                           Design、PRD、Plan、Acceptance 与契约说明
+└── docs/                           系统设计文档与 README 截图资源
 ```
 
 目录职责规则：
@@ -192,8 +192,8 @@ video-app/
 3. 每个批次保持可编译、可回滚，不让新旧状态管理或两套视觉系统继续扩散。
 4. 新文件立即遵守本文；旧文件只在对应 feature 被迁移或修改时收敛，避免纯重命名造成大范围冲突。
 5. 每批至少执行格式化、`flutter analyze`、相关单元/Widget 测试；涉及核心旅程、平台能力或视觉变化时补充 integration_test、模拟器/真机和截图证据。
-6. 当前工作区中已存在的迁移改动不因“代码已写入”自动视为通过，仍需按 Design → PRD → Plan → Acceptance 和本文逐项复核。
+6. 当前工作区中已存在的迁移改动不因“代码已写入”自动视为通过，仍需按 docs/design/README.md 和本文逐项复核。
 
 质量入口包括 `dart run tool/check.dart`、`flutter analyze`、单元与 Widget 测试、`integration_test` 及 Android/iOS 构建。签名、凭据、本地环境和构建产物不得进入 Git。
 
-详细入口：[运行说明](README.md)、[文档索引](docs/README.md)、[契约边界](docs/contracts/README.md)、[OpenAPI 工具](tool/openapi/README.md)。
+详细入口：[运行说明](README.md)、[设计文档与契约边界](docs/design/README.md)、[OpenAPI 工具](tool/openapi/README.md)。

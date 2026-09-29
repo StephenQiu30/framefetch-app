@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        FrameFetch 按 Design → PRD → Plan → Acceptance 交付。请先描述用户问题与移动端价值；服务端能力建议应提交到 video-server。
+        FrameFetch 以 docs/design/README.md 为设计基线交付。请先描述用户问题与移动端价值；服务端能力建议应提交到 video-server。
 
   - type: textarea
     id: problem

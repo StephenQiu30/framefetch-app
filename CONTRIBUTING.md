@@ -6,7 +6,7 @@
 
 本仓库是 Flutter iOS/Android 客户端，不再建设 Web 平台。API 与浏览器 Web 由 [`video-server`](https://github.com/StephenQiu30/video-server) 维护；管理后台、Provider 执行、媒体解析、AI Worker 和对象存储不进入 App。
 
-Phase 1 工程基座已经建立。每个后续能力仍必须完成 `Design → PRD → Plan → Acceptance`；原生鉴权契约未冻结前不得接入浏览器 Cookie、WebView 登录或伪造业务 E2E。详细规则见 [`AGENTS.md`](AGENTS.md)。
+Phase 1 工程基座已经建立。每个后续能力须先更新 `docs/design/README.md`；原生鉴权契约未冻结前不得接入浏览器 Cookie、WebView 登录或伪造业务 E2E。详细规则见 [`AGENTS.md`](AGENTS.md)。
 
 ## 实现原则
 
