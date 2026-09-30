@@ -8,9 +8,9 @@ part of 'screenplay_structure_response.dart';
 
 class _$ScreenplayStructureResponse extends ScreenplayStructureResponse {
   @override
-  final BuiltList<ScreenplayEvidenceItemResponse> acts;
+  final BuiltList<ScreenplayFindingResponse> acts;
   @override
-  final BuiltList<ScreenplayEvidenceItemResponse> turningPoints;
+  final BuiltList<ScreenplayFindingResponse> turningPoints;
   @override
   final String pacingSummary;
 
@@ -67,17 +67,15 @@ class ScreenplayStructureResponseBuilder
             ScreenplayStructureResponseBuilder> {
   _$ScreenplayStructureResponse? _$v;
 
-  ListBuilder<ScreenplayEvidenceItemResponse>? _acts;
-  ListBuilder<ScreenplayEvidenceItemResponse> get acts =>
-      _$this._acts ??= ListBuilder<ScreenplayEvidenceItemResponse>();
-  set acts(ListBuilder<ScreenplayEvidenceItemResponse>? acts) =>
-      _$this._acts = acts;
+  ListBuilder<ScreenplayFindingResponse>? _acts;
+  ListBuilder<ScreenplayFindingResponse> get acts =>
+      _$this._acts ??= ListBuilder<ScreenplayFindingResponse>();
+  set acts(ListBuilder<ScreenplayFindingResponse>? acts) => _$this._acts = acts;
 
-  ListBuilder<ScreenplayEvidenceItemResponse>? _turningPoints;
-  ListBuilder<ScreenplayEvidenceItemResponse> get turningPoints =>
-      _$this._turningPoints ??= ListBuilder<ScreenplayEvidenceItemResponse>();
-  set turningPoints(
-          ListBuilder<ScreenplayEvidenceItemResponse>? turningPoints) =>
+  ListBuilder<ScreenplayFindingResponse>? _turningPoints;
+  ListBuilder<ScreenplayFindingResponse> get turningPoints =>
+      _$this._turningPoints ??= ListBuilder<ScreenplayFindingResponse>();
+  set turningPoints(ListBuilder<ScreenplayFindingResponse>? turningPoints) =>
       _$this._turningPoints = turningPoints;
 
   String? _pacingSummary;

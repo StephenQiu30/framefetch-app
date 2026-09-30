@@ -8,8 +8,8 @@ import 'package:video_server_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**acts** | [**BuiltList&lt;ScreenplayEvidenceItemResponse&gt;**](ScreenplayEvidenceItemResponse.md) |  |
-**turningPoints** | [**BuiltList&lt;ScreenplayEvidenceItemResponse&gt;**](ScreenplayEvidenceItemResponse.md) |  |
+**acts** | [**BuiltList&lt;ScreenplayFindingResponse&gt;**](ScreenplayFindingResponse.md) |  |
+**turningPoints** | [**BuiltList&lt;ScreenplayFindingResponse&gt;**](ScreenplayFindingResponse.md) |  |
 **pacingSummary** | **String** |  |
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

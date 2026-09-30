@@ -17,8 +17,6 @@ class _$ScreenplayCharacterResponse extends ScreenplayCharacterResponse {
   final String conflict;
   @override
   final String arc;
-  @override
-  final BuiltList<String> evidenceSceneIds;
 
   factory _$ScreenplayCharacterResponse(
           [void Function(ScreenplayCharacterResponseBuilder)? updates]) =>
@@ -29,8 +27,7 @@ class _$ScreenplayCharacterResponse extends ScreenplayCharacterResponse {
       required this.name,
       required this.goal,
       required this.conflict,
-      required this.arc,
-      required this.evidenceSceneIds})
+      required this.arc})
       : super._();
   @override
   ScreenplayCharacterResponse rebuild(
@@ -49,8 +46,7 @@ class _$ScreenplayCharacterResponse extends ScreenplayCharacterResponse {
         name == other.name &&
         goal == other.goal &&
         conflict == other.conflict &&
-        arc == other.arc &&
-        evidenceSceneIds == other.evidenceSceneIds;
+        arc == other.arc;
   }
 
   @override
@@ -61,7 +57,6 @@ class _$ScreenplayCharacterResponse extends ScreenplayCharacterResponse {
     _$hash = $jc(_$hash, goal.hashCode);
     _$hash = $jc(_$hash, conflict.hashCode);
     _$hash = $jc(_$hash, arc.hashCode);
-    _$hash = $jc(_$hash, evidenceSceneIds.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -73,8 +68,7 @@ class _$ScreenplayCharacterResponse extends ScreenplayCharacterResponse {
           ..add('name', name)
           ..add('goal', goal)
           ..add('conflict', conflict)
-          ..add('arc', arc)
-          ..add('evidenceSceneIds', evidenceSceneIds))
+          ..add('arc', arc))
         .toString();
   }
 }
@@ -105,12 +99,6 @@ class ScreenplayCharacterResponseBuilder
   String? get arc => _$this._arc;
   set arc(String? arc) => _$this._arc = arc;
 
-  ListBuilder<String>? _evidenceSceneIds;
-  ListBuilder<String> get evidenceSceneIds =>
-      _$this._evidenceSceneIds ??= ListBuilder<String>();
-  set evidenceSceneIds(ListBuilder<String>? evidenceSceneIds) =>
-      _$this._evidenceSceneIds = evidenceSceneIds;
-
   ScreenplayCharacterResponseBuilder() {
     ScreenplayCharacterResponse._defaults(this);
   }
@@ -123,7 +111,6 @@ class ScreenplayCharacterResponseBuilder
       _goal = $v.goal;
       _conflict = $v.conflict;
       _arc = $v.arc;
-      _evidenceSceneIds = $v.evidenceSceneIds.toBuilder();
       _$v = null;
     }
     return this;
@@ -143,33 +130,19 @@ class ScreenplayCharacterResponseBuilder
   ScreenplayCharacterResponse build() => _build();
 
   _$ScreenplayCharacterResponse _build() {
-    _$ScreenplayCharacterResponse _$result;
-    try {
-      _$result = _$v ??
-          _$ScreenplayCharacterResponse._(
-            id: BuiltValueNullFieldError.checkNotNull(
-                id, r'ScreenplayCharacterResponse', 'id'),
-            name: BuiltValueNullFieldError.checkNotNull(
-                name, r'ScreenplayCharacterResponse', 'name'),
-            goal: BuiltValueNullFieldError.checkNotNull(
-                goal, r'ScreenplayCharacterResponse', 'goal'),
-            conflict: BuiltValueNullFieldError.checkNotNull(
-                conflict, r'ScreenplayCharacterResponse', 'conflict'),
-            arc: BuiltValueNullFieldError.checkNotNull(
-                arc, r'ScreenplayCharacterResponse', 'arc'),
-            evidenceSceneIds: evidenceSceneIds.build(),
-          );
-    } catch (_) {
-      late String _$failedField;
-      try {
-        _$failedField = 'evidenceSceneIds';
-        evidenceSceneIds.build();
-      } catch (e) {
-        throw BuiltValueNestedFieldError(
-            r'ScreenplayCharacterResponse', _$failedField, e.toString());
-      }
-      rethrow;
-    }
+    final _$result = _$v ??
+        _$ScreenplayCharacterResponse._(
+          id: BuiltValueNullFieldError.checkNotNull(
+              id, r'ScreenplayCharacterResponse', 'id'),
+          name: BuiltValueNullFieldError.checkNotNull(
+              name, r'ScreenplayCharacterResponse', 'name'),
+          goal: BuiltValueNullFieldError.checkNotNull(
+              goal, r'ScreenplayCharacterResponse', 'goal'),
+          conflict: BuiltValueNullFieldError.checkNotNull(
+              conflict, r'ScreenplayCharacterResponse', 'conflict'),
+          arc: BuiltValueNullFieldError.checkNotNull(
+              arc, r'ScreenplayCharacterResponse', 'arc'),
+        );
     replace(_$result);
     return _$result;
   }

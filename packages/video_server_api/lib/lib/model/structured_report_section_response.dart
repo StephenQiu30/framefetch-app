@@ -3,64 +3,69 @@
 //
 
 // ignore_for_file: unused_element, unused_element_parameter
+import 'package:video_server_api/lib/model/video_article_evidence_response.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-part 'screenplay_evidence_item_response.g.dart';
+part 'structured_report_section_response.g.dart';
 
-/// ScreenplayEvidenceItemResponse
+/// StructuredReportSectionResponse
 ///
 /// Properties:
 /// * [id]
-/// * [title]
-/// * [description]
-/// * [evidenceSceneIds]
+/// * [heading]
+/// * [body]
+/// * [items]
+/// * [evidence]
 @BuiltValue()
-abstract class ScreenplayEvidenceItemResponse
+abstract class StructuredReportSectionResponse
     implements
-        Built<ScreenplayEvidenceItemResponse,
-            ScreenplayEvidenceItemResponseBuilder> {
+        Built<StructuredReportSectionResponse,
+            StructuredReportSectionResponseBuilder> {
   @BuiltValueField(wireName: r'id')
   String get id;
 
-  @BuiltValueField(wireName: r'title')
-  String get title;
+  @BuiltValueField(wireName: r'heading')
+  String get heading;
 
-  @BuiltValueField(wireName: r'description')
-  String get description;
+  @BuiltValueField(wireName: r'body')
+  String get body;
 
-  @BuiltValueField(wireName: r'evidence_scene_ids')
-  BuiltList<String> get evidenceSceneIds;
+  @BuiltValueField(wireName: r'items')
+  BuiltList<String> get items;
 
-  ScreenplayEvidenceItemResponse._();
+  @BuiltValueField(wireName: r'evidence')
+  BuiltList<VideoArticleEvidenceResponse> get evidence;
 
-  factory ScreenplayEvidenceItemResponse(
-          [void updates(ScreenplayEvidenceItemResponseBuilder b)]) =
-      _$ScreenplayEvidenceItemResponse;
+  StructuredReportSectionResponse._();
+
+  factory StructuredReportSectionResponse(
+          [void updates(StructuredReportSectionResponseBuilder b)]) =
+      _$StructuredReportSectionResponse;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ScreenplayEvidenceItemResponseBuilder b) => b;
+  static void _defaults(StructuredReportSectionResponseBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ScreenplayEvidenceItemResponse> get serializer =>
-      _$ScreenplayEvidenceItemResponseSerializer();
+  static Serializer<StructuredReportSectionResponse> get serializer =>
+      _$StructuredReportSectionResponseSerializer();
 }
 
-class _$ScreenplayEvidenceItemResponseSerializer
-    implements PrimitiveSerializer<ScreenplayEvidenceItemResponse> {
+class _$StructuredReportSectionResponseSerializer
+    implements PrimitiveSerializer<StructuredReportSectionResponse> {
   @override
   final Iterable<Type> types = const [
-    ScreenplayEvidenceItemResponse,
-    _$ScreenplayEvidenceItemResponse
+    StructuredReportSectionResponse,
+    _$StructuredReportSectionResponse
   ];
 
   @override
-  final String wireName = r'ScreenplayEvidenceItemResponse';
+  final String wireName = r'StructuredReportSectionResponse';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
-    ScreenplayEvidenceItemResponse object, {
+    StructuredReportSectionResponse object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
     yield r'id';
@@ -68,27 +73,33 @@ class _$ScreenplayEvidenceItemResponseSerializer
       object.id,
       specifiedType: const FullType(String),
     );
-    yield r'title';
+    yield r'heading';
     yield serializers.serialize(
-      object.title,
+      object.heading,
       specifiedType: const FullType(String),
     );
-    yield r'description';
+    yield r'body';
     yield serializers.serialize(
-      object.description,
+      object.body,
       specifiedType: const FullType(String),
     );
-    yield r'evidence_scene_ids';
+    yield r'items';
     yield serializers.serialize(
-      object.evidenceSceneIds,
+      object.items,
       specifiedType: const FullType(BuiltList, [FullType(String)]),
+    );
+    yield r'evidence';
+    yield serializers.serialize(
+      object.evidence,
+      specifiedType:
+          const FullType(BuiltList, [FullType(VideoArticleEvidenceResponse)]),
     );
   }
 
   @override
   Object serialize(
     Serializers serializers,
-    ScreenplayEvidenceItemResponse object, {
+    StructuredReportSectionResponse object, {
     FullType specifiedType = FullType.unspecified,
   }) {
     return _serializeProperties(serializers, object,
@@ -101,7 +112,7 @@ class _$ScreenplayEvidenceItemResponseSerializer
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required ScreenplayEvidenceItemResponseBuilder result,
+    required StructuredReportSectionResponseBuilder result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
@@ -115,26 +126,34 @@ class _$ScreenplayEvidenceItemResponseSerializer
           ) as String;
           result.id = valueDes;
           break;
-        case r'title':
+        case r'heading':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.title = valueDes;
+          result.heading = valueDes;
           break;
-        case r'description':
+        case r'body':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.description = valueDes;
+          result.body = valueDes;
           break;
-        case r'evidence_scene_ids':
+        case r'items':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(BuiltList, [FullType(String)]),
           ) as BuiltList<String>;
-          result.evidenceSceneIds.replace(valueDes);
+          result.items.replace(valueDes);
+          break;
+        case r'evidence':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(
+                BuiltList, [FullType(VideoArticleEvidenceResponse)]),
+          ) as BuiltList<VideoArticleEvidenceResponse>;
+          result.evidence.replace(valueDes);
           break;
         default:
           unhandled.add(key);
@@ -145,12 +164,12 @@ class _$ScreenplayEvidenceItemResponseSerializer
   }
 
   @override
-  ScreenplayEvidenceItemResponse deserialize(
+  StructuredReportSectionResponse deserialize(
     Serializers serializers,
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = ScreenplayEvidenceItemResponseBuilder();
+    final result = StructuredReportSectionResponseBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(

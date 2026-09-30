@@ -5,6 +5,7 @@
 // ignore_for_file: unused_element, unused_element_parameter
 import 'package:video_server_api/lib/model/screenplay_analysis_result_response.dart';
 import 'package:video_server_api/lib/model/screenplay_rewrite_result_response.dart';
+import 'package:video_server_api/lib/model/structured_report_result_response.dart';
 import 'package:video_server_api/lib/model/video_article_result_response.dart';
 import 'package:video_server_api/lib/model/video_analysis_result_response.dart';
 import 'package:built_collection/built_collection.dart';
@@ -49,7 +50,7 @@ part 'analysis_response_result.g.dart';
 @BuiltValue()
 abstract class AnalysisResponseResult
     implements Built<AnalysisResponseResult, AnalysisResponseResultBuilder> {
-  /// One Of [ScreenplayAnalysisResultResponse], [ScreenplayRewriteResultResponse], [VideoAnalysisResultResponse], [VideoArticleResultResponse]
+  /// One Of [ScreenplayAnalysisResultResponse], [ScreenplayRewriteResultResponse], [StructuredReportResultResponse], [VideoAnalysisResultResponse], [VideoArticleResultResponse]
   OneOf get oneOf;
 
   static const String discriminatorFieldName = r'kind';
@@ -57,6 +58,7 @@ abstract class AnalysisResponseResult
   static const Map<String, Type> discriminatorMapping = {
     r'screenplay_analysis': ScreenplayAnalysisResultResponse,
     r'screenplay_rewrite': ScreenplayRewriteResultResponse,
+    r'structured_report': StructuredReportResultResponse,
     r'video_article': VideoArticleResultResponse,
     r'video_visual_analysis': VideoAnalysisResultResponse,
   };
@@ -83,6 +85,9 @@ extension AnalysisResponseResultDiscriminatorExt on AnalysisResponseResult {
     if (this is ScreenplayRewriteResultResponse) {
       return r'screenplay_rewrite';
     }
+    if (this is StructuredReportResultResponse) {
+      return r'structured_report';
+    }
     if (this is VideoArticleResultResponse) {
       return r'video_article';
     }
@@ -101,6 +106,9 @@ extension AnalysisResponseResultBuilderDiscriminatorExt
     }
     if (this is ScreenplayRewriteResultResponseBuilder) {
       return r'screenplay_rewrite';
+    }
+    if (this is StructuredReportResultResponseBuilder) {
+      return r'structured_report';
     }
     if (this is VideoArticleResultResponseBuilder) {
       return r'video_article';
@@ -158,6 +166,7 @@ class _$AnalysisResponseResultSerializer
     final oneOfTypes = [
       ScreenplayAnalysisResultResponse,
       ScreenplayRewriteResultResponse,
+      StructuredReportResultResponse,
       VideoArticleResultResponse,
       VideoAnalysisResultResponse,
     ];
@@ -177,6 +186,13 @@ class _$AnalysisResponseResultSerializer
           specifiedType: FullType(ScreenplayRewriteResultResponse),
         ) as ScreenplayRewriteResultResponse;
         oneOfType = ScreenplayRewriteResultResponse;
+        break;
+      case r'structured_report':
+        oneOfResult = serializers.deserialize(
+          oneOfDataSrc,
+          specifiedType: FullType(StructuredReportResultResponse),
+        ) as StructuredReportResultResponse;
+        oneOfType = StructuredReportResultResponse;
         break;
       case r'video_article':
         oneOfResult = serializers.deserialize(
@@ -205,9 +221,9 @@ class _$AnalysisResponseResultSerializer
 }
 
 class AnalysisResponseResultKindEnum extends EnumClass {
-  @BuiltValueEnumConst(wireName: r'screenplay_rewrite')
-  static const AnalysisResponseResultKindEnum screenplayRewrite =
-      _$analysisResponseResultKindEnum_screenplayRewrite;
+  @BuiltValueEnumConst(wireName: r'structured_report')
+  static const AnalysisResponseResultKindEnum structuredReport =
+      _$analysisResponseResultKindEnum_structuredReport;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const AnalysisResponseResultKindEnum unknownDefaultOpenApi =
       _$analysisResponseResultKindEnum_unknownDefaultOpenApi;

@@ -52,6 +52,9 @@ class DownloadErrorCode extends EnumClass {
   @BuiltValueEnumConst(wireName: r'provider_session_expired')
   static const DownloadErrorCode providerSessionExpired =
       _$providerSessionExpired;
+  @BuiltValueEnumConst(wireName: r'provider_session_not_ready')
+  static const DownloadErrorCode providerSessionNotReady =
+      _$providerSessionNotReady;
   @BuiltValueEnumConst(wireName: r'provider_temporarily_unavailable')
   static const DownloadErrorCode providerTemporarilyUnavailable =
       _$providerTemporarilyUnavailable;

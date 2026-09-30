@@ -3,8 +3,8 @@
 //
 
 // ignore_for_file: unused_element, unused_element_parameter
-import 'package:video_server_api/lib/model/screenplay_evidence_item_response.dart';
 import 'package:built_collection/built_collection.dart';
+import 'package:video_server_api/lib/model/screenplay_finding_response.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -21,10 +21,10 @@ abstract class ScreenplayStructureResponse
     implements
         Built<ScreenplayStructureResponse, ScreenplayStructureResponseBuilder> {
   @BuiltValueField(wireName: r'acts')
-  BuiltList<ScreenplayEvidenceItemResponse> get acts;
+  BuiltList<ScreenplayFindingResponse> get acts;
 
   @BuiltValueField(wireName: r'turning_points')
-  BuiltList<ScreenplayEvidenceItemResponse> get turningPoints;
+  BuiltList<ScreenplayFindingResponse> get turningPoints;
 
   @BuiltValueField(wireName: r'pacing_summary')
   String get pacingSummary;
@@ -63,13 +63,13 @@ class _$ScreenplayStructureResponseSerializer
     yield serializers.serialize(
       object.acts,
       specifiedType:
-          const FullType(BuiltList, [FullType(ScreenplayEvidenceItemResponse)]),
+          const FullType(BuiltList, [FullType(ScreenplayFindingResponse)]),
     );
     yield r'turning_points';
     yield serializers.serialize(
       object.turningPoints,
       specifiedType:
-          const FullType(BuiltList, [FullType(ScreenplayEvidenceItemResponse)]),
+          const FullType(BuiltList, [FullType(ScreenplayFindingResponse)]),
     );
     yield r'pacing_summary';
     yield serializers.serialize(
@@ -105,16 +105,16 @@ class _$ScreenplayStructureResponseSerializer
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(
-                BuiltList, [FullType(ScreenplayEvidenceItemResponse)]),
-          ) as BuiltList<ScreenplayEvidenceItemResponse>;
+                BuiltList, [FullType(ScreenplayFindingResponse)]),
+          ) as BuiltList<ScreenplayFindingResponse>;
           result.acts.replace(valueDes);
           break;
         case r'turning_points':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(
-                BuiltList, [FullType(ScreenplayEvidenceItemResponse)]),
-          ) as BuiltList<ScreenplayEvidenceItemResponse>;
+                BuiltList, [FullType(ScreenplayFindingResponse)]),
+          ) as BuiltList<ScreenplayFindingResponse>;
           result.turningPoints.replace(valueDes);
           break;
         case r'pacing_summary':

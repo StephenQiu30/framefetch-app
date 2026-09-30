@@ -14,6 +14,8 @@ const AnalysisResultContract _$screenplayAnalysis =
     const AnalysisResultContract._('screenplayAnalysis');
 const AnalysisResultContract _$screenplayRewrite =
     const AnalysisResultContract._('screenplayRewrite');
+const AnalysisResultContract _$structuredReport =
+    const AnalysisResultContract._('structuredReport');
 const AnalysisResultContract _$unknownDefaultOpenApi =
     const AnalysisResultContract._('unknownDefaultOpenApi');
 
@@ -27,6 +29,8 @@ AnalysisResultContract _$valueOf(String name) {
       return _$screenplayAnalysis;
     case 'screenplayRewrite':
       return _$screenplayRewrite;
+    case 'structuredReport':
+      return _$structuredReport;
     case 'unknownDefaultOpenApi':
       return _$unknownDefaultOpenApi;
     default:
@@ -40,6 +44,7 @@ final BuiltSet<AnalysisResultContract> _$values =
   _$videoArticle,
   _$screenplayAnalysis,
   _$screenplayRewrite,
+  _$structuredReport,
   _$unknownDefaultOpenApi,
 ]);
 
@@ -49,6 +54,7 @@ class _$AnalysisResultContractMeta {
   AnalysisResultContract get videoArticle => _$videoArticle;
   AnalysisResultContract get screenplayAnalysis => _$screenplayAnalysis;
   AnalysisResultContract get screenplayRewrite => _$screenplayRewrite;
+  AnalysisResultContract get structuredReport => _$structuredReport;
   AnalysisResultContract get unknownDefaultOpenApi => _$unknownDefaultOpenApi;
   AnalysisResultContract valueOf(String name) => _$valueOf(name);
   BuiltSet<AnalysisResultContract> get values => _$values;
@@ -70,6 +76,7 @@ class _$AnalysisResultContractSerializer
     'videoArticle': 'video-article',
     'screenplayAnalysis': 'screenplay-analysis',
     'screenplayRewrite': 'screenplay-rewrite',
+    'structuredReport': 'structured-report',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
@@ -77,6 +84,7 @@ class _$AnalysisResultContractSerializer
     'video-article': 'videoArticle',
     'screenplay-analysis': 'screenplayAnalysis',
     'screenplay-rewrite': 'screenplayRewrite',
+    'structured-report': 'structuredReport',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 

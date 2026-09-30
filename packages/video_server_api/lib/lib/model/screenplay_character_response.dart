@@ -3,7 +3,6 @@
 //
 
 // ignore_for_file: unused_element, unused_element_parameter
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -17,7 +16,6 @@ part 'screenplay_character_response.g.dart';
 /// * [goal]
 /// * [conflict]
 /// * [arc]
-/// * [evidenceSceneIds]
 @BuiltValue()
 abstract class ScreenplayCharacterResponse
     implements
@@ -36,9 +34,6 @@ abstract class ScreenplayCharacterResponse
 
   @BuiltValueField(wireName: r'arc')
   String get arc;
-
-  @BuiltValueField(wireName: r'evidence_scene_ids')
-  BuiltList<String> get evidenceSceneIds;
 
   ScreenplayCharacterResponse._();
 
@@ -94,11 +89,6 @@ class _$ScreenplayCharacterResponseSerializer
     yield serializers.serialize(
       object.arc,
       specifiedType: const FullType(String),
-    );
-    yield r'evidence_scene_ids';
-    yield serializers.serialize(
-      object.evidenceSceneIds,
-      specifiedType: const FullType(BuiltList, [FullType(String)]),
     );
   }
 
@@ -159,13 +149,6 @@ class _$ScreenplayCharacterResponseSerializer
             specifiedType: const FullType(String),
           ) as String;
           result.arc = valueDes;
-          break;
-        case r'evidence_scene_ids':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
-          result.evidenceSceneIds.replace(valueDes);
           break;
         default:
           unhandled.add(key);

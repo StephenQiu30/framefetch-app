@@ -9,7 +9,7 @@ import 'package:video_server_api/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  |
-**status** | **String** |  |
+**status** | [**AnalysisReportStatus**](AnalysisReportStatus.md) |  |
 **rendererVersion** | **String** |  |
 **contentSha256** | **String** |  |
 **publishedAt** | [**DateTime**](DateTime.md) |  |

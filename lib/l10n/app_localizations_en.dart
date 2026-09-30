@@ -1068,16 +1068,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get intentQueued => 'Waiting to inspect';
 
   @override
-  String get intentPreparing => 'Preparing public access';
+  String get intentPreparing => 'Preparing inspection access';
 
   @override
   String get intentResolving => 'Inspecting media';
 
   @override
-  String get intentRetryWait => 'Waiting to retry inspection';
-
-  @override
-  String get intentActionRequired => 'Action required to continue';
+  String get intentRetryWait => 'Restoring inspection automatically';
 
   @override
   String get intentExpired => 'Inspection result expired';
@@ -1190,7 +1187,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get providerSessionError =>
-      'This provider currently requires a server-authorized session, so this media cannot be inspected.';
+      'The system could not obtain the platform session required for this media. This automatic inspection has stopped.';
 
   @override
   String get accessPolicyLabel => 'Access policy';
@@ -2021,4 +2018,76 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get analysisRateLimited => 'Too many AI requests. Try again later.';
+
+  @override
+  String get intentAutomaticSessionRecovery =>
+      'The system is restoring the platform session and will continue within the original deadline. No resubmission is needed.';
+
+  @override
+  String get intentPhaseRecognize => 'Identify link';
+
+  @override
+  String get intentPhasePrepare => 'Prepare access';
+
+  @override
+  String get intentPhaseRead => 'Read media information';
+
+  @override
+  String get intentPhaseSelect => 'Check formats';
+
+  @override
+  String get intentPhaseProbe => 'Check media availability';
+
+  @override
+  String get intentPhaseTransfer => 'Transfer media';
+
+  @override
+  String get intentPhaseValidate => 'Validate file';
+
+  @override
+  String get intentPhasePublish => 'Publish file';
+
+  @override
+  String get providerChallengeError =>
+      'The platform requires verification that the system cannot complete automatically. This inspection has stopped.';
+
+  @override
+  String get providerTokenError =>
+      'The platform access token is unavailable. The system cannot continue reading this media.';
+
+  @override
+  String get providerExtractorError =>
+      'The platform page structure has changed. Media cannot be read with the current adapter.';
+
+  @override
+  String get providerMediaProbeError =>
+      'Media information was read, but its media address failed the availability check.';
+
+  @override
+  String get providerEgressError =>
+      'The configured egress cannot reach the media platform.';
+
+  @override
+  String get providerNetworkError =>
+      'A temporary network failure occurred while connecting to the media platform.';
+
+  @override
+  String get providerSessionSourceError =>
+      'The approved platform session source remains unavailable. Automatic recovery ended and this inspection has stopped.';
+
+  @override
+  String get providerRuntimeError =>
+      'The inspection runtime is temporarily unavailable.';
+
+  @override
+  String get providerCapacityError =>
+      'Inspection resources are busy or out of space. Try again later.';
+
+  @override
+  String get intentContextChangedError =>
+      'The access context has changed. Update the inspection and confirm the format again.';
+
+  @override
+  String get providerUnknownOutcomeError =>
+      'Execution was interrupted and its outcome could not be confirmed. The system stopped duplicate requests.';
 }

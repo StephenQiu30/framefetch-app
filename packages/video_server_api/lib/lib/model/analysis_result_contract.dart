@@ -19,6 +19,8 @@ class AnalysisResultContract extends EnumClass {
   static const AnalysisResultContract screenplayAnalysis = _$screenplayAnalysis;
   @BuiltValueEnumConst(wireName: r'screenplay-rewrite')
   static const AnalysisResultContract screenplayRewrite = _$screenplayRewrite;
+  @BuiltValueEnumConst(wireName: r'structured-report')
+  static const AnalysisResultContract structuredReport = _$structuredReport;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const AnalysisResultContract unknownDefaultOpenApi =
       _$unknownDefaultOpenApi;

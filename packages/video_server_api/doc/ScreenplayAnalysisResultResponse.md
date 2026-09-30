@@ -16,8 +16,8 @@ Name | Type | Description | Notes
 **structure** | [**ScreenplayStructureResponse**](ScreenplayStructureResponse.md) |  |
 **characters** | [**BuiltList&lt;ScreenplayCharacterResponse&gt;**](ScreenplayCharacterResponse.md) |  |
 **scenes** | [**BuiltList&lt;ScreenplaySceneResponse&gt;**](ScreenplaySceneResponse.md) |  |
-**dialogueFindings** | [**BuiltList&lt;ScreenplayEvidenceItemResponse&gt;**](ScreenplayEvidenceItemResponse.md) |  |
-**strengths** | [**BuiltList&lt;ScreenplayEvidenceItemResponse&gt;**](ScreenplayEvidenceItemResponse.md) |  |
-**priorityRevisions** | [**BuiltList&lt;ScreenplayEvidenceItemResponse&gt;**](ScreenplayEvidenceItemResponse.md) |  |
+**dialogueFindings** | [**BuiltList&lt;ScreenplayFindingResponse&gt;**](ScreenplayFindingResponse.md) |  |
+**strengths** | [**BuiltList&lt;ScreenplayFindingResponse&gt;**](ScreenplayFindingResponse.md) |  |
+**priorityRevisions** | [**BuiltList&lt;ScreenplayFindingResponse&gt;**](ScreenplayFindingResponse.md) |  |
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

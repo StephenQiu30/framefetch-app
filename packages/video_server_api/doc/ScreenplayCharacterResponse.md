@@ -13,6 +13,5 @@ Name | Type | Description | Notes
 **goal** | **String** |  |
 **conflict** | **String** |  |
 **arc** | **String** |  |
-**evidenceSceneIds** | **BuiltList&lt;String&gt;** |  |
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -18,6 +18,7 @@ part 'user_response.g.dart';
 /// * [role]
 /// * [createdAt]
 /// * [updatedAt]
+/// * [avatarVersion]
 @BuiltValue()
 abstract class UserResponse
     implements Built<UserResponse, UserResponseBuilder> {
@@ -39,6 +40,9 @@ abstract class UserResponse
 
   @BuiltValueField(wireName: r'updated_at')
   DateTime get updatedAt;
+
+  @BuiltValueField(wireName: r'avatar_version')
+  String? get avatarVersion;
 
   UserResponse._();
 
@@ -93,6 +97,13 @@ class _$UserResponseSerializer implements PrimitiveSerializer<UserResponse> {
       object.updatedAt,
       specifiedType: const FullType(DateTime),
     );
+    if (object.avatarVersion != null) {
+      yield r'avatar_version';
+      yield serializers.serialize(
+        object.avatarVersion,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
   }
 
   @override
@@ -159,6 +170,14 @@ class _$UserResponseSerializer implements PrimitiveSerializer<UserResponse> {
             specifiedType: const FullType(DateTime),
           ) as DateTime;
           result.updatedAt = valueDes;
+          break;
+        case r'avatar_version':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.avatarVersion = valueDes;
           break;
         default:
           unhandled.add(key);

@@ -475,7 +475,7 @@ class DownloadIntentsApi {
     );
   }
 
-  /// 在原意图与剩余预算内更新过期解析结果
+  /// 在原意图中重新解析并确认过期结果
   ///
   ///
   /// Parameters:

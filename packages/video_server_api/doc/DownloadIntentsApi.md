@@ -14,7 +14,7 @@ Method | HTTP request | Description
 [**findDownloadIntent**](DownloadIntentsApi.md#finddownloadintent) | **GET** /api/download-intents | 按幂等键找回当前用户已提交的解析意图
 [**getDownloadIntent**](DownloadIntentsApi.md#getdownloadintent) | **GET** /api/download-intents/{intent_id} | 查询当前用户的解析意图
 [**listDownloadIntents**](DownloadIntentsApi.md#listdownloadintents) | **GET** /api/download-intents/history | 分页查询当前用户的解析记录
-[**refreshDownloadIntent**](DownloadIntentsApi.md#refreshdownloadintent) | **POST** /api/download-intents/{intent_id}/refresh | 在原意图与剩余预算内更新过期解析结果
+[**refreshDownloadIntent**](DownloadIntentsApi.md#refreshdownloadintent) | **POST** /api/download-intents/{intent_id}/refresh | 在原意图中重新解析并确认过期结果
 
 
 # **cancelDownloadIntent**
@@ -229,7 +229,7 @@ Name | Type | Description  | Notes
 # **refreshDownloadIntent**
 > ApiResponseIntentResponse refreshDownloadIntent(intentId)
 
-在原意图与剩余预算内更新过期解析结果
+在原意图中重新解析并确认过期结果
 
 ### Example
 ```dart

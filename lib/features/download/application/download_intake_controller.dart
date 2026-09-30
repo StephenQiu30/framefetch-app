@@ -244,7 +244,21 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
       final updated = await _intents.get(current.id);
       if (generation == _generation) await _adopt(updated, generation);
     } catch (error) {
-      if (generation == _generation) state = state.copyWith(error: error);
+      if (generation == _generation) {
+        state = state.copyWith(error: error);
+        final statusCode = error is DataRequestFailure
+            ? error.statusCode
+            : null;
+        if (statusCode != null &&
+            statusCode >= 400 &&
+            statusCode < 500 &&
+            statusCode != 408 &&
+            statusCode != 429) {
+          _pollTimer?.cancel();
+        } else {
+          _schedulePoll(current, recovering: true);
+        }
+      }
     } finally {
       if (_pollingGeneration == generation) _pollingGeneration = null;
     }
@@ -282,7 +296,7 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
     _schedulePoll(next);
   }
 
-  void _schedulePoll(IntentResponse intent) {
+  void _schedulePoll(IntentResponse intent, {bool recovering = false}) {
     if (_foreground &&
         (intent.status == IntentStatus.queued ||
             intent.status == IntentStatus.preparing ||
@@ -290,7 +304,13 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
             intent.status == IntentStatus.retryWait)) {
       _pollTimer?.cancel();
       _pollTimer = Timer.periodic(
-        const Duration(seconds: 2),
+        // The deadline bounds server work, not reconciliation of its final
+        // state. These reads never admit a replacement or refresh generation.
+        Duration(
+          seconds: recovering || !intent.deadline.isAfter(DateTime.now())
+              ? 5
+              : 2,
+        ),
         (_) => unawaited(pollIntent()),
       );
     } else {

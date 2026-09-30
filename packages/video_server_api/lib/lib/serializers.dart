@@ -24,6 +24,7 @@ import 'package:video_server_api/lib/model/analysis_input_kind.dart';
 import 'package:video_server_api/lib/model/analysis_media_response.dart';
 import 'package:video_server_api/lib/model/analysis_report_artifact_response.dart';
 import 'package:video_server_api/lib/model/analysis_report_response.dart';
+import 'package:video_server_api/lib/model/analysis_report_status.dart';
 import 'package:video_server_api/lib/model/analysis_request.dart';
 import 'package:video_server_api/lib/model/analysis_response.dart';
 import 'package:video_server_api/lib/model/analysis_response_result.dart';
@@ -102,6 +103,10 @@ import 'package:video_server_api/lib/model/error_code.dart';
 import 'package:video_server_api/lib/model/error_response.dart';
 import 'package:video_server_api/lib/model/evidence_summary_response.dart';
 import 'package:video_server_api/lib/model/execution_mode.dart';
+import 'package:video_server_api/lib/model/failure_class.dart';
+import 'package:video_server_api/lib/model/failure_evidence_kind.dart';
+import 'package:video_server_api/lib/model/failure_phase.dart';
+import 'package:video_server_api/lib/model/failure_scope.dart';
 import 'package:video_server_api/lib/model/format_response.dart';
 import 'package:video_server_api/lib/model/fps_bucket.dart';
 import 'package:video_server_api/lib/model/highlight_response.dart';
@@ -111,6 +116,7 @@ import 'package:video_server_api/lib/model/import_source_format.dart';
 import 'package:video_server_api/lib/model/import_status.dart';
 import 'package:video_server_api/lib/model/inspection_request.dart';
 import 'package:video_server_api/lib/model/inspection_response.dart';
+import 'package:video_server_api/lib/model/intent_failure_response.dart';
 import 'package:video_server_api/lib/model/intent_history_item_response.dart';
 import 'package:video_server_api/lib/model/intent_history_response.dart';
 import 'package:video_server_api/lib/model/intent_request.dart';
@@ -133,7 +139,6 @@ import 'package:video_server_api/lib/model/provider_access_mode.dart';
 import 'package:video_server_api/lib/model/provider_access_policy.dart';
 import 'package:video_server_api/lib/model/provider_access_policy_response.dart';
 import 'package:video_server_api/lib/model/provider_access_state.dart';
-import 'package:video_server_api/lib/model/provider_authorization_action.dart';
 import 'package:video_server_api/lib/model/provider_capability.dart';
 import 'package:video_server_api/lib/model/provider_catalog_entry_response.dart';
 import 'package:video_server_api/lib/model/provider_catalog_list_response.dart';
@@ -150,7 +155,7 @@ import 'package:video_server_api/lib/model/registration_code_response.dart';
 import 'package:video_server_api/lib/model/rights_basis.dart';
 import 'package:video_server_api/lib/model/screenplay_analysis_result_response.dart';
 import 'package:video_server_api/lib/model/screenplay_character_response.dart';
-import 'package:video_server_api/lib/model/screenplay_evidence_item_response.dart';
+import 'package:video_server_api/lib/model/screenplay_finding_response.dart';
 import 'package:video_server_api/lib/model/screenplay_glossary_term_response.dart';
 import 'package:video_server_api/lib/model/screenplay_rewrite_result_response.dart';
 import 'package:video_server_api/lib/model/screenplay_scene_response.dart';
@@ -166,6 +171,8 @@ import 'package:video_server_api/lib/model/storage_cleanup_response.dart';
 import 'package:video_server_api/lib/model/stored_file_category.dart';
 import 'package:video_server_api/lib/model/stored_file_list_response.dart';
 import 'package:video_server_api/lib/model/stored_file_response.dart';
+import 'package:video_server_api/lib/model/structured_report_result_response.dart';
+import 'package:video_server_api/lib/model/structured_report_section_response.dart';
 import 'package:video_server_api/lib/model/update_ai_provider_profile_request.dart';
 import 'package:video_server_api/lib/model/update_profile_request.dart';
 import 'package:video_server_api/lib/model/update_provider_catalog_entry_request.dart';
@@ -195,6 +202,7 @@ part 'serializers.g.dart';
   AnalysisMediaResponse,
   AnalysisReportArtifactResponse,
   AnalysisReportResponse,
+  AnalysisReportStatus,
   AnalysisRequest,
   AnalysisResponse,
   AnalysisResponseResult,
@@ -273,6 +281,10 @@ part 'serializers.g.dart';
   ErrorResponse,
   EvidenceSummaryResponse,
   ExecutionMode,
+  FailureClass,
+  FailureEvidenceKind,
+  FailurePhase,
+  FailureScope,
   FormatResponse,
   FpsBucket,
   HighlightResponse,
@@ -282,6 +294,7 @@ part 'serializers.g.dart';
   ImportStatus,
   InspectionRequest,
   InspectionResponse,
+  IntentFailureResponse,
   IntentHistoryItemResponse,
   IntentHistoryResponse,
   IntentRequest,
@@ -304,7 +317,6 @@ part 'serializers.g.dart';
   ProviderAccessPolicy,
   ProviderAccessPolicyResponse,
   ProviderAccessState,
-  ProviderAuthorizationAction,
   ProviderCapability,
   ProviderCatalogEntryResponse,
   ProviderCatalogListResponse,
@@ -321,7 +333,7 @@ part 'serializers.g.dart';
   RightsBasis,
   ScreenplayAnalysisResultResponse,
   ScreenplayCharacterResponse,
-  ScreenplayEvidenceItemResponse,
+  ScreenplayFindingResponse,
   ScreenplayGlossaryTermResponse,
   ScreenplayRewriteResultResponse,
   ScreenplaySceneResponse,
@@ -337,6 +349,8 @@ part 'serializers.g.dart';
   StoredFileCategory,
   StoredFileListResponse,
   StoredFileResponse,
+  StructuredReportResultResponse,
+  StructuredReportSectionResponse,
   UpdateAiProviderProfileRequest,
   UpdateProfileRequest,
   UpdateProviderCatalogEntryRequest,

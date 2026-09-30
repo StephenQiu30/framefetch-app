@@ -327,10 +327,9 @@
   "intentHistoryTitle": "解析记录",
   "intentHistoryEmpty": "暂无解析记录",
   "intentQueued": "等待解析",
-  "intentPreparing": "正在准备公开访问",
+  "intentPreparing": "正在准备解析环境",
   "intentResolving": "正在解析媒体",
-  "intentRetryWait": "等待重试解析",
-  "intentActionRequired": "需要进一步操作",
+  "intentRetryWait": "正在自动恢复解析",
   "intentExpired": "解析结果已过期",
   "intentFailed": "解析未能完成",
   "intentCancelled": "解析已取消",
@@ -362,10 +361,16 @@
   "inspectionFailedError": "暂时无法读取视频信息，请检查链接后重试。",
   "inspectionTimeoutError": "媒体解析超时，请稍后重新提交。",
   "providerTemporaryError": "媒体平台当前无法完成验证，请稍后重试。",
-  "providerSessionError": "该平台当前需要服务端授权会话，暂时无法解析此内容。",
+  "providerSessionError": "系统无法取得内容所需的平台会话，本次自动解析已停止。",
   "accessPolicyLabel": "访问策略",
   "routeCooldownUntil": "默认线路最早重试时间：{time}；到期仍需验证恢复。",
-  "@routeCooldownUntil": {"placeholders": {"time": {"type": "String"}}},
+  "@routeCooldownUntil": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "providerRuntimeTitle": "读取运行诊断",
   "providerRuntimeDescription": "仅展示已开放平台的默认线路；快照最多缓存 30 秒。配置和上下文可达不代表真实下载通过。",
   "providerRouteConfigured": "线路已配置",
@@ -681,5 +686,25 @@
   "previousAnalysisResult": "上一版已完成的结果",
   "catalogScopeDescription": "此处只维护状态页名称、排序与可见性，不会新增下载域名或执行能力。",
   "saveConfiguration": "保存配置",
-  "analysisRateLimited": "AI 服务请求过于频繁，请稍后重试。"
+  "analysisRateLimited": "AI 服务请求过于频繁，请稍后重试。",
+  "intentAutomaticSessionRecovery": "系统正在恢复平台会话，将在本次解析期限内自动继续，无需重复提交。",
+  "intentPhaseRecognize": "识别链接",
+  "intentPhasePrepare": "准备解析环境",
+  "intentPhaseRead": "读取作品",
+  "intentPhaseSelect": "检查格式",
+  "intentPhaseProbe": "检查媒体",
+  "intentPhaseTransfer": "获取媒体",
+  "intentPhaseValidate": "校验文件",
+  "intentPhasePublish": "保存文件",
+  "providerChallengeError": "平台要求当前系统无法自动完成的验证，本次解析已停止。",
+  "providerTokenError": "平台访问令牌尚不可用，系统无法继续读取此内容。",
+  "providerExtractorError": "平台页面结构已变化，当前无法读取媒体。",
+  "providerMediaProbeError": "作品信息已读取，但媒体地址未通过可用性检查。",
+  "providerEgressError": "当前出口无法连接媒体平台。",
+  "providerNetworkError": "连接媒体平台时发生临时网络故障。",
+  "providerSessionSourceError": "批准的平台会话来源仍不可用，自动恢复已结束，本次解析已停止。",
+  "providerRuntimeError": "解析执行环境暂不可用。",
+  "providerCapacityError": "解析执行资源正忙或空间不足，请稍后重试。",
+  "intentContextChangedError": "解析环境已变化，需要更新结果并重新确认规格。",
+  "providerUnknownOutcomeError": "执行中断且无法确认结果，系统已停止重复请求。"
 }

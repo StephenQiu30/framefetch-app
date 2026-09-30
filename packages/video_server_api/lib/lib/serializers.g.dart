@@ -17,6 +17,7 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(AnalysisMediaResponse.serializer)
       ..add(AnalysisReportArtifactResponse.serializer)
       ..add(AnalysisReportResponse.serializer)
+      ..add(AnalysisReportStatus.serializer)
       ..add(AnalysisRequest.serializer)
       ..add(AnalysisResponse.serializer)
       ..add(AnalysisResponseResult.serializer)
@@ -96,6 +97,10 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(ErrorResponse.serializer)
       ..add(EvidenceSummaryResponse.serializer)
       ..add(ExecutionMode.serializer)
+      ..add(FailureClass.serializer)
+      ..add(FailureEvidenceKind.serializer)
+      ..add(FailurePhase.serializer)
+      ..add(FailureScope.serializer)
       ..add(FormatResponse.serializer)
       ..add(FpsBucket.serializer)
       ..add(HighlightResponse.serializer)
@@ -105,6 +110,7 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(ImportStatus.serializer)
       ..add(InspectionRequest.serializer)
       ..add(InspectionResponse.serializer)
+      ..add(IntentFailureResponse.serializer)
       ..add(IntentHistoryItemResponse.serializer)
       ..add(IntentHistoryItemResponseNextActionEnum.serializer)
       ..add(IntentHistoryResponse.serializer)
@@ -130,7 +136,6 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(ProviderAccessPolicy.serializer)
       ..add(ProviderAccessPolicyResponse.serializer)
       ..add(ProviderAccessState.serializer)
-      ..add(ProviderAuthorizationAction.serializer)
       ..add(ProviderCapability.serializer)
       ..add(ProviderCatalogEntryResponse.serializer)
       ..add(ProviderCatalogListResponse.serializer)
@@ -138,6 +143,7 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(ProviderListResponse.serializer)
       ..add(ProviderRuntimeListResponse.serializer)
       ..add(ProviderRuntimeResponse.serializer)
+      ..add(ProviderRuntimeResponseLoginStateEnum.serializer)
       ..add(ProviderRuntimeResponseSourceStateEnum.serializer)
       ..add(ProviderStatusResponse.serializer)
       ..add(ProviderSupportStatus.serializer)
@@ -150,7 +156,7 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(ScreenplayAnalysisResultResponse.serializer)
       ..add(ScreenplayAnalysisResultResponseKindEnum.serializer)
       ..add(ScreenplayCharacterResponse.serializer)
-      ..add(ScreenplayEvidenceItemResponse.serializer)
+      ..add(ScreenplayFindingResponse.serializer)
       ..add(ScreenplayGlossaryTermResponse.serializer)
       ..add(ScreenplayRewriteResultResponse.serializer)
       ..add(ScreenplayRewriteResultResponseKindEnum.serializer)
@@ -168,6 +174,9 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(StoredFileCategory.serializer)
       ..add(StoredFileListResponse.serializer)
       ..add(StoredFileResponse.serializer)
+      ..add(StructuredReportResultResponse.serializer)
+      ..add(StructuredReportResultResponseKindEnum.serializer)
+      ..add(StructuredReportSectionResponse.serializer)
       ..add(UpdateAiProviderProfileRequest.serializer)
       ..add(UpdateProfileRequest.serializer)
       ..add(UpdateProviderCatalogEntryRequest.serializer)
@@ -271,25 +280,25 @@ Serializers _$serializers = (Serializers().toBuilder()
               BuiltList, const [const FullType(ScreenplaySceneResponse)]),
           () => ListBuilder<ScreenplaySceneResponse>())
       ..addBuilderFactory(
-          const FullType(BuiltList,
-              const [const FullType(ScreenplayEvidenceItemResponse)]),
-          () => ListBuilder<ScreenplayEvidenceItemResponse>())
+          const FullType(
+              BuiltList, const [const FullType(ScreenplayFindingResponse)]),
+          () => ListBuilder<ScreenplayFindingResponse>())
       ..addBuilderFactory(
-          const FullType(BuiltList,
-              const [const FullType(ScreenplayEvidenceItemResponse)]),
-          () => ListBuilder<ScreenplayEvidenceItemResponse>())
+          const FullType(
+              BuiltList, const [const FullType(ScreenplayFindingResponse)]),
+          () => ListBuilder<ScreenplayFindingResponse>())
       ..addBuilderFactory(
-          const FullType(BuiltList,
-              const [const FullType(ScreenplayEvidenceItemResponse)]),
-          () => ListBuilder<ScreenplayEvidenceItemResponse>())
+          const FullType(
+              BuiltList, const [const FullType(ScreenplayFindingResponse)]),
+          () => ListBuilder<ScreenplayFindingResponse>())
       ..addBuilderFactory(
-          const FullType(BuiltList,
-              const [const FullType(ScreenplayEvidenceItemResponse)]),
-          () => ListBuilder<ScreenplayEvidenceItemResponse>())
+          const FullType(
+              BuiltList, const [const FullType(ScreenplayFindingResponse)]),
+          () => ListBuilder<ScreenplayFindingResponse>())
       ..addBuilderFactory(
-          const FullType(BuiltList,
-              const [const FullType(ScreenplayEvidenceItemResponse)]),
-          () => ListBuilder<ScreenplayEvidenceItemResponse>())
+          const FullType(
+              BuiltList, const [const FullType(ScreenplayFindingResponse)]),
+          () => ListBuilder<ScreenplayFindingResponse>())
       ..addBuilderFactory(
           const FullType(BuiltList,
               const [const FullType(ScreenplayGlossaryTermResponse)]),
@@ -359,6 +368,14 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => ListBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(VideoArticleEvidenceResponse)]),
+          () => ListBuilder<VideoArticleEvidenceResponse>())
+      ..addBuilderFactory(
+          const FullType(BuiltList,
+              const [const FullType(StructuredReportSectionResponse)]),
+          () => ListBuilder<StructuredReportSectionResponse>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => ListBuilder<String>())

@@ -988,16 +988,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get intentQueued => '等待解析';
 
   @override
-  String get intentPreparing => '正在准备公开访问';
+  String get intentPreparing => '正在准备解析环境';
 
   @override
   String get intentResolving => '正在解析媒体';
 
   @override
-  String get intentRetryWait => '等待重试解析';
-
-  @override
-  String get intentActionRequired => '需要进一步操作';
+  String get intentRetryWait => '正在自动恢复解析';
 
   @override
   String get intentExpired => '解析结果已过期';
@@ -1097,7 +1094,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get providerTemporaryError => '媒体平台当前无法完成验证，请稍后重试。';
 
   @override
-  String get providerSessionError => '该平台当前需要服务端授权会话，暂时无法解析此内容。';
+  String get providerSessionError => '系统无法取得内容所需的平台会话，本次自动解析已停止。';
 
   @override
   String get accessPolicyLabel => '访问策略';
@@ -1874,4 +1871,65 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get analysisRateLimited => 'AI 服务请求过于频繁，请稍后重试。';
+
+  @override
+  String get intentAutomaticSessionRecovery =>
+      '系统正在恢复平台会话，将在本次解析期限内自动继续，无需重复提交。';
+
+  @override
+  String get intentPhaseRecognize => '识别链接';
+
+  @override
+  String get intentPhasePrepare => '准备解析环境';
+
+  @override
+  String get intentPhaseRead => '读取作品';
+
+  @override
+  String get intentPhaseSelect => '检查格式';
+
+  @override
+  String get intentPhaseProbe => '检查媒体';
+
+  @override
+  String get intentPhaseTransfer => '获取媒体';
+
+  @override
+  String get intentPhaseValidate => '校验文件';
+
+  @override
+  String get intentPhasePublish => '保存文件';
+
+  @override
+  String get providerChallengeError => '平台要求当前系统无法自动完成的验证，本次解析已停止。';
+
+  @override
+  String get providerTokenError => '平台访问令牌尚不可用，系统无法继续读取此内容。';
+
+  @override
+  String get providerExtractorError => '平台页面结构已变化，当前无法读取媒体。';
+
+  @override
+  String get providerMediaProbeError => '作品信息已读取，但媒体地址未通过可用性检查。';
+
+  @override
+  String get providerEgressError => '当前出口无法连接媒体平台。';
+
+  @override
+  String get providerNetworkError => '连接媒体平台时发生临时网络故障。';
+
+  @override
+  String get providerSessionSourceError => '批准的平台会话来源仍不可用，自动恢复已结束，本次解析已停止。';
+
+  @override
+  String get providerRuntimeError => '解析执行环境暂不可用。';
+
+  @override
+  String get providerCapacityError => '解析执行资源正忙或空间不足，请稍后重试。';
+
+  @override
+  String get intentContextChangedError => '解析环境已变化，需要更新结果并重新确认规格。';
+
+  @override
+  String get providerUnknownOutcomeError => '执行中断且无法确认结果，系统已停止重复请求。';
 }

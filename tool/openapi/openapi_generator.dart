@@ -1,11 +1,17 @@
 import 'dart:io';
 
+import 'generated_files.dart';
 import 'openapi_config.dart';
 
 Future<void> generateDartClient({
   required Directory projectRoot,
   required AppOpenApiConfig config,
 }) async {
+  final package = Directory('${projectRoot.path}/packages/video_server_api');
+  final manifest = File('${package.path}/.openapi-generator/FILES');
+  final previous = await manifest.exists()
+      ? await readGeneratedFiles(package)
+      : <String>{};
   final generatorJar = await _resolveGeneratorJar(
     projectRoot: projectRoot,
     version: config.generatorVersion,
@@ -24,7 +30,8 @@ Future<void> generateDartClient({
     '${projectRoot.path}/tool/openapi/config.yaml',
   ], workingDirectory: projectRoot.path);
 
-  final package = Directory('${projectRoot.path}/packages/video_server_api');
+  await normalizeGeneratedManifest(package);
+  await pruneObsoleteGeneratedFiles(package, previous);
   await _normalizeGeneratedSources(package);
   await _run(Platform.resolvedExecutable, [
     'pub',

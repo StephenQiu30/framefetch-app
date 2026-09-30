@@ -24,9 +24,13 @@ OPENAPI_SCHEMA_URL=https://api.example.com/openapi.json dart run tool/openapi.da
 
 允许的端点和查询参数集中声明在 `openapi_config.dart`。生成入口会验证 operationId、传递依赖 schema 和 `NativeBearerAuth`，包括经服务端管理员鉴权的 App 管理操作，排除 Web Cookie 契约；禁止手工修改生成目录或维护平行 DTO。
 
+生成前读取 `.openapi-generator/FILES`，生成后按新清单删除旧清单中已失效的模型、API 和文档，以及对应的 `.g.dart` 和生成测试桩。清理只处理生成器原有文件，不遍历符号链接，也不删除无归属的文件或包配置。契约删除字段或模型后无需手工修补生成包。
+
+生成器默认跳过已有测试桩，原始 `FILES` 因此只登记本次新写出的测试。入口将当前模型／API 的已有测试桩补入清单并排序，使首次生成与重复生成拥有相同的文件事实。
+
 注册 API 要求先发送邮箱验证码。集成测试仅在隔离 API＋本地 SMTP 捕获器上运行，并通过 `--dart-define=REGISTRATION_TEST_INBOX_URL=http://127.0.0.1:<捕获器端口>/code` 读取测试邮件；生产 API 不提供验证码读取接口，不允许固定验证码或跳过验证。
 
-业务一致性契约包含 48 个路径、56 个操作：历史搜索/状态、用户搜索/身份/启用状态、分页、资料更新、平台与 AI 配置管理、平台运行诊断、DOCX 导出。`exportAnalysisReport` 与缩略图一样按 binary 响应生成，调用不得退回手写 Dio 或携带 Bearer 的外部浏览器链接。
+业务一致性契约包含 53 个路径、62 个操作：持久解析意图与自动恢复查询、历史搜索/状态、用户搜索/身份/启用状态、分页、资料更新、平台与 AI 配置管理、平台运行诊断、DOCX 导出。`exportAnalysisReport` 与缩略图一样按 binary 响应生成，调用不得退回手写 Dio 或携带 Bearer 的外部浏览器链接。
 
 可选 query 中的 null 代表不发送条件；冻结器去除 nullable 标量的 null 分支，生成客户端据此省略未传参数，避免产生 `role=&is_active=`。测试覆盖空条件、false 与 retry_wait 的实际编码。
 

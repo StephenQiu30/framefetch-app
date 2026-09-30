@@ -115,7 +115,7 @@ final class AnalysisJobState extends StatelessWidget {
           spacing: AppSpacing.small,
           runSpacing: AppSpacing.small,
           children: [
-            if (job.report?.status == 'available' &&
+            if (job.report?.status == AnalysisReportStatus.available &&
                 (job.report?.artifacts.any((a) => a.format == 'docx') ?? false))
               AnalysisDocxButton(analysisId: job.id),
             if (_active)

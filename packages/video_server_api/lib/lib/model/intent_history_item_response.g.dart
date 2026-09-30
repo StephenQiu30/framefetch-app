@@ -10,6 +10,15 @@ const IntentHistoryItemResponseNextActionEnum
     _$intentHistoryItemResponseNextActionEnum_none =
     const IntentHistoryItemResponseNextActionEnum._('none');
 const IntentHistoryItemResponseNextActionEnum
+    _$intentHistoryItemResponseNextActionEnum_wait =
+    const IntentHistoryItemResponseNextActionEnum._('wait');
+const IntentHistoryItemResponseNextActionEnum
+    _$intentHistoryItemResponseNextActionEnum_refreshResult =
+    const IntentHistoryItemResponseNextActionEnum._('refreshResult');
+const IntentHistoryItemResponseNextActionEnum
+    _$intentHistoryItemResponseNextActionEnum_importFile =
+    const IntentHistoryItemResponseNextActionEnum._('importFile');
+const IntentHistoryItemResponseNextActionEnum
     _$intentHistoryItemResponseNextActionEnum_unknownDefaultOpenApi =
     const IntentHistoryItemResponseNextActionEnum._('unknownDefaultOpenApi');
 
@@ -18,6 +27,12 @@ IntentHistoryItemResponseNextActionEnum
   switch (name) {
     case 'none':
       return _$intentHistoryItemResponseNextActionEnum_none;
+    case 'wait':
+      return _$intentHistoryItemResponseNextActionEnum_wait;
+    case 'refreshResult':
+      return _$intentHistoryItemResponseNextActionEnum_refreshResult;
+    case 'importFile':
+      return _$intentHistoryItemResponseNextActionEnum_importFile;
     case 'unknownDefaultOpenApi':
       return _$intentHistoryItemResponseNextActionEnum_unknownDefaultOpenApi;
     default:
@@ -29,6 +44,9 @@ final BuiltSet<IntentHistoryItemResponseNextActionEnum>
     _$intentHistoryItemResponseNextActionEnumValues = BuiltSet<
         IntentHistoryItemResponseNextActionEnum>(const <IntentHistoryItemResponseNextActionEnum>[
   _$intentHistoryItemResponseNextActionEnum_none,
+  _$intentHistoryItemResponseNextActionEnum_wait,
+  _$intentHistoryItemResponseNextActionEnum_refreshResult,
+  _$intentHistoryItemResponseNextActionEnum_importFile,
   _$intentHistoryItemResponseNextActionEnum_unknownDefaultOpenApi,
 ]);
 
@@ -40,10 +58,16 @@ class _$IntentHistoryItemResponseNextActionEnumSerializer
     implements PrimitiveSerializer<IntentHistoryItemResponseNextActionEnum> {
   static const Map<String, Object> _toWire = const <String, Object>{
     'none': 'none',
+    'wait': 'wait',
+    'refreshResult': 'refresh_result',
+    'importFile': 'import_file',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
     'none': 'none',
+    'wait': 'wait',
+    'refresh_result': 'refreshResult',
+    'import_file': 'importFile',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 
@@ -78,6 +102,10 @@ class _$IntentHistoryItemResponse extends IntentHistoryItemResponse {
   @override
   final String? reasonCode;
   @override
+  final FailurePhase? phase;
+  @override
+  final IntentFailureResponse? failure;
+  @override
   final IntentHistoryItemResponseNextActionEnum? nextAction;
   @override
   final DateTime? retryAt;
@@ -101,6 +129,8 @@ class _$IntentHistoryItemResponse extends IntentHistoryItemResponse {
       required this.version,
       required this.status,
       this.reasonCode,
+      this.phase,
+      this.failure,
       this.nextAction,
       this.retryAt,
       required this.deadline,
@@ -126,6 +156,8 @@ class _$IntentHistoryItemResponse extends IntentHistoryItemResponse {
         version == other.version &&
         status == other.status &&
         reasonCode == other.reasonCode &&
+        phase == other.phase &&
+        failure == other.failure &&
         nextAction == other.nextAction &&
         retryAt == other.retryAt &&
         deadline == other.deadline &&
@@ -142,6 +174,8 @@ class _$IntentHistoryItemResponse extends IntentHistoryItemResponse {
     _$hash = $jc(_$hash, version.hashCode);
     _$hash = $jc(_$hash, status.hashCode);
     _$hash = $jc(_$hash, reasonCode.hashCode);
+    _$hash = $jc(_$hash, phase.hashCode);
+    _$hash = $jc(_$hash, failure.hashCode);
     _$hash = $jc(_$hash, nextAction.hashCode);
     _$hash = $jc(_$hash, retryAt.hashCode);
     _$hash = $jc(_$hash, deadline.hashCode);
@@ -160,6 +194,8 @@ class _$IntentHistoryItemResponse extends IntentHistoryItemResponse {
           ..add('version', version)
           ..add('status', status)
           ..add('reasonCode', reasonCode)
+          ..add('phase', phase)
+          ..add('failure', failure)
           ..add('nextAction', nextAction)
           ..add('retryAt', retryAt)
           ..add('deadline', deadline)
@@ -191,6 +227,16 @@ class IntentHistoryItemResponseBuilder
   String? _reasonCode;
   String? get reasonCode => _$this._reasonCode;
   set reasonCode(String? reasonCode) => _$this._reasonCode = reasonCode;
+
+  FailurePhase? _phase;
+  FailurePhase? get phase => _$this._phase;
+  set phase(FailurePhase? phase) => _$this._phase = phase;
+
+  IntentFailureResponseBuilder? _failure;
+  IntentFailureResponseBuilder get failure =>
+      _$this._failure ??= IntentFailureResponseBuilder();
+  set failure(IntentFailureResponseBuilder? failure) =>
+      _$this._failure = failure;
 
   IntentHistoryItemResponseNextActionEnum? _nextAction;
   IntentHistoryItemResponseNextActionEnum? get nextAction => _$this._nextAction;
@@ -232,6 +278,8 @@ class IntentHistoryItemResponseBuilder
       _version = $v.version;
       _status = $v.status;
       _reasonCode = $v.reasonCode;
+      _phase = $v.phase;
+      _failure = $v.failure?.toBuilder();
       _nextAction = $v.nextAction;
       _retryAt = $v.retryAt;
       _deadline = $v.deadline;
@@ -258,25 +306,40 @@ class IntentHistoryItemResponseBuilder
   IntentHistoryItemResponse build() => _build();
 
   _$IntentHistoryItemResponse _build() {
-    final _$result = _$v ??
-        _$IntentHistoryItemResponse._(
-          id: BuiltValueNullFieldError.checkNotNull(
-              id, r'IntentHistoryItemResponse', 'id'),
-          version: BuiltValueNullFieldError.checkNotNull(
-              version, r'IntentHistoryItemResponse', 'version'),
-          status: BuiltValueNullFieldError.checkNotNull(
-              status, r'IntentHistoryItemResponse', 'status'),
-          reasonCode: reasonCode,
-          nextAction: nextAction,
-          retryAt: retryAt,
-          deadline: BuiltValueNullFieldError.checkNotNull(
-              deadline, r'IntentHistoryItemResponse', 'deadline'),
-          inspectionId: inspectionId,
-          jobId: jobId,
-          createdAt: BuiltValueNullFieldError.checkNotNull(
-              createdAt, r'IntentHistoryItemResponse', 'createdAt'),
-          title: title,
-        );
+    _$IntentHistoryItemResponse _$result;
+    try {
+      _$result = _$v ??
+          _$IntentHistoryItemResponse._(
+            id: BuiltValueNullFieldError.checkNotNull(
+                id, r'IntentHistoryItemResponse', 'id'),
+            version: BuiltValueNullFieldError.checkNotNull(
+                version, r'IntentHistoryItemResponse', 'version'),
+            status: BuiltValueNullFieldError.checkNotNull(
+                status, r'IntentHistoryItemResponse', 'status'),
+            reasonCode: reasonCode,
+            phase: phase,
+            failure: _failure?.build(),
+            nextAction: nextAction,
+            retryAt: retryAt,
+            deadline: BuiltValueNullFieldError.checkNotNull(
+                deadline, r'IntentHistoryItemResponse', 'deadline'),
+            inspectionId: inspectionId,
+            jobId: jobId,
+            createdAt: BuiltValueNullFieldError.checkNotNull(
+                createdAt, r'IntentHistoryItemResponse', 'createdAt'),
+            title: title,
+          );
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'failure';
+        _failure?.build();
+      } catch (e) {
+        throw BuiltValueNestedFieldError(
+            r'IntentHistoryItemResponse', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

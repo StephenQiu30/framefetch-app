@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **kind** | **String** |  |
 **language** | **String** |  |
 **title** | **String** |  |
-**summary** | [**EvidenceSummaryResponse**](EvidenceSummaryResponse.md) |  |
+**summary** | **String** |  |
 **media** | [**AnalysisMediaResponse**](AnalysisMediaResponse.md) |  |
 **shotCount** | **int** |  |
 **shots** | [**BuiltList&lt;ShotResponse&gt;**](ShotResponse.md) |  |
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **assets** | [**BuiltList&lt;VisualAssetResponse&gt;**](VisualAssetResponse.md) |  |
 **productionAdvice** | [**ProductionAdviceResponse**](ProductionAdviceResponse.md) |  |
 **lead** | **String** |  |
-**sections** | [**BuiltList&lt;VideoArticleSectionResponse&gt;**](VideoArticleSectionResponse.md) |  |
+**sections** | [**BuiltList&lt;StructuredReportSectionResponse&gt;**](StructuredReportSectionResponse.md) |  |
 **keyPoints** | **BuiltList&lt;String&gt;** |  |
 **closing** | **String** |  |
 **limitations** | **BuiltList&lt;String&gt;** |  |
@@ -28,9 +28,9 @@ Name | Type | Description | Notes
 **synopsis** | **String** |  |
 **structure** | [**ScreenplayStructureResponse**](ScreenplayStructureResponse.md) |  |
 **characters** | [**BuiltList&lt;ScreenplayCharacterResponse&gt;**](ScreenplayCharacterResponse.md) |  |
-**dialogueFindings** | [**BuiltList&lt;ScreenplayEvidenceItemResponse&gt;**](ScreenplayEvidenceItemResponse.md) |  |
-**strengths** | [**BuiltList&lt;ScreenplayEvidenceItemResponse&gt;**](ScreenplayEvidenceItemResponse.md) |  |
-**priorityRevisions** | [**BuiltList&lt;ScreenplayEvidenceItemResponse&gt;**](ScreenplayEvidenceItemResponse.md) |  |
+**dialogueFindings** | [**BuiltList&lt;ScreenplayFindingResponse&gt;**](ScreenplayFindingResponse.md) |  |
+**strengths** | [**BuiltList&lt;ScreenplayFindingResponse&gt;**](ScreenplayFindingResponse.md) |  |
+**priorityRevisions** | [**BuiltList&lt;ScreenplayFindingResponse&gt;**](ScreenplayFindingResponse.md) |  |
 **sourceLanguage** | **String** |  |
 **targetLanguage** | **String** |  |
 **sourceSceneCount** | **int** |  |

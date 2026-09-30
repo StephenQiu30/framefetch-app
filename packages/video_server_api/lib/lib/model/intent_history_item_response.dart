@@ -4,7 +4,9 @@
 
 // ignore_for_file: unused_element, unused_element_parameter
 import 'package:built_collection/built_collection.dart';
+import 'package:video_server_api/lib/model/failure_phase.dart';
 import 'package:video_server_api/lib/model/intent_status.dart';
+import 'package:video_server_api/lib/model/intent_failure_response.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -17,6 +19,8 @@ part 'intent_history_item_response.g.dart';
 /// * [version]
 /// * [status]
 /// * [reasonCode]
+/// * [phase]
+/// * [failure]
 /// * [nextAction]
 /// * [retryAt]
 /// * [deadline]
@@ -36,14 +40,21 @@ abstract class IntentHistoryItemResponse
 
   @BuiltValueField(wireName: r'status')
   IntentStatus get status;
-  // enum statusEnum {  queued,  preparing,  resolving,  retry_wait,  action_required,  ready,  handed_off,  cancelled,  expired,  failed,  };
+  // enum statusEnum {  queued,  preparing,  resolving,  retry_wait,  ready,  handed_off,  cancelled,  expired,  failed,  };
 
   @BuiltValueField(wireName: r'reason_code')
   String? get reasonCode;
 
+  @BuiltValueField(wireName: r'phase')
+  FailurePhase? get phase;
+  // enum phaseEnum {  recognize,  prepare_context,  fetch_metadata,  select_format,  probe_media,  transfer,  validate,  publish,  };
+
+  @BuiltValueField(wireName: r'failure')
+  IntentFailureResponse? get failure;
+
   @BuiltValueField(wireName: r'next_action')
   IntentHistoryItemResponseNextActionEnum? get nextAction;
-  // enum nextActionEnum {  none,  };
+  // enum nextActionEnum {  none,  wait,  refresh_result,  import_file,  };
 
   @BuiltValueField(wireName: r'retry_at')
   DateTime? get retryAt;
@@ -115,6 +126,20 @@ class _$IntentHistoryItemResponseSerializer
         : serializers.serialize(
             object.reasonCode,
             specifiedType: const FullType.nullable(String),
+          );
+    yield r'phase';
+    yield object.phase == null
+        ? null
+        : serializers.serialize(
+            object.phase,
+            specifiedType: const FullType.nullable(FailurePhase),
+          );
+    yield r'failure';
+    yield object.failure == null
+        ? null
+        : serializers.serialize(
+            object.failure,
+            specifiedType: const FullType.nullable(IntentFailureResponse),
           );
     if (object.nextAction != null) {
       yield r'next_action';
@@ -215,6 +240,22 @@ class _$IntentHistoryItemResponseSerializer
           if (valueDes == null) continue;
           result.reasonCode = valueDes;
           break;
+        case r'phase':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(FailurePhase),
+          ) as FailurePhase?;
+          if (valueDes == null) continue;
+          result.phase = valueDes;
+          break;
+        case r'failure':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(IntentFailureResponse),
+          ) as IntentFailureResponse?;
+          if (valueDes == null) continue;
+          result.failure.replace(valueDes);
+          break;
         case r'next_action':
           final valueDes = serializers.deserialize(
             value,
@@ -302,6 +343,15 @@ class IntentHistoryItemResponseNextActionEnum extends EnumClass {
   @BuiltValueEnumConst(wireName: r'none')
   static const IntentHistoryItemResponseNextActionEnum none =
       _$intentHistoryItemResponseNextActionEnum_none;
+  @BuiltValueEnumConst(wireName: r'wait')
+  static const IntentHistoryItemResponseNextActionEnum wait =
+      _$intentHistoryItemResponseNextActionEnum_wait;
+  @BuiltValueEnumConst(wireName: r'refresh_result')
+  static const IntentHistoryItemResponseNextActionEnum refreshResult =
+      _$intentHistoryItemResponseNextActionEnum_refreshResult;
+  @BuiltValueEnumConst(wireName: r'import_file')
+  static const IntentHistoryItemResponseNextActionEnum importFile =
+      _$intentHistoryItemResponseNextActionEnum_importFile;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const IntentHistoryItemResponseNextActionEnum unknownDefaultOpenApi =
       _$intentHistoryItemResponseNextActionEnum_unknownDefaultOpenApi;

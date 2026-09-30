@@ -18,8 +18,6 @@ class IntentStatus extends EnumClass {
   static const IntentStatus resolving = _$resolving;
   @BuiltValueEnumConst(wireName: r'retry_wait')
   static const IntentStatus retryWait = _$retryWait;
-  @BuiltValueEnumConst(wireName: r'action_required')
-  static const IntentStatus actionRequired = _$actionRequired;
   @BuiltValueEnumConst(wireName: r'ready')
   static const IntentStatus ready = _$ready;
   @BuiltValueEnumConst(wireName: r'handed_off')
