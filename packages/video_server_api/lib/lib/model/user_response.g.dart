@@ -19,6 +19,8 @@ class _$UserResponse extends UserResponse {
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
+  @override
+  final String? avatarVersion;
 
   factory _$UserResponse([void Function(UserResponseBuilder)? updates]) =>
       (UserResponseBuilder()..update(updates))._build();
@@ -29,7 +31,8 @@ class _$UserResponse extends UserResponse {
       required this.email,
       required this.role,
       required this.createdAt,
-      required this.updatedAt})
+      required this.updatedAt,
+      this.avatarVersion})
       : super._();
   @override
   UserResponse rebuild(void Function(UserResponseBuilder) updates) =>
@@ -47,7 +50,8 @@ class _$UserResponse extends UserResponse {
         email == other.email &&
         role == other.role &&
         createdAt == other.createdAt &&
-        updatedAt == other.updatedAt;
+        updatedAt == other.updatedAt &&
+        avatarVersion == other.avatarVersion;
   }
 
   @override
@@ -59,6 +63,7 @@ class _$UserResponse extends UserResponse {
     _$hash = $jc(_$hash, role.hashCode);
     _$hash = $jc(_$hash, createdAt.hashCode);
     _$hash = $jc(_$hash, updatedAt.hashCode);
+    _$hash = $jc(_$hash, avatarVersion.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -71,7 +76,8 @@ class _$UserResponse extends UserResponse {
           ..add('email', email)
           ..add('role', role)
           ..add('createdAt', createdAt)
-          ..add('updatedAt', updatedAt))
+          ..add('updatedAt', updatedAt)
+          ..add('avatarVersion', avatarVersion))
         .toString();
   }
 }
@@ -104,6 +110,11 @@ class UserResponseBuilder
   DateTime? get updatedAt => _$this._updatedAt;
   set updatedAt(DateTime? updatedAt) => _$this._updatedAt = updatedAt;
 
+  String? _avatarVersion;
+  String? get avatarVersion => _$this._avatarVersion;
+  set avatarVersion(String? avatarVersion) =>
+      _$this._avatarVersion = avatarVersion;
+
   UserResponseBuilder() {
     UserResponse._defaults(this);
   }
@@ -117,6 +128,7 @@ class UserResponseBuilder
       _role = $v.role;
       _createdAt = $v.createdAt;
       _updatedAt = $v.updatedAt;
+      _avatarVersion = $v.avatarVersion;
       _$v = null;
     }
     return this;
@@ -149,6 +161,7 @@ class UserResponseBuilder
               createdAt, r'UserResponse', 'createdAt'),
           updatedAt: BuiltValueNullFieldError.checkNotNull(
               updatedAt, r'UserResponse', 'updatedAt'),
+          avatarVersion: avatarVersion,
         );
     replace(_$result);
     return _$result;

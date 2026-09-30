@@ -8,6 +8,8 @@ import 'package:video_server_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**loginState** | **String** |  |
+**sessionSite** | **String** |  | [optional]
 **providerKey** | **String** |  |
 **accessPolicyId** | [**ProviderAccessPolicy**](ProviderAccessPolicy.md) |  |
 **routeConfigured** | **bool** |  |

@@ -1,5 +1,56 @@
 import 'package:framegrab/core/network/data_request_failure.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:video_server_api/video_server_api.dart';
+
+String? intentFailureMessage(
+  AppLocalizations localizations,
+  IntentResponse intent,
+) {
+  final failure = intent.failure;
+  if (intent.status == IntentStatus.retryWait &&
+      failure?.scope == FailureScope.session) {
+    return localizations.intentAutomaticSessionRecovery;
+  }
+  if (intent.status == IntentStatus.queued ||
+      intent.status == IntentStatus.preparing ||
+      intent.status == IntentStatus.resolving ||
+      intent.status == IntentStatus.retryWait) {
+    return null;
+  }
+  final message = switch (failure?.failureClass) {
+    FailureClass.authRequired ||
+    FailureClass.sessionExpired => localizations.providerSessionError,
+    FailureClass.challengeRequired => localizations.providerChallengeError,
+    FailureClass.tokenUnavailable ||
+    FailureClass.tokenRejected => localizations.providerTokenError,
+    FailureClass.extractorChanged => localizations.providerExtractorError,
+    FailureClass.mediaProbeFailed => localizations.providerMediaProbeError,
+    FailureClass.egressDenied => localizations.providerEgressError,
+    FailureClass.networkTransient => localizations.providerNetworkError,
+    FailureClass.runtimeUnavailable =>
+      failure?.scope == FailureScope.session
+          ? localizations.providerSessionSourceError
+          : localizations.providerRuntimeError,
+    FailureClass.capacityExhausted => localizations.providerCapacityError,
+    FailureClass.contextChanged => localizations.intentContextChangedError,
+    FailureClass.outcomeUnknown => localizations.providerUnknownOutcomeError,
+    FailureClass.contentRestricted => localizations.providerRestrictedError,
+    FailureClass.contentUnavailable => localizations.providerLinkError,
+    FailureClass.sourceUnsupported => localizations.providerUnsupportedError,
+    FailureClass.protocolUnavailable ||
+    FailureClass.formatUnavailable => localizations.noFormatsAvailable,
+    FailureClass.rateLimited => localizations.rateLimitedError,
+    _ => null,
+  };
+  if (message != null) return message;
+  final code = intent.reasonCode;
+  return code == null
+      ? null
+      : intakeFailureMessage(
+          localizations,
+          DataRequestFailure(DataRequestFailureKind.unknown, code: code),
+        );
+}
 
 String intakeFailureMessage(AppLocalizations localizations, Object error) {
   if (error is! DataRequestFailure) return localizations.operationFailed;
@@ -17,7 +68,8 @@ String intakeFailureMessage(AppLocalizations localizations, Object error) {
     'provider_content_restricted' => localizations.providerRestrictedError,
     'provider_drm_protected' => localizations.providerDrmError,
     'provider_link_unavailable' => localizations.providerLinkError,
-    'provider_verification_failed' ||
+    'provider_verification_failed' => localizations.providerChallengeError,
+    'provider_session_not_ready' => localizations.providerSessionSourceError,
     'provider_temporarily_unavailable' => localizations.providerTemporaryError,
     'provider_media_unsupported' ||
     'provider_unsupported' => localizations.providerUnsupportedError,

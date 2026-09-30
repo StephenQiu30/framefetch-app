@@ -10,7 +10,6 @@ const IntentStatus _$queued = const IntentStatus._('queued');
 const IntentStatus _$preparing = const IntentStatus._('preparing');
 const IntentStatus _$resolving = const IntentStatus._('resolving');
 const IntentStatus _$retryWait = const IntentStatus._('retryWait');
-const IntentStatus _$actionRequired = const IntentStatus._('actionRequired');
 const IntentStatus _$ready = const IntentStatus._('ready');
 const IntentStatus _$handedOff = const IntentStatus._('handedOff');
 const IntentStatus _$cancelled = const IntentStatus._('cancelled');
@@ -29,8 +28,6 @@ IntentStatus _$valueOf(String name) {
       return _$resolving;
     case 'retryWait':
       return _$retryWait;
-    case 'actionRequired':
-      return _$actionRequired;
     case 'ready':
       return _$ready;
     case 'handedOff':
@@ -54,7 +51,6 @@ final BuiltSet<IntentStatus> _$values =
   _$preparing,
   _$resolving,
   _$retryWait,
-  _$actionRequired,
   _$ready,
   _$handedOff,
   _$cancelled,
@@ -69,7 +65,6 @@ class _$IntentStatusMeta {
   IntentStatus get preparing => _$preparing;
   IntentStatus get resolving => _$resolving;
   IntentStatus get retryWait => _$retryWait;
-  IntentStatus get actionRequired => _$actionRequired;
   IntentStatus get ready => _$ready;
   IntentStatus get handedOff => _$handedOff;
   IntentStatus get cancelled => _$cancelled;
@@ -93,7 +88,6 @@ class _$IntentStatusSerializer implements PrimitiveSerializer<IntentStatus> {
     'preparing': 'preparing',
     'resolving': 'resolving',
     'retryWait': 'retry_wait',
-    'actionRequired': 'action_required',
     'ready': 'ready',
     'handedOff': 'handed_off',
     'cancelled': 'cancelled',
@@ -106,7 +100,6 @@ class _$IntentStatusSerializer implements PrimitiveSerializer<IntentStatus> {
     'preparing': 'preparing',
     'resolving': 'resolving',
     'retry_wait': 'retryWait',
-    'action_required': 'actionRequired',
     'ready': 'ready',
     'handed_off': 'handedOff',
     'cancelled': 'cancelled',

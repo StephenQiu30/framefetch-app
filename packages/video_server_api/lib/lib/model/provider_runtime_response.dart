@@ -14,6 +14,8 @@ part 'provider_runtime_response.g.dart';
 /// ProviderRuntimeResponse
 ///
 /// Properties:
+/// * [loginState]
+/// * [sessionSite]
 /// * [providerKey]
 /// * [accessPolicyId]
 /// * [routeConfigured]
@@ -28,6 +30,13 @@ part 'provider_runtime_response.g.dart';
 @BuiltValue()
 abstract class ProviderRuntimeResponse
     implements Built<ProviderRuntimeResponse, ProviderRuntimeResponseBuilder> {
+  @BuiltValueField(wireName: r'login_state')
+  ProviderRuntimeResponseLoginStateEnum get loginState;
+  // enum loginStateEnum {  not_required,  signed_in,  unavailable,  };
+
+  @BuiltValueField(wireName: r'session_site')
+  String? get sessionSite;
+
   @BuiltValueField(wireName: r'provider_key')
   String get providerKey;
 
@@ -94,6 +103,18 @@ class _$ProviderRuntimeResponseSerializer
     ProviderRuntimeResponse object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
+    yield r'login_state';
+    yield serializers.serialize(
+      object.loginState,
+      specifiedType: const FullType(ProviderRuntimeResponseLoginStateEnum),
+    );
+    if (object.sessionSite != null) {
+      yield r'session_site';
+      yield serializers.serialize(
+        object.sessionSite,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
     yield r'provider_key';
     yield serializers.serialize(
       object.providerKey,
@@ -186,6 +207,22 @@ class _$ProviderRuntimeResponseSerializer
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
+        case r'login_state':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType:
+                const FullType(ProviderRuntimeResponseLoginStateEnum),
+          ) as ProviderRuntimeResponseLoginStateEnum;
+          result.loginState = valueDes;
+          break;
+        case r'session_site':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.sessionSite = valueDes;
+          break;
         case r'provider_key':
           final valueDes = serializers.deserialize(
             value,
@@ -297,6 +334,31 @@ class _$ProviderRuntimeResponseSerializer
     );
     return result.build();
   }
+}
+
+class ProviderRuntimeResponseLoginStateEnum extends EnumClass {
+  @BuiltValueEnumConst(wireName: r'not_required')
+  static const ProviderRuntimeResponseLoginStateEnum notRequired =
+      _$providerRuntimeResponseLoginStateEnum_notRequired;
+  @BuiltValueEnumConst(wireName: r'signed_in')
+  static const ProviderRuntimeResponseLoginStateEnum signedIn =
+      _$providerRuntimeResponseLoginStateEnum_signedIn;
+  @BuiltValueEnumConst(wireName: r'unavailable')
+  static const ProviderRuntimeResponseLoginStateEnum unavailable =
+      _$providerRuntimeResponseLoginStateEnum_unavailable;
+  @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
+  static const ProviderRuntimeResponseLoginStateEnum unknownDefaultOpenApi =
+      _$providerRuntimeResponseLoginStateEnum_unknownDefaultOpenApi;
+
+  static Serializer<ProviderRuntimeResponseLoginStateEnum> get serializer =>
+      _$providerRuntimeResponseLoginStateEnumSerializer;
+
+  const ProviderRuntimeResponseLoginStateEnum._(String name) : super(name);
+
+  static BuiltSet<ProviderRuntimeResponseLoginStateEnum> get values =>
+      _$providerRuntimeResponseLoginStateEnumValues;
+  static ProviderRuntimeResponseLoginStateEnum valueOf(String name) =>
+      _$providerRuntimeResponseLoginStateEnumValueOf(name);
 }
 
 class ProviderRuntimeResponseSourceStateEnum extends EnumClass {

@@ -1,12 +1,12 @@
 import 'package:test/test.dart';
 import 'package:video_server_api/video_server_api.dart';
 
-// tests for ScreenplayEvidenceItemResponse
+// tests for ScreenplayFindingResponse
 void main() {
-  final instance = ScreenplayEvidenceItemResponseBuilder();
+  final instance = ScreenplayFindingResponseBuilder();
   // TODO add properties to the builder and call build()
 
-  group(ScreenplayEvidenceItemResponse, () {
+  group(ScreenplayFindingResponse, () {
     // String id
     test('to test the property `id`', () async {
       // TODO
@@ -19,11 +19,6 @@ void main() {
 
     // String description
     test('to test the property `description`', () async {
-      // TODO
-    });
-
-    // BuiltList<String> evidenceSceneIds
-    test('to test the property `evidenceSceneIds`', () async {
       // TODO
     });
   });

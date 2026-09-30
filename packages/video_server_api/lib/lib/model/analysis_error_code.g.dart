@@ -40,6 +40,8 @@ const AnalysisErrorCode _$analysisReportUnavailable =
 const AnalysisErrorCode _$internalError =
     const AnalysisErrorCode._('internalError');
 const AnalysisErrorCode _$workerLost = const AnalysisErrorCode._('workerLost');
+const AnalysisErrorCode _$analysisOutcomeUnknown =
+    const AnalysisErrorCode._('analysisOutcomeUnknown');
 const AnalysisErrorCode _$unknownDefaultOpenApi =
     const AnalysisErrorCode._('unknownDefaultOpenApi');
 
@@ -81,6 +83,8 @@ AnalysisErrorCode _$valueOf(String name) {
       return _$internalError;
     case 'workerLost':
       return _$workerLost;
+    case 'analysisOutcomeUnknown':
+      return _$analysisOutcomeUnknown;
     case 'unknownDefaultOpenApi':
       return _$unknownDefaultOpenApi;
     default:
@@ -108,6 +112,7 @@ final BuiltSet<AnalysisErrorCode> _$values =
   _$analysisReportUnavailable,
   _$internalError,
   _$workerLost,
+  _$analysisOutcomeUnknown,
   _$unknownDefaultOpenApi,
 ]);
 
@@ -137,6 +142,7 @@ class _$AnalysisErrorCodeMeta {
       _$analysisReportUnavailable;
   AnalysisErrorCode get internalError => _$internalError;
   AnalysisErrorCode get workerLost => _$workerLost;
+  AnalysisErrorCode get analysisOutcomeUnknown => _$analysisOutcomeUnknown;
   AnalysisErrorCode get unknownDefaultOpenApi => _$unknownDefaultOpenApi;
   AnalysisErrorCode valueOf(String name) => _$valueOf(name);
   BuiltSet<AnalysisErrorCode> get values => _$values;
@@ -172,6 +178,7 @@ class _$AnalysisErrorCodeSerializer
     'analysisReportUnavailable': 'analysis_report_unavailable',
     'internalError': 'internal_error',
     'workerLost': 'worker_lost',
+    'analysisOutcomeUnknown': 'analysis_outcome_unknown',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
@@ -193,6 +200,7 @@ class _$AnalysisErrorCodeSerializer
     'analysis_report_unavailable': 'analysisReportUnavailable',
     'internal_error': 'internalError',
     'worker_lost': 'workerLost',
+    'analysis_outcome_unknown': 'analysisOutcomeUnknown',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 

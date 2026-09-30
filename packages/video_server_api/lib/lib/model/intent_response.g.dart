@@ -8,6 +8,13 @@ part of 'intent_response.dart';
 
 const IntentResponseNextActionEnum _$intentResponseNextActionEnum_none =
     const IntentResponseNextActionEnum._('none');
+const IntentResponseNextActionEnum _$intentResponseNextActionEnum_wait =
+    const IntentResponseNextActionEnum._('wait');
+const IntentResponseNextActionEnum
+    _$intentResponseNextActionEnum_refreshResult =
+    const IntentResponseNextActionEnum._('refreshResult');
+const IntentResponseNextActionEnum _$intentResponseNextActionEnum_importFile =
+    const IntentResponseNextActionEnum._('importFile');
 const IntentResponseNextActionEnum
     _$intentResponseNextActionEnum_unknownDefaultOpenApi =
     const IntentResponseNextActionEnum._('unknownDefaultOpenApi');
@@ -17,6 +24,12 @@ IntentResponseNextActionEnum _$intentResponseNextActionEnumValueOf(
   switch (name) {
     case 'none':
       return _$intentResponseNextActionEnum_none;
+    case 'wait':
+      return _$intentResponseNextActionEnum_wait;
+    case 'refreshResult':
+      return _$intentResponseNextActionEnum_refreshResult;
+    case 'importFile':
+      return _$intentResponseNextActionEnum_importFile;
     case 'unknownDefaultOpenApi':
       return _$intentResponseNextActionEnum_unknownDefaultOpenApi;
     default:
@@ -28,6 +41,9 @@ final BuiltSet<IntentResponseNextActionEnum>
     _$intentResponseNextActionEnumValues =
     BuiltSet<IntentResponseNextActionEnum>(const <IntentResponseNextActionEnum>[
   _$intentResponseNextActionEnum_none,
+  _$intentResponseNextActionEnum_wait,
+  _$intentResponseNextActionEnum_refreshResult,
+  _$intentResponseNextActionEnum_importFile,
   _$intentResponseNextActionEnum_unknownDefaultOpenApi,
 ]);
 
@@ -39,10 +55,16 @@ class _$IntentResponseNextActionEnumSerializer
     implements PrimitiveSerializer<IntentResponseNextActionEnum> {
   static const Map<String, Object> _toWire = const <String, Object>{
     'none': 'none',
+    'wait': 'wait',
+    'refreshResult': 'refresh_result',
+    'importFile': 'import_file',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
     'none': 'none',
+    'wait': 'wait',
+    'refresh_result': 'refreshResult',
+    'import_file': 'importFile',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 
@@ -74,6 +96,10 @@ class _$IntentResponse extends IntentResponse {
   @override
   final String? reasonCode;
   @override
+  final FailurePhase? phase;
+  @override
+  final IntentFailureResponse? failure;
+  @override
   final IntentResponseNextActionEnum? nextAction;
   @override
   final DateTime? retryAt;
@@ -92,6 +118,8 @@ class _$IntentResponse extends IntentResponse {
       required this.version,
       required this.status,
       this.reasonCode,
+      this.phase,
+      this.failure,
       this.nextAction,
       this.retryAt,
       required this.deadline,
@@ -113,6 +141,8 @@ class _$IntentResponse extends IntentResponse {
         version == other.version &&
         status == other.status &&
         reasonCode == other.reasonCode &&
+        phase == other.phase &&
+        failure == other.failure &&
         nextAction == other.nextAction &&
         retryAt == other.retryAt &&
         deadline == other.deadline &&
@@ -127,6 +157,8 @@ class _$IntentResponse extends IntentResponse {
     _$hash = $jc(_$hash, version.hashCode);
     _$hash = $jc(_$hash, status.hashCode);
     _$hash = $jc(_$hash, reasonCode.hashCode);
+    _$hash = $jc(_$hash, phase.hashCode);
+    _$hash = $jc(_$hash, failure.hashCode);
     _$hash = $jc(_$hash, nextAction.hashCode);
     _$hash = $jc(_$hash, retryAt.hashCode);
     _$hash = $jc(_$hash, deadline.hashCode);
@@ -143,6 +175,8 @@ class _$IntentResponse extends IntentResponse {
           ..add('version', version)
           ..add('status', status)
           ..add('reasonCode', reasonCode)
+          ..add('phase', phase)
+          ..add('failure', failure)
           ..add('nextAction', nextAction)
           ..add('retryAt', retryAt)
           ..add('deadline', deadline)
@@ -171,6 +205,16 @@ class IntentResponseBuilder
   String? _reasonCode;
   String? get reasonCode => _$this._reasonCode;
   set reasonCode(String? reasonCode) => _$this._reasonCode = reasonCode;
+
+  FailurePhase? _phase;
+  FailurePhase? get phase => _$this._phase;
+  set phase(FailurePhase? phase) => _$this._phase = phase;
+
+  IntentFailureResponseBuilder? _failure;
+  IntentFailureResponseBuilder get failure =>
+      _$this._failure ??= IntentFailureResponseBuilder();
+  set failure(IntentFailureResponseBuilder? failure) =>
+      _$this._failure = failure;
 
   IntentResponseNextActionEnum? _nextAction;
   IntentResponseNextActionEnum? get nextAction => _$this._nextAction;
@@ -204,6 +248,8 @@ class IntentResponseBuilder
       _version = $v.version;
       _status = $v.status;
       _reasonCode = $v.reasonCode;
+      _phase = $v.phase;
+      _failure = $v.failure?.toBuilder();
       _nextAction = $v.nextAction;
       _retryAt = $v.retryAt;
       _deadline = $v.deadline;
@@ -228,22 +274,37 @@ class IntentResponseBuilder
   IntentResponse build() => _build();
 
   _$IntentResponse _build() {
-    final _$result = _$v ??
-        _$IntentResponse._(
-          id: BuiltValueNullFieldError.checkNotNull(
-              id, r'IntentResponse', 'id'),
-          version: BuiltValueNullFieldError.checkNotNull(
-              version, r'IntentResponse', 'version'),
-          status: BuiltValueNullFieldError.checkNotNull(
-              status, r'IntentResponse', 'status'),
-          reasonCode: reasonCode,
-          nextAction: nextAction,
-          retryAt: retryAt,
-          deadline: BuiltValueNullFieldError.checkNotNull(
-              deadline, r'IntentResponse', 'deadline'),
-          inspectionId: inspectionId,
-          jobId: jobId,
-        );
+    _$IntentResponse _$result;
+    try {
+      _$result = _$v ??
+          _$IntentResponse._(
+            id: BuiltValueNullFieldError.checkNotNull(
+                id, r'IntentResponse', 'id'),
+            version: BuiltValueNullFieldError.checkNotNull(
+                version, r'IntentResponse', 'version'),
+            status: BuiltValueNullFieldError.checkNotNull(
+                status, r'IntentResponse', 'status'),
+            reasonCode: reasonCode,
+            phase: phase,
+            failure: _failure?.build(),
+            nextAction: nextAction,
+            retryAt: retryAt,
+            deadline: BuiltValueNullFieldError.checkNotNull(
+                deadline, r'IntentResponse', 'deadline'),
+            inspectionId: inspectionId,
+            jobId: jobId,
+          );
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'failure';
+        _failure?.build();
+      } catch (e) {
+        throw BuiltValueNestedFieldError(
+            r'IntentResponse', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

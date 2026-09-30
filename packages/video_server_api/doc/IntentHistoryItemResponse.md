@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **version** | **int** |  |
 **status** | [**IntentStatus**](IntentStatus.md) |  |
 **reasonCode** | **String** |  |
+**phase** | [**FailurePhase**](FailurePhase.md) |  |
+**failure** | [**IntentFailureResponse**](IntentFailureResponse.md) |  |
 **nextAction** | **String** |  | [optional] [default to 'none']
 **retryAt** | [**DateTime**](DateTime.md) |  |
 **deadline** | [**DateTime**](DateTime.md) |  |

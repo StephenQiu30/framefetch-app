@@ -3021,7 +3021,7 @@
         "tags": [
           "download-intents"
         ],
-        "summary": "在原意图与剩余预算内更新过期解析结果",
+        "summary": "在原意图中重新解析并确认过期结果",
         "operationId": "refreshDownloadIntent",
         "security": [
           {
@@ -8972,7 +8972,8 @@
           "screenplay_output_incomplete",
           "analysis_report_unavailable",
           "internal_error",
-          "worker_lost"
+          "worker_lost",
+          "analysis_outcome_unknown"
         ],
         "title": "AnalysisErrorCode"
       },
@@ -9045,8 +9046,7 @@
             "title": "Id"
           },
           "status": {
-            "type": "string",
-            "title": "Status"
+            "$ref": "#/components/schemas/AnalysisReportStatus"
           },
           "renderer_version": {
             "type": "string",
@@ -9087,6 +9087,18 @@
           "artifacts"
         ],
         "title": "AnalysisReportResponse"
+      },
+      "AnalysisReportStatus": {
+        "type": "string",
+        "enum": [
+          "validated",
+          "publishing",
+          "available",
+          "publish_failed",
+          "delete_pending",
+          "deleted"
+        ],
+        "title": "AnalysisReportStatus"
       },
       "AnalysisRequest": {
         "properties": {
@@ -9243,6 +9255,9 @@
                   },
                   {
                     "$ref": "#/components/schemas/ScreenplayRewriteResultResponse"
+                  },
+                  {
+                    "$ref": "#/components/schemas/StructuredReportResultResponse"
                   }
                 ],
                 "discriminator": {
@@ -9250,6 +9265,7 @@
                   "mapping": {
                     "screenplay_analysis": "#/components/schemas/ScreenplayAnalysisResultResponse",
                     "screenplay_rewrite": "#/components/schemas/ScreenplayRewriteResultResponse",
+                    "structured_report": "#/components/schemas/StructuredReportResultResponse",
                     "video_article": "#/components/schemas/VideoArticleResultResponse",
                     "video_visual_analysis": "#/components/schemas/VideoAnalysisResultResponse"
                   }
@@ -9328,7 +9344,8 @@
           "video-visual-analysis",
           "video-article",
           "screenplay-analysis",
-          "screenplay-rewrite"
+          "screenplay-rewrite",
+          "structured-report"
         ],
         "title": "AnalysisResultContract"
       },
@@ -11155,6 +11172,7 @@
           "provider_media_unsupported",
           "provider_rate_limited",
           "provider_session_expired",
+          "provider_session_not_ready",
           "provider_temporarily_unavailable",
           "provider_unsupported",
           "provider_verification_failed",
@@ -11669,6 +11687,7 @@
           "analysis_report_not_ready",
           "analysis_report_unavailable",
           "analysis_retry_limited",
+          "analysis_skill_outdated",
           "analysis_unavailable",
           "article_access_restricted",
           "article_discovery_failed",
@@ -11699,6 +11718,7 @@
           "invalid_url",
           "invalid_username",
           "invalid_verification_code",
+          "last_admin_change",
           "job_conflict",
           "method_not_allowed",
           "metrics_unavailable",
@@ -11706,7 +11726,6 @@
           "ok",
           "provider_access_policy_not_allowed",
           "provider_auth_required",
-          "provider_authorization_unavailable",
           "provider_catalog_conflict",
           "provider_catalog_not_found",
           "provider_configuration_missing",
@@ -11719,6 +11738,7 @@
           "provider_media_unsupported",
           "provider_rate_limited",
           "provider_session_expired",
+          "provider_session_not_ready",
           "provider_temporarily_unavailable",
           "provider_unsupported",
           "provider_verification_failed",
@@ -11800,6 +11820,71 @@
           "verified_import"
         ],
         "title": "ExecutionMode"
+      },
+      "FailureClass": {
+        "type": "string",
+        "enum": [
+          "auth_required",
+          "session_expired",
+          "challenge_required",
+          "token_unavailable",
+          "token_rejected",
+          "extractor_changed",
+          "protocol_unavailable",
+          "format_unavailable",
+          "media_probe_failed",
+          "egress_denied",
+          "network_transient",
+          "rate_limited",
+          "content_unavailable",
+          "content_restricted",
+          "context_changed",
+          "runtime_unavailable",
+          "capacity_exhausted",
+          "invalid_input",
+          "source_unsupported",
+          "artifact_invalid",
+          "storage_unavailable",
+          "outcome_unknown",
+          "upstream_unclassified"
+        ],
+        "title": "FailureClass"
+      },
+      "FailureEvidenceKind": {
+        "type": "string",
+        "enum": [
+          "upstream_response",
+          "transport",
+          "local_validation",
+          "runtime",
+          "unknown"
+        ],
+        "title": "FailureEvidenceKind"
+      },
+      "FailurePhase": {
+        "type": "string",
+        "enum": [
+          "recognize",
+          "prepare_context",
+          "fetch_metadata",
+          "select_format",
+          "probe_media",
+          "transfer",
+          "validate",
+          "publish"
+        ],
+        "title": "FailurePhase"
+      },
+      "FailureScope": {
+        "type": "string",
+        "enum": [
+          "content",
+          "session",
+          "route",
+          "dependency",
+          "runtime"
+        ],
+        "title": "FailureScope"
       },
       "FormatResponse": {
         "properties": {
@@ -12113,6 +12198,79 @@
         "title": "InspectionResponse",
         "description": "Inspection resource with normalized semantic download formats."
       },
+      "IntentFailureResponse": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "phase": {
+            "$ref": "#/components/schemas/FailurePhase"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/FailureScope"
+          },
+          "failure_class": {
+            "$ref": "#/components/schemas/FailureClass"
+          },
+          "cause_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cause Code"
+          },
+          "evidence_kind": {
+            "$ref": "#/components/schemas/FailureEvidenceKind"
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observed At"
+          },
+          "retry_after": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retry After"
+          },
+          "diagnostic_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Diagnostic Ref"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "phase",
+          "scope",
+          "failure_class",
+          "cause_code",
+          "evidence_kind",
+          "observed_at",
+          "retry_after",
+          "diagnostic_ref"
+        ],
+        "title": "IntentFailureResponse"
+      },
       "IntentHistoryItemResponse": {
         "properties": {
           "id": {
@@ -12138,9 +12296,34 @@
             ],
             "title": "Reason Code"
           },
+          "phase": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FailurePhase"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "failure": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IntentFailureResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "next_action": {
             "type": "string",
-            "const": "none",
+            "enum": [
+              "none",
+              "wait",
+              "refresh_result",
+              "import_file"
+            ],
             "title": "Next Action",
             "default": "none"
           },
@@ -12209,6 +12392,8 @@
           "version",
           "status",
           "reason_code",
+          "phase",
+          "failure",
           "retry_at",
           "deadline",
           "inspection_id",
@@ -12290,9 +12475,34 @@
             ],
             "title": "Reason Code"
           },
+          "phase": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FailurePhase"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "failure": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IntentFailureResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "next_action": {
             "type": "string",
-            "const": "none",
+            "enum": [
+              "none",
+              "wait",
+              "refresh_result",
+              "import_file"
+            ],
             "title": "Next Action",
             "default": "none"
           },
@@ -12345,6 +12555,8 @@
           "version",
           "status",
           "reason_code",
+          "phase",
+          "failure",
           "retry_at",
           "deadline",
           "inspection_id",
@@ -12359,7 +12571,6 @@
           "preparing",
           "resolving",
           "retry_wait",
-          "action_required",
           "ready",
           "handed_off",
           "cancelled",
@@ -12801,7 +13012,7 @@
           "operator_managed"
         ],
         "title": "ProviderAccessMode",
-        "description": "Privilege boundary for one provider operation.\n\nGUEST may use automatically maintained visitor material but has no account\nentitlement. OPERATOR_MANAGED is the only account-bearing mode."
+        "description": "Privilege boundary for one provider operation.\n\nOPERATOR_MANAGED carries the dedicated platform login for one operation.\nGUEST only appears in persisted history from the retired visitor route."
       },
       "ProviderAccessPolicy": {
         "type": "string",
@@ -12836,8 +13047,6 @@
         "enum": [
           "public_probe",
           "public_ready",
-          "guest_probe",
-          "guest_ready",
           "authorization_required",
           "operator_probe",
           "operator_ready",
@@ -12848,16 +13057,6 @@
         ],
         "title": "ProviderAccessState",
         "description": "User-facing access state projected from support and runtime evidence."
-      },
-      "ProviderAuthorizationAction": {
-        "type": "string",
-        "enum": [
-          "none",
-          "browser_session",
-          "managed_session"
-        ],
-        "title": "ProviderAuthorizationAction",
-        "description": "Coarse, non-secret recovery action exposed by the Provider API."
       },
       "ProviderCapability": {
         "type": "string",
@@ -12990,6 +13189,26 @@
       },
       "ProviderRuntimeResponse": {
         "properties": {
+          "login_state": {
+            "type": "string",
+            "enum": [
+              "not_required",
+              "signed_in",
+              "unavailable"
+            ],
+            "title": "Login State"
+          },
+          "session_site": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Session Site"
+          },
           "provider_key": {
             "type": "string",
             "title": "Provider Key"
@@ -13086,6 +13305,7 @@
         "additionalProperties": false,
         "type": "object",
         "required": [
+          "login_state",
           "provider_key",
           "access_policy_id",
           "route_configured",
@@ -13248,9 +13468,6 @@
               }
             ],
             "title": "Route Retry At"
-          },
-          "authorization_action": {
-            "$ref": "#/components/schemas/ProviderAuthorizationAction"
           }
         },
         "additionalProperties": false,
@@ -13275,8 +13492,7 @@
           "default_access_policy_id",
           "evidence_state",
           "hosts",
-          "host_suffixes",
-          "authorization_action"
+          "host_suffixes"
         ],
         "title": "ProviderStatusResponse"
       },
@@ -13468,21 +13684,21 @@
           },
           "dialogue_findings": {
             "items": {
-              "$ref": "#/components/schemas/ScreenplayEvidenceItemResponse"
+              "$ref": "#/components/schemas/ScreenplayFindingResponse"
             },
             "type": "array",
             "title": "Dialogue Findings"
           },
           "strengths": {
             "items": {
-              "$ref": "#/components/schemas/ScreenplayEvidenceItemResponse"
+              "$ref": "#/components/schemas/ScreenplayFindingResponse"
             },
             "type": "array",
             "title": "Strengths"
           },
           "priority_revisions": {
             "items": {
-              "$ref": "#/components/schemas/ScreenplayEvidenceItemResponse"
+              "$ref": "#/components/schemas/ScreenplayFindingResponse"
             },
             "type": "array",
             "title": "Priority Revisions"
@@ -13526,13 +13742,6 @@
           "arc": {
             "type": "string",
             "title": "Arc"
-          },
-          "evidence_scene_ids": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Evidence Scene Ids"
           }
         },
         "additionalProperties": false,
@@ -13542,12 +13751,11 @@
           "name",
           "goal",
           "conflict",
-          "arc",
-          "evidence_scene_ids"
+          "arc"
         ],
         "title": "ScreenplayCharacterResponse"
       },
-      "ScreenplayEvidenceItemResponse": {
+      "ScreenplayFindingResponse": {
         "properties": {
           "id": {
             "type": "string",
@@ -13560,13 +13768,6 @@
           "description": {
             "type": "string",
             "title": "Description"
-          },
-          "evidence_scene_ids": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Evidence Scene Ids"
           }
         },
         "additionalProperties": false,
@@ -13574,10 +13775,9 @@
         "required": [
           "id",
           "title",
-          "description",
-          "evidence_scene_ids"
+          "description"
         ],
-        "title": "ScreenplayEvidenceItemResponse"
+        "title": "ScreenplayFindingResponse"
       },
       "ScreenplayGlossaryTermResponse": {
         "properties": {
@@ -13708,14 +13908,14 @@
         "properties": {
           "acts": {
             "items": {
-              "$ref": "#/components/schemas/ScreenplayEvidenceItemResponse"
+              "$ref": "#/components/schemas/ScreenplayFindingResponse"
             },
             "type": "array",
             "title": "Acts"
           },
           "turning_points": {
             "items": {
-              "$ref": "#/components/schemas/ScreenplayEvidenceItemResponse"
+              "$ref": "#/components/schemas/ScreenplayFindingResponse"
             },
             "type": "array",
             "title": "Turning Points"
@@ -14130,6 +14330,99 @@
         ],
         "title": "StoredFileResponse"
       },
+      "StructuredReportResultResponse": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "structured_report"
+            ],
+            "const": "structured_report",
+            "title": "Kind"
+          },
+          "language": {
+            "type": "string",
+            "title": "Language"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary"
+          },
+          "sections": {
+            "items": {
+              "$ref": "#/components/schemas/StructuredReportSectionResponse"
+            },
+            "type": "array",
+            "title": "Sections"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          },
+          "media": {
+            "$ref": "#/components/schemas/AnalysisMediaResponse"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "kind",
+          "language",
+          "title",
+          "summary",
+          "sections",
+          "limitations",
+          "media"
+        ],
+        "title": "StructuredReportResultResponse"
+      },
+      "StructuredReportSectionResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "heading": {
+            "type": "string",
+            "title": "Heading"
+          },
+          "body": {
+            "type": "string",
+            "title": "Body"
+          },
+          "items": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/VideoArticleEvidenceResponse"
+            },
+            "type": "array",
+            "title": "Evidence"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "heading",
+          "body",
+          "items",
+          "evidence"
+        ],
+        "title": "StructuredReportSectionResponse"
+      },
       "UpdateAiProviderProfileRequest": {
         "properties": {
           "display_name": {
@@ -14426,6 +14719,18 @@
             "type": "string",
             "format": "date-time",
             "title": "Updated At"
+          },
+          "avatar_version": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avatar Version"
           }
         },
         "type": "object",

@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element, unused_element_parameter
+import 'package:video_server_api/lib/model/analysis_report_status.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:video_server_api/lib/model/analysis_report_artifact_response.dart';
 import 'package:built_value/built_value.dart';
@@ -26,7 +27,8 @@ abstract class AnalysisReportResponse
   String get id;
 
   @BuiltValueField(wireName: r'status')
-  String get status;
+  AnalysisReportStatus get status;
+  // enum statusEnum {  validated,  publishing,  available,  publish_failed,  delete_pending,  deleted,  };
 
   @BuiltValueField(wireName: r'renderer_version')
   String get rendererVersion;
@@ -78,7 +80,7 @@ class _$AnalysisReportResponseSerializer
     yield r'status';
     yield serializers.serialize(
       object.status,
-      specifiedType: const FullType(String),
+      specifiedType: const FullType(AnalysisReportStatus),
     );
     yield r'renderer_version';
     yield serializers.serialize(
@@ -138,8 +140,8 @@ class _$AnalysisReportResponseSerializer
         case r'status':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(String),
-          ) as String;
+            specifiedType: const FullType(AnalysisReportStatus),
+          ) as AnalysisReportStatus;
           result.status = valueDes;
           break;
         case r'renderer_version':

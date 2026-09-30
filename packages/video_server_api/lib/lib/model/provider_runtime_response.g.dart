@@ -6,6 +6,44 @@ part of 'provider_runtime_response.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
+const ProviderRuntimeResponseLoginStateEnum
+    _$providerRuntimeResponseLoginStateEnum_notRequired =
+    const ProviderRuntimeResponseLoginStateEnum._('notRequired');
+const ProviderRuntimeResponseLoginStateEnum
+    _$providerRuntimeResponseLoginStateEnum_signedIn =
+    const ProviderRuntimeResponseLoginStateEnum._('signedIn');
+const ProviderRuntimeResponseLoginStateEnum
+    _$providerRuntimeResponseLoginStateEnum_unavailable =
+    const ProviderRuntimeResponseLoginStateEnum._('unavailable');
+const ProviderRuntimeResponseLoginStateEnum
+    _$providerRuntimeResponseLoginStateEnum_unknownDefaultOpenApi =
+    const ProviderRuntimeResponseLoginStateEnum._('unknownDefaultOpenApi');
+
+ProviderRuntimeResponseLoginStateEnum
+    _$providerRuntimeResponseLoginStateEnumValueOf(String name) {
+  switch (name) {
+    case 'notRequired':
+      return _$providerRuntimeResponseLoginStateEnum_notRequired;
+    case 'signedIn':
+      return _$providerRuntimeResponseLoginStateEnum_signedIn;
+    case 'unavailable':
+      return _$providerRuntimeResponseLoginStateEnum_unavailable;
+    case 'unknownDefaultOpenApi':
+      return _$providerRuntimeResponseLoginStateEnum_unknownDefaultOpenApi;
+    default:
+      return _$providerRuntimeResponseLoginStateEnum_unknownDefaultOpenApi;
+  }
+}
+
+final BuiltSet<ProviderRuntimeResponseLoginStateEnum>
+    _$providerRuntimeResponseLoginStateEnumValues = BuiltSet<
+        ProviderRuntimeResponseLoginStateEnum>(const <ProviderRuntimeResponseLoginStateEnum>[
+  _$providerRuntimeResponseLoginStateEnum_notRequired,
+  _$providerRuntimeResponseLoginStateEnum_signedIn,
+  _$providerRuntimeResponseLoginStateEnum_unavailable,
+  _$providerRuntimeResponseLoginStateEnum_unknownDefaultOpenApi,
+]);
+
 const ProviderRuntimeResponseSourceStateEnum
     _$providerRuntimeResponseSourceStateEnum_notRequired =
     const ProviderRuntimeResponseSourceStateEnum._('notRequired');
@@ -50,9 +88,48 @@ final BuiltSet<ProviderRuntimeResponseSourceStateEnum>
   _$providerRuntimeResponseSourceStateEnum_unknownDefaultOpenApi,
 ]);
 
+Serializer<ProviderRuntimeResponseLoginStateEnum>
+    _$providerRuntimeResponseLoginStateEnumSerializer =
+    _$ProviderRuntimeResponseLoginStateEnumSerializer();
 Serializer<ProviderRuntimeResponseSourceStateEnum>
     _$providerRuntimeResponseSourceStateEnumSerializer =
     _$ProviderRuntimeResponseSourceStateEnumSerializer();
+
+class _$ProviderRuntimeResponseLoginStateEnumSerializer
+    implements PrimitiveSerializer<ProviderRuntimeResponseLoginStateEnum> {
+  static const Map<String, Object> _toWire = const <String, Object>{
+    'notRequired': 'not_required',
+    'signedIn': 'signed_in',
+    'unavailable': 'unavailable',
+    'unknownDefaultOpenApi': 'unknown_default_open_api',
+  };
+  static const Map<Object, String> _fromWire = const <Object, String>{
+    'not_required': 'notRequired',
+    'signed_in': 'signedIn',
+    'unavailable': 'unavailable',
+    'unknown_default_open_api': 'unknownDefaultOpenApi',
+  };
+
+  @override
+  final Iterable<Type> types = const <Type>[
+    ProviderRuntimeResponseLoginStateEnum
+  ];
+  @override
+  final String wireName = 'ProviderRuntimeResponseLoginStateEnum';
+
+  @override
+  Object serialize(
+          Serializers serializers, ProviderRuntimeResponseLoginStateEnum object,
+          {FullType specifiedType = FullType.unspecified}) =>
+      _toWire[object.name] ?? object.name;
+
+  @override
+  ProviderRuntimeResponseLoginStateEnum deserialize(
+          Serializers serializers, Object serialized,
+          {FullType specifiedType = FullType.unspecified}) =>
+      ProviderRuntimeResponseLoginStateEnum.valueOf(
+          _fromWire[serialized] ?? (serialized is String ? serialized : ''));
+}
 
 class _$ProviderRuntimeResponseSourceStateEnumSerializer
     implements PrimitiveSerializer<ProviderRuntimeResponseSourceStateEnum> {
@@ -94,6 +171,10 @@ class _$ProviderRuntimeResponseSourceStateEnumSerializer
 
 class _$ProviderRuntimeResponse extends ProviderRuntimeResponse {
   @override
+  final ProviderRuntimeResponseLoginStateEnum loginState;
+  @override
+  final String? sessionSite;
+  @override
   final String providerKey;
   @override
   final ProviderAccessPolicy? accessPolicyId;
@@ -121,7 +202,9 @@ class _$ProviderRuntimeResponse extends ProviderRuntimeResponse {
       (ProviderRuntimeResponseBuilder()..update(updates))._build();
 
   _$ProviderRuntimeResponse._(
-      {required this.providerKey,
+      {required this.loginState,
+      this.sessionSite,
+      required this.providerKey,
       this.accessPolicyId,
       required this.routeConfigured,
       required this.contextAvailable,
@@ -146,6 +229,8 @@ class _$ProviderRuntimeResponse extends ProviderRuntimeResponse {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is ProviderRuntimeResponse &&
+        loginState == other.loginState &&
+        sessionSite == other.sessionSite &&
         providerKey == other.providerKey &&
         accessPolicyId == other.accessPolicyId &&
         routeConfigured == other.routeConfigured &&
@@ -162,6 +247,8 @@ class _$ProviderRuntimeResponse extends ProviderRuntimeResponse {
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, loginState.hashCode);
+    _$hash = $jc(_$hash, sessionSite.hashCode);
     _$hash = $jc(_$hash, providerKey.hashCode);
     _$hash = $jc(_$hash, accessPolicyId.hashCode);
     _$hash = $jc(_$hash, routeConfigured.hashCode);
@@ -180,6 +267,8 @@ class _$ProviderRuntimeResponse extends ProviderRuntimeResponse {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'ProviderRuntimeResponse')
+          ..add('loginState', loginState)
+          ..add('sessionSite', sessionSite)
           ..add('providerKey', providerKey)
           ..add('accessPolicyId', accessPolicyId)
           ..add('routeConfigured', routeConfigured)
@@ -199,6 +288,15 @@ class ProviderRuntimeResponseBuilder
     implements
         Builder<ProviderRuntimeResponse, ProviderRuntimeResponseBuilder> {
   _$ProviderRuntimeResponse? _$v;
+
+  ProviderRuntimeResponseLoginStateEnum? _loginState;
+  ProviderRuntimeResponseLoginStateEnum? get loginState => _$this._loginState;
+  set loginState(ProviderRuntimeResponseLoginStateEnum? loginState) =>
+      _$this._loginState = loginState;
+
+  String? _sessionSite;
+  String? get sessionSite => _$this._sessionSite;
+  set sessionSite(String? sessionSite) => _$this._sessionSite = sessionSite;
 
   String? _providerKey;
   String? get providerKey => _$this._providerKey;
@@ -260,6 +358,8 @@ class ProviderRuntimeResponseBuilder
   ProviderRuntimeResponseBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _loginState = $v.loginState;
+      _sessionSite = $v.sessionSite;
       _providerKey = $v.providerKey;
       _accessPolicyId = $v.accessPolicyId;
       _routeConfigured = $v.routeConfigured;
@@ -292,6 +392,9 @@ class ProviderRuntimeResponseBuilder
   _$ProviderRuntimeResponse _build() {
     final _$result = _$v ??
         _$ProviderRuntimeResponse._(
+          loginState: BuiltValueNullFieldError.checkNotNull(
+              loginState, r'ProviderRuntimeResponse', 'loginState'),
+          sessionSite: sessionSite,
           providerKey: BuiltValueNullFieldError.checkNotNull(
               providerKey, r'ProviderRuntimeResponse', 'providerKey'),
           accessPolicyId: accessPolicyId,

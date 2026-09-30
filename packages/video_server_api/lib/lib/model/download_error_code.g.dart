@@ -39,6 +39,8 @@ const DownloadErrorCode _$providerRateLimited =
     const DownloadErrorCode._('providerRateLimited');
 const DownloadErrorCode _$providerSessionExpired =
     const DownloadErrorCode._('providerSessionExpired');
+const DownloadErrorCode _$providerSessionNotReady =
+    const DownloadErrorCode._('providerSessionNotReady');
 const DownloadErrorCode _$providerTemporarilyUnavailable =
     const DownloadErrorCode._('providerTemporarilyUnavailable');
 const DownloadErrorCode _$providerUnsupported =
@@ -93,6 +95,8 @@ DownloadErrorCode _$valueOf(String name) {
       return _$providerRateLimited;
     case 'providerSessionExpired':
       return _$providerSessionExpired;
+    case 'providerSessionNotReady':
+      return _$providerSessionNotReady;
     case 'providerTemporarilyUnavailable':
       return _$providerTemporarilyUnavailable;
     case 'providerUnsupported':
@@ -135,6 +139,7 @@ final BuiltSet<DownloadErrorCode> _$values =
   _$providerMediaUnsupported,
   _$providerRateLimited,
   _$providerSessionExpired,
+  _$providerSessionNotReady,
   _$providerTemporarilyUnavailable,
   _$providerUnsupported,
   _$providerVerificationFailed,
@@ -168,6 +173,7 @@ class _$DownloadErrorCodeMeta {
   DownloadErrorCode get providerMediaUnsupported => _$providerMediaUnsupported;
   DownloadErrorCode get providerRateLimited => _$providerRateLimited;
   DownloadErrorCode get providerSessionExpired => _$providerSessionExpired;
+  DownloadErrorCode get providerSessionNotReady => _$providerSessionNotReady;
   DownloadErrorCode get providerTemporarilyUnavailable =>
       _$providerTemporarilyUnavailable;
   DownloadErrorCode get providerUnsupported => _$providerUnsupported;
@@ -212,6 +218,7 @@ class _$DownloadErrorCodeSerializer
     'providerMediaUnsupported': 'provider_media_unsupported',
     'providerRateLimited': 'provider_rate_limited',
     'providerSessionExpired': 'provider_session_expired',
+    'providerSessionNotReady': 'provider_session_not_ready',
     'providerTemporarilyUnavailable': 'provider_temporarily_unavailable',
     'providerUnsupported': 'provider_unsupported',
     'providerVerificationFailed': 'provider_verification_failed',
@@ -240,6 +247,7 @@ class _$DownloadErrorCodeSerializer
     'provider_media_unsupported': 'providerMediaUnsupported',
     'provider_rate_limited': 'providerRateLimited',
     'provider_session_expired': 'providerSessionExpired',
+    'provider_session_not_ready': 'providerSessionNotReady',
     'provider_temporarily_unavailable': 'providerTemporarilyUnavailable',
     'provider_unsupported': 'providerUnsupported',
     'provider_verification_failed': 'providerVerificationFailed',

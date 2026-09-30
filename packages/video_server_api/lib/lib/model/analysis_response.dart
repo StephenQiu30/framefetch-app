@@ -69,7 +69,7 @@ abstract class AnalysisResponse
 
   @BuiltValueField(wireName: r'result_contract')
   AnalysisResultContract get resultContract;
-  // enum resultContractEnum {  video-visual-analysis,  video-article,  screenplay-analysis,  screenplay-rewrite,  };
+  // enum resultContractEnum {  video-visual-analysis,  video-article,  screenplay-analysis,  screenplay-rewrite,  structured-report,  };
 
   @BuiltValueField(wireName: r'status')
   AnalysisStatus get status;
@@ -87,7 +87,7 @@ abstract class AnalysisResponse
 
   @BuiltValueField(wireName: r'error_code')
   AnalysisErrorCode? get errorCode;
-  // enum errorCodeEnum {  cancelled,  analysis_cli_unavailable,  analysis_cli_unsupported,  analysis_cli_not_authenticated,  analysis_sandbox_unavailable,  analysis_media_invalid,  analysis_provider_rate_limited,  analysis_provider_usage_limited,  analysis_cli_timeout,  analysis_cli_failed,  invalid_model_output,  analysis_resource_limit,  input_artifact_unavailable,  analysis_input_expired,  screenplay_output_incomplete,  analysis_report_unavailable,  internal_error,  worker_lost,  };
+  // enum errorCodeEnum {  cancelled,  analysis_cli_unavailable,  analysis_cli_unsupported,  analysis_cli_not_authenticated,  analysis_sandbox_unavailable,  analysis_media_invalid,  analysis_provider_rate_limited,  analysis_provider_usage_limited,  analysis_cli_timeout,  analysis_cli_failed,  invalid_model_output,  analysis_resource_limit,  input_artifact_unavailable,  analysis_input_expired,  screenplay_output_incomplete,  analysis_report_unavailable,  internal_error,  worker_lost,  analysis_outcome_unknown,  };
 
   @BuiltValueField(wireName: r'created_at')
   DateTime get createdAt;

@@ -28,6 +28,8 @@ const ErrorCode _$analysisReportUnavailable =
     const ErrorCode._('analysisReportUnavailable');
 const ErrorCode _$analysisRetryLimited =
     const ErrorCode._('analysisRetryLimited');
+const ErrorCode _$analysisSkillOutdated =
+    const ErrorCode._('analysisSkillOutdated');
 const ErrorCode _$analysisUnavailable =
     const ErrorCode._('analysisUnavailable');
 const ErrorCode _$articleAccessRestricted =
@@ -70,6 +72,7 @@ const ErrorCode _$invalidUrl = const ErrorCode._('invalidUrl');
 const ErrorCode _$invalidUsername = const ErrorCode._('invalidUsername');
 const ErrorCode _$invalidVerificationCode =
     const ErrorCode._('invalidVerificationCode');
+const ErrorCode _$lastAdminChange = const ErrorCode._('lastAdminChange');
 const ErrorCode _$jobConflict = const ErrorCode._('jobConflict');
 const ErrorCode _$methodNotAllowed = const ErrorCode._('methodNotAllowed');
 const ErrorCode _$metricsUnavailable = const ErrorCode._('metricsUnavailable');
@@ -79,8 +82,6 @@ const ErrorCode _$providerAccessPolicyNotAllowed =
     const ErrorCode._('providerAccessPolicyNotAllowed');
 const ErrorCode _$providerAuthRequired =
     const ErrorCode._('providerAuthRequired');
-const ErrorCode _$providerAuthorizationUnavailable =
-    const ErrorCode._('providerAuthorizationUnavailable');
 const ErrorCode _$providerCatalogConflict =
     const ErrorCode._('providerCatalogConflict');
 const ErrorCode _$providerCatalogNotFound =
@@ -104,6 +105,8 @@ const ErrorCode _$providerRateLimited =
     const ErrorCode._('providerRateLimited');
 const ErrorCode _$providerSessionExpired =
     const ErrorCode._('providerSessionExpired');
+const ErrorCode _$providerSessionNotReady =
+    const ErrorCode._('providerSessionNotReady');
 const ErrorCode _$providerTemporarilyUnavailable =
     const ErrorCode._('providerTemporarilyUnavailable');
 const ErrorCode _$providerUnsupported =
@@ -163,6 +166,8 @@ ErrorCode _$valueOf(String name) {
       return _$analysisReportUnavailable;
     case 'analysisRetryLimited':
       return _$analysisRetryLimited;
+    case 'analysisSkillOutdated':
+      return _$analysisSkillOutdated;
     case 'analysisUnavailable':
       return _$analysisUnavailable;
     case 'articleAccessRestricted':
@@ -223,6 +228,8 @@ ErrorCode _$valueOf(String name) {
       return _$invalidUsername;
     case 'invalidVerificationCode':
       return _$invalidVerificationCode;
+    case 'lastAdminChange':
+      return _$lastAdminChange;
     case 'jobConflict':
       return _$jobConflict;
     case 'methodNotAllowed':
@@ -237,8 +244,6 @@ ErrorCode _$valueOf(String name) {
       return _$providerAccessPolicyNotAllowed;
     case 'providerAuthRequired':
       return _$providerAuthRequired;
-    case 'providerAuthorizationUnavailable':
-      return _$providerAuthorizationUnavailable;
     case 'providerCatalogConflict':
       return _$providerCatalogConflict;
     case 'providerCatalogNotFound':
@@ -263,6 +268,8 @@ ErrorCode _$valueOf(String name) {
       return _$providerRateLimited;
     case 'providerSessionExpired':
       return _$providerSessionExpired;
+    case 'providerSessionNotReady':
+      return _$providerSessionNotReady;
     case 'providerTemporarilyUnavailable':
       return _$providerTemporarilyUnavailable;
     case 'providerUnsupported':
@@ -325,6 +332,7 @@ final BuiltSet<ErrorCode> _$values = BuiltSet<ErrorCode>(const <ErrorCode>[
   _$analysisReportNotReady,
   _$analysisReportUnavailable,
   _$analysisRetryLimited,
+  _$analysisSkillOutdated,
   _$analysisUnavailable,
   _$articleAccessRestricted,
   _$articleDiscoveryFailed,
@@ -355,6 +363,7 @@ final BuiltSet<ErrorCode> _$values = BuiltSet<ErrorCode>(const <ErrorCode>[
   _$invalidUrl,
   _$invalidUsername,
   _$invalidVerificationCode,
+  _$lastAdminChange,
   _$jobConflict,
   _$methodNotAllowed,
   _$metricsUnavailable,
@@ -362,7 +371,6 @@ final BuiltSet<ErrorCode> _$values = BuiltSet<ErrorCode>(const <ErrorCode>[
   _$ok,
   _$providerAccessPolicyNotAllowed,
   _$providerAuthRequired,
-  _$providerAuthorizationUnavailable,
   _$providerCatalogConflict,
   _$providerCatalogNotFound,
   _$providerConfigurationMissing,
@@ -375,6 +383,7 @@ final BuiltSet<ErrorCode> _$values = BuiltSet<ErrorCode>(const <ErrorCode>[
   _$providerMediaUnsupported,
   _$providerRateLimited,
   _$providerSessionExpired,
+  _$providerSessionNotReady,
   _$providerTemporarilyUnavailable,
   _$providerUnsupported,
   _$providerVerificationFailed,
@@ -413,6 +422,7 @@ class _$ErrorCodeMeta {
   ErrorCode get analysisReportNotReady => _$analysisReportNotReady;
   ErrorCode get analysisReportUnavailable => _$analysisReportUnavailable;
   ErrorCode get analysisRetryLimited => _$analysisRetryLimited;
+  ErrorCode get analysisSkillOutdated => _$analysisSkillOutdated;
   ErrorCode get analysisUnavailable => _$analysisUnavailable;
   ErrorCode get articleAccessRestricted => _$articleAccessRestricted;
   ErrorCode get articleDiscoveryFailed => _$articleDiscoveryFailed;
@@ -443,6 +453,7 @@ class _$ErrorCodeMeta {
   ErrorCode get invalidUrl => _$invalidUrl;
   ErrorCode get invalidUsername => _$invalidUsername;
   ErrorCode get invalidVerificationCode => _$invalidVerificationCode;
+  ErrorCode get lastAdminChange => _$lastAdminChange;
   ErrorCode get jobConflict => _$jobConflict;
   ErrorCode get methodNotAllowed => _$methodNotAllowed;
   ErrorCode get metricsUnavailable => _$metricsUnavailable;
@@ -451,8 +462,6 @@ class _$ErrorCodeMeta {
   ErrorCode get providerAccessPolicyNotAllowed =>
       _$providerAccessPolicyNotAllowed;
   ErrorCode get providerAuthRequired => _$providerAuthRequired;
-  ErrorCode get providerAuthorizationUnavailable =>
-      _$providerAuthorizationUnavailable;
   ErrorCode get providerCatalogConflict => _$providerCatalogConflict;
   ErrorCode get providerCatalogNotFound => _$providerCatalogNotFound;
   ErrorCode get providerConfigurationMissing => _$providerConfigurationMissing;
@@ -465,6 +474,7 @@ class _$ErrorCodeMeta {
   ErrorCode get providerMediaUnsupported => _$providerMediaUnsupported;
   ErrorCode get providerRateLimited => _$providerRateLimited;
   ErrorCode get providerSessionExpired => _$providerSessionExpired;
+  ErrorCode get providerSessionNotReady => _$providerSessionNotReady;
   ErrorCode get providerTemporarilyUnavailable =>
       _$providerTemporarilyUnavailable;
   ErrorCode get providerUnsupported => _$providerUnsupported;
@@ -513,6 +523,7 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'analysisReportNotReady': 'analysis_report_not_ready',
     'analysisReportUnavailable': 'analysis_report_unavailable',
     'analysisRetryLimited': 'analysis_retry_limited',
+    'analysisSkillOutdated': 'analysis_skill_outdated',
     'analysisUnavailable': 'analysis_unavailable',
     'articleAccessRestricted': 'article_access_restricted',
     'articleDiscoveryFailed': 'article_discovery_failed',
@@ -543,6 +554,7 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'invalidUrl': 'invalid_url',
     'invalidUsername': 'invalid_username',
     'invalidVerificationCode': 'invalid_verification_code',
+    'lastAdminChange': 'last_admin_change',
     'jobConflict': 'job_conflict',
     'methodNotAllowed': 'method_not_allowed',
     'metricsUnavailable': 'metrics_unavailable',
@@ -550,7 +562,6 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'ok': 'ok',
     'providerAccessPolicyNotAllowed': 'provider_access_policy_not_allowed',
     'providerAuthRequired': 'provider_auth_required',
-    'providerAuthorizationUnavailable': 'provider_authorization_unavailable',
     'providerCatalogConflict': 'provider_catalog_conflict',
     'providerCatalogNotFound': 'provider_catalog_not_found',
     'providerConfigurationMissing': 'provider_configuration_missing',
@@ -563,6 +574,7 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'providerMediaUnsupported': 'provider_media_unsupported',
     'providerRateLimited': 'provider_rate_limited',
     'providerSessionExpired': 'provider_session_expired',
+    'providerSessionNotReady': 'provider_session_not_ready',
     'providerTemporarilyUnavailable': 'provider_temporarily_unavailable',
     'providerUnsupported': 'provider_unsupported',
     'providerVerificationFailed': 'provider_verification_failed',
@@ -599,6 +611,7 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'analysis_report_not_ready': 'analysisReportNotReady',
     'analysis_report_unavailable': 'analysisReportUnavailable',
     'analysis_retry_limited': 'analysisRetryLimited',
+    'analysis_skill_outdated': 'analysisSkillOutdated',
     'analysis_unavailable': 'analysisUnavailable',
     'article_access_restricted': 'articleAccessRestricted',
     'article_discovery_failed': 'articleDiscoveryFailed',
@@ -629,6 +642,7 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'invalid_url': 'invalidUrl',
     'invalid_username': 'invalidUsername',
     'invalid_verification_code': 'invalidVerificationCode',
+    'last_admin_change': 'lastAdminChange',
     'job_conflict': 'jobConflict',
     'method_not_allowed': 'methodNotAllowed',
     'metrics_unavailable': 'metricsUnavailable',
@@ -636,7 +650,6 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'ok': 'ok',
     'provider_access_policy_not_allowed': 'providerAccessPolicyNotAllowed',
     'provider_auth_required': 'providerAuthRequired',
-    'provider_authorization_unavailable': 'providerAuthorizationUnavailable',
     'provider_catalog_conflict': 'providerCatalogConflict',
     'provider_catalog_not_found': 'providerCatalogNotFound',
     'provider_configuration_missing': 'providerConfigurationMissing',
@@ -649,6 +662,7 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'provider_media_unsupported': 'providerMediaUnsupported',
     'provider_rate_limited': 'providerRateLimited',
     'provider_session_expired': 'providerSessionExpired',
+    'provider_session_not_ready': 'providerSessionNotReady',
     'provider_temporarily_unavailable': 'providerTemporarilyUnavailable',
     'provider_unsupported': 'providerUnsupported',
     'provider_verification_failed': 'providerVerificationFailed',

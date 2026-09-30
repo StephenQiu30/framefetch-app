@@ -56,6 +56,9 @@ class AnalysisErrorCode extends EnumClass {
   static const AnalysisErrorCode internalError = _$internalError;
   @BuiltValueEnumConst(wireName: r'worker_lost')
   static const AnalysisErrorCode workerLost = _$workerLost;
+  @BuiltValueEnumConst(wireName: r'analysis_outcome_unknown')
+  static const AnalysisErrorCode analysisOutcomeUnknown =
+      _$analysisOutcomeUnknown;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const AnalysisErrorCode unknownDefaultOpenApi =
       _$unknownDefaultOpenApi;

@@ -9,7 +9,6 @@ import 'package:built_collection/built_collection.dart';
 import 'package:video_server_api/lib/model/provider_access_state.dart';
 import 'package:video_server_api/lib/model/provider_access_mode.dart';
 import 'package:video_server_api/lib/model/provider_access_policy.dart';
-import 'package:video_server_api/lib/model/provider_authorization_action.dart';
 import 'package:video_server_api/lib/model/provider_access_policy_response.dart';
 import 'package:video_server_api/lib/model/provider_evidence_state.dart';
 import 'package:built_value/built_value.dart';
@@ -41,7 +40,6 @@ part 'provider_status_response.g.dart';
 /// * [hosts]
 /// * [hostSuffixes]
 /// * [routeRetryAt]
-/// * [authorizationAction]
 @BuiltValue()
 abstract class ProviderStatusResponse
     implements Built<ProviderStatusResponse, ProviderStatusResponseBuilder> {
@@ -65,7 +63,7 @@ abstract class ProviderStatusResponse
 
   @BuiltValueField(wireName: r'access_state')
   ProviderAccessState get accessState;
-  // enum accessStateEnum {  public_probe,  public_ready,  guest_probe,  guest_ready,  authorization_required,  operator_probe,  operator_ready,  degraded,  blocked,  disabled,  unsupported,  };
+  // enum accessStateEnum {  public_probe,  public_ready,  authorization_required,  operator_probe,  operator_ready,  degraded,  blocked,  disabled,  unsupported,  };
 
   @BuiltValueField(wireName: r'status')
   ProviderSupportStatus get status;
@@ -111,10 +109,6 @@ abstract class ProviderStatusResponse
 
   @BuiltValueField(wireName: r'route_retry_at')
   DateTime? get routeRetryAt;
-
-  @BuiltValueField(wireName: r'authorization_action')
-  ProviderAuthorizationAction get authorizationAction;
-  // enum authorizationActionEnum {  none,  browser_session,  managed_session,  };
 
   ProviderStatusResponse._();
 
@@ -266,11 +260,6 @@ class _$ProviderStatusResponseSerializer
         specifiedType: const FullType.nullable(DateTime),
       );
     }
-    yield r'authorization_action';
-    yield serializers.serialize(
-      object.authorizationAction,
-      specifiedType: const FullType(ProviderAuthorizationAction),
-    );
   }
 
   @override
@@ -452,13 +441,6 @@ class _$ProviderStatusResponseSerializer
           ) as DateTime?;
           if (valueDes == null) continue;
           result.routeRetryAt = valueDes;
-          break;
-        case r'authorization_action':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ProviderAuthorizationAction),
-          ) as ProviderAuthorizationAction;
-          result.authorizationAction = valueDes;
           break;
         default:
           unhandled.add(key);

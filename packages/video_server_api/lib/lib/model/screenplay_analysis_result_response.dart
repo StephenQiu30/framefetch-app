@@ -3,9 +3,9 @@
 //
 
 // ignore_for_file: unused_element, unused_element_parameter
-import 'package:video_server_api/lib/model/screenplay_evidence_item_response.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:video_server_api/lib/model/screenplay_character_response.dart';
+import 'package:video_server_api/lib/model/screenplay_finding_response.dart';
 import 'package:video_server_api/lib/model/screenplay_scene_response.dart';
 import 'package:video_server_api/lib/model/screenplay_structure_response.dart';
 import 'package:built_value/built_value.dart';
@@ -58,13 +58,13 @@ abstract class ScreenplayAnalysisResultResponse
   BuiltList<ScreenplaySceneResponse> get scenes;
 
   @BuiltValueField(wireName: r'dialogue_findings')
-  BuiltList<ScreenplayEvidenceItemResponse> get dialogueFindings;
+  BuiltList<ScreenplayFindingResponse> get dialogueFindings;
 
   @BuiltValueField(wireName: r'strengths')
-  BuiltList<ScreenplayEvidenceItemResponse> get strengths;
+  BuiltList<ScreenplayFindingResponse> get strengths;
 
   @BuiltValueField(wireName: r'priority_revisions')
-  BuiltList<ScreenplayEvidenceItemResponse> get priorityRevisions;
+  BuiltList<ScreenplayFindingResponse> get priorityRevisions;
 
   ScreenplayAnalysisResultResponse._();
 
@@ -142,19 +142,19 @@ class _$ScreenplayAnalysisResultResponseSerializer
     yield serializers.serialize(
       object.dialogueFindings,
       specifiedType:
-          const FullType(BuiltList, [FullType(ScreenplayEvidenceItemResponse)]),
+          const FullType(BuiltList, [FullType(ScreenplayFindingResponse)]),
     );
     yield r'strengths';
     yield serializers.serialize(
       object.strengths,
       specifiedType:
-          const FullType(BuiltList, [FullType(ScreenplayEvidenceItemResponse)]),
+          const FullType(BuiltList, [FullType(ScreenplayFindingResponse)]),
     );
     yield r'priority_revisions';
     yield serializers.serialize(
       object.priorityRevisions,
       specifiedType:
-          const FullType(BuiltList, [FullType(ScreenplayEvidenceItemResponse)]),
+          const FullType(BuiltList, [FullType(ScreenplayFindingResponse)]),
     );
   }
 
@@ -244,24 +244,24 @@ class _$ScreenplayAnalysisResultResponseSerializer
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(
-                BuiltList, [FullType(ScreenplayEvidenceItemResponse)]),
-          ) as BuiltList<ScreenplayEvidenceItemResponse>;
+                BuiltList, [FullType(ScreenplayFindingResponse)]),
+          ) as BuiltList<ScreenplayFindingResponse>;
           result.dialogueFindings.replace(valueDes);
           break;
         case r'strengths':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(
-                BuiltList, [FullType(ScreenplayEvidenceItemResponse)]),
-          ) as BuiltList<ScreenplayEvidenceItemResponse>;
+                BuiltList, [FullType(ScreenplayFindingResponse)]),
+          ) as BuiltList<ScreenplayFindingResponse>;
           result.strengths.replace(valueDes);
           break;
         case r'priority_revisions':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(
-                BuiltList, [FullType(ScreenplayEvidenceItemResponse)]),
-          ) as BuiltList<ScreenplayEvidenceItemResponse>;
+                BuiltList, [FullType(ScreenplayFindingResponse)]),
+          ) as BuiltList<ScreenplayFindingResponse>;
           result.priorityRevisions.replace(valueDes);
           break;
         default:

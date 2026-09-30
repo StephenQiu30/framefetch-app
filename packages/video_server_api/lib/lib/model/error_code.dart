@@ -37,6 +37,8 @@ class ErrorCode extends EnumClass {
       _$analysisReportUnavailable;
   @BuiltValueEnumConst(wireName: r'analysis_retry_limited')
   static const ErrorCode analysisRetryLimited = _$analysisRetryLimited;
+  @BuiltValueEnumConst(wireName: r'analysis_skill_outdated')
+  static const ErrorCode analysisSkillOutdated = _$analysisSkillOutdated;
   @BuiltValueEnumConst(wireName: r'analysis_unavailable')
   static const ErrorCode analysisUnavailable = _$analysisUnavailable;
   @BuiltValueEnumConst(wireName: r'article_access_restricted')
@@ -98,6 +100,8 @@ class ErrorCode extends EnumClass {
   static const ErrorCode invalidUsername = _$invalidUsername;
   @BuiltValueEnumConst(wireName: r'invalid_verification_code')
   static const ErrorCode invalidVerificationCode = _$invalidVerificationCode;
+  @BuiltValueEnumConst(wireName: r'last_admin_change')
+  static const ErrorCode lastAdminChange = _$lastAdminChange;
   @BuiltValueEnumConst(wireName: r'job_conflict')
   static const ErrorCode jobConflict = _$jobConflict;
   @BuiltValueEnumConst(wireName: r'method_not_allowed')
@@ -113,9 +117,6 @@ class ErrorCode extends EnumClass {
       _$providerAccessPolicyNotAllowed;
   @BuiltValueEnumConst(wireName: r'provider_auth_required')
   static const ErrorCode providerAuthRequired = _$providerAuthRequired;
-  @BuiltValueEnumConst(wireName: r'provider_authorization_unavailable')
-  static const ErrorCode providerAuthorizationUnavailable =
-      _$providerAuthorizationUnavailable;
   @BuiltValueEnumConst(wireName: r'provider_catalog_conflict')
   static const ErrorCode providerCatalogConflict = _$providerCatalogConflict;
   @BuiltValueEnumConst(wireName: r'provider_catalog_not_found')
@@ -143,6 +144,8 @@ class ErrorCode extends EnumClass {
   static const ErrorCode providerRateLimited = _$providerRateLimited;
   @BuiltValueEnumConst(wireName: r'provider_session_expired')
   static const ErrorCode providerSessionExpired = _$providerSessionExpired;
+  @BuiltValueEnumConst(wireName: r'provider_session_not_ready')
+  static const ErrorCode providerSessionNotReady = _$providerSessionNotReady;
   @BuiltValueEnumConst(wireName: r'provider_temporarily_unavailable')
   static const ErrorCode providerTemporarilyUnavailable =
       _$providerTemporarilyUnavailable;

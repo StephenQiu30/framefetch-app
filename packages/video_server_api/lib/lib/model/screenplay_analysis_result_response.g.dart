@@ -87,11 +87,11 @@ class _$ScreenplayAnalysisResultResponse
   @override
   final BuiltList<ScreenplaySceneResponse> scenes;
   @override
-  final BuiltList<ScreenplayEvidenceItemResponse> dialogueFindings;
+  final BuiltList<ScreenplayFindingResponse> dialogueFindings;
   @override
-  final BuiltList<ScreenplayEvidenceItemResponse> strengths;
+  final BuiltList<ScreenplayFindingResponse> strengths;
   @override
-  final BuiltList<ScreenplayEvidenceItemResponse> priorityRevisions;
+  final BuiltList<ScreenplayFindingResponse> priorityRevisions;
 
   factory _$ScreenplayAnalysisResultResponse(
           [void Function(ScreenplayAnalysisResultResponseBuilder)? updates]) =>
@@ -217,26 +217,24 @@ class ScreenplayAnalysisResultResponseBuilder
   set scenes(ListBuilder<ScreenplaySceneResponse>? scenes) =>
       _$this._scenes = scenes;
 
-  ListBuilder<ScreenplayEvidenceItemResponse>? _dialogueFindings;
-  ListBuilder<ScreenplayEvidenceItemResponse> get dialogueFindings =>
-      _$this._dialogueFindings ??=
-          ListBuilder<ScreenplayEvidenceItemResponse>();
+  ListBuilder<ScreenplayFindingResponse>? _dialogueFindings;
+  ListBuilder<ScreenplayFindingResponse> get dialogueFindings =>
+      _$this._dialogueFindings ??= ListBuilder<ScreenplayFindingResponse>();
   set dialogueFindings(
-          ListBuilder<ScreenplayEvidenceItemResponse>? dialogueFindings) =>
+          ListBuilder<ScreenplayFindingResponse>? dialogueFindings) =>
       _$this._dialogueFindings = dialogueFindings;
 
-  ListBuilder<ScreenplayEvidenceItemResponse>? _strengths;
-  ListBuilder<ScreenplayEvidenceItemResponse> get strengths =>
-      _$this._strengths ??= ListBuilder<ScreenplayEvidenceItemResponse>();
-  set strengths(ListBuilder<ScreenplayEvidenceItemResponse>? strengths) =>
+  ListBuilder<ScreenplayFindingResponse>? _strengths;
+  ListBuilder<ScreenplayFindingResponse> get strengths =>
+      _$this._strengths ??= ListBuilder<ScreenplayFindingResponse>();
+  set strengths(ListBuilder<ScreenplayFindingResponse>? strengths) =>
       _$this._strengths = strengths;
 
-  ListBuilder<ScreenplayEvidenceItemResponse>? _priorityRevisions;
-  ListBuilder<ScreenplayEvidenceItemResponse> get priorityRevisions =>
-      _$this._priorityRevisions ??=
-          ListBuilder<ScreenplayEvidenceItemResponse>();
+  ListBuilder<ScreenplayFindingResponse>? _priorityRevisions;
+  ListBuilder<ScreenplayFindingResponse> get priorityRevisions =>
+      _$this._priorityRevisions ??= ListBuilder<ScreenplayFindingResponse>();
   set priorityRevisions(
-          ListBuilder<ScreenplayEvidenceItemResponse>? priorityRevisions) =>
+          ListBuilder<ScreenplayFindingResponse>? priorityRevisions) =>
       _$this._priorityRevisions = priorityRevisions;
 
   ScreenplayAnalysisResultResponseBuilder() {

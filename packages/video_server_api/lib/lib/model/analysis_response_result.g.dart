@@ -7,8 +7,8 @@ part of 'analysis_response_result.dart';
 // **************************************************************************
 
 const AnalysisResponseResultKindEnum
-    _$analysisResponseResultKindEnum_screenplayRewrite =
-    const AnalysisResponseResultKindEnum._('screenplayRewrite');
+    _$analysisResponseResultKindEnum_structuredReport =
+    const AnalysisResponseResultKindEnum._('structuredReport');
 const AnalysisResponseResultKindEnum
     _$analysisResponseResultKindEnum_unknownDefaultOpenApi =
     const AnalysisResponseResultKindEnum._('unknownDefaultOpenApi');
@@ -16,8 +16,8 @@ const AnalysisResponseResultKindEnum
 AnalysisResponseResultKindEnum _$analysisResponseResultKindEnumValueOf(
     String name) {
   switch (name) {
-    case 'screenplayRewrite':
-      return _$analysisResponseResultKindEnum_screenplayRewrite;
+    case 'structuredReport':
+      return _$analysisResponseResultKindEnum_structuredReport;
     case 'unknownDefaultOpenApi':
       return _$analysisResponseResultKindEnum_unknownDefaultOpenApi;
     default:
@@ -28,7 +28,7 @@ AnalysisResponseResultKindEnum _$analysisResponseResultKindEnumValueOf(
 final BuiltSet<AnalysisResponseResultKindEnum>
     _$analysisResponseResultKindEnumValues = BuiltSet<
         AnalysisResponseResultKindEnum>(const <AnalysisResponseResultKindEnum>[
-  _$analysisResponseResultKindEnum_screenplayRewrite,
+  _$analysisResponseResultKindEnum_structuredReport,
   _$analysisResponseResultKindEnum_unknownDefaultOpenApi,
 ]);
 
@@ -39,11 +39,11 @@ Serializer<AnalysisResponseResultKindEnum>
 class _$AnalysisResponseResultKindEnumSerializer
     implements PrimitiveSerializer<AnalysisResponseResultKindEnum> {
   static const Map<String, Object> _toWire = const <String, Object>{
-    'screenplayRewrite': 'screenplay_rewrite',
+    'structuredReport': 'structured_report',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
-    'screenplay_rewrite': 'screenplayRewrite',
+    'structured_report': 'structuredReport',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 

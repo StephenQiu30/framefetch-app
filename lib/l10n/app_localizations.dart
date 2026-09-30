@@ -2003,7 +2003,7 @@ abstract class AppLocalizations {
   /// No description provided for @intentPreparing.
   ///
   /// In zh, this message translates to:
-  /// **'正在准备公开访问'**
+  /// **'正在准备解析环境'**
   String get intentPreparing;
 
   /// No description provided for @intentResolving.
@@ -2015,14 +2015,8 @@ abstract class AppLocalizations {
   /// No description provided for @intentRetryWait.
   ///
   /// In zh, this message translates to:
-  /// **'等待重试解析'**
+  /// **'正在自动恢复解析'**
   String get intentRetryWait;
-
-  /// No description provided for @intentActionRequired.
-  ///
-  /// In zh, this message translates to:
-  /// **'需要进一步操作'**
-  String get intentActionRequired;
 
   /// No description provided for @intentExpired.
   ///
@@ -2213,7 +2207,7 @@ abstract class AppLocalizations {
   /// No description provided for @providerSessionError.
   ///
   /// In zh, this message translates to:
-  /// **'该平台当前需要服务端授权会话，暂时无法解析此内容。'**
+  /// **'系统无法取得内容所需的平台会话，本次自动解析已停止。'**
   String get providerSessionError;
 
   /// No description provided for @accessPolicyLabel.
@@ -3709,6 +3703,126 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'AI 服务请求过于频繁，请稍后重试。'**
   String get analysisRateLimited;
+
+  /// No description provided for @intentAutomaticSessionRecovery.
+  ///
+  /// In zh, this message translates to:
+  /// **'系统正在恢复平台会话，将在本次解析期限内自动继续，无需重复提交。'**
+  String get intentAutomaticSessionRecovery;
+
+  /// No description provided for @intentPhaseRecognize.
+  ///
+  /// In zh, this message translates to:
+  /// **'识别链接'**
+  String get intentPhaseRecognize;
+
+  /// No description provided for @intentPhasePrepare.
+  ///
+  /// In zh, this message translates to:
+  /// **'准备解析环境'**
+  String get intentPhasePrepare;
+
+  /// No description provided for @intentPhaseRead.
+  ///
+  /// In zh, this message translates to:
+  /// **'读取作品'**
+  String get intentPhaseRead;
+
+  /// No description provided for @intentPhaseSelect.
+  ///
+  /// In zh, this message translates to:
+  /// **'检查格式'**
+  String get intentPhaseSelect;
+
+  /// No description provided for @intentPhaseProbe.
+  ///
+  /// In zh, this message translates to:
+  /// **'检查媒体'**
+  String get intentPhaseProbe;
+
+  /// No description provided for @intentPhaseTransfer.
+  ///
+  /// In zh, this message translates to:
+  /// **'获取媒体'**
+  String get intentPhaseTransfer;
+
+  /// No description provided for @intentPhaseValidate.
+  ///
+  /// In zh, this message translates to:
+  /// **'校验文件'**
+  String get intentPhaseValidate;
+
+  /// No description provided for @intentPhasePublish.
+  ///
+  /// In zh, this message translates to:
+  /// **'保存文件'**
+  String get intentPhasePublish;
+
+  /// No description provided for @providerChallengeError.
+  ///
+  /// In zh, this message translates to:
+  /// **'平台要求当前系统无法自动完成的验证，本次解析已停止。'**
+  String get providerChallengeError;
+
+  /// No description provided for @providerTokenError.
+  ///
+  /// In zh, this message translates to:
+  /// **'平台访问令牌尚不可用，系统无法继续读取此内容。'**
+  String get providerTokenError;
+
+  /// No description provided for @providerExtractorError.
+  ///
+  /// In zh, this message translates to:
+  /// **'平台页面结构已变化，当前无法读取媒体。'**
+  String get providerExtractorError;
+
+  /// No description provided for @providerMediaProbeError.
+  ///
+  /// In zh, this message translates to:
+  /// **'作品信息已读取，但媒体地址未通过可用性检查。'**
+  String get providerMediaProbeError;
+
+  /// No description provided for @providerEgressError.
+  ///
+  /// In zh, this message translates to:
+  /// **'当前出口无法连接媒体平台。'**
+  String get providerEgressError;
+
+  /// No description provided for @providerNetworkError.
+  ///
+  /// In zh, this message translates to:
+  /// **'连接媒体平台时发生临时网络故障。'**
+  String get providerNetworkError;
+
+  /// No description provided for @providerSessionSourceError.
+  ///
+  /// In zh, this message translates to:
+  /// **'批准的平台会话来源仍不可用，自动恢复已结束，本次解析已停止。'**
+  String get providerSessionSourceError;
+
+  /// No description provided for @providerRuntimeError.
+  ///
+  /// In zh, this message translates to:
+  /// **'解析执行环境暂不可用。'**
+  String get providerRuntimeError;
+
+  /// No description provided for @providerCapacityError.
+  ///
+  /// In zh, this message translates to:
+  /// **'解析执行资源正忙或空间不足，请稍后重试。'**
+  String get providerCapacityError;
+
+  /// No description provided for @intentContextChangedError.
+  ///
+  /// In zh, this message translates to:
+  /// **'解析环境已变化，需要更新结果并重新确认规格。'**
+  String get intentContextChangedError;
+
+  /// No description provided for @providerUnknownOutcomeError.
+  ///
+  /// In zh, this message translates to:
+  /// **'执行中断且无法确认结果，系统已停止重复请求。'**
+  String get providerUnknownOutcomeError;
 }
 
 class _AppLocalizationsDelegate

@@ -10,7 +10,7 @@ class _$AnalysisReportResponse extends AnalysisReportResponse {
   @override
   final String id;
   @override
-  final String status;
+  final AnalysisReportStatus status;
   @override
   final String rendererVersion;
   @override
@@ -87,9 +87,9 @@ class AnalysisReportResponseBuilder
   String? get id => _$this._id;
   set id(String? id) => _$this._id = id;
 
-  String? _status;
-  String? get status => _$this._status;
-  set status(String? status) => _$this._status = status;
+  AnalysisReportStatus? _status;
+  AnalysisReportStatus? get status => _$this._status;
+  set status(AnalysisReportStatus? status) => _$this._status = status;
 
   String? _rendererVersion;
   String? get rendererVersion => _$this._rendererVersion;

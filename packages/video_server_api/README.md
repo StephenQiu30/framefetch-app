@@ -108,7 +108,7 @@ Class | Method | HTTP request | Description
 [*DownloadIntentsApi*](doc/DownloadIntentsApi.md) | [**findDownloadIntent**](doc/DownloadIntentsApi.md#finddownloadintent) | **GET** /api/download-intents | 按幂等键找回当前用户已提交的解析意图
 [*DownloadIntentsApi*](doc/DownloadIntentsApi.md) | [**getDownloadIntent**](doc/DownloadIntentsApi.md#getdownloadintent) | **GET** /api/download-intents/{intent_id} | 查询当前用户的解析意图
 [*DownloadIntentsApi*](doc/DownloadIntentsApi.md) | [**listDownloadIntents**](doc/DownloadIntentsApi.md#listdownloadintents) | **GET** /api/download-intents/history | 分页查询当前用户的解析记录
-[*DownloadIntentsApi*](doc/DownloadIntentsApi.md) | [**refreshDownloadIntent**](doc/DownloadIntentsApi.md#refreshdownloadintent) | **POST** /api/download-intents/{intent_id}/refresh | 在原意图与剩余预算内更新过期解析结果
+[*DownloadIntentsApi*](doc/DownloadIntentsApi.md) | [**refreshDownloadIntent**](doc/DownloadIntentsApi.md#refreshdownloadintent) | **POST** /api/download-intents/{intent_id}/refresh | 在原意图中重新解析并确认过期结果
 [*DownloadsApi*](doc/DownloadsApi.md) | [**cancelDownload**](doc/DownloadsApi.md#canceldownload) | **POST** /api/downloads/{job_id}/cancel | 取消下载任务
 [*DownloadsApi*](doc/DownloadsApi.md) | [**createDownload**](doc/DownloadsApi.md#createdownload) | **POST** /api/downloads | 创建下载任务
 [*DownloadsApi*](doc/DownloadsApi.md) | [**deleteDownload**](doc/DownloadsApi.md#deletedownload) | **DELETE** /api/downloads/{job_id} | 删除下载任务及其私有文件
@@ -141,6 +141,7 @@ Class | Method | HTTP request | Description
  - [AnalysisMediaResponse](doc/AnalysisMediaResponse.md)
  - [AnalysisReportArtifactResponse](doc/AnalysisReportArtifactResponse.md)
  - [AnalysisReportResponse](doc/AnalysisReportResponse.md)
+ - [AnalysisReportStatus](doc/AnalysisReportStatus.md)
  - [AnalysisRequest](doc/AnalysisRequest.md)
  - [AnalysisResponse](doc/AnalysisResponse.md)
  - [AnalysisResponseResult](doc/AnalysisResponseResult.md)
@@ -219,6 +220,10 @@ Class | Method | HTTP request | Description
  - [ErrorResponse](doc/ErrorResponse.md)
  - [EvidenceSummaryResponse](doc/EvidenceSummaryResponse.md)
  - [ExecutionMode](doc/ExecutionMode.md)
+ - [FailureClass](doc/FailureClass.md)
+ - [FailureEvidenceKind](doc/FailureEvidenceKind.md)
+ - [FailurePhase](doc/FailurePhase.md)
+ - [FailureScope](doc/FailureScope.md)
  - [FormatResponse](doc/FormatResponse.md)
  - [FpsBucket](doc/FpsBucket.md)
  - [HighlightResponse](doc/HighlightResponse.md)
@@ -228,6 +233,7 @@ Class | Method | HTTP request | Description
  - [ImportStatus](doc/ImportStatus.md)
  - [InspectionRequest](doc/InspectionRequest.md)
  - [InspectionResponse](doc/InspectionResponse.md)
+ - [IntentFailureResponse](doc/IntentFailureResponse.md)
  - [IntentHistoryItemResponse](doc/IntentHistoryItemResponse.md)
  - [IntentHistoryResponse](doc/IntentHistoryResponse.md)
  - [IntentRequest](doc/IntentRequest.md)
@@ -250,7 +256,6 @@ Class | Method | HTTP request | Description
  - [ProviderAccessPolicy](doc/ProviderAccessPolicy.md)
  - [ProviderAccessPolicyResponse](doc/ProviderAccessPolicyResponse.md)
  - [ProviderAccessState](doc/ProviderAccessState.md)
- - [ProviderAuthorizationAction](doc/ProviderAuthorizationAction.md)
  - [ProviderCapability](doc/ProviderCapability.md)
  - [ProviderCatalogEntryResponse](doc/ProviderCatalogEntryResponse.md)
  - [ProviderCatalogListResponse](doc/ProviderCatalogListResponse.md)
@@ -267,7 +272,7 @@ Class | Method | HTTP request | Description
  - [RightsBasis](doc/RightsBasis.md)
  - [ScreenplayAnalysisResultResponse](doc/ScreenplayAnalysisResultResponse.md)
  - [ScreenplayCharacterResponse](doc/ScreenplayCharacterResponse.md)
- - [ScreenplayEvidenceItemResponse](doc/ScreenplayEvidenceItemResponse.md)
+ - [ScreenplayFindingResponse](doc/ScreenplayFindingResponse.md)
  - [ScreenplayGlossaryTermResponse](doc/ScreenplayGlossaryTermResponse.md)
  - [ScreenplayRewriteResultResponse](doc/ScreenplayRewriteResultResponse.md)
  - [ScreenplaySceneResponse](doc/ScreenplaySceneResponse.md)
@@ -283,6 +288,8 @@ Class | Method | HTTP request | Description
  - [StoredFileCategory](doc/StoredFileCategory.md)
  - [StoredFileListResponse](doc/StoredFileListResponse.md)
  - [StoredFileResponse](doc/StoredFileResponse.md)
+ - [StructuredReportResultResponse](doc/StructuredReportResultResponse.md)
+ - [StructuredReportSectionResponse](doc/StructuredReportSectionResponse.md)
  - [UpdateAiProviderProfileRequest](doc/UpdateAiProviderProfileRequest.md)
  - [UpdateProfileRequest](doc/UpdateProfileRequest.md)
  - [UpdateProviderCatalogEntryRequest](doc/UpdateProviderCatalogEntryRequest.md)

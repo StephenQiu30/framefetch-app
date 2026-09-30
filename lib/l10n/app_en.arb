@@ -327,10 +327,9 @@
   "intentHistoryTitle": "Recent inspections",
   "intentHistoryEmpty": "No previous inspections",
   "intentQueued": "Waiting to inspect",
-  "intentPreparing": "Preparing public access",
+  "intentPreparing": "Preparing inspection access",
   "intentResolving": "Inspecting media",
-  "intentRetryWait": "Waiting to retry inspection",
-  "intentActionRequired": "Action required to continue",
+  "intentRetryWait": "Restoring inspection automatically",
   "intentExpired": "Inspection result expired",
   "intentFailed": "Inspection could not finish",
   "intentCancelled": "Inspection cancelled",
@@ -362,10 +361,16 @@
   "inspectionFailedError": "The media provider did not return a valid inspection. Confirm this is a supported public single-video link.",
   "inspectionTimeoutError": "Media inspection timed out. Submit it again later.",
   "providerTemporaryError": "The media provider cannot complete verification right now. Try again later.",
-  "providerSessionError": "This provider currently requires a server-authorized session, so this media cannot be inspected.",
+  "providerSessionError": "The system could not obtain the platform session required for this media. This automatic inspection has stopped.",
   "accessPolicyLabel": "Access policy",
   "routeCooldownUntil": "Default route: retry no earlier than {time}; recovery still needs verification.",
-  "@routeCooldownUntil": {"placeholders": {"time": {"type": "String"}}},
+  "@routeCooldownUntil": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "providerRuntimeTitle": "Read runtime diagnostics",
   "providerRuntimeDescription": "Default routes of visible providers only. Snapshots are cached for at most 30 seconds. Configuration and reachable contexts do not prove a successful download.",
   "providerRouteConfigured": "Route configured",
@@ -681,5 +686,25 @@
   "previousAnalysisResult": "Previous completed result",
   "catalogScopeDescription": "These settings only change the name, order and visibility. They do not add supported download domains or execution capabilities.",
   "saveConfiguration": "Save configuration",
-  "analysisRateLimited": "Too many AI requests. Try again later."
+  "analysisRateLimited": "Too many AI requests. Try again later.",
+  "intentAutomaticSessionRecovery": "The system is restoring the platform session and will continue within the original deadline. No resubmission is needed.",
+  "intentPhaseRecognize": "Identify link",
+  "intentPhasePrepare": "Prepare access",
+  "intentPhaseRead": "Read media information",
+  "intentPhaseSelect": "Check formats",
+  "intentPhaseProbe": "Check media availability",
+  "intentPhaseTransfer": "Transfer media",
+  "intentPhaseValidate": "Validate file",
+  "intentPhasePublish": "Publish file",
+  "providerChallengeError": "The platform requires verification that the system cannot complete automatically. This inspection has stopped.",
+  "providerTokenError": "The platform access token is unavailable. The system cannot continue reading this media.",
+  "providerExtractorError": "The platform page structure has changed. Media cannot be read with the current adapter.",
+  "providerMediaProbeError": "Media information was read, but its media address failed the availability check.",
+  "providerEgressError": "The configured egress cannot reach the media platform.",
+  "providerNetworkError": "A temporary network failure occurred while connecting to the media platform.",
+  "providerSessionSourceError": "The approved platform session source remains unavailable. Automatic recovery ended and this inspection has stopped.",
+  "providerRuntimeError": "The inspection runtime is temporarily unavailable.",
+  "providerCapacityError": "Inspection resources are busy or out of space. Try again later.",
+  "intentContextChangedError": "The access context has changed. Update the inspection and confirm the format again.",
+  "providerUnknownOutcomeError": "Execution was interrupted and its outcome could not be confirmed. The system stopped duplicate requests."
 }

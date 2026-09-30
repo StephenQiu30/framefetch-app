@@ -16,6 +16,66 @@ import '../../../support/auth_fakes.dart';
 import '../../../support/intake_fakes.dart';
 
 void main() {
+  testWidgets('reconciles a terminal write after the deadline using only GET', (
+    tester,
+  ) async {
+    final container = _container(FakeDownloadIntakeRepository());
+    addTearDown(container.dispose);
+    final intents =
+        container.read(downloadIntentRepositoryProvider)
+            as FakeDownloadIntentRepository;
+    final overdue = intentFixture(
+      status: IntentStatus.retryWait,
+    ).rebuild((b) => b..deadline = DateTime.utc(2020));
+    intents.pendingCreate = Future.value(overdue);
+    final controller = container.read(
+      downloadIntakeControllerProvider.notifier,
+    );
+    await controller.inspect('https://media.example/delayed-terminal');
+    intents.status = IntentStatus.expired;
+    await tester.pump(const Duration(seconds: 5));
+    expect(
+      container.read(downloadIntakeControllerProvider).intent?.status,
+      IntentStatus.expired,
+    );
+    await tester.pump(const Duration(seconds: 10));
+    expect(intents.inputs, hasLength(1));
+    expect(intents.reads, [overdue.id]);
+    expect(intents.refreshCount, 0);
+  });
+
+  testWidgets(
+    'recovers a temporary GET error without a replacement admission',
+    (tester) async {
+      final container = _container(FakeDownloadIntakeRepository());
+      addTearDown(container.dispose);
+      final intents =
+          container.read(downloadIntentRepositoryProvider)
+              as FakeDownloadIntentRepository;
+      intents.status = IntentStatus.retryWait;
+      final controller = container.read(
+        downloadIntakeControllerProvider.notifier,
+      );
+      await controller.inspect('https://media.example/transient-read');
+      intents.getError = const DataRequestFailure(
+        DataRequestFailureKind.unavailable,
+        statusCode: 503,
+      );
+      await tester.pump(const Duration(seconds: 2));
+      intents.getError = null;
+      intents.status = IntentStatus.cancelled;
+      await tester.pump(const Duration(seconds: 5));
+      expect(
+        container.read(downloadIntakeControllerProvider).intent?.status,
+        IntentStatus.cancelled,
+      );
+      await tester.pump(const Duration(seconds: 10));
+      expect(intents.inputs, hasLength(1));
+      expect(intents.reads, [intentFixture().id, intentFixture().id]);
+      expect(intents.refreshCount, 0);
+    },
+  );
+
   test(
     'keeps a retry key within one policy and changes it for a new policy',
     () async {
