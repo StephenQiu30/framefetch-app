@@ -11,42 +11,34 @@ const DownloadErrorCode _$downloadTimeout =
     const DownloadErrorCode._('downloadTimeout');
 const DownloadErrorCode _$formatUnavailable =
     const DownloadErrorCode._('formatUnavailable');
-const DownloadErrorCode _$inspectionTimeout =
-    const DownloadErrorCode._('inspectionTimeout');
 const DownloadErrorCode _$internalError =
     const DownloadErrorCode._('internalError');
 const DownloadErrorCode _$mediaValidationFailed =
     const DownloadErrorCode._('mediaValidationFailed');
 const DownloadErrorCode _$outputLimitExceeded =
     const DownloadErrorCode._('outputLimitExceeded');
-const DownloadErrorCode _$providerAccessPolicyNotAllowed =
-    const DownloadErrorCode._('providerAccessPolicyNotAllowed');
-const DownloadErrorCode _$providerAuthRequired =
-    const DownloadErrorCode._('providerAuthRequired');
-const DownloadErrorCode _$providerContentRestricted =
-    const DownloadErrorCode._('providerContentRestricted');
-const DownloadErrorCode _$providerDrmProtected =
-    const DownloadErrorCode._('providerDrmProtected');
-const DownloadErrorCode _$providerGeoRestricted =
-    const DownloadErrorCode._('providerGeoRestricted');
-const DownloadErrorCode _$providerGuestContextRequired =
-    const DownloadErrorCode._('providerGuestContextRequired');
-const DownloadErrorCode _$providerLinkUnavailable =
-    const DownloadErrorCode._('providerLinkUnavailable');
-const DownloadErrorCode _$providerMediaUnsupported =
-    const DownloadErrorCode._('providerMediaUnsupported');
-const DownloadErrorCode _$providerRateLimited =
-    const DownloadErrorCode._('providerRateLimited');
-const DownloadErrorCode _$providerSessionExpired =
-    const DownloadErrorCode._('providerSessionExpired');
-const DownloadErrorCode _$providerSessionNotReady =
-    const DownloadErrorCode._('providerSessionNotReady');
-const DownloadErrorCode _$providerTemporarilyUnavailable =
-    const DownloadErrorCode._('providerTemporarilyUnavailable');
-const DownloadErrorCode _$providerUnsupported =
-    const DownloadErrorCode._('providerUnsupported');
-const DownloadErrorCode _$providerVerificationFailed =
-    const DownloadErrorCode._('providerVerificationFailed');
+const DownloadErrorCode _$networkBlocked =
+    const DownloadErrorCode._('networkBlocked');
+const DownloadErrorCode _$challenge = const DownloadErrorCode._('challenge');
+const DownloadErrorCode _$loginRequired =
+    const DownloadErrorCode._('loginRequired');
+const DownloadErrorCode _$identityUnavailable =
+    const DownloadErrorCode._('identityUnavailable');
+const DownloadErrorCode _$rateLimited =
+    const DownloadErrorCode._('rateLimited');
+const DownloadErrorCode _$contextChanged =
+    const DownloadErrorCode._('contextChanged');
+const DownloadErrorCode _$contentUnavailable =
+    const DownloadErrorCode._('contentUnavailable');
+const DownloadErrorCode _$contentProtected =
+    const DownloadErrorCode._('contentProtected');
+const DownloadErrorCode _$extractorBroken =
+    const DownloadErrorCode._('extractorBroken');
+const DownloadErrorCode _$transient = const DownloadErrorCode._('transient');
+const DownloadErrorCode _$invalidInput =
+    const DownloadErrorCode._('invalidInput');
+const DownloadErrorCode _$runtimeUnavailable =
+    const DownloadErrorCode._('runtimeUnavailable');
 const DownloadErrorCode _$storageUnavailable =
     const DownloadErrorCode._('storageUnavailable');
 const DownloadErrorCode _$tempSpaceExhausted =
@@ -67,42 +59,36 @@ DownloadErrorCode _$valueOf(String name) {
       return _$downloadTimeout;
     case 'formatUnavailable':
       return _$formatUnavailable;
-    case 'inspectionTimeout':
-      return _$inspectionTimeout;
     case 'internalError':
       return _$internalError;
     case 'mediaValidationFailed':
       return _$mediaValidationFailed;
     case 'outputLimitExceeded':
       return _$outputLimitExceeded;
-    case 'providerAccessPolicyNotAllowed':
-      return _$providerAccessPolicyNotAllowed;
-    case 'providerAuthRequired':
-      return _$providerAuthRequired;
-    case 'providerContentRestricted':
-      return _$providerContentRestricted;
-    case 'providerDrmProtected':
-      return _$providerDrmProtected;
-    case 'providerGeoRestricted':
-      return _$providerGeoRestricted;
-    case 'providerGuestContextRequired':
-      return _$providerGuestContextRequired;
-    case 'providerLinkUnavailable':
-      return _$providerLinkUnavailable;
-    case 'providerMediaUnsupported':
-      return _$providerMediaUnsupported;
-    case 'providerRateLimited':
-      return _$providerRateLimited;
-    case 'providerSessionExpired':
-      return _$providerSessionExpired;
-    case 'providerSessionNotReady':
-      return _$providerSessionNotReady;
-    case 'providerTemporarilyUnavailable':
-      return _$providerTemporarilyUnavailable;
-    case 'providerUnsupported':
-      return _$providerUnsupported;
-    case 'providerVerificationFailed':
-      return _$providerVerificationFailed;
+    case 'networkBlocked':
+      return _$networkBlocked;
+    case 'challenge':
+      return _$challenge;
+    case 'loginRequired':
+      return _$loginRequired;
+    case 'identityUnavailable':
+      return _$identityUnavailable;
+    case 'rateLimited':
+      return _$rateLimited;
+    case 'contextChanged':
+      return _$contextChanged;
+    case 'contentUnavailable':
+      return _$contentUnavailable;
+    case 'contentProtected':
+      return _$contentProtected;
+    case 'extractorBroken':
+      return _$extractorBroken;
+    case 'transient':
+      return _$transient;
+    case 'invalidInput':
+      return _$invalidInput;
+    case 'runtimeUnavailable':
+      return _$runtimeUnavailable;
     case 'storageUnavailable':
       return _$storageUnavailable;
     case 'tempSpaceExhausted':
@@ -125,24 +111,21 @@ final BuiltSet<DownloadErrorCode> _$values =
   _$cancelled,
   _$downloadTimeout,
   _$formatUnavailable,
-  _$inspectionTimeout,
   _$internalError,
   _$mediaValidationFailed,
   _$outputLimitExceeded,
-  _$providerAccessPolicyNotAllowed,
-  _$providerAuthRequired,
-  _$providerContentRestricted,
-  _$providerDrmProtected,
-  _$providerGeoRestricted,
-  _$providerGuestContextRequired,
-  _$providerLinkUnavailable,
-  _$providerMediaUnsupported,
-  _$providerRateLimited,
-  _$providerSessionExpired,
-  _$providerSessionNotReady,
-  _$providerTemporarilyUnavailable,
-  _$providerUnsupported,
-  _$providerVerificationFailed,
+  _$networkBlocked,
+  _$challenge,
+  _$loginRequired,
+  _$identityUnavailable,
+  _$rateLimited,
+  _$contextChanged,
+  _$contentUnavailable,
+  _$contentProtected,
+  _$extractorBroken,
+  _$transient,
+  _$invalidInput,
+  _$runtimeUnavailable,
   _$storageUnavailable,
   _$tempSpaceExhausted,
   _$transcodeRequired,
@@ -156,29 +139,21 @@ class _$DownloadErrorCodeMeta {
   DownloadErrorCode get cancelled => _$cancelled;
   DownloadErrorCode get downloadTimeout => _$downloadTimeout;
   DownloadErrorCode get formatUnavailable => _$formatUnavailable;
-  DownloadErrorCode get inspectionTimeout => _$inspectionTimeout;
   DownloadErrorCode get internalError => _$internalError;
   DownloadErrorCode get mediaValidationFailed => _$mediaValidationFailed;
   DownloadErrorCode get outputLimitExceeded => _$outputLimitExceeded;
-  DownloadErrorCode get providerAccessPolicyNotAllowed =>
-      _$providerAccessPolicyNotAllowed;
-  DownloadErrorCode get providerAuthRequired => _$providerAuthRequired;
-  DownloadErrorCode get providerContentRestricted =>
-      _$providerContentRestricted;
-  DownloadErrorCode get providerDrmProtected => _$providerDrmProtected;
-  DownloadErrorCode get providerGeoRestricted => _$providerGeoRestricted;
-  DownloadErrorCode get providerGuestContextRequired =>
-      _$providerGuestContextRequired;
-  DownloadErrorCode get providerLinkUnavailable => _$providerLinkUnavailable;
-  DownloadErrorCode get providerMediaUnsupported => _$providerMediaUnsupported;
-  DownloadErrorCode get providerRateLimited => _$providerRateLimited;
-  DownloadErrorCode get providerSessionExpired => _$providerSessionExpired;
-  DownloadErrorCode get providerSessionNotReady => _$providerSessionNotReady;
-  DownloadErrorCode get providerTemporarilyUnavailable =>
-      _$providerTemporarilyUnavailable;
-  DownloadErrorCode get providerUnsupported => _$providerUnsupported;
-  DownloadErrorCode get providerVerificationFailed =>
-      _$providerVerificationFailed;
+  DownloadErrorCode get networkBlocked => _$networkBlocked;
+  DownloadErrorCode get challenge => _$challenge;
+  DownloadErrorCode get loginRequired => _$loginRequired;
+  DownloadErrorCode get identityUnavailable => _$identityUnavailable;
+  DownloadErrorCode get rateLimited => _$rateLimited;
+  DownloadErrorCode get contextChanged => _$contextChanged;
+  DownloadErrorCode get contentUnavailable => _$contentUnavailable;
+  DownloadErrorCode get contentProtected => _$contentProtected;
+  DownloadErrorCode get extractorBroken => _$extractorBroken;
+  DownloadErrorCode get transient => _$transient;
+  DownloadErrorCode get invalidInput => _$invalidInput;
+  DownloadErrorCode get runtimeUnavailable => _$runtimeUnavailable;
   DownloadErrorCode get storageUnavailable => _$storageUnavailable;
   DownloadErrorCode get tempSpaceExhausted => _$tempSpaceExhausted;
   DownloadErrorCode get transcodeRequired => _$transcodeRequired;
@@ -204,24 +179,21 @@ class _$DownloadErrorCodeSerializer
     'cancelled': 'cancelled',
     'downloadTimeout': 'download_timeout',
     'formatUnavailable': 'format_unavailable',
-    'inspectionTimeout': 'inspection_timeout',
     'internalError': 'internal_error',
     'mediaValidationFailed': 'media_validation_failed',
     'outputLimitExceeded': 'output_limit_exceeded',
-    'providerAccessPolicyNotAllowed': 'provider_access_policy_not_allowed',
-    'providerAuthRequired': 'provider_auth_required',
-    'providerContentRestricted': 'provider_content_restricted',
-    'providerDrmProtected': 'provider_drm_protected',
-    'providerGeoRestricted': 'provider_geo_restricted',
-    'providerGuestContextRequired': 'provider_guest_context_required',
-    'providerLinkUnavailable': 'provider_link_unavailable',
-    'providerMediaUnsupported': 'provider_media_unsupported',
-    'providerRateLimited': 'provider_rate_limited',
-    'providerSessionExpired': 'provider_session_expired',
-    'providerSessionNotReady': 'provider_session_not_ready',
-    'providerTemporarilyUnavailable': 'provider_temporarily_unavailable',
-    'providerUnsupported': 'provider_unsupported',
-    'providerVerificationFailed': 'provider_verification_failed',
+    'networkBlocked': 'network_blocked',
+    'challenge': 'challenge',
+    'loginRequired': 'login_required',
+    'identityUnavailable': 'identity_unavailable',
+    'rateLimited': 'rate_limited',
+    'contextChanged': 'context_changed',
+    'contentUnavailable': 'content_unavailable',
+    'contentProtected': 'content_protected',
+    'extractorBroken': 'extractor_broken',
+    'transient': 'transient',
+    'invalidInput': 'invalid_input',
+    'runtimeUnavailable': 'runtime_unavailable',
     'storageUnavailable': 'storage_unavailable',
     'tempSpaceExhausted': 'temp_space_exhausted',
     'transcodeRequired': 'transcode_required',
@@ -233,24 +205,21 @@ class _$DownloadErrorCodeSerializer
     'cancelled': 'cancelled',
     'download_timeout': 'downloadTimeout',
     'format_unavailable': 'formatUnavailable',
-    'inspection_timeout': 'inspectionTimeout',
     'internal_error': 'internalError',
     'media_validation_failed': 'mediaValidationFailed',
     'output_limit_exceeded': 'outputLimitExceeded',
-    'provider_access_policy_not_allowed': 'providerAccessPolicyNotAllowed',
-    'provider_auth_required': 'providerAuthRequired',
-    'provider_content_restricted': 'providerContentRestricted',
-    'provider_drm_protected': 'providerDrmProtected',
-    'provider_geo_restricted': 'providerGeoRestricted',
-    'provider_guest_context_required': 'providerGuestContextRequired',
-    'provider_link_unavailable': 'providerLinkUnavailable',
-    'provider_media_unsupported': 'providerMediaUnsupported',
-    'provider_rate_limited': 'providerRateLimited',
-    'provider_session_expired': 'providerSessionExpired',
-    'provider_session_not_ready': 'providerSessionNotReady',
-    'provider_temporarily_unavailable': 'providerTemporarilyUnavailable',
-    'provider_unsupported': 'providerUnsupported',
-    'provider_verification_failed': 'providerVerificationFailed',
+    'network_blocked': 'networkBlocked',
+    'challenge': 'challenge',
+    'login_required': 'loginRequired',
+    'identity_unavailable': 'identityUnavailable',
+    'rate_limited': 'rateLimited',
+    'context_changed': 'contextChanged',
+    'content_unavailable': 'contentUnavailable',
+    'content_protected': 'contentProtected',
+    'extractor_broken': 'extractorBroken',
+    'transient': 'transient',
+    'invalid_input': 'invalidInput',
+    'runtime_unavailable': 'runtimeUnavailable',
     'storage_unavailable': 'storageUnavailable',
     'temp_space_exhausted': 'tempSpaceExhausted',
     'transcode_required': 'transcodeRequired',

@@ -7,7 +7,6 @@ import 'package:framegrab/features/admin/data/admin_repository.dart';
 import 'package:framegrab/features/admin/presentation/admin_edit_sheet.dart';
 import 'package:framegrab/features/admin/presentation/admin_page.dart';
 import 'package:framegrab/features/admin/presentation/catalog_editor.dart';
-import 'package:framegrab/features/admin/presentation/provider_runtime_panel.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
 import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
 import 'package:framegrab/shared/presentation/list_filters.dart';
@@ -81,7 +80,6 @@ final class _AdminProvidersScreenState
       onRefresh: () =>
           ref.refresh(adminProviderCatalogProvider.future).then((_) {}),
       children: [
-        const ProviderRuntimePanel(),
         ListFilters(
           query: _query,
           searchLabel: l10n.searchPlatforms,

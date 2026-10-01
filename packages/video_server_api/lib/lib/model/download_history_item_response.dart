@@ -52,7 +52,7 @@ abstract class DownloadHistoryItemResponse
 
   @BuiltValueField(wireName: r'error_code')
   DownloadErrorCode? get errorCode;
-  // enum errorCodeEnum {  cancelled,  download_timeout,  format_unavailable,  inspection_timeout,  internal_error,  media_validation_failed,  output_limit_exceeded,  provider_access_policy_not_allowed,  provider_auth_required,  provider_content_restricted,  provider_drm_protected,  provider_geo_restricted,  provider_guest_context_required,  provider_link_unavailable,  provider_media_unsupported,  provider_rate_limited,  provider_session_expired,  provider_session_not_ready,  provider_temporarily_unavailable,  provider_unsupported,  provider_verification_failed,  storage_unavailable,  temp_space_exhausted,  transcode_required,  unsupported_source,  worker_lost,  };
+  // enum errorCodeEnum {  cancelled,  download_timeout,  format_unavailable,  internal_error,  media_validation_failed,  output_limit_exceeded,  network_blocked,  challenge,  login_required,  identity_unavailable,  rate_limited,  context_changed,  content_unavailable,  content_protected,  extractor_broken,  transient,  invalid_input,  runtime_unavailable,  storage_unavailable,  temp_space_exhausted,  transcode_required,  unsupported_source,  worker_lost,  };
 
   @BuiltValueField(wireName: r'created_at')
   DateTime get createdAt;

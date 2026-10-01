@@ -102,13 +102,9 @@ class _$IntentHistoryItemResponse extends IntentHistoryItemResponse {
   @override
   final String? reasonCode;
   @override
-  final FailurePhase? phase;
-  @override
   final IntentFailureResponse? failure;
   @override
   final IntentHistoryItemResponseNextActionEnum? nextAction;
-  @override
-  final DateTime? retryAt;
   @override
   final DateTime deadline;
   @override
@@ -129,10 +125,8 @@ class _$IntentHistoryItemResponse extends IntentHistoryItemResponse {
       required this.version,
       required this.status,
       this.reasonCode,
-      this.phase,
       this.failure,
       this.nextAction,
-      this.retryAt,
       required this.deadline,
       this.inspectionId,
       this.jobId,
@@ -156,10 +150,8 @@ class _$IntentHistoryItemResponse extends IntentHistoryItemResponse {
         version == other.version &&
         status == other.status &&
         reasonCode == other.reasonCode &&
-        phase == other.phase &&
         failure == other.failure &&
         nextAction == other.nextAction &&
-        retryAt == other.retryAt &&
         deadline == other.deadline &&
         inspectionId == other.inspectionId &&
         jobId == other.jobId &&
@@ -174,10 +166,8 @@ class _$IntentHistoryItemResponse extends IntentHistoryItemResponse {
     _$hash = $jc(_$hash, version.hashCode);
     _$hash = $jc(_$hash, status.hashCode);
     _$hash = $jc(_$hash, reasonCode.hashCode);
-    _$hash = $jc(_$hash, phase.hashCode);
     _$hash = $jc(_$hash, failure.hashCode);
     _$hash = $jc(_$hash, nextAction.hashCode);
-    _$hash = $jc(_$hash, retryAt.hashCode);
     _$hash = $jc(_$hash, deadline.hashCode);
     _$hash = $jc(_$hash, inspectionId.hashCode);
     _$hash = $jc(_$hash, jobId.hashCode);
@@ -194,10 +184,8 @@ class _$IntentHistoryItemResponse extends IntentHistoryItemResponse {
           ..add('version', version)
           ..add('status', status)
           ..add('reasonCode', reasonCode)
-          ..add('phase', phase)
           ..add('failure', failure)
           ..add('nextAction', nextAction)
-          ..add('retryAt', retryAt)
           ..add('deadline', deadline)
           ..add('inspectionId', inspectionId)
           ..add('jobId', jobId)
@@ -228,10 +216,6 @@ class IntentHistoryItemResponseBuilder
   String? get reasonCode => _$this._reasonCode;
   set reasonCode(String? reasonCode) => _$this._reasonCode = reasonCode;
 
-  FailurePhase? _phase;
-  FailurePhase? get phase => _$this._phase;
-  set phase(FailurePhase? phase) => _$this._phase = phase;
-
   IntentFailureResponseBuilder? _failure;
   IntentFailureResponseBuilder get failure =>
       _$this._failure ??= IntentFailureResponseBuilder();
@@ -242,10 +226,6 @@ class IntentHistoryItemResponseBuilder
   IntentHistoryItemResponseNextActionEnum? get nextAction => _$this._nextAction;
   set nextAction(IntentHistoryItemResponseNextActionEnum? nextAction) =>
       _$this._nextAction = nextAction;
-
-  DateTime? _retryAt;
-  DateTime? get retryAt => _$this._retryAt;
-  set retryAt(DateTime? retryAt) => _$this._retryAt = retryAt;
 
   DateTime? _deadline;
   DateTime? get deadline => _$this._deadline;
@@ -278,10 +258,8 @@ class IntentHistoryItemResponseBuilder
       _version = $v.version;
       _status = $v.status;
       _reasonCode = $v.reasonCode;
-      _phase = $v.phase;
       _failure = $v.failure?.toBuilder();
       _nextAction = $v.nextAction;
-      _retryAt = $v.retryAt;
       _deadline = $v.deadline;
       _inspectionId = $v.inspectionId;
       _jobId = $v.jobId;
@@ -317,10 +295,8 @@ class IntentHistoryItemResponseBuilder
             status: BuiltValueNullFieldError.checkNotNull(
                 status, r'IntentHistoryItemResponse', 'status'),
             reasonCode: reasonCode,
-            phase: phase,
             failure: _failure?.build(),
             nextAction: nextAction,
-            retryAt: retryAt,
             deadline: BuiltValueNullFieldError.checkNotNull(
                 deadline, r'IntentHistoryItemResponse', 'deadline'),
             inspectionId: inspectionId,

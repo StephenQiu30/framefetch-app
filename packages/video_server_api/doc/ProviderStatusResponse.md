@@ -13,21 +13,11 @@ Name | Type | Description | Notes
 **registered** | **bool** |  |
 **extractorExists** | **bool** |  |
 **capabilities** | [**BuiltList&lt;ProviderCapability&gt;**](ProviderCapability.md) |  |
-**accessModes** | [**BuiltList&lt;ProviderAccessMode&gt;**](ProviderAccessMode.md) |  |
-**accessState** | [**ProviderAccessState**](ProviderAccessState.md) |  |
+**identity** | [**ProviderIdentity**](ProviderIdentity.md) |  |
 **status** | [**ProviderSupportStatus**](ProviderSupportStatus.md) |  |
-**lastCheckedAt** | [**DateTime**](DateTime.md) |  |
-**lastCheckSucceeded** | **bool** |  |
 **downloadSupported** | **bool** |  |
-**downloadAvailable** | **bool** |  |
-**lastMediaVerifiedAt** | [**DateTime**](DateTime.md) |  |
-**lastVerifiedAt** | [**DateTime**](DateTime.md) |  |
 **userAction** | **String** |  |
-**accessPolicies** | [**BuiltList&lt;ProviderAccessPolicyResponse&gt;**](ProviderAccessPolicyResponse.md) |  |
-**defaultAccessPolicyId** | [**ProviderAccessPolicy**](ProviderAccessPolicy.md) |  |
-**evidenceState** | [**ProviderEvidenceState**](ProviderEvidenceState.md) |  |
 **hosts** | **BuiltList&lt;String&gt;** |  |
 **hostSuffixes** | **BuiltList&lt;String&gt;** |  |
-**routeRetryAt** | [**DateTime**](DateTime.md) |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

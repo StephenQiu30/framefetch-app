@@ -36,64 +36,33 @@ void main() {
       DownloadIntakeState(
         intent: intentFixture(
           status: IntentStatus.failed,
-          reasonCode: 'provider_verification_failed',
+          reasonCode: 'challenge',
         ),
       ),
     );
 
-    expect(find.textContaining('平台要求当前系统无法自动完成的验证'), findsOneWidget);
+    expect(find.textContaining('平台要求验证'), findsOneWidget);
   });
 
   testWidgets(
-    'shows the actual token cause and media phase instead of a login instruction',
+    'shows the simplified failure class without retired session phases',
     (tester) async {
       final failure = IntentFailureResponse(
         (b) => b
-          ..code = 'pot_provider_unavailable'
-          ..phase = FailurePhase.prepareContext
-          ..scope = FailureScope.dependency
-          ..failureClass = FailureClass.tokenUnavailable
-          ..evidenceKind = FailureEvidenceKind.runtime
-          ..observedAt = DateTime.utc(2026, 9, 30),
-      );
-      final intent =
-          intentFixture(
-            status: IntentStatus.failed,
-            reasonCode: 'provider_auth_required',
-          ).rebuild(
-            (b) => b
-              ..phase = FailurePhase.prepareContext
-              ..failure.replace(failure),
-          );
-      await _pumpWorkspace(tester, DownloadIntakeState(intent: intent));
-      expect(find.textContaining('平台访问令牌尚不可用'), findsOneWidget);
-      expect(find.textContaining('准备解析环境'), findsOneWidget);
-      expect(find.textContaining('去登录'), findsNothing);
-    },
-  );
-
-  testWidgets(
-    'observes automatic source recovery and offers cancellation without manual login',
-    (tester) async {
-      final failure = IntentFailureResponse(
-        (b) => b
-          ..code = 'provider_session_not_ready'
-          ..phase = FailurePhase.prepareContext
-          ..scope = FailureScope.session
+          ..code = 'runtime_unavailable'
           ..failureClass = FailureClass.runtimeUnavailable
-          ..evidenceKind = FailureEvidenceKind.runtime
-          ..observedAt = DateTime.utc(2026, 9, 30),
+          ..layer = 'L1'
+          ..stage = IntentFailureResponseStageEnum.resolve
+          ..gate = IntentFailureResponseGateEnum.none
+          ..evidence.replace({})
+          ..summary = '解析执行环境暂不可用。',
       );
-      final intent = intentFixture(status: IntentStatus.retryWait).rebuild(
-        (b) => b
-          ..phase = FailurePhase.prepareContext
-          ..failure.replace(failure),
-      );
+      final intent = intentFixture(
+        status: IntentStatus.failed,
+      ).rebuild((b) => b..failure.replace(failure));
       await _pumpWorkspace(tester, DownloadIntakeState(intent: intent));
-      expect(find.textContaining('系统正在恢复平台会话'), findsOneWidget);
-      expect(find.text('取消解析'), findsOneWidget);
-      expect(find.textContaining('已处理'), findsNothing);
-      expect(find.textContaining('平台登录'), findsNothing);
+      expect(find.textContaining('解析执行环境暂不可用'), findsOneWidget);
+      expect(find.textContaining('系统正在恢复平台会话'), findsNothing);
     },
   );
 }

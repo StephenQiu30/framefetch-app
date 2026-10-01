@@ -196,10 +196,6 @@ const appOpenApiConfig = AppOpenApiConfig(
     ),
     OpenApiOperationSelection(method: 'get', path: '/api/admin/providers'),
     OpenApiOperationSelection(
-      method: 'get',
-      path: '/api/admin/provider-runtime',
-    ),
-    OpenApiOperationSelection(
       method: 'patch',
       path: '/api/admin/providers/{provider_key}',
     ),

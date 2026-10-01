@@ -137,6 +137,27 @@ Object? _normalizeGeneratorSchema(
     normalized['type'] = 'string';
     normalized['nullable'] = true;
   }
+  final variants = normalized['anyOf'];
+  if (variants is List &&
+      variants.length == 4 &&
+      variants.every(
+        (variant) =>
+            variant is Map &&
+            variant.length == 1 &&
+            {'string', 'integer', 'boolean', 'null'}.contains(variant['type']),
+      ) &&
+      variants.map((variant) => (variant as Map)['type']).toSet().length == 4) {
+    // These JSON primitive types cannot overlap. oneOf has identical wire
+    // semantics and avoids dart-dio's broken AnyOf response serialization.
+    normalized.remove('anyOf');
+    normalized['oneOf'] = variants;
+  }
+  final enumValues = normalized['enum'];
+  // dart-dio strips circled gate numbers from identifiers. Its official enum
+  // naming extension keeps valid Dart names while preserving wire values.
+  if (enumValues is List && enumValues.join(',') == '①,②,③,none') {
+    normalized['x-enum-varnames'] = ['gateOne', 'gateTwo', 'gateThree', 'none'];
+  }
   return normalized;
 }
 

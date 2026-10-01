@@ -7,39 +7,27 @@ String? intentFailureMessage(
   IntentResponse intent,
 ) {
   final failure = intent.failure;
-  if (intent.status == IntentStatus.retryWait &&
-      failure?.scope == FailureScope.session) {
-    return localizations.intentAutomaticSessionRecovery;
-  }
   if (intent.status == IntentStatus.queued ||
-      intent.status == IntentStatus.preparing ||
       intent.status == IntentStatus.resolving ||
-      intent.status == IntentStatus.retryWait) {
+      intent.status == IntentStatus.cancelling) {
     return null;
   }
   final message = switch (failure?.failureClass) {
-    FailureClass.authRequired ||
-    FailureClass.sessionExpired => localizations.providerSessionError,
-    FailureClass.challengeRequired => localizations.providerChallengeError,
-    FailureClass.tokenUnavailable ||
-    FailureClass.tokenRejected => localizations.providerTokenError,
-    FailureClass.extractorChanged => localizations.providerExtractorError,
-    FailureClass.mediaProbeFailed => localizations.providerMediaProbeError,
-    FailureClass.egressDenied => localizations.providerEgressError,
-    FailureClass.networkTransient => localizations.providerNetworkError,
-    FailureClass.runtimeUnavailable =>
-      failure?.scope == FailureScope.session
-          ? localizations.providerSessionSourceError
-          : localizations.providerRuntimeError,
-    FailureClass.capacityExhausted => localizations.providerCapacityError,
-    FailureClass.contextChanged => localizations.intentContextChangedError,
-    FailureClass.outcomeUnknown => localizations.providerUnknownOutcomeError,
-    FailureClass.contentRestricted => localizations.providerRestrictedError,
-    FailureClass.contentUnavailable => localizations.providerLinkError,
-    FailureClass.sourceUnsupported => localizations.providerUnsupportedError,
-    FailureClass.protocolUnavailable ||
-    FailureClass.formatUnavailable => localizations.noFormatsAvailable,
+    FailureClass.networkBlocked => localizations.providerEgressError,
+    FailureClass.challenge => localizations.providerChallengeError,
+    FailureClass.loginRequired => localizations.providerLoginRequiredError,
+    FailureClass.identityUnavailable =>
+      localizations.providerIdentityUnavailableError,
     FailureClass.rateLimited => localizations.rateLimitedError,
+    FailureClass.contextChanged => localizations.providerContextChangedError,
+    FailureClass.contentUnavailable => localizations.providerLinkError,
+    FailureClass.contentProtected =>
+      localizations.providerContentProtectedError,
+    FailureClass.extractorBroken => localizations.providerExtractorError,
+    FailureClass.formatUnavailable => localizations.noFormatsAvailable,
+    FailureClass.transient => localizations.providerNetworkError,
+    FailureClass.invalidInput => localizations.mediaUrlError,
+    FailureClass.runtimeUnavailable => localizations.providerRuntimeError,
     _ => null,
   };
   if (message != null) return message;
@@ -56,23 +44,18 @@ String intakeFailureMessage(AppLocalizations localizations, Object error) {
   if (error is! DataRequestFailure) return localizations.operationFailed;
   return switch (error.code) {
     'invalid_url' => localizations.mediaUrlError,
-    'inspection_failed' => localizations.inspectionFailedError,
-    'inspection_timeout' => localizations.inspectionTimeoutError,
-    'provider_auth_required' ||
-    'provider_session_expired' => localizations.providerSessionError,
-    'provider_configuration_missing' =>
-      localizations.providerConfigurationMissing,
-    'provider_access_policy_not_allowed' =>
-      localizations.providerPolicyNotAllowed,
-    'provider_geo_restricted' => localizations.providerRegionError,
-    'provider_content_restricted' => localizations.providerRestrictedError,
-    'provider_drm_protected' => localizations.providerDrmError,
-    'provider_link_unavailable' => localizations.providerLinkError,
-    'provider_verification_failed' => localizations.providerChallengeError,
-    'provider_session_not_ready' => localizations.providerSessionSourceError,
-    'provider_temporarily_unavailable' => localizations.providerTemporaryError,
-    'provider_media_unsupported' ||
-    'provider_unsupported' => localizations.providerUnsupportedError,
+    'network_blocked' => localizations.providerEgressError,
+    'challenge' => localizations.providerChallengeError,
+    'login_required' => localizations.providerLoginRequiredError,
+    'identity_unavailable' => localizations.providerIdentityUnavailableError,
+    'rate_limited' => localizations.rateLimitedError,
+    'context_changed' => localizations.providerContextChangedError,
+    'content_unavailable' => localizations.providerLinkError,
+    'content_protected' => localizations.providerContentProtectedError,
+    'extractor_broken' => localizations.providerExtractorError,
+    'transient' => localizations.providerNetworkError,
+    'invalid_input' => localizations.mediaUrlError,
+    'runtime_unavailable' => localizations.providerRuntimeError,
     'duration_limit_exceeded' => localizations.durationLimitError,
     'format_unavailable' => localizations.noFormatsAvailable,
     'resource_expired' => localizations.intentExpired,

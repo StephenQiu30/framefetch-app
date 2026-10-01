@@ -21,7 +21,7 @@ final class DownloadDetailContent extends StatelessWidget {
     final status = downloadStatusLabel(localizations, job.status.name);
     final failure = job.errorCode == null
         ? null
-        : downloadFailureLabel(localizations, job.errorCode!.name);
+        : downloadFailureLabel(localizations, job.errorCode!);
     return Column(
       key: const Key('download-detail-content'),
       crossAxisAlignment: CrossAxisAlignment.stretch,

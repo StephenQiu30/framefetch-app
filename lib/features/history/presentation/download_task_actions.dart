@@ -101,6 +101,7 @@ final class _DownloadTaskActionsState
       sourceKind: widget.job.sourceKind,
       status: widget.job.status,
       fileAvailable: widget.job.fileAvailable,
+      errorCode: widget.job.errorCode,
     );
     final primaryAction = canCancel
         ? ShadButton.secondary(
@@ -120,7 +121,8 @@ final class _DownloadTaskActionsState
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
             child: Flexible(child: Text(l10n.retryDownloadAction)),
           )
-        : recovery == DownloadRecovery.reimport
+        : recovery == DownloadRecovery.reimport ||
+              recovery == DownloadRecovery.reparse
         ? ShadButton.secondary(
             onPressed: _busy
                 ? null
@@ -130,7 +132,13 @@ final class _DownloadTaskActionsState
                 null,
             height: 0,
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-            child: Flexible(child: Text(l10n.reimportDownloadAction)),
+            child: Flexible(
+              child: Text(
+                recovery == DownloadRecovery.reparse
+                    ? l10n.reparseDownloadAction
+                    : l10n.reimportDownloadAction,
+              ),
+            ),
           )
         : null;
     return Align(

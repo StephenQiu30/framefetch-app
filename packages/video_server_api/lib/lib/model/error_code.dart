@@ -10,6 +10,28 @@ import 'package:built_value/serializer.dart';
 part 'error_code.g.dart';
 
 class ErrorCode extends EnumClass {
+  @BuiltValueEnumConst(wireName: r'network_blocked')
+  static const ErrorCode networkBlocked = _$networkBlocked;
+  @BuiltValueEnumConst(wireName: r'challenge')
+  static const ErrorCode challenge = _$challenge;
+  @BuiltValueEnumConst(wireName: r'login_required')
+  static const ErrorCode loginRequired = _$loginRequired;
+  @BuiltValueEnumConst(wireName: r'identity_unavailable')
+  static const ErrorCode identityUnavailable = _$identityUnavailable;
+  @BuiltValueEnumConst(wireName: r'context_changed')
+  static const ErrorCode contextChanged = _$contextChanged;
+  @BuiltValueEnumConst(wireName: r'content_unavailable')
+  static const ErrorCode contentUnavailable = _$contentUnavailable;
+  @BuiltValueEnumConst(wireName: r'content_protected')
+  static const ErrorCode contentProtected = _$contentProtected;
+  @BuiltValueEnumConst(wireName: r'extractor_broken')
+  static const ErrorCode extractorBroken = _$extractorBroken;
+  @BuiltValueEnumConst(wireName: r'transient')
+  static const ErrorCode transient = _$transient;
+  @BuiltValueEnumConst(wireName: r'invalid_input')
+  static const ErrorCode invalidInput = _$invalidInput;
+  @BuiltValueEnumConst(wireName: r'runtime_unavailable')
+  static const ErrorCode runtimeUnavailable = _$runtimeUnavailable;
   @BuiltValueEnumConst(wireName: r'active_ai_provider_delete')
   static const ErrorCode activeAiProviderDelete = _$activeAiProviderDelete;
   @BuiltValueEnumConst(wireName: r'active_task_quota_exceeded')
@@ -75,10 +97,6 @@ class ErrorCode extends EnumClass {
   static const ErrorCode importSizeMismatch = _$importSizeMismatch;
   @BuiltValueEnumConst(wireName: r'import_storage_unavailable')
   static const ErrorCode importStorageUnavailable = _$importStorageUnavailable;
-  @BuiltValueEnumConst(wireName: r'inspection_failed')
-  static const ErrorCode inspectionFailed = _$inspectionFailed;
-  @BuiltValueEnumConst(wireName: r'inspection_timeout')
-  static const ErrorCode inspectionTimeout = _$inspectionTimeout;
   @BuiltValueEnumConst(wireName: r'internal_error')
   static const ErrorCode internalError = _$internalError;
   @BuiltValueEnumConst(wireName: r'invalid_ai_provider_profile')
@@ -112,48 +130,12 @@ class ErrorCode extends EnumClass {
   static const ErrorCode notFound = _$notFound;
   @BuiltValueEnumConst(wireName: r'ok')
   static const ErrorCode ok = _$ok;
-  @BuiltValueEnumConst(wireName: r'provider_access_policy_not_allowed')
-  static const ErrorCode providerAccessPolicyNotAllowed =
-      _$providerAccessPolicyNotAllowed;
-  @BuiltValueEnumConst(wireName: r'provider_auth_required')
-  static const ErrorCode providerAuthRequired = _$providerAuthRequired;
   @BuiltValueEnumConst(wireName: r'provider_catalog_conflict')
   static const ErrorCode providerCatalogConflict = _$providerCatalogConflict;
   @BuiltValueEnumConst(wireName: r'provider_catalog_not_found')
   static const ErrorCode providerCatalogNotFound = _$providerCatalogNotFound;
-  @BuiltValueEnumConst(wireName: r'provider_configuration_missing')
-  static const ErrorCode providerConfigurationMissing =
-      _$providerConfigurationMissing;
-  @BuiltValueEnumConst(wireName: r'provider_guest_context_required')
-  static const ErrorCode providerGuestContextRequired =
-      _$providerGuestContextRequired;
-  @BuiltValueEnumConst(wireName: r'provider_content_restricted')
-  static const ErrorCode providerContentRestricted =
-      _$providerContentRestricted;
-  @BuiltValueEnumConst(wireName: r'provider_drm_protected')
-  static const ErrorCode providerDrmProtected = _$providerDrmProtected;
   @BuiltValueEnumConst(wireName: r'provider_failure')
   static const ErrorCode providerFailure = _$providerFailure;
-  @BuiltValueEnumConst(wireName: r'provider_geo_restricted')
-  static const ErrorCode providerGeoRestricted = _$providerGeoRestricted;
-  @BuiltValueEnumConst(wireName: r'provider_link_unavailable')
-  static const ErrorCode providerLinkUnavailable = _$providerLinkUnavailable;
-  @BuiltValueEnumConst(wireName: r'provider_media_unsupported')
-  static const ErrorCode providerMediaUnsupported = _$providerMediaUnsupported;
-  @BuiltValueEnumConst(wireName: r'provider_rate_limited')
-  static const ErrorCode providerRateLimited = _$providerRateLimited;
-  @BuiltValueEnumConst(wireName: r'provider_session_expired')
-  static const ErrorCode providerSessionExpired = _$providerSessionExpired;
-  @BuiltValueEnumConst(wireName: r'provider_session_not_ready')
-  static const ErrorCode providerSessionNotReady = _$providerSessionNotReady;
-  @BuiltValueEnumConst(wireName: r'provider_temporarily_unavailable')
-  static const ErrorCode providerTemporarilyUnavailable =
-      _$providerTemporarilyUnavailable;
-  @BuiltValueEnumConst(wireName: r'provider_unsupported')
-  static const ErrorCode providerUnsupported = _$providerUnsupported;
-  @BuiltValueEnumConst(wireName: r'provider_verification_failed')
-  static const ErrorCode providerVerificationFailed =
-      _$providerVerificationFailed;
   @BuiltValueEnumConst(wireName: r'rate_limited')
   static const ErrorCode rateLimited = _$rateLimited;
   @BuiltValueEnumConst(wireName: r'rate_limiter_unavailable')

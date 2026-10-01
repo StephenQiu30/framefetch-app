@@ -4,7 +4,6 @@
 
 // ignore_for_file: unused_element, unused_element_parameter
 import 'package:built_collection/built_collection.dart';
-import 'package:video_server_api/lib/model/failure_phase.dart';
 import 'package:video_server_api/lib/model/intent_status.dart';
 import 'package:video_server_api/lib/model/intent_failure_response.dart';
 import 'package:built_value/built_value.dart';
@@ -19,10 +18,8 @@ part 'intent_history_item_response.g.dart';
 /// * [version]
 /// * [status]
 /// * [reasonCode]
-/// * [phase]
 /// * [failure]
 /// * [nextAction]
-/// * [retryAt]
 /// * [deadline]
 /// * [inspectionId]
 /// * [jobId]
@@ -40,14 +37,10 @@ abstract class IntentHistoryItemResponse
 
   @BuiltValueField(wireName: r'status')
   IntentStatus get status;
-  // enum statusEnum {  queued,  preparing,  resolving,  retry_wait,  ready,  handed_off,  cancelled,  expired,  failed,  };
+  // enum statusEnum {  queued,  resolving,  ready,  handed_off,  cancelling,  cancelled,  expired,  failed,  };
 
   @BuiltValueField(wireName: r'reason_code')
   String? get reasonCode;
-
-  @BuiltValueField(wireName: r'phase')
-  FailurePhase? get phase;
-  // enum phaseEnum {  recognize,  prepare_context,  fetch_metadata,  select_format,  probe_media,  transfer,  validate,  publish,  };
 
   @BuiltValueField(wireName: r'failure')
   IntentFailureResponse? get failure;
@@ -55,9 +48,6 @@ abstract class IntentHistoryItemResponse
   @BuiltValueField(wireName: r'next_action')
   IntentHistoryItemResponseNextActionEnum? get nextAction;
   // enum nextActionEnum {  none,  wait,  refresh_result,  import_file,  };
-
-  @BuiltValueField(wireName: r'retry_at')
-  DateTime? get retryAt;
 
   @BuiltValueField(wireName: r'deadline')
   DateTime get deadline;
@@ -127,13 +117,6 @@ class _$IntentHistoryItemResponseSerializer
             object.reasonCode,
             specifiedType: const FullType.nullable(String),
           );
-    yield r'phase';
-    yield object.phase == null
-        ? null
-        : serializers.serialize(
-            object.phase,
-            specifiedType: const FullType.nullable(FailurePhase),
-          );
     yield r'failure';
     yield object.failure == null
         ? null
@@ -148,13 +131,6 @@ class _$IntentHistoryItemResponseSerializer
         specifiedType: const FullType(IntentHistoryItemResponseNextActionEnum),
       );
     }
-    yield r'retry_at';
-    yield object.retryAt == null
-        ? null
-        : serializers.serialize(
-            object.retryAt,
-            specifiedType: const FullType.nullable(DateTime),
-          );
     yield r'deadline';
     yield serializers.serialize(
       object.deadline,
@@ -240,14 +216,6 @@ class _$IntentHistoryItemResponseSerializer
           if (valueDes == null) continue;
           result.reasonCode = valueDes;
           break;
-        case r'phase':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(FailurePhase),
-          ) as FailurePhase?;
-          if (valueDes == null) continue;
-          result.phase = valueDes;
-          break;
         case r'failure':
           final valueDes = serializers.deserialize(
             value,
@@ -263,14 +231,6 @@ class _$IntentHistoryItemResponseSerializer
                 const FullType(IntentHistoryItemResponseNextActionEnum),
           ) as IntentHistoryItemResponseNextActionEnum;
           result.nextAction = valueDes;
-          break;
-        case r'retry_at':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DateTime),
-          ) as DateTime?;
-          if (valueDes == null) continue;
-          result.retryAt = valueDes;
           break;
         case r'deadline':
           final valueDes = serializers.deserialize(

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,6 +29,7 @@ final class DownloadIntakeState {
   final String? selectedFormatId;
 
   bool get busy => phase != DownloadIntakePhase.idle;
+  bool get cancelling => intent?.status == IntentStatus.cancelling;
 
   DownloadIntakeState copyWith({
     SourceDiscoveryResponse? discovery,
@@ -103,7 +103,7 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
   }
 
   void clearResult() {
-    if (state.busy) return;
+    if (state.busy || state.cancelling) return;
     _generation++;
     _pollTimer?.cancel();
     _keys.forget('intent');
@@ -121,7 +121,7 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
   }
 
   Future<void> resume(String id) async {
-    if (state.busy || _owner == null) return;
+    if (state.busy || state.cancelling || _owner == null) return;
     final generation = ++_generation;
     final previous = state.intent;
     _pollTimer?.cancel();
@@ -198,7 +198,7 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
 
   Future<void> cancelIntent() async {
     final current = state.intent;
-    if (state.busy || current == null) return;
+    if (state.busy || state.cancelling || current == null) return;
     final generation = ++_generation;
     _pollTimer?.cancel();
     state = state.copyWith(
@@ -214,7 +214,8 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
         final snapshot = await _intents.get(current.id);
         if (generation != _generation) return;
         await _adopt(snapshot, generation);
-        if (snapshot.status != IntentStatus.cancelled) {
+        if (snapshot.status != IntentStatus.cancelled &&
+            snapshot.status != IntentStatus.cancelling) {
           state = state.copyWith(error: error);
         }
       } catch (_) {
@@ -299,9 +300,8 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
   void _schedulePoll(IntentResponse intent, {bool recovering = false}) {
     if (_foreground &&
         (intent.status == IntentStatus.queued ||
-            intent.status == IntentStatus.preparing ||
             intent.status == IntentStatus.resolving ||
-            intent.status == IntentStatus.retryWait)) {
+            intent.status == IntentStatus.cancelling)) {
       _pollTimer?.cancel();
       _pollTimer = Timer.periodic(
         // The deadline bounds server work, not reconciliation of its final
@@ -336,8 +336,8 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
     return _intents.create(input: input, idempotencyKey: key);
   }
 
-  Future<void> inspect(String url, {ProviderAccessPolicy? accessPolicy}) async {
-    if (state.busy) return;
+  Future<void> inspect(String url) async {
+    if (state.busy || state.cancelling) return;
     final generation = ++_generation;
     _pollTimer?.cancel();
     state = const DownloadIntakeState(phase: DownloadIntakePhase.inspecting);
@@ -350,9 +350,7 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
         if (generation == _generation) {
           state = DownloadIntakeState(discovery: discovery);
         }
-      } else if (accessPolicy == null ||
-          accessPolicy == ProviderAccessPolicy.public ||
-          accessPolicy == ProviderAccessPolicy.publicSession) {
+      } else {
         final key = _keys.value('intent', url);
         try {
           final intent = await _submitIntent(url, key, generation);
@@ -392,16 +390,6 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
             }
           }
         }
-      } else {
-        final inspection = await _repository.inspectPublicUrl(
-          idempotencyKey: _keys.value(
-            'inspect',
-            jsonEncode([url, accessPolicy.name]),
-          ),
-          url: url,
-          accessPolicy: accessPolicy,
-        );
-        if (generation == _generation) _applyInspection(inspection);
       }
     } catch (error) {
       if (generation == _generation) state = DownloadIntakeState(error: error);

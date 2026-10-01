@@ -71,7 +71,6 @@ Class | Method | HTTP request | Description
 [*AdminApi*](doc/AdminApi.md) | [**createProviderCatalogEntry**](doc/AdminApi.md#createprovidercatalogentry) | **POST** /api/admin/providers | 新增平台目录条目
 [*AdminApi*](doc/AdminApi.md) | [**deleteAiProviderProfile**](doc/AdminApi.md#deleteaiproviderprofile) | **DELETE** /api/admin/ai-providers/{provider_key} | 删除 AI 分析 Provider
 [*AdminApi*](doc/AdminApi.md) | [**deleteProviderCatalogEntry**](doc/AdminApi.md#deleteprovidercatalogentry) | **DELETE** /api/admin/providers/{provider_key} | 删除平台目录条目
-[*AdminApi*](doc/AdminApi.md) | [**getAdminProviderRuntime**](doc/AdminApi.md#getadminproviderruntime) | **GET** /api/admin/provider-runtime | 读取已开放平台的脱敏运行诊断
 [*AdminApi*](doc/AdminApi.md) | [**getDownloadAnalytics**](doc/AdminApi.md#getdownloadanalytics) | **GET** /api/admin/downloads/analytics | 查询下载分析
 [*AdminApi*](doc/AdminApi.md) | [**listAiProviderProfiles**](doc/AdminApi.md#listaiproviderprofiles) | **GET** /api/admin/ai-providers | 查询 AI 分析 Provider
 [*AdminApi*](doc/AdminApi.md) | [**listProviderCatalogEntries**](doc/AdminApi.md#listprovidercatalogentries) | **GET** /api/admin/providers | 查询平台目录
@@ -170,7 +169,6 @@ Class | Method | HTTP request | Description
  - [ApiResponseProviderCatalogEntryResponse](doc/ApiResponseProviderCatalogEntryResponse.md)
  - [ApiResponseProviderCatalogListResponse](doc/ApiResponseProviderCatalogListResponse.md)
  - [ApiResponseProviderListResponse](doc/ApiResponseProviderListResponse.md)
- - [ApiResponseProviderRuntimeListResponse](doc/ApiResponseProviderRuntimeListResponse.md)
  - [ApiResponseSourceDiscoveryResponse](doc/ApiResponseSourceDiscoveryResponse.md)
  - [ApiResponseStorageCleanupResponse](doc/ApiResponseStorageCleanupResponse.md)
  - [ApiResponseStoredFileListResponse](doc/ApiResponseStoredFileListResponse.md)
@@ -219,11 +217,9 @@ Class | Method | HTTP request | Description
  - [ErrorCode](doc/ErrorCode.md)
  - [ErrorResponse](doc/ErrorResponse.md)
  - [EvidenceSummaryResponse](doc/EvidenceSummaryResponse.md)
+ - [EvidenceValue](doc/EvidenceValue.md)
  - [ExecutionMode](doc/ExecutionMode.md)
  - [FailureClass](doc/FailureClass.md)
- - [FailureEvidenceKind](doc/FailureEvidenceKind.md)
- - [FailurePhase](doc/FailurePhase.md)
- - [FailureScope](doc/FailureScope.md)
  - [FormatResponse](doc/FormatResponse.md)
  - [FpsBucket](doc/FpsBucket.md)
  - [HighlightResponse](doc/HighlightResponse.md)
@@ -252,17 +248,11 @@ Class | Method | HTTP request | Description
  - [ProblemDetails](doc/ProblemDetails.md)
  - [ProductionAdviceResponse](doc/ProductionAdviceResponse.md)
  - [ProtectionState](doc/ProtectionState.md)
- - [ProviderAccessMode](doc/ProviderAccessMode.md)
- - [ProviderAccessPolicy](doc/ProviderAccessPolicy.md)
- - [ProviderAccessPolicyResponse](doc/ProviderAccessPolicyResponse.md)
- - [ProviderAccessState](doc/ProviderAccessState.md)
  - [ProviderCapability](doc/ProviderCapability.md)
  - [ProviderCatalogEntryResponse](doc/ProviderCatalogEntryResponse.md)
  - [ProviderCatalogListResponse](doc/ProviderCatalogListResponse.md)
- - [ProviderEvidenceState](doc/ProviderEvidenceState.md)
+ - [ProviderIdentity](doc/ProviderIdentity.md)
  - [ProviderListResponse](doc/ProviderListResponse.md)
- - [ProviderRuntimeListResponse](doc/ProviderRuntimeListResponse.md)
- - [ProviderRuntimeResponse](doc/ProviderRuntimeResponse.md)
  - [ProviderStatusResponse](doc/ProviderStatusResponse.md)
  - [ProviderSupportStatus](doc/ProviderSupportStatus.md)
  - [PublicUrlInspectionSource](doc/PublicUrlInspectionSource.md)

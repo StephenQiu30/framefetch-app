@@ -71,15 +71,12 @@ class _$PublicUrlInspectionSource extends PublicUrlInspectionSource {
   final PublicUrlInspectionSourceKindEnum kind;
   @override
   final String url;
-  @override
-  final ProviderAccessPolicy? accessPolicyId;
 
   factory _$PublicUrlInspectionSource(
           [void Function(PublicUrlInspectionSourceBuilder)? updates]) =>
       (PublicUrlInspectionSourceBuilder()..update(updates))._build();
 
-  _$PublicUrlInspectionSource._(
-      {required this.kind, required this.url, this.accessPolicyId})
+  _$PublicUrlInspectionSource._({required this.kind, required this.url})
       : super._();
   @override
   PublicUrlInspectionSource rebuild(
@@ -95,8 +92,7 @@ class _$PublicUrlInspectionSource extends PublicUrlInspectionSource {
     if (identical(other, this)) return true;
     return other is PublicUrlInspectionSource &&
         kind == other.kind &&
-        url == other.url &&
-        accessPolicyId == other.accessPolicyId;
+        url == other.url;
   }
 
   @override
@@ -104,7 +100,6 @@ class _$PublicUrlInspectionSource extends PublicUrlInspectionSource {
     var _$hash = 0;
     _$hash = $jc(_$hash, kind.hashCode);
     _$hash = $jc(_$hash, url.hashCode);
-    _$hash = $jc(_$hash, accessPolicyId.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -113,8 +108,7 @@ class _$PublicUrlInspectionSource extends PublicUrlInspectionSource {
   String toString() {
     return (newBuiltValueToStringHelper(r'PublicUrlInspectionSource')
           ..add('kind', kind)
-          ..add('url', url)
-          ..add('accessPolicyId', accessPolicyId))
+          ..add('url', url))
         .toString();
   }
 }
@@ -132,11 +126,6 @@ class PublicUrlInspectionSourceBuilder
   String? get url => _$this._url;
   set url(String? url) => _$this._url = url;
 
-  ProviderAccessPolicy? _accessPolicyId;
-  ProviderAccessPolicy? get accessPolicyId => _$this._accessPolicyId;
-  set accessPolicyId(ProviderAccessPolicy? accessPolicyId) =>
-      _$this._accessPolicyId = accessPolicyId;
-
   PublicUrlInspectionSourceBuilder() {
     PublicUrlInspectionSource._defaults(this);
   }
@@ -146,7 +135,6 @@ class PublicUrlInspectionSourceBuilder
     if ($v != null) {
       _kind = $v.kind;
       _url = $v.url;
-      _accessPolicyId = $v.accessPolicyId;
       _$v = null;
     }
     return this;
@@ -172,7 +160,6 @@ class PublicUrlInspectionSourceBuilder
               kind, r'PublicUrlInspectionSource', 'kind'),
           url: BuiltValueNullFieldError.checkNotNull(
               url, r'PublicUrlInspectionSource', 'url'),
-          accessPolicyId: accessPolicyId,
         );
     replace(_$result);
     return _$result;

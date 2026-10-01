@@ -443,7 +443,7 @@ void main() {
       providerStatusRepository: providerRepository,
     );
 
-    expect(providerRepository.calls, 1);
+    expect(providerRepository.calls, 0);
 
     await tester.tap(find.byKey(const Key('app-tab-1')));
     await tester.pumpAndSettle();
@@ -459,7 +459,8 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('YouTube'), findsOneWidget);
     expect(find.textContaining('单视频', findRichText: true), findsOneWidget);
-    expect(find.textContaining('匿名访问', findRichText: true), findsOneWidget);
+    expect(find.textContaining('可选登录', findRichText: true), findsOneWidget);
+    expect(providerRepository.calls, 1);
 
     await tester.tap(find.byKey(const Key('app-tab-0')));
     await tester.pumpAndSettle();

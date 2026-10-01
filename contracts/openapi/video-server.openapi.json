@@ -7686,7 +7686,7 @@
           "providers"
         ],
         "summary": "查询平台能力状态",
-        "description": "返回不含凭据、出口地址和 Canary 目标的能力快照。",
+        "description": "返回 Registry 声明的能力与身份要求。",
         "operationId": "listProviders",
         "responses": {
           "200": {
@@ -8564,134 +8564,6 @@
             }
           }
         }
-      }
-    },
-    "/api/admin/provider-runtime": {
-      "get": {
-        "tags": [
-          "admin"
-        ],
-        "summary": "读取已开放平台的脱敏运行诊断",
-        "description": "仅元数据快照，不登录、不导出会话、不解析或下载媒体。",
-        "operationId": "getAdminProviderRuntime",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse_ProviderRuntimeListResponse_"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "未登录或会话已经失效",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "当前用户没有操作权限",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "资源不存在、已清理或临时解析状态已过期",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "资源状态或幂等键冲突",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "请求频率超过限制",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "请求参数或业务输入无效",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "服务内部错误",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "上游媒体或模型服务失败",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "运行依赖暂时不可用",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "504": {
-            "description": "上游操作超时",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "NativeBearerAuth": []
-          }
-        ],
-        "parameters": []
       }
     },
     "/api/admin/ai-providers/{provider_key}/activate": {
@@ -9937,31 +9809,6 @@
         ],
         "title": "ApiResponse[ProviderListResponse]"
       },
-      "ApiResponse_ProviderRuntimeListResponse_": {
-        "properties": {
-          "code": {
-            "$ref": "#/components/schemas/ErrorCode",
-            "description": "稳定的业务结果码。"
-          },
-          "message": {
-            "type": "string",
-            "title": "Message",
-            "description": "安全的结果说明。"
-          },
-          "data": {
-            "$ref": "#/components/schemas/ProviderRuntimeListResponse",
-            "description": "成功时为业务数据，错误时为 null。"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "code",
-          "message",
-          "data"
-        ],
-        "title": "ApiResponse[ProviderRuntimeListResponse]"
-      },
       "ApiResponse_SourceDiscoveryResponse_": {
         "properties": {
           "code": {
@@ -11158,24 +11005,21 @@
           "cancelled",
           "download_timeout",
           "format_unavailable",
-          "inspection_timeout",
           "internal_error",
           "media_validation_failed",
           "output_limit_exceeded",
-          "provider_access_policy_not_allowed",
-          "provider_auth_required",
-          "provider_content_restricted",
-          "provider_drm_protected",
-          "provider_geo_restricted",
-          "provider_guest_context_required",
-          "provider_link_unavailable",
-          "provider_media_unsupported",
-          "provider_rate_limited",
-          "provider_session_expired",
-          "provider_session_not_ready",
-          "provider_temporarily_unavailable",
-          "provider_unsupported",
-          "provider_verification_failed",
+          "network_blocked",
+          "challenge",
+          "login_required",
+          "identity_unavailable",
+          "rate_limited",
+          "context_changed",
+          "content_unavailable",
+          "content_protected",
+          "extractor_broken",
+          "transient",
+          "invalid_input",
+          "runtime_unavailable",
           "storage_unavailable",
           "temp_space_exhausted",
           "transcode_required",
@@ -11675,6 +11519,17 @@
       "ErrorCode": {
         "type": "string",
         "enum": [
+          "network_blocked",
+          "challenge",
+          "login_required",
+          "identity_unavailable",
+          "context_changed",
+          "content_unavailable",
+          "content_protected",
+          "extractor_broken",
+          "transient",
+          "invalid_input",
+          "runtime_unavailable",
           "active_ai_provider_delete",
           "active_task_quota_exceeded",
           "admin_bootstrap_required",
@@ -11706,8 +11561,6 @@
           "import_disabled",
           "import_size_mismatch",
           "import_storage_unavailable",
-          "inspection_failed",
-          "inspection_timeout",
           "internal_error",
           "invalid_ai_provider_profile",
           "invalid_credentials",
@@ -11724,24 +11577,9 @@
           "metrics_unavailable",
           "not_found",
           "ok",
-          "provider_access_policy_not_allowed",
-          "provider_auth_required",
           "provider_catalog_conflict",
           "provider_catalog_not_found",
-          "provider_configuration_missing",
-          "provider_guest_context_required",
-          "provider_content_restricted",
-          "provider_drm_protected",
           "provider_failure",
-          "provider_geo_restricted",
-          "provider_link_unavailable",
-          "provider_media_unsupported",
-          "provider_rate_limited",
-          "provider_session_expired",
-          "provider_session_not_ready",
-          "provider_temporarily_unavailable",
-          "provider_unsupported",
-          "provider_verification_failed",
           "rate_limited",
           "rate_limiter_unavailable",
           "refresh_in_progress",
@@ -11824,67 +11662,21 @@
       "FailureClass": {
         "type": "string",
         "enum": [
-          "auth_required",
-          "session_expired",
-          "challenge_required",
-          "token_unavailable",
-          "token_rejected",
-          "extractor_changed",
-          "protocol_unavailable",
-          "format_unavailable",
-          "media_probe_failed",
-          "egress_denied",
-          "network_transient",
+          "network_blocked",
+          "challenge",
+          "login_required",
+          "identity_unavailable",
           "rate_limited",
-          "content_unavailable",
-          "content_restricted",
           "context_changed",
-          "runtime_unavailable",
-          "capacity_exhausted",
+          "content_unavailable",
+          "content_protected",
+          "extractor_broken",
+          "format_unavailable",
+          "transient",
           "invalid_input",
-          "source_unsupported",
-          "artifact_invalid",
-          "storage_unavailable",
-          "outcome_unknown",
-          "upstream_unclassified"
+          "runtime_unavailable"
         ],
         "title": "FailureClass"
-      },
-      "FailureEvidenceKind": {
-        "type": "string",
-        "enum": [
-          "upstream_response",
-          "transport",
-          "local_validation",
-          "runtime",
-          "unknown"
-        ],
-        "title": "FailureEvidenceKind"
-      },
-      "FailurePhase": {
-        "type": "string",
-        "enum": [
-          "recognize",
-          "prepare_context",
-          "fetch_metadata",
-          "select_format",
-          "probe_media",
-          "transfer",
-          "validate",
-          "publish"
-        ],
-        "title": "FailurePhase"
-      },
-      "FailureScope": {
-        "type": "string",
-        "enum": [
-          "content",
-          "session",
-          "route",
-          "dependency",
-          "runtime"
-        ],
-        "title": "FailureScope"
       },
       "FormatResponse": {
         "properties": {
@@ -12159,16 +11951,6 @@
               }
             ],
             "title": "User Action"
-          },
-          "access_policy_id": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ProviderAccessPolicy"
-              },
-              {
-                "type": "null"
-              }
-            ]
           }
         },
         "additionalProperties": false,
@@ -12192,8 +11974,7 @@
           "protection_state",
           "rights_basis",
           "restriction_reason",
-          "user_action",
-          "access_policy_id"
+          "user_action"
         ],
         "title": "InspectionResponse",
         "description": "Inspection resource with normalized semantic download formats."
@@ -12204,70 +11985,74 @@
             "type": "string",
             "title": "Code"
           },
-          "phase": {
-            "$ref": "#/components/schemas/FailurePhase"
-          },
-          "scope": {
-            "$ref": "#/components/schemas/FailureScope"
-          },
           "failure_class": {
             "$ref": "#/components/schemas/FailureClass"
           },
-          "cause_code": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Cause Code"
-          },
-          "evidence_kind": {
-            "$ref": "#/components/schemas/FailureEvidenceKind"
-          },
-          "observed_at": {
+          "layer": {
             "type": "string",
-            "format": "date-time",
-            "title": "Observed At"
+            "title": "Layer"
           },
-          "retry_after": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
+          "stage": {
+            "type": "string",
+            "enum": [
+              "resolve",
+              "download",
+              "validate",
+              "publish"
             ],
-            "title": "Retry After"
+            "title": "Stage"
           },
-          "diagnostic_ref": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
+          "gate": {
+            "type": "string",
+            "enum": [
+              "①",
+              "②",
+              "③",
+              "none"
             ],
-            "title": "Diagnostic Ref"
+            "title": "Gate",
+            "x-enum-varnames": [
+              "gateOne",
+              "gateTwo",
+              "gateThree",
+              "none"
+            ]
+          },
+          "evidence": {
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Evidence"
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary"
           }
         },
         "additionalProperties": false,
         "type": "object",
         "required": [
           "code",
-          "phase",
-          "scope",
           "failure_class",
-          "cause_code",
-          "evidence_kind",
-          "observed_at",
-          "retry_after",
-          "diagnostic_ref"
+          "layer",
+          "stage",
+          "gate",
+          "evidence",
+          "summary"
         ],
         "title": "IntentFailureResponse"
       },
@@ -12296,16 +12081,6 @@
             ],
             "title": "Reason Code"
           },
-          "phase": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/FailurePhase"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
           "failure": {
             "anyOf": [
               {
@@ -12326,18 +12101,6 @@
             ],
             "title": "Next Action",
             "default": "none"
-          },
-          "retry_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Retry At"
           },
           "deadline": {
             "type": "string",
@@ -12392,9 +12155,7 @@
           "version",
           "status",
           "reason_code",
-          "phase",
           "failure",
-          "retry_at",
           "deadline",
           "inspection_id",
           "job_id",
@@ -12440,7 +12201,7 @@
             "maxLength": 4096,
             "minLength": 8,
             "title": "Input",
-            "description": "公开媒体地址或包含唯一媒体地址的分享文案。"
+            "description": "媒体地址或包含唯一媒体地址的分享文案。"
           }
         },
         "additionalProperties": false,
@@ -12475,16 +12236,6 @@
             ],
             "title": "Reason Code"
           },
-          "phase": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/FailurePhase"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
           "failure": {
             "anyOf": [
               {
@@ -12505,18 +12256,6 @@
             ],
             "title": "Next Action",
             "default": "none"
-          },
-          "retry_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Retry At"
           },
           "deadline": {
             "type": "string",
@@ -12555,9 +12294,7 @@
           "version",
           "status",
           "reason_code",
-          "phase",
           "failure",
-          "retry_at",
           "deadline",
           "inspection_id",
           "job_id"
@@ -12568,11 +12305,10 @@
         "type": "string",
         "enum": [
           "queued",
-          "preparing",
           "resolving",
-          "retry_wait",
           "ready",
           "handed_off",
+          "cancelling",
           "cancelled",
           "expired",
           "failed"
@@ -13004,60 +12740,6 @@
         ],
         "title": "ProtectionState"
       },
-      "ProviderAccessMode": {
-        "type": "string",
-        "enum": [
-          "anonymous",
-          "guest",
-          "operator_managed"
-        ],
-        "title": "ProviderAccessMode",
-        "description": "Privilege boundary for one provider operation.\n\nOPERATOR_MANAGED carries the dedicated platform login for one operation.\nGUEST only appears in persisted history from the retired visitor route."
-      },
-      "ProviderAccessPolicy": {
-        "type": "string",
-        "enum": [
-          "public",
-          "public_session",
-          "operator_public",
-          "personal_entitled"
-        ],
-        "title": "ProviderAccessPolicy"
-      },
-      "ProviderAccessPolicyResponse": {
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/ProviderAccessPolicy"
-          },
-          "configured": {
-            "type": "boolean",
-            "title": "Configured"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "id",
-          "configured"
-        ],
-        "title": "ProviderAccessPolicyResponse"
-      },
-      "ProviderAccessState": {
-        "type": "string",
-        "enum": [
-          "public_probe",
-          "public_ready",
-          "authorization_required",
-          "operator_probe",
-          "operator_ready",
-          "degraded",
-          "blocked",
-          "disabled",
-          "unsupported"
-        ],
-        "title": "ProviderAccessState",
-        "description": "User-facing access state projected from support and runtime evidence."
-      },
       "ProviderCapability": {
         "type": "string",
         "enum": [
@@ -13139,14 +12821,14 @@
         ],
         "title": "ProviderCatalogListResponse"
       },
-      "ProviderEvidenceState": {
+      "ProviderIdentity": {
         "type": "string",
         "enum": [
-          "missing",
-          "stale",
-          "fresh"
+          "none",
+          "optional",
+          "required"
         ],
-        "title": "ProviderEvidenceState"
+        "title": "ProviderIdentity"
       },
       "ProviderListResponse": {
         "properties": {
@@ -13164,160 +12846,6 @@
           "items"
         ],
         "title": "ProviderListResponse"
-      },
-      "ProviderRuntimeListResponse": {
-        "properties": {
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/ProviderRuntimeResponse"
-            },
-            "type": "array",
-            "title": "Items"
-          },
-          "snapshot_max_age_seconds": {
-            "type": "integer",
-            "title": "Snapshot Max Age Seconds",
-            "default": 30
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "items"
-        ],
-        "title": "ProviderRuntimeListResponse"
-      },
-      "ProviderRuntimeResponse": {
-        "properties": {
-          "login_state": {
-            "type": "string",
-            "enum": [
-              "not_required",
-              "signed_in",
-              "unavailable"
-            ],
-            "title": "Login State"
-          },
-          "session_site": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Session Site"
-          },
-          "provider_key": {
-            "type": "string",
-            "title": "Provider Key"
-          },
-          "access_policy_id": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ProviderAccessPolicy"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "route_configured": {
-            "type": "boolean",
-            "title": "Route Configured"
-          },
-          "context_available": {
-            "type": "boolean",
-            "title": "Context Available"
-          },
-          "profile_version": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Profile Version"
-          },
-          "engine_commit": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Engine Commit"
-          },
-          "source_state": {
-            "type": "string",
-            "enum": [
-              "not_required",
-              "revision_observed",
-              "not_observed",
-              "unknown"
-            ],
-            "title": "Source State"
-          },
-          "evidence_state": {
-            "$ref": "#/components/schemas/ProviderEvidenceState"
-          },
-          "last_media_verified_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Last Media Verified At"
-          },
-          "user_action": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "User Action"
-          },
-          "route_retry_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Route Retry At"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "login_state",
-          "provider_key",
-          "access_policy_id",
-          "route_configured",
-          "context_available",
-          "profile_version",
-          "engine_commit",
-          "source_state",
-          "evidence_state",
-          "last_media_verified_at",
-          "user_action"
-        ],
-        "title": "ProviderRuntimeResponse"
       },
       "ProviderStatusResponse": {
         "properties": {
@@ -13344,73 +12872,15 @@
             "type": "array",
             "title": "Capabilities"
           },
-          "access_modes": {
-            "items": {
-              "$ref": "#/components/schemas/ProviderAccessMode"
-            },
-            "type": "array",
-            "title": "Access Modes"
-          },
-          "access_state": {
-            "$ref": "#/components/schemas/ProviderAccessState"
+          "identity": {
+            "$ref": "#/components/schemas/ProviderIdentity"
           },
           "status": {
             "$ref": "#/components/schemas/ProviderSupportStatus"
           },
-          "last_checked_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Last Checked At"
-          },
-          "last_check_succeeded": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Last Check Succeeded"
-          },
           "download_supported": {
             "type": "boolean",
             "title": "Download Supported"
-          },
-          "download_available": {
-            "type": "boolean",
-            "title": "Download Available"
-          },
-          "last_media_verified_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Last Media Verified At"
-          },
-          "last_verified_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Last Verified At"
           },
           "user_action": {
             "anyOf": [
@@ -13422,26 +12892,6 @@
               }
             ],
             "title": "User Action"
-          },
-          "access_policies": {
-            "items": {
-              "$ref": "#/components/schemas/ProviderAccessPolicyResponse"
-            },
-            "type": "array",
-            "title": "Access Policies"
-          },
-          "default_access_policy_id": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ProviderAccessPolicy"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "evidence_state": {
-            "$ref": "#/components/schemas/ProviderEvidenceState"
           },
           "hosts": {
             "items": {
@@ -13456,18 +12906,6 @@
             },
             "type": "array",
             "title": "Host Suffixes"
-          },
-          "route_retry_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Route Retry At"
           }
         },
         "additionalProperties": false,
@@ -13478,19 +12916,10 @@
           "registered",
           "extractor_exists",
           "capabilities",
-          "access_modes",
-          "access_state",
+          "identity",
           "status",
-          "last_checked_at",
-          "last_check_succeeded",
           "download_supported",
-          "download_available",
-          "last_media_verified_at",
-          "last_verified_at",
           "user_action",
-          "access_policies",
-          "default_access_policy_id",
-          "evidence_state",
           "hosts",
           "host_suffixes"
         ],
@@ -13500,11 +12929,6 @@
         "type": "string",
         "enum": [
           "unknown",
-          "verified",
-          "degraded",
-          "access_required",
-          "rate_limited",
-          "blocked",
           "disabled",
           "unsupported"
         ],
@@ -13526,17 +12950,6 @@
             "examples": [
               "https://media.example/video"
             ]
-          },
-          "access_policy_id": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ProviderAccessPolicy"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "显式选择平台允许的访问策略；省略时使用平台固定默认策略，不按端点存在性切换。"
           }
         },
         "additionalProperties": false,

@@ -6,11 +6,7 @@
 import 'package:video_server_api/lib/model/provider_capability.dart';
 import 'package:video_server_api/lib/model/provider_support_status.dart';
 import 'package:built_collection/built_collection.dart';
-import 'package:video_server_api/lib/model/provider_access_state.dart';
-import 'package:video_server_api/lib/model/provider_access_mode.dart';
-import 'package:video_server_api/lib/model/provider_access_policy.dart';
-import 'package:video_server_api/lib/model/provider_access_policy_response.dart';
-import 'package:video_server_api/lib/model/provider_evidence_state.dart';
+import 'package:video_server_api/lib/model/provider_identity.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -24,22 +20,12 @@ part 'provider_status_response.g.dart';
 /// * [registered]
 /// * [extractorExists]
 /// * [capabilities]
-/// * [accessModes]
-/// * [accessState]
+/// * [identity]
 /// * [status]
-/// * [lastCheckedAt]
-/// * [lastCheckSucceeded]
 /// * [downloadSupported]
-/// * [downloadAvailable]
-/// * [lastMediaVerifiedAt]
-/// * [lastVerifiedAt]
 /// * [userAction]
-/// * [accessPolicies]
-/// * [defaultAccessPolicyId]
-/// * [evidenceState]
 /// * [hosts]
 /// * [hostSuffixes]
-/// * [routeRetryAt]
 @BuiltValue()
 abstract class ProviderStatusResponse
     implements Built<ProviderStatusResponse, ProviderStatusResponseBuilder> {
@@ -58,57 +44,25 @@ abstract class ProviderStatusResponse
   @BuiltValueField(wireName: r'capabilities')
   BuiltList<ProviderCapability> get capabilities;
 
-  @BuiltValueField(wireName: r'access_modes')
-  BuiltList<ProviderAccessMode> get accessModes;
-
-  @BuiltValueField(wireName: r'access_state')
-  ProviderAccessState get accessState;
-  // enum accessStateEnum {  public_probe,  public_ready,  authorization_required,  operator_probe,  operator_ready,  degraded,  blocked,  disabled,  unsupported,  };
+  @BuiltValueField(wireName: r'identity')
+  ProviderIdentity get identity;
+  // enum identityEnum {  none,  optional,  required,  };
 
   @BuiltValueField(wireName: r'status')
   ProviderSupportStatus get status;
-  // enum statusEnum {  unknown,  verified,  degraded,  access_required,  rate_limited,  blocked,  disabled,  unsupported,  };
-
-  @BuiltValueField(wireName: r'last_checked_at')
-  DateTime? get lastCheckedAt;
-
-  @BuiltValueField(wireName: r'last_check_succeeded')
-  bool? get lastCheckSucceeded;
+  // enum statusEnum {  unknown,  disabled,  unsupported,  };
 
   @BuiltValueField(wireName: r'download_supported')
   bool get downloadSupported;
 
-  @BuiltValueField(wireName: r'download_available')
-  bool get downloadAvailable;
-
-  @BuiltValueField(wireName: r'last_media_verified_at')
-  DateTime? get lastMediaVerifiedAt;
-
-  @BuiltValueField(wireName: r'last_verified_at')
-  DateTime? get lastVerifiedAt;
-
   @BuiltValueField(wireName: r'user_action')
   String? get userAction;
-
-  @BuiltValueField(wireName: r'access_policies')
-  BuiltList<ProviderAccessPolicyResponse> get accessPolicies;
-
-  @BuiltValueField(wireName: r'default_access_policy_id')
-  ProviderAccessPolicy? get defaultAccessPolicyId;
-  // enum defaultAccessPolicyIdEnum {  public,  public_session,  operator_public,  personal_entitled,  };
-
-  @BuiltValueField(wireName: r'evidence_state')
-  ProviderEvidenceState get evidenceState;
-  // enum evidenceStateEnum {  missing,  stale,  fresh,  };
 
   @BuiltValueField(wireName: r'hosts')
   BuiltList<String> get hosts;
 
   @BuiltValueField(wireName: r'host_suffixes')
   BuiltList<String> get hostSuffixes;
-
-  @BuiltValueField(wireName: r'route_retry_at')
-  DateTime? get routeRetryAt;
 
   ProviderStatusResponse._();
 
@@ -165,59 +119,21 @@ class _$ProviderStatusResponseSerializer
       object.capabilities,
       specifiedType: const FullType(BuiltList, [FullType(ProviderCapability)]),
     );
-    yield r'access_modes';
+    yield r'identity';
     yield serializers.serialize(
-      object.accessModes,
-      specifiedType: const FullType(BuiltList, [FullType(ProviderAccessMode)]),
-    );
-    yield r'access_state';
-    yield serializers.serialize(
-      object.accessState,
-      specifiedType: const FullType(ProviderAccessState),
+      object.identity,
+      specifiedType: const FullType(ProviderIdentity),
     );
     yield r'status';
     yield serializers.serialize(
       object.status,
       specifiedType: const FullType(ProviderSupportStatus),
     );
-    yield r'last_checked_at';
-    yield object.lastCheckedAt == null
-        ? null
-        : serializers.serialize(
-            object.lastCheckedAt,
-            specifiedType: const FullType.nullable(DateTime),
-          );
-    yield r'last_check_succeeded';
-    yield object.lastCheckSucceeded == null
-        ? null
-        : serializers.serialize(
-            object.lastCheckSucceeded,
-            specifiedType: const FullType.nullable(bool),
-          );
     yield r'download_supported';
     yield serializers.serialize(
       object.downloadSupported,
       specifiedType: const FullType(bool),
     );
-    yield r'download_available';
-    yield serializers.serialize(
-      object.downloadAvailable,
-      specifiedType: const FullType(bool),
-    );
-    yield r'last_media_verified_at';
-    yield object.lastMediaVerifiedAt == null
-        ? null
-        : serializers.serialize(
-            object.lastMediaVerifiedAt,
-            specifiedType: const FullType.nullable(DateTime),
-          );
-    yield r'last_verified_at';
-    yield object.lastVerifiedAt == null
-        ? null
-        : serializers.serialize(
-            object.lastVerifiedAt,
-            specifiedType: const FullType.nullable(DateTime),
-          );
     yield r'user_action';
     yield object.userAction == null
         ? null
@@ -225,24 +141,6 @@ class _$ProviderStatusResponseSerializer
             object.userAction,
             specifiedType: const FullType.nullable(String),
           );
-    yield r'access_policies';
-    yield serializers.serialize(
-      object.accessPolicies,
-      specifiedType:
-          const FullType(BuiltList, [FullType(ProviderAccessPolicyResponse)]),
-    );
-    yield r'default_access_policy_id';
-    yield object.defaultAccessPolicyId == null
-        ? null
-        : serializers.serialize(
-            object.defaultAccessPolicyId,
-            specifiedType: const FullType.nullable(ProviderAccessPolicy),
-          );
-    yield r'evidence_state';
-    yield serializers.serialize(
-      object.evidenceState,
-      specifiedType: const FullType(ProviderEvidenceState),
-    );
     yield r'hosts';
     yield serializers.serialize(
       object.hosts,
@@ -253,13 +151,6 @@ class _$ProviderStatusResponseSerializer
       object.hostSuffixes,
       specifiedType: const FullType(BuiltList, [FullType(String)]),
     );
-    if (object.routeRetryAt != null) {
-      yield r'route_retry_at';
-      yield serializers.serialize(
-        object.routeRetryAt,
-        specifiedType: const FullType.nullable(DateTime),
-      );
-    }
   }
 
   @override
@@ -321,20 +212,12 @@ class _$ProviderStatusResponseSerializer
           ) as BuiltList<ProviderCapability>;
           result.capabilities.replace(valueDes);
           break;
-        case r'access_modes':
+        case r'identity':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType:
-                const FullType(BuiltList, [FullType(ProviderAccessMode)]),
-          ) as BuiltList<ProviderAccessMode>;
-          result.accessModes.replace(valueDes);
-          break;
-        case r'access_state':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ProviderAccessState),
-          ) as ProviderAccessState;
-          result.accessState = valueDes;
+            specifiedType: const FullType(ProviderIdentity),
+          ) as ProviderIdentity;
+          result.identity = valueDes;
           break;
         case r'status':
           final valueDes = serializers.deserialize(
@@ -343,51 +226,12 @@ class _$ProviderStatusResponseSerializer
           ) as ProviderSupportStatus;
           result.status = valueDes;
           break;
-        case r'last_checked_at':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DateTime),
-          ) as DateTime?;
-          if (valueDes == null) continue;
-          result.lastCheckedAt = valueDes;
-          break;
-        case r'last_check_succeeded':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
-          if (valueDes == null) continue;
-          result.lastCheckSucceeded = valueDes;
-          break;
         case r'download_supported':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(bool),
           ) as bool;
           result.downloadSupported = valueDes;
-          break;
-        case r'download_available':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.downloadAvailable = valueDes;
-          break;
-        case r'last_media_verified_at':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DateTime),
-          ) as DateTime?;
-          if (valueDes == null) continue;
-          result.lastMediaVerifiedAt = valueDes;
-          break;
-        case r'last_verified_at':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DateTime),
-          ) as DateTime?;
-          if (valueDes == null) continue;
-          result.lastVerifiedAt = valueDes;
           break;
         case r'user_action':
           final valueDes = serializers.deserialize(
@@ -396,29 +240,6 @@ class _$ProviderStatusResponseSerializer
           ) as String?;
           if (valueDes == null) continue;
           result.userAction = valueDes;
-          break;
-        case r'access_policies':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(
-                BuiltList, [FullType(ProviderAccessPolicyResponse)]),
-          ) as BuiltList<ProviderAccessPolicyResponse>;
-          result.accessPolicies.replace(valueDes);
-          break;
-        case r'default_access_policy_id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ProviderAccessPolicy),
-          ) as ProviderAccessPolicy?;
-          if (valueDes == null) continue;
-          result.defaultAccessPolicyId = valueDes;
-          break;
-        case r'evidence_state':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ProviderEvidenceState),
-          ) as ProviderEvidenceState;
-          result.evidenceState = valueDes;
           break;
         case r'hosts':
           final valueDes = serializers.deserialize(
@@ -433,14 +254,6 @@ class _$ProviderStatusResponseSerializer
             specifiedType: const FullType(BuiltList, [FullType(String)]),
           ) as BuiltList<String>;
           result.hostSuffixes.replace(valueDes);
-          break;
-        case r'route_retry_at':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DateTime),
-          ) as DateTime?;
-          if (valueDes == null) continue;
-          result.routeRetryAt = valueDes;
           break;
         default:
           unhandled.add(key);

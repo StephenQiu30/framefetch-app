@@ -7,11 +7,10 @@ part of 'intent_status.dart';
 // **************************************************************************
 
 const IntentStatus _$queued = const IntentStatus._('queued');
-const IntentStatus _$preparing = const IntentStatus._('preparing');
 const IntentStatus _$resolving = const IntentStatus._('resolving');
-const IntentStatus _$retryWait = const IntentStatus._('retryWait');
 const IntentStatus _$ready = const IntentStatus._('ready');
 const IntentStatus _$handedOff = const IntentStatus._('handedOff');
+const IntentStatus _$cancelling = const IntentStatus._('cancelling');
 const IntentStatus _$cancelled = const IntentStatus._('cancelled');
 const IntentStatus _$expired = const IntentStatus._('expired');
 const IntentStatus _$failed = const IntentStatus._('failed');
@@ -22,16 +21,14 @@ IntentStatus _$valueOf(String name) {
   switch (name) {
     case 'queued':
       return _$queued;
-    case 'preparing':
-      return _$preparing;
     case 'resolving':
       return _$resolving;
-    case 'retryWait':
-      return _$retryWait;
     case 'ready':
       return _$ready;
     case 'handedOff':
       return _$handedOff;
+    case 'cancelling':
+      return _$cancelling;
     case 'cancelled':
       return _$cancelled;
     case 'expired':
@@ -48,11 +45,10 @@ IntentStatus _$valueOf(String name) {
 final BuiltSet<IntentStatus> _$values =
     BuiltSet<IntentStatus>(const <IntentStatus>[
   _$queued,
-  _$preparing,
   _$resolving,
-  _$retryWait,
   _$ready,
   _$handedOff,
+  _$cancelling,
   _$cancelled,
   _$expired,
   _$failed,
@@ -62,11 +58,10 @@ final BuiltSet<IntentStatus> _$values =
 class _$IntentStatusMeta {
   const _$IntentStatusMeta();
   IntentStatus get queued => _$queued;
-  IntentStatus get preparing => _$preparing;
   IntentStatus get resolving => _$resolving;
-  IntentStatus get retryWait => _$retryWait;
   IntentStatus get ready => _$ready;
   IntentStatus get handedOff => _$handedOff;
+  IntentStatus get cancelling => _$cancelling;
   IntentStatus get cancelled => _$cancelled;
   IntentStatus get expired => _$expired;
   IntentStatus get failed => _$failed;
@@ -85,11 +80,10 @@ Serializer<IntentStatus> _$intentStatusSerializer = _$IntentStatusSerializer();
 class _$IntentStatusSerializer implements PrimitiveSerializer<IntentStatus> {
   static const Map<String, Object> _toWire = const <String, Object>{
     'queued': 'queued',
-    'preparing': 'preparing',
     'resolving': 'resolving',
-    'retryWait': 'retry_wait',
     'ready': 'ready',
     'handedOff': 'handed_off',
+    'cancelling': 'cancelling',
     'cancelled': 'cancelled',
     'expired': 'expired',
     'failed': 'failed',
@@ -97,11 +91,10 @@ class _$IntentStatusSerializer implements PrimitiveSerializer<IntentStatus> {
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
     'queued': 'queued',
-    'preparing': 'preparing',
     'resolving': 'resolving',
-    'retry_wait': 'retryWait',
     'ready': 'ready',
     'handed_off': 'handedOff',
+    'cancelling': 'cancelling',
     'cancelled': 'cancelled',
     'expired': 'expired',
     'failed': 'failed',

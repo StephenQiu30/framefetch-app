@@ -6,17 +6,22 @@ import 'package:video_server_api/video_server_api.dart';
 bool isActiveDownloadStatus(String status) =>
     status == 'queued' || status == 'running' || status == 'retryWait';
 
-enum DownloadRecovery { retry, reimport }
+enum DownloadRecovery { retry, reimport, reparse }
 
 DownloadRecovery? downloadRecovery({
   required DownloadSourceKind sourceKind,
   required DownloadStatus status,
   required bool fileAvailable,
+  DownloadErrorCode? errorCode,
 }) {
   if (status != DownloadStatus.failed &&
       status != DownloadStatus.cancelled &&
       !(status == DownloadStatus.succeeded && !fileAvailable)) {
     return null;
+  }
+  if (sourceKind == DownloadSourceKind.remoteProvider &&
+      errorCode == DownloadErrorCode.contextChanged) {
+    return DownloadRecovery.reparse;
   }
   return sourceKind == DownloadSourceKind.remoteProvider
       ? DownloadRecovery.retry
@@ -52,25 +57,28 @@ String downloadStageLabel(AppLocalizations l10n, String stage) =>
       _ => l10n.downloadStageUnknown,
     };
 
-String downloadFailureLabel(AppLocalizations l10n, String code) {
-  if (code == 'cancelled') return l10n.failureCancelled;
-  if (code.contains('timeout')) return l10n.failureTimeout;
-  if (code.contains('auth') ||
-      code.contains('restricted') ||
-      code.contains('geo') ||
-      code.contains('drm')) {
-    return l10n.failureProviderAccess;
-  }
-  if (code.contains('rate') ||
-      code.contains('temporary') ||
-      code.contains('unavailable')) {
-    return l10n.failureProviderTemporary;
-  }
-  if (code.contains('storage') || code.contains('space')) {
-    return l10n.failureStorage;
-  }
-  return l10n.failureGeneric;
-}
+String downloadFailureLabel(AppLocalizations l10n, DownloadErrorCode code) =>
+    switch (code) {
+      DownloadErrorCode.cancelled => l10n.failureCancelled,
+      DownloadErrorCode.downloadTimeout ||
+      DownloadErrorCode.networkBlocked => l10n.providerEgressError,
+      DownloadErrorCode.challenge => l10n.providerChallengeError,
+      DownloadErrorCode.loginRequired => l10n.providerLoginRequiredError,
+      DownloadErrorCode.identityUnavailable =>
+        l10n.providerIdentityUnavailableError,
+      DownloadErrorCode.rateLimited => l10n.rateLimitedError,
+      DownloadErrorCode.contextChanged => l10n.providerContextChangedError,
+      DownloadErrorCode.contentUnavailable => l10n.providerLinkError,
+      DownloadErrorCode.contentProtected => l10n.providerContentProtectedError,
+      DownloadErrorCode.extractorBroken => l10n.providerExtractorError,
+      DownloadErrorCode.formatUnavailable => l10n.noFormatsAvailable,
+      DownloadErrorCode.transient => l10n.providerNetworkError,
+      DownloadErrorCode.invalidInput => l10n.mediaUrlError,
+      DownloadErrorCode.runtimeUnavailable => l10n.providerRuntimeError,
+      DownloadErrorCode.storageUnavailable ||
+      DownloadErrorCode.tempSpaceExhausted => l10n.failureStorage,
+      _ => l10n.failureGeneric,
+    };
 
 String downloadFormatLabel(
   AppLocalizations localizations,

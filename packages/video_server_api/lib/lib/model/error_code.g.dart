@@ -6,6 +6,18 @@ part of 'error_code.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
+const ErrorCode _$networkBlocked = const ErrorCode._('networkBlocked');
+const ErrorCode _$challenge = const ErrorCode._('challenge');
+const ErrorCode _$loginRequired = const ErrorCode._('loginRequired');
+const ErrorCode _$identityUnavailable =
+    const ErrorCode._('identityUnavailable');
+const ErrorCode _$contextChanged = const ErrorCode._('contextChanged');
+const ErrorCode _$contentUnavailable = const ErrorCode._('contentUnavailable');
+const ErrorCode _$contentProtected = const ErrorCode._('contentProtected');
+const ErrorCode _$extractorBroken = const ErrorCode._('extractorBroken');
+const ErrorCode _$transient = const ErrorCode._('transient');
+const ErrorCode _$invalidInput = const ErrorCode._('invalidInput');
+const ErrorCode _$runtimeUnavailable = const ErrorCode._('runtimeUnavailable');
 const ErrorCode _$activeAiProviderDelete =
     const ErrorCode._('activeAiProviderDelete');
 const ErrorCode _$activeTaskQuotaExceeded =
@@ -57,8 +69,6 @@ const ErrorCode _$importDisabled = const ErrorCode._('importDisabled');
 const ErrorCode _$importSizeMismatch = const ErrorCode._('importSizeMismatch');
 const ErrorCode _$importStorageUnavailable =
     const ErrorCode._('importStorageUnavailable');
-const ErrorCode _$inspectionFailed = const ErrorCode._('inspectionFailed');
-const ErrorCode _$inspectionTimeout = const ErrorCode._('inspectionTimeout');
 const ErrorCode _$internalError = const ErrorCode._('internalError');
 const ErrorCode _$invalidAiProviderProfile =
     const ErrorCode._('invalidAiProviderProfile');
@@ -78,41 +88,11 @@ const ErrorCode _$methodNotAllowed = const ErrorCode._('methodNotAllowed');
 const ErrorCode _$metricsUnavailable = const ErrorCode._('metricsUnavailable');
 const ErrorCode _$notFound = const ErrorCode._('notFound');
 const ErrorCode _$ok = const ErrorCode._('ok');
-const ErrorCode _$providerAccessPolicyNotAllowed =
-    const ErrorCode._('providerAccessPolicyNotAllowed');
-const ErrorCode _$providerAuthRequired =
-    const ErrorCode._('providerAuthRequired');
 const ErrorCode _$providerCatalogConflict =
     const ErrorCode._('providerCatalogConflict');
 const ErrorCode _$providerCatalogNotFound =
     const ErrorCode._('providerCatalogNotFound');
-const ErrorCode _$providerConfigurationMissing =
-    const ErrorCode._('providerConfigurationMissing');
-const ErrorCode _$providerGuestContextRequired =
-    const ErrorCode._('providerGuestContextRequired');
-const ErrorCode _$providerContentRestricted =
-    const ErrorCode._('providerContentRestricted');
-const ErrorCode _$providerDrmProtected =
-    const ErrorCode._('providerDrmProtected');
 const ErrorCode _$providerFailure = const ErrorCode._('providerFailure');
-const ErrorCode _$providerGeoRestricted =
-    const ErrorCode._('providerGeoRestricted');
-const ErrorCode _$providerLinkUnavailable =
-    const ErrorCode._('providerLinkUnavailable');
-const ErrorCode _$providerMediaUnsupported =
-    const ErrorCode._('providerMediaUnsupported');
-const ErrorCode _$providerRateLimited =
-    const ErrorCode._('providerRateLimited');
-const ErrorCode _$providerSessionExpired =
-    const ErrorCode._('providerSessionExpired');
-const ErrorCode _$providerSessionNotReady =
-    const ErrorCode._('providerSessionNotReady');
-const ErrorCode _$providerTemporarilyUnavailable =
-    const ErrorCode._('providerTemporarilyUnavailable');
-const ErrorCode _$providerUnsupported =
-    const ErrorCode._('providerUnsupported');
-const ErrorCode _$providerVerificationFailed =
-    const ErrorCode._('providerVerificationFailed');
 const ErrorCode _$rateLimited = const ErrorCode._('rateLimited');
 const ErrorCode _$rateLimiterUnavailable =
     const ErrorCode._('rateLimiterUnavailable');
@@ -142,6 +122,28 @@ const ErrorCode _$unknownDefaultOpenApi =
 
 ErrorCode _$valueOf(String name) {
   switch (name) {
+    case 'networkBlocked':
+      return _$networkBlocked;
+    case 'challenge':
+      return _$challenge;
+    case 'loginRequired':
+      return _$loginRequired;
+    case 'identityUnavailable':
+      return _$identityUnavailable;
+    case 'contextChanged':
+      return _$contextChanged;
+    case 'contentUnavailable':
+      return _$contentUnavailable;
+    case 'contentProtected':
+      return _$contentProtected;
+    case 'extractorBroken':
+      return _$extractorBroken;
+    case 'transient':
+      return _$transient;
+    case 'invalidInput':
+      return _$invalidInput;
+    case 'runtimeUnavailable':
+      return _$runtimeUnavailable;
     case 'activeAiProviderDelete':
       return _$activeAiProviderDelete;
     case 'activeTaskQuotaExceeded':
@@ -204,10 +206,6 @@ ErrorCode _$valueOf(String name) {
       return _$importSizeMismatch;
     case 'importStorageUnavailable':
       return _$importStorageUnavailable;
-    case 'inspectionFailed':
-      return _$inspectionFailed;
-    case 'inspectionTimeout':
-      return _$inspectionTimeout;
     case 'internalError':
       return _$internalError;
     case 'invalidAiProviderProfile':
@@ -240,42 +238,12 @@ ErrorCode _$valueOf(String name) {
       return _$notFound;
     case 'ok':
       return _$ok;
-    case 'providerAccessPolicyNotAllowed':
-      return _$providerAccessPolicyNotAllowed;
-    case 'providerAuthRequired':
-      return _$providerAuthRequired;
     case 'providerCatalogConflict':
       return _$providerCatalogConflict;
     case 'providerCatalogNotFound':
       return _$providerCatalogNotFound;
-    case 'providerConfigurationMissing':
-      return _$providerConfigurationMissing;
-    case 'providerGuestContextRequired':
-      return _$providerGuestContextRequired;
-    case 'providerContentRestricted':
-      return _$providerContentRestricted;
-    case 'providerDrmProtected':
-      return _$providerDrmProtected;
     case 'providerFailure':
       return _$providerFailure;
-    case 'providerGeoRestricted':
-      return _$providerGeoRestricted;
-    case 'providerLinkUnavailable':
-      return _$providerLinkUnavailable;
-    case 'providerMediaUnsupported':
-      return _$providerMediaUnsupported;
-    case 'providerRateLimited':
-      return _$providerRateLimited;
-    case 'providerSessionExpired':
-      return _$providerSessionExpired;
-    case 'providerSessionNotReady':
-      return _$providerSessionNotReady;
-    case 'providerTemporarilyUnavailable':
-      return _$providerTemporarilyUnavailable;
-    case 'providerUnsupported':
-      return _$providerUnsupported;
-    case 'providerVerificationFailed':
-      return _$providerVerificationFailed;
     case 'rateLimited':
       return _$rateLimited;
     case 'rateLimiterUnavailable':
@@ -320,6 +288,17 @@ ErrorCode _$valueOf(String name) {
 }
 
 final BuiltSet<ErrorCode> _$values = BuiltSet<ErrorCode>(const <ErrorCode>[
+  _$networkBlocked,
+  _$challenge,
+  _$loginRequired,
+  _$identityUnavailable,
+  _$contextChanged,
+  _$contentUnavailable,
+  _$contentProtected,
+  _$extractorBroken,
+  _$transient,
+  _$invalidInput,
+  _$runtimeUnavailable,
   _$activeAiProviderDelete,
   _$activeTaskQuotaExceeded,
   _$adminBootstrapRequired,
@@ -351,8 +330,6 @@ final BuiltSet<ErrorCode> _$values = BuiltSet<ErrorCode>(const <ErrorCode>[
   _$importDisabled,
   _$importSizeMismatch,
   _$importStorageUnavailable,
-  _$inspectionFailed,
-  _$inspectionTimeout,
   _$internalError,
   _$invalidAiProviderProfile,
   _$invalidCredentials,
@@ -369,24 +346,9 @@ final BuiltSet<ErrorCode> _$values = BuiltSet<ErrorCode>(const <ErrorCode>[
   _$metricsUnavailable,
   _$notFound,
   _$ok,
-  _$providerAccessPolicyNotAllowed,
-  _$providerAuthRequired,
   _$providerCatalogConflict,
   _$providerCatalogNotFound,
-  _$providerConfigurationMissing,
-  _$providerGuestContextRequired,
-  _$providerContentRestricted,
-  _$providerDrmProtected,
   _$providerFailure,
-  _$providerGeoRestricted,
-  _$providerLinkUnavailable,
-  _$providerMediaUnsupported,
-  _$providerRateLimited,
-  _$providerSessionExpired,
-  _$providerSessionNotReady,
-  _$providerTemporarilyUnavailable,
-  _$providerUnsupported,
-  _$providerVerificationFailed,
   _$rateLimited,
   _$rateLimiterUnavailable,
   _$refreshInProgress,
@@ -410,6 +372,17 @@ final BuiltSet<ErrorCode> _$values = BuiltSet<ErrorCode>(const <ErrorCode>[
 
 class _$ErrorCodeMeta {
   const _$ErrorCodeMeta();
+  ErrorCode get networkBlocked => _$networkBlocked;
+  ErrorCode get challenge => _$challenge;
+  ErrorCode get loginRequired => _$loginRequired;
+  ErrorCode get identityUnavailable => _$identityUnavailable;
+  ErrorCode get contextChanged => _$contextChanged;
+  ErrorCode get contentUnavailable => _$contentUnavailable;
+  ErrorCode get contentProtected => _$contentProtected;
+  ErrorCode get extractorBroken => _$extractorBroken;
+  ErrorCode get transient => _$transient;
+  ErrorCode get invalidInput => _$invalidInput;
+  ErrorCode get runtimeUnavailable => _$runtimeUnavailable;
   ErrorCode get activeAiProviderDelete => _$activeAiProviderDelete;
   ErrorCode get activeTaskQuotaExceeded => _$activeTaskQuotaExceeded;
   ErrorCode get adminBootstrapRequired => _$adminBootstrapRequired;
@@ -441,8 +414,6 @@ class _$ErrorCodeMeta {
   ErrorCode get importDisabled => _$importDisabled;
   ErrorCode get importSizeMismatch => _$importSizeMismatch;
   ErrorCode get importStorageUnavailable => _$importStorageUnavailable;
-  ErrorCode get inspectionFailed => _$inspectionFailed;
-  ErrorCode get inspectionTimeout => _$inspectionTimeout;
   ErrorCode get internalError => _$internalError;
   ErrorCode get invalidAiProviderProfile => _$invalidAiProviderProfile;
   ErrorCode get invalidCredentials => _$invalidCredentials;
@@ -459,26 +430,9 @@ class _$ErrorCodeMeta {
   ErrorCode get metricsUnavailable => _$metricsUnavailable;
   ErrorCode get notFound => _$notFound;
   ErrorCode get ok => _$ok;
-  ErrorCode get providerAccessPolicyNotAllowed =>
-      _$providerAccessPolicyNotAllowed;
-  ErrorCode get providerAuthRequired => _$providerAuthRequired;
   ErrorCode get providerCatalogConflict => _$providerCatalogConflict;
   ErrorCode get providerCatalogNotFound => _$providerCatalogNotFound;
-  ErrorCode get providerConfigurationMissing => _$providerConfigurationMissing;
-  ErrorCode get providerGuestContextRequired => _$providerGuestContextRequired;
-  ErrorCode get providerContentRestricted => _$providerContentRestricted;
-  ErrorCode get providerDrmProtected => _$providerDrmProtected;
   ErrorCode get providerFailure => _$providerFailure;
-  ErrorCode get providerGeoRestricted => _$providerGeoRestricted;
-  ErrorCode get providerLinkUnavailable => _$providerLinkUnavailable;
-  ErrorCode get providerMediaUnsupported => _$providerMediaUnsupported;
-  ErrorCode get providerRateLimited => _$providerRateLimited;
-  ErrorCode get providerSessionExpired => _$providerSessionExpired;
-  ErrorCode get providerSessionNotReady => _$providerSessionNotReady;
-  ErrorCode get providerTemporarilyUnavailable =>
-      _$providerTemporarilyUnavailable;
-  ErrorCode get providerUnsupported => _$providerUnsupported;
-  ErrorCode get providerVerificationFailed => _$providerVerificationFailed;
   ErrorCode get rateLimited => _$rateLimited;
   ErrorCode get rateLimiterUnavailable => _$rateLimiterUnavailable;
   ErrorCode get refreshInProgress => _$refreshInProgress;
@@ -511,6 +465,17 @@ Serializer<ErrorCode> _$errorCodeSerializer = _$ErrorCodeSerializer();
 
 class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
   static const Map<String, Object> _toWire = const <String, Object>{
+    'networkBlocked': 'network_blocked',
+    'challenge': 'challenge',
+    'loginRequired': 'login_required',
+    'identityUnavailable': 'identity_unavailable',
+    'contextChanged': 'context_changed',
+    'contentUnavailable': 'content_unavailable',
+    'contentProtected': 'content_protected',
+    'extractorBroken': 'extractor_broken',
+    'transient': 'transient',
+    'invalidInput': 'invalid_input',
+    'runtimeUnavailable': 'runtime_unavailable',
     'activeAiProviderDelete': 'active_ai_provider_delete',
     'activeTaskQuotaExceeded': 'active_task_quota_exceeded',
     'adminBootstrapRequired': 'admin_bootstrap_required',
@@ -542,8 +507,6 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'importDisabled': 'import_disabled',
     'importSizeMismatch': 'import_size_mismatch',
     'importStorageUnavailable': 'import_storage_unavailable',
-    'inspectionFailed': 'inspection_failed',
-    'inspectionTimeout': 'inspection_timeout',
     'internalError': 'internal_error',
     'invalidAiProviderProfile': 'invalid_ai_provider_profile',
     'invalidCredentials': 'invalid_credentials',
@@ -560,24 +523,9 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'metricsUnavailable': 'metrics_unavailable',
     'notFound': 'not_found',
     'ok': 'ok',
-    'providerAccessPolicyNotAllowed': 'provider_access_policy_not_allowed',
-    'providerAuthRequired': 'provider_auth_required',
     'providerCatalogConflict': 'provider_catalog_conflict',
     'providerCatalogNotFound': 'provider_catalog_not_found',
-    'providerConfigurationMissing': 'provider_configuration_missing',
-    'providerGuestContextRequired': 'provider_guest_context_required',
-    'providerContentRestricted': 'provider_content_restricted',
-    'providerDrmProtected': 'provider_drm_protected',
     'providerFailure': 'provider_failure',
-    'providerGeoRestricted': 'provider_geo_restricted',
-    'providerLinkUnavailable': 'provider_link_unavailable',
-    'providerMediaUnsupported': 'provider_media_unsupported',
-    'providerRateLimited': 'provider_rate_limited',
-    'providerSessionExpired': 'provider_session_expired',
-    'providerSessionNotReady': 'provider_session_not_ready',
-    'providerTemporarilyUnavailable': 'provider_temporarily_unavailable',
-    'providerUnsupported': 'provider_unsupported',
-    'providerVerificationFailed': 'provider_verification_failed',
     'rateLimited': 'rate_limited',
     'rateLimiterUnavailable': 'rate_limiter_unavailable',
     'refreshInProgress': 'refresh_in_progress',
@@ -599,6 +547,17 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
+    'network_blocked': 'networkBlocked',
+    'challenge': 'challenge',
+    'login_required': 'loginRequired',
+    'identity_unavailable': 'identityUnavailable',
+    'context_changed': 'contextChanged',
+    'content_unavailable': 'contentUnavailable',
+    'content_protected': 'contentProtected',
+    'extractor_broken': 'extractorBroken',
+    'transient': 'transient',
+    'invalid_input': 'invalidInput',
+    'runtime_unavailable': 'runtimeUnavailable',
     'active_ai_provider_delete': 'activeAiProviderDelete',
     'active_task_quota_exceeded': 'activeTaskQuotaExceeded',
     'admin_bootstrap_required': 'adminBootstrapRequired',
@@ -630,8 +589,6 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'import_disabled': 'importDisabled',
     'import_size_mismatch': 'importSizeMismatch',
     'import_storage_unavailable': 'importStorageUnavailable',
-    'inspection_failed': 'inspectionFailed',
-    'inspection_timeout': 'inspectionTimeout',
     'internal_error': 'internalError',
     'invalid_ai_provider_profile': 'invalidAiProviderProfile',
     'invalid_credentials': 'invalidCredentials',
@@ -648,24 +605,9 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'metrics_unavailable': 'metricsUnavailable',
     'not_found': 'notFound',
     'ok': 'ok',
-    'provider_access_policy_not_allowed': 'providerAccessPolicyNotAllowed',
-    'provider_auth_required': 'providerAuthRequired',
     'provider_catalog_conflict': 'providerCatalogConflict',
     'provider_catalog_not_found': 'providerCatalogNotFound',
-    'provider_configuration_missing': 'providerConfigurationMissing',
-    'provider_guest_context_required': 'providerGuestContextRequired',
-    'provider_content_restricted': 'providerContentRestricted',
-    'provider_drm_protected': 'providerDrmProtected',
     'provider_failure': 'providerFailure',
-    'provider_geo_restricted': 'providerGeoRestricted',
-    'provider_link_unavailable': 'providerLinkUnavailable',
-    'provider_media_unsupported': 'providerMediaUnsupported',
-    'provider_rate_limited': 'providerRateLimited',
-    'provider_session_expired': 'providerSessionExpired',
-    'provider_session_not_ready': 'providerSessionNotReady',
-    'provider_temporarily_unavailable': 'providerTemporarilyUnavailable',
-    'provider_unsupported': 'providerUnsupported',
-    'provider_verification_failed': 'providerVerificationFailed',
     'rate_limited': 'rateLimited',
     'rate_limiter_unavailable': 'rateLimiterUnavailable',
     'refresh_in_progress': 'refreshInProgress',

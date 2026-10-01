@@ -103,7 +103,7 @@ final class _DownloadHistoryItemState
     final status = downloadStatusLabel(localizations, statusName);
     final failure = item.errorCode == null
         ? null
-        : downloadFailureLabel(localizations, item.errorCode!.name);
+        : downloadFailureLabel(localizations, item.errorCode!);
     final meta = [
       item.sourceLabel,
       item.formatName,
@@ -113,9 +113,11 @@ final class _DownloadHistoryItemState
       sourceKind: item.sourceKind,
       status: item.status,
       fileAvailable: item.fileAvailable,
+      errorCode: item.errorCode,
     );
     final canRetry = recovery == DownloadRecovery.retry;
     final reimport = recovery == DownloadRecovery.reimport;
+    final reparse = recovery == DownloadRecovery.reparse;
     final actionCount = 2 + (canCancel || recovery != null ? 1 : 0);
     final semanticActions = <CustomSemanticsAction, VoidCallback>{
       CustomSemanticsAction(label: localizations.downloadDetailNavigation):
@@ -130,6 +132,9 @@ final class _DownloadHistoryItemState
         CustomSemanticsAction(
           label: localizations.reimportDownloadAction,
         ): () =>
+            const DownloadHomeRoute().go(context),
+      if (reparse)
+        CustomSemanticsAction(label: localizations.reparseDownloadAction): () =>
             const DownloadHomeRoute().go(context),
       CustomSemanticsAction(label: localizations.deleteDownloadAction): () =>
           unawaited(_delete()),
@@ -180,6 +185,17 @@ final class _DownloadHistoryItemState
               foregroundColor: colors.onSecondaryContainer,
               icon: PhosphorIconsRegular.upload,
               label: localizations.reimportDownloadAction,
+            ),
+          if (reparse)
+            AppSwipeAction(
+              key: Key('reparse-download-${item.id}'),
+              onPressed: _busy
+                  ? null
+                  : (_) => const DownloadHomeRoute().go(context),
+              backgroundColor: colors.secondaryContainer,
+              foregroundColor: colors.onSecondaryContainer,
+              icon: PhosphorIconsRegular.arrowClockwise,
+              label: localizations.reparseDownloadAction,
             ),
           AppSwipeAction(
             key: Key('delete-download-${item.id}'),

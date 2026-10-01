@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/core/theme/app_colors.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/data_formatters.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:video_server_api/video_server_api.dart';
 
@@ -14,15 +12,12 @@ final class ProviderStatusItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
-    final status = _statusLabel(localizations, item.status.name);
+    final status = item.downloadSupported && item.status.name == 'unknown'
+        ? localizations.providerRegistered
+        : _statusLabel(localizations, item.status.name);
     final capabilities = item.capabilities
         .map((value) => _capabilityLabel(localizations, value.name))
         .join('、');
-    final accessModes = item.accessModes
-        .map((value) => _accessModeLabel(localizations, value.name))
-        .join('、');
-    final verifiedAt =
-        item.lastVerifiedAt ?? item.lastMediaVerifiedAt ?? item.lastCheckedAt;
 
     return Semantics(
       container: true,
@@ -49,8 +44,8 @@ final class ProviderStatusItem extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.small),
               _DetailLine(
-                label: localizations.downloadAvailableLabel,
-                value: item.downloadAvailable
+                label: localizations.providerDownloadEnabled,
+                value: item.downloadSupported
                     ? localizations.yesLabel
                     : localizations.noLabel,
               ),
@@ -59,16 +54,13 @@ final class ProviderStatusItem extends StatelessWidget {
                   label: localizations.capabilitiesLabel,
                   value: capabilities,
                 ),
-              if (accessModes.isNotEmpty)
-                _DetailLine(
-                  label: localizations.accessModesLabel,
-                  value: accessModes,
-                ),
               _DetailLine(
-                label: localizations.lastVerifiedLabel,
-                value: verifiedAt == null
-                    ? localizations.notYetVerified
-                    : formatDataTime(context, verifiedAt),
+                label: localizations.providerIdentityLabel,
+                value: switch (item.identity.name) {
+                  'required' => localizations.providerIdentityRequired,
+                  'optional' => localizations.providerIdentityOptional,
+                  _ => localizations.providerIdentityNone,
+                },
               ),
               if (item.userAction?.trim().isNotEmpty ?? false)
                 _DetailLine(
@@ -112,21 +104,14 @@ final class _DetailLine extends StatelessWidget {
 }
 
 Color _statusColor(BuildContext context, String status) => switch (status) {
-  'verified' => context.appColors.success,
-  'degraded' || 'accessRequired' || 'rateLimited' => context.appColors.warning,
   'blocked' || 'unsupported' => Theme.of(context).colorScheme.error,
   _ => Theme.of(context).colorScheme.onSurfaceVariant,
 };
 
 String _statusLabel(AppLocalizations l10n, String status) => switch (status) {
-  'verified' => l10n.providerStatusVerified,
-  'degraded' => l10n.providerStatusDegraded,
-  'accessRequired' => l10n.providerStatusAccessRequired,
-  'rateLimited' => l10n.providerStatusRateLimited,
-  'blocked' => l10n.providerStatusBlocked,
   'disabled' => l10n.providerStatusDisabled,
   'unsupported' => l10n.providerStatusUnsupported,
-  _ => l10n.providerStatusUnknown,
+  _ => l10n.providerUnavailable,
 };
 
 String _capabilityLabel(AppLocalizations l10n, String value) => switch (value) {
@@ -138,11 +123,5 @@ String _capabilityLabel(AppLocalizations l10n, String value) => switch (value) {
   'imageOrCarousel' => l10n.capabilityImageOrCarousel,
   'live' => l10n.capabilityLive,
   'playlist' => l10n.capabilityPlaylist,
-  _ => l10n.providerStatusUnknown,
-};
-
-String _accessModeLabel(AppLocalizations l10n, String value) => switch (value) {
-  'anonymous' => l10n.accessModeAnonymous,
-  'operatorManaged' => l10n.accessModeOperatorManaged,
-  _ => l10n.providerStatusUnknown,
+  _ => l10n.providerUnavailable,
 };

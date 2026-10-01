@@ -18,15 +18,11 @@ import 'package:framegrab/features/download/presentation/download_status.dart';
 import 'package:framegrab/features/download/presentation/intake_failure_message.dart';
 import 'package:framegrab/features/history/application/download_history_provider.dart';
 import 'package:framegrab/features/history/presentation/download_history_screen.dart';
-import 'package:framegrab/features/providers/application/provider_access.dart';
-import 'package:framegrab/features/providers/application/provider_status_provider.dart';
-import 'package:framegrab/features/providers/presentation/provider_access_selector.dart';
 import 'package:framegrab/features/providers/presentation/provider_status_screen.dart';
 import 'package:framegrab/features/settings/presentation/settings_screen.dart';
 import 'package:framegrab/features/upload/application/content_upload_controller.dart';
 import 'package:framegrab/features/upload/domain/content_upload.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 final class DownloadHomeScreen extends ConsumerStatefulWidget {
   const DownloadHomeScreen({super.key});
@@ -38,7 +34,6 @@ final class DownloadHomeScreen extends ConsumerStatefulWidget {
 final class _DownloadHomeScreenState extends ConsumerState<DownloadHomeScreen>
     with WidgetsBindingObserver {
   final _urlController = TextEditingController();
-  ProviderAccessPolicy? _accessPolicy;
   String? _error;
   bool _urlInvalid = false;
   int _selectedIndex = 0;
@@ -90,16 +85,13 @@ final class _DownloadHomeScreenState extends ConsumerState<DownloadHomeScreen>
       _urlInvalid = false;
       _statusTone = DownloadNoticeTone.destructive;
     });
-    await ref
-        .read(downloadIntakeControllerProvider.notifier)
-        .inspect(input, accessPolicy: _accessPolicy);
+    await ref.read(downloadIntakeControllerProvider.notifier).inspect(input);
   }
 
   void _clear() {
     _urlController.clear();
     ref.read(downloadIntakeControllerProvider.notifier).clearResult();
     setState(() {
-      _accessPolicy = null;
       _error = null;
       _urlInvalid = false;
       _statusTone = DownloadNoticeTone.destructive;
@@ -145,11 +137,6 @@ final class _DownloadHomeScreenState extends ConsumerState<DownloadHomeScreen>
     final intake = ref.watch(downloadIntakeControllerProvider);
     final intentHistory = ref.watch(downloadIntentHistoryProvider);
     final upload = ref.watch(contentUploadControllerProvider);
-    final providers = ref.watch(providerStatusProvider);
-    final provider = providerForInput(
-      _urlController.text,
-      providers.value?.items ?? [],
-    );
     ref.listen(
       contentUploadControllerProvider.select((state) => state.result),
       (previous, next) {
@@ -168,27 +155,11 @@ final class _DownloadHomeScreenState extends ConsumerState<DownloadHomeScreen>
         index: _selectedIndex,
         children: [
           DownloadHomeContent(
-            accessPolicySelector: provider == null
-                ? null
-                : ProviderAccessSelector(
-                    provider: provider,
-                    selected: _accessPolicy,
-                    busy: intake.busy || upload.busy,
-                    onChanged: (policy) {
-                      ref
-                          .read(downloadIntakeControllerProvider.notifier)
-                          .clearResult();
-                      setState(() {
-                        _accessPolicy = policy;
-                        _error = null;
-                      });
-                    },
-                  ),
-            busy: intake.busy || upload.busy,
+            busy: intake.busy || intake.cancelling || upload.busy,
             controller: _urlController,
             error: error,
             history: DownloadIntentHistory(
-              busy: intake.busy,
+              busy: intake.busy || intake.cancelling,
               onLoad: () => unawaited(
                 ref.read(downloadIntentHistoryProvider.notifier).load(),
               ),
@@ -207,7 +178,6 @@ final class _DownloadHomeScreenState extends ConsumerState<DownloadHomeScreen>
             onChanged: (_) {
               ref.read(downloadIntakeControllerProvider.notifier).clearResult();
               setState(() {
-                _accessPolicy = null;
                 if (_error != null) _error = null;
                 _urlInvalid = false;
                 _statusTone = DownloadNoticeTone.destructive;
@@ -215,7 +185,7 @@ final class _DownloadHomeScreenState extends ConsumerState<DownloadHomeScreen>
             },
             onClear: _clear,
             onModeChanged: (mode) {
-              if (upload.busy) return;
+              if (upload.busy || intake.cancelling) return;
               ref.read(downloadIntakeControllerProvider.notifier).clearResult();
               ref.read(contentUploadControllerProvider.notifier).reset();
               setState(() {

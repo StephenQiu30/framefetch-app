@@ -191,7 +191,7 @@ abstract class AppLocalizations {
   /// No description provided for @providerStatusDescription.
   ///
   /// In zh, this message translates to:
-  /// **'先查看当前下载支持；需要时再展开单个平台，核对探针与真实任务证据。'**
+  /// **'这里展示平台的接入与身份要求。下载是否成功以实际文件结果为准。'**
   String get providerStatusDescription;
 
   /// No description provided for @loadingData.
@@ -367,18 +367,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'处理超时'**
   String get failureTimeout;
-
-  /// No description provided for @failureProviderAccess.
-  ///
-  /// In zh, this message translates to:
-  /// **'平台需要授权或限制访问'**
-  String get failureProviderAccess;
-
-  /// No description provided for @failureProviderTemporary.
-  ///
-  /// In zh, this message translates to:
-  /// **'平台暂时不可用'**
-  String get failureProviderTemporary;
 
   /// No description provided for @failureStorage.
   ///
@@ -758,59 +746,11 @@ abstract class AppLocalizations {
   /// **'能力'**
   String get capabilitiesLabel;
 
-  /// No description provided for @accessModesLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'访问方式'**
-  String get accessModesLabel;
-
-  /// No description provided for @lastVerifiedLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'最近验证'**
-  String get lastVerifiedLabel;
-
   /// No description provided for @userActionLabel.
   ///
   /// In zh, this message translates to:
   /// **'建议操作'**
   String get userActionLabel;
-
-  /// No description provided for @providerStatusUnknown.
-  ///
-  /// In zh, this message translates to:
-  /// **'待验证'**
-  String get providerStatusUnknown;
-
-  /// No description provided for @providerStatusVerified.
-  ///
-  /// In zh, this message translates to:
-  /// **'已验证'**
-  String get providerStatusVerified;
-
-  /// No description provided for @providerStatusDegraded.
-  ///
-  /// In zh, this message translates to:
-  /// **'能力受限'**
-  String get providerStatusDegraded;
-
-  /// No description provided for @providerStatusAccessRequired.
-  ///
-  /// In zh, this message translates to:
-  /// **'需要访问授权'**
-  String get providerStatusAccessRequired;
-
-  /// No description provided for @providerStatusRateLimited.
-  ///
-  /// In zh, this message translates to:
-  /// **'受到限流'**
-  String get providerStatusRateLimited;
-
-  /// No description provided for @providerStatusBlocked.
-  ///
-  /// In zh, this message translates to:
-  /// **'当前受阻'**
-  String get providerStatusBlocked;
 
   /// No description provided for @providerStatusDisabled.
   ///
@@ -871,24 +811,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'播放列表'**
   String get capabilityPlaylist;
-
-  /// No description provided for @accessModeAnonymous.
-  ///
-  /// In zh, this message translates to:
-  /// **'匿名访问'**
-  String get accessModeAnonymous;
-
-  /// No description provided for @accessModeOperatorManaged.
-  ///
-  /// In zh, this message translates to:
-  /// **'服务端托管'**
-  String get accessModeOperatorManaged;
-
-  /// No description provided for @notYetVerified.
-  ///
-  /// In zh, this message translates to:
-  /// **'尚未验证'**
-  String get notYetVerified;
 
   /// No description provided for @accountDescription.
   ///
@@ -1970,12 +1892,6 @@ abstract class AppLocalizations {
   /// **'解析媒体'**
   String get inspectMedia;
 
-  /// No description provided for @accessPolicyPublicSession.
-  ///
-  /// In zh, this message translates to:
-  /// **'服务端自动准备公开访问'**
-  String get accessPolicyPublicSession;
-
   /// No description provided for @intentAutomaticAccess.
   ///
   /// In zh, this message translates to:
@@ -2000,23 +1916,11 @@ abstract class AppLocalizations {
   /// **'等待解析'**
   String get intentQueued;
 
-  /// No description provided for @intentPreparing.
-  ///
-  /// In zh, this message translates to:
-  /// **'正在准备解析环境'**
-  String get intentPreparing;
-
   /// No description provided for @intentResolving.
   ///
   /// In zh, this message translates to:
   /// **'正在解析媒体'**
   String get intentResolving;
-
-  /// No description provided for @intentRetryWait.
-  ///
-  /// In zh, this message translates to:
-  /// **'正在自动恢复解析'**
-  String get intentRetryWait;
 
   /// No description provided for @intentExpired.
   ///
@@ -2041,6 +1945,12 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'更新解析结果'**
   String get intentRefreshAction;
+
+  /// No description provided for @intentCancelling.
+  ///
+  /// In zh, this message translates to:
+  /// **'正在取消解析'**
+  String get intentCancelling;
 
   /// No description provided for @intentCancelAction.
   ///
@@ -2186,53 +2096,17 @@ abstract class AppLocalizations {
   /// **'{count} 个视频 · ZIP'**
   String videoCollectionFormatDetails(Object count);
 
-  /// No description provided for @inspectionFailedError.
-  ///
-  /// In zh, this message translates to:
-  /// **'暂时无法读取视频信息，请检查链接后重试。'**
-  String get inspectionFailedError;
-
-  /// No description provided for @inspectionTimeoutError.
-  ///
-  /// In zh, this message translates to:
-  /// **'媒体解析超时，请稍后重新提交。'**
-  String get inspectionTimeoutError;
-
   /// No description provided for @providerTemporaryError.
   ///
   /// In zh, this message translates to:
   /// **'媒体平台当前无法完成验证，请稍后重试。'**
   String get providerTemporaryError;
 
-  /// No description provided for @providerSessionError.
-  ///
-  /// In zh, this message translates to:
-  /// **'系统无法取得内容所需的平台会话，本次自动解析已停止。'**
-  String get providerSessionError;
-
-  /// No description provided for @accessPolicyLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'访问策略'**
-  String get accessPolicyLabel;
-
   /// No description provided for @routeCooldownUntil.
   ///
   /// In zh, this message translates to:
   /// **'默认线路最早重试时间：{time}；到期仍需验证恢复。'**
   String routeCooldownUntil(String time);
-
-  /// No description provided for @providerRuntimeTitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'读取运行诊断'**
-  String get providerRuntimeTitle;
-
-  /// No description provided for @providerRuntimeDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'仅展示已开放平台的默认线路；快照最多缓存 30 秒。配置和上下文可达不代表真实下载通过。'**
-  String get providerRuntimeDescription;
 
   /// No description provided for @providerRouteConfigured.
   ///
@@ -2252,77 +2126,11 @@ abstract class AppLocalizations {
   /// **'上下文不可达或尚未确认'**
   String get providerContextMissing;
 
-  /// No description provided for @providerRuntimeEngine.
-  ///
-  /// In zh, this message translates to:
-  /// **'引擎'**
-  String get providerRuntimeEngine;
-
-  /// No description provided for @accessPolicyPublic.
-  ///
-  /// In zh, this message translates to:
-  /// **'公开无会话'**
-  String get accessPolicyPublic;
-
-  /// No description provided for @accessPolicyOperator.
-  ///
-  /// In zh, this message translates to:
-  /// **'部署者公开会话'**
-  String get accessPolicyOperator;
-
-  /// No description provided for @accessPolicyPersonal.
-  ///
-  /// In zh, this message translates to:
-  /// **'个人授权会话'**
-  String get accessPolicyPersonal;
-
-  /// No description provided for @accessPolicyUnavailable.
-  ///
-  /// In zh, this message translates to:
-  /// **'未配置或未开放'**
-  String get accessPolicyUnavailable;
-
-  /// No description provided for @accessPolicyDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'仅处理有权获取的非 DRM 内容；切换策略后需重新解析，不会自动切换会话。'**
-  String get accessPolicyDescription;
-
-  /// No description provided for @accessPolicyEvidenceMissing.
-  ///
-  /// In zh, this message translates to:
-  /// **'当前默认线路尚无新鲜验证证据。'**
-  String get accessPolicyEvidenceMissing;
-
-  /// No description provided for @providerConfigurationMissing.
-  ///
-  /// In zh, this message translates to:
-  /// **'所选访问策略尚未配置。请部署者配置持久来源，或显式选择公开线路重新解析。'**
-  String get providerConfigurationMissing;
-
-  /// No description provided for @providerPolicyNotAllowed.
-  ///
-  /// In zh, this message translates to:
-  /// **'此来源不允许所选访问策略，请更换策略后重新解析。'**
-  String get providerPolicyNotAllowed;
-
-  /// No description provided for @providerRegionError.
-  ///
-  /// In zh, this message translates to:
-  /// **'该媒体在当前服务区域不可用。'**
-  String get providerRegionError;
-
   /// No description provided for @providerRestrictedError.
   ///
   /// In zh, this message translates to:
   /// **'该媒体为私有或受访问权限限制，无法处理。'**
   String get providerRestrictedError;
-
-  /// No description provided for @providerDrmError.
-  ///
-  /// In zh, this message translates to:
-  /// **'该媒体受 DRM 保护，不属于本服务支持范围。'**
-  String get providerDrmError;
 
   /// No description provided for @providerLinkError.
   ///
@@ -3704,83 +3512,17 @@ abstract class AppLocalizations {
   /// **'AI 服务请求过于频繁，请稍后重试。'**
   String get analysisRateLimited;
 
-  /// No description provided for @intentAutomaticSessionRecovery.
-  ///
-  /// In zh, this message translates to:
-  /// **'系统正在恢复平台会话，将在本次解析期限内自动继续，无需重复提交。'**
-  String get intentAutomaticSessionRecovery;
-
-  /// No description provided for @intentPhaseRecognize.
-  ///
-  /// In zh, this message translates to:
-  /// **'识别链接'**
-  String get intentPhaseRecognize;
-
-  /// No description provided for @intentPhasePrepare.
-  ///
-  /// In zh, this message translates to:
-  /// **'准备解析环境'**
-  String get intentPhasePrepare;
-
-  /// No description provided for @intentPhaseRead.
-  ///
-  /// In zh, this message translates to:
-  /// **'读取作品'**
-  String get intentPhaseRead;
-
-  /// No description provided for @intentPhaseSelect.
-  ///
-  /// In zh, this message translates to:
-  /// **'检查格式'**
-  String get intentPhaseSelect;
-
-  /// No description provided for @intentPhaseProbe.
-  ///
-  /// In zh, this message translates to:
-  /// **'检查媒体'**
-  String get intentPhaseProbe;
-
-  /// No description provided for @intentPhaseTransfer.
-  ///
-  /// In zh, this message translates to:
-  /// **'获取媒体'**
-  String get intentPhaseTransfer;
-
-  /// No description provided for @intentPhaseValidate.
-  ///
-  /// In zh, this message translates to:
-  /// **'校验文件'**
-  String get intentPhaseValidate;
-
-  /// No description provided for @intentPhasePublish.
-  ///
-  /// In zh, this message translates to:
-  /// **'保存文件'**
-  String get intentPhasePublish;
-
   /// No description provided for @providerChallengeError.
   ///
   /// In zh, this message translates to:
-  /// **'平台要求当前系统无法自动完成的验证，本次解析已停止。'**
+  /// **'平台要求验证，当前无法继续读取媒体。'**
   String get providerChallengeError;
-
-  /// No description provided for @providerTokenError.
-  ///
-  /// In zh, this message translates to:
-  /// **'平台访问令牌尚不可用，系统无法继续读取此内容。'**
-  String get providerTokenError;
 
   /// No description provided for @providerExtractorError.
   ///
   /// In zh, this message translates to:
   /// **'平台页面结构已变化，当前无法读取媒体。'**
   String get providerExtractorError;
-
-  /// No description provided for @providerMediaProbeError.
-  ///
-  /// In zh, this message translates to:
-  /// **'作品信息已读取，但媒体地址未通过可用性检查。'**
-  String get providerMediaProbeError;
 
   /// No description provided for @providerEgressError.
   ///
@@ -3794,35 +3536,83 @@ abstract class AppLocalizations {
   /// **'连接媒体平台时发生临时网络故障。'**
   String get providerNetworkError;
 
-  /// No description provided for @providerSessionSourceError.
-  ///
-  /// In zh, this message translates to:
-  /// **'批准的平台会话来源仍不可用，自动恢复已结束，本次解析已停止。'**
-  String get providerSessionSourceError;
-
   /// No description provided for @providerRuntimeError.
   ///
   /// In zh, this message translates to:
   /// **'解析执行环境暂不可用。'**
   String get providerRuntimeError;
 
-  /// No description provided for @providerCapacityError.
+  /// No description provided for @providerRegistered.
   ///
   /// In zh, this message translates to:
-  /// **'解析执行资源正忙或空间不足，请稍后重试。'**
-  String get providerCapacityError;
+  /// **'已接入'**
+  String get providerRegistered;
 
-  /// No description provided for @intentContextChangedError.
+  /// No description provided for @providerIdentityLabel.
   ///
   /// In zh, this message translates to:
-  /// **'解析环境已变化，需要更新结果并重新确认规格。'**
-  String get intentContextChangedError;
+  /// **'身份要求'**
+  String get providerIdentityLabel;
 
-  /// No description provided for @providerUnknownOutcomeError.
+  /// No description provided for @providerIdentityRequired.
   ///
   /// In zh, this message translates to:
-  /// **'执行中断且无法确认结果，系统已停止重复请求。'**
-  String get providerUnknownOutcomeError;
+  /// **'需要登录'**
+  String get providerIdentityRequired;
+
+  /// No description provided for @providerIdentityOptional.
+  ///
+  /// In zh, this message translates to:
+  /// **'可选登录'**
+  String get providerIdentityOptional;
+
+  /// No description provided for @providerIdentityNone.
+  ///
+  /// In zh, this message translates to:
+  /// **'无需登录'**
+  String get providerIdentityNone;
+
+  /// No description provided for @providerLoginRequiredError.
+  ///
+  /// In zh, this message translates to:
+  /// **'该内容需要登录，请确认部署主机已登录对应平台。'**
+  String get providerLoginRequiredError;
+
+  /// No description provided for @providerContentProtectedError.
+  ///
+  /// In zh, this message translates to:
+  /// **'该内容受加密保护，无法下载；可导入已取得的文件。'**
+  String get providerContentProtectedError;
+
+  /// No description provided for @providerUnavailable.
+  ///
+  /// In zh, this message translates to:
+  /// **'未开放'**
+  String get providerUnavailable;
+
+  /// No description provided for @providerDownloadEnabled.
+  ///
+  /// In zh, this message translates to:
+  /// **'下载已开放'**
+  String get providerDownloadEnabled;
+
+  /// No description provided for @providerIdentityUnavailableError.
+  ///
+  /// In zh, this message translates to:
+  /// **'平台登录材料暂不可用，请检查部署主机的登录状态后重新解析。'**
+  String get providerIdentityUnavailableError;
+
+  /// No description provided for @providerContextChangedError.
+  ///
+  /// In zh, this message translates to:
+  /// **'媒体执行上下文已变化，请重新解析链接并确认下载规格。'**
+  String get providerContextChangedError;
+
+  /// No description provided for @reparseDownloadAction.
+  ///
+  /// In zh, this message translates to:
+  /// **'重新解析'**
+  String get reparseDownloadAction;
 }
 
 class _AppLocalizationsDelegate

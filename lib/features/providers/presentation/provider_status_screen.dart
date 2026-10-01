@@ -39,8 +39,8 @@ final class _ProviderStatusScreenState
           tabs: [
             for (final entry in {
               'all': localizations.allStatuses,
-              'available': localizations.availableLabel,
-              'attention': localizations.needsAttention,
+              'enabled': localizations.providerRegistered,
+              'disabled': localizations.providerUnavailable,
             }.entries)
               ShadTab<String>(
                 key: Key('provider-filter-${entry.key}'),
@@ -82,27 +82,10 @@ final class _ProviderStatusScreenState
       ];
     }
     return [
-      DataMetricGrid(
-        keyPrefix: 'provider-summary',
-        metrics: [
-          DataMetricValue(
-            key: 'total',
-            label: localizations.totalLabel,
-            value: '${data.items.length}',
-          ),
-          DataMetricValue(
-            key: 'available',
-            label: localizations.availableLabel,
-            value:
-                '${data.items.where((item) => item.downloadAvailable).length}',
-          ),
-        ],
-      ),
-      const SizedBox(height: AppSpacing.xLarge),
       for (final item in data.items.where(
         (item) =>
             _filter == 'all' ||
-            item.downloadAvailable == (_filter == 'available'),
+            item.downloadSupported == (_filter == 'enabled'),
       ))
         ProviderStatusItem(item: item),
     ];

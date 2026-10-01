@@ -44,9 +44,8 @@ final class DownloadIntakeWorkspace extends StatelessWidget {
         ? null
         : switch (intent.status) {
             IntentStatus.queued => localizations.intentQueued,
-            IntentStatus.preparing => localizations.intentPreparing,
             IntentStatus.resolving => localizations.intentResolving,
-            IntentStatus.retryWait => localizations.intentRetryWait,
+            IntentStatus.cancelling => localizations.intentCancelling,
             IntentStatus.failed => localizations.intentFailed,
             IntentStatus.cancelled => localizations.intentCancelled,
             IntentStatus.expired => localizations.intentExpired,
@@ -56,10 +55,6 @@ final class DownloadIntakeWorkspace extends StatelessWidget {
     final reason = intent == null
         ? null
         : intentFailureMessage(localizations, intent);
-    final phase = intent == null
-        ? null
-        : _phaseLabel(localizations, intent.phase);
-    final statusLabel = phase == null ? status : '$status · $phase';
     return Column(
       key: const Key('download-intake-workspace'),
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -80,8 +75,8 @@ final class DownloadIntakeWorkspace extends StatelessWidget {
                 : intent.status == IntentStatus.ready && inspection == null
                 ? localizations.serviceUnavailableError
                 : reason == null
-                ? statusLabel ?? localizations.inspectionResultTitle
-                : '$statusLabel — $reason',
+                ? status ?? localizations.inspectionResultTitle
+                : '$status — $reason',
             tone: DownloadNoticeTone.neutral,
           ),
           const SizedBox(height: 12),
@@ -103,12 +98,15 @@ final class DownloadIntakeWorkspace extends StatelessWidget {
               child: Text(localizations.downloadDetailNavigation),
             ),
           if (intent.status == IntentStatus.queued ||
-              intent.status == IntentStatus.preparing ||
               intent.status == IntentStatus.resolving ||
-              intent.status == IntentStatus.retryWait)
+              intent.status == IntentStatus.cancelling)
             ShadButton.outline(
-              onPressed: state.busy ? null : onCancelIntent,
-              child: Text(localizations.intentCancelAction),
+              onPressed: state.busy || state.cancelling ? null : onCancelIntent,
+              child: Text(
+                state.cancelling
+                    ? localizations.intentCancelling
+                    : localizations.intentCancelAction,
+              ),
             ),
         ] else if (inspection != null)
           InspectionWorkspace(
@@ -120,16 +118,3 @@ final class DownloadIntakeWorkspace extends StatelessWidget {
     );
   }
 }
-
-String? _phaseLabel(AppLocalizations localizations, FailurePhase? phase) =>
-    switch (phase) {
-      FailurePhase.recognize => localizations.intentPhaseRecognize,
-      FailurePhase.prepareContext => localizations.intentPhasePrepare,
-      FailurePhase.fetchMetadata => localizations.intentPhaseRead,
-      FailurePhase.selectFormat => localizations.intentPhaseSelect,
-      FailurePhase.probeMedia => localizations.intentPhaseProbe,
-      FailurePhase.transfer => localizations.intentPhaseTransfer,
-      FailurePhase.validate => localizations.intentPhaseValidate,
-      FailurePhase.publish => localizations.intentPhasePublish,
-      _ => null,
-    };

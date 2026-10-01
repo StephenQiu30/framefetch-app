@@ -53,7 +53,6 @@ import 'package:video_server_api/lib/model/api_response_media_upload_session_res
 import 'package:video_server_api/lib/model/api_response_provider_catalog_entry_response.dart';
 import 'package:video_server_api/lib/model/api_response_provider_catalog_list_response.dart';
 import 'package:video_server_api/lib/model/api_response_provider_list_response.dart';
-import 'package:video_server_api/lib/model/api_response_provider_runtime_list_response.dart';
 import 'package:video_server_api/lib/model/api_response_source_discovery_response.dart';
 import 'package:video_server_api/lib/model/api_response_storage_cleanup_response.dart';
 import 'package:video_server_api/lib/model/api_response_stored_file_list_response.dart';
@@ -102,11 +101,9 @@ import 'package:video_server_api/lib/model/entitlement_state.dart';
 import 'package:video_server_api/lib/model/error_code.dart';
 import 'package:video_server_api/lib/model/error_response.dart';
 import 'package:video_server_api/lib/model/evidence_summary_response.dart';
+import 'package:video_server_api/lib/model/evidence_value.dart';
 import 'package:video_server_api/lib/model/execution_mode.dart';
 import 'package:video_server_api/lib/model/failure_class.dart';
-import 'package:video_server_api/lib/model/failure_evidence_kind.dart';
-import 'package:video_server_api/lib/model/failure_phase.dart';
-import 'package:video_server_api/lib/model/failure_scope.dart';
 import 'package:video_server_api/lib/model/format_response.dart';
 import 'package:video_server_api/lib/model/fps_bucket.dart';
 import 'package:video_server_api/lib/model/highlight_response.dart';
@@ -135,17 +132,11 @@ import 'package:video_server_api/lib/model/native_session_response.dart';
 import 'package:video_server_api/lib/model/problem_details.dart';
 import 'package:video_server_api/lib/model/production_advice_response.dart';
 import 'package:video_server_api/lib/model/protection_state.dart';
-import 'package:video_server_api/lib/model/provider_access_mode.dart';
-import 'package:video_server_api/lib/model/provider_access_policy.dart';
-import 'package:video_server_api/lib/model/provider_access_policy_response.dart';
-import 'package:video_server_api/lib/model/provider_access_state.dart';
 import 'package:video_server_api/lib/model/provider_capability.dart';
 import 'package:video_server_api/lib/model/provider_catalog_entry_response.dart';
 import 'package:video_server_api/lib/model/provider_catalog_list_response.dart';
-import 'package:video_server_api/lib/model/provider_evidence_state.dart';
+import 'package:video_server_api/lib/model/provider_identity.dart';
 import 'package:video_server_api/lib/model/provider_list_response.dart';
-import 'package:video_server_api/lib/model/provider_runtime_list_response.dart';
-import 'package:video_server_api/lib/model/provider_runtime_response.dart';
 import 'package:video_server_api/lib/model/provider_status_response.dart';
 import 'package:video_server_api/lib/model/provider_support_status.dart';
 import 'package:video_server_api/lib/model/public_url_inspection_source.dart';
@@ -231,7 +222,6 @@ part 'serializers.g.dart';
   ApiResponseProviderCatalogEntryResponse,
   ApiResponseProviderCatalogListResponse,
   ApiResponseProviderListResponse,
-  ApiResponseProviderRuntimeListResponse,
   ApiResponseSourceDiscoveryResponse,
   ApiResponseStorageCleanupResponse,
   ApiResponseStoredFileListResponse,
@@ -280,11 +270,9 @@ part 'serializers.g.dart';
   ErrorCode,
   ErrorResponse,
   EvidenceSummaryResponse,
+  EvidenceValue,
   ExecutionMode,
   FailureClass,
-  FailureEvidenceKind,
-  FailurePhase,
-  FailureScope,
   FormatResponse,
   FpsBucket,
   HighlightResponse,
@@ -313,17 +301,11 @@ part 'serializers.g.dart';
   ProblemDetails,
   ProductionAdviceResponse,
   ProtectionState,
-  ProviderAccessMode,
-  ProviderAccessPolicy,
-  ProviderAccessPolicyResponse,
-  ProviderAccessState,
   ProviderCapability,
   ProviderCatalogEntryResponse,
   ProviderCatalogListResponse,
-  ProviderEvidenceState,
+  ProviderIdentity,
   ProviderListResponse,
-  ProviderRuntimeListResponse,
-  ProviderRuntimeResponse,
   ProviderStatusResponse,
   ProviderSupportStatus,
   PublicUrlInspectionSource,

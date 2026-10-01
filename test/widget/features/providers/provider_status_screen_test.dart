@@ -17,9 +17,8 @@ void main() {
       (builder) => builder
         ..key = 'attention-provider'
         ..displayName = '需要处理的平台'
-        ..downloadAvailable = false
-        ..lastCheckSucceeded = false
-        ..status = ProviderSupportStatus.degraded,
+        ..downloadSupported = false
+        ..status = ProviderSupportStatus.disabled,
     );
     final repository = FakeProviderStatusRepository(
       data: ProviderListResponse(
@@ -48,7 +47,7 @@ void main() {
     expect(find.text('YouTube'), findsOneWidget);
     expect(find.text('需要处理的平台'), findsOneWidget);
 
-    await tester.tap(find.byKey(const Key('provider-filter-attention')));
+    await tester.tap(find.byKey(const Key('provider-filter-disabled')));
     await tester.pumpAndSettle();
 
     expect(find.text('YouTube'), findsNothing);

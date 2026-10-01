@@ -17,7 +17,7 @@ class ProvidersApi {
   const ProvidersApi(this._dio, this._serializers);
 
   /// 查询平台能力状态
-  /// 返回不含凭据、出口地址和 Canary 目标的能力快照。
+  /// 返回 Registry 声明的能力与身份要求。
   ///
   /// Parameters:
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation

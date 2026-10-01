@@ -16,8 +16,6 @@ class DownloadErrorCode extends EnumClass {
   static const DownloadErrorCode downloadTimeout = _$downloadTimeout;
   @BuiltValueEnumConst(wireName: r'format_unavailable')
   static const DownloadErrorCode formatUnavailable = _$formatUnavailable;
-  @BuiltValueEnumConst(wireName: r'inspection_timeout')
-  static const DownloadErrorCode inspectionTimeout = _$inspectionTimeout;
   @BuiltValueEnumConst(wireName: r'internal_error')
   static const DownloadErrorCode internalError = _$internalError;
   @BuiltValueEnumConst(wireName: r'media_validation_failed')
@@ -25,44 +23,30 @@ class DownloadErrorCode extends EnumClass {
       _$mediaValidationFailed;
   @BuiltValueEnumConst(wireName: r'output_limit_exceeded')
   static const DownloadErrorCode outputLimitExceeded = _$outputLimitExceeded;
-  @BuiltValueEnumConst(wireName: r'provider_access_policy_not_allowed')
-  static const DownloadErrorCode providerAccessPolicyNotAllowed =
-      _$providerAccessPolicyNotAllowed;
-  @BuiltValueEnumConst(wireName: r'provider_auth_required')
-  static const DownloadErrorCode providerAuthRequired = _$providerAuthRequired;
-  @BuiltValueEnumConst(wireName: r'provider_content_restricted')
-  static const DownloadErrorCode providerContentRestricted =
-      _$providerContentRestricted;
-  @BuiltValueEnumConst(wireName: r'provider_drm_protected')
-  static const DownloadErrorCode providerDrmProtected = _$providerDrmProtected;
-  @BuiltValueEnumConst(wireName: r'provider_geo_restricted')
-  static const DownloadErrorCode providerGeoRestricted =
-      _$providerGeoRestricted;
-  @BuiltValueEnumConst(wireName: r'provider_guest_context_required')
-  static const DownloadErrorCode providerGuestContextRequired =
-      _$providerGuestContextRequired;
-  @BuiltValueEnumConst(wireName: r'provider_link_unavailable')
-  static const DownloadErrorCode providerLinkUnavailable =
-      _$providerLinkUnavailable;
-  @BuiltValueEnumConst(wireName: r'provider_media_unsupported')
-  static const DownloadErrorCode providerMediaUnsupported =
-      _$providerMediaUnsupported;
-  @BuiltValueEnumConst(wireName: r'provider_rate_limited')
-  static const DownloadErrorCode providerRateLimited = _$providerRateLimited;
-  @BuiltValueEnumConst(wireName: r'provider_session_expired')
-  static const DownloadErrorCode providerSessionExpired =
-      _$providerSessionExpired;
-  @BuiltValueEnumConst(wireName: r'provider_session_not_ready')
-  static const DownloadErrorCode providerSessionNotReady =
-      _$providerSessionNotReady;
-  @BuiltValueEnumConst(wireName: r'provider_temporarily_unavailable')
-  static const DownloadErrorCode providerTemporarilyUnavailable =
-      _$providerTemporarilyUnavailable;
-  @BuiltValueEnumConst(wireName: r'provider_unsupported')
-  static const DownloadErrorCode providerUnsupported = _$providerUnsupported;
-  @BuiltValueEnumConst(wireName: r'provider_verification_failed')
-  static const DownloadErrorCode providerVerificationFailed =
-      _$providerVerificationFailed;
+  @BuiltValueEnumConst(wireName: r'network_blocked')
+  static const DownloadErrorCode networkBlocked = _$networkBlocked;
+  @BuiltValueEnumConst(wireName: r'challenge')
+  static const DownloadErrorCode challenge = _$challenge;
+  @BuiltValueEnumConst(wireName: r'login_required')
+  static const DownloadErrorCode loginRequired = _$loginRequired;
+  @BuiltValueEnumConst(wireName: r'identity_unavailable')
+  static const DownloadErrorCode identityUnavailable = _$identityUnavailable;
+  @BuiltValueEnumConst(wireName: r'rate_limited')
+  static const DownloadErrorCode rateLimited = _$rateLimited;
+  @BuiltValueEnumConst(wireName: r'context_changed')
+  static const DownloadErrorCode contextChanged = _$contextChanged;
+  @BuiltValueEnumConst(wireName: r'content_unavailable')
+  static const DownloadErrorCode contentUnavailable = _$contentUnavailable;
+  @BuiltValueEnumConst(wireName: r'content_protected')
+  static const DownloadErrorCode contentProtected = _$contentProtected;
+  @BuiltValueEnumConst(wireName: r'extractor_broken')
+  static const DownloadErrorCode extractorBroken = _$extractorBroken;
+  @BuiltValueEnumConst(wireName: r'transient')
+  static const DownloadErrorCode transient = _$transient;
+  @BuiltValueEnumConst(wireName: r'invalid_input')
+  static const DownloadErrorCode invalidInput = _$invalidInput;
+  @BuiltValueEnumConst(wireName: r'runtime_unavailable')
+  static const DownloadErrorCode runtimeUnavailable = _$runtimeUnavailable;
   @BuiltValueEnumConst(wireName: r'storage_unavailable')
   static const DownloadErrorCode storageUnavailable = _$storageUnavailable;
   @BuiltValueEnumConst(wireName: r'temp_space_exhausted')
