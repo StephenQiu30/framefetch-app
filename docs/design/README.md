@@ -25,3 +25,7 @@
 ### 解析引擎 P1 只读上下文
 
 InspectionResponse 与 DownloadResponse 从服务端 OpenAPI 生成可空、只读的 `execution_context`，包含设计 17 第 3.7 节十二个非敏感字段。App 可读取实际层级、客户端、引擎与出口摘要，不接收 Cookie 或浏览器句柄；本地导入或尚未执行的下载可为 null。生成客户端的字段反序列化由契约单测覆盖；本次只更新 REST 契约，不构成 App 真机平台验收。
+
+### prefer 身份契约
+
+平台目录的身份枚举由服务端 OpenAPI 生成 `none / prefer / required`；prefer 表示解析优先复用已登录 Chrome 会话，身份不可用时匿名继续，下载保持解析时的身份选择。App 仅消费非敏感声明与十二字段 ExecutionContext，扩展材料不进入 App。客户端生成、格式、分析和测试为确定性契约证据，不能替代服务端登录平台或 App 真机验收。

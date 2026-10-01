@@ -46,7 +46,7 @@ abstract class ProviderStatusResponse
 
   @BuiltValueField(wireName: r'identity')
   ProviderIdentity get identity;
-  // enum identityEnum {  none,  optional,  required,  };
+  // enum identityEnum {  none,  prefer,  required,  };
 
   @BuiltValueField(wireName: r'status')
   ProviderSupportStatus get status;

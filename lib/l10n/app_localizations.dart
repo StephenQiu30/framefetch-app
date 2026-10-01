@@ -3560,11 +3560,11 @@ abstract class AppLocalizations {
   /// **'需要登录'**
   String get providerIdentityRequired;
 
-  /// No description provided for @providerIdentityOptional.
+  /// No description provided for @providerIdentityPrefer.
   ///
   /// In zh, this message translates to:
-  /// **'可选登录'**
-  String get providerIdentityOptional;
+  /// **'优先登录'**
+  String get providerIdentityPrefer;
 
   /// No description provided for @providerIdentityNone.
   ///

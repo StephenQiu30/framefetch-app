@@ -58,7 +58,7 @@ final class ProviderStatusItem extends StatelessWidget {
                 label: localizations.providerIdentityLabel,
                 value: switch (item.identity.name) {
                   'required' => localizations.providerIdentityRequired,
-                  'optional' => localizations.providerIdentityOptional,
+                  'prefer' => localizations.providerIdentityPrefer,
                   _ => localizations.providerIdentityNone,
                 },
               ),

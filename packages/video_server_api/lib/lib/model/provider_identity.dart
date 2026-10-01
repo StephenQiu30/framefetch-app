@@ -12,8 +12,8 @@ part 'provider_identity.g.dart';
 class ProviderIdentity extends EnumClass {
   @BuiltValueEnumConst(wireName: r'none')
   static const ProviderIdentity none = _$none;
-  @BuiltValueEnumConst(wireName: r'optional')
-  static const ProviderIdentity optional = _$optional;
+  @BuiltValueEnumConst(wireName: r'prefer')
+  static const ProviderIdentity prefer = _$prefer;
   @BuiltValueEnumConst(wireName: r'required')
   static const ProviderIdentity required_ = _$required_;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)

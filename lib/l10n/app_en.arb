@@ -663,7 +663,7 @@
   "providerRegistered": "Registered",
   "providerIdentityLabel": "Identity",
   "providerIdentityRequired": "Login required",
-  "providerIdentityOptional": "Login optional",
+  "providerIdentityPrefer": "Prefer login",
   "providerIdentityNone": "No login required",
   "providerLoginRequiredError": "This content requires login. Confirm the deployment host is signed into the platform.",
   "providerContentProtectedError": "This content is protected and cannot be downloaded. Import a file you have already obtained.",
