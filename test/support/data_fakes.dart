@@ -321,30 +321,15 @@ ProviderListResponse providerFixture() {
   final item = ProviderStatusResponse(
     (builder) => builder
       ..key = 'youtube'
-      ..evidenceState = ProviderEvidenceState.fresh
-      ..accessState = ProviderAccessState.publicReady
+      ..identity = ProviderIdentity.optional
       ..hosts.replace(['www.youtube.com', 'youtu.be'])
       ..hostSuffixes.clear()
-      ..defaultAccessPolicyId = ProviderAccessPolicy.public
-      ..accessPolicies.replace([
-        ProviderAccessPolicyResponse(
-          (b) => b
-            ..id = ProviderAccessPolicy.public
-            ..configured = true,
-        ),
-      ])
       ..displayName = 'YouTube'
       ..registered = true
       ..extractorExists = true
       ..capabilities.replace([ProviderCapability.singleVideo])
-      ..accessModes.replace([ProviderAccessMode.anonymous])
-      ..status = ProviderSupportStatus.verified
-      ..lastCheckedAt = DateTime.utc(2026, 8, 30, 12, 30)
-      ..lastCheckSucceeded = true
-      ..downloadSupported = true
-      ..downloadAvailable = true
-      ..lastMediaVerifiedAt = DateTime.utc(2026, 8, 30, 12, 30)
-      ..lastVerifiedAt = DateTime.utc(2026, 8, 30, 12, 30),
+      ..status = ProviderSupportStatus.unknown
+      ..downloadSupported = true,
   );
   return ProviderListResponse((builder) => builder.items.replace([item]));
 }

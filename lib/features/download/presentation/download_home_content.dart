@@ -22,7 +22,6 @@ final class DownloadHomeContent extends StatelessWidget {
     required this.result,
     required this.statusTone,
     required this.uploadState,
-    this.accessPolicySelector,
     this.history,
     super.key,
   });
@@ -42,7 +41,6 @@ final class DownloadHomeContent extends StatelessWidget {
   final Widget? result;
   final DownloadNoticeTone statusTone;
   final ContentUploadState uploadState;
-  final Widget? accessPolicySelector;
 
   @override
   Widget build(BuildContext context) {
@@ -81,9 +79,6 @@ final class DownloadHomeContent extends StatelessWidget {
                         onUploadCancel: onUploadCancel,
                         uploadState: uploadState,
                       ),
-                      if (mode == ContentIntakeMode.link &&
-                          accessPolicySelector != null)
-                        accessPolicySelector!,
                       if (error != null) ...[
                         const SizedBox(height: 24),
                         DownloadInlineStatus(message: error!, tone: statusTone),

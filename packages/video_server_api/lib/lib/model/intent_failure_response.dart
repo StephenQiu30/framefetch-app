@@ -4,9 +4,8 @@
 
 // ignore_for_file: unused_element, unused_element_parameter
 import 'package:video_server_api/lib/model/failure_class.dart';
-import 'package:video_server_api/lib/model/failure_phase.dart';
-import 'package:video_server_api/lib/model/failure_evidence_kind.dart';
-import 'package:video_server_api/lib/model/failure_scope.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:video_server_api/lib/model/evidence_value.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -16,47 +15,38 @@ part 'intent_failure_response.g.dart';
 ///
 /// Properties:
 /// * [code]
-/// * [phase]
-/// * [scope]
 /// * [failureClass]
-/// * [causeCode]
-/// * [evidenceKind]
-/// * [observedAt]
-/// * [retryAfter]
-/// * [diagnosticRef]
+/// * [layer]
+/// * [stage]
+/// * [gate]
+/// * [evidence]
+/// * [summary]
 @BuiltValue()
 abstract class IntentFailureResponse
     implements Built<IntentFailureResponse, IntentFailureResponseBuilder> {
   @BuiltValueField(wireName: r'code')
   String get code;
 
-  @BuiltValueField(wireName: r'phase')
-  FailurePhase get phase;
-  // enum phaseEnum {  recognize,  prepare_context,  fetch_metadata,  select_format,  probe_media,  transfer,  validate,  publish,  };
-
-  @BuiltValueField(wireName: r'scope')
-  FailureScope get scope;
-  // enum scopeEnum {  content,  session,  route,  dependency,  runtime,  };
-
   @BuiltValueField(wireName: r'failure_class')
   FailureClass get failureClass;
-  // enum failureClassEnum {  auth_required,  session_expired,  challenge_required,  token_unavailable,  token_rejected,  extractor_changed,  protocol_unavailable,  format_unavailable,  media_probe_failed,  egress_denied,  network_transient,  rate_limited,  content_unavailable,  content_restricted,  context_changed,  runtime_unavailable,  capacity_exhausted,  invalid_input,  source_unsupported,  artifact_invalid,  storage_unavailable,  outcome_unknown,  upstream_unclassified,  };
+  // enum failureClassEnum {  network_blocked,  challenge,  login_required,  identity_unavailable,  rate_limited,  context_changed,  content_unavailable,  content_protected,  extractor_broken,  format_unavailable,  transient,  invalid_input,  runtime_unavailable,  };
 
-  @BuiltValueField(wireName: r'cause_code')
-  String? get causeCode;
+  @BuiltValueField(wireName: r'layer')
+  String get layer;
 
-  @BuiltValueField(wireName: r'evidence_kind')
-  FailureEvidenceKind get evidenceKind;
-  // enum evidenceKindEnum {  upstream_response,  transport,  local_validation,  runtime,  unknown,  };
+  @BuiltValueField(wireName: r'stage')
+  IntentFailureResponseStageEnum get stage;
+  // enum stageEnum {  resolve,  download,  validate,  publish,  };
 
-  @BuiltValueField(wireName: r'observed_at')
-  DateTime get observedAt;
+  @BuiltValueField(wireName: r'gate')
+  IntentFailureResponseGateEnum get gate;
+  // enum gateEnum {  ①,  ②,  ③,  none,  };
 
-  @BuiltValueField(wireName: r'retry_after')
-  DateTime? get retryAfter;
+  @BuiltValueField(wireName: r'evidence')
+  BuiltMap<String, EvidenceValue?> get evidence;
 
-  @BuiltValueField(wireName: r'diagnostic_ref')
-  String? get diagnosticRef;
+  @BuiltValueField(wireName: r'summary')
+  String get summary;
 
   IntentFailureResponse._();
 
@@ -92,52 +82,37 @@ class _$IntentFailureResponseSerializer
       object.code,
       specifiedType: const FullType(String),
     );
-    yield r'phase';
-    yield serializers.serialize(
-      object.phase,
-      specifiedType: const FullType(FailurePhase),
-    );
-    yield r'scope';
-    yield serializers.serialize(
-      object.scope,
-      specifiedType: const FullType(FailureScope),
-    );
     yield r'failure_class';
     yield serializers.serialize(
       object.failureClass,
       specifiedType: const FullType(FailureClass),
     );
-    yield r'cause_code';
-    yield object.causeCode == null
-        ? null
-        : serializers.serialize(
-            object.causeCode,
-            specifiedType: const FullType.nullable(String),
-          );
-    yield r'evidence_kind';
+    yield r'layer';
     yield serializers.serialize(
-      object.evidenceKind,
-      specifiedType: const FullType(FailureEvidenceKind),
+      object.layer,
+      specifiedType: const FullType(String),
     );
-    yield r'observed_at';
+    yield r'stage';
     yield serializers.serialize(
-      object.observedAt,
-      specifiedType: const FullType(DateTime),
+      object.stage,
+      specifiedType: const FullType(IntentFailureResponseStageEnum),
     );
-    yield r'retry_after';
-    yield object.retryAfter == null
-        ? null
-        : serializers.serialize(
-            object.retryAfter,
-            specifiedType: const FullType.nullable(DateTime),
-          );
-    yield r'diagnostic_ref';
-    yield object.diagnosticRef == null
-        ? null
-        : serializers.serialize(
-            object.diagnosticRef,
-            specifiedType: const FullType.nullable(String),
-          );
+    yield r'gate';
+    yield serializers.serialize(
+      object.gate,
+      specifiedType: const FullType(IntentFailureResponseGateEnum),
+    );
+    yield r'evidence';
+    yield serializers.serialize(
+      object.evidence,
+      specifiedType: const FullType(
+          BuiltMap, [FullType(String), FullType.nullable(EvidenceValue)]),
+    );
+    yield r'summary';
+    yield serializers.serialize(
+      object.summary,
+      specifiedType: const FullType(String),
+    );
   }
 
   @override
@@ -170,20 +145,6 @@ class _$IntentFailureResponseSerializer
           ) as String;
           result.code = valueDes;
           break;
-        case r'phase':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(FailurePhase),
-          ) as FailurePhase;
-          result.phase = valueDes;
-          break;
-        case r'scope':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(FailureScope),
-          ) as FailureScope;
-          result.scope = valueDes;
-          break;
         case r'failure_class':
           final valueDes = serializers.deserialize(
             value,
@@ -191,43 +152,41 @@ class _$IntentFailureResponseSerializer
           ) as FailureClass;
           result.failureClass = valueDes;
           break;
-        case r'cause_code':
+        case r'layer':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.causeCode = valueDes;
+            specifiedType: const FullType(String),
+          ) as String;
+          result.layer = valueDes;
           break;
-        case r'evidence_kind':
+        case r'stage':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(FailureEvidenceKind),
-          ) as FailureEvidenceKind;
-          result.evidenceKind = valueDes;
+            specifiedType: const FullType(IntentFailureResponseStageEnum),
+          ) as IntentFailureResponseStageEnum;
+          result.stage = valueDes;
           break;
-        case r'observed_at':
+        case r'gate':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(DateTime),
-          ) as DateTime;
-          result.observedAt = valueDes;
+            specifiedType: const FullType(IntentFailureResponseGateEnum),
+          ) as IntentFailureResponseGateEnum;
+          result.gate = valueDes;
           break;
-        case r'retry_after':
+        case r'evidence':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(DateTime),
-          ) as DateTime?;
-          if (valueDes == null) continue;
-          result.retryAfter = valueDes;
+            specifiedType: const FullType(
+                BuiltMap, [FullType(String), FullType.nullable(EvidenceValue)]),
+          ) as BuiltMap<String, EvidenceValue?>;
+          result.evidence.replace(valueDes);
           break;
-        case r'diagnostic_ref':
+        case r'summary':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.diagnosticRef = valueDes;
+            specifiedType: const FullType(String),
+          ) as String;
+          result.summary = valueDes;
           break;
         default:
           unhandled.add(key);
@@ -256,4 +215,60 @@ class _$IntentFailureResponseSerializer
     );
     return result.build();
   }
+}
+
+class IntentFailureResponseStageEnum extends EnumClass {
+  @BuiltValueEnumConst(wireName: r'resolve')
+  static const IntentFailureResponseStageEnum resolve =
+      _$intentFailureResponseStageEnum_resolve;
+  @BuiltValueEnumConst(wireName: r'download')
+  static const IntentFailureResponseStageEnum download =
+      _$intentFailureResponseStageEnum_download;
+  @BuiltValueEnumConst(wireName: r'validate')
+  static const IntentFailureResponseStageEnum validate =
+      _$intentFailureResponseStageEnum_validate;
+  @BuiltValueEnumConst(wireName: r'publish')
+  static const IntentFailureResponseStageEnum publish =
+      _$intentFailureResponseStageEnum_publish;
+  @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
+  static const IntentFailureResponseStageEnum unknownDefaultOpenApi =
+      _$intentFailureResponseStageEnum_unknownDefaultOpenApi;
+
+  static Serializer<IntentFailureResponseStageEnum> get serializer =>
+      _$intentFailureResponseStageEnumSerializer;
+
+  const IntentFailureResponseStageEnum._(String name) : super(name);
+
+  static BuiltSet<IntentFailureResponseStageEnum> get values =>
+      _$intentFailureResponseStageEnumValues;
+  static IntentFailureResponseStageEnum valueOf(String name) =>
+      _$intentFailureResponseStageEnumValueOf(name);
+}
+
+class IntentFailureResponseGateEnum extends EnumClass {
+  @BuiltValueEnumConst(wireName: r'①')
+  static const IntentFailureResponseGateEnum gateOne =
+      _$intentFailureResponseGateEnum_gateOne;
+  @BuiltValueEnumConst(wireName: r'②')
+  static const IntentFailureResponseGateEnum gateTwo =
+      _$intentFailureResponseGateEnum_gateTwo;
+  @BuiltValueEnumConst(wireName: r'③')
+  static const IntentFailureResponseGateEnum gateThree =
+      _$intentFailureResponseGateEnum_gateThree;
+  @BuiltValueEnumConst(wireName: r'none')
+  static const IntentFailureResponseGateEnum none =
+      _$intentFailureResponseGateEnum_none;
+  @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
+  static const IntentFailureResponseGateEnum unknownDefaultOpenApi =
+      _$intentFailureResponseGateEnum_unknownDefaultOpenApi;
+
+  static Serializer<IntentFailureResponseGateEnum> get serializer =>
+      _$intentFailureResponseGateEnumSerializer;
+
+  const IntentFailureResponseGateEnum._(String name) : super(name);
+
+  static BuiltSet<IntentFailureResponseGateEnum> get values =>
+      _$intentFailureResponseGateEnumValues;
+  static IntentFailureResponseGateEnum valueOf(String name) =>
+      _$intentFailureResponseGateEnumValueOf(name);
 }

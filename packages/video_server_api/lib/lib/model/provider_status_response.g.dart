@@ -18,37 +18,17 @@ class _$ProviderStatusResponse extends ProviderStatusResponse {
   @override
   final BuiltList<ProviderCapability> capabilities;
   @override
-  final BuiltList<ProviderAccessMode> accessModes;
-  @override
-  final ProviderAccessState accessState;
+  final ProviderIdentity identity;
   @override
   final ProviderSupportStatus status;
   @override
-  final DateTime? lastCheckedAt;
-  @override
-  final bool? lastCheckSucceeded;
-  @override
   final bool downloadSupported;
   @override
-  final bool downloadAvailable;
-  @override
-  final DateTime? lastMediaVerifiedAt;
-  @override
-  final DateTime? lastVerifiedAt;
-  @override
   final String? userAction;
-  @override
-  final BuiltList<ProviderAccessPolicyResponse> accessPolicies;
-  @override
-  final ProviderAccessPolicy? defaultAccessPolicyId;
-  @override
-  final ProviderEvidenceState evidenceState;
   @override
   final BuiltList<String> hosts;
   @override
   final BuiltList<String> hostSuffixes;
-  @override
-  final DateTime? routeRetryAt;
 
   factory _$ProviderStatusResponse(
           [void Function(ProviderStatusResponseBuilder)? updates]) =>
@@ -60,22 +40,12 @@ class _$ProviderStatusResponse extends ProviderStatusResponse {
       required this.registered,
       required this.extractorExists,
       required this.capabilities,
-      required this.accessModes,
-      required this.accessState,
+      required this.identity,
       required this.status,
-      this.lastCheckedAt,
-      this.lastCheckSucceeded,
       required this.downloadSupported,
-      required this.downloadAvailable,
-      this.lastMediaVerifiedAt,
-      this.lastVerifiedAt,
       this.userAction,
-      required this.accessPolicies,
-      this.defaultAccessPolicyId,
-      required this.evidenceState,
       required this.hosts,
-      required this.hostSuffixes,
-      this.routeRetryAt})
+      required this.hostSuffixes})
       : super._();
   @override
   ProviderStatusResponse rebuild(
@@ -95,22 +65,12 @@ class _$ProviderStatusResponse extends ProviderStatusResponse {
         registered == other.registered &&
         extractorExists == other.extractorExists &&
         capabilities == other.capabilities &&
-        accessModes == other.accessModes &&
-        accessState == other.accessState &&
+        identity == other.identity &&
         status == other.status &&
-        lastCheckedAt == other.lastCheckedAt &&
-        lastCheckSucceeded == other.lastCheckSucceeded &&
         downloadSupported == other.downloadSupported &&
-        downloadAvailable == other.downloadAvailable &&
-        lastMediaVerifiedAt == other.lastMediaVerifiedAt &&
-        lastVerifiedAt == other.lastVerifiedAt &&
         userAction == other.userAction &&
-        accessPolicies == other.accessPolicies &&
-        defaultAccessPolicyId == other.defaultAccessPolicyId &&
-        evidenceState == other.evidenceState &&
         hosts == other.hosts &&
-        hostSuffixes == other.hostSuffixes &&
-        routeRetryAt == other.routeRetryAt;
+        hostSuffixes == other.hostSuffixes;
   }
 
   @override
@@ -121,22 +81,12 @@ class _$ProviderStatusResponse extends ProviderStatusResponse {
     _$hash = $jc(_$hash, registered.hashCode);
     _$hash = $jc(_$hash, extractorExists.hashCode);
     _$hash = $jc(_$hash, capabilities.hashCode);
-    _$hash = $jc(_$hash, accessModes.hashCode);
-    _$hash = $jc(_$hash, accessState.hashCode);
+    _$hash = $jc(_$hash, identity.hashCode);
     _$hash = $jc(_$hash, status.hashCode);
-    _$hash = $jc(_$hash, lastCheckedAt.hashCode);
-    _$hash = $jc(_$hash, lastCheckSucceeded.hashCode);
     _$hash = $jc(_$hash, downloadSupported.hashCode);
-    _$hash = $jc(_$hash, downloadAvailable.hashCode);
-    _$hash = $jc(_$hash, lastMediaVerifiedAt.hashCode);
-    _$hash = $jc(_$hash, lastVerifiedAt.hashCode);
     _$hash = $jc(_$hash, userAction.hashCode);
-    _$hash = $jc(_$hash, accessPolicies.hashCode);
-    _$hash = $jc(_$hash, defaultAccessPolicyId.hashCode);
-    _$hash = $jc(_$hash, evidenceState.hashCode);
     _$hash = $jc(_$hash, hosts.hashCode);
     _$hash = $jc(_$hash, hostSuffixes.hashCode);
-    _$hash = $jc(_$hash, routeRetryAt.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -149,22 +99,12 @@ class _$ProviderStatusResponse extends ProviderStatusResponse {
           ..add('registered', registered)
           ..add('extractorExists', extractorExists)
           ..add('capabilities', capabilities)
-          ..add('accessModes', accessModes)
-          ..add('accessState', accessState)
+          ..add('identity', identity)
           ..add('status', status)
-          ..add('lastCheckedAt', lastCheckedAt)
-          ..add('lastCheckSucceeded', lastCheckSucceeded)
           ..add('downloadSupported', downloadSupported)
-          ..add('downloadAvailable', downloadAvailable)
-          ..add('lastMediaVerifiedAt', lastMediaVerifiedAt)
-          ..add('lastVerifiedAt', lastVerifiedAt)
           ..add('userAction', userAction)
-          ..add('accessPolicies', accessPolicies)
-          ..add('defaultAccessPolicyId', defaultAccessPolicyId)
-          ..add('evidenceState', evidenceState)
           ..add('hosts', hosts)
-          ..add('hostSuffixes', hostSuffixes)
-          ..add('routeRetryAt', routeRetryAt))
+          ..add('hostSuffixes', hostSuffixes))
         .toString();
   }
 }
@@ -196,72 +136,22 @@ class ProviderStatusResponseBuilder
   set capabilities(ListBuilder<ProviderCapability>? capabilities) =>
       _$this._capabilities = capabilities;
 
-  ListBuilder<ProviderAccessMode>? _accessModes;
-  ListBuilder<ProviderAccessMode> get accessModes =>
-      _$this._accessModes ??= ListBuilder<ProviderAccessMode>();
-  set accessModes(ListBuilder<ProviderAccessMode>? accessModes) =>
-      _$this._accessModes = accessModes;
-
-  ProviderAccessState? _accessState;
-  ProviderAccessState? get accessState => _$this._accessState;
-  set accessState(ProviderAccessState? accessState) =>
-      _$this._accessState = accessState;
+  ProviderIdentity? _identity;
+  ProviderIdentity? get identity => _$this._identity;
+  set identity(ProviderIdentity? identity) => _$this._identity = identity;
 
   ProviderSupportStatus? _status;
   ProviderSupportStatus? get status => _$this._status;
   set status(ProviderSupportStatus? status) => _$this._status = status;
-
-  DateTime? _lastCheckedAt;
-  DateTime? get lastCheckedAt => _$this._lastCheckedAt;
-  set lastCheckedAt(DateTime? lastCheckedAt) =>
-      _$this._lastCheckedAt = lastCheckedAt;
-
-  bool? _lastCheckSucceeded;
-  bool? get lastCheckSucceeded => _$this._lastCheckSucceeded;
-  set lastCheckSucceeded(bool? lastCheckSucceeded) =>
-      _$this._lastCheckSucceeded = lastCheckSucceeded;
 
   bool? _downloadSupported;
   bool? get downloadSupported => _$this._downloadSupported;
   set downloadSupported(bool? downloadSupported) =>
       _$this._downloadSupported = downloadSupported;
 
-  bool? _downloadAvailable;
-  bool? get downloadAvailable => _$this._downloadAvailable;
-  set downloadAvailable(bool? downloadAvailable) =>
-      _$this._downloadAvailable = downloadAvailable;
-
-  DateTime? _lastMediaVerifiedAt;
-  DateTime? get lastMediaVerifiedAt => _$this._lastMediaVerifiedAt;
-  set lastMediaVerifiedAt(DateTime? lastMediaVerifiedAt) =>
-      _$this._lastMediaVerifiedAt = lastMediaVerifiedAt;
-
-  DateTime? _lastVerifiedAt;
-  DateTime? get lastVerifiedAt => _$this._lastVerifiedAt;
-  set lastVerifiedAt(DateTime? lastVerifiedAt) =>
-      _$this._lastVerifiedAt = lastVerifiedAt;
-
   String? _userAction;
   String? get userAction => _$this._userAction;
   set userAction(String? userAction) => _$this._userAction = userAction;
-
-  ListBuilder<ProviderAccessPolicyResponse>? _accessPolicies;
-  ListBuilder<ProviderAccessPolicyResponse> get accessPolicies =>
-      _$this._accessPolicies ??= ListBuilder<ProviderAccessPolicyResponse>();
-  set accessPolicies(
-          ListBuilder<ProviderAccessPolicyResponse>? accessPolicies) =>
-      _$this._accessPolicies = accessPolicies;
-
-  ProviderAccessPolicy? _defaultAccessPolicyId;
-  ProviderAccessPolicy? get defaultAccessPolicyId =>
-      _$this._defaultAccessPolicyId;
-  set defaultAccessPolicyId(ProviderAccessPolicy? defaultAccessPolicyId) =>
-      _$this._defaultAccessPolicyId = defaultAccessPolicyId;
-
-  ProviderEvidenceState? _evidenceState;
-  ProviderEvidenceState? get evidenceState => _$this._evidenceState;
-  set evidenceState(ProviderEvidenceState? evidenceState) =>
-      _$this._evidenceState = evidenceState;
 
   ListBuilder<String>? _hosts;
   ListBuilder<String> get hosts => _$this._hosts ??= ListBuilder<String>();
@@ -272,11 +162,6 @@ class ProviderStatusResponseBuilder
       _$this._hostSuffixes ??= ListBuilder<String>();
   set hostSuffixes(ListBuilder<String>? hostSuffixes) =>
       _$this._hostSuffixes = hostSuffixes;
-
-  DateTime? _routeRetryAt;
-  DateTime? get routeRetryAt => _$this._routeRetryAt;
-  set routeRetryAt(DateTime? routeRetryAt) =>
-      _$this._routeRetryAt = routeRetryAt;
 
   ProviderStatusResponseBuilder() {
     ProviderStatusResponse._defaults(this);
@@ -290,22 +175,12 @@ class ProviderStatusResponseBuilder
       _registered = $v.registered;
       _extractorExists = $v.extractorExists;
       _capabilities = $v.capabilities.toBuilder();
-      _accessModes = $v.accessModes.toBuilder();
-      _accessState = $v.accessState;
+      _identity = $v.identity;
       _status = $v.status;
-      _lastCheckedAt = $v.lastCheckedAt;
-      _lastCheckSucceeded = $v.lastCheckSucceeded;
       _downloadSupported = $v.downloadSupported;
-      _downloadAvailable = $v.downloadAvailable;
-      _lastMediaVerifiedAt = $v.lastMediaVerifiedAt;
-      _lastVerifiedAt = $v.lastVerifiedAt;
       _userAction = $v.userAction;
-      _accessPolicies = $v.accessPolicies.toBuilder();
-      _defaultAccessPolicyId = $v.defaultAccessPolicyId;
-      _evidenceState = $v.evidenceState;
       _hosts = $v.hosts.toBuilder();
       _hostSuffixes = $v.hostSuffixes.toBuilder();
-      _routeRetryAt = $v.routeRetryAt;
       _$v = null;
     }
     return this;
@@ -338,42 +213,23 @@ class ProviderStatusResponseBuilder
             extractorExists: BuiltValueNullFieldError.checkNotNull(
                 extractorExists, r'ProviderStatusResponse', 'extractorExists'),
             capabilities: capabilities.build(),
-            accessModes: accessModes.build(),
-            accessState: BuiltValueNullFieldError.checkNotNull(
-                accessState, r'ProviderStatusResponse', 'accessState'),
+            identity: BuiltValueNullFieldError.checkNotNull(
+                identity, r'ProviderStatusResponse', 'identity'),
             status: BuiltValueNullFieldError.checkNotNull(
                 status, r'ProviderStatusResponse', 'status'),
-            lastCheckedAt: lastCheckedAt,
-            lastCheckSucceeded: lastCheckSucceeded,
             downloadSupported: BuiltValueNullFieldError.checkNotNull(
                 downloadSupported,
                 r'ProviderStatusResponse',
                 'downloadSupported'),
-            downloadAvailable: BuiltValueNullFieldError.checkNotNull(
-                downloadAvailable,
-                r'ProviderStatusResponse',
-                'downloadAvailable'),
-            lastMediaVerifiedAt: lastMediaVerifiedAt,
-            lastVerifiedAt: lastVerifiedAt,
             userAction: userAction,
-            accessPolicies: accessPolicies.build(),
-            defaultAccessPolicyId: defaultAccessPolicyId,
-            evidenceState: BuiltValueNullFieldError.checkNotNull(
-                evidenceState, r'ProviderStatusResponse', 'evidenceState'),
             hosts: hosts.build(),
             hostSuffixes: hostSuffixes.build(),
-            routeRetryAt: routeRetryAt,
           );
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'capabilities';
         capabilities.build();
-        _$failedField = 'accessModes';
-        accessModes.build();
-
-        _$failedField = 'accessPolicies';
-        accessPolicies.build();
 
         _$failedField = 'hosts';
         hosts.build();

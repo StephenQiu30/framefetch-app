@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 查询平台能力状态
 
-返回不含凭据、出口地址和 Canary 目标的能力快照。
+返回 Registry 声明的能力与身份要求。
 
 ### Example
 ```dart

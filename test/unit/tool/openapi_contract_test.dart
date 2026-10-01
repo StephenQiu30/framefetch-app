@@ -7,6 +7,69 @@ import '../../../tool/openapi/openapi_config.dart';
 import '../../../tool/openapi/openapi_contract.dart';
 
 void main() {
+  test('freezes the 13 failure classes and safe execution evidence', () {
+    final source =
+        jsonDecode(
+              File(
+                'contracts/openapi/video-server.openapi.json',
+              ).readAsStringSync(),
+            )
+            as Map<String, dynamic>;
+    final schemas =
+        (source['components'] as Map<String, dynamic>)['schemas']
+            as Map<String, dynamic>;
+    final classes = schemas['FailureClass'] as Map<String, dynamic>;
+    expect(
+      classes['enum'],
+      unorderedEquals([
+        'network_blocked',
+        'challenge',
+        'login_required',
+        'identity_unavailable',
+        'rate_limited',
+        'content_unavailable',
+        'content_protected',
+        'extractor_broken',
+        'format_unavailable',
+        'transient',
+        'runtime_unavailable',
+        'invalid_input',
+        'context_changed',
+      ]),
+    );
+    final failure = schemas['IntentFailureResponse'] as Map<String, dynamic>;
+    final properties = failure['properties'] as Map<String, dynamic>;
+    expect(properties, contains('gate'));
+    expect(properties, contains('evidence'));
+    final evidence = properties['evidence'] as Map<String, dynamic>;
+    final evidenceValues =
+        evidence['additionalProperties'] as Map<String, dynamic>;
+    expect(
+      evidenceValues['oneOf'],
+      unorderedEquals([
+        {'type': 'string'},
+        {'type': 'integer'},
+        {'type': 'boolean'},
+        {'type': 'null'},
+      ]),
+    );
+    final gate = properties['gate'] as Map<String, dynamic>;
+    expect(gate['enum'], ['①', '②', '③', 'none']);
+    expect(gate['x-enum-varnames'], [
+      'gateOne',
+      'gateTwo',
+      'gateThree',
+      'none',
+    ]);
+    final stages = properties['stage'] as Map<String, dynamic>;
+    expect(stages['enum'], contains('publish'));
+    final codes = schemas['DownloadErrorCode'] as Map<String, dynamic>;
+    expect(
+      codes['enum'],
+      containsAll(['identity_unavailable', 'rate_limited', 'context_changed']),
+    );
+  });
+
   test('retains business filters and all reviewed App operations', () {
     final decoded =
         jsonDecode(
@@ -28,17 +91,17 @@ void main() {
         (selectedUsers['get'] as Map<String, dynamic>)['parameters']
             as List<dynamic>;
 
-    expect(selectedPaths, hasLength(53));
+    expect(selectedPaths, hasLength(52));
     expect(
       selectedPaths.values.cast<Map<String, dynamic>>().fold<int>(
         0,
         (total, path) => total + path.length,
       ),
-      62,
+      61,
     );
     expect(selectedPaths['/api/users/me'], contains('patch'));
     expect(selectedPaths['/api/admin/ai-providers'], contains('post'));
-    expect(selectedPaths['/api/admin/provider-runtime'], contains('get'));
+    expect(selectedPaths, isNot(contains('/api/admin/provider-runtime')));
     expect(
       selectedPaths['/api/admin/ai-providers/{provider_key}'],
       contains('delete'),

@@ -11,11 +11,11 @@ part 'intent_request.g.dart';
 /// IntentRequest
 ///
 /// Properties:
-/// * [input] - 公开媒体地址或包含唯一媒体地址的分享文案。
+/// * [input] - 媒体地址或包含唯一媒体地址的分享文案。
 @BuiltValue()
 abstract class IntentRequest
     implements Built<IntentRequest, IntentRequestBuilder> {
-  /// 公开媒体地址或包含唯一媒体地址的分享文案。
+  /// 媒体地址或包含唯一媒体地址的分享文案。
   @BuiltValueField(wireName: r'input')
   String get input;
 

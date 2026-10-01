@@ -13,6 +13,36 @@ import '../../../support/data_fakes.dart';
 import '../../../support/shad_test_app.dart';
 
 void main() {
+  testWidgets('context changes require new inspection instead of retry', (
+    tester,
+  ) async {
+    final job = downloadDetailFixture().rebuild(
+      (b) => b
+        ..status = DownloadStatus.failed
+        ..errorCode = DownloadErrorCode.contextChanged
+        ..fileAvailable = false,
+    );
+    final item = downloadHistoryFixture().items.first.rebuild(
+      (b) => b
+        ..status = DownloadStatus.failed
+        ..errorCode = DownloadErrorCode.contextChanged
+        ..fileAvailable = false,
+    );
+    var calls = 0;
+    await _pumpRecovery(tester, job, item, () => calls++);
+    expect(find.text('重新下载'), findsNothing);
+    expect(find.byKey(Key('retry-download-${job.id}')), findsNothing);
+    await tester.drag(
+      find.byKey(Key('download-history-item-${item.id}')),
+      const Offset(-600, 0),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byKey(Key('reparse-download-${job.id}')), findsOneWidget);
+    expect(find.text('重新解析'), findsWidgets);
+    expect(calls, 0);
+    expect(tester.takeException(), isNull);
+  });
+
   for (final status in [
     DownloadStatus.failed,
     DownloadStatus.cancelled,
@@ -34,43 +64,7 @@ void main() {
           ..fileAvailable = false,
       );
       var calls = 0;
-      await pumpShadWidget(
-        tester,
-        ProviderScope(
-          overrides: [
-            downloadRetryProvider(job.id).overrideWithValue(
-              DownloadRetry(
-                execute: (_) async {
-                  calls++;
-                  return job;
-                },
-                sessionGeneration: () => 0,
-              ),
-            ),
-          ],
-          child: ShadTestApp(
-            locale: const Locale('zh'),
-            theme: AppTheme.light,
-            supportedLocales: AppLocalizations.supportedLocales,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-            ],
-            home: Scaffold(
-              body: Column(
-                children: [
-                  DownloadTaskActions(job: job),
-                  DownloadHistoryItem(item: item, onTap: () {}),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-      await tester.pump();
-      await tester.pumpAndSettle();
+      await _pumpRecovery(tester, job, item, () => calls++);
       expect(find.text('重新下载'), findsNothing);
       expect(find.byKey(Key('retry-download-${job.id}')), findsNothing);
       expect(find.text('返回首页重新导入'), findsWidgets);
@@ -78,4 +72,49 @@ void main() {
       expect(tester.takeException(), isNull);
     });
   }
+}
+
+Future<void> _pumpRecovery(
+  WidgetTester tester,
+  DownloadResponse job,
+  DownloadHistoryItemResponse item,
+  VoidCallback onRetry,
+) async {
+  await pumpShadWidget(
+    tester,
+    ProviderScope(
+      overrides: [
+        downloadRetryProvider(job.id).overrideWithValue(
+          DownloadRetry(
+            execute: (_) async {
+              onRetry();
+              return job;
+            },
+            sessionGeneration: () => 0,
+          ),
+        ),
+      ],
+      child: ShadTestApp(
+        locale: const Locale('zh'),
+        theme: AppTheme.light,
+        supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: Scaffold(
+          body: Column(
+            children: [
+              DownloadTaskActions(job: job),
+              DownloadHistoryItem(item: item, onTap: () {}),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+  await tester.pump();
+  await tester.pumpAndSettle();
 }

@@ -12,16 +12,14 @@ part 'intent_status.g.dart';
 class IntentStatus extends EnumClass {
   @BuiltValueEnumConst(wireName: r'queued')
   static const IntentStatus queued = _$queued;
-  @BuiltValueEnumConst(wireName: r'preparing')
-  static const IntentStatus preparing = _$preparing;
   @BuiltValueEnumConst(wireName: r'resolving')
   static const IntentStatus resolving = _$resolving;
-  @BuiltValueEnumConst(wireName: r'retry_wait')
-  static const IntentStatus retryWait = _$retryWait;
   @BuiltValueEnumConst(wireName: r'ready')
   static const IntentStatus ready = _$ready;
   @BuiltValueEnumConst(wireName: r'handed_off')
   static const IntentStatus handedOff = _$handedOff;
+  @BuiltValueEnumConst(wireName: r'cancelling')
+  static const IntentStatus cancelling = _$cancelling;
   @BuiltValueEnumConst(wireName: r'cancelled')
   static const IntentStatus cancelled = _$cancelled;
   @BuiltValueEnumConst(wireName: r'expired')

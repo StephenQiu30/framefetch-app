@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 import 'package:video_server_api/video_server_api.dart';
 
-// tests for ProviderAccessState
+// tests for ProviderIdentity
 void main() {
-  group(ProviderAccessState, () {});
+  group(ProviderIdentity, () {});
 }

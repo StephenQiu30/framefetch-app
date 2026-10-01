@@ -42,7 +42,7 @@ abstract class ProviderCatalogEntryResponse
 
   @BuiltValueField(wireName: r'system_status')
   ProviderSupportStatus get systemStatus;
-  // enum systemStatusEnum {  unknown,  verified,  degraded,  access_required,  rate_limited,  blocked,  disabled,  unsupported,  };
+  // enum systemStatusEnum {  unknown,  disabled,  unsupported,  };
 
   @BuiltValueField(wireName: r'created_at')
   DateTime get createdAt;

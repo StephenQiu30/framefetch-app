@@ -16,6 +16,58 @@ import '../../../support/auth_fakes.dart';
 import '../../../support/intake_fakes.dart';
 
 void main() {
+  test('does not refresh a cancelled intent', () async {
+    final container = _container(FakeDownloadIntakeRepository());
+    addTearDown(container.dispose);
+    final intents =
+        container.read(downloadIntentRepositoryProvider)
+            as FakeDownloadIntentRepository;
+    intents.status = IntentStatus.cancelled;
+    final controller = container.read(
+      downloadIntakeControllerProvider.notifier,
+    );
+    await controller.inspect('https://media.example/cancelled');
+    await controller.refreshIntent();
+    expect(intents.refreshCount, 0);
+    expect(
+      container.read(downloadIntakeControllerProvider).intent?.status,
+      IntentStatus.cancelled,
+    );
+  });
+
+  testWidgets('waits for cancellation confirmation without new work', (
+    tester,
+  ) async {
+    final container = _container(FakeDownloadIntakeRepository());
+    addTearDown(container.dispose);
+    final intents =
+        container.read(downloadIntentRepositoryProvider)
+            as FakeDownloadIntentRepository;
+    intents.status = IntentStatus.cancelling;
+    final controller = container.read(
+      downloadIntakeControllerProvider.notifier,
+    );
+    await controller.inspect('https://media.example/cancelling');
+    expect(container.read(downloadIntakeControllerProvider).cancelling, isTrue);
+    await controller.inspect('https://media.example/replacement');
+    await controller.refreshIntent();
+    await controller.cancelIntent();
+    controller.clearResult();
+    expect(intents.inputs, hasLength(1));
+    expect(intents.refreshCount, 0);
+    expect(intents.cancelCount, 0);
+    intents.status = IntentStatus.cancelled;
+    await tester.pump(const Duration(seconds: 2));
+    expect(
+      container.read(downloadIntakeControllerProvider).intent?.status,
+      IntentStatus.cancelled,
+    );
+    expect(
+      container.read(downloadIntakeControllerProvider).cancelling,
+      isFalse,
+    );
+  });
+
   testWidgets('reconciles a terminal write after the deadline using only GET', (
     tester,
   ) async {
@@ -25,7 +77,7 @@ void main() {
         container.read(downloadIntentRepositoryProvider)
             as FakeDownloadIntentRepository;
     final overdue = intentFixture(
-      status: IntentStatus.retryWait,
+      status: IntentStatus.resolving,
     ).rebuild((b) => b..deadline = DateTime.utc(2020));
     intents.pendingCreate = Future.value(overdue);
     final controller = container.read(
@@ -52,7 +104,7 @@ void main() {
       final intents =
           container.read(downloadIntentRepositoryProvider)
               as FakeDownloadIntentRepository;
-      intents.status = IntentStatus.retryWait;
+      intents.status = IntentStatus.resolving;
       final controller = container.read(
         downloadIntakeControllerProvider.notifier,
       );
@@ -76,30 +128,6 @@ void main() {
     },
   );
 
-  test(
-    'keeps a retry key within one policy and changes it for a new policy',
-    () async {
-      final repository = FakeDownloadIntakeRepository();
-      final container = _container(repository);
-      final intents =
-          container.read(downloadIntentRepositoryProvider)
-              as FakeDownloadIntentRepository;
-      addTearDown(container.dispose);
-      final controller = container.read(
-        downloadIntakeControllerProvider.notifier,
-      );
-      const url = 'https://www.youtube.com/watch?v=owned';
-      await controller.inspect(url, accessPolicy: ProviderAccessPolicy.public);
-      await controller.inspect(url, accessPolicy: ProviderAccessPolicy.public);
-      await controller.inspect(
-        url,
-        accessPolicy: ProviderAccessPolicy.operatorPublic,
-      );
-      expect(intents.keys[0], intents.keys[1]);
-      expect(intents.keys[0], isNot(repository.idempotencyKeys.single));
-      expect(repository.accessPolicies, [ProviderAccessPolicy.operatorPublic]);
-    },
-  );
   test('inspects a public URL and selects the first real format', () async {
     final repository = FakeDownloadIntakeRepository();
     final container = _container(repository);
@@ -549,40 +577,6 @@ void main() {
       container.read(downloadIntakeControllerProvider).intent?.status,
       IntentStatus.ready,
     );
-  });
-
-  test('legacy inspection expiry requires a new explicit parse', () async {
-    final intake = FakeDownloadIntakeRepository();
-    intake.inspection = intake.inspection.rebuild(
-      (builder) => builder..expiresAt = DateTime.utc(2020),
-    );
-    final container = _container(intake);
-    addTearDown(container.dispose);
-    final controller = container.read(
-      downloadIntakeControllerProvider.notifier,
-    );
-    const input = 'https://media.example/legacy';
-    await controller.inspect(
-      input,
-      accessPolicy: ProviderAccessPolicy.operatorPublic,
-    );
-    final firstKey = intake.idempotencyKeys.single;
-
-    expect(await controller.createDownload(), isNull);
-    expect(container.read(downloadIntakeControllerProvider).inspection, isNull);
-    expect(
-      (container.read(downloadIntakeControllerProvider).error
-              as DataRequestFailure)
-          .code,
-      'resource_expired',
-    );
-    await controller.inspect(
-      input,
-      accessPolicy: ProviderAccessPolicy.operatorPublic,
-    );
-
-    expect(intake.idempotencyKeys.last, isNot(firstKey));
-    expect(intake.createdFormats, isEmpty);
   });
 }
 

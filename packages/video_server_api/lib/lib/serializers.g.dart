@@ -46,7 +46,6 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(ApiResponseProviderCatalogEntryResponse.serializer)
       ..add(ApiResponseProviderCatalogListResponse.serializer)
       ..add(ApiResponseProviderListResponse.serializer)
-      ..add(ApiResponseProviderRuntimeListResponse.serializer)
       ..add(ApiResponseSourceDiscoveryResponse.serializer)
       ..add(ApiResponseStorageCleanupResponse.serializer)
       ..add(ApiResponseStoredFileListResponse.serializer)
@@ -96,11 +95,9 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(ErrorCode.serializer)
       ..add(ErrorResponse.serializer)
       ..add(EvidenceSummaryResponse.serializer)
+      ..add(EvidenceValue.serializer)
       ..add(ExecutionMode.serializer)
       ..add(FailureClass.serializer)
-      ..add(FailureEvidenceKind.serializer)
-      ..add(FailurePhase.serializer)
-      ..add(FailureScope.serializer)
       ..add(FormatResponse.serializer)
       ..add(FpsBucket.serializer)
       ..add(HighlightResponse.serializer)
@@ -111,6 +108,8 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(InspectionRequest.serializer)
       ..add(InspectionResponse.serializer)
       ..add(IntentFailureResponse.serializer)
+      ..add(IntentFailureResponseGateEnum.serializer)
+      ..add(IntentFailureResponseStageEnum.serializer)
       ..add(IntentHistoryItemResponse.serializer)
       ..add(IntentHistoryItemResponseNextActionEnum.serializer)
       ..add(IntentHistoryResponse.serializer)
@@ -132,19 +131,11 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(ProblemDetails.serializer)
       ..add(ProductionAdviceResponse.serializer)
       ..add(ProtectionState.serializer)
-      ..add(ProviderAccessMode.serializer)
-      ..add(ProviderAccessPolicy.serializer)
-      ..add(ProviderAccessPolicyResponse.serializer)
-      ..add(ProviderAccessState.serializer)
       ..add(ProviderCapability.serializer)
       ..add(ProviderCatalogEntryResponse.serializer)
       ..add(ProviderCatalogListResponse.serializer)
-      ..add(ProviderEvidenceState.serializer)
+      ..add(ProviderIdentity.serializer)
       ..add(ProviderListResponse.serializer)
-      ..add(ProviderRuntimeListResponse.serializer)
-      ..add(ProviderRuntimeResponse.serializer)
-      ..add(ProviderRuntimeResponseLoginStateEnum.serializer)
-      ..add(ProviderRuntimeResponseSourceStateEnum.serializer)
       ..add(ProviderStatusResponse.serializer)
       ..add(ProviderSupportStatus.serializer)
       ..add(PublicUrlInspectionSource.serializer)
@@ -247,13 +238,6 @@ Serializers _$serializers = (Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(ProviderCapability)]),
           () => ListBuilder<ProviderCapability>())
       ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(ProviderAccessMode)]),
-          () => ListBuilder<ProviderAccessMode>())
-      ..addBuilderFactory(
-          const FullType(
-              BuiltList, const [const FullType(ProviderAccessPolicyResponse)]),
-          () => ListBuilder<ProviderAccessPolicyResponse>())
-      ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => ListBuilder<String>())
       ..addBuilderFactory(
@@ -263,10 +247,6 @@ Serializers _$serializers = (Serializers().toBuilder()
           const FullType(
               BuiltList, const [const FullType(ProviderCatalogEntryResponse)]),
           () => ListBuilder<ProviderCatalogEntryResponse>())
-      ..addBuilderFactory(
-          const FullType(
-              BuiltList, const [const FullType(ProviderRuntimeResponse)]),
-          () => ListBuilder<ProviderRuntimeResponse>())
       ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType(ProviderStatusResponse)]),
@@ -398,7 +378,13 @@ Serializers _$serializers = (Serializers().toBuilder()
           () => ListBuilder<String>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
-          () => ListBuilder<String>()))
+          () => ListBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(BuiltMap, const [
+            const FullType(String),
+            const FullType.nullable(EvidenceValue)
+          ]),
+          () => MapBuilder<String, EvidenceValue?>()))
     .build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

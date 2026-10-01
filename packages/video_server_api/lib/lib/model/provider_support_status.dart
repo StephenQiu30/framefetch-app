@@ -12,16 +12,6 @@ part 'provider_support_status.g.dart';
 class ProviderSupportStatus extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown')
   static const ProviderSupportStatus unknown = _$unknown;
-  @BuiltValueEnumConst(wireName: r'verified')
-  static const ProviderSupportStatus verified = _$verified;
-  @BuiltValueEnumConst(wireName: r'degraded')
-  static const ProviderSupportStatus degraded = _$degraded;
-  @BuiltValueEnumConst(wireName: r'access_required')
-  static const ProviderSupportStatus accessRequired = _$accessRequired;
-  @BuiltValueEnumConst(wireName: r'rate_limited')
-  static const ProviderSupportStatus rateLimited = _$rateLimited;
-  @BuiltValueEnumConst(wireName: r'blocked')
-  static const ProviderSupportStatus blocked = _$blocked;
   @BuiltValueEnumConst(wireName: r'disabled')
   static const ProviderSupportStatus disabled = _$disabled;
   @BuiltValueEnumConst(wireName: r'unsupported')

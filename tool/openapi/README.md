@@ -30,10 +30,14 @@ OPENAPI_SCHEMA_URL=https://api.example.com/openapi.json dart run tool/openapi.da
 
 注册 API 要求先发送邮箱验证码。集成测试仅在隔离 API＋本地 SMTP 捕获器上运行，并通过 `--dart-define=REGISTRATION_TEST_INBOX_URL=http://127.0.0.1:<捕获器端口>/code` 读取测试邮件；生产 API 不提供验证码读取接口，不允许固定验证码或跳过验证。
 
-业务一致性契约包含 53 个路径、62 个操作：持久解析意图与自动恢复查询、历史搜索/状态、用户搜索/身份/启用状态、分页、资料更新、平台与 AI 配置管理、平台运行诊断、DOCX 导出。`exportAnalysisReport` 与缩略图一样按 binary 响应生成，调用不得退回手写 Dio 或携带 Bearer 的外部浏览器链接。
+业务一致性契约包含 52 个路径、61 个操作：持久解析意图与自动恢复查询、历史搜索/状态、用户搜索/身份/启用状态、分页、资料更新、平台与 AI 配置管理、DOCX 导出。`exportAnalysisReport` 与缩略图一样按 binary 响应生成，调用不得退回手写 Dio 或携带 Bearer 的外部浏览器链接。
 
 可选 query 中的 null 代表不发送条件；冻结器去除 nullable 标量的 null 分支，生成客户端据此省略未传参数，避免产生 `role=&is_active=`。测试覆盖空条件、false 与 retry_wait 的实际编码。
 
 共享业务接口的 `{code, message, data}` 包装作为真实契约进入生成包，业务层只允许在 Repository 解包并校验 `data`，不得在页面或手写 Dio 逻辑中绕过。原生认证接口仍按 OpenAPI 的直接响应生成。
 
 服务端 OpenAPI 3.1 的 `ErrorResponse.data` 使用 null-only schema；`dart-dio` 7.22 的 BuiltValue 模板无法为它生成具体 Dart 类型。冻结器仅将这种独立 null-only 字段规范为 nullable string 以满足代码生成，`anyOf`/`oneOf` 中的 null 分支保持不变。该兼容处理不改变线上响应，也不允许应用层读取该字段承载业务数据。
+
+失败 gate 的 `①/②/③/none` 线上枚举保持不变。冻结器通过生成器官方 `x-enum-varnames` 扩展指定 `gateOne/gateTwo/gateThree/none`，避免 `dart-dio` 将圈号清空而生成无效 Dart 标识符；不手改生成文件或改变 HTTP 契约。
+
+失败 evidence 的 string/integer/boolean/null 四种 JSON 原始类型互不重叠。冻结器将这一完整 `anyOf` 组合等价表示为 `oneOf`，避免生成器 AnyOf 响应回序列化越界；类型和值保持不变，回归覆盖真实 JSON 的反序列化及回序列化。

@@ -54,7 +54,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get documentRowActionsHint => '向左轻扫可管理剧本文档。';
 
   @override
-  String get providerStatusDescription => '先查看当前下载支持；需要时再展开单个平台，核对探针与真实任务证据。';
+  String get providerStatusDescription => '这里展示平台的接入与身份要求。下载是否成功以实际文件结果为准。';
 
   @override
   String get loadingData => '正在加载…';
@@ -142,12 +142,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get failureTimeout => '处理超时';
-
-  @override
-  String get failureProviderAccess => '平台需要授权或限制访问';
-
-  @override
-  String get failureProviderTemporary => '平台暂时不可用';
 
   @override
   String get failureStorage => '存储暂时不可用';
@@ -341,31 +335,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get capabilitiesLabel => '能力';
 
   @override
-  String get accessModesLabel => '访问方式';
-
-  @override
-  String get lastVerifiedLabel => '最近验证';
-
-  @override
   String get userActionLabel => '建议操作';
-
-  @override
-  String get providerStatusUnknown => '待验证';
-
-  @override
-  String get providerStatusVerified => '已验证';
-
-  @override
-  String get providerStatusDegraded => '能力受限';
-
-  @override
-  String get providerStatusAccessRequired => '需要访问授权';
-
-  @override
-  String get providerStatusRateLimited => '受到限流';
-
-  @override
-  String get providerStatusBlocked => '当前受阻';
 
   @override
   String get providerStatusDisabled => '已停用';
@@ -396,15 +366,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get capabilityPlaylist => '播放列表';
-
-  @override
-  String get accessModeAnonymous => '匿名访问';
-
-  @override
-  String get accessModeOperatorManaged => '服务端托管';
-
-  @override
-  String get notYetVerified => '尚未验证';
 
   @override
   String get accountDescription => '查看当前账户，管理登录状态。';
@@ -973,9 +934,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get inspectMedia => '解析媒体';
 
   @override
-  String get accessPolicyPublicSession => '服务端自动准备公开访问';
-
-  @override
   String get intentAutomaticAccess => '系统会自动选择公开访问路线。仅在明确获得授权时选择其他策略。';
 
   @override
@@ -988,13 +946,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get intentQueued => '等待解析';
 
   @override
-  String get intentPreparing => '正在准备解析环境';
-
-  @override
   String get intentResolving => '正在解析媒体';
-
-  @override
-  String get intentRetryWait => '正在自动恢复解析';
 
   @override
   String get intentExpired => '解析结果已过期';
@@ -1007,6 +959,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get intentRefreshAction => '更新解析结果';
+
+  @override
+  String get intentCancelling => '正在取消解析';
 
   @override
   String get intentCancelAction => '取消解析';
@@ -1085,31 +1040,12 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get inspectionFailedError => '暂时无法读取视频信息，请检查链接后重试。';
-
-  @override
-  String get inspectionTimeoutError => '媒体解析超时，请稍后重新提交。';
-
-  @override
   String get providerTemporaryError => '媒体平台当前无法完成验证，请稍后重试。';
-
-  @override
-  String get providerSessionError => '系统无法取得内容所需的平台会话，本次自动解析已停止。';
-
-  @override
-  String get accessPolicyLabel => '访问策略';
 
   @override
   String routeCooldownUntil(String time) {
     return '默认线路最早重试时间：$time；到期仍需验证恢复。';
   }
-
-  @override
-  String get providerRuntimeTitle => '读取运行诊断';
-
-  @override
-  String get providerRuntimeDescription =>
-      '仅展示已开放平台的默认线路；快照最多缓存 30 秒。配置和上下文可达不代表真实下载通过。';
 
   @override
   String get providerRouteConfigured => '线路已配置';
@@ -1121,41 +1057,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get providerContextMissing => '上下文不可达或尚未确认';
 
   @override
-  String get providerRuntimeEngine => '引擎';
-
-  @override
-  String get accessPolicyPublic => '公开无会话';
-
-  @override
-  String get accessPolicyOperator => '部署者公开会话';
-
-  @override
-  String get accessPolicyPersonal => '个人授权会话';
-
-  @override
-  String get accessPolicyUnavailable => '未配置或未开放';
-
-  @override
-  String get accessPolicyDescription => '仅处理有权获取的非 DRM 内容；切换策略后需重新解析，不会自动切换会话。';
-
-  @override
-  String get accessPolicyEvidenceMissing => '当前默认线路尚无新鲜验证证据。';
-
-  @override
-  String get providerConfigurationMissing =>
-      '所选访问策略尚未配置。请部署者配置持久来源，或显式选择公开线路重新解析。';
-
-  @override
-  String get providerPolicyNotAllowed => '此来源不允许所选访问策略，请更换策略后重新解析。';
-
-  @override
-  String get providerRegionError => '该媒体在当前服务区域不可用。';
-
-  @override
   String get providerRestrictedError => '该媒体为私有或受访问权限限制，无法处理。';
-
-  @override
-  String get providerDrmError => '该媒体受 DRM 保护，不属于本服务支持范围。';
 
   @override
   String get providerLinkError => '分享链接已失效或无法定位视频，请复制新的公开分享链接。';
@@ -1873,44 +1775,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get analysisRateLimited => 'AI 服务请求过于频繁，请稍后重试。';
 
   @override
-  String get intentAutomaticSessionRecovery =>
-      '系统正在恢复平台会话，将在本次解析期限内自动继续，无需重复提交。';
-
-  @override
-  String get intentPhaseRecognize => '识别链接';
-
-  @override
-  String get intentPhasePrepare => '准备解析环境';
-
-  @override
-  String get intentPhaseRead => '读取作品';
-
-  @override
-  String get intentPhaseSelect => '检查格式';
-
-  @override
-  String get intentPhaseProbe => '检查媒体';
-
-  @override
-  String get intentPhaseTransfer => '获取媒体';
-
-  @override
-  String get intentPhaseValidate => '校验文件';
-
-  @override
-  String get intentPhasePublish => '保存文件';
-
-  @override
-  String get providerChallengeError => '平台要求当前系统无法自动完成的验证，本次解析已停止。';
-
-  @override
-  String get providerTokenError => '平台访问令牌尚不可用，系统无法继续读取此内容。';
+  String get providerChallengeError => '平台要求验证，当前无法继续读取媒体。';
 
   @override
   String get providerExtractorError => '平台页面结构已变化，当前无法读取媒体。';
-
-  @override
-  String get providerMediaProbeError => '作品信息已读取，但媒体地址未通过可用性检查。';
 
   @override
   String get providerEgressError => '当前出口无法连接媒体平台。';
@@ -1919,17 +1787,42 @@ class AppLocalizationsZh extends AppLocalizations {
   String get providerNetworkError => '连接媒体平台时发生临时网络故障。';
 
   @override
-  String get providerSessionSourceError => '批准的平台会话来源仍不可用，自动恢复已结束，本次解析已停止。';
-
-  @override
   String get providerRuntimeError => '解析执行环境暂不可用。';
 
   @override
-  String get providerCapacityError => '解析执行资源正忙或空间不足，请稍后重试。';
+  String get providerRegistered => '已接入';
 
   @override
-  String get intentContextChangedError => '解析环境已变化，需要更新结果并重新确认规格。';
+  String get providerIdentityLabel => '身份要求';
 
   @override
-  String get providerUnknownOutcomeError => '执行中断且无法确认结果，系统已停止重复请求。';
+  String get providerIdentityRequired => '需要登录';
+
+  @override
+  String get providerIdentityOptional => '可选登录';
+
+  @override
+  String get providerIdentityNone => '无需登录';
+
+  @override
+  String get providerLoginRequiredError => '该内容需要登录，请确认部署主机已登录对应平台。';
+
+  @override
+  String get providerContentProtectedError => '该内容受加密保护，无法下载；可导入已取得的文件。';
+
+  @override
+  String get providerUnavailable => '未开放';
+
+  @override
+  String get providerDownloadEnabled => '下载已开放';
+
+  @override
+  String get providerIdentityUnavailableError =>
+      '平台登录材料暂不可用，请检查部署主机的登录状态后重新解析。';
+
+  @override
+  String get providerContextChangedError => '媒体执行上下文已变化，请重新解析链接并确认下载规格。';
+
+  @override
+  String get reparseDownloadAction => '重新解析';
 }

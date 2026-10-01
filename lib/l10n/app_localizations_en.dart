@@ -59,7 +59,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get providerStatusDescription =>
-      'See which providers are available and what access they require.';
+      'Provider registration and identity requirements. Download success is determined by the actual file.';
 
   @override
   String get loadingData => 'Loading…';
@@ -150,14 +150,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get failureTimeout => 'Processing timed out';
-
-  @override
-  String get failureProviderAccess =>
-      'The provider requires access or restricts this content';
-
-  @override
-  String get failureProviderTemporary =>
-      'The provider is temporarily unavailable';
 
   @override
   String get failureStorage => 'Storage is temporarily unavailable';
@@ -373,31 +365,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get capabilitiesLabel => 'Capabilities';
 
   @override
-  String get accessModesLabel => 'Access';
-
-  @override
-  String get lastVerifiedLabel => 'Last verified';
-
-  @override
   String get userActionLabel => 'Suggested action';
-
-  @override
-  String get providerStatusUnknown => 'Pending verification';
-
-  @override
-  String get providerStatusVerified => 'Verified';
-
-  @override
-  String get providerStatusDegraded => 'Degraded';
-
-  @override
-  String get providerStatusAccessRequired => 'Access required';
-
-  @override
-  String get providerStatusRateLimited => 'Rate limited';
-
-  @override
-  String get providerStatusBlocked => 'Blocked';
 
   @override
   String get providerStatusDisabled => 'Disabled';
@@ -428,15 +396,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get capabilityPlaylist => 'Playlist';
-
-  @override
-  String get accessModeAnonymous => 'Anonymous';
-
-  @override
-  String get accessModeOperatorManaged => 'Service-managed';
-
-  @override
-  String get notYetVerified => 'Not yet verified';
 
   @override
   String get accountDescription =>
@@ -1051,10 +1010,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get inspectMedia => 'Inspect media';
 
   @override
-  String get accessPolicyPublicSession =>
-      'Public access prepared by the server';
-
-  @override
   String get intentAutomaticAccess =>
       'The system chooses a public route automatically. Select another policy only with explicit authorization.';
 
@@ -1068,13 +1023,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get intentQueued => 'Waiting to inspect';
 
   @override
-  String get intentPreparing => 'Preparing inspection access';
-
-  @override
   String get intentResolving => 'Inspecting media';
-
-  @override
-  String get intentRetryWait => 'Restoring inspection automatically';
 
   @override
   String get intentExpired => 'Inspection result expired';
@@ -1087,6 +1036,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get intentRefreshAction => 'Update inspection';
+
+  @override
+  String get intentCancelling => 'Cancelling inspection';
 
   @override
   String get intentCancelAction => 'Cancel inspection';
@@ -1174,35 +1126,13 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get inspectionFailedError =>
-      'The media provider did not return a valid inspection. Confirm this is a supported public single-video link.';
-
-  @override
-  String get inspectionTimeoutError =>
-      'Media inspection timed out. Submit it again later.';
-
-  @override
   String get providerTemporaryError =>
       'The media provider cannot complete verification right now. Try again later.';
-
-  @override
-  String get providerSessionError =>
-      'The system could not obtain the platform session required for this media. This automatic inspection has stopped.';
-
-  @override
-  String get accessPolicyLabel => 'Access policy';
 
   @override
   String routeCooldownUntil(String time) {
     return 'Default route: retry no earlier than $time; recovery still needs verification.';
   }
-
-  @override
-  String get providerRuntimeTitle => 'Read runtime diagnostics';
-
-  @override
-  String get providerRuntimeDescription =>
-      'Default routes of visible providers only. Snapshots are cached for at most 30 seconds. Configuration and reachable contexts do not prove a successful download.';
 
   @override
   String get providerRouteConfigured => 'Route configured';
@@ -1216,47 +1146,8 @@ class AppLocalizationsEn extends AppLocalizations {
       'Context unreachable or not yet confirmed';
 
   @override
-  String get providerRuntimeEngine => 'Engine';
-
-  @override
-  String get accessPolicyPublic => 'Public, no session';
-
-  @override
-  String get accessPolicyOperator => 'Operator public session';
-
-  @override
-  String get accessPolicyPersonal => 'Personal authorized session';
-
-  @override
-  String get accessPolicyUnavailable => 'Not configured or admitted';
-
-  @override
-  String get accessPolicyDescription =>
-      'Only authorized, non-DRM media is supported. Changing policy requires reinspection; sessions never switch automatically.';
-
-  @override
-  String get accessPolicyEvidenceMissing =>
-      'No fresh verification evidence for the default route.';
-
-  @override
-  String get providerConfigurationMissing =>
-      'This access policy is not configured. Ask the operator to configure its persistent source, or explicitly select the public route and inspect again.';
-
-  @override
-  String get providerPolicyNotAllowed =>
-      'This source does not admit the selected access policy. Change policy and inspect again.';
-
-  @override
-  String get providerRegionError =>
-      'This media is unavailable from the current service region.';
-
-  @override
   String get providerRestrictedError =>
       'This media is private or access-restricted and cannot be processed.';
-
-  @override
-  String get providerDrmError =>
-      'This media is DRM protected and is outside the supported service boundary.';
 
   @override
   String get providerLinkError =>
@@ -2020,48 +1911,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get analysisRateLimited => 'Too many AI requests. Try again later.';
 
   @override
-  String get intentAutomaticSessionRecovery =>
-      'The system is restoring the platform session and will continue within the original deadline. No resubmission is needed.';
-
-  @override
-  String get intentPhaseRecognize => 'Identify link';
-
-  @override
-  String get intentPhasePrepare => 'Prepare access';
-
-  @override
-  String get intentPhaseRead => 'Read media information';
-
-  @override
-  String get intentPhaseSelect => 'Check formats';
-
-  @override
-  String get intentPhaseProbe => 'Check media availability';
-
-  @override
-  String get intentPhaseTransfer => 'Transfer media';
-
-  @override
-  String get intentPhaseValidate => 'Validate file';
-
-  @override
-  String get intentPhasePublish => 'Publish file';
-
-  @override
   String get providerChallengeError =>
-      'The platform requires verification that the system cannot complete automatically. This inspection has stopped.';
-
-  @override
-  String get providerTokenError =>
-      'The platform access token is unavailable. The system cannot continue reading this media.';
+      'The platform requires verification. Media cannot be read right now.';
 
   @override
   String get providerExtractorError =>
       'The platform page structure has changed. Media cannot be read with the current adapter.';
-
-  @override
-  String get providerMediaProbeError =>
-      'Media information was read, but its media address failed the availability check.';
 
   @override
   String get providerEgressError =>
@@ -2072,22 +1927,46 @@ class AppLocalizationsEn extends AppLocalizations {
       'A temporary network failure occurred while connecting to the media platform.';
 
   @override
-  String get providerSessionSourceError =>
-      'The approved platform session source remains unavailable. Automatic recovery ended and this inspection has stopped.';
-
-  @override
   String get providerRuntimeError =>
       'The inspection runtime is temporarily unavailable.';
 
   @override
-  String get providerCapacityError =>
-      'Inspection resources are busy or out of space. Try again later.';
+  String get providerRegistered => 'Registered';
 
   @override
-  String get intentContextChangedError =>
-      'The access context has changed. Update the inspection and confirm the format again.';
+  String get providerIdentityLabel => 'Identity';
 
   @override
-  String get providerUnknownOutcomeError =>
-      'Execution was interrupted and its outcome could not be confirmed. The system stopped duplicate requests.';
+  String get providerIdentityRequired => 'Login required';
+
+  @override
+  String get providerIdentityOptional => 'Login optional';
+
+  @override
+  String get providerIdentityNone => 'No login required';
+
+  @override
+  String get providerLoginRequiredError =>
+      'This content requires login. Confirm the deployment host is signed into the platform.';
+
+  @override
+  String get providerContentProtectedError =>
+      'This content is protected and cannot be downloaded. Import a file you have already obtained.';
+
+  @override
+  String get providerUnavailable => 'Not enabled';
+
+  @override
+  String get providerDownloadEnabled => 'Download enabled';
+
+  @override
+  String get providerIdentityUnavailableError =>
+      'Platform login material is unavailable. Check the deployment host login and inspect the link again.';
+
+  @override
+  String get providerContextChangedError =>
+      'The media execution context changed. Inspect the link again and confirm the download format.';
+
+  @override
+  String get reparseDownloadAction => 'Inspect link again';
 }
