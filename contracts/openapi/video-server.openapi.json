@@ -12932,7 +12932,7 @@
         "type": "string",
         "enum": [
           "none",
-          "optional",
+          "prefer",
           "required"
         ],
         "title": "ProviderIdentity"

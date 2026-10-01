@@ -45,6 +45,7 @@ void main() {
     expect(find.byType(ShadTabs<String>), findsOneWidget);
     expect(find.byType(ChoiceChip), findsNothing);
     expect(find.text('YouTube'), findsOneWidget);
+    expect(find.textContaining('优先登录', findRichText: true), findsNWidgets(2));
     expect(find.text('需要处理的平台'), findsOneWidget);
 
     await tester.tap(find.byKey(const Key('provider-filter-disabled')));

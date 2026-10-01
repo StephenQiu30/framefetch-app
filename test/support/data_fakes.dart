@@ -321,7 +321,7 @@ ProviderListResponse providerFixture() {
   final item = ProviderStatusResponse(
     (builder) => builder
       ..key = 'youtube'
-      ..identity = ProviderIdentity.optional
+      ..identity = ProviderIdentity.prefer
       ..hosts.replace(['www.youtube.com', 'youtu.be'])
       ..hostSuffixes.clear()
       ..displayName = 'YouTube'

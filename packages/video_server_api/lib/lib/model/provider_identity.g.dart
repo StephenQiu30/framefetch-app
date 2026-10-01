@@ -7,7 +7,7 @@ part of 'provider_identity.dart';
 // **************************************************************************
 
 const ProviderIdentity _$none = const ProviderIdentity._('none');
-const ProviderIdentity _$optional = const ProviderIdentity._('optional');
+const ProviderIdentity _$prefer = const ProviderIdentity._('prefer');
 const ProviderIdentity _$required_ = const ProviderIdentity._('required_');
 const ProviderIdentity _$unknownDefaultOpenApi =
     const ProviderIdentity._('unknownDefaultOpenApi');
@@ -16,8 +16,8 @@ ProviderIdentity _$valueOf(String name) {
   switch (name) {
     case 'none':
       return _$none;
-    case 'optional':
-      return _$optional;
+    case 'prefer':
+      return _$prefer;
     case 'required_':
       return _$required_;
     case 'unknownDefaultOpenApi':
@@ -30,7 +30,7 @@ ProviderIdentity _$valueOf(String name) {
 final BuiltSet<ProviderIdentity> _$values =
     BuiltSet<ProviderIdentity>(const <ProviderIdentity>[
   _$none,
-  _$optional,
+  _$prefer,
   _$required_,
   _$unknownDefaultOpenApi,
 ]);
@@ -38,7 +38,7 @@ final BuiltSet<ProviderIdentity> _$values =
 class _$ProviderIdentityMeta {
   const _$ProviderIdentityMeta();
   ProviderIdentity get none => _$none;
-  ProviderIdentity get optional => _$optional;
+  ProviderIdentity get prefer => _$prefer;
   ProviderIdentity get required_ => _$required_;
   ProviderIdentity get unknownDefaultOpenApi => _$unknownDefaultOpenApi;
   ProviderIdentity valueOf(String name) => _$valueOf(name);
@@ -57,13 +57,13 @@ class _$ProviderIdentitySerializer
     implements PrimitiveSerializer<ProviderIdentity> {
   static const Map<String, Object> _toWire = const <String, Object>{
     'none': 'none',
-    'optional': 'optional',
+    'prefer': 'prefer',
     'required_': 'required',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
     'none': 'none',
-    'optional': 'optional',
+    'prefer': 'prefer',
     'required': 'required_',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };

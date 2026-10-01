@@ -1799,7 +1799,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get providerIdentityRequired => '需要登录';
 
   @override
-  String get providerIdentityOptional => '可选登录';
+  String get providerIdentityPrefer => '优先登录';
 
   @override
   String get providerIdentityNone => '无需登录';

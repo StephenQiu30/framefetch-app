@@ -459,7 +459,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('YouTube'), findsOneWidget);
     expect(find.textContaining('单视频', findRichText: true), findsOneWidget);
-    expect(find.textContaining('可选登录', findRichText: true), findsOneWidget);
+    expect(find.textContaining('优先登录', findRichText: true), findsOneWidget);
     expect(providerRepository.calls, 1);
 
     await tester.tap(find.byKey(const Key('app-tab-0')));

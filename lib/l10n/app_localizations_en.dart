@@ -1940,7 +1940,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get providerIdentityRequired => 'Login required';
 
   @override
-  String get providerIdentityOptional => 'Login optional';
+  String get providerIdentityPrefer => 'Prefer login';
 
   @override
   String get providerIdentityNone => 'No login required';
