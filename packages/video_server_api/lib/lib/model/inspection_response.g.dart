@@ -8,6 +8,8 @@ part of 'inspection_response.dart';
 
 class _$InspectionResponse extends InspectionResponse {
   @override
+  final ExecutionContext? executionContext;
+  @override
   final String id;
   @override
   final String extractorKey;
@@ -51,7 +53,8 @@ class _$InspectionResponse extends InspectionResponse {
       (InspectionResponseBuilder()..update(updates))._build();
 
   _$InspectionResponse._(
-      {required this.id,
+      {this.executionContext,
+      required this.id,
       required this.extractorKey,
       required this.providerMediaId,
       required this.title,
@@ -84,6 +87,7 @@ class _$InspectionResponse extends InspectionResponse {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is InspectionResponse &&
+        executionContext == other.executionContext &&
         id == other.id &&
         extractorKey == other.extractorKey &&
         providerMediaId == other.providerMediaId &&
@@ -108,6 +112,7 @@ class _$InspectionResponse extends InspectionResponse {
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, executionContext.hashCode);
     _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, extractorKey.hashCode);
     _$hash = $jc(_$hash, providerMediaId.hashCode);
@@ -134,6 +139,7 @@ class _$InspectionResponse extends InspectionResponse {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'InspectionResponse')
+          ..add('executionContext', executionContext)
           ..add('id', id)
           ..add('extractorKey', extractorKey)
           ..add('providerMediaId', providerMediaId)
@@ -160,6 +166,12 @@ class _$InspectionResponse extends InspectionResponse {
 class InspectionResponseBuilder
     implements Builder<InspectionResponse, InspectionResponseBuilder> {
   _$InspectionResponse? _$v;
+
+  ExecutionContextBuilder? _executionContext;
+  ExecutionContextBuilder get executionContext =>
+      _$this._executionContext ??= ExecutionContextBuilder();
+  set executionContext(ExecutionContextBuilder? executionContext) =>
+      _$this._executionContext = executionContext;
 
   String? _id;
   String? get id => _$this._id;
@@ -256,6 +268,7 @@ class InspectionResponseBuilder
   InspectionResponseBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _executionContext = $v.executionContext?.toBuilder();
       _id = $v.id;
       _extractorKey = $v.extractorKey;
       _providerMediaId = $v.providerMediaId;
@@ -298,6 +311,7 @@ class InspectionResponseBuilder
     try {
       _$result = _$v ??
           _$InspectionResponse._(
+            executionContext: _executionContext?.build(),
             id: BuiltValueNullFieldError.checkNotNull(
                 id, r'InspectionResponse', 'id'),
             extractorKey: BuiltValueNullFieldError.checkNotNull(
@@ -335,6 +349,9 @@ class InspectionResponseBuilder
     } catch (_) {
       late String _$failedField;
       try {
+        _$failedField = 'executionContext';
+        _executionContext?.build();
+
         _$failedField = 'formats';
         formats.build();
       } catch (e) {
