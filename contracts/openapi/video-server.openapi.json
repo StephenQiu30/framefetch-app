@@ -11215,6 +11215,18 @@
       },
       "DownloadResponse": {
         "properties": {
+          "execution_context": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ExecutionContext"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "实际执行的十二字段非敏感上下文；本地导入无解析上下文。",
+            "readOnly": true
+          },
           "id": {
             "type": "string",
             "format": "uuid",
@@ -11649,6 +11661,89 @@
         ],
         "title": "EvidenceSummaryResponse"
       },
+      "ExecutionContext": {
+        "properties": {
+          "provider_key": {
+            "type": "string",
+            "title": "Provider Key"
+          },
+          "registry_revision": {
+            "type": "string",
+            "title": "Registry Revision"
+          },
+          "resolved_layer": {
+            "type": "string",
+            "title": "Resolved Layer"
+          },
+          "client": {
+            "type": "string",
+            "title": "Client"
+          },
+          "engine_revision": {
+            "type": "string",
+            "title": "Engine Revision"
+          },
+          "egress_route": {
+            "type": "string",
+            "title": "Egress Route"
+          },
+          "egress_revision": {
+            "type": "string",
+            "title": "Egress Revision"
+          },
+          "egress_class": {
+            "type": "string",
+            "title": "Egress Class"
+          },
+          "egress_observed_ip": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Egress Observed Ip"
+          },
+          "identity_used": {
+            "type": "boolean",
+            "title": "Identity Used"
+          },
+          "identity_digest": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Identity Digest"
+          },
+          "browser_context_kind": {
+            "type": "string",
+            "title": "Browser Context Kind"
+          }
+        },
+        "type": "object",
+        "required": [
+          "provider_key",
+          "registry_revision",
+          "resolved_layer",
+          "client",
+          "engine_revision",
+          "egress_route",
+          "egress_revision",
+          "egress_class",
+          "egress_observed_ip",
+          "identity_used",
+          "identity_digest",
+          "browser_context_kind"
+        ],
+        "title": "ExecutionContext",
+        "description": "The twelve non-secret facts needed to reproduce a media execution."
+      },
       "ExecutionMode": {
         "type": "string",
         "enum": [
@@ -11851,6 +11946,18 @@
       },
       "InspectionResponse": {
         "properties": {
+          "execution_context": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ExecutionContext"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "实际执行的十二字段非敏感上下文；本地导入无解析上下文。",
+            "readOnly": true
+          },
           "id": {
             "type": "string",
             "format": "uuid",

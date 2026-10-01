@@ -102,6 +102,7 @@ import 'package:video_server_api/lib/model/error_code.dart';
 import 'package:video_server_api/lib/model/error_response.dart';
 import 'package:video_server_api/lib/model/evidence_summary_response.dart';
 import 'package:video_server_api/lib/model/evidence_value.dart';
+import 'package:video_server_api/lib/model/execution_context.dart';
 import 'package:video_server_api/lib/model/execution_mode.dart';
 import 'package:video_server_api/lib/model/failure_class.dart';
 import 'package:video_server_api/lib/model/format_response.dart';
@@ -271,6 +272,7 @@ part 'serializers.g.dart';
   ErrorResponse,
   EvidenceSummaryResponse,
   EvidenceValue,
+  ExecutionContext,
   ExecutionMode,
   FailureClass,
   FormatResponse,

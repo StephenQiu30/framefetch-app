@@ -8,6 +8,8 @@ part of 'download_response.dart';
 
 class _$DownloadResponse extends DownloadResponse {
   @override
+  final ExecutionContext? executionContext;
+  @override
   final String id;
   @override
   final String? inspectionId;
@@ -59,7 +61,8 @@ class _$DownloadResponse extends DownloadResponse {
       (DownloadResponseBuilder()..update(updates))._build();
 
   _$DownloadResponse._(
-      {required this.id,
+      {this.executionContext,
+      required this.id,
       this.inspectionId,
       this.formatId,
       required this.sourceKind,
@@ -95,6 +98,7 @@ class _$DownloadResponse extends DownloadResponse {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is DownloadResponse &&
+        executionContext == other.executionContext &&
         id == other.id &&
         inspectionId == other.inspectionId &&
         formatId == other.formatId &&
@@ -123,6 +127,7 @@ class _$DownloadResponse extends DownloadResponse {
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, executionContext.hashCode);
     _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, inspectionId.hashCode);
     _$hash = $jc(_$hash, formatId.hashCode);
@@ -153,6 +158,7 @@ class _$DownloadResponse extends DownloadResponse {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'DownloadResponse')
+          ..add('executionContext', executionContext)
           ..add('id', id)
           ..add('inspectionId', inspectionId)
           ..add('formatId', formatId)
@@ -183,6 +189,12 @@ class _$DownloadResponse extends DownloadResponse {
 class DownloadResponseBuilder
     implements Builder<DownloadResponse, DownloadResponseBuilder> {
   _$DownloadResponse? _$v;
+
+  ExecutionContextBuilder? _executionContext;
+  ExecutionContextBuilder get executionContext =>
+      _$this._executionContext ??= ExecutionContextBuilder();
+  set executionContext(ExecutionContextBuilder? executionContext) =>
+      _$this._executionContext = executionContext;
 
   String? _id;
   String? get id => _$this._id;
@@ -287,6 +299,7 @@ class DownloadResponseBuilder
   DownloadResponseBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _executionContext = $v.executionContext?.toBuilder();
       _id = $v.id;
       _inspectionId = $v.inspectionId;
       _formatId = $v.formatId;
@@ -333,6 +346,7 @@ class DownloadResponseBuilder
     try {
       _$result = _$v ??
           _$DownloadResponse._(
+            executionContext: _executionContext?.build(),
             id: BuiltValueNullFieldError.checkNotNull(
                 id, r'DownloadResponse', 'id'),
             inspectionId: inspectionId,
@@ -372,6 +386,9 @@ class DownloadResponseBuilder
     } catch (_) {
       late String _$failedField;
       try {
+        _$failedField = 'executionContext';
+        _executionContext?.build();
+
         _$failedField = 'format';
         _format?.build();
       } catch (e) {

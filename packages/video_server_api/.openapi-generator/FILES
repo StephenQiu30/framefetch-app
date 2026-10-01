@@ -95,6 +95,7 @@ doc/ErrorCode.md
 doc/ErrorResponse.md
 doc/EvidenceSummaryResponse.md
 doc/EvidenceValue.md
+doc/ExecutionContext.md
 doc/ExecutionMode.md
 doc/FailureClass.md
 doc/FormatResponse.md
@@ -285,6 +286,7 @@ lib/lib/model/error_code.dart
 lib/lib/model/error_response.dart
 lib/lib/model/evidence_summary_response.dart
 lib/lib/model/evidence_value.dart
+lib/lib/model/execution_context.dart
 lib/lib/model/execution_mode.dart
 lib/lib/model/failure_class.dart
 lib/lib/model/format_response.dart
@@ -459,6 +461,7 @@ test/error_code_test.dart
 test/error_response_test.dart
 test/evidence_summary_response_test.dart
 test/evidence_value_test.dart
+test/execution_context_test.dart
 test/execution_mode_test.dart
 test/failure_class_test.dart
 test/format_response_test.dart

@@ -7,6 +7,7 @@ import 'package:video_server_api/lib/model/download_error_code.dart';
 import 'package:video_server_api/lib/model/download_status.dart';
 import 'package:video_server_api/lib/model/media_kind.dart';
 import 'package:video_server_api/lib/model/semantic_plan_response.dart';
+import 'package:video_server_api/lib/model/execution_context.dart';
 import 'package:video_server_api/lib/model/download_source_kind.dart';
 import 'package:video_server_api/lib/model/download_stage.dart';
 import 'package:built_value/built_value.dart';
@@ -17,6 +18,7 @@ part 'download_response.g.dart';
 /// Current state of a durable asynchronous download resource.
 ///
 /// Properties:
+/// * [executionContext] - 实际执行的十二字段非敏感上下文；本地导入无解析上下文。
 /// * [id]
 /// * [inspectionId]
 /// * [formatId]
@@ -43,6 +45,10 @@ part 'download_response.g.dart';
 @BuiltValue()
 abstract class DownloadResponse
     implements Built<DownloadResponse, DownloadResponseBuilder> {
+  /// 实际执行的十二字段非敏感上下文；本地导入无解析上下文。
+  @BuiltValueField(wireName: r'execution_context')
+  ExecutionContext? get executionContext;
+
   @BuiltValueField(wireName: r'id')
   String get id;
 
@@ -143,6 +149,13 @@ class _$DownloadResponseSerializer
     DownloadResponse object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
+    if (object.executionContext != null) {
+      yield r'execution_context';
+      yield serializers.serialize(
+        object.executionContext,
+        specifiedType: const FullType.nullable(ExecutionContext),
+      );
+    }
     yield r'id';
     yield serializers.serialize(
       object.id,
@@ -305,6 +318,14 @@ class _$DownloadResponseSerializer
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
+        case r'execution_context':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(ExecutionContext),
+          ) as ExecutionContext?;
+          if (valueDes == null) continue;
+          result.executionContext.replace(valueDes);
+          break;
         case r'id':
           final valueDes = serializers.deserialize(
             value,

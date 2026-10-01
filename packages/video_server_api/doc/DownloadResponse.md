@@ -8,6 +8,7 @@ import 'package:video_server_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**executionContext** | [**ExecutionContext**](ExecutionContext.md) | 实际执行的十二字段非敏感上下文；本地导入无解析上下文。 | [optional]
 **id** | **String** |  |
 **inspectionId** | **String** |  |
 **formatId** | **String** |  |
