@@ -142,17 +142,17 @@ final class _DataMetric extends StatelessWidget {
       label: '$label: $value',
       child: ExcludeSemantics(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
               height: valueLine.height,
               child: FittedBox(
                 fit: BoxFit.scaleDown,
-                alignment: Alignment.centerLeft,
+                alignment: Alignment.center,
                 child: Text(
                   value,
                   maxLines: 1,
-                  textAlign: TextAlign.start,
+                  textAlign: TextAlign.center,
                   style: valueStyle,
                 ),
               ),
@@ -162,7 +162,7 @@ final class _DataMetric extends StatelessWidget {
               label,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.start,
+              textAlign: TextAlign.center,
               style: theme.textTheme.labelMedium?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),

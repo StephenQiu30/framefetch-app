@@ -51,6 +51,12 @@ void main() {
     expect(gaps[0], closeTo(gaps[1], 0.1));
     expect(gaps[1], closeTo(gaps[2], 0.1));
     expect((centers.first.dx + centers.last.dx) / 2, closeTo(195, 0.1));
+    expectMetricCenters(tester, [
+      'analytics-total',
+      'analytics-done',
+      'analytics-failed',
+      'analytics-active',
+    ]);
   });
 
   testWidgets('falls back to two columns for accessibility text', (
@@ -86,6 +92,12 @@ void main() {
     final third = tester.getCenter(find.byKey(const Key('accessible-three')));
     expect(first.dy, closeTo(second.dy, 0.1));
     expect(third.dy, greaterThan(first.dy));
+    expectMetricCenters(tester, [
+      'accessible-one',
+      'accessible-two',
+      'accessible-three',
+      'accessible-four',
+    ]);
   });
 
   testWidgets('keeps long document metrics in one phone row', (tester) async {
@@ -125,5 +137,25 @@ void main() {
     expect(first.dy, closeTo(third.dy, 0.1));
     expect(first.dy, closeTo(fourth.dy, 0.1));
     expect(find.text('FOUNTAIN'), findsOneWidget);
+    expectMetricCenters(tester, [
+      'document-format',
+      'document-language',
+      'document-scenes',
+      'document-characters',
+    ]);
   });
+}
+
+void expectMetricCenters(WidgetTester tester, List<String> keys) {
+  for (final key in keys) {
+    final cell = find.byKey(Key(key));
+    for (final text
+        in find.descendant(of: cell, matching: find.byType(Text)).evaluate()) {
+      expect(
+        tester.getCenter(find.byWidget(text.widget)).dx,
+        closeTo(tester.getCenter(cell).dx, .01),
+      );
+    }
+  }
+  expect(tester.takeException(), isNull);
 }

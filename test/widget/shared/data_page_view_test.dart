@@ -45,7 +45,7 @@ void main() {
   });
 
   testWidgets(
-    'centers recovery visuals while keeping metrics and prose left aligned',
+    'centers metrics and recovery visuals while keeping prose left aligned',
     (tester) async {
       var retries = 0;
       const description = '网络请求未能完成，请检查网络连接后重试。已经创建的任务会保留，刷新页面后可以继续查看。';
@@ -82,8 +82,8 @@ void main() {
         ),
       );
 
-      expect(tester.widget<Text>(find.text('81')).textAlign, TextAlign.start);
-      expect(tester.widget<Text>(find.text('全部')).textAlign, TextAlign.start);
+      expect(tester.widget<Text>(find.text('81')).textAlign, TextAlign.center);
+      expect(tester.widget<Text>(find.text('全部')).textAlign, TextAlign.center);
       expect(
         tester.widget<Text>(find.text(description)).textAlign,
         TextAlign.start,

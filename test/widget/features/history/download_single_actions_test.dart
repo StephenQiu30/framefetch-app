@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:framegrab/features/history/presentation/download_history_screen.dart';
@@ -44,6 +45,24 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byKey(const Key('download-detail-content')), findsOneWidget);
+    final detail = find.byKey(const Key('download-detail-content'));
+    final values = find.descendant(
+      of: detail,
+      matching: find.byType(SelectableText),
+    );
+    expect(values, findsWidgets);
+    for (final element in values.evaluate()) {
+      final value = element.widget as SelectableText;
+      expect(value.textAlign, TextAlign.center);
+      final finder = find.byWidget(value);
+      final cell = find
+          .ancestor(of: finder, matching: find.byType(Column))
+          .first;
+      expect(
+        tester.getCenter(finder).dx,
+        closeTo(tester.getCenter(cell).dx, .01),
+      );
+    }
     expect(repository.detailCalls, [id]);
     expect(repository.deleteCalls, isEmpty);
     expect(tester.takeException(), isNull);

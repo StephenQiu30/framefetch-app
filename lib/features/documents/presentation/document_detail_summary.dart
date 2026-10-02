@@ -122,16 +122,21 @@ final class _DetailGrid extends StatelessWidget {
             SizedBox(
               width: width,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     value.$1,
+                    textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(height: AppSpacing.xSmall),
-                  Text(value.$2, style: Theme.of(context).textTheme.bodyMedium),
+                  Text(
+                    value.$2,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                 ],
               ),
             ),

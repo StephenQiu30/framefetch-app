@@ -143,16 +143,21 @@ final class _DetailLine extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: AppSpacing.large),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             label,
+            textAlign: TextAlign.center,
             style: theme.textTheme.labelMedium?.copyWith(
               color: theme.colorScheme.onSurfaceVariant,
             ),
           ),
           const SizedBox(height: AppSpacing.xSmall),
-          SelectableText(value, style: theme.textTheme.bodyLarge),
+          SelectableText(
+            value,
+            textAlign: TextAlign.center,
+            style: theme.textTheme.bodyLarge,
+          ),
         ],
       ),
     );
