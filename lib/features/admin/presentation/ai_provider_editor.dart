@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:framegrab/features/admin/application/admin_providers.dart';
+import 'package:framegrab/features/admin/application/ai_provider_protocol.dart';
 import 'package:framegrab/features/admin/data/admin_configuration_repository.dart';
 import 'package:framegrab/features/admin/presentation/admin_edit_sheet.dart';
+import 'package:framegrab/features/admin/presentation/ai_engine_label.dart';
+import 'package:framegrab/features/admin/presentation/open_router_models.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
 import 'package:framegrab/shared/presentation/app_dropdown_field.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -38,14 +41,18 @@ final class _AiEditor extends ConsumerStatefulWidget {
 final class _AiEditorState extends ConsumerState<_AiEditor> {
   late final _key = TextEditingController(text: widget.item?.key);
   late final _name = TextEditingController(text: widget.item?.displayName);
-  late final _model = TextEditingController(
-    text: widget.item?.model ?? 'gpt-5.6-sol',
-  );
+  late final _model = TextEditingController(text: widget.item?.model);
   late final _url = TextEditingController(text: widget.item?.baseUrl);
   final _secret = TextEditingController();
   late var _engine = widget.item?.engine ?? AiProviderEngine.codex;
   late var _auth = widget.item?.authMode ?? AiProviderAuthMode.hostLogin;
   bool get _local => widget.item?.key == 'local-codex';
+  bool get _canKeepCredential =>
+      widget.item?.credentialConfigured == true &&
+      widget.item?.engine == _engine &&
+      widget.item?.authMode == _auth &&
+      (widget.item?.baseUrl ?? '').replaceFirst(RegExp(r'/+$'), '') ==
+          _url.text.trim().replaceFirst(RegExp(r'/+$'), '');
   @override
   void dispose() {
     for (final c in [_key, _name, _model, _url, _secret]) {
@@ -56,16 +63,14 @@ final class _AiEditorState extends ConsumerState<_AiEditor> {
 
   void _changeEngine(AiProviderEngine value) => setState(() {
     _engine = value;
-    _auth = value == AiProviderEngine.deepseek
+    _auth = isDirectAiEngine(value)
         ? AiProviderAuthMode.apiKey
         : AiProviderAuthMode.hostLogin;
     _model.text = value == AiProviderEngine.deepseek
         ? 'deepseek-v4-flash-vision-exp'
-        : value == AiProviderEngine.codex
-        ? 'gpt-5.6-sol'
-        : 'sonnet';
-    _url.text = value == AiProviderEngine.deepseek
-        ? 'https://api.deepseek.com'
+        : '';
+    _url.text = _auth == AiProviderAuthMode.apiKey
+        ? aiProviderBaseUrl(value)
         : '';
     _secret.clear();
   });
@@ -141,7 +146,7 @@ final class _AiEditorState extends ConsumerState<_AiEditor> {
             for (final e in AiProviderEngine.values.where(
               (v) => v != AiProviderEngine.unknownDefaultOpenApi,
             ))
-              AppDropdownOption(value: e, label: e.name),
+              AppDropdownOption(value: e, label: aiEngineLabel(l, e)),
           ],
           onSelected: (v) {
             if (v != null) _changeEngine(v);
@@ -156,60 +161,68 @@ final class _AiEditorState extends ConsumerState<_AiEditor> {
             for (final a in AiProviderAuthMode.values.where(
               (v) => v != AiProviderAuthMode.unknownDefaultOpenApi,
             ))
-              if (_engine != AiProviderEngine.deepseek ||
-                  a == AiProviderAuthMode.apiKey)
+              if (!isDirectAiEngine(_engine) || a == AiProviderAuthMode.apiKey)
                 AppDropdownOption(
                   value: a,
                   label: a == AiProviderAuthMode.hostLogin
                       ? l.hostLoginLabel
-                      : 'API Key',
+                      : l.apiKeyLabel,
                 ),
           ],
           onSelected: (v) {
             if (v != null) {
               setState(() {
                 _auth = v;
-                _url.clear();
+                _url.text = v == AiProviderAuthMode.apiKey
+                    ? aiProviderBaseUrl(_engine)
+                    : '';
                 _secret.clear();
               });
             }
           },
         ),
+        if (_engine == AiProviderEngine.openrouter)
+          OpenRouterModels(
+            onSelected: (id) => setState(() => _model.text = id),
+          ),
         ShadInputFormField(
           controller: _model,
           enabled: _engine != AiProviderEngine.deepseek,
           maxLength: 128,
           validator: required,
           label: Text(l.modelLabel),
+          description: _engine == AiProviderEngine.deepseek
+              ? Text(l.adminFixedDeepSeekModel)
+              : null,
         ),
         if (_auth == AiProviderAuthMode.apiKey) ...[
           ShadInputFormField(
             controller: _url,
+            enabled: !_local && _engine != AiProviderEngine.openrouter,
+            maxLength: 2048,
             keyboardType: TextInputType.url,
-            validator: (v) {
-              final uri = Uri.tryParse(v);
-              return uri != null &&
-                      uri.hasAuthority &&
-                      {'http', 'https'}.contains(uri.scheme)
-                  ? null
-                  : l.invalidConfiguration;
-            },
+            onChanged: (_) => setState(() {}),
+            validator: (v) =>
+                isValidAiBaseUrl(v) ? null : l.invalidConfiguration,
             label: Text(l.baseUrlLabel),
+            description: Text(
+              _engine == AiProviderEngine.openrouter
+                  ? l.adminOpenRouterUrlHint
+                  : l.adminApiUrlHint,
+            ),
           ),
           ShadInputFormField(
             controller: _secret,
+            maxLength: 4096,
             obscureText: true,
             autocorrect: false,
             enableSuggestions: false,
-            validator: widget.item?.credentialConfigured == true
-                ? null
-                : required,
+            validator: _canKeepCredential ? null : required,
             label: Text(l.apiKeyLabel),
-            description: widget.item?.credentialConfigured == true
-                ? Text(l.apiKeyKeepHint)
-                : null,
+            description: _canKeepCredential ? Text(l.apiKeyKeepHint) : null,
           ),
-        ],
+        ] else
+          Text(l.adminHostLoginHint),
       ],
     );
   }

@@ -1,19 +1,26 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:framegrab/app/presentation/root_screen.dart';
+import 'package:framegrab/core/routing/auth_return_location.dart';
 import 'package:framegrab/features/admin/presentation/admin_ai_providers_screen.dart';
 import 'package:framegrab/features/admin/presentation/admin_analytics_screen.dart';
 import 'package:framegrab/features/admin/presentation/admin_home_screen.dart';
+import 'package:framegrab/features/admin/presentation/admin_operation_logs_screen.dart';
 import 'package:framegrab/features/admin/presentation/admin_providers_screen.dart';
 import 'package:framegrab/features/admin/presentation/admin_storage_screen.dart';
 import 'package:framegrab/features/admin/presentation/admin_users_screen.dart';
+import 'package:framegrab/features/analysis/presentation/analysis_detail_screen.dart';
 import 'package:framegrab/features/auth/application/auth_session_controller.dart';
 import 'package:framegrab/features/auth/presentation/login_screen.dart';
 import 'package:framegrab/features/auth/presentation/register_screen.dart';
 import 'package:framegrab/features/auth/presentation/session_restore_screen.dart';
 import 'package:framegrab/features/documents/presentation/document_detail_screen.dart';
+import 'package:framegrab/features/download/presentation/content_intake_selector.dart';
+import 'package:framegrab/features/download/presentation/inspection_result_screen.dart';
+import 'package:framegrab/features/history/presentation/activity_history_screen.dart';
 import 'package:framegrab/features/history/presentation/download_detail_screen.dart';
 import 'package:framegrab/features/landing/presentation/public_guide_screen.dart';
+import 'package:framegrab/features/landing/presentation/resource_info_screen.dart';
 import 'package:go_router/go_router.dart';
 
 part 'app_router.g.dart';
@@ -59,7 +66,11 @@ String? authRedirect({
   final isRestore = location == '/auth/restoring';
   final isAuthLocation = location.startsWith('/auth/');
   final isPublicHome = location == '/';
-  final isPublicGuide = location == '/guide';
+  final isPublicGuide = const {
+    '/guide',
+    '/self-hosting',
+    '/about',
+  }.contains(location);
 
   if (phase == AuthSessionPhase.restoring) {
     if (isRestore || isPublicHome || isPublicGuide) return null;
@@ -69,29 +80,34 @@ String? authRedirect({
     ).toString();
   }
   if (phase == AuthSessionPhase.signedOut) {
-    if (isRestore) return '/';
-    return isEntry || isPublicHome || isPublicGuide ? null : '/auth/login';
+    if (isRestore) {
+      final destination = safeAuthReturnLocation(uri.queryParameters['from']);
+      return destination == '/'
+          ? '/'
+          : Uri(
+              path: '/auth/login',
+              queryParameters: {'from': destination},
+            ).toString();
+    }
+    return isEntry || isPublicHome || isPublicGuide
+        ? null
+        : Uri(
+            path: '/auth/login',
+            queryParameters: {'from': uri.toString()},
+          ).toString();
   }
   if (phase == AuthSessionPhase.signedIn && isRestore) {
-    return _safeReturnLocation(uri.queryParameters['from']);
+    return safeAuthReturnLocation(uri.queryParameters['from']);
   }
-  if (phase == AuthSessionPhase.signedIn && isAuthLocation) return '/';
+  if (phase == AuthSessionPhase.signedIn && isAuthLocation) {
+    return safeAuthReturnLocation(uri.queryParameters['from']);
+  }
   if (phase == AuthSessionPhase.signedIn &&
       location.startsWith('/admin') &&
       !isAdmin) {
     return '/';
   }
   return null;
-}
-
-String _safeReturnLocation(String? location) {
-  if (location == null ||
-      !location.startsWith('/') ||
-      location.startsWith('//') ||
-      location.startsWith('/auth/')) {
-    return '/';
-  }
-  return location;
 }
 
 @TypedGoRoute<AdminHomeRoute>(path: '/admin')
@@ -112,6 +128,15 @@ final class AdminAnalyticsRoute extends GoRouteData with $AdminAnalyticsRoute {
   Widget build(BuildContext context, GoRouterState state) {
     return const AdminAnalyticsScreen();
   }
+}
+
+@TypedGoRoute<AdminOperationLogsRoute>(path: '/admin/operation-logs')
+final class AdminOperationLogsRoute extends GoRouteData
+    with $AdminOperationLogsRoute {
+  const AdminOperationLogsRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const AdminOperationLogsScreen();
 }
 
 @TypedGoRoute<AdminFilesRoute>(path: '/admin/files')
@@ -165,7 +190,13 @@ final class DownloadHomeRoute extends GoRouteData with $DownloadHomeRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const RootScreen();
+    return RootScreen(
+      initialIntakeMode: switch (state.uri.queryParameters['intake']) {
+        'video' => ContentIntakeMode.video,
+        'screenplay' => ContentIntakeMode.screenplay,
+        _ => ContentIntakeMode.link,
+      },
+    );
   }
 }
 
@@ -179,6 +210,19 @@ final class PublicGuideRoute extends GoRouteData with $PublicGuideRoute {
   }
 }
 
+@TypedGoRoute<InspectionWorkspaceRoute>(path: '/downloads/new')
+final class InspectionWorkspaceRoute extends GoRouteData
+    with $InspectionWorkspaceRoute {
+  const InspectionWorkspaceRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      InspectionResultScreen(
+        intentId: state.uri.queryParameters['intentId'],
+        inspectionId: state.uri.queryParameters['inspectionId'],
+        discoveryId: state.uri.queryParameters['discoveryId'],
+      );
+}
+
 @TypedGoRoute<DownloadDetailRoute>(path: '/downloads/:jobId')
 final class DownloadDetailRoute extends GoRouteData with $DownloadDetailRoute {
   const DownloadDetailRoute({required this.jobId});
@@ -189,6 +233,57 @@ final class DownloadDetailRoute extends GoRouteData with $DownloadDetailRoute {
   Widget build(BuildContext context, GoRouterState state) {
     return DownloadDetailScreen(jobId: jobId);
   }
+}
+
+@TypedGoRoute<ActivityHistoryRoute>(path: '/history/activity')
+final class ActivityHistoryRoute extends GoRouteData
+    with $ActivityHistoryRoute {
+  const ActivityHistoryRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    final documentId = state.uri.queryParameters['document_id'];
+    final downloadId = state.uri.queryParameters['download_id'];
+    return ActivityHistoryScreen(
+      key: ValueKey((documentId, downloadId)),
+      documentId: documentId,
+      downloadId: downloadId,
+    );
+  }
+}
+
+@TypedGoRoute<InspectionResultRoute>(path: '/download-intents/:intentId')
+final class InspectionResultRoute extends GoRouteData
+    with $InspectionResultRoute {
+  const InspectionResultRoute({required this.intentId});
+  final String intentId;
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      InspectionResultScreen(intentId: intentId);
+}
+
+@TypedGoRoute<AnalysisDetailRoute>(path: '/analyses/:analysisId')
+final class AnalysisDetailRoute extends GoRouteData with $AnalysisDetailRoute {
+  const AnalysisDetailRoute({required this.analysisId});
+  final String analysisId;
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      AnalysisDetailScreen(analysisId: analysisId);
+}
+
+@TypedGoRoute<SelfHostingRoute>(path: '/self-hosting')
+final class SelfHostingRoute extends GoRouteData with $SelfHostingRoute {
+  const SelfHostingRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const ResourceInfoScreen(resource: ResourceInfo.selfHosting);
+}
+
+@TypedGoRoute<AboutRoute>(path: '/about')
+final class AboutRoute extends GoRouteData with $AboutRoute {
+  const AboutRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const ResourceInfoScreen(resource: ResourceInfo.about);
 }
 
 @TypedGoRoute<DocumentDetailRoute>(path: '/documents/:documentId')

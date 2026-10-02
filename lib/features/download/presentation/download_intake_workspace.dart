@@ -19,6 +19,8 @@ final class DownloadIntakeWorkspace extends StatelessWidget {
     required this.onSelectFormat,
     required this.onSelectItem,
     required this.state,
+    this.onUseUpload,
+    this.onReparse,
     super.key,
   });
 
@@ -30,6 +32,8 @@ final class DownloadIntakeWorkspace extends StatelessWidget {
   final ValueChanged<String> onSelectFormat;
   final ValueChanged<String> onSelectItem;
   final DownloadIntakeState state;
+  final VoidCallback? onUseUpload;
+  final VoidCallback? onReparse;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +69,14 @@ final class DownloadIntakeWorkspace extends StatelessWidget {
             discovery: state.discovery!,
             onSelect: onSelectItem,
           ),
+        if (intent == null &&
+            state.discovery != null &&
+            !state.discovery!.expiresAt.isAfter(DateTime.now()) &&
+            onReparse != null)
+          ShadButton.outline(
+            onPressed: state.busy ? null : onReparse,
+            child: Text(localizations.reparseDownloadAction),
+          ),
         if (intent != null &&
             (intent.status != IntentStatus.ready ||
                 inspection == null ||
@@ -97,6 +109,14 @@ final class DownloadIntakeWorkspace extends StatelessWidget {
               onPressed: () => onOpenJob(intent.jobId!),
               child: Text(localizations.downloadDetailNavigation),
             ),
+          if ((intent.status == IntentStatus.failed ||
+                  intent.status == IntentStatus.cancelled ||
+                  intent.status == IntentStatus.expired) &&
+              onReparse != null)
+            ShadButton.outline(
+              onPressed: state.busy ? null : onReparse,
+              child: Text(localizations.reparseDownloadAction),
+            ),
           if (intent.status == IntentStatus.queued ||
               intent.status == IntentStatus.resolving ||
               intent.status == IntentStatus.cancelling)
@@ -108,11 +128,24 @@ final class DownloadIntakeWorkspace extends StatelessWidget {
                     : localizations.intentCancelAction,
               ),
             ),
+        ] else if (inspection != null && expired) ...[
+          DownloadInlineStatus(
+            message: localizations.intentExpired,
+            tone: DownloadNoticeTone.neutral,
+          ),
+          if (onReparse != null) ...[
+            const SizedBox(height: 12),
+            ShadButton.outline(
+              onPressed: state.busy ? null : onReparse,
+              child: Text(localizations.reparseDownloadAction),
+            ),
+          ],
         ] else if (inspection != null)
           InspectionWorkspace(
             onCreate: onCreate,
             onSelectFormat: onSelectFormat,
             state: state,
+            onUseUpload: onUseUpload,
           ),
       ],
     );

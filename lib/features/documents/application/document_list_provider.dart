@@ -6,7 +6,10 @@ import 'package:video_server_api/video_server_api.dart';
 final documentListProvider = FutureProvider.autoDispose<DocumentPageResponse>(
   (ref) => ref
       .watch(documentRepositoryProvider)
-      .fetchPage(page: ref.watch(documentListQueryProvider).page),
+      .fetchPage(
+        page: ref.watch(documentListQueryProvider).page,
+        pageSize: ref.watch(documentListQueryProvider).pageSize,
+      ),
   retry: (_, _) => null,
 );
 

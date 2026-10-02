@@ -78,14 +78,6 @@ final class LinkIntakeForm extends StatelessWidget {
             );
           },
         ),
-        const SizedBox(height: AppSpacing.small),
-        Text(
-          localizations.linkIntakeSupport,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-            height: 1.55,
-          ),
-        ),
       ],
     );
   }

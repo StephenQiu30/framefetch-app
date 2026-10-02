@@ -14,6 +14,8 @@ import 'package:video_server_api/lib/model/native_session_response.dart';
 import 'package:video_server_api/lib/model/register_request.dart';
 import 'package:video_server_api/lib/model/registration_code_request.dart';
 import 'package:video_server_api/lib/model/registration_code_response.dart';
+import 'package:video_server_api/lib/model/registration_code_verification_request.dart';
+import 'package:video_server_api/lib/model/registration_code_verification_response.dart';
 import 'package:video_server_api/lib/model/user_response.dart';
 
 class AppAuthApi {
@@ -542,6 +544,105 @@ class AppAuthApi {
     }
 
     return Response<RegistrationCodeResponse>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// 验证注册邮箱验证码
+  ///
+  ///
+  /// Parameters:
+  /// * [registrationCodeVerificationRequest]
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [RegistrationCodeVerificationResponse] as data
+  /// Throws [DioException] if API call or serialization fails
+  Future<Response<RegistrationCodeVerificationResponse>>
+      verifyNativeRegistrationCode({
+    required RegistrationCodeVerificationRequest
+        registrationCodeVerificationRequest,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/api/app/v1/auth/registration-code/verify';
+    final _options = Options(
+      method: r'POST',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      contentType: 'application/json',
+      validateStatus: validateStatus,
+    );
+
+    dynamic _bodyData;
+
+    try {
+      const _type = FullType(RegistrationCodeVerificationRequest);
+      _bodyData = _serializers.serialize(registrationCodeVerificationRequest,
+          specifiedType: _type);
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _options.compose(
+          _dio.options,
+          _path,
+        ),
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    final _response = await _dio.request<Object>(
+      _path,
+      data: _bodyData,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    RegistrationCodeVerificationResponse? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+              rawResponse,
+              specifiedType:
+                  const FullType(RegistrationCodeVerificationResponse),
+            ) as RegistrationCodeVerificationResponse;
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<RegistrationCodeVerificationResponse>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

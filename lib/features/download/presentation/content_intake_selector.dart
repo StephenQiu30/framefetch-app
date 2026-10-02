@@ -73,13 +73,17 @@ final class ContentIntakeSelector extends StatelessWidget {
         ],
       );
     }
+    final colors = ShadTheme.of(context).colorScheme;
     return ShadTabs<ContentIntakeMode>(
       value: selected,
       onChanged: onChanged,
-      padding: EdgeInsets.zero,
-      decoration: const ShadDecoration(
-        color: Color(0x00000000),
-        border: ShadBorder.none,
+      padding: const EdgeInsets.all(4),
+      decoration: ShadDecoration(
+        color: colors.muted,
+        border: const ShadBorder(
+          canMerge: false,
+          radius: BorderRadius.all(Radius.circular(8)),
+        ),
       ),
       tabs: [
         for (final destination in destinations)
@@ -89,26 +93,15 @@ final class ContentIntakeSelector extends StatelessWidget {
             enabled: enabled,
             height: 44,
             backgroundColor: const Color(0x00000000),
-            selectedBackgroundColor: const Color(0x00000000),
+            selectedBackgroundColor: colors.background,
             hoverBackgroundColor: const Color(0x00000000),
-            selectedHoverBackgroundColor: const Color(0x00000000),
+            selectedHoverBackgroundColor: colors.background,
             shadows: const [],
             selectedShadows: const [],
             decoration: const ShadDecoration(
               border: ShadBorder(
                 canMerge: false,
-                radius: BorderRadius.zero,
-                bottom: ShadBorderSide(width: 2, color: Color(0x00000000)),
-              ),
-            ),
-            selectedDecoration: ShadDecoration(
-              border: ShadBorder(
-                canMerge: false,
-                radius: BorderRadius.zero,
-                bottom: ShadBorderSide(
-                  width: 2,
-                  color: ShadTheme.of(context).colorScheme.foreground,
-                ),
+                radius: BorderRadius.all(Radius.circular(6)),
               ),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 8),

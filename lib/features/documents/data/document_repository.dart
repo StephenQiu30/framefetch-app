@@ -8,7 +8,7 @@ final documentRepositoryProvider = Provider<DocumentRepository>(
 );
 
 abstract interface class DocumentRepository {
-  Future<DocumentPageResponse> fetchPage({int page = 1});
+  Future<DocumentPageResponse> fetchPage({int page = 1, int pageSize = 20});
 
   Future<DocumentDetailResponse> fetchDetail(String documentId);
 
@@ -28,11 +28,11 @@ final class GeneratedDocumentRepository implements DocumentRepository {
   }
 
   @override
-  Future<DocumentPageResponse> fetchPage({int page = 1}) {
+  Future<DocumentPageResponse> fetchPage({int page = 1, int pageSize = 20}) {
     return _request.execute((client) async {
       final response = await client.getDocumentsApi().listDocuments(
         page: page,
-        pageSize: 20,
+        pageSize: pageSize,
       );
       final data = response.data?.data;
       if (data == null) {

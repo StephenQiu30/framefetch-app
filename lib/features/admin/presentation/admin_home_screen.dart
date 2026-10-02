@@ -41,6 +41,12 @@ final class AdminHomeScreen extends StatelessWidget {
         PhosphorIconsRegular.sparkle,
         '/admin/ai-providers',
       ),
+      (
+        l10n.adminOperationLogsTitle,
+        l10n.adminOperationLogsDescription,
+        PhosphorIconsRegular.clockCounterClockwise,
+        '/admin/operation-logs',
+      ),
     ];
     return AdminPage(
       backFallbackLocation: '/',

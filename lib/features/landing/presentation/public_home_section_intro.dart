@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
+import 'package:framegrab/features/landing/presentation/public_home_layout.dart';
 
 final class PublicHomeSectionIntro extends StatelessWidget {
   const PublicHomeSectionIntro({
@@ -20,6 +20,7 @@ final class PublicHomeSectionIntro extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final wide = publicHomeUsesColumns(context, breakpoint: 640);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -27,26 +28,35 @@ final class PublicHomeSectionIntro extends StatelessWidget {
           eyebrow,
           style: theme.textTheme.labelMedium?.copyWith(
             color: theme.colorScheme.onSurfaceVariant,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 1.4,
+            fontFamily: 'monospace',
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
           ),
         ),
-        const SizedBox(height: AppSpacing.small),
+        const SizedBox(height: 20),
         Semantics(
           header: true,
           child: Text(
             title,
             key: titleKey,
-            style: prominent
-                ? theme.textTheme.headlineLarge
-                : theme.textTheme.headlineSmall,
+            style: theme.textTheme.headlineLarge?.copyWith(
+              fontSize: prominent ? (wide ? 48 : 40) : (wide ? 30 : 24),
+              fontWeight: FontWeight.w600,
+              height: 1.15,
+              letterSpacing: -0.8,
+            ),
           ),
         ),
-        const SizedBox(height: AppSpacing.small),
-        Text(
-          description,
-          style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
+        const SizedBox(height: 16),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 672),
+          child: Text(
+            description,
+            style: theme.textTheme.bodyLarge?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+              fontSize: 18,
+              height: 28 / 18,
+            ),
           ),
         ),
       ],

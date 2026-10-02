@@ -12,6 +12,7 @@ final class RecordingHistory implements DownloadHistoryRepository {
   @override
   Future<DownloadHistoryResponse> fetchPage({
     int page = 1,
+    int pageSize = 20,
     String? search,
     DownloadStatus? status,
   }) {

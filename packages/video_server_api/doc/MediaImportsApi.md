@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**completeMediaImport**](MediaImportsApi.md#completemediaimport) | **POST** /api/media-imports/{resource_id}/complete | 完成视频上传并触发验证
 [**createMediaImport**](MediaImportsApi.md#createmediaimport) | **POST** /api/media-imports | 创建本地视频导入
 [**createMediaUploadSession**](MediaImportsApi.md#createmediauploadsession) | **POST** /api/media-imports/{resource_id}/upload-sessions | 创建或刷新视频上传会话
+[**getMediaImport**](MediaImportsApi.md#getmediaimport) | **GET** /api/media-imports/{resource_id} | 查询本地视频导入
 
 
 # **completeMediaImport**
@@ -131,6 +132,47 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ApiResponseMediaUploadSessionResponse**](ApiResponseMediaUploadSessionResponse.md)
+
+### Authorization
+
+[NativeBearerAuth](../README.md#NativeBearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getMediaImport**
+> ApiResponseMediaImportResponse getMediaImport(resourceId)
+
+查询本地视频导入
+
+### Example
+```dart
+import 'package:video_server_api/api.dart';
+
+final api = VideoServerApi().getMediaImportsApi();
+final String resourceId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // String |
+
+try {
+    final response = api.getMediaImport(resourceId);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling MediaImportsApi->getMediaImport: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resourceId** | **String**|  |
+
+### Return type
+
+[**ApiResponseMediaImportResponse**](ApiResponseMediaImportResponse.md)
 
 ### Authorization
 

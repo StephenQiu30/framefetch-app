@@ -44,6 +44,10 @@ final class AuthRequestFailure implements Exception {
 
 abstract interface class NativeAuthGateway {
   Future<RegistrationCodeResponse> sendRegistrationCode(String email);
+  Future<void> verifyRegistrationCode({
+    required String email,
+    required String verificationCode,
+  });
   Future<NativeSessionResponse> login({
     required String email,
     required String password,
@@ -81,6 +85,28 @@ final class GeneratedNativeAuthGateway implements NativeAuthGateway {
         throw const AuthRequestFailure(AuthFailureKind.emailSendFailed);
       }
       return result;
+    } on DioException catch (error) {
+      throw _failure(error);
+    }
+  }
+
+  @override
+  Future<void> verifyRegistrationCode({
+    required String email,
+    required String verificationCode,
+  }) async {
+    try {
+      final response = await _api.verifyNativeRegistrationCode(
+        registrationCodeVerificationRequest:
+            RegistrationCodeVerificationRequest(
+              (builder) => builder
+                ..email = email
+                ..verificationCode = verificationCode,
+            ),
+      );
+      if (response.data?.verified != true) {
+        throw const AuthRequestFailure(AuthFailureKind.invalidVerificationCode);
+      }
     } on DioException catch (error) {
       throw _failure(error);
     }

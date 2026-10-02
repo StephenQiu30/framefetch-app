@@ -4,12 +4,14 @@ import 'package:framegrab/core/theme/app_spacing.dart';
 final class AppPageIntro extends StatelessWidget {
   const AppPageIntro({
     this.compactTitle = false,
+    this.large = false,
     required this.description,
     required this.title,
     super.key,
   });
 
   final bool compactTitle;
+  final bool large;
   final String description;
   final String title;
 
@@ -33,13 +35,18 @@ final class AppPageIntro extends StatelessWidget {
                 title,
                 maxLines: compactTitle ? 3 : null,
                 overflow: compactTitle ? TextOverflow.ellipsis : null,
-                style: compactTitle
-                    ? theme.textTheme.headlineMedium
-                    : theme.textTheme.displaySmall,
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  fontSize: MediaQuery.sizeOf(context).width >= 640
+                      ? (large ? 36 : 30)
+                      : (large ? 30 : 24),
+                  fontWeight: FontWeight.w500,
+                  height: 1.2,
+                  letterSpacing: -.5,
+                ),
               ),
             ),
           ),
-          const SizedBox(height: AppSpacing.medium),
+          const SizedBox(height: AppSpacing.xSmall),
           Semantics(
             key: const Key('page-description'),
             container: true,
@@ -47,7 +54,8 @@ final class AppPageIntro extends StatelessWidget {
             child: ExcludeSemantics(
               child: Text(
                 description,
-                style: theme.textTheme.bodyLarge?.copyWith(
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  fontSize: large ? 16 : 14,
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
               ),

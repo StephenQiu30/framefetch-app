@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:framegrab/features/analysis/presentation/screenplay_analysis_result_view.dart';
+import 'package:framegrab/features/analysis/presentation/structured_report_result_view.dart';
 import 'package:framegrab/features/analysis/presentation/video_analysis_result_view.dart';
 import 'package:framegrab/features/analysis/presentation/video_article_result_view.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
@@ -16,11 +17,18 @@ final class AnalysisResultView extends StatelessWidget {
     return switch (result) {
       final VideoAnalysisResultResponse visual => VideoAnalysisResultView(
         reportMarkdown: job.reportMarkdown,
+        analysisId: job.id,
         result: visual,
       ),
       final VideoArticleResultResponse article => VideoArticleResultView(
         reportMarkdown: job.reportMarkdown,
+        analysisId: job.id,
         result: article,
+      ),
+      final StructuredReportResultResponse report => StructuredReportResultView(
+        reportMarkdown: job.reportMarkdown,
+        analysisId: job.id,
+        result: report,
       ),
       final ScreenplayAnalysisResultResponse screenplay =>
         ScreenplayAnalysisResultView(

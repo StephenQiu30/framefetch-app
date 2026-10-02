@@ -14,10 +14,21 @@ import '../../../support/shad_test_app.dart';
 class CodeGateway implements NativeAuthGateway {
   final result = Completer<RegistrationCodeResponse>();
   final emails = <String>[];
+  var verification = Completer<void>();
+  final verificationRequests = <(String, String)>[];
   @override
   Future<RegistrationCodeResponse> sendRegistrationCode(String email) {
     emails.add(email);
     return result.future;
+  }
+
+  @override
+  Future<void> verifyRegistrationCode({
+    required String email,
+    required String verificationCode,
+  }) {
+    verificationRequests.add((email, verificationCode));
+    return verification.future;
   }
 
   @override
@@ -27,6 +38,7 @@ class CodeGateway implements NativeAuthGateway {
 void main() {
   Future<void> show(WidgetTester tester, CodeGateway gateway) async {
     final controller = TextEditingController();
+    var verified = false;
     addTearDown(controller.dispose);
     await pumpShadWidget(
       tester,
@@ -37,11 +49,15 @@ void main() {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
-            body: RegistrationCodeField(
-              email: 'member@example.com',
-              controller: controller,
-              disabled: false,
-              onSendingChanged: (_) {},
+            body: StatefulBuilder(
+              builder: (context, setState) => RegistrationCodeField(
+                email: 'member@example.com',
+                controller: controller,
+                disabled: false,
+                verified: verified,
+                onSendingChanged: (_) {},
+                onVerifiedChanged: (value) => setState(() => verified = value),
+              ),
             ),
           ),
         ),
@@ -92,5 +108,70 @@ void main() {
     expect(find.textContaining('邮件发送未能确认'), findsOneWidget);
     expect(find.textContaining('验证码已发送'), findsNothing);
     expect(tester.widget<ShadButton>(button).onPressed, isNotNull);
+  });
+
+  testWidgets('verifies once and locks the accepted email code', (
+    tester,
+  ) async {
+    final gateway = CodeGateway();
+    await show(tester, gateway);
+    final verify = find.byKey(const Key('register-verify-code-button'));
+    expect(tester.widget<ShadButton>(verify).onPressed, isNull);
+    await tester.tap(find.byKey(const Key('register-send-code-button')));
+    gateway.result.complete(
+      RegistrationCodeResponse((b) => b..emailSent = true),
+    );
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.byKey(const Key('register-code-field')),
+      '123456',
+    );
+    await tester.pump();
+    await tester.tap(verify);
+    await tester.pump();
+    expect(find.text('验证中…'), findsOneWidget);
+    expect(tester.widget<ShadButton>(verify).onPressed, isNull);
+    expect(gateway.verificationRequests, [('member@example.com', '123456')]);
+    gateway.verification.complete();
+    await tester.pumpAndSettle();
+    expect(find.text('邮箱已验证'), findsOneWidget);
+    expect(find.text('邮箱已验证，可以设置密码。'), findsOneWidget);
+    expect(tester.widget<ShadButton>(verify).onPressed, isNull);
+    final input = tester.widget<ShadInputFormField>(
+      find.byKey(const Key('register-code-field')),
+    );
+    expect(input.enabled, isFalse);
+    await pumpShadWidget(tester, const SizedBox());
+  });
+
+  testWidgets('rejected verification preserves the code and allows retry', (
+    tester,
+  ) async {
+    final gateway = CodeGateway();
+    await show(tester, gateway);
+    await tester.tap(find.byKey(const Key('register-send-code-button')));
+    gateway.result.complete(
+      RegistrationCodeResponse((b) => b..emailSent = true),
+    );
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.byKey(const Key('register-code-field')),
+      '123456',
+    );
+    await tester.pump();
+    final verify = find.byKey(const Key('register-verify-code-button'));
+    await tester.tap(verify);
+    gateway.verification.completeError(
+      const AuthRequestFailure(AuthFailureKind.invalidVerificationCode),
+    );
+    await tester.pumpAndSettle();
+    expect(find.textContaining('验证码错误'), findsOneWidget);
+    expect(tester.widget<ShadButton>(verify).onPressed, isNotNull);
+    final input = tester.widget<ShadInputFormField>(
+      find.byKey(const Key('register-code-field')),
+    );
+    expect(input.controller?.text, '123456');
+    expect(find.text('邮箱已验证'), findsNothing);
+    await pumpShadWidget(tester, const SizedBox());
   });
 }

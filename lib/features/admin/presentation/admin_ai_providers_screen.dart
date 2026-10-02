@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
 import 'package:framegrab/features/admin/application/admin_providers.dart';
+import 'package:framegrab/features/admin/application/admin_selection_controller.dart';
 import 'package:framegrab/features/admin/data/admin_configuration_repository.dart';
 import 'package:framegrab/features/admin/data/admin_repository.dart';
+import 'package:framegrab/features/admin/presentation/admin_ai_provider_row.dart';
+import 'package:framegrab/features/admin/presentation/admin_bulk_delete_bar.dart';
 import 'package:framegrab/features/admin/presentation/admin_edit_sheet.dart';
 import 'package:framegrab/features/admin/presentation/admin_page.dart';
 import 'package:framegrab/features/admin/presentation/ai_provider_editor.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/app_spinner.dart';
+import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
-import 'package:phosphor_icons/phosphor_icons.dart';
+import 'package:framegrab/shared/presentation/list_query.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:video_server_api/video_server_api.dart';
 
 final class AdminAiProvidersScreen extends ConsumerStatefulWidget {
   const AdminAiProvidersScreen({super.key});
-
   @override
   ConsumerState<AdminAiProvidersScreen> createState() =>
       _AdminAiProvidersScreenState();
@@ -25,12 +27,20 @@ final class AdminAiProvidersScreen extends ConsumerStatefulWidget {
 final class _AdminAiProvidersScreenState
     extends ConsumerState<AdminAiProvidersScreen> {
   String? _busyKey;
+  String _search = '';
+  int _page = 1;
+  int _pageSize = 10;
+  bool _deletable(AiProviderProfileResponse item) =>
+      !item.isActive && item.key != 'local-codex';
 
   Future<void> _activate(String key) async {
     setState(() => _busyKey = key);
     try {
       await ref.read(adminRepositoryProvider).activateAiProvider(key);
-      ref.invalidate(adminAiProvidersProvider);
+      if (mounted) {
+        ref.read(adminAiSelectionProvider.notifier).clear();
+        ref.invalidate(adminAiProvidersProvider);
+      }
     } catch (_) {
       if (mounted) {
         ShadSonner.of(context).show(
@@ -44,156 +54,142 @@ final class _AdminAiProvidersScreenState
     }
   }
 
-  Future<void> _delete(AiProviderProfileResponse item) async {
-    if (!await confirmAdminDelete(context) || !mounted) return;
-    setState(() => _busyKey = item.key);
-    try {
-      await ref.read(adminConfigurationRepositoryProvider).deleteAi(item.key);
-      ref.invalidate(adminAiProvidersProvider);
-    } catch (_) {
-      if (mounted) {
-        ShadSonner.of(context).show(
-          ShadToast(
-            description: Text(AppLocalizations.of(context).adminActionFailed),
-          ),
-        );
-      }
-    } finally {
-      if (mounted) setState(() => _busyKey = null);
+  Future<void> _delete([AiProviderProfileResponse? item]) async {
+    final l = AppLocalizations.of(context);
+    if (!await confirmAdminDelete(
+          context,
+          title: item == null ? l.adminDeleteSelectionTitle : null,
+          description: l.adminDeleteAiDescription,
+        ) ||
+        !mounted) {
+      return;
     }
+    final controller = ref.read(adminAiSelectionProvider.notifier);
+    if (item != null) controller.selectPage([item.key], true);
+    final current = await controller.deleteSelected(
+      ref.read(adminConfigurationRepositoryProvider).deleteAi,
+    );
+    if (current && mounted) ref.invalidate(adminAiProvidersProvider);
+  }
+
+  void _filter(String value) {
+    if (_busyKey != null || ref.read(adminAiSelectionProvider).busy) return;
+    ref.read(adminAiSelectionProvider.notifier).clear();
+    setState(() {
+      _search = value;
+      _page = 1;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final l = AppLocalizations.of(context);
     final result = ref.watch(adminAiProvidersProvider);
+    final selection = ref.watch(adminAiSelectionProvider);
+    final controller = ref.read(adminAiSelectionProvider.notifier);
+    final busy = selection.busy || _busyKey != null;
     return AdminPage(
-      title: l10n.adminAiProvidersTitle,
-      description: l10n.adminAiProvidersDescription,
-      refreshLabel: l10n.refreshAction,
+      title: l.adminAiProvidersTitle,
+      description: l.adminAiProvidersDescription,
+      refreshLabel: l.refreshAction,
       onRefresh: () =>
           ref.refresh(adminAiProvidersProvider.future).then((_) {}),
-      children: result.when(
-        data: (data) => [
-          ShadButton.ghost(
-            onPressed: () => editAiProvider(context, ref),
-            leading: const Icon(PhosphorIconsRegular.plus),
-            height: 0,
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-            child: Flexible(child: Text(l10n.createAiProvider)),
-          ),
-          Text(
-            data.agentAvailable
-                ? l10n.adminAgentAvailable
-                : l10n.adminAgentUnavailable,
-          ),
-          const SizedBox(height: AppSpacing.medium),
-          for (final item in data.items)
-            Padding(
-              key: ValueKey('ai-${item.key}'),
-              padding: const EdgeInsets.symmetric(vertical: AppSpacing.large),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              item.displayName,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            const SizedBox(height: AppSpacing.xSmall),
-                            Text(
-                              '${item.engine.name} · ${item.model} · '
-                              '${item.credentialConfigured ? l10n.adminCredentialReady : l10n.adminCredentialMissing}',
-                              style: Theme.of(context).textTheme.bodySmall
-                                  ?.copyWith(
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.onSurfaceVariant,
-                                  ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: AppSpacing.small),
-                      if (item.isActive)
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(PhosphorIconsRegular.check, size: 16),
-                            const SizedBox(width: 4),
-                            Text(l10n.adminActiveLine),
-                          ],
-                        )
-                      else
-                        ShadButton.ghost(
-                          onPressed: _busyKey == null
-                              ? () => _activate(item.key)
-                              : null,
-                          enabled:
-                              (_busyKey == null
-                                  ? () => _activate(item.key)
-                                  : null) !=
-                              null,
-                          child: _busyKey == item.key
-                              ? const SizedBox.square(
-                                  dimension: 18,
-                                  child: AppSpinner(),
-                                )
-                              : Text(l10n.adminActivateAction),
-                        ),
-                    ],
-                  ),
-                  Wrap(
-                    children: [
-                      ShadButton.ghost(
-                        onPressed: _busyKey == null
-                            ? () => editAiProvider(context, ref, item)
-                            : null,
-                        enabled:
-                            (_busyKey == null
-                                ? () => editAiProvider(context, ref, item)
-                                : null) !=
-                            null,
-                        height: 0,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 12,
-                        ),
-                        child: Flexible(child: Text(l10n.editAction)),
-                      ),
-                      if (!item.isActive && item.key != 'local-codex')
-                        ShadButton.ghost(
-                          onPressed: _busyKey == null
-                              ? () => _delete(item)
-                              : null,
-                          enabled:
-                              (_busyKey == null ? () => _delete(item) : null) !=
-                              null,
-                          height: 0,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 12,
-                          ),
-                          child: Flexible(child: Text(l10n.deleteAction)),
-                        ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-        ],
-        error: (error, _) => adminError(
-          action: l10n.retryAction,
-          title: l10n.loadFailedTitle,
-          description: dataRequestFailureMessage(l10n, error),
-          retry: () => ref.invalidate(adminAiProvidersProvider),
+      children: [
+        ShadButton(
+          enabled: !busy,
+          onPressed: busy ? null : () => editAiProvider(context, ref),
+          child: Text(l.createAiProvider),
         ),
-        loading: () => adminLoading(l10n.loadingData),
-      ),
+        const SizedBox(height: AppSpacing.medium),
+        ShadInput(placeholder: Text(l.adminAiSearch), onChanged: _filter),
+        ...result.when(
+          data: (data) {
+            final filtered = data.items
+                .where(
+                  (item) => '${item.key} ${item.displayName} ${item.model}'
+                      .toLowerCase()
+                      .contains(_search.toLowerCase()),
+                )
+                .toList();
+            final page = _page.clamp(
+              1,
+              (filtered.length / _pageSize).ceil().clamp(1, 1000000),
+            );
+            final items = filtered
+                .skip((page - 1) * _pageSize)
+                .take(_pageSize)
+                .toList();
+            return [
+              const SizedBox(height: AppSpacing.medium),
+              Text(
+                data.agentAvailable
+                    ? l.adminAgentAvailable
+                    : l.adminAgentUnavailable,
+              ),
+              const SizedBox(height: AppSpacing.medium),
+              if (items.isEmpty)
+                DataStateMessage(
+                  title: l.adminAiEmpty,
+                  description: l.adminAiEmptyDescription,
+                ),
+              if (items.isNotEmpty)
+                AdminBulkDeleteBar(
+                  disabled: busy,
+                  state: selection,
+                  eligibleIds: items
+                      .where(_deletable)
+                      .map((item) => item.key)
+                      .toList(),
+                  onSelectPage: (v) => controller.selectPage(
+                    items.where(_deletable).map((item) => item.key),
+                    v,
+                  ),
+                  onDelete: () => _delete(),
+                ),
+              for (final item in items)
+                AdminSelectionRow(
+                  key: ValueKey('ai-${item.key}'),
+                  selected: selection.selected.contains(item.key),
+                  enabled: !busy && _deletable(item),
+                  label: item.displayName,
+                  onChanged: (v) => controller.toggle(item.key, v),
+                  child: AdminAiProviderRow(
+                    item: item,
+                    busy: busy,
+                    onActivate: () => _activate(item.key),
+                    onEdit: () => editAiProvider(context, ref, item),
+                    onDelete: () => _delete(item),
+                  ),
+                ),
+              if (filtered.isNotEmpty)
+                ListPagination(
+                  page: page,
+                  pageSize: _pageSize,
+                  total: filtered.length,
+                  busy: busy,
+                  onPage: (v) {
+                    controller.clear();
+                    setState(() => _page = v);
+                  },
+                  onPageSize: (v) {
+                    controller.clear();
+                    setState(() {
+                      _pageSize = v;
+                      _page = 1;
+                    });
+                  },
+                ),
+            ];
+          },
+          error: (error, _) => adminError(
+            action: l.retryAction,
+            title: l.loadFailedTitle,
+            description: dataRequestFailureMessage(l, error),
+            retry: () => ref.invalidate(adminAiProvidersProvider),
+          ),
+          loading: () => adminLoading(l.loadingData),
+        ),
+      ],
     );
   }
 }

@@ -399,7 +399,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get accountDescription =>
-      'View your account and manage your signed-in session.';
+      'Manage your username and avatar. Administrators can also change their role.';
 
   @override
   String get appearanceSection => 'Appearance';
@@ -911,11 +911,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loggingOut => 'Signing out…';
 
   @override
-  String get downloadHomeTitle => 'Bring content\nback to your device.';
+  String get downloadHomeTitle => 'Bring content back to your device.';
 
   @override
   String get downloadHomeDescription =>
-      'Inspect a public video link, or import a local video or screenplay you are authorized to process.';
+      'Inspect public video, image, and collection links, or upload local videos and screenplays.';
 
   @override
   String get linkIntakeMode => 'Link';
@@ -1513,11 +1513,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Review global operations and handle frequent administration tasks.';
 
   @override
-  String get adminAnalyticsTitle => 'Download analytics';
+  String get adminAnalyticsTitle => 'Usage analytics';
 
   @override
   String get adminAnalyticsDescription =>
-      'Review global volume, success rate, and source distribution by UTC day.';
+      'Review download performance and AI analysis executions.';
 
   @override
   String get adminFilesTitle => 'File management';
@@ -1562,11 +1562,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminSourceBreakdown => 'Source breakdown';
 
   @override
-  String get adminCleanupTitle => 'Clean up expired files';
+  String get adminCleanupTitle => 'Clean up historical files?';
 
   @override
   String get adminCleanupDescription =>
-      'Choose a retention period. The service will remove eligible persisted resources older than it.';
+      'Permanently delete videos, screenplays, and analysis reports older than the specified days. Source files used by active analysis are skipped.';
 
   @override
   String adminCleanupDays(int days) {
@@ -1629,7 +1629,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminSystemRegistered => 'Registered by system';
 
   @override
-  String get adminSystemMissing => 'Not registered by system';
+  String get adminSystemMissing => 'Catalog only';
 
   @override
   String get adminAgentAvailable => 'The local analysis agent is available.';
@@ -1969,4 +1969,587 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reparseDownloadAction => 'Inspect link again';
+
+  @override
+  String get inspectionContainerLabel => 'Container';
+
+  @override
+  String get inspectionCompatibilityLabel => 'Compatibility';
+
+  @override
+  String get inspectionVideoCodecLabel => 'Video codec';
+
+  @override
+  String get inspectionAudioCodecLabel => 'Audio codec';
+
+  @override
+  String get compatibilityQuality => 'Quality first';
+
+  @override
+  String get compatibilitySmallest => 'Smallest file';
+
+  @override
+  String get compatibilityBalanced => 'Balanced';
+
+  @override
+  String get analysisPriorityRevisions => 'Priority revisions';
+
+  @override
+  String get analysisStrengths => 'Strengths';
+
+  @override
+  String get analysisStructure => 'Acts';
+
+  @override
+  String get analysisTurningPoints => 'Turning points';
+
+  @override
+  String get analysisCharacters => 'Characters';
+
+  @override
+  String get analysisDialogue => 'Dialogue findings';
+
+  @override
+  String get analysisConflict => 'Conflict';
+
+  @override
+  String get analysisTurn => 'Turn';
+
+  @override
+  String get analysisPacing => 'Pacing';
+
+  @override
+  String get analysisGoal => 'Goal';
+
+  @override
+  String get analysisCharacterArc => 'Character arc';
+
+  @override
+  String get analysisVisualRules => 'Visual rules';
+
+  @override
+  String get analysisContinuityRisks => 'Continuity risks';
+
+  @override
+  String get analysisNarrativeFunction => 'Narrative function';
+
+  @override
+  String get analysisTransition => 'Transition';
+
+  @override
+  String get analysisRecommendedExtensions => 'Recommended extensions';
+
+  @override
+  String get analysisPriorityShots => 'Priority shots';
+
+  @override
+  String get analysisEvidenceShots => 'Evidence shots';
+
+  @override
+  String get analysisReportSections => 'Report sections';
+
+  @override
+  String get activityHistoryTitle => 'My activity';
+
+  @override
+  String get activityHistoryDescription =>
+      'View link, document and AI analysis records together.';
+
+  @override
+  String get activityHistorySearch => 'Search activity';
+
+  @override
+  String get activityHistoryLink => 'Link parsing';
+
+  @override
+  String get activityHistoryVideo => 'Video AI';
+
+  @override
+  String get activityHistoryScreenplay => 'Screenplay processing';
+
+  @override
+  String get activityHistoryBasic => 'Basic parsing';
+
+  @override
+  String get activityHistoryRewrite => 'AI rewrite';
+
+  @override
+  String get activityHistoryAll => 'All types';
+
+  @override
+  String get bulkSelectAll => 'Select this page';
+
+  @override
+  String get bulkClear => 'Clear selection';
+
+  @override
+  String get bulkDownload => 'Download selected';
+
+  @override
+  String get bulkRetry => 'Retry selected';
+
+  @override
+  String get bulkDelete => 'Delete selected';
+
+  @override
+  String get bulkActionResult => 'Operation complete';
+
+  @override
+  String get bulkActionSummary => 'Completed';
+
+  @override
+  String get pageSizeLabel => 'Page size';
+
+  @override
+  String get profileAvatarUpload => 'Upload avatar';
+
+  @override
+  String get profileAvatarRemove => 'Remove avatar';
+
+  @override
+  String get profileAvatarBusy => 'Updating avatar';
+
+  @override
+  String get profileAvatarHelp =>
+      'JPEG, PNG or WebP, up to 4 MB. Uploaded images are cropped to a square.';
+
+  @override
+  String get profileAvatarInvalidType => 'Choose a JPEG, PNG or WebP image.';
+
+  @override
+  String get profileAvatarInvalidSize =>
+      'Avatar files must be nonempty and no larger than 4 MB.';
+
+  @override
+  String get profileAvatarSaved => 'Avatar updated.';
+
+  @override
+  String get profileAvatarRemoved => 'Avatar removed.';
+
+  @override
+  String get profileEmailHelp => 'Used to sign in. It cannot be changed here.';
+
+  @override
+  String get profileRoleLabel => 'Account role';
+
+  @override
+  String get profileRoleAdminHelp =>
+      'Another active administrator must remain before changing to a regular user.';
+
+  @override
+  String get profileRoleUserHelp =>
+      'Only administrators can change account roles.';
+
+  @override
+  String get profileFieldsTitle => 'Profile fields';
+
+  @override
+  String get profilePartialSave =>
+      'Username saved; account role could not be updated.';
+
+  @override
+  String get selfHostingNavigation => 'Self-hosting';
+
+  @override
+  String get selfHostingDescription =>
+      'Run FrameFetch on your infrastructure, from setup to first sign-in.';
+
+  @override
+  String get aboutNavigation => 'About FrameFetch';
+
+  @override
+  String get aboutDescription =>
+      'Learn about the open-source media workflow, engineering principles and content boundaries.';
+
+  @override
+  String get resourcesNavigation => 'Resources';
+
+  @override
+  String get adminDownloadsTab => 'Downloads';
+
+  @override
+  String get adminAnalysisTab => 'AI analysis';
+
+  @override
+  String get adminAnalysisExecutions => 'Executions';
+
+  @override
+  String get adminAnalysisDuration => 'Average completion duration';
+
+  @override
+  String get adminAnalysisDurationCount => 'Valid completion records';
+
+  @override
+  String get adminAnalysisStatus => 'Execution status';
+
+  @override
+  String get adminAnalysisInput => 'Input type';
+
+  @override
+  String get adminAnalysisEmpty => 'No AI analysis records in this period';
+
+  @override
+  String get adminAnalysisEmptyDescription =>
+      'Choose another period or start an analysis.';
+
+  @override
+  String get adminAnalysisScopeHint =>
+      'Analysis executions are grouped by UTC day. Retries and reanalysis count separately. Executions are not model request counts.';
+
+  @override
+  String get adminCompletionRate => 'Completion rate';
+
+  @override
+  String get adminTrendDetails => 'Exact data';
+
+  @override
+  String get adminOperationLogsTitle => 'System operation logs';
+
+  @override
+  String get adminOperationLogsDescription =>
+      'Review business requests and administrator operations, including actors, resources, and outcomes.';
+
+  @override
+  String get adminOperationLogSearch => 'Actor or operation';
+
+  @override
+  String get adminOperationScope => 'Operation scope';
+
+  @override
+  String get adminAllOperations => 'All operations';
+
+  @override
+  String get adminRequestOperations => 'API requests';
+
+  @override
+  String get adminTaskOperations => 'System tasks';
+
+  @override
+  String get adminAdminOperations => 'Administrator operations';
+
+  @override
+  String get adminOperationOutcome => 'Outcome';
+
+  @override
+  String get adminAllOutcomes => 'All outcomes';
+
+  @override
+  String get adminOperationStarted => 'Outcome unconfirmed';
+
+  @override
+  String get adminOperationSucceeded => 'Request succeeded';
+
+  @override
+  String get adminOperationFailed => 'Request failed';
+
+  @override
+  String get adminOperationSucceededFilter => 'Success / state update';
+
+  @override
+  String get adminOperationFrom => 'Start time';
+
+  @override
+  String get adminOperationTo => 'End time';
+
+  @override
+  String get adminOperationDateHint => 'YYYY-MM-DD HH:mm';
+
+  @override
+  String get adminOperationInvalidDates =>
+      'The end time cannot precede the start time. Use YYYY-MM-DD HH:mm.';
+
+  @override
+  String get adminOperationLogsHint =>
+      'Logs cover operations after logging was enabled. Request outcomes and task states are recorded separately. An unconfirmed outcome means a request is unfinished or was interrupted.';
+
+  @override
+  String get adminOperationLogsEmpty => 'No operation logs';
+
+  @override
+  String get adminOperationLogsEmptyDescription =>
+      'No operations match these filters. Adjust the filters or refresh later.';
+
+  @override
+  String get adminOperationDetails => 'Operation details';
+
+  @override
+  String get adminOperationDetailsDescription =>
+      'Read-only records for locating requests and verifying outcomes.';
+
+  @override
+  String get adminOperationActor => 'Actor';
+
+  @override
+  String get adminUnknownAccount => 'Unknown account';
+
+  @override
+  String get adminOperationObject => 'Resource';
+
+  @override
+  String get adminOperationId => 'Log ID';
+
+  @override
+  String get adminActorId => 'Account ID';
+
+  @override
+  String get adminOperationLabel => 'Operation';
+
+  @override
+  String get adminOperationKey => 'Operation key';
+
+  @override
+  String get adminOperationEndpoint => 'Endpoint';
+
+  @override
+  String get adminOperationFinished => 'Finished at';
+
+  @override
+  String get adminOperationStatusCode => 'HTTP status';
+
+  @override
+  String get adminOperationErrorCode => 'Error code';
+
+  @override
+  String get adminSelectAll => 'Select this page';
+
+  @override
+  String get adminDeleteSelected => 'Delete selected';
+
+  @override
+  String get adminDeleteSelectionTitle => 'Delete the selected records?';
+
+  @override
+  String get adminDeleteSelectionDescription =>
+      'Deletion cannot be undone. Deleted records are removed from the list; failed deletions can be retried.';
+
+  @override
+  String get adminDeletePartialFailure =>
+      'Some records could not be deleted. Review them and retry.';
+
+  @override
+  String get adminDeleteUserDescription =>
+      'The account, credentials, role, quotas, and sessions are removed. Historical download files and task records are retained.';
+
+  @override
+  String get adminDeleteFileDescription =>
+      'The file and its persistent objects are permanently deleted. Source files used by active analysis cannot be deleted.';
+
+  @override
+  String get adminUsersEmpty => 'No matching accounts';
+
+  @override
+  String get adminUsersEmptyDescription =>
+      'Adjust the search, role, or account status and try again.';
+
+  @override
+  String get adminQuotaTitle => 'Usage limits';
+
+  @override
+  String get adminQuotaDescription =>
+      'Leave blank to use system defaults. Exempt accounts bypass usage limits.';
+
+  @override
+  String get adminQuotaExempt => 'Exempt from usage limits';
+
+  @override
+  String get adminQuotaActive => 'Active tasks';
+
+  @override
+  String get adminQuotaDailyTasks => 'Tasks per 24 hours';
+
+  @override
+  String get adminQuotaDailyGiB => 'Processed per 24 hours (GiB)';
+
+  @override
+  String get adminQuotaStorageGiB => 'Retained storage (GiB)';
+
+  @override
+  String get adminQuotaAnalysis => 'Analysis attempts per 24 hours';
+
+  @override
+  String get adminUseSystemDefault => 'Use system default';
+
+  @override
+  String get adminPlatformsEmpty => 'No matching platforms';
+
+  @override
+  String get adminPlatformsEmptyDescription =>
+      'Adjust the search or visibility and try again.';
+
+  @override
+  String get adminAiSearch => 'Search AI configurations';
+
+  @override
+  String get adminAiEmpty => 'No matching AI configurations';
+
+  @override
+  String get adminAiEmptyDescription =>
+      'Adjust the search or create an AI configuration.';
+
+  @override
+  String get adminEngineCodex => 'Codex CLI · Responses';
+
+  @override
+  String get adminEngineClaude => 'Claude CLI · Messages';
+
+  @override
+  String get adminEngineOpenRouter => 'OpenRouter API';
+
+  @override
+  String get adminEngineOpenAi => 'OpenAI-compatible API';
+
+  @override
+  String get adminEngineDeepSeek => 'DeepSeek API · LangChain vision';
+
+  @override
+  String get adminOpenRouterUrlHint =>
+      'Uses the official OpenRouter endpoint. Video analysis requires image input and structured output support.';
+
+  @override
+  String get adminApiUrlHint =>
+      'Public endpoints require HTTPS; localhost endpoints may use HTTP.';
+
+  @override
+  String get adminFixedDeepSeekModel =>
+      'The current vision adapter uses this fixed model.';
+
+  @override
+  String get adminHostLoginHint =>
+      'The agent uses the current system user’s CLI sign-in. No project API key is required.';
+
+  @override
+  String get adminReadModels => 'Load OpenRouter models';
+
+  @override
+  String get adminModelSearch => 'Search model name or ID';
+
+  @override
+  String get adminModelsHint =>
+      'Only models declaring structured output support are listed. Choose image-capable models for video. Catalog information does not verify actual calls.';
+
+  @override
+  String get adminImageSupported => 'Image input';
+
+  @override
+  String get adminTextOnly => 'Text only';
+
+  @override
+  String get adminModelsEmpty => 'No matching models';
+
+  @override
+  String get adminModelDirectory => 'Catalog models';
+
+  @override
+  String pageSizeOption(int size) {
+    return '$size per page';
+  }
+
+  @override
+  String get uploadVideoAction => 'Import your video';
+
+  @override
+  String get aboutContent =>
+      '## Who is FrameFetch for?\n\n### Creators\n\nOrganize media you own or are authorized to use. Review structure using shots, scenes and keyframe evidence.\n\n### Content researchers\n\nTrack videos and screenplay documents as tasks. Export Markdown and DOCX reports for review.\n\n### Developers and teams\n\nRun FastAPI, Next.js and workers on your infrastructure, and extend Web or mobile clients through OpenAPI.\n\n## Why asynchronous workflows?\n\n### Recoverable\n\nPostgreSQL stores task facts. Transactional Outbox keeps database state and message intent consistent. Realtime connections display progress.\n\n### Isolated\n\nDownloads, media commands and AI tasks run outside HTTP request processes. Runners use controlled egress that blocks private networks.\n\n### Verifiable\n\nProvider responses do not become final files directly. Workers resolve again and verify format, duration, size and SHA-256 before storage.\n\n### Self-hosted\n\nData stays on infrastructure configured by the deployer. No official hosted service or embedded third-party tracking is required.\n\n## Content and service boundaries\n\nProcess only authorized, public, free, non-DRM HTTP(S) content by default. Protected, paid, private or region-restricted content is outside that scope. Private-network URLs, arbitrary yt-dlp arguments and shell inputs are prohibited.\n\nThe MIT license grants software rights, not rights to download, copy or analyze third-party media. The project offers no official SaaS, public demo service or availability SLA.\n\n## Source repositories\n\n[video-server](https://github.com/StephenQiu30/video-server): FastAPI API, Next.js Web, download/document/report workers, isolated media runner and Compose deployment.\n\n[video-app](https://github.com/StephenQiu30/video-app): Flutter iOS and Android client. Media processing and AI inference run on the server.\n\nMaintained by [StephenQiu](https://github.com/StephenQiu30). Contributions through issues and pull requests are welcome. Report security issues privately using the [security policy](https://github.com/StephenQiu30/video-server/blob/main/SECURITY.md).';
+
+  @override
+  String get selfHostingContent =>
+      'Commands and configuration follow the repository README. Consult the design documents for platform sign-in and recovery.\n\n## Requirements\n\n- Docker Engine and Docker Compose.\n- Existing PostgreSQL, RabbitMQ, Redis and MinIO. Compose manages FrameFetch business services and reuses this infrastructure.\n- macOS platform identity requires uv (Python 3.12), your regular Chrome profile and the FrameFetch extension.\n- Production needs strong random secrets, a stable HTTPS address and planned object storage capacity.\n\n## Deploy with Docker Compose\n\n### Clone and configure\n\nConfigure .env to connect to your existing infrastructure. Store real secrets in an untracked .env or a secret manager.\n\n```sh\ngit clone https://github.com/StephenQiu30/video-server.git\ncd video-server\ntest -f .env || cp .env.example .env\n```\n\n### Load the current schema\n\nFor an empty project database, load schema.sql using the DDL account. Back up existing databases before upgrades.\n\n```sh\npsql -X -v ON_ERROR_STOP=1 -W -h 127.0.0.1 -U video -d video -f backend/sql/schema.sql\n```\n\n### Install identity source and start services\n\nOn macOS install the identity source and load the printed extension directory in chrome://extensions. Reuse your regular Chrome sign-in. Compose starts Web, API, workers, runner and egress proxy. Public links prefer anonymous parsing. See README for production.\n\n```sh\nuv run --project backend python -m app.workers.session.source_cli install --env-file .env\ndocker compose up -d --build --wait --remove-orphans\n```\n\n### Bootstrap the first administrator\n\nRun once on the deployment host for an empty user table. Enter the password interactively. There is no HTTP bootstrap endpoint.\n\n```sh\nuv run --project backend python -m app.workers.bootstrap_admin --env-file .env --username your-admin --email you@example.com\n```\n\n### Check health\n\nWeb defaults to port 8101, API to 8111 and Swagger to :8111/docs. Health does not prove platform media can be downloaded.\n\n```sh\ncurl --fail http://127.0.0.1:8111/health/live\ncurl --fail http://127.0.0.1:8111/health/ready\ncurl --fail --head http://127.0.0.1:8101/\n```\n\n## Is AI required?\n\nAI workers run independently of business Compose. Use a signed-in host Codex App Server or configure a supported model provider. Set ANALYSIS_ENABLED=false for download/document-only use. This does not disable downloads or document imports.\n\nExternal models receive analysis content and may incur fees. Check media authorization and provider data policies before enabling them.\n\n## Before publishing\n\n- Replace all placeholder .env.prod credentials and make secret recovery possible.\n- Route external media through egress that blocks private networks. URL validation alone is insufficient.\n- Plan MinIO capacity, backup and explicit cleanup. Expired signed URLs do not delete final files.\n- Use SITE_INDEXABLE=true only for a public project introduction site and set SITE_URL to a stable HTTPS domain.\n- Update with git pull --ff-only, reinstall identity source and rebuild/start Compose per README. Restart alone does not apply new images or environment settings.\n\n[Quick Start](https://github.com/StephenQiu30/video-server#快速开始) · [System design](https://github.com/StephenQiu30/video-server/blob/main/docs/design/README.md)';
+
+  @override
+  String get activityHistoryFrom => 'From date';
+
+  @override
+  String get activityHistoryTo => 'To date';
+
+  @override
+  String get activityHistorySkill => 'Analysis Skill';
+
+  @override
+  String get activitySourceUnavailable =>
+      'Source unavailable. Saved results remain available.';
+
+  @override
+  String get analysisRunsTitle => 'Run history';
+
+  @override
+  String get verifyRegistrationEmail => 'Verify email';
+
+  @override
+  String get verifyingRegistrationEmail => 'Verifying…';
+
+  @override
+  String get registrationEmailVerified => 'Email verified';
+
+  @override
+  String get registrationEmailVerificationSuccess =>
+      'Email verified. You can set your password.';
+
+  @override
+  String get registrationPasswordPrompt =>
+      'Email verified. Set your password to finish registration.';
+
+  @override
+  String currentPageLabel(int page) {
+    return 'Page $page';
+  }
+
+  @override
+  String get adminAnalysisRateFormula => 'Succeeded ÷ (succeeded + failed)';
+
+  @override
+  String get adminAnalysisTrendTitle => 'Daily analysis trend';
+
+  @override
+  String get adminDownloadTrendTitle => 'Daily download trend';
+
+  @override
+  String get adminStatusDistribution => 'Status distribution';
+
+  @override
+  String get adminSourcePerformance => 'Download performance by source';
+
+  @override
+  String get adminCompletionTrend => 'Completion rate trend';
+
+  @override
+  String get adminOperationDeleted => 'Deleted';
+
+  @override
+  String get adminDeleteAiDescription =>
+      'Selected AI configurations and credentials will be permanently deleted. Active and fallback routes cannot be deleted.';
+
+  @override
+  String get adminDeleteCatalogDescription =>
+      'Entries are removed from the catalog and public status page. System download profiles remain available.';
+
+  @override
+  String get exportMarkdown => 'Export Markdown';
+
+  @override
+  String get publicWorkflowEyebrow => 'Workflow';
+
+  @override
+  String get publicWorkflowDescription =>
+      'Every step from discovery to delivery has a clear boundary.';
+
+  @override
+  String get adminObjectCount => 'Object count';
+
+  @override
+  String analysisRunNumber(int run) {
+    return 'Run $run';
+  }
+
+  @override
+  String get analysisRetryTitle => 'Run again with the original settings';
+
+  @override
+  String get analysisRetryDescription =>
+      'Keeps the analysis ID and starts another run, which may consume model quota. Create a new analysis from the source to change settings.';
+
+  @override
+  String get confirmRetryAnalysis => 'Confirm run';
+
+  @override
+  String get adminPeriodLabel => 'Period';
 }

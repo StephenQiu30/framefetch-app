@@ -125,7 +125,7 @@ final class _DownloadVideoPanelState extends ConsumerState<DownloadVideoPanel> {
             busyAction: _busyAction,
             downloadLabel: localizations.getFileAction,
             onDownload: _download,
-            onWatch: _watch,
+            onWatch: widget.job.mediaKind == MediaKind.video ? _watch : null,
             watchLabel: localizations.watchVideoAction,
           ),
         ],

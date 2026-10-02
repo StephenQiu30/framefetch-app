@@ -80,6 +80,7 @@ final class _SequencedDownloadHistoryRepository
   @override
   Future<DownloadHistoryResponse> fetchPage({
     int page = 1,
+    int pageSize = 20,
     String? search,
     DownloadStatus? status,
   }) => throw UnimplementedError();

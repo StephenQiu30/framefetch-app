@@ -7,6 +7,7 @@ import 'package:framegrab/features/auth/application/auth_session_controller.dart
 import 'package:framegrab/features/download/application/public_input.dart';
 import 'package:framegrab/features/download/data/download_intake_repository.dart';
 import 'package:framegrab/features/download/data/download_intent_repository.dart';
+import 'package:framegrab/features/download/data/source_discovery_repository.dart';
 import 'package:video_server_api/video_server_api.dart';
 
 enum DownloadIntakePhase { idle, inspecting, selecting, creating }
@@ -135,6 +136,38 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
     } catch (error) {
       if (generation == _generation) {
         state = state.copyWith(error: error, phase: DownloadIntakePhase.idle);
+      }
+    }
+  }
+
+  Future<void> resumeInspection(String id) => _restoreReadOnly(
+    () async => DownloadIntakeState(inspection: await _intents.inspection(id)),
+  );
+
+  Future<void> resumeDiscovery(String id) => _restoreReadOnly(
+    () async => DownloadIntakeState(
+      discovery: await ref.read(sourceDiscoveryRepositoryProvider).get(id),
+    ),
+  );
+
+  Future<void> _restoreReadOnly(
+    Future<DownloadIntakeState> Function() query,
+  ) async {
+    if (state.busy || state.cancelling || _owner == null) return;
+    final generation = ++_generation;
+    _pollTimer?.cancel();
+    state = const DownloadIntakeState(phase: DownloadIntakePhase.inspecting);
+    try {
+      final next = await query();
+      if (generation != _generation || !ref.mounted) return;
+      if (next.inspection case final inspection?) {
+        _applyInspection(inspection);
+      } else {
+        state = next;
+      }
+    } catch (error) {
+      if (generation == _generation && ref.mounted) {
+        state = DownloadIntakeState(error: error);
       }
     }
   }
@@ -398,7 +431,11 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
 
   Future<void> inspectItem(String itemRef) async {
     final discovery = state.discovery;
-    if (state.busy || discovery == null) return;
+    if (state.busy ||
+        discovery == null ||
+        !discovery.expiresAt.isAfter(DateTime.now())) {
+      return;
+    }
     final generation = ++_generation;
     state = state.copyWith(
       phase: DownloadIntakePhase.selecting,

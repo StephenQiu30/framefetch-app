@@ -1,227 +1,165 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
 import 'package:framegrab/features/admin/application/admin_providers.dart';
+import 'package:framegrab/features/admin/application/admin_selection_controller.dart';
 import 'package:framegrab/features/admin/data/admin_repository.dart';
+import 'package:framegrab/features/admin/presentation/admin_bulk_delete_bar.dart';
+import 'package:framegrab/features/admin/presentation/admin_edit_sheet.dart';
 import 'package:framegrab/features/admin/presentation/admin_page.dart';
+import 'package:framegrab/features/admin/presentation/admin_user_editor.dart';
+import 'package:framegrab/features/admin/presentation/admin_user_row.dart';
 import 'package:framegrab/features/auth/application/auth_session_controller.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
 import 'package:framegrab/shared/presentation/app_dropdown_field.dart';
+import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
 import 'package:framegrab/shared/presentation/list_filters.dart';
 import 'package:framegrab/shared/presentation/list_query.dart';
-import 'package:phosphor_icons/phosphor_icons.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:video_server_api/video_server_api.dart';
 
 final class AdminUsersScreen extends ConsumerWidget {
   const AdminUsersScreen({super.key});
 
+  Future<void> _delete(
+    BuildContext context,
+    WidgetRef ref, [
+    String? id,
+  ]) async {
+    final l = AppLocalizations.of(context);
+    if (!await confirmAdminDelete(
+          context,
+          title: id == null ? l.adminDeleteSelectionTitle : l.deleteAction,
+          description: l.adminDeleteUserDescription,
+        ) ||
+        !context.mounted) {
+      return;
+    }
+    final selection = ref.read(adminUserSelectionProvider.notifier);
+    if (id != null) selection.selectPage([id], true);
+    final query = ref.read(userListQueryProvider);
+    final total = ref.read(adminUsersProvider).value?.total ?? 0;
+    final requestedCount = ref.read(adminUserSelectionProvider).selected.length;
+    final current = await selection.deleteSelected(
+      ref.read(adminRepositoryProvider).deleteUser,
+    );
+    if (!current || !context.mounted) return;
+    final removed =
+        requestedCount - ref.read(adminUserSelectionProvider).selected.length;
+    final lastPage = ((total - removed) / query.pageSize).ceil().clamp(
+      1,
+      1000000,
+    );
+    if (query.page > lastPage) {
+      ref.read(userListQueryProvider.notifier).page(lastPage);
+    }
+    ref.invalidate(adminUsersProvider);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
+    final l = AppLocalizations.of(context);
     final currentUserId = ref.watch(authSessionProvider).user?.id;
     final result = ref.watch(adminUsersProvider);
+    final query = ref.watch(userListQueryProvider);
+    final selection = ref.watch(adminUserSelectionProvider);
+    final controller = ref.read(adminUserSelectionProvider.notifier);
+    ref.listen(userListQueryProvider, (_, _) => controller.clear());
+    ref.listen(userRoleFilterProvider, (_, _) => controller.clear());
     return AdminPage(
-      title: l10n.adminUsersTitle,
-      description: l10n.adminUsersDescription,
-      refreshLabel: l10n.refreshAction,
+      title: l.adminUsersTitle,
+      description: l.adminUsersDescription,
+      refreshLabel: l.refreshAction,
       onRefresh: () => ref.refresh(adminUsersProvider.future).then((_) {}),
       children: [
         AppDropdownField<String>(
+          enabled: !selection.busy,
           value: ref.watch(userRoleFilterProvider)?.name ?? '',
-          label: l10n.adminRoleLabel,
+          label: l.adminRoleLabel,
           options: [
-            AppDropdownOption(value: '', label: l10n.allRoles),
-            AppDropdownOption(value: 'user', label: l10n.adminRoleUser),
-            AppDropdownOption(value: 'admin', label: l10n.adminRoleAdmin),
+            AppDropdownOption(value: '', label: l.allRoles),
+            AppDropdownOption(value: 'user', label: l.adminRoleUser),
+            AppDropdownOption(value: 'admin', label: l.adminRoleAdmin),
           ],
           onSelected: (v) => ref
               .read(userRoleFilterProvider.notifier)
               .select(v == null || v.isEmpty ? null : UserRole.valueOf(v)),
         ),
         ListFilters(
-          query: ref.watch(userListQueryProvider),
-          searchLabel: l10n.searchUsers,
+          query: query,
+          searchLabel: l.searchUsers,
           statuses: {
-            'active': l10n.adminAccountEnabled,
-            'inactive': l10n.adminAccountDisabled,
+            'active': l.adminAccountEnabled,
+            'inactive': l.adminAccountDisabled,
           },
-          onSearch: (v) => ref
-              .read(userListQueryProvider.notifier)
-              .filter(
-                search: v,
-                status: ref.read(userListQueryProvider).status,
-              ),
-          onStatus: (v) =>
-              ref.read(userListQueryProvider.notifier).filter(status: v),
+          onSearch: (v) {
+            if (!selection.busy) {
+              ref
+                  .read(userListQueryProvider.notifier)
+                  .filter(search: v, status: query.status);
+            }
+          },
+          onStatus: (v) {
+            if (!selection.busy) {
+              ref.read(userListQueryProvider.notifier).filter(status: v);
+            }
+          },
         ),
         ...result.when(
           data: (data) => [
-            ListPagination(
-              page: ref.watch(userListQueryProvider).page,
-              total: data.total,
-              onPage: ref.read(userListQueryProvider.notifier).page,
-            ),
-            Text(l10n.adminUserCount(data.total)),
-            const SizedBox(height: AppSpacing.medium),
+            if (data.items.isEmpty)
+              DataStateMessage(
+                title: l.adminUsersEmpty,
+                description: l.adminUsersEmptyDescription,
+              ),
+            if (data.items.isNotEmpty)
+              AdminBulkDeleteBar(
+                state: selection,
+                eligibleIds: [
+                  for (final u in data.items)
+                    if (u.id != currentUserId) u.id,
+                ],
+                onSelectPage: (v) => controller.selectPage(
+                  data.items
+                      .where((u) => u.id != currentUserId)
+                      .map((u) => u.id),
+                  v,
+                ),
+                onDelete: () => _delete(context, ref),
+              ),
             for (final user in data.items)
-              _UserRow(
-                user: user,
-                isCurrent: user.id == currentUserId,
-                onEdit: () => _editUser(context, ref, user),
+              AdminSelectionRow(
+                key: ValueKey('admin-user-${user.id}'),
+                selected: selection.selected.contains(user.id),
+                enabled: !selection.busy && user.id != currentUserId,
+                label: user.username,
+                onChanged: (v) => controller.toggle(user.id, v),
+                child: AdminUserRow(
+                  user: user,
+                  isCurrent: user.id == currentUserId,
+                  busy: selection.busy,
+                  onEdit: () => editAdminUser(context, ref, user),
+                  onDelete: () => _delete(context, ref, user.id),
+                ),
+              ),
+            if (data.total > 0)
+              ListPagination(
+                page: query.page,
+                pageSize: query.pageSize,
+                total: data.total,
+                busy: selection.busy,
+                onPage: ref.read(userListQueryProvider.notifier).page,
+                onPageSize: ref.read(userListQueryProvider.notifier).pageSize,
               ),
           ],
           error: (error, _) => adminError(
-            action: l10n.retryAction,
-            title: l10n.loadFailedTitle,
-            description: dataRequestFailureMessage(l10n, error),
+            action: l.retryAction,
+            title: l.loadFailedTitle,
+            description: dataRequestFailureMessage(l, error),
             retry: () => ref.invalidate(adminUsersProvider),
           ),
-          loading: () => adminLoading(l10n.loadingData),
+          loading: () => adminLoading(l.loadingData),
         ),
       ],
-    );
-  }
-
-  Future<void> _editUser(
-    BuildContext context,
-    WidgetRef ref,
-    ManagedUserResponse user,
-  ) async {
-    var role = user.role;
-    var active = user.isActive;
-    final save = await showShadSheet<bool>(
-      context: context,
-      builder: (sheetContext) => ShadSheet(
-        isScrollControlled: true,
-        child: Builder(
-          builder: (context) => StatefulBuilder(
-            builder: (context, setSheetState) {
-              final l10n = AppLocalizations.of(context);
-              return SafeArea(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(
-                    AppSpacing.xLarge,
-                    AppSpacing.medium,
-                    AppSpacing.xLarge,
-                    MediaQuery.viewInsetsOf(context).bottom + AppSpacing.xLarge,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        user.username,
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      const SizedBox(height: AppSpacing.large),
-                      AppDropdownField<UserRole>(
-                        value: role,
-                        label: l10n.adminRoleLabel,
-                        options: [
-                          AppDropdownOption(
-                            value: UserRole.user,
-                            label: l10n.adminRoleUser,
-                          ),
-                          AppDropdownOption(
-                            value: UserRole.admin,
-                            label: l10n.adminRoleAdmin,
-                          ),
-                        ],
-                        onSelected: (value) {
-                          if (value != null) setSheetState(() => role = value);
-                        },
-                      ),
-                      ShadSwitch(
-                        value: active,
-                        onChanged: (value) =>
-                            setSheetState(() => active = value),
-                        label: Text(l10n.adminAccountActive),
-                      ),
-                      const SizedBox(height: AppSpacing.medium),
-                      ShadButton(
-                        onPressed: () => Navigator.pop(context, true),
-                        height: 0,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 12,
-                        ),
-                        child: Flexible(child: Text(l10n.saveAction)),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      ),
-    );
-    if (save != true || !context.mounted) return;
-    try {
-      await ref.read(adminRepositoryProvider).updateUser(user, role, active);
-      ref.invalidate(adminUsersProvider);
-    } catch (_) {
-      if (context.mounted) {
-        ShadSonner.of(context).show(
-          ShadToast(
-            description: Text(AppLocalizations.of(context).adminActionFailed),
-          ),
-        );
-      }
-    }
-  }
-}
-
-final class _UserRow extends StatelessWidget {
-  const _UserRow({
-    required this.isCurrent,
-    required this.onEdit,
-    required this.user,
-  });
-
-  final bool isCurrent;
-  final VoidCallback onEdit;
-  final ManagedUserResponse user;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(user.username),
-                const SizedBox(height: 4),
-                DefaultTextStyle(
-                  style: ShadTheme.of(context).textTheme.muted,
-                  child: Text(
-                    '${user.email}\n${user.role == UserRole.admin ? l10n.adminRoleAdmin : l10n.adminRoleUser} · '
-                    '${user.isActive ? l10n.adminAccountEnabled : l10n.adminAccountDisabled}',
-                  ),
-                ),
-              ],
-            ),
-          ),
-          isCurrent
-              ? Text(l10n.adminCurrentUser)
-              : ShadTooltip(
-                  builder: (context) => Text(l10n.editAction),
-                  child: Semantics(
-                    label: l10n.editAction,
-                    child: ShadIconButton.ghost(
-                      onPressed: onEdit,
-                      icon: const Icon(PhosphorIconsRegular.pencil, size: 18),
-                    ),
-                  ),
-                ),
-        ],
-      ),
     );
   }
 }

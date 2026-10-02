@@ -815,7 +815,7 @@ abstract class AppLocalizations {
   /// No description provided for @accountDescription.
   ///
   /// In zh, this message translates to:
-  /// **'查看当前账户，管理登录状态。'**
+  /// **'管理用户名与头像；管理员还可调整账户身份。'**
   String get accountDescription;
 
   /// No description provided for @appearanceSection.
@@ -1715,13 +1715,13 @@ abstract class AppLocalizations {
   /// No description provided for @downloadHomeTitle.
   ///
   /// In zh, this message translates to:
-  /// **'把素材，\n带回本地。'**
+  /// **'把素材，带回本地。'**
   String get downloadHomeTitle;
 
   /// No description provided for @downloadHomeDescription.
   ///
   /// In zh, this message translates to:
-  /// **'解析公开视频链接，或导入你有权处理的本地视频与剧本文档。'**
+  /// **'解析公开视频、图片与合集链接，或上传本地视频与剧本文档。'**
   String get downloadHomeDescription;
 
   /// No description provided for @linkIntakeMode.
@@ -2789,13 +2789,13 @@ abstract class AppLocalizations {
   /// No description provided for @adminAnalyticsTitle.
   ///
   /// In zh, this message translates to:
-  /// **'下载分析'**
+  /// **'使用统计'**
   String get adminAnalyticsTitle;
 
   /// No description provided for @adminAnalyticsDescription.
   ///
   /// In zh, this message translates to:
-  /// **'按 UTC 自然日查看全局下载量、成功率与来源分布。'**
+  /// **'查看下载表现与 AI 分析执行情况。'**
   String get adminAnalyticsDescription;
 
   /// No description provided for @adminFilesTitle.
@@ -2873,7 +2873,7 @@ abstract class AppLocalizations {
   /// No description provided for @adminCleanupTitle.
   ///
   /// In zh, this message translates to:
-  /// **'清理过期文件'**
+  /// **'清理历史文件？'**
   String get adminCleanupTitle;
 
   /// No description provided for @adminCleanupDescription.
@@ -2987,7 +2987,7 @@ abstract class AppLocalizations {
   /// No description provided for @adminSystemMissing.
   ///
   /// In zh, this message translates to:
-  /// **'系统未注册'**
+  /// **'仅目录'**
   String get adminSystemMissing;
 
   /// No description provided for @adminAgentAvailable.
@@ -3613,6 +3613,1086 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'重新解析'**
   String get reparseDownloadAction;
+
+  /// No description provided for @inspectionContainerLabel.
+  ///
+  /// In zh, this message translates to:
+  /// **'容器'**
+  String get inspectionContainerLabel;
+
+  /// No description provided for @inspectionCompatibilityLabel.
+  ///
+  /// In zh, this message translates to:
+  /// **'兼容策略'**
+  String get inspectionCompatibilityLabel;
+
+  /// No description provided for @inspectionVideoCodecLabel.
+  ///
+  /// In zh, this message translates to:
+  /// **'视频编码'**
+  String get inspectionVideoCodecLabel;
+
+  /// No description provided for @inspectionAudioCodecLabel.
+  ///
+  /// In zh, this message translates to:
+  /// **'音频编码'**
+  String get inspectionAudioCodecLabel;
+
+  /// No description provided for @compatibilityQuality.
+  ///
+  /// In zh, this message translates to:
+  /// **'画质优先'**
+  String get compatibilityQuality;
+
+  /// No description provided for @compatibilitySmallest.
+  ///
+  /// In zh, this message translates to:
+  /// **'体积优先'**
+  String get compatibilitySmallest;
+
+  /// No description provided for @compatibilityBalanced.
+  ///
+  /// In zh, this message translates to:
+  /// **'均衡'**
+  String get compatibilityBalanced;
+
+  /// No description provided for @analysisPriorityRevisions.
+  ///
+  /// In zh, this message translates to:
+  /// **'优先修改'**
+  String get analysisPriorityRevisions;
+
+  /// No description provided for @analysisStrengths.
+  ///
+  /// In zh, this message translates to:
+  /// **'值得保留'**
+  String get analysisStrengths;
+
+  /// No description provided for @analysisStructure.
+  ///
+  /// In zh, this message translates to:
+  /// **'幕结构'**
+  String get analysisStructure;
+
+  /// No description provided for @analysisTurningPoints.
+  ///
+  /// In zh, this message translates to:
+  /// **'关键转折'**
+  String get analysisTurningPoints;
+
+  /// No description provided for @analysisCharacters.
+  ///
+  /// In zh, this message translates to:
+  /// **'人物'**
+  String get analysisCharacters;
+
+  /// No description provided for @analysisDialogue.
+  ///
+  /// In zh, this message translates to:
+  /// **'对白发现'**
+  String get analysisDialogue;
+
+  /// No description provided for @analysisConflict.
+  ///
+  /// In zh, this message translates to:
+  /// **'冲突'**
+  String get analysisConflict;
+
+  /// No description provided for @analysisTurn.
+  ///
+  /// In zh, this message translates to:
+  /// **'变化'**
+  String get analysisTurn;
+
+  /// No description provided for @analysisPacing.
+  ///
+  /// In zh, this message translates to:
+  /// **'节奏'**
+  String get analysisPacing;
+
+  /// No description provided for @analysisGoal.
+  ///
+  /// In zh, this message translates to:
+  /// **'目标'**
+  String get analysisGoal;
+
+  /// No description provided for @analysisCharacterArc.
+  ///
+  /// In zh, this message translates to:
+  /// **'人物弧'**
+  String get analysisCharacterArc;
+
+  /// No description provided for @analysisVisualRules.
+  ///
+  /// In zh, this message translates to:
+  /// **'视觉规则'**
+  String get analysisVisualRules;
+
+  /// No description provided for @analysisContinuityRisks.
+  ///
+  /// In zh, this message translates to:
+  /// **'连续性风险'**
+  String get analysisContinuityRisks;
+
+  /// No description provided for @analysisNarrativeFunction.
+  ///
+  /// In zh, this message translates to:
+  /// **'叙事作用'**
+  String get analysisNarrativeFunction;
+
+  /// No description provided for @analysisTransition.
+  ///
+  /// In zh, this message translates to:
+  /// **'转场'**
+  String get analysisTransition;
+
+  /// No description provided for @analysisRecommendedExtensions.
+  ///
+  /// In zh, this message translates to:
+  /// **'建议延展'**
+  String get analysisRecommendedExtensions;
+
+  /// No description provided for @analysisPriorityShots.
+  ///
+  /// In zh, this message translates to:
+  /// **'优先分镜'**
+  String get analysisPriorityShots;
+
+  /// No description provided for @analysisEvidenceShots.
+  ///
+  /// In zh, this message translates to:
+  /// **'依据分镜'**
+  String get analysisEvidenceShots;
+
+  /// No description provided for @analysisReportSections.
+  ///
+  /// In zh, this message translates to:
+  /// **'报告章节'**
+  String get analysisReportSections;
+
+  /// No description provided for @activityHistoryTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'我的处理记录'**
+  String get activityHistoryTitle;
+
+  /// No description provided for @activityHistoryDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'统一查看链接、文档和 AI 分析记录。'**
+  String get activityHistoryDescription;
+
+  /// No description provided for @activityHistorySearch.
+  ///
+  /// In zh, this message translates to:
+  /// **'搜索处理记录'**
+  String get activityHistorySearch;
+
+  /// No description provided for @activityHistoryLink.
+  ///
+  /// In zh, this message translates to:
+  /// **'链接解析'**
+  String get activityHistoryLink;
+
+  /// No description provided for @activityHistoryVideo.
+  ///
+  /// In zh, this message translates to:
+  /// **'视频 AI'**
+  String get activityHistoryVideo;
+
+  /// No description provided for @activityHistoryScreenplay.
+  ///
+  /// In zh, this message translates to:
+  /// **'剧本解析'**
+  String get activityHistoryScreenplay;
+
+  /// No description provided for @activityHistoryBasic.
+  ///
+  /// In zh, this message translates to:
+  /// **'基础解析'**
+  String get activityHistoryBasic;
+
+  /// No description provided for @activityHistoryRewrite.
+  ///
+  /// In zh, this message translates to:
+  /// **'AI 改写'**
+  String get activityHistoryRewrite;
+
+  /// No description provided for @activityHistoryAll.
+  ///
+  /// In zh, this message translates to:
+  /// **'全部类型'**
+  String get activityHistoryAll;
+
+  /// No description provided for @bulkSelectAll.
+  ///
+  /// In zh, this message translates to:
+  /// **'选择本页'**
+  String get bulkSelectAll;
+
+  /// No description provided for @bulkClear.
+  ///
+  /// In zh, this message translates to:
+  /// **'清除选择'**
+  String get bulkClear;
+
+  /// No description provided for @bulkDownload.
+  ///
+  /// In zh, this message translates to:
+  /// **'批量下载'**
+  String get bulkDownload;
+
+  /// No description provided for @bulkRetry.
+  ///
+  /// In zh, this message translates to:
+  /// **'批量重试'**
+  String get bulkRetry;
+
+  /// No description provided for @bulkDelete.
+  ///
+  /// In zh, this message translates to:
+  /// **'批量删除'**
+  String get bulkDelete;
+
+  /// No description provided for @bulkActionResult.
+  ///
+  /// In zh, this message translates to:
+  /// **'操作完成'**
+  String get bulkActionResult;
+
+  /// No description provided for @bulkActionSummary.
+  ///
+  /// In zh, this message translates to:
+  /// **'已完成'**
+  String get bulkActionSummary;
+
+  /// No description provided for @pageSizeLabel.
+  ///
+  /// In zh, this message translates to:
+  /// **'每页条数'**
+  String get pageSizeLabel;
+
+  /// No description provided for @profileAvatarUpload.
+  ///
+  /// In zh, this message translates to:
+  /// **'上传头像'**
+  String get profileAvatarUpload;
+
+  /// No description provided for @profileAvatarRemove.
+  ///
+  /// In zh, this message translates to:
+  /// **'移除头像'**
+  String get profileAvatarRemove;
+
+  /// No description provided for @profileAvatarBusy.
+  ///
+  /// In zh, this message translates to:
+  /// **'正在处理头像'**
+  String get profileAvatarBusy;
+
+  /// No description provided for @profileAvatarHelp.
+  ///
+  /// In zh, this message translates to:
+  /// **'JPEG、PNG 或 WebP，最大 4 MB。上传后自动裁切为方形。'**
+  String get profileAvatarHelp;
+
+  /// No description provided for @profileAvatarInvalidType.
+  ///
+  /// In zh, this message translates to:
+  /// **'请选择 JPEG、PNG 或 WebP 图片。'**
+  String get profileAvatarInvalidType;
+
+  /// No description provided for @profileAvatarInvalidSize.
+  ///
+  /// In zh, this message translates to:
+  /// **'头像文件不能超过 4 MB，且不能为空。'**
+  String get profileAvatarInvalidSize;
+
+  /// No description provided for @profileAvatarSaved.
+  ///
+  /// In zh, this message translates to:
+  /// **'头像已更新。'**
+  String get profileAvatarSaved;
+
+  /// No description provided for @profileAvatarRemoved.
+  ///
+  /// In zh, this message translates to:
+  /// **'头像已移除。'**
+  String get profileAvatarRemoved;
+
+  /// No description provided for @profileEmailHelp.
+  ///
+  /// In zh, this message translates to:
+  /// **'用于登录账户，暂不支持在此修改。'**
+  String get profileEmailHelp;
+
+  /// No description provided for @profileRoleLabel.
+  ///
+  /// In zh, this message translates to:
+  /// **'账户身份'**
+  String get profileRoleLabel;
+
+  /// No description provided for @profileRoleAdminHelp.
+  ///
+  /// In zh, this message translates to:
+  /// **'更改为普通用户前，必须保留另一位启用的管理员。'**
+  String get profileRoleAdminHelp;
+
+  /// No description provided for @profileRoleUserHelp.
+  ///
+  /// In zh, this message translates to:
+  /// **'仅管理员可以修改账户身份。'**
+  String get profileRoleUserHelp;
+
+  /// No description provided for @profileFieldsTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'资料字段'**
+  String get profileFieldsTitle;
+
+  /// No description provided for @profilePartialSave.
+  ///
+  /// In zh, this message translates to:
+  /// **'用户名已保存；账户身份修改失败。'**
+  String get profilePartialSave;
+
+  /// No description provided for @selfHostingNavigation.
+  ///
+  /// In zh, this message translates to:
+  /// **'自托管部署'**
+  String get selfHostingNavigation;
+
+  /// No description provided for @selfHostingDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'从环境准备到首次登录，在自己的基础设施上运行帧取。'**
+  String get selfHostingDescription;
+
+  /// No description provided for @aboutNavigation.
+  ///
+  /// In zh, this message translates to:
+  /// **'关于帧取'**
+  String get aboutNavigation;
+
+  /// No description provided for @aboutDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'了解开源媒体工作流的定位、工程原则与授权边界。'**
+  String get aboutDescription;
+
+  /// No description provided for @resourcesNavigation.
+  ///
+  /// In zh, this message translates to:
+  /// **'资源'**
+  String get resourcesNavigation;
+
+  /// No description provided for @adminDownloadsTab.
+  ///
+  /// In zh, this message translates to:
+  /// **'下载'**
+  String get adminDownloadsTab;
+
+  /// No description provided for @adminAnalysisTab.
+  ///
+  /// In zh, this message translates to:
+  /// **'AI 分析'**
+  String get adminAnalysisTab;
+
+  /// No description provided for @adminAnalysisExecutions.
+  ///
+  /// In zh, this message translates to:
+  /// **'执行次数'**
+  String get adminAnalysisExecutions;
+
+  /// No description provided for @adminAnalysisDuration.
+  ///
+  /// In zh, this message translates to:
+  /// **'平均完成耗时'**
+  String get adminAnalysisDuration;
+
+  /// No description provided for @adminAnalysisDurationCount.
+  ///
+  /// In zh, this message translates to:
+  /// **'有效完成记录'**
+  String get adminAnalysisDurationCount;
+
+  /// No description provided for @adminAnalysisStatus.
+  ///
+  /// In zh, this message translates to:
+  /// **'执行状态'**
+  String get adminAnalysisStatus;
+
+  /// No description provided for @adminAnalysisInput.
+  ///
+  /// In zh, this message translates to:
+  /// **'输入类型'**
+  String get adminAnalysisInput;
+
+  /// No description provided for @adminAnalysisEmpty.
+  ///
+  /// In zh, this message translates to:
+  /// **'当前周期还没有 AI 分析记录'**
+  String get adminAnalysisEmpty;
+
+  /// No description provided for @adminAnalysisEmptyDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'切换统计周期，或发起分析后再查看。'**
+  String get adminAnalysisEmptyDescription;
+
+  /// No description provided for @adminAnalysisScopeHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'按 UTC 日期统计分析执行；重试与重新分析分别计次。执行次数不代表模型请求次数。'**
+  String get adminAnalysisScopeHint;
+
+  /// No description provided for @adminCompletionRate.
+  ///
+  /// In zh, this message translates to:
+  /// **'完成率'**
+  String get adminCompletionRate;
+
+  /// No description provided for @adminTrendDetails.
+  ///
+  /// In zh, this message translates to:
+  /// **'精确数据'**
+  String get adminTrendDetails;
+
+  /// No description provided for @adminOperationLogsTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'系统操作日志'**
+  String get adminOperationLogsTitle;
+
+  /// No description provided for @adminOperationLogsDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'查看全系统业务请求与管理员操作，追踪操作人、对象和执行结果。'**
+  String get adminOperationLogsDescription;
+
+  /// No description provided for @adminOperationLogSearch.
+  ///
+  /// In zh, this message translates to:
+  /// **'操作人或操作名称'**
+  String get adminOperationLogSearch;
+
+  /// No description provided for @adminOperationScope.
+  ///
+  /// In zh, this message translates to:
+  /// **'操作范围'**
+  String get adminOperationScope;
+
+  /// No description provided for @adminAllOperations.
+  ///
+  /// In zh, this message translates to:
+  /// **'全部操作'**
+  String get adminAllOperations;
+
+  /// No description provided for @adminRequestOperations.
+  ///
+  /// In zh, this message translates to:
+  /// **'接口请求'**
+  String get adminRequestOperations;
+
+  /// No description provided for @adminTaskOperations.
+  ///
+  /// In zh, this message translates to:
+  /// **'系统任务'**
+  String get adminTaskOperations;
+
+  /// No description provided for @adminAdminOperations.
+  ///
+  /// In zh, this message translates to:
+  /// **'管理员操作'**
+  String get adminAdminOperations;
+
+  /// No description provided for @adminOperationOutcome.
+  ///
+  /// In zh, this message translates to:
+  /// **'执行结果'**
+  String get adminOperationOutcome;
+
+  /// No description provided for @adminAllOutcomes.
+  ///
+  /// In zh, this message translates to:
+  /// **'全部结果'**
+  String get adminAllOutcomes;
+
+  /// No description provided for @adminOperationStarted.
+  ///
+  /// In zh, this message translates to:
+  /// **'结果未确认'**
+  String get adminOperationStarted;
+
+  /// No description provided for @adminOperationSucceeded.
+  ///
+  /// In zh, this message translates to:
+  /// **'请求成功'**
+  String get adminOperationSucceeded;
+
+  /// No description provided for @adminOperationFailed.
+  ///
+  /// In zh, this message translates to:
+  /// **'请求失败'**
+  String get adminOperationFailed;
+
+  /// No description provided for @adminOperationSucceededFilter.
+  ///
+  /// In zh, this message translates to:
+  /// **'成功 / 状态更新'**
+  String get adminOperationSucceededFilter;
+
+  /// No description provided for @adminOperationFrom.
+  ///
+  /// In zh, this message translates to:
+  /// **'开始时间'**
+  String get adminOperationFrom;
+
+  /// No description provided for @adminOperationTo.
+  ///
+  /// In zh, this message translates to:
+  /// **'结束时间'**
+  String get adminOperationTo;
+
+  /// No description provided for @adminOperationDateHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'YYYY-MM-DD HH:mm'**
+  String get adminOperationDateHint;
+
+  /// No description provided for @adminOperationInvalidDates.
+  ///
+  /// In zh, this message translates to:
+  /// **'结束时间不能早于开始时间，时间格式为 YYYY-MM-DD HH:mm。'**
+  String get adminOperationInvalidDates;
+
+  /// No description provided for @adminOperationLogsHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'展示日志启用后的操作。请求结果与系统任务状态分别记录；结果未确认表示请求尚未结束或执行曾中断。'**
+  String get adminOperationLogsHint;
+
+  /// No description provided for @adminOperationLogsEmpty.
+  ///
+  /// In zh, this message translates to:
+  /// **'暂无操作日志'**
+  String get adminOperationLogsEmpty;
+
+  /// No description provided for @adminOperationLogsEmptyDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'尚未产生符合条件的操作。可以调整筛选条件或稍后刷新。'**
+  String get adminOperationLogsEmptyDescription;
+
+  /// No description provided for @adminOperationDetails.
+  ///
+  /// In zh, this message translates to:
+  /// **'操作详情'**
+  String get adminOperationDetails;
+
+  /// No description provided for @adminOperationDetailsDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'只读记录，用于定位请求和核对执行结果。'**
+  String get adminOperationDetailsDescription;
+
+  /// No description provided for @adminOperationActor.
+  ///
+  /// In zh, this message translates to:
+  /// **'操作人'**
+  String get adminOperationActor;
+
+  /// No description provided for @adminUnknownAccount.
+  ///
+  /// In zh, this message translates to:
+  /// **'未识别账户'**
+  String get adminUnknownAccount;
+
+  /// No description provided for @adminOperationObject.
+  ///
+  /// In zh, this message translates to:
+  /// **'对象'**
+  String get adminOperationObject;
+
+  /// No description provided for @adminOperationId.
+  ///
+  /// In zh, this message translates to:
+  /// **'日志 ID'**
+  String get adminOperationId;
+
+  /// No description provided for @adminActorId.
+  ///
+  /// In zh, this message translates to:
+  /// **'账户 ID'**
+  String get adminActorId;
+
+  /// No description provided for @adminOperationLabel.
+  ///
+  /// In zh, this message translates to:
+  /// **'操作'**
+  String get adminOperationLabel;
+
+  /// No description provided for @adminOperationKey.
+  ///
+  /// In zh, this message translates to:
+  /// **'操作标识'**
+  String get adminOperationKey;
+
+  /// No description provided for @adminOperationEndpoint.
+  ///
+  /// In zh, this message translates to:
+  /// **'接口'**
+  String get adminOperationEndpoint;
+
+  /// No description provided for @adminOperationFinished.
+  ///
+  /// In zh, this message translates to:
+  /// **'结束时间'**
+  String get adminOperationFinished;
+
+  /// No description provided for @adminOperationStatusCode.
+  ///
+  /// In zh, this message translates to:
+  /// **'HTTP 状态'**
+  String get adminOperationStatusCode;
+
+  /// No description provided for @adminOperationErrorCode.
+  ///
+  /// In zh, this message translates to:
+  /// **'错误码'**
+  String get adminOperationErrorCode;
+
+  /// No description provided for @adminSelectAll.
+  ///
+  /// In zh, this message translates to:
+  /// **'选择本页'**
+  String get adminSelectAll;
+
+  /// No description provided for @adminDeleteSelected.
+  ///
+  /// In zh, this message translates to:
+  /// **'删除所选'**
+  String get adminDeleteSelected;
+
+  /// No description provided for @adminDeleteSelectionTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'删除所选记录？'**
+  String get adminDeleteSelectionTitle;
+
+  /// No description provided for @adminDeleteSelectionDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'删除后无法恢复。已删除的记录会从列表移除；失败的记录可以重试。'**
+  String get adminDeleteSelectionDescription;
+
+  /// No description provided for @adminDeletePartialFailure.
+  ///
+  /// In zh, this message translates to:
+  /// **'部分记录未能删除，请核对并重试。'**
+  String get adminDeletePartialFailure;
+
+  /// No description provided for @adminDeleteUserDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'账户、登录凭据、角色、配额和会话会一并移除；历史下载文件与任务记录不会自动删除。'**
+  String get adminDeleteUserDescription;
+
+  /// No description provided for @adminDeleteFileDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'文件及其持久对象将永久删除。正在分析的源文件无法删除。'**
+  String get adminDeleteFileDescription;
+
+  /// No description provided for @adminUsersEmpty.
+  ///
+  /// In zh, this message translates to:
+  /// **'没有匹配的账户'**
+  String get adminUsersEmpty;
+
+  /// No description provided for @adminUsersEmptyDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'调整搜索词、角色或账户状态后重试。'**
+  String get adminUsersEmptyDescription;
+
+  /// No description provided for @adminQuotaTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'用量限制'**
+  String get adminQuotaTitle;
+
+  /// No description provided for @adminQuotaDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'留空使用系统默认。启用豁免后跳过用量限制。'**
+  String get adminQuotaDescription;
+
+  /// No description provided for @adminQuotaExempt.
+  ///
+  /// In zh, this message translates to:
+  /// **'豁免用量限制'**
+  String get adminQuotaExempt;
+
+  /// No description provided for @adminQuotaActive.
+  ///
+  /// In zh, this message translates to:
+  /// **'同时活跃任务'**
+  String get adminQuotaActive;
+
+  /// No description provided for @adminQuotaDailyTasks.
+  ///
+  /// In zh, this message translates to:
+  /// **'24 小时任务数'**
+  String get adminQuotaDailyTasks;
+
+  /// No description provided for @adminQuotaDailyGiB.
+  ///
+  /// In zh, this message translates to:
+  /// **'24 小时处理量（GiB）'**
+  String get adminQuotaDailyGiB;
+
+  /// No description provided for @adminQuotaStorageGiB.
+  ///
+  /// In zh, this message translates to:
+  /// **'保留存储（GiB）'**
+  String get adminQuotaStorageGiB;
+
+  /// No description provided for @adminQuotaAnalysis.
+  ///
+  /// In zh, this message translates to:
+  /// **'24 小时分析尝试'**
+  String get adminQuotaAnalysis;
+
+  /// No description provided for @adminUseSystemDefault.
+  ///
+  /// In zh, this message translates to:
+  /// **'使用系统默认'**
+  String get adminUseSystemDefault;
+
+  /// No description provided for @adminPlatformsEmpty.
+  ///
+  /// In zh, this message translates to:
+  /// **'没有匹配的平台'**
+  String get adminPlatformsEmpty;
+
+  /// No description provided for @adminPlatformsEmptyDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'调整搜索词或公开状态后重试。'**
+  String get adminPlatformsEmptyDescription;
+
+  /// No description provided for @adminAiSearch.
+  ///
+  /// In zh, this message translates to:
+  /// **'搜索 AI 配置'**
+  String get adminAiSearch;
+
+  /// No description provided for @adminAiEmpty.
+  ///
+  /// In zh, this message translates to:
+  /// **'没有匹配的 AI 配置'**
+  String get adminAiEmpty;
+
+  /// No description provided for @adminAiEmptyDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'调整搜索词，或新增 AI 配置。'**
+  String get adminAiEmptyDescription;
+
+  /// No description provided for @adminEngineCodex.
+  ///
+  /// In zh, this message translates to:
+  /// **'Codex CLI · Responses'**
+  String get adminEngineCodex;
+
+  /// No description provided for @adminEngineClaude.
+  ///
+  /// In zh, this message translates to:
+  /// **'Claude CLI · Messages'**
+  String get adminEngineClaude;
+
+  /// No description provided for @adminEngineOpenRouter.
+  ///
+  /// In zh, this message translates to:
+  /// **'OpenRouter API'**
+  String get adminEngineOpenRouter;
+
+  /// No description provided for @adminEngineOpenAi.
+  ///
+  /// In zh, this message translates to:
+  /// **'OpenAI 兼容 API'**
+  String get adminEngineOpenAi;
+
+  /// No description provided for @adminEngineDeepSeek.
+  ///
+  /// In zh, this message translates to:
+  /// **'DeepSeek API · LangChain 视觉'**
+  String get adminEngineDeepSeek;
+
+  /// No description provided for @adminOpenRouterUrlHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'使用 OpenRouter 官方地址；视频分析要求模型支持图像输入与结构化输出。'**
+  String get adminOpenRouterUrlHint;
+
+  /// No description provided for @adminApiUrlHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'公网地址必须使用 HTTPS；本机 localhost 可使用 HTTP。'**
+  String get adminApiUrlHint;
+
+  /// No description provided for @adminFixedDeepSeekModel.
+  ///
+  /// In zh, this message translates to:
+  /// **'当前视觉适配器固定使用此模型。'**
+  String get adminFixedDeepSeekModel;
+
+  /// No description provided for @adminHostLoginHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'Agent 将读取当前系统用户的 CLI 登录状态，无需在项目中保存 Key。'**
+  String get adminHostLoginHint;
+
+  /// No description provided for @adminReadModels.
+  ///
+  /// In zh, this message translates to:
+  /// **'读取 OpenRouter 模型'**
+  String get adminReadModels;
+
+  /// No description provided for @adminModelSearch.
+  ///
+  /// In zh, this message translates to:
+  /// **'搜索模型名称或 ID'**
+  String get adminModelSearch;
+
+  /// No description provided for @adminModelsHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'仅列出声明支持结构化输出的模型；视频请选择支持图像的模型。目录信息不代表实际调用已验证。'**
+  String get adminModelsHint;
+
+  /// No description provided for @adminImageSupported.
+  ///
+  /// In zh, this message translates to:
+  /// **'支持图像'**
+  String get adminImageSupported;
+
+  /// No description provided for @adminTextOnly.
+  ///
+  /// In zh, this message translates to:
+  /// **'仅文本'**
+  String get adminTextOnly;
+
+  /// No description provided for @adminModelsEmpty.
+  ///
+  /// In zh, this message translates to:
+  /// **'没有匹配的模型'**
+  String get adminModelsEmpty;
+
+  /// No description provided for @adminModelDirectory.
+  ///
+  /// In zh, this message translates to:
+  /// **'目录中的模型'**
+  String get adminModelDirectory;
+
+  /// No description provided for @pageSizeOption.
+  ///
+  /// In zh, this message translates to:
+  /// **'每页 {size} 条'**
+  String pageSizeOption(int size);
+
+  /// No description provided for @uploadVideoAction.
+  ///
+  /// In zh, this message translates to:
+  /// **'导入自有视频'**
+  String get uploadVideoAction;
+
+  /// No description provided for @aboutContent.
+  ///
+  /// In zh, this message translates to:
+  /// **'## 帧取为谁而做？\n\n### 创作者\n\n整理自己拥有或已获授权的素材，用分镜、场景与关键帧证据复盘作品结构。\n\n### 内容研究者\n\n把视频与剧本文档组织为可追踪的任务，并导出 Markdown / DOCX 报告用于审阅。\n\n### 开发者与团队\n\n在自己的基础设施上运行 FastAPI、Next.js 与 Worker，通过 OpenAPI 契约扩展 Web 或移动端。\n\n## 为什么采用异步工作流架构？\n\n### 可恢复\n\nPostgreSQL 保存任务事实，Transactional Outbox 保证数据库状态与消息意图一致；实时连接只用于展示进度。\n\n### 可隔离\n\n下载、媒体命令与 AI 长任务不在 HTTP 请求进程中执行，Runner 经过阻断私网的受控出口代理。\n\n### 可验证\n\nProvider 返回值不会直接成为最终文件；Worker 重新解析并校验格式、时长、大小与 SHA-256 后才写入存储。\n\n### 可自托管\n\n数据保存在部署者配置的基础设施中，项目不依赖官方托管服务，也不内置第三方追踪器。\n\n## 帧取不做什么？\n\n帧取不是规避平台限制的下载脚本。默认只处理用户有权使用、公开、免费且非 DRM 的 HTTP(S) 内容；受保护、会员、私密、购买或地域限制内容不属于项目目标。私网 URL、任意 yt-dlp 参数和 shell 输入始终禁止。\n\nMIT 许可证授予软件的使用、修改和分发权，不代表授予任何第三方媒体内容的下载、复制或分析权。项目不提供官方 SaaS、公共演示站或服务可用性 SLA。\n\n## 源码在哪里？\n\n[video-server](https://github.com/StephenQiu30/video-server)：FastAPI API、Next.js Web、下载 / 文档 / 报告 Worker、隔离 Media Runner 与 Docker Compose 部署。\n\n[video-app](https://github.com/StephenQiu30/video-app)：连接自托管 video-server 的 Flutter iOS / Android 客户端；媒体处理与 AI 推理仍在服务端执行。\n\n项目由 [StephenQiu](https://github.com/StephenQiu30) 维护，欢迎通过 Issue 或 Pull Request 参与。安全问题请按[安全策略](https://github.com/StephenQiu30/video-server/blob/main/SECURITY.md)私下报告。'**
+  String get aboutContent;
+
+  /// No description provided for @selfHostingContent.
+  ///
+  /// In zh, this message translates to:
+  /// **'本页摘录当前部署流程。命令与配置以仓库 README 为准；平台登录、换机与故障恢复请阅读对应设计文档。\n\n## 运行帧取需要准备什么？\n\n- Docker Engine 与 Docker Compose。\n- 部署者已有的 PostgreSQL、RabbitMQ、Redis 与 MinIO；Compose 只管理帧取自身的业务服务并复用这些基础环境。\n- macOS 平台会话来源需要 uv（Python 3.12）、日常 Chrome 与帧取扩展。\n- 生产部署需要强随机密钥、稳定的 HTTPS 访问地址和规划好的对象存储容量。\n\n## 如何用 Docker Compose 部署？\n\n### 克隆仓库并准备环境文件\n\n复制示例配置后，把 .env 中的连接信息改为本机已运行的 PostgreSQL、RabbitMQ、Redis 与 MinIO。真实密钥只写入未提交的 .env 或 Secret Manager。\n\n```sh\ngit clone https://github.com/StephenQiu30/video-server.git\ncd video-server\ntest -f .env || cp .env.example .env\n```\n\n### 为空数据库加载当前态结构\n\n首次使用空项目数据库时，以该库的 DDL 账号加载 schema.sql。已有数据库升级前先备份。\n\n```sh\npsql -X -v ON_ERROR_STOP=1 -W -h 127.0.0.1 -U video -d video \\\n  -f backend/sql/schema.sql\n```\n\n### 安装登录来源并启动业务服务\n\nmacOS 上安装 Chrome 会话来源，并在 chrome://extensions 加载命令输出目录中的扩展。复用日常 Chrome 已有平台登录；Compose 启动 Web、API、Worker、Runner 与出口代理。公开链接优先匿名解析。生产配置见 README。\n\n```sh\nuv run --project backend python -m app.workers.session.source_cli install --env-file .env\ndocker compose up -d --build --wait --remove-orphans\n```\n\n### 初始化首个管理员\n\n全新空库在部署机终端执行一次，密码交互输入。命令只在用户表为空时创建管理员，不开放 HTTP 初始化接口。\n\n```sh\nuv run --project backend python -m app.workers.bootstrap_admin \\\n  --env-file .env --username your-admin --email you@example.com\n```\n\n### 检查服务健康状态\n\n默认 Web 端口为 8101，API 端口为 8111，Swagger UI 位于 :8111/docs。健康检查只证明服务可运行，不代表每个平台都有可下载的媒体。\n\n```sh\ncurl --fail http://127.0.0.1:8111/health/live\ncurl --fail http://127.0.0.1:8111/health/ready\ncurl --fail --head http://127.0.0.1:8101/\n```\n\n## AI 视频分析是否必须启用？\n\n不是。AI Worker 独立于业务 Compose 运行，可复用宿主机已登录的 Codex App Server，或由管理员配置受支持的模型 Provider。只需要下载与剧本文档导入时，在 .env 中设置 ANALYSIS_ENABLED=false；关闭 AI 不影响下载和文档导入。\n\n使用外部模型时，分析所需内容会发送到该服务，并可能产生费用。启用前应确认素材授权和模型服务的数据处理约定。\n\n## 公开上线前应检查什么？\n\n- 替换 .env.prod 中所有占位凭据，并确认密钥来源可在换机时恢复。\n- 外部媒体访问必须经过阻断私网的出口代理；入口 URL 校验不能替代网络隔离。\n- 为 MinIO 规划容量、备份与显式清理策略；预签名链接过期不会删除最终文件。\n- 只在计划公开介绍项目的网站设置 SITE_INDEXABLE=true，并把 SITE_URL 设为稳定的 HTTPS 域名。\n- 更新代码后执行 git pull --ff-only 并按 README 重新安装来源并执行 Compose 构建启动；docker compose restart 不会应用新镜像或环境配置。\n\n[README 快速开始](https://github.com/StephenQiu30/video-server#快速开始) · [系统设计](https://github.com/StephenQiu30/video-server/blob/main/docs/design/README.md)'**
+  String get selfHostingContent;
+
+  /// No description provided for @activityHistoryFrom.
+  ///
+  /// In zh, this message translates to:
+  /// **'起始日期'**
+  String get activityHistoryFrom;
+
+  /// No description provided for @activityHistoryTo.
+  ///
+  /// In zh, this message translates to:
+  /// **'结束日期'**
+  String get activityHistoryTo;
+
+  /// No description provided for @activityHistorySkill.
+  ///
+  /// In zh, this message translates to:
+  /// **'分析 Skill'**
+  String get activityHistorySkill;
+
+  /// No description provided for @activitySourceUnavailable.
+  ///
+  /// In zh, this message translates to:
+  /// **'源文件不可用，已有结果仍可查看。'**
+  String get activitySourceUnavailable;
+
+  /// No description provided for @analysisRunsTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'运行记录'**
+  String get analysisRunsTitle;
+
+  /// No description provided for @verifyRegistrationEmail.
+  ///
+  /// In zh, this message translates to:
+  /// **'验证邮箱'**
+  String get verifyRegistrationEmail;
+
+  /// No description provided for @verifyingRegistrationEmail.
+  ///
+  /// In zh, this message translates to:
+  /// **'验证中…'**
+  String get verifyingRegistrationEmail;
+
+  /// No description provided for @registrationEmailVerified.
+  ///
+  /// In zh, this message translates to:
+  /// **'邮箱已验证'**
+  String get registrationEmailVerified;
+
+  /// No description provided for @registrationEmailVerificationSuccess.
+  ///
+  /// In zh, this message translates to:
+  /// **'邮箱已验证，可以设置密码。'**
+  String get registrationEmailVerificationSuccess;
+
+  /// No description provided for @registrationPasswordPrompt.
+  ///
+  /// In zh, this message translates to:
+  /// **'邮箱已验证，现在设置密码完成注册。'**
+  String get registrationPasswordPrompt;
+
+  /// No description provided for @currentPageLabel.
+  ///
+  /// In zh, this message translates to:
+  /// **'第 {page} 页'**
+  String currentPageLabel(int page);
+
+  /// No description provided for @adminAnalysisRateFormula.
+  ///
+  /// In zh, this message translates to:
+  /// **'成功 ÷（成功 + 失败）'**
+  String get adminAnalysisRateFormula;
+
+  /// No description provided for @adminAnalysisTrendTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'每日分析趋势'**
+  String get adminAnalysisTrendTitle;
+
+  /// No description provided for @adminDownloadTrendTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'每日下载趋势'**
+  String get adminDownloadTrendTitle;
+
+  /// No description provided for @adminStatusDistribution.
+  ///
+  /// In zh, this message translates to:
+  /// **'状态分布'**
+  String get adminStatusDistribution;
+
+  /// No description provided for @adminSourcePerformance.
+  ///
+  /// In zh, this message translates to:
+  /// **'各视频源下载表现'**
+  String get adminSourcePerformance;
+
+  /// No description provided for @adminCompletionTrend.
+  ///
+  /// In zh, this message translates to:
+  /// **'完成率走势'**
+  String get adminCompletionTrend;
+
+  /// No description provided for @adminOperationDeleted.
+  ///
+  /// In zh, this message translates to:
+  /// **'已删除'**
+  String get adminOperationDeleted;
+
+  /// No description provided for @adminDeleteAiDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'所选 AI 配置与凭据将永久删除。当前线路和系统兜底线路不可删除。'**
+  String get adminDeleteAiDescription;
+
+  /// No description provided for @adminDeleteCatalogDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'该条目会从平台目录和公开状态页移除。系统下载 Profile 不会因此被删除。'**
+  String get adminDeleteCatalogDescription;
+
+  /// No description provided for @exportMarkdown.
+  ///
+  /// In zh, this message translates to:
+  /// **'导出 Markdown'**
+  String get exportMarkdown;
+
+  /// No description provided for @publicWorkflowEyebrow.
+  ///
+  /// In zh, this message translates to:
+  /// **'工作流'**
+  String get publicWorkflowEyebrow;
+
+  /// No description provided for @publicWorkflowDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'从识别到交付，每一步都有明确边界。'**
+  String get publicWorkflowDescription;
+
+  /// No description provided for @adminObjectCount.
+  ///
+  /// In zh, this message translates to:
+  /// **'对象数'**
+  String get adminObjectCount;
+
+  /// No description provided for @analysisRunNumber.
+  ///
+  /// In zh, this message translates to:
+  /// **'第 {run} 次执行'**
+  String analysisRunNumber(int run);
+
+  /// No description provided for @analysisRetryTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'按原配置重新运行'**
+  String get analysisRetryTitle;
+
+  /// No description provided for @analysisRetryDescription.
+  ///
+  /// In zh, this message translates to:
+  /// **'将保留任务编号并增加执行次数，可能消耗模型额度。修改配置请从源文件新建分析。'**
+  String get analysisRetryDescription;
+
+  /// No description provided for @confirmRetryAnalysis.
+  ///
+  /// In zh, this message translates to:
+  /// **'确认执行'**
+  String get confirmRetryAnalysis;
+
+  /// No description provided for @adminPeriodLabel.
+  ///
+  /// In zh, this message translates to:
+  /// **'统计周期'**
+  String get adminPeriodLabel;
 }
 
 class _AppLocalizationsDelegate

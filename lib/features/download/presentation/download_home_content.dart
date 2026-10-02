@@ -62,7 +62,7 @@ final class DownloadHomeContent extends StatelessWidget {
             sliver: SliverToBoxAdapter(
               child: Center(
                 child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 720),
+                  constraints: const BoxConstraints(maxWidth: 1280),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -87,9 +87,6 @@ final class DownloadHomeContent extends StatelessWidget {
                         const SizedBox(height: 32),
                         result!,
                       ],
-                      const SizedBox(height: 64),
-                      if (mode == ContentIntakeMode.link)
-                        const DownloadTrustFooter(),
                       if (mode == ContentIntakeMode.link &&
                           history != null) ...[
                         const SizedBox(height: 32),

@@ -66,6 +66,7 @@ final class FakeDownloadHistoryRepository implements DownloadHistoryRepository {
   @override
   Future<DownloadHistoryResponse> fetchPage({
     int page = 1,
+    int pageSize = 20,
     String? search,
     DownloadStatus? status,
   }) async {
@@ -116,7 +117,10 @@ final class FakeDocumentRepository implements DocumentRepository {
   }
 
   @override
-  Future<DocumentPageResponse> fetchPage({int page = 1}) async {
+  Future<DocumentPageResponse> fetchPage({
+    int page = 1,
+    int pageSize = 20,
+  }) async {
     calls += 1;
     if (error case final failure?) throw failure;
     return data;

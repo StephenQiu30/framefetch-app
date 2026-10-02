@@ -203,7 +203,7 @@ SourceDiscoveryResponse sourceDiscoveryFixture() => SourceDiscoveryResponse(
     ..providerKey = 'wechat_official_account'
     ..title = '公众号文章视频'
     ..status = DiscoveryStatus.ready
-    ..expiresAt = DateTime.utc(2026, 8, 30, 13)
+    ..expiresAt = DateTime.utc(2099, 8, 30, 13)
     ..items.replace([
       SourceDiscoveryItemResponse(
         (item) => item

@@ -28,9 +28,9 @@ OPENAPI_SCHEMA_URL=https://api.example.com/openapi.json dart run tool/openapi.da
 
 生成器默认跳过已有测试桩，原始 `FILES` 因此只登记本次新写出的测试。入口将当前模型／API 的已有测试桩补入清单并排序，使首次生成与重复生成拥有相同的文件事实。
 
-注册 API 要求先发送邮箱验证码。集成测试仅在隔离 API＋本地 SMTP 捕获器上运行，并通过 `--dart-define=REGISTRATION_TEST_INBOX_URL=http://127.0.0.1:<捕获器端口>/code` 读取测试邮件；生产 API 不提供验证码读取接口，不允许固定验证码或跳过验证。
+注册流程依次调用 `sendNativeRegistrationCode` → `verifyNativeRegistrationCode` → `registerNativeUser`。独立验证响应的 `verified` 必须为 true 才展示密码与提交按钮，最终注册仍携带验证码，由服务端再次校验。邮箱修改清空验证状态与输入。集成测试仅在隔离 API＋本地 SMTP 捕获器上运行，并通过 `--dart-define=REGISTRATION_TEST_INBOX_URL=http://127.0.0.1:<捕获器端口>/code` 读取测试邮件；生产 API 不提供验证码读取接口，不允许固定验证码或跳过验证。
 
-业务一致性契约包含 52 个路径、61 个操作：持久解析意图与自动恢复查询、历史搜索/状态、用户搜索/身份/启用状态、分页、资料更新、平台与 AI 配置管理、DOCX 导出。`exportAnalysisReport` 与缩略图一样按 binary 响应生成，调用不得退回手写 Dio 或携带 Bearer 的外部浏览器链接。
+业务一致性契约包含 65 个路径、77 个操作：原生认证、持久解析意图与恢复、统一处理记录与分析运行历史、下载与媒体来源恢复、分页筛选、资料和头像、平台与 AI 配置、OpenRouter 模型与引擎目录、管理员操作日志/AI 统计/用户及文件删除，以及 DOCX 与 Markdown 报告导出。`exportAnalysisReport`、`exportAnalysisMarkdown`、头像读取、私有缩略图和流式下载均按 binary 响应生成；头像上传按服务端声明发送原始二进制 body。调用不得退回手写 Dio 或携带 Bearer 的外部浏览器链接。报告预览的保存/分享按 analysisId 获取服务端 Markdown 原文。
 
 可选 query 中的 null 代表不发送条件；冻结器去除 nullable 标量的 null 分支，生成客户端据此省略未传参数，避免产生 `role=&is_active=`。测试覆盖空条件、false 与 retry_wait 的实际编码。
 
@@ -41,3 +41,7 @@ OPENAPI_SCHEMA_URL=https://api.example.com/openapi.json dart run tool/openapi.da
 失败 gate 的 `①/②/③/none` 线上枚举保持不变。冻结器通过生成器官方 `x-enum-varnames` 扩展指定 `gateOne/gateTwo/gateThree/none`，避免 `dart-dio` 将圈号清空而生成无效 Dart 标识符；不手改生成文件或改变 HTTP 契约。
 
 失败 evidence 的 string/integer/boolean/null 四种 JSON 原始类型互不重叠。冻结器将这一完整 `anyOf` 组合等价表示为 `oneOf`，避免生成器 AnyOf 响应回序列化越界；类型和值保持不变，回归覆盖真实 JSON 的反序列化及回序列化。
+
+统一处理记录的分支以必填且唯一的 `record_type` 常量区分。冻结器仅对满足该条件的引用型 `anyOf` 增加等价 `oneOf` 与 discriminator，避免生成器把视频/剧本分析字段合并后丢失记录类型；可空或可能重叠的联合保持不变。契约测试覆盖四种统一记录、两种分析记录、游标与查询编码、头像二进制、统计与日志反序列化。
+
+2026-10-02 同步时，只读导出的服务端源码契约与运行中契约的 73 个路径、85 个非 HEAD 操作及 schemas 一致；白名单裁剪后的客户端静态分析和 20 个相关契约测试通过，重复从快照生成的 846 个文件内容一致。这些证据不替代真实账户、文件传输或 AI 执行验收。

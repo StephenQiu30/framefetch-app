@@ -21,6 +21,7 @@ final class SourceDiscoveryWorkspace extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     final theme = Theme.of(context);
+    final expired = !discovery.expiresAt.isAfter(DateTime.now());
     return Column(
       key: const Key('source-discovery-workspace'),
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +45,9 @@ final class SourceDiscoveryWorkspace extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        if (discovery.items.isEmpty)
+        if (expired)
+          Text(localizations.intentExpired)
+        else if (discovery.items.isEmpty)
           Text(localizations.sourceCandidatesEmpty)
         else
           ...discovery.items.map((item) {
@@ -55,7 +58,9 @@ final class SourceDiscoveryWorkspace extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 10),
               child: ShadButton.ghost(
                 key: Key('source-candidate-${item.itemRef}'),
-                onPressed: ready && !busy ? () => onSelect(item.itemRef) : null,
+                onPressed: ready && !busy && !expired
+                    ? () => onSelect(item.itemRef)
+                    : null,
                 padding: EdgeInsets.zero,
                 height: 0,
                 expands: true,

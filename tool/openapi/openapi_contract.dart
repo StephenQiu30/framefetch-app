@@ -1,4 +1,5 @@
 import 'openapi_config.dart';
+import 'openapi_schema.dart';
 
 Map<String, Object?> buildAppOpenApi(
   Map<String, Object?> source,
@@ -61,6 +62,9 @@ Map<String, Object?> buildAppOpenApi(
     }
     if (operationId == 'getDownloadThumbnail' ||
         operationId == 'getInspectionThumbnail' ||
+        operationId == 'getCurrentUserAvatar' ||
+        operationId == 'downloadFile' ||
+        operationId == 'exportAnalysisMarkdown' ||
         operationId == 'exportAnalysisReport') {
       _declareBinaryResponse(operation);
     }
@@ -79,7 +83,10 @@ Map<String, Object?> buildAppOpenApi(
   final schemaNames = _collectSchemaClosure(selectedPaths, sourceSchemas);
   final selectedSchemas = <String, Object?>{};
   for (final name in schemaNames.toList()..sort()) {
-    selectedSchemas[name] = _normalizeGeneratorSchema(sourceSchemas[name]);
+    selectedSchemas[name] = normalizeGeneratorSchema(
+      sourceSchemas[name],
+      sourceSchemas,
+    );
   }
   final securitySchemes = _map(
     components['securitySchemes'],
@@ -95,7 +102,7 @@ Map<String, Object?> buildAppOpenApi(
     'info': <String, Object?>{
       'title': '帧取 App API',
       'description': 'Flutter iOS 与 Android 客户端使用的冻结 Bearer 契约来源。',
-      'version': '1.4.0',
+      'version': '1.5.0',
     },
     'paths': selectedPaths,
     'components': <String, Object?>{
@@ -105,66 +112,12 @@ Map<String, Object?> buildAppOpenApi(
   };
 }
 
-Object? _normalizeGeneratorSchema(
-  Object? value, {
-  bool preserveNullBranch = false,
-}) {
-  if (value is List) {
-    return value
-        .map(
-          (child) => _normalizeGeneratorSchema(
-            child,
-            preserveNullBranch: preserveNullBranch,
-          ),
-        )
-        .toList(growable: false);
-  }
-  if (value is! Map) return value;
-
-  final normalized = <String, Object?>{};
-  for (final entry in value.entries) {
-    final key = entry.key.toString();
-    normalized[key] = _normalizeGeneratorSchema(
-      entry.value,
-      preserveNullBranch: key == 'anyOf' || key == 'oneOf',
-    );
-  }
-  // dart-dio 7.22 cannot generate a BuiltValue field for the OpenAPI 3.1
-  // null-only schema used by ErrorResponse.data. The wire value remains null;
-  // a nullable String gives the generator a concrete Dart type without exposing
-  // an untyped model to application code.
-  if (!preserveNullBranch && normalized['type'] == 'null') {
-    normalized['type'] = 'string';
-    normalized['nullable'] = true;
-  }
-  final variants = normalized['anyOf'];
-  if (variants is List &&
-      variants.length == 4 &&
-      variants.every(
-        (variant) =>
-            variant is Map &&
-            variant.length == 1 &&
-            {'string', 'integer', 'boolean', 'null'}.contains(variant['type']),
-      ) &&
-      variants.map((variant) => (variant as Map)['type']).toSet().length == 4) {
-    // These JSON primitive types cannot overlap. oneOf has identical wire
-    // semantics and avoids dart-dio's broken AnyOf response serialization.
-    normalized.remove('anyOf');
-    normalized['oneOf'] = variants;
-  }
-  final enumValues = normalized['enum'];
-  // dart-dio strips circled gate numbers from identifiers. Its official enum
-  // naming extension keeps valid Dart names while preserving wire values.
-  if (enumValues is List && enumValues.join(',') == '①,②,③,none') {
-    normalized['x-enum-varnames'] = ['gateOne', 'gateTwo', 'gateThree', 'none'];
-  }
-  return normalized;
-}
-
 void _declareBinaryResponse(Map<String, Object?> operation) {
   final responses = _map(operation['responses'], 'responses');
   final success = _map(responses['200'], 'responses.200');
-  final content = _map(success['content'], 'responses.200.content');
+  final content = success['content'] == null
+      ? <String, Object?>{'application/octet-stream': <String, Object?>{}}
+      : _map(success['content'], 'responses.200.content');
   for (final entry in content.entries) {
     final media = _map(entry.value, 'responses.200.content.${entry.key}');
     media['schema'] = <String, Object?>{'type': 'string', 'format': 'binary'};

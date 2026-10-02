@@ -9,10 +9,12 @@ final class VideoArticleResultView extends StatelessWidget {
   const VideoArticleResultView({
     required this.reportMarkdown,
     required this.result,
+    this.analysisId,
     super.key,
   });
 
   final String? reportMarkdown;
+  final String? analysisId;
   final VideoArticleResultResponse result;
 
   @override
@@ -55,7 +57,11 @@ final class VideoArticleResultView extends StatelessWidget {
         ),
         if (reportMarkdown case final report?) ...[
           const SizedBox(height: AppSpacing.xLarge),
-          AnalysisReportLauncher(markdown: report, title: result.title),
+          AnalysisReportLauncher(
+            analysisId: analysisId,
+            markdown: report,
+            title: result.title,
+          ),
         ],
       ],
     );
@@ -91,4 +97,4 @@ final class _StringList extends StatelessWidget {
 
 String _evidence(VideoArticleEvidenceResponse value) =>
     '${formatDurationClock(value.startMs ~/ 1000)}–'
-    '${formatDurationClock(value.endMs ~/ 1000)}';
+    '${formatDurationClock(value.endMs ~/ 1000)} · ${value.note}';

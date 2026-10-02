@@ -68,7 +68,7 @@ See [`docs/design/README.md`](docs/design/README.md) for the App design, includi
 Requirements:
 
 - Flutter `3.44.7` stable / Dart `3.12.2`
-- Xcode `26.6` for iOS `13+`
+- Xcode `27` for iOS `16+`
 - JDK `21` and Android API `24+` for Android
 - A reachable [`video-server`](https://github.com/StephenQiu30/video-server) instance
 
@@ -117,7 +117,7 @@ The app does not maintain parallel server DTOs. Its REST client is generated fro
 - file_selector for Flutter-maintained system file access without broad photo or storage permissions
 - flutter_secure_storage for Keychain/Keystore-backed credentials
 - shared_preferences for the non-sensitive light/dark theme preference
-- Material 3 and ARB localization for Chinese and English
+- shadcn_ui with the Web neutral theme and ARB localization for Chinese and English
 
 ## Security and privacy
 

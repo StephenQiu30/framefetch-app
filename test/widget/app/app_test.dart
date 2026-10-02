@@ -33,13 +33,13 @@ void main() {
     expect(wordmark, findsOneWidget);
     expect(tester.getSemantics(wordmark).label, '帧取');
     expect(find.textContaining(RegExp(r'^\d{2} /')), findsNothing);
-    expect(find.text('把素材，\n带回本地。'), findsOneWidget);
+    expect(find.text('把素材，带回本地。'), findsOneWidget);
     expect(find.text('解析媒体'), findsOneWidget);
     expect(find.text('链接解析'), findsOneWidget);
     expect(find.text('本地视频'), findsOneWidget);
     expect(find.text('剧本文档'), findsOneWidget);
-    expect(find.textContaining('有权处理的公开链接'), findsOneWidget);
-    expect(find.textContaining('账号或访问凭据'), findsOneWidget);
+    expect(find.textContaining('解析公开视频、图片与合集链接'), findsOneWidget);
+    expect(find.textContaining('账号或访问凭据'), findsNothing);
     expect(find.byKey(const Key('app-bottom-navigation')), findsOneWidget);
     expect(find.text('首页'), findsOneWidget);
     expect(find.text('历史'), findsOneWidget);
@@ -51,21 +51,23 @@ void main() {
     expect(find.byKey(const Key('app-tab-4')), findsOneWidget);
 
     final wordmarkRect = tester.getRect(wordmark);
-    final titleRect = tester.getRect(find.text('把素材，\n带回本地。'));
+    final titleRect = tester.getRect(find.text('把素材，带回本地。'));
     expect(
       titleRect.top - wordmarkRect.bottom,
-      lessThanOrEqualTo(40),
-      reason: '移动端 Navbar 与主标题之间应保持紧凑的首屏节奏。',
+      lessThanOrEqualTo(48),
+      reason: '64px 导航和 24px 页面顶距应保持紧凑的首屏节奏。',
     );
 
-    final privacyRect = tester.getRect(find.textContaining('账号或访问凭据'));
+    final actionRect = tester.getRect(
+      find.byKey(const Key('inspect-media-button')),
+    );
     final navigationRect = tester.getRect(
       find.byKey(const Key('app-bottom-navigation')),
     );
     expect(
-      privacyRect.bottom,
+      actionRect.bottom,
       lessThanOrEqualTo(navigationRect.top - 12),
-      reason: '390×844 首屏应完整露出两条信任提示，不需要先滚动。',
+      reason: '390×844 首屏应完整露出解析操作，不需要先滚动。',
     );
     expect(tester.takeException(), isNull);
   });
@@ -613,7 +615,7 @@ void main() {
     await tester.tap(backButton);
     await tester.pumpAndSettle();
 
-    expect(find.text('把素材，\n带回本地。'), findsOneWidget);
+    expect(find.text('把素材，带回本地。'), findsOneWidget);
     expect(find.byKey(const Key('app-bottom-navigation')), findsOneWidget);
   });
 
@@ -644,6 +646,16 @@ void main() {
 
     expect(result, findsOneWidget);
     expect(find.text('一位剪辑师必须在首映前找回丢失的结局。'), findsOneWidget);
+    expect(find.text('剧本分析报告'), findsNothing);
+    final section = find.descendant(
+      of: find.byKey(const Key('screenplay-result-section')),
+      matching: find.byType(ShadSelect<String>),
+    );
+    await tester.ensureVisible(section);
+    await tester.tap(section);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('报告预览').last);
+    await tester.pumpAndSettle();
     expect(find.text('剧本分析报告'), findsOneWidget);
     expect(find.textContaining('等待调度'), findsNothing);
     expect(analysis.latestInputKinds, [AnalysisInputKind.screenplay]);
@@ -834,7 +846,7 @@ void main() {
     await tester.tap(backButton);
     await tester.pumpAndSettle();
 
-    expect(find.text('把素材，\n带回本地。'), findsOneWidget);
+    expect(find.text('把素材，带回本地。'), findsOneWidget);
     expect(find.byKey(const Key('app-bottom-navigation')), findsOneWidget);
   });
 
@@ -1071,7 +1083,8 @@ void main() {
     await tester.tap(find.byKey(const Key('admin-center-entry')));
     await tester.pumpAndSettle();
     expect(find.text('管理中心'), findsOneWidget);
-    expect(find.text('下载分析'), findsOneWidget);
+    expect(find.text('使用统计'), findsOneWidget);
+    expect(find.text('系统操作日志'), findsOneWidget);
     expect(find.text('文件管理'), findsOneWidget);
     expect(find.text('用户管理'), findsOneWidget);
     expect(find.text('平台目录'), findsOneWidget);
@@ -1160,6 +1173,22 @@ void main() {
   });
 
   testWidgets('registers, exposes the account, and signs out', (tester) async {
+    Future<void> verifyEmail() async {
+      final send = find.byKey(const Key('register-send-code-button'));
+      await tester.ensureVisible(send);
+      await tester.tap(send);
+      await tester.pumpAndSettle();
+      await tester.enterText(
+        find.byKey(const Key('register-code-field')),
+        '123456',
+      );
+      await tester.pump();
+      final verify = find.byKey(const Key('register-verify-code-button'));
+      await tester.ensureVisible(verify);
+      await tester.tap(verify);
+      await tester.pumpAndSettle();
+    }
+
     final gateway = FakeAuthGateway();
     final store = MemoryCredentialStore();
     await pumpFramegrabApp(
@@ -1180,6 +1209,23 @@ void main() {
       find.byKey(const Key('register-email-field')),
       'member@example.com',
     );
+    expect(find.byKey(const Key('register-password-field')), findsNothing);
+    expect(find.byKey(const Key('register-submit-button')), findsNothing);
+    await tester.pump();
+    await verifyEmail();
+    expect(find.byKey(const Key('register-password-field')), findsOneWidget);
+    await tester.enterText(
+      find.byKey(const Key('register-email-field')),
+      'other@example.com',
+    );
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('register-password-field')), findsNothing);
+    await tester.enterText(
+      find.byKey(const Key('register-email-field')),
+      'member@example.com',
+    );
+    await tester.pumpAndSettle();
+    await verifyEmail();
     await tester.enterText(
       find.byKey(const Key('register-password-field')),
       'strong-pass-123',
@@ -1188,20 +1234,18 @@ void main() {
       find.byKey(const Key('register-confirm-field')),
       'strong-pass-123',
     );
-    await tester.enterText(
-      find.byKey(const Key('register-code-field')),
-      '123456',
-    );
     await tester.ensureVisible(find.byKey(const Key('register-submit-button')));
     await tester.tap(find.byKey(const Key('register-submit-button')));
     await tester.pumpAndSettle();
 
-    expect(find.text('把素材，\n带回本地。'), findsOneWidget);
-    expect(find.byKey(const Key('app-bottom-navigation')), findsOneWidget);
     expect(store.value, 'refresh-register');
+    expect(find.byKey(const Key('register-submit-button')), findsNothing);
+    expect(find.byKey(const Key('login-email-field')), findsNothing);
+    expect(find.byKey(const Key('app-bottom-navigation')), findsOneWidget);
+    expect(find.text('把素材，带回本地。'), findsOneWidget);
     await tester.tap(find.byKey(const Key('app-tab-4')));
     await tester.pumpAndSettle();
-    expect(find.text('member@example.com'), findsOneWidget);
+    expect(find.text('member@example.com'), findsNWidgets(2));
 
     await tester.ensureVisible(find.byKey(const Key('logout-button')));
     await tester.pumpAndSettle();

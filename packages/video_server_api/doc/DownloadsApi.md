@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**cancelDownload**](DownloadsApi.md#canceldownload) | **POST** /api/downloads/{job_id}/cancel | 取消下载任务
 [**createDownload**](DownloadsApi.md#createdownload) | **POST** /api/downloads | 创建下载任务
 [**deleteDownload**](DownloadsApi.md#deletedownload) | **DELETE** /api/downloads/{job_id} | 删除下载任务及其私有文件
+[**downloadFile**](DownloadsApi.md#downloadfile) | **GET** /api/downloads/{job_id}/file | 读取已完成的视频文件
 [**getDownload**](DownloadsApi.md#getdownload) | **GET** /api/downloads/{job_id} | 查询下载任务
 [**getDownloadHistory**](DownloadsApi.md#getdownloadhistory) | **GET** /api/downloads/history | 查询下载历史
 [**getDownloadThumbnail**](DownloadsApi.md#getdownloadthumbnail) | **GET** /api/downloads/{job_id}/thumbnail | 读取下载任务封面
@@ -146,6 +147,53 @@ void (empty response body)
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **downloadFile**
+> Uint8List downloadFile(jobId, preview, range)
+
+读取已完成的视频文件
+
+Stream an owned artifact through the authenticated application origin.
+
+### Example
+```dart
+import 'package:video_server_api/api.dart';
+
+final api = VideoServerApi().getDownloadsApi();
+final String jobId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // String |
+final bool preview = true; // bool |
+final String range = range_example; // String |
+
+try {
+    final response = api.downloadFile(jobId, preview, range);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling DownloadsApi->downloadFile: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **jobId** | **String**|  |
+ **preview** | **bool**|  | [optional] [default to false]
+ **range** | **String**|  | [optional]
+
+### Return type
+
+[**Uint8List**](Uint8List.md)
+
+### Authorization
+
+[NativeBearerAuth](../README.md#NativeBearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/octet-stream, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

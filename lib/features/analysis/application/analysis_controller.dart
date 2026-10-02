@@ -35,10 +35,12 @@ final class AnalysisController extends AsyncNotifier<AnalysisState> {
     final repository = _repository = ref.watch(analysisRepositoryProvider);
     _pollingInterval = ref.watch(analysisPollingIntervalProvider);
     ref.onDispose(_invalidateRequests);
-    final job = await repository.fetchLatest(
-      inputKind: target.inputKind,
-      sourceId: target.id,
-    );
+    final job = target.isRecord
+        ? await repository.fetch(target.id)
+        : await repository.fetchLatest(
+            inputKind: target.inputKind,
+            sourceId: target.id,
+          );
     if (!_isCurrent(generation)) return const AnalysisState();
     if (job != null) {
       _schedulePoll(job);
@@ -54,6 +56,7 @@ final class AnalysisController extends AsyncNotifier<AnalysisState> {
     required String outputLanguage,
     required String skillId,
   }) async {
+    if (target.isRecord) return;
     final payload =
         '${target.inputKind.name}\u0000${target.id}\u0000$skillId\u0000'
         '$outputLanguage\u0000$customPrompt';
@@ -101,6 +104,7 @@ final class AnalysisController extends AsyncNotifier<AnalysisState> {
       final repository = _repository;
       await repository.delete(job.id);
       if (!_isCurrent(generation)) return current;
+      if (target.isRecord) return const AnalysisState();
       return AnalysisState(
         skills: await repository.fetchSkills(target.inputKind),
       );
@@ -110,12 +114,14 @@ final class AnalysisController extends AsyncNotifier<AnalysisState> {
   Future<void> refresh() =>
       _runAction(AnalysisAction.refresh, (current, generation) async {
         final repository = _repository;
-        final job = await repository.fetchLatest(
-          inputKind: target.inputKind,
-          sourceId: target.id,
-        );
+        final job = target.isRecord
+            ? await repository.fetch(target.id)
+            : await repository.fetchLatest(
+                inputKind: target.inputKind,
+                sourceId: target.id,
+              );
         if (!_isCurrent(generation)) return current;
-        final skills = job == null && current.skills.isEmpty
+        final skills = !target.isRecord && job == null && current.skills.isEmpty
             ? await repository.fetchSkills(target.inputKind)
             : current.skills;
         return AnalysisState(

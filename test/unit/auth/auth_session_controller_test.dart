@@ -217,4 +217,10 @@ final class _FakeAuthGateway implements NativeAuthGateway {
     required String email,
     required String password,
   }) async => _grant('register');
+
+  @override
+  Future<void> verifyRegistrationCode({
+    required String email,
+    required String verificationCode,
+  }) async {}
 }

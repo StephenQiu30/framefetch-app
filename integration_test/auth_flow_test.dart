@@ -8,6 +8,7 @@ import 'package:framegrab/features/analysis/data/analysis_repository.dart';
 import 'package:framegrab/features/auth/application/authenticated_request.dart';
 import 'package:framegrab/features/auth/data/native_auth_gateway.dart';
 import 'package:framegrab/main.dart' as app;
+import 'package:go_router/go_router.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:video_server_api/video_server_api.dart';
 
@@ -27,6 +28,28 @@ void main() {
     await tester.tap(find.byKey(const Key('public-home-login')));
     await tester.pumpAndSettle();
     expect(find.byKey(const Key('login-email-field')), findsOneWidget);
+    final router = GoRouter.of(
+      tester.element(find.byKey(const Key('login-email-field'))),
+    );
+    const returnTarget = '/history/activity?q=registration';
+    router.go(returnTarget);
+    await tester.pumpAndSettle();
+    expect(
+      router.routerDelegate.currentConfiguration.uri.queryParameters['from'],
+      returnTarget,
+    );
+    await tester.tap(find.byKey(const Key('go-register-button')));
+    await tester.pumpAndSettle();
+    expect(
+      router.routerDelegate.currentConfiguration.uri.queryParameters['from'],
+      returnTarget,
+    );
+    await tester.tap(find.byKey(const Key('go-login-button')));
+    await tester.pumpAndSettle();
+    expect(
+      router.routerDelegate.currentConfiguration.uri.queryParameters['from'],
+      returnTarget,
+    );
     await tester.tap(find.byKey(const Key('go-register-button')));
     await tester.pumpAndSettle();
 
@@ -41,14 +64,8 @@ void main() {
       find.byKey(const Key('register-email-field')),
       email,
     );
-    await tester.enterText(
-      find.byKey(const Key('register-password-field')),
-      'strong-pass-123',
-    );
-    await tester.enterText(
-      find.byKey(const Key('register-confirm-field')),
-      'strong-pass-123',
-    );
+    expect(find.byKey(const Key('register-password-field')), findsNothing);
+    expect(find.byKey(const Key('register-submit-button')), findsNothing);
     await tester.ensureVisible(
       find.byKey(const Key('register-send-code-button')),
     );
@@ -57,10 +74,28 @@ void main() {
     final code = await registrationCodeFromTestInbox(email);
     await tester.enterText(find.byKey(const Key('register-code-field')), code);
     FocusManager.instance.primaryFocus?.unfocus();
+    final verify = find.byKey(const Key('register-verify-code-button'));
+    await tester.ensureVisible(verify);
+    await tester.tap(verify);
+    await _pumpUntilVisible(
+      tester,
+      find.byKey(const Key('register-password-field')),
+    );
+    await tester.enterText(
+      find.byKey(const Key('register-password-field')),
+      'strong-pass-123',
+    );
+    await tester.enterText(
+      find.byKey(const Key('register-confirm-field')),
+      'strong-pass-123',
+    );
+    FocusManager.instance.primaryFocus?.unfocus();
     final submit = find.byKey(const Key('register-submit-button'));
     await tester.ensureVisible(submit);
     await tester.pumpAndSettle();
     await tester.tap(submit);
+    await _pumpUntilLocation(tester, router, returnTarget);
+    router.go('/');
     await _pumpUntilVisible(
       tester,
       find.byKey(const Key('app-bottom-navigation')),
@@ -85,7 +120,7 @@ void main() {
 
     await tester.tap(find.byKey(const Key('app-tab-4')));
     await tester.pumpAndSettle();
-    expect(find.text(email), findsOneWidget);
+    expect(find.text(email), findsNWidgets(2));
     expect(find.text('外观'), findsNothing);
     final updatedUsername = '${username}x';
     await tester.enterText(
@@ -140,6 +175,10 @@ void main() {
     final username = 'aiqa${suffix.substring(suffix.length - 12)}';
     await gateway.sendRegistrationCode('$username@example.com');
     final code = await registrationCodeFromTestInbox('$username@example.com');
+    await gateway.verifyRegistrationCode(
+      email: '$username@example.com',
+      verificationCode: code,
+    );
     final session = await gateway.register(
       verificationCode: code,
       username: username,
@@ -192,4 +231,18 @@ Future<void> _pumpUntilVisible(
   while (finder.evaluate().isEmpty && DateTime.now().isBefore(deadline)) {
     await tester.pump(const Duration(milliseconds: 100));
   }
+}
+
+Future<void> _pumpUntilLocation(
+  WidgetTester tester,
+  GoRouter router,
+  String location,
+) async {
+  final deadline = DateTime.now().add(const Duration(seconds: 10));
+  while (router.routerDelegate.currentConfiguration.uri.toString() !=
+          location &&
+      DateTime.now().isBefore(deadline)) {
+    await tester.pump(const Duration(milliseconds: 100));
+  }
+  expect(router.routerDelegate.currentConfiguration.uri.toString(), location);
 }

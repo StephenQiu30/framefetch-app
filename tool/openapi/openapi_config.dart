@@ -31,6 +31,9 @@ const appOpenApiConfig = AppOpenApiConfig(
       path: '/api/analyses/{analysis_id}/report.docx',
     ),
     OpenApiOperationSelection(method: 'patch', path: '/api/users/me'),
+    OpenApiOperationSelection(method: 'get', path: '/api/users/me/avatar'),
+    OpenApiOperationSelection(method: 'put', path: '/api/users/me/avatar'),
+    OpenApiOperationSelection(method: 'delete', path: '/api/users/me/avatar'),
     OpenApiOperationSelection(method: 'post', path: '/api/admin/providers'),
     OpenApiOperationSelection(
       method: 'delete',
@@ -54,6 +57,10 @@ const appOpenApiConfig = AppOpenApiConfig(
       method: 'post',
       path: '/api/app/v1/auth/registration-code',
     ),
+    OpenApiOperationSelection(
+      method: 'post',
+      path: '/api/app/v1/auth/registration-code/verify',
+    ),
     OpenApiOperationSelection(method: 'post', path: '/api/app/v1/auth/login'),
     OpenApiOperationSelection(method: 'get', path: '/api/app/v1/auth/me'),
     OpenApiOperationSelection(method: 'post', path: '/api/app/v1/auth/refresh'),
@@ -68,6 +75,10 @@ const appOpenApiConfig = AppOpenApiConfig(
     OpenApiOperationSelection(
       method: 'get',
       path: '/api/download-intents/history',
+    ),
+    OpenApiOperationSelection(
+      method: 'get',
+      path: '/api/download-intents/history/records',
     ),
     OpenApiOperationSelection(
       method: 'get',
@@ -106,6 +117,10 @@ const appOpenApiConfig = AppOpenApiConfig(
       path: '/api/downloads/{job_id}/download-url',
     ),
     OpenApiOperationSelection(
+      method: 'get',
+      path: '/api/downloads/{job_id}/file',
+    ),
+    OpenApiOperationSelection(
       method: 'post',
       path: '/api/downloads/{job_id}/cancel',
     ),
@@ -131,6 +146,18 @@ const appOpenApiConfig = AppOpenApiConfig(
       path: '/api/analyses/{analysis_id}',
     ),
     OpenApiOperationSelection(
+      method: 'get',
+      path: '/api/analyses/{analysis_id}/history-record',
+    ),
+    OpenApiOperationSelection(
+      method: 'get',
+      path: '/api/analyses/{analysis_id}/runs',
+    ),
+    OpenApiOperationSelection(
+      method: 'get',
+      path: '/api/analyses/{analysis_id}/report.md',
+    ),
+    OpenApiOperationSelection(
       method: 'post',
       path: '/api/analyses/{analysis_id}/cancel',
     ),
@@ -143,6 +170,10 @@ const appOpenApiConfig = AppOpenApiConfig(
       path: '/api/analyses/{analysis_id}',
     ),
     OpenApiOperationSelection(method: 'post', path: '/api/media-imports'),
+    OpenApiOperationSelection(
+      method: 'get',
+      path: '/api/media-imports/{resource_id}',
+    ),
     OpenApiOperationSelection(
       method: 'post',
       path: '/api/media-imports/{resource_id}/upload-sessions',
@@ -187,11 +218,29 @@ const appOpenApiConfig = AppOpenApiConfig(
       path: '/api/admin/downloads/analytics',
       queryParameters: {'days'},
     ),
+    OpenApiOperationSelection(
+      method: 'get',
+      path: '/api/admin/analyses/analytics',
+      queryParameters: {'days'},
+    ),
+    OpenApiOperationSelection(method: 'get', path: '/api/admin/operation-logs'),
+    OpenApiOperationSelection(
+      method: 'get',
+      path: '/api/admin/provider-runtime/engine-catalog',
+    ),
     OpenApiOperationSelection(method: 'get', path: '/api/admin/files'),
+    OpenApiOperationSelection(
+      method: 'delete',
+      path: '/api/admin/files/{category}/{file_id}',
+    ),
     OpenApiOperationSelection(method: 'post', path: '/api/admin/files/cleanup'),
     OpenApiOperationSelection(method: 'get', path: '/api/admin/users'),
     OpenApiOperationSelection(
       method: 'patch',
+      path: '/api/admin/users/{user_id}',
+    ),
+    OpenApiOperationSelection(
+      method: 'delete',
       path: '/api/admin/users/{user_id}',
     ),
     OpenApiOperationSelection(method: 'get', path: '/api/admin/providers'),
@@ -200,6 +249,10 @@ const appOpenApiConfig = AppOpenApiConfig(
       path: '/api/admin/providers/{provider_key}',
     ),
     OpenApiOperationSelection(method: 'get', path: '/api/admin/ai-providers'),
+    OpenApiOperationSelection(
+      method: 'get',
+      path: '/api/admin/ai-providers/models/openrouter',
+    ),
     OpenApiOperationSelection(
       method: 'post',
       path: '/api/admin/ai-providers/{provider_key}/activate',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:framegrab/core/theme/theme_toggle_button.dart';
 import 'package:framegrab/shared/presentation/app_brand.dart';
+import 'package:framegrab/shared/presentation/app_resource_menu.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -17,7 +18,7 @@ final class AppNavigationBar extends StatelessWidget
   final List<Widget> actions;
 
   @override
-  Size get preferredSize => const Size.fromHeight(72);
+  Size get preferredSize => const Size.fromHeight(64);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ final class AppNavigationBar extends StatelessWidget
       child: SafeArea(
         bottom: false,
         child: SizedBox(
-          height: 72,
+          height: 64,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
@@ -49,6 +50,7 @@ final class AppNavigationBar extends StatelessWidget
                   ),
                 const Expanded(child: AppBrand()),
                 const ThemeToggleButton(),
+                const AppResourceMenu(),
                 ...actions,
               ],
             ),

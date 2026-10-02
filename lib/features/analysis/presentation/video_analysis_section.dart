@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
 import 'package:framegrab/features/analysis/presentation/analysis_presentation_labels.dart';
 import 'package:framegrab/features/analysis/presentation/analysis_report_preview.dart';
+import 'package:framegrab/features/analysis/presentation/analysis_result_details.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
 import 'package:framegrab/shared/presentation/data_formatters.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -14,10 +15,12 @@ final class VideoAnalysisSection extends StatefulWidget {
     required this.reportMarkdown,
     required this.result,
     required this.section,
+    this.analysisId,
     super.key,
   });
 
   final String? reportMarkdown;
+  final String? analysisId;
   final VideoAnalysisResultResponse result;
   final String section;
 
@@ -42,10 +45,12 @@ final class _VideoAnalysisSectionState extends State<VideoAnalysisSection> {
     final limit = min(_visibleCount, total);
     final children = switch (widget.section) {
       'scenes' => [
-        for (final item in widget.result.scenes.take(limit)) _scene(item),
+        for (final item in widget.result.scenes.take(limit))
+          _scene(context, item),
       ],
       'shots' => [
-        for (final item in widget.result.shots.take(limit)) _shot(item),
+        for (final item in widget.result.shots.take(limit))
+          _shot(context, item),
       ],
       'highlights' => [
         for (final item in widget.result.highlights.take(limit))
@@ -57,7 +62,11 @@ final class _VideoAnalysisSectionState extends State<VideoAnalysisSection> {
       ],
       'report' => [
         if (widget.reportMarkdown case final value?)
-          AnalysisReportLauncher(markdown: value, title: widget.result.title),
+          AnalysisReportLauncher(
+            analysisId: widget.analysisId,
+            markdown: value,
+            title: widget.result.title,
+          ),
       ],
       _ => const <Widget>[],
     };
@@ -90,18 +99,44 @@ final class _VideoAnalysisSectionState extends State<VideoAnalysisSection> {
     );
   }
 
-  Widget _scene(VideoSceneResponse item) => _ResultItem(
-    eyebrow: _timeRange(item.startMs, item.endMs),
-    title: '${item.index}. ${item.title}',
-    body: '${item.description}\n${item.narrativeFunction}',
-    footer: item.location,
+  Widget _scene(BuildContext context, VideoSceneResponse item) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      _ResultItem(
+        eyebrow: _timeRange(item.startMs, item.endMs),
+        title: '${item.index}. ${item.title}',
+        body: '${item.description}\n${item.narrativeFunction}',
+        footer: item.location,
+      ),
+      AnalysisStringList(
+        title: AppLocalizations.of(context).analysisVisualRules,
+        items: item.visualRules,
+      ),
+      AnalysisStringList(
+        title: AppLocalizations.of(context).analysisContinuityRisks,
+        items: item.continuityRisks,
+      ),
+    ],
   );
 
-  Widget _shot(ShotResponse item) => _ResultItem(
-    eyebrow: _timeRange(item.startMs, item.endMs),
-    title: '${item.index}. ${item.shotSize} · ${item.cameraMotion}',
-    body: item.description,
-    footer: item.visualTags.join(' · '),
+  Widget _shot(BuildContext context, ShotResponse item) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      _ResultItem(
+        eyebrow: _timeRange(item.startMs, item.endMs),
+        title: '${item.index}. ${item.shotSize} · ${item.cameraMotion}',
+        body: item.description,
+        footer: item.visualTags.join(' · '),
+      ),
+      AnalysisLabeledText(
+        label: AppLocalizations.of(context).analysisNarrativeFunction,
+        value: item.narrativeFunction,
+      ),
+      AnalysisLabeledText(
+        label: AppLocalizations.of(context).analysisTransition,
+        value: item.transitionIn,
+      ),
+    ],
   );
 
   Widget _highlight(BuildContext context, HighlightResponse item) {
@@ -120,7 +155,9 @@ final class _VideoAnalysisSectionState extends State<VideoAnalysisSection> {
       eyebrow: analysisAssetTypeLabel(l10n, item.type),
       title: item.label,
       body: item.description,
-      footer: formatDurationClock(item.firstSeenMs ~/ 1000),
+      footer:
+          '${formatDurationClock(item.firstSeenMs ~/ 1000)}\n'
+          '${l10n.analysisEvidenceShots}: ${item.evidenceShotIds.join(' · ')}',
     );
   }
 }
