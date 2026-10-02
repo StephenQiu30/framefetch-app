@@ -61,6 +61,21 @@ void main() {
       find.byKey(const Key('analysis-report-loading'), skipOffstage: false),
       findsOneWidget,
     );
+    final loading = find.byKey(
+      const Key('analysis-report-loading'),
+      skipOffstage: false,
+    );
+    expect(tester.widget(loading), isA<Center>());
+    final label = find.descendant(
+      of: loading,
+      matching: find.text(
+        AppLocalizations.of(tester.element(loading)).analysisReportLoading,
+        skipOffstage: false,
+      ),
+      skipOffstage: false,
+    );
+    expect(label, findsOneWidget);
+    expect(tester.widget<Text>(label).textAlign, TextAlign.center);
     expect(
       find.byKey(const Key('analysis-markdown-preview'), skipOffstage: false),
       findsNothing,

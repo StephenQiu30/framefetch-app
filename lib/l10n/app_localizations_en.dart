@@ -43,23 +43,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get accountNavigation => 'Me';
 
   @override
-  String get downloadHistoryDescription =>
-      'Continue reviewing, retrieving, or analyzing created tasks.';
-
-  @override
   String get downloadRowActionsHint => 'Swipe left to reveal task actions.';
-
-  @override
-  String get screenplayDocumentsDescription =>
-      'Review import status, parsing details, and screenplay text.';
-
-  @override
-  String get documentRowActionsHint =>
-      'Swipe left to manage screenplay documents.';
-
-  @override
-  String get providerStatusDescription =>
-      'Provider registration and identity requirements. Download success is determined by the actual file.';
 
   @override
   String get loadingData => 'Loading…';
@@ -107,10 +91,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get downloadHistoryEmptyTitle => 'No download records yet';
-
-  @override
-  String get downloadHistoryEmptyDescription =>
-      'Inspect a link or import a local video from Home, and the created task will appear here.';
 
   @override
   String get createDownloadFromHomeAction => 'Create from Home';
@@ -161,10 +141,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get documentEmptyTitle => 'No screenplay documents yet';
 
   @override
-  String get documentEmptyDescription =>
-      'Upload a screenplay from Home to review its parsing state and content here.';
-
-  @override
   String get goToScreenplayUploadAction => 'Upload from Home';
 
   @override
@@ -193,10 +169,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get screenplayDocumentDetailNavigation => 'Document details';
-
-  @override
-  String get screenplayDocumentDetailDescription =>
-      'Review import information, parsing summary, and normalized screenplay text.';
 
   @override
   String get documentInformationTitle => 'Import information';
@@ -355,10 +327,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get providerEmptyTitle => 'No provider status';
 
   @override
-  String get providerEmptyDescription =>
-      'The service currently exposes no provider capability records. Refresh later.';
-
-  @override
   String get downloadAvailableLabel => 'Download available';
 
   @override
@@ -396,10 +364,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get capabilityPlaylist => 'Playlist';
-
-  @override
-  String get accountDescription =>
-      'Manage your username and avatar. Administrators can also change their role.';
 
   @override
   String get appearanceSection => 'Appearance';
@@ -446,9 +410,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get publicSourceAction => 'View source code';
 
   @override
-  String get publicWorkflowTitle => 'A complete, auditable workflow';
-
-  @override
   String get publicWorkflowInspectTitle => 'Inspect';
 
   @override
@@ -477,18 +438,8 @@ class AppLocalizationsEn extends AppLocalizations {
       'Preview or retrieve artifacts through authorized short-lived access';
 
   @override
-  String get publicCapabilitiesEyebrow => 'Core capabilities';
-
-  @override
   String get publicHomeCapabilitiesTitle =>
       'Video parsing, screenplay workflows, and AI analysis';
-
-  @override
-  String get publicHomeCapabilitiesDescription =>
-      'The Web console, API, and workers share one permission, task, and artifact model for personal use and team self-hosting.';
-
-  @override
-  String get publicVideoEyebrow => 'Public video';
 
   @override
   String get publicVideoTitle => 'Public video workflows';
@@ -498,17 +449,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Parse authorized public links, select real available formats, and track downloads through their final artifacts.';
 
   @override
-  String get publicDocumentEyebrow => 'Screenplay documents';
-
-  @override
   String get publicDocumentTitle => 'Screenplay and document workflows';
 
   @override
   String get publicDocumentDescription =>
       'Import authorized screenplay documents, then normalize, analyze, and retain processing records in one workspace.';
-
-  @override
-  String get publicAnalysisEyebrow => 'AI analysis';
 
   @override
   String get publicAnalysisTitle => 'Structured AI video analysis';
@@ -521,47 +466,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get publicTrustEyebrow => 'Self-hosted architecture';
 
   @override
-  String get publicTrustTitle => 'Open source without giving up data control';
-
-  @override
   String get publicTrustDescription =>
       'FastAPI, Next.js, PostgreSQL, RabbitMQ, MinIO, FFmpeg, and yt-dlp form an independently deployable workflow. The MIT license lets you inspect, modify, and self-host it for free.';
-
-  @override
-  String get publicSafeguardSession =>
-      'Browser sessions use HttpOnly cookies; native clients use rotatable tokens.';
-
-  @override
-  String get publicSafeguardWorkers =>
-      'Downloads, imports, and AI analysis run through independent queues and workers.';
-
-  @override
-  String get publicSafeguardArtifacts =>
-      'Short-lived artifact access, owner isolation, and authorization boundaries span the full workflow.';
 
   @override
   String get publicSafeguardAuthorization =>
       'Public media is not automatically free to use. Only process content you are authorized to handle.';
 
   @override
-  String get publicSafetyEyebrow => 'Security boundaries';
-
-  @override
-  String get publicSafetyTitle => 'Execution and authorization boundaries';
-
-  @override
-  String get publicSafetyDescription =>
-      'Keep access, execution, and delivery as separate, inspectable boundaries.';
-
-  @override
   String get publicFaqEyebrow => 'Common questions';
-
-  @override
-  String get publicFaqTitle => 'What to know before you begin';
-
-  @override
-  String get publicFaqDescription =>
-      'Understand supported inputs, analysis results, operating costs, and the mobile client boundary.';
 
   @override
   String get publicFaqWhatQuestion => 'What is FrameFetch?';
@@ -614,14 +527,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Read the video analysis and self-hosting guide';
 
   @override
-  String get publicStartEyebrow => 'Quick start';
-
-  @override
   String get publicStartTitle => 'Run FrameFetch on your own infrastructure';
-
-  @override
-  String get publicStartDescription =>
-      'Start with the repository Quick Start, architecture documentation, and security boundaries, then enable media parsing, screenplay workflows, and AI services as needed.';
 
   @override
   String get publicDeploymentAction => 'Read deployment guide';
@@ -631,14 +537,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get publicGuideTitle => 'From source material to an analysis report';
-
-  @override
-  String get publicGuideDescription =>
-      'Learn how FrameFetch imports authorized videos and screenplay documents, runs AI shot analysis, exports Markdown and DOCX reports, and divides responsibilities among the Web UI, Flutter client, and self-hosted server.';
-
-  @override
-  String get publicGuideNotice =>
-      'This guide describes the current product flow. Follow the linked repository documentation for configuration and implementation details, and verify availability on the deployed instance.';
 
   @override
   String get publicGuideVideoTitle =>
@@ -735,10 +633,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get downloadDetailNavigation => 'Task details';
 
   @override
-  String get downloadDetailDescription =>
-      'Review the task state, file availability, and processing details.';
-
-  @override
   String get sourceLabel => 'Source';
 
   @override
@@ -799,15 +693,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcomeBack => 'Welcome back';
 
   @override
-  String get loginDescription =>
-      'Use your Framegrab account to continue managing downloads, documents, and analysis.';
-
-  @override
   String get createAccountTitle => 'Create your Framegrab account';
-
-  @override
-  String get registerDescription =>
-      'Verify your email to create an account and manage downloads, documents and analyses.';
 
   @override
   String get emailLabel => 'Email';
@@ -848,12 +734,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get goLogin => 'Back to sign in';
-
-  @override
-  String get noAccountPrompt => 'New to Framegrab?';
-
-  @override
-  String get hasAccountPrompt => 'Already have an account?';
 
   @override
   String get invalidEmail => 'Enter a valid email address.';
@@ -914,10 +794,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get downloadHomeTitle => 'Bring content back to your device.';
 
   @override
-  String get downloadHomeDescription =>
-      'Inspect public video, image, and collection links, or upload local videos and screenplays.';
-
-  @override
   String get linkIntakeMode => 'Link';
 
   @override
@@ -934,10 +810,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get videoIntakeTitle => 'Import a local video';
 
   @override
-  String get videoIntakeDescription =>
-      'Choose an MP4 video you own or are authorized to process. The service validates it in isolation before adding it to history and AI analysis.';
-
-  @override
   String get selectVideoFile => 'Choose video file';
 
   @override
@@ -945,10 +817,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get screenplayIntakeTitle => 'Import a screenplay';
-
-  @override
-  String get screenplayIntakeDescription =>
-      'Choose a DOCX, PDF, TXT, Markdown, or Fountain file for a normalized preview, analysis, and rewriting on the service.';
 
   @override
   String get selectScreenplayFile => 'Choose screenplay file';
@@ -1023,10 +891,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get providerNoCapabilities => 'No registered capabilities';
 
   @override
-  String get providerFileResultHint =>
-      'Download availability depends on the actual file.';
-
-  @override
   String get intentQueued => 'Waiting to inspect';
 
   @override
@@ -1085,10 +949,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get formatSelectionTitle => 'Choose a download format';
 
   @override
-  String get formatSelectionDescription =>
-      'These formats come from this live inspection. Track the created task in download history.';
-
-  @override
   String get createDownloadAction => 'Create download task';
 
   @override
@@ -1096,10 +956,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sourceCandidatesTitle => 'Choose a video from the article';
-
-  @override
-  String get sourceCandidatesDescription =>
-      'This article contains multiple media sources. Select the video you want to process.';
 
   @override
   String get sourceCandidatesEmpty =>
@@ -1208,15 +1064,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aiAnalysisTitle => 'AI analysis';
 
   @override
-  String get aiAnalysisDescription =>
-      'Let AI review the video to create a continuous shot breakdown, visual highlights, an asset catalog, or an article draft.';
-
-  @override
   String get screenplayAnalysisTitle => 'Screenplay analysis and rewriting';
-
-  @override
-  String get screenplayAnalysisDescription =>
-      'Choose comprehensive analysis, structure review, or bilingual rewriting. The task stays bound to this normalized screenplay and never changes the source.';
 
   @override
   String get analysisSkillLabel => 'Analysis skill';
@@ -1513,43 +1361,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminCenterTitle => 'Admin center';
 
   @override
-  String get adminCenterDescription =>
-      'Review global operations and handle frequent administration tasks.';
-
-  @override
   String get adminAnalyticsTitle => 'Usage analytics';
-
-  @override
-  String get adminAnalyticsDescription =>
-      'Review download performance and AI analysis executions.';
 
   @override
   String get adminFilesTitle => 'File management';
 
   @override
-  String get adminFilesDescription =>
-      'Review saved file types, sizes, and creation times, or delete a single file.';
-
-  @override
   String get adminUsersTitle => 'User management';
-
-  @override
-  String get adminUsersDescription =>
-      'Review users and adjust roles or account access.';
 
   @override
   String get adminProvidersTitle => 'Provider catalog';
 
   @override
-  String get adminProvidersDescription =>
-      'Review provider state and control user-facing visibility.';
-
-  @override
   String get adminAiProvidersTitle => 'AI services';
-
-  @override
-  String get adminAiProvidersDescription =>
-      'Review analysis routes and select the active provider.';
 
   @override
   String adminDays(int days) {
@@ -1572,10 +1396,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminFilesEmpty => 'No persisted files';
-
-  @override
-  String get adminFilesEmptyDescription =>
-      'There are no persisted files requiring administrator action.';
 
   @override
   String adminUserCount(int count) {
@@ -1831,7 +1651,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get localCodexRestriction =>
-      'This built-in Codex service only allows changes to its display name and model.';
+      'System fallback: only the name and model can be changed.';
 
   @override
   String get hostLoginLabel => 'Host login · no API key';
@@ -1883,7 +1703,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get catalogScopeDescription =>
-      'These settings only change the name, order and visibility. They do not add supported download domains or execution capabilities.';
+      'Adding a catalog entry does not add download support.';
 
   @override
   String get saveConfiguration => 'Save configuration';
@@ -2030,10 +1850,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get activityHistoryTitle => 'My activity';
 
   @override
-  String get activityHistoryDescription =>
-      'View link, document and AI analysis records together.';
-
-  @override
   String get activityHistorySearch => 'Search activity';
 
   @override
@@ -2068,7 +1884,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileAvatarHelp =>
-      'JPEG, PNG or WebP, up to 4 MB. Uploaded images are cropped to a square.';
+      'JPEG, PNG, WebP · Max 4 MB · Automatically cropped to a square';
 
   @override
   String get profileAvatarInvalidType => 'Choose a JPEG, PNG or WebP image.';
@@ -2084,21 +1900,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileAvatarRemoved => 'Avatar removed.';
 
   @override
-  String get profileEmailHelp => 'Used to sign in. It cannot be changed here.';
-
-  @override
   String get profileRoleLabel => 'Account role';
 
   @override
   String get profileRoleAdminHelp =>
       'Another active administrator must remain before changing to a regular user.';
-
-  @override
-  String get profileRoleUserHelp =>
-      'Only administrators can change account roles.';
-
-  @override
-  String get profileFieldsTitle => 'Profile fields';
 
   @override
   String get profilePartialSave =>
@@ -2108,15 +1914,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get selfHostingNavigation => 'Self-hosting';
 
   @override
-  String get selfHostingDescription =>
-      'Run FrameFetch on your infrastructure, from setup to first sign-in.';
-
-  @override
   String get aboutNavigation => 'About FrameFetch';
-
-  @override
-  String get aboutDescription =>
-      'Learn about the open-source media workflow, engineering principles and content boundaries.';
 
   @override
   String get resourcesNavigation => 'Resources';
@@ -2146,14 +1944,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminAnalysisEmpty => 'No AI analysis records in this period';
 
   @override
-  String get adminAnalysisEmptyDescription =>
-      'Choose another period or start an analysis.';
-
-  @override
-  String get adminAnalysisScopeHint =>
-      'Analysis executions are grouped by UTC day. Retries and reanalysis count separately. Executions are not model request counts.';
-
-  @override
   String get adminCompletionRate => 'Completion rate';
 
   @override
@@ -2161,10 +1951,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminOperationLogsTitle => 'System operation logs';
-
-  @override
-  String get adminOperationLogsDescription =>
-      'Review business requests and administrator operations, including actors, resources, and outcomes.';
 
   @override
   String get adminOperationLogSearch => 'Actor or operation';
@@ -2216,22 +2002,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'The end time cannot precede the start time. Use YYYY-MM-DD HH:mm.';
 
   @override
-  String get adminOperationLogsHint =>
-      'Logs cover operations after logging was enabled. Request outcomes and task states are recorded separately. An unconfirmed outcome means a request is unfinished or was interrupted.';
-
-  @override
   String get adminOperationLogsEmpty => 'No operation logs';
 
   @override
-  String get adminOperationLogsEmptyDescription =>
-      'No operations match these filters. Adjust the filters or refresh later.';
-
-  @override
   String get adminOperationDetails => 'Operation details';
-
-  @override
-  String get adminOperationDetailsDescription =>
-      'Read-only records for locating requests and verifying outcomes.';
 
   @override
   String get adminOperationActor => 'Actor';
@@ -2282,15 +2056,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminUsersEmpty => 'No matching accounts';
 
   @override
-  String get adminUsersEmptyDescription =>
-      'Adjust the search, role, or account status and try again.';
-
-  @override
   String get adminQuotaTitle => 'Usage limits';
-
-  @override
-  String get adminQuotaDescription =>
-      'Leave blank to use system defaults. Exempt accounts bypass usage limits.';
 
   @override
   String get adminQuotaExempt => 'Exempt from usage limits';
@@ -2317,18 +2083,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminPlatformsEmpty => 'No matching platforms';
 
   @override
-  String get adminPlatformsEmptyDescription =>
-      'Adjust the search or visibility and try again.';
-
-  @override
   String get adminAiSearch => 'Search AI configurations';
 
   @override
   String get adminAiEmpty => 'No matching AI configurations';
-
-  @override
-  String get adminAiEmptyDescription =>
-      'Adjust the search or create an AI configuration.';
 
   @override
   String get adminEngineCodex => 'Codex CLI · Responses';
@@ -2346,20 +2104,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminEngineDeepSeek => 'DeepSeek API · LangChain vision';
 
   @override
-  String get adminOpenRouterUrlHint =>
-      'Uses the official OpenRouter endpoint. Video analysis requires image input and structured output support.';
-
-  @override
   String get adminApiUrlHint =>
       'Public endpoints require HTTPS; localhost endpoints may use HTTP.';
 
   @override
-  String get adminFixedDeepSeekModel =>
-      'The current vision adapter uses this fixed model.';
-
-  @override
   String get adminHostLoginHint =>
-      'The agent uses the current system user’s CLI sign-in. No project API key is required.';
+      'Use the CLI account signed in on the server.';
 
   @override
   String get adminReadModels => 'Load OpenRouter models';
@@ -2369,7 +2119,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminModelsHint =>
-      'Only models declaring structured output support are listed. Choose image-capable models for video. Catalog information does not verify actual calls.';
+      'Choose an image-capable model for video analysis.';
 
   @override
   String get adminImageSupported => 'Image input';
@@ -2429,10 +2179,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Email verified. You can set your password.';
 
   @override
-  String get registrationPasswordPrompt =>
-      'Email verified. Set your password to finish registration.';
-
-  @override
   String currentPageLabel(int page) {
     return 'Page $page';
   }
@@ -2471,10 +2217,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get publicWorkflowEyebrow => 'Workflow';
-
-  @override
-  String get publicWorkflowDescription =>
-      'Every step from discovery to delivery has a clear boundary.';
 
   @override
   String get adminObjectCount => 'Object count';

@@ -5,14 +5,12 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 
 final class SettingsNavigationEntry extends StatelessWidget {
   const SettingsNavigationEntry({
-    required this.description,
     required this.icon,
     required this.onTap,
     required this.title,
     super.key,
   });
 
-  final String description;
   final IconData icon;
   final VoidCallback onTap;
   final String title;
@@ -39,14 +37,6 @@ final class SettingsNavigationEntry extends StatelessWidget {
                     title,
                     textAlign: TextAlign.start,
                     style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: AppSpacing.xSmall),
-                  Text(
-                    description,
-                    textAlign: TextAlign.start,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
                   ),
                 ],
               ),

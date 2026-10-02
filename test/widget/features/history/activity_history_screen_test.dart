@@ -36,6 +36,7 @@ void main() {
       );
       expect(find.text('选择本页'), findsNothing);
       expect(find.textContaining('批量下载'), findsNothing);
+      expect(find.text('统一查看链接、文档和 AI 分析记录。'), findsNothing);
       await tester.enterText(
         find.byKey(const Key('activity-search')),
         'lesson',

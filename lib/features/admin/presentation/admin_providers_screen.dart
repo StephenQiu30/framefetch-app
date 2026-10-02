@@ -95,7 +95,6 @@ final class _AdminProvidersScreenState
     final busy = ref.watch(adminCatalogMutationProvider) || _busy.isNotEmpty;
     return AdminPage(
       title: l.adminProvidersTitle,
-      description: l.adminProvidersDescription,
       refreshLabel: l.refreshAction,
       onRefresh: () =>
           ref.refresh(adminProviderCatalogProvider.future).then((_) {}),
@@ -104,11 +103,6 @@ final class _AdminProvidersScreenState
           enabled: !busy,
           onPressed: busy ? null : () => editCatalog(context, ref),
           child: Text(l.createPlatform),
-        ),
-        const SizedBox(height: AppSpacing.medium),
-        Text(
-          l.catalogScopeDescription,
-          style: ShadTheme.of(context).textTheme.muted,
         ),
         const SizedBox(height: AppSpacing.medium),
         ListFilters(
@@ -139,11 +133,7 @@ final class _AdminProvidersScreenState
                 .take(_query.pageSize)
                 .toList();
             return [
-              if (items.isEmpty)
-                DataStateMessage(
-                  title: l.adminPlatformsEmpty,
-                  description: l.adminPlatformsEmptyDescription,
-                ),
+              if (items.isEmpty) DataStateMessage(title: l.adminPlatformsEmpty),
               for (final item in items)
                 AdminCatalogRow(
                   key: ValueKey('catalog-${item.key}'),

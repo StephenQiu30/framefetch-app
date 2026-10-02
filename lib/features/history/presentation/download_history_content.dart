@@ -8,7 +8,6 @@ import 'package:framegrab/features/history/presentation/download_history_item.da
 import 'package:framegrab/l10n/app_localizations.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:framegrab/shared/presentation/list_query.dart';
-import 'package:framegrab/shared/presentation/swipe_action_hint.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:video_server_api/video_server_api.dart';
 
@@ -40,7 +39,6 @@ final class DownloadHistoryContent extends ConsumerWidget {
         ),
         DataStateMessage(
           title: localizations.downloadHistoryEmptyTitle,
-          description: localizations.downloadHistoryEmptyDescription,
           actionLabel: onCreateDownload == null
               ? null
               : localizations.createDownloadFromHomeAction,
@@ -77,8 +75,6 @@ final class DownloadHistoryContent extends ConsumerWidget {
         ],
       ),
       const SizedBox(height: AppSpacing.xLarge),
-      SwipeActionHint(label: localizations.downloadRowActionsHint),
-      const SizedBox(height: AppSpacing.small),
       SlidableAutoCloseBehavior(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

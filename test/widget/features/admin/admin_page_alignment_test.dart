@@ -11,7 +11,6 @@ void main() {
     tester,
   ) async {
     const title = '查看服务端的系统操作日志与任务结果';
-    const description = '读取当前管理员可见的接口请求和系统任务，按时间与结果筛选。';
     tester.view.devicePixelRatio = 1;
     tester.view.physicalSize = const Size(320, 844);
     addTearDown(tester.view.reset);
@@ -30,7 +29,6 @@ void main() {
             padding: const EdgeInsets.all(16),
             child: AdminSectionLink(
               title: title,
-              description: description,
               icon: PhosphorIconsRegular.list,
               onTap: () => taps++,
             ),
@@ -38,10 +36,8 @@ void main() {
         ),
       ),
     );
-    for (final value in [title, description]) {
-      final paragraph = tester.renderObject<RenderParagraph>(find.text(value));
-      expect(paragraph.textAlign, TextAlign.start);
-    }
+    final paragraph = tester.renderObject<RenderParagraph>(find.text(title));
+    expect(paragraph.textAlign, TextAlign.start);
     expect(tester.takeException(), isNull);
     await tester.tap(find.text(title));
     await tester.pump();

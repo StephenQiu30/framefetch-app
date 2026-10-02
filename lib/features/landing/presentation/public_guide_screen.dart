@@ -48,17 +48,7 @@ final class PublicGuideScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    AppPageIntro(
-                      description: l10n.publicGuideDescription,
-                      title: l10n.publicGuideTitle,
-                    ),
-                    const SizedBox(height: AppSpacing.large),
-                    Text(
-                      l10n.publicGuideNotice,
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
+                    AppPageIntro(title: l10n.publicGuideTitle),
                     for (final section in publicGuideSections(l10n)) ...[
                       const SizedBox(height: AppSpacing.section),
                       Semantics(

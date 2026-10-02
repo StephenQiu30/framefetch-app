@@ -39,9 +39,6 @@ final class ResourceInfoScreen extends StatelessWidget {
                       title: about
                           ? l.aboutNavigation
                           : l.selfHostingNavigation,
-                      description: about
-                          ? l.aboutDescription
-                          : l.selfHostingDescription,
                     ),
                     const SizedBox(height: AppSpacing.xxLarge),
                     Align(

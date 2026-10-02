@@ -81,7 +81,6 @@ final class _InspectionResultScreenState
       appBar: const AppNavigationBar(backFallbackLocation: '/'),
       body: DataPageView(
         title: state.inspection?.title ?? l.inspectionResultTitle,
-        description: l.formatSelectionDescription,
         refreshLabel: l.refreshAction,
         onRefresh: _restore,
         children: [

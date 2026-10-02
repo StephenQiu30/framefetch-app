@@ -13,37 +13,23 @@ final class AdminHomeScreen extends StatelessWidget {
     final items = [
       (
         l10n.adminAnalyticsTitle,
-        l10n.adminAnalyticsDescription,
         PhosphorIconsRegular.chartLineUp,
         '/admin/analytics',
       ),
-      (
-        l10n.adminFilesTitle,
-        l10n.adminFilesDescription,
-        PhosphorIconsRegular.hardDrive,
-        '/admin/files',
-      ),
-      (
-        l10n.adminUsersTitle,
-        l10n.adminUsersDescription,
-        PhosphorIconsRegular.users,
-        '/admin/users',
-      ),
+      (l10n.adminFilesTitle, PhosphorIconsRegular.hardDrive, '/admin/files'),
+      (l10n.adminUsersTitle, PhosphorIconsRegular.users, '/admin/users'),
       (
         l10n.adminProvidersTitle,
-        l10n.adminProvidersDescription,
         PhosphorIconsRegular.treeStructure,
         '/admin/providers',
       ),
       (
         l10n.adminAiProvidersTitle,
-        l10n.adminAiProvidersDescription,
         PhosphorIconsRegular.sparkle,
         '/admin/ai-providers',
       ),
       (
         l10n.adminOperationLogsTitle,
-        l10n.adminOperationLogsDescription,
         PhosphorIconsRegular.clockCounterClockwise,
         '/admin/operation-logs',
       ),
@@ -51,16 +37,14 @@ final class AdminHomeScreen extends StatelessWidget {
     return AdminPage(
       backFallbackLocation: '/',
       title: l10n.adminCenterTitle,
-      description: l10n.adminCenterDescription,
       refreshLabel: l10n.refreshAction,
       onRefresh: () async {},
       children: [
         for (final item in items)
           AdminSectionLink(
             title: item.$1,
-            description: item.$2,
-            icon: item.$3,
-            onTap: () => context.push(item.$4),
+            icon: item.$2,
+            onTap: () => context.push(item.$3),
           ),
       ],
     );

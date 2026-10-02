@@ -42,19 +42,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get accountNavigation => '我的';
 
   @override
-  String get downloadHistoryDescription => '继续查看、获取或分析已创建的任务。';
-
-  @override
   String get downloadRowActionsHint => '向左轻扫可查看任务操作。';
-
-  @override
-  String get screenplayDocumentsDescription => '查看导入状态、解析信息和剧本正文。';
-
-  @override
-  String get documentRowActionsHint => '向左轻扫可管理剧本文档。';
-
-  @override
-  String get providerStatusDescription => '这里展示平台的接入与身份要求。下载是否成功以实际文件结果为准。';
 
   @override
   String get loadingData => '正在加载…';
@@ -100,9 +88,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get downloadHistoryEmptyTitle => '还没有下载记录';
-
-  @override
-  String get downloadHistoryEmptyDescription => '从首页解析链接或导入本地视频后，下载任务会显示在这里。';
 
   @override
   String get createDownloadFromHomeAction => '去首页创建任务';
@@ -153,9 +138,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get documentEmptyTitle => '还没有剧本文档';
 
   @override
-  String get documentEmptyDescription => '从首页上传剧本文档后，可在这里查看解析状态与正文。';
-
-  @override
   String get goToScreenplayUploadAction => '去首页上传剧本';
 
   @override
@@ -184,9 +166,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get screenplayDocumentDetailNavigation => '文档详情';
-
-  @override
-  String get screenplayDocumentDetailDescription => '查看导入信息、解析摘要和规范化剧本。';
 
   @override
   String get documentInformationTitle => '导入信息';
@@ -326,9 +305,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get providerEmptyTitle => '暂无平台状态';
 
   @override
-  String get providerEmptyDescription => '服务端当前没有公开的平台能力记录，请稍后刷新。';
-
-  @override
   String get downloadAvailableLabel => '下载可用';
 
   @override
@@ -366,9 +342,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get capabilityPlaylist => '播放列表';
-
-  @override
-  String get accountDescription => '管理用户名与头像；管理员还可调整账户身份。';
 
   @override
   String get appearanceSection => '外观';
@@ -414,9 +387,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get publicSourceAction => '查看源代码';
 
   @override
-  String get publicWorkflowTitle => '一套可审计的完整链路';
-
-  @override
   String get publicWorkflowInspectTitle => '解析';
 
   @override
@@ -441,17 +411,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get publicWorkflowDeliverDescription => '通过授权短时入口预览或获取制品';
 
   @override
-  String get publicCapabilitiesEyebrow => '核心功能';
-
-  @override
   String get publicHomeCapabilitiesTitle => '视频解析、剧本处理与 AI 分析';
-
-  @override
-  String get publicHomeCapabilitiesDescription =>
-      'Web 控制面、API 与 Worker 共享同一套权限、任务和制品模型，适合个人本地使用，也便于团队自托管。';
-
-  @override
-  String get publicVideoEyebrow => '公开视频';
 
   @override
   String get publicVideoTitle => '公开视频工作流';
@@ -460,16 +420,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get publicVideoDescription => '解析有权处理的公开链接，选择真实可用格式，并跟踪下载与最终制品。';
 
   @override
-  String get publicDocumentEyebrow => '剧本文档';
-
-  @override
   String get publicDocumentTitle => '剧本与文档处理';
 
   @override
   String get publicDocumentDescription => '导入获授权的剧本文档，在同一工作区完成规范化、分析与处理记录。';
-
-  @override
-  String get publicAnalysisEyebrow => 'AI 分析';
 
   @override
   String get publicAnalysisTitle => '结构化 AI 视频分析';
@@ -481,41 +435,14 @@ class AppLocalizationsZh extends AppLocalizations {
   String get publicTrustEyebrow => '自托管架构';
 
   @override
-  String get publicTrustTitle => '开源，不交出数据控制权';
-
-  @override
   String get publicTrustDescription =>
       'FastAPI、Next.js、PostgreSQL、RabbitMQ、MinIO、FFmpeg 与 yt-dlp 组成可独立部署的工作流。MIT 许可证允许你免费检查、修改和自托管。';
-
-  @override
-  String get publicSafeguardSession => '浏览器会话采用 HttpOnly Cookie；原生客户端使用可轮换令牌。';
-
-  @override
-  String get publicSafeguardWorkers => '下载、导入与 AI 分析通过独立队列和 Worker 执行。';
-
-  @override
-  String get publicSafeguardArtifacts => '短时制品入口、所有者隔离与授权边界贯穿完整链路。';
 
   @override
   String get publicSafeguardAuthorization => '公开视频并不等于可自由使用，请仅处理已获授权的内容。';
 
   @override
-  String get publicSafetyEyebrow => '安全边界';
-
-  @override
-  String get publicSafetyTitle => '运行与授权边界';
-
-  @override
-  String get publicSafetyDescription => '把访问、执行和交付拆成可检查的边界。';
-
-  @override
   String get publicFaqEyebrow => '常见问题';
-
-  @override
-  String get publicFaqTitle => '开始使用前，先了解这些';
-
-  @override
-  String get publicFaqDescription => '了解输入、分析结果、运行成本与移动端支持范围。';
 
   @override
   String get publicFaqWhatQuestion => '帧取 FrameFetch 是什么？';
@@ -563,14 +490,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get publicGuideAction => '阅读视频分析与自托管使用指南';
 
   @override
-  String get publicStartEyebrow => '快速开始';
-
-  @override
   String get publicStartTitle => '在自己的基础设施上运行 FrameFetch';
-
-  @override
-  String get publicStartDescription =>
-      '从仓库的 Quick Start、架构文档和安全边界开始，按需启用媒体解析、剧本工作流与 AI 服务。';
 
   @override
   String get publicDeploymentAction => '阅读部署说明';
@@ -580,13 +500,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get publicGuideTitle => '从素材到分析报告';
-
-  @override
-  String get publicGuideDescription =>
-      '了解 FrameFetch 如何导入授权视频与剧本文档、执行 AI 分镜分析并导出 Markdown / DOCX 报告，以及 Web、Flutter 客户端和自托管服务端的分工。';
-
-  @override
-  String get publicGuideNotice => '本指南介绍当前产品流程。配置与实现以链接的仓库文档为准，实例可用性以实际检查结果为准。';
 
   @override
   String get publicGuideVideoTitle => '如何从视频得到可复核的 AI 分析报告？';
@@ -673,9 +586,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get downloadDetailNavigation => '任务详情';
 
   @override
-  String get downloadDetailDescription => '查看任务当前执行状态、文件可用性与处理信息。';
-
-  @override
   String get sourceLabel => '来源';
 
   @override
@@ -736,13 +646,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get welcomeBack => '欢迎回来';
 
   @override
-  String get loginDescription => '使用你的帧取账户继续管理下载、文档与分析。';
-
-  @override
   String get createAccountTitle => '创建你的帧取账户';
-
-  @override
-  String get registerDescription => '验证邮箱后创建账户，保存和管理你的下载、文档与分析。';
 
   @override
   String get emailLabel => '邮箱地址';
@@ -782,12 +686,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get goLogin => '返回登录';
-
-  @override
-  String get noAccountPrompt => '还没有账户？';
-
-  @override
-  String get hasAccountPrompt => '已有账户？';
 
   @override
   String get invalidEmail => '请输入有效的邮箱地址';
@@ -844,9 +742,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get downloadHomeTitle => '把素材，带回本地。';
 
   @override
-  String get downloadHomeDescription => '解析公开视频、图片与合集链接，或上传本地视频与剧本文档。';
-
-  @override
   String get linkIntakeMode => '链接解析';
 
   @override
@@ -862,10 +757,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get videoIntakeTitle => '导入本地视频';
 
   @override
-  String get videoIntakeDescription =>
-      '选择你拥有或已获授权的 MP4 视频，服务端完成隔离校验后进入下载记录与 AI 分析。';
-
-  @override
   String get selectVideoFile => '选择视频文件';
 
   @override
@@ -873,10 +764,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get screenplayIntakeTitle => '导入剧本文档';
-
-  @override
-  String get screenplayIntakeDescription =>
-      '选择 DOCX、PDF、TXT、Markdown 或 Fountain 文件，服务端会生成可分析和改写的规范化预览。';
 
   @override
   String get selectScreenplayFile => '选择剧本文件';
@@ -946,9 +833,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get providerNoCapabilities => '暂无已登记能力';
 
   @override
-  String get providerFileResultHint => '下载结果以实际文件为准。';
-
-  @override
   String get intentQueued => '等待解析';
 
   @override
@@ -1003,9 +887,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get formatSelectionTitle => '选择下载格式';
 
   @override
-  String get formatSelectionDescription => '格式来自本次真实解析结果，创建后可在下载记录查看进度。';
-
-  @override
   String get createDownloadAction => '创建下载任务';
 
   @override
@@ -1013,9 +894,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get sourceCandidatesTitle => '选择文章中的视频';
-
-  @override
-  String get sourceCandidatesDescription => '该文章包含多个媒体来源，请明确选择要处理的视频。';
 
   @override
   String get sourceCandidatesEmpty => '文章中没有发现可处理的视频。';
@@ -1108,14 +986,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get aiAnalysisTitle => 'AI 智能分析';
 
   @override
-  String get aiAnalysisDescription => '由 AI 观察视频画面，生成连续分镜、视觉高光、资产目录，或将视频整理成文章。';
-
-  @override
   String get screenplayAnalysisTitle => '剧本分析与改写';
-
-  @override
-  String get screenplayAnalysisDescription =>
-      '选择综合分析、结构审阅或中英文改写；任务绑定当前规范化剧本，不会修改原文。';
 
   @override
   String get analysisSkillLabel => '分析 Skill';
@@ -1394,39 +1265,19 @@ class AppLocalizationsZh extends AppLocalizations {
   String get adminCenterTitle => '管理中心';
 
   @override
-  String get adminCenterDescription => '查看全局运行数据，并处理高频管理事项。';
-
-  @override
   String get adminAnalyticsTitle => '使用统计';
-
-  @override
-  String get adminAnalyticsDescription => '查看下载表现与 AI 分析执行情况。';
 
   @override
   String get adminFilesTitle => '文件管理';
 
   @override
-  String get adminFilesDescription => '查看已保存文件的类型、大小和创建时间，或删除单个文件。';
-
-  @override
   String get adminUsersTitle => '用户管理';
-
-  @override
-  String get adminUsersDescription => '查找账户，并在不离开当前页面的情况下调整角色与启用状态。';
 
   @override
   String get adminProvidersTitle => '平台目录';
 
   @override
-  String get adminProvidersDescription =>
-      '维护平台状态页的名称、排序与可见性。下载域名和执行能力由系统 Profile 控制。';
-
-  @override
   String get adminAiProvidersTitle => 'AI 服务';
-
-  @override
-  String get adminAiProvidersDescription =>
-      '默认使用服务端本机 Codex；可在这里新增并启用第三方 API。切换后从下一次分析任务生效，无需修改环境文件。';
 
   @override
   String adminDays(int days) {
@@ -1449,9 +1300,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get adminFilesEmpty => '暂无持久文件';
-
-  @override
-  String get adminFilesEmptyDescription => '当前没有需要管理员处理的持久文件。';
 
   @override
   String adminUserCount(int count) {
@@ -1695,7 +1543,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get apiKeyKeepHint => '留空保留已有凭据';
 
   @override
-  String get localCodexRestriction => '这是服务端保留的本机 Codex 线路，只能修改显示名称和模型。';
+  String get localCodexRestriction => '系统兜底线路，仅可修改名称和模型。';
 
   @override
   String get hostLoginLabel => '本机账号登录 · 免 Key';
@@ -1746,7 +1594,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get previousAnalysisResult => '上一版已完成的结果';
 
   @override
-  String get catalogScopeDescription => '此处只维护状态页名称、排序与可见性，不会新增下载域名或执行能力。';
+  String get catalogScopeDescription => '新增目录条目不会增加下载支持。';
 
   @override
   String get saveConfiguration => '保存配置';
@@ -1885,9 +1733,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get activityHistoryTitle => '我的处理记录';
 
   @override
-  String get activityHistoryDescription => '统一查看链接、文档和 AI 分析记录。';
-
-  @override
   String get activityHistorySearch => '搜索处理记录';
 
   @override
@@ -1921,7 +1766,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get profileAvatarBusy => '正在处理头像';
 
   @override
-  String get profileAvatarHelp => 'JPEG、PNG 或 WebP，最大 4 MB。上传后自动裁切为方形。';
+  String get profileAvatarHelp => 'JPEG、PNG、WebP · 最大 4 MB · 自动裁切为方形';
 
   @override
   String get profileAvatarInvalidType => '请选择 JPEG、PNG 或 WebP 图片。';
@@ -1936,19 +1781,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get profileAvatarRemoved => '头像已移除。';
 
   @override
-  String get profileEmailHelp => '用于登录账户，暂不支持在此修改。';
-
-  @override
   String get profileRoleLabel => '账户身份';
 
   @override
   String get profileRoleAdminHelp => '更改为普通用户前，必须保留另一位启用的管理员。';
-
-  @override
-  String get profileRoleUserHelp => '仅管理员可以修改账户身份。';
-
-  @override
-  String get profileFieldsTitle => '资料字段';
 
   @override
   String get profilePartialSave => '用户名已保存；账户身份修改失败。';
@@ -1957,13 +1793,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get selfHostingNavigation => '自托管部署';
 
   @override
-  String get selfHostingDescription => '从环境准备到首次登录，在自己的基础设施上运行帧取。';
-
-  @override
   String get aboutNavigation => '关于帧取';
-
-  @override
-  String get aboutDescription => '了解开源媒体工作流的定位、工程原则与授权边界。';
 
   @override
   String get resourcesNavigation => '资源';
@@ -1993,13 +1823,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get adminAnalysisEmpty => '当前周期还没有 AI 分析记录';
 
   @override
-  String get adminAnalysisEmptyDescription => '切换统计周期，或发起分析后再查看。';
-
-  @override
-  String get adminAnalysisScopeHint =>
-      '按 UTC 日期统计分析执行；重试与重新分析分别计次。执行次数不代表模型请求次数。';
-
-  @override
   String get adminCompletionRate => '完成率';
 
   @override
@@ -2007,9 +1830,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get adminOperationLogsTitle => '系统操作日志';
-
-  @override
-  String get adminOperationLogsDescription => '查看全系统业务请求与管理员操作，追踪操作人、对象和执行结果。';
 
   @override
   String get adminOperationLogSearch => '操作人或操作名称';
@@ -2061,20 +1881,10 @@ class AppLocalizationsZh extends AppLocalizations {
       '结束时间不能早于开始时间，时间格式为 YYYY-MM-DD HH:mm。';
 
   @override
-  String get adminOperationLogsHint =>
-      '展示日志启用后的操作。请求结果与系统任务状态分别记录；结果未确认表示请求尚未结束或执行曾中断。';
-
-  @override
   String get adminOperationLogsEmpty => '暂无操作日志';
 
   @override
-  String get adminOperationLogsEmptyDescription => '尚未产生符合条件的操作。可以调整筛选条件或稍后刷新。';
-
-  @override
   String get adminOperationDetails => '操作详情';
-
-  @override
-  String get adminOperationDetailsDescription => '只读记录，用于定位请求和核对执行结果。';
 
   @override
   String get adminOperationActor => '操作人';
@@ -2124,13 +1934,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get adminUsersEmpty => '没有匹配的账户';
 
   @override
-  String get adminUsersEmptyDescription => '调整搜索词、角色或账户状态后重试。';
-
-  @override
   String get adminQuotaTitle => '用量限制';
-
-  @override
-  String get adminQuotaDescription => '留空使用系统默认。启用豁免后跳过用量限制。';
 
   @override
   String get adminQuotaExempt => '豁免用量限制';
@@ -2157,16 +1961,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get adminPlatformsEmpty => '没有匹配的平台';
 
   @override
-  String get adminPlatformsEmptyDescription => '调整搜索词或公开状态后重试。';
-
-  @override
   String get adminAiSearch => '搜索 AI 配置';
 
   @override
   String get adminAiEmpty => '没有匹配的 AI 配置';
-
-  @override
-  String get adminAiEmptyDescription => '调整搜索词，或新增 AI 配置。';
 
   @override
   String get adminEngineCodex => 'Codex CLI · Responses';
@@ -2184,17 +1982,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get adminEngineDeepSeek => 'DeepSeek API · LangChain 视觉';
 
   @override
-  String get adminOpenRouterUrlHint =>
-      '使用 OpenRouter 官方地址；视频分析要求模型支持图像输入与结构化输出。';
-
-  @override
   String get adminApiUrlHint => '公网地址必须使用 HTTPS；本机 localhost 可使用 HTTP。';
 
   @override
-  String get adminFixedDeepSeekModel => '当前视觉适配器固定使用此模型。';
-
-  @override
-  String get adminHostLoginHint => 'Agent 将读取当前系统用户的 CLI 登录状态，无需在项目中保存 Key。';
+  String get adminHostLoginHint => '使用服务端已登录的 CLI 账号。';
 
   @override
   String get adminReadModels => '读取 OpenRouter 模型';
@@ -2203,7 +1994,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get adminModelSearch => '搜索模型名称或 ID';
 
   @override
-  String get adminModelsHint => '仅列出声明支持结构化输出的模型；视频请选择支持图像的模型。目录信息不代表实际调用已验证。';
+  String get adminModelsHint => '视频分析请选择支持图像的模型。';
 
   @override
   String get adminImageSupported => '支持图像';
@@ -2261,9 +2052,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get registrationEmailVerificationSuccess => '邮箱已验证，可以设置密码。';
 
   @override
-  String get registrationPasswordPrompt => '邮箱已验证，现在设置密码完成注册。';
-
-  @override
   String currentPageLabel(int page) {
     return '第 $page 页';
   }
@@ -2301,9 +2089,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get publicWorkflowEyebrow => '工作流';
-
-  @override
-  String get publicWorkflowDescription => '从识别到交付，每一步都有明确边界。';
 
   @override
   String get adminObjectCount => '对象数';

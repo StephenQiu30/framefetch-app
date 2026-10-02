@@ -24,26 +24,19 @@ final class PublicHomeContentSections extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              PublicHomeSectionIntro(
-                description: l.publicHomeCapabilitiesDescription,
-                eyebrow: l.publicCapabilitiesEyebrow,
-                title: l.publicHomeCapabilitiesTitle,
-              ),
+              PublicHomeSectionIntro(title: l.publicHomeCapabilitiesTitle),
               const SizedBox(height: 48),
               PublicHomeCapabilities(
                 items: [
                   (
-                    eyebrow: l.publicVideoEyebrow,
                     title: l.publicVideoTitle,
                     description: l.publicVideoDescription,
                   ),
                   (
-                    eyebrow: l.publicDocumentEyebrow,
                     title: l.publicDocumentTitle,
                     description: l.publicDocumentDescription,
                   ),
                   (
-                    eyebrow: l.publicAnalysisEyebrow,
                     title: l.publicAnalysisTitle,
                     description: l.publicAnalysisDescription,
                   ),
@@ -58,47 +51,10 @@ final class PublicHomeContentSections extends StatelessWidget {
             key: const Key('public-home-architecture-layout'),
             first: PublicHomeSectionIntro(
               description: l.publicTrustDescription,
-              eyebrow: l.publicTrustEyebrow,
-              title: l.publicTrustTitle,
+              title: l.publicTrustEyebrow,
             ),
-            second: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: ShadBadge.secondary(
-                    child: Text(l.publicSafetyEyebrow),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Semantics(
-                  header: true,
-                  child: Text(
-                    l.publicSafetyTitle,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  l.publicSafetyDescription,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontSize: 14,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
-                ),
-                const SizedBox(height: 32),
-                PublicHomeSafeguards(
-                  items: [
-                    l.publicSafeguardSession,
-                    l.publicSafeguardWorkers,
-                    l.publicSafeguardArtifacts,
-                    l.publicSafeguardAuthorization,
-                  ],
-                ),
-              ],
+            second: PublicHomeSafeguards(
+              items: [l.publicSafeguardAuthorization],
             ),
           ),
         ),
@@ -108,9 +64,7 @@ final class PublicHomeContentSections extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               PublicHomeFaq(
-                description: l.publicFaqDescription,
-                eyebrow: l.publicFaqEyebrow,
-                title: l.publicFaqTitle,
+                title: l.publicFaqEyebrow,
                 items: [
                   (
                     question: l.publicFaqWhatQuestion,

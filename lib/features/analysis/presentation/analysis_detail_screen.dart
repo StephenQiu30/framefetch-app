@@ -177,10 +177,7 @@ final class _AnalysisDetail extends ConsumerWidget {
                 active: isActiveAnalysis(job),
               ),
             ] else
-              DataStateMessage(
-                title: l.analysisInvalidResult,
-                description: l.activityHistoryDescription,
-              ),
+              DataStateMessage(title: l.analysisInvalidResult),
           ],
           loading: () => [const Center(child: AppSpinner())],
           error: (error, _) => [

@@ -49,7 +49,6 @@ final class _DownloadHistoryScreenState
     final result = ref.watch(downloadHistoryProvider);
     return DataPageView(
       title: localizations.downloadHistoryNavigation,
-      description: localizations.downloadHistoryDescription,
       refreshLabel: localizations.refreshAction,
       onRefresh: () => ref.refresh(downloadHistoryProvider.future).then((_) {}),
       children: [

@@ -29,15 +29,18 @@ final class ProviderStatusItem extends StatelessWidget {
       'prefer' => localizations.providerIdentityPrefer,
       _ => localizations.providerIdentityNone,
     };
-    final description = item.userAction?.trim().isNotEmpty ?? false
-        ? item.userAction!.trim()
-        : localizations.providerFileResultHint;
+    final userAction = item.userAction?.trim();
 
     return Semantics(
       container: true,
-      label:
-          '${item.displayName}, ${item.key}, $status, $identity, '
-          '$capabilitySummary, $description',
+      label: [
+        item.displayName,
+        item.key,
+        status,
+        identity,
+        capabilitySummary,
+        if (userAction?.isNotEmpty ?? false) userAction!,
+      ].join(', '),
       child: ExcludeSemantics(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.large),
@@ -86,12 +89,14 @@ final class ProviderStatusItem extends StatelessWidget {
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
               ),
-              const SizedBox(height: AppSpacing.small),
-              Text(
-                description,
-                textAlign: TextAlign.start,
-                style: theme.textTheme.bodyMedium,
-              ),
+              if (userAction?.isNotEmpty ?? false) ...[
+                const SizedBox(height: AppSpacing.small),
+                Text(
+                  userAction!,
+                  textAlign: TextAlign.start,
+                  style: theme.textTheme.bodyMedium,
+                ),
+              ],
             ],
           ),
         ),

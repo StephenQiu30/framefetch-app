@@ -191,9 +191,6 @@ final class _AiEditorState extends ConsumerState<_AiEditor> {
           maxLength: 128,
           validator: required,
           label: Text(l.modelLabel),
-          description: _engine == AiProviderEngine.deepseek
-              ? Text(l.adminFixedDeepSeekModel)
-              : null,
         ),
         if (_auth == AiProviderAuthMode.apiKey) ...[
           ShadInputFormField(
@@ -205,11 +202,9 @@ final class _AiEditorState extends ConsumerState<_AiEditor> {
             validator: (v) =>
                 isValidAiBaseUrl(v) ? null : l.invalidConfiguration,
             label: Text(l.baseUrlLabel),
-            description: Text(
-              _engine == AiProviderEngine.openrouter
-                  ? l.adminOpenRouterUrlHint
-                  : l.adminApiUrlHint,
-            ),
+            description: _engine == AiProviderEngine.openrouter
+                ? null
+                : Text(l.adminApiUrlHint),
           ),
           ShadInputFormField(
             controller: _secret,

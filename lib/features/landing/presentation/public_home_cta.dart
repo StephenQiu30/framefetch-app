@@ -12,11 +12,7 @@ final class PublicHomeCta extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
-    final intro = PublicHomeSectionIntro(
-      description: l.publicStartDescription,
-      eyebrow: l.publicStartEyebrow,
-      title: l.publicStartTitle,
-    );
+    final intro = PublicHomeSectionIntro(title: l.publicStartTitle);
     final button = ShadButton.secondary(
       key: const Key('public-home-deployment'),
       onPressed: onOpenDeployment,

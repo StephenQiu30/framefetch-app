@@ -77,10 +77,6 @@ final class _OpenRouterModelsState extends ConsumerState<OpenRouterModels> {
                       widget.onSelected(id);
                     },
                   ),
-                Text(
-                  l.adminModelsHint,
-                  style: ShadTheme.of(context).textTheme.muted,
-                ),
               ];
             },
             loading: () => <Widget>[],
@@ -90,6 +86,8 @@ final class _OpenRouterModelsState extends ConsumerState<OpenRouterModels> {
               ),
             ],
           ),
+        const SizedBox(height: AppSpacing.small),
+        Text(l.adminModelsHint, style: ShadTheme.of(context).textTheme.muted),
       ],
     );
   }

@@ -3,16 +3,16 @@ import 'package:framegrab/features/landing/presentation/public_home_layout.dart'
 
 final class PublicHomeSectionIntro extends StatelessWidget {
   const PublicHomeSectionIntro({
-    required this.description,
-    required this.eyebrow,
+    this.description,
+    this.eyebrow,
     required this.title,
     this.prominent = false,
     this.titleKey,
     super.key,
   });
 
-  final String description;
-  final String eyebrow;
+  final String? description;
+  final String? eyebrow;
   final bool prominent;
   final String title;
   final Key? titleKey;
@@ -24,16 +24,18 @@ final class PublicHomeSectionIntro extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          eyebrow,
-          style: theme.textTheme.labelMedium?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-            fontFamily: 'monospace',
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
+        if (eyebrow != null) ...[
+          Text(
+            eyebrow!,
+            style: theme.textTheme.labelMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+              fontFamily: 'monospace',
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+            ),
           ),
-        ),
-        const SizedBox(height: 20),
+          const SizedBox(height: 20),
+        ],
         Semantics(
           header: true,
           child: Text(
@@ -47,18 +49,20 @@ final class PublicHomeSectionIntro extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 16),
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 672),
-          child: Text(
-            description,
-            style: theme.textTheme.bodyLarge?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-              fontSize: 18,
-              height: 28 / 18,
+        if (description != null) ...[
+          const SizedBox(height: 16),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 672),
+            child: Text(
+              description!,
+              style: theme.textTheme.bodyLarge?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+                fontSize: 18,
+                height: 28 / 18,
+              ),
             ),
           ),
-        ),
+        ],
       ],
     );
   }

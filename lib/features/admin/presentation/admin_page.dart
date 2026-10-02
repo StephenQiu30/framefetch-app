@@ -9,7 +9,7 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 final class AdminPage extends StatelessWidget {
   const AdminPage({
     required this.children,
-    required this.description,
+    this.description,
     required this.onRefresh,
     required this.refreshLabel,
     required this.title,
@@ -19,7 +19,7 @@ final class AdminPage extends StatelessWidget {
 
   final String backFallbackLocation;
   final List<Widget> children;
-  final String description;
+  final String? description;
   final Future<void> Function() onRefresh;
   final String refreshLabel;
   final String title;
@@ -42,14 +42,12 @@ final class AdminPage extends StatelessWidget {
 
 final class AdminSectionLink extends StatelessWidget {
   const AdminSectionLink({
-    required this.description,
     required this.icon,
     required this.onTap,
     required this.title,
     super.key,
   });
 
-  final String description;
   final IconData icon;
   final VoidCallback onTap;
   final String title;
@@ -78,14 +76,6 @@ final class AdminSectionLink extends StatelessWidget {
                     textAlign: TextAlign.start,
                     style: theme.textTheme.titleMedium,
                   ),
-                  const SizedBox(height: AppSpacing.xSmall),
-                  Text(
-                    description,
-                    textAlign: TextAlign.start,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -99,11 +89,17 @@ final class AdminSectionLink extends StatelessWidget {
 }
 
 List<Widget> adminLoading(String label) => [
-  const Padding(
-    padding: EdgeInsets.symmetric(vertical: 56),
-    child: Center(child: AppSpinner()),
+  Semantics(
+    liveRegion: true,
+    label: label,
+    child: const Padding(
+      padding: EdgeInsets.symmetric(vertical: 56),
+      child: Align(
+        alignment: AlignmentDirectional.centerStart,
+        child: AppSpinner(),
+      ),
+    ),
   ),
-  Center(child: Text(label)),
 ];
 
 List<Widget> adminError({

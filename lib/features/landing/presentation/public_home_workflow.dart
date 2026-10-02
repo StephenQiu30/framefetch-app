@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 
 typedef PublicHomeWorkflowItem = ({String description, String title});
 
@@ -7,15 +6,11 @@ final class PublicHomeWorkflow extends StatelessWidget {
   const PublicHomeWorkflow({
     required this.items,
     required this.title,
-    required this.eyebrow,
-    required this.description,
     super.key,
   });
 
   final List<PublicHomeWorkflowItem> items;
   final String title;
-  final String eyebrow;
-  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +19,6 @@ final class PublicHomeWorkflow extends StatelessWidget {
       key: const Key('public-home-workflow'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ShadBadge.secondary(child: Text(eyebrow)),
-        const SizedBox(height: 16),
         Semantics(
           header: true,
           child: Text(
@@ -35,14 +28,6 @@ final class PublicHomeWorkflow extends StatelessWidget {
               fontWeight: FontWeight.w500,
               height: 1.375,
             ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          description,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-            fontSize: 14,
           ),
         ),
         const SizedBox(height: 32),

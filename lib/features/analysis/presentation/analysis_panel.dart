@@ -30,11 +30,8 @@ final class AnalysisPanel extends ConsumerWidget {
     final title = target.isScreenplay
         ? l10n.screenplayAnalysisTitle
         : l10n.aiAnalysisTitle;
-    final description = target.isScreenplay
-        ? l10n.screenplayAnalysisDescription
-        : l10n.aiAnalysisDescription;
     final job = result.value?.job;
-    final showIntroduction =
+    final showTitle =
         job?.status != AnalysisStatus.succeeded || job?.result == null;
     return Semantics(
       container: true,
@@ -44,15 +41,8 @@ final class AnalysisPanel extends ConsumerWidget {
         key: const Key('analysis-panel'),
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (showIntroduction) ...[
+          if (showTitle) ...[
             Text(title, style: Theme.of(context).textTheme.headlineLarge),
-            const SizedBox(height: AppSpacing.small),
-            Text(
-              description,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-            ),
             const SizedBox(height: AppSpacing.xLarge),
           ],
           result.when(

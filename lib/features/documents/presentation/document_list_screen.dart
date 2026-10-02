@@ -11,7 +11,6 @@ import 'package:framegrab/shared/presentation/app_spinner.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
 import 'package:framegrab/shared/presentation/list_query.dart';
-import 'package:framegrab/shared/presentation/swipe_action_hint.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:video_server_api/video_server_api.dart';
 
@@ -50,7 +49,6 @@ final class _DocumentListScreenState extends ConsumerState<DocumentListScreen> {
     final result = ref.watch(documentListProvider);
     return DataPageView(
       title: localizations.screenplayDocumentsNavigation,
-      description: localizations.screenplayDocumentsDescription,
       refreshLabel: localizations.refreshAction,
       onRefresh: () => ref.refresh(documentListProvider.future).then((_) {}),
       children: result.when(
@@ -88,7 +86,6 @@ final class _DocumentListScreenState extends ConsumerState<DocumentListScreen> {
         ),
         DataStateMessage(
           title: localizations.documentEmptyTitle,
-          description: localizations.documentEmptyDescription,
           icon: PhosphorIconsRegular.fileText,
           actionEmphasis: DataStateActionEmphasis.primary,
           actionLabel: widget.onUpload == null
@@ -117,8 +114,6 @@ final class _DocumentListScreenState extends ConsumerState<DocumentListScreen> {
         ],
       ),
       const SizedBox(height: AppSpacing.xLarge),
-      SwipeActionHint(label: localizations.documentRowActionsHint),
-      const SizedBox(height: AppSpacing.small),
       SlidableAutoCloseBehavior(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

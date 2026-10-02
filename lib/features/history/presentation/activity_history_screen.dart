@@ -65,7 +65,6 @@ final class _ActivityHistoryScreenState
       appBar: const AppNavigationBar(backFallbackLocation: '/'),
       body: DataPageView(
         title: l.activityHistoryTitle,
-        description: l.activityHistoryDescription,
         refreshLabel: l.refreshAction,
         onRefresh: () async {
           ref.invalidate(activityHistoryProvider(_query));
@@ -104,11 +103,7 @@ final class _ActivityHistoryScreenState
         .whereType<Object>()
         .toList();
     return [
-      if (records.isEmpty)
-        DataStateMessage(
-          title: l.activityHistoryEmpty,
-          description: l.activityHistoryDescription,
-        ),
+      if (records.isEmpty) DataStateMessage(title: l.activityHistoryEmpty),
       for (final record in records)
         ActivityHistoryItem(record: record, onOpen: () => _open(record)),
       CursorPagination(

@@ -5,14 +5,14 @@ final class AppPageIntro extends StatelessWidget {
   const AppPageIntro({
     this.compactTitle = false,
     this.large = false,
-    required this.description,
+    this.description,
     required this.title,
     super.key,
   });
 
   final bool compactTitle;
   final bool large;
-  final String description;
+  final String? description;
   final String title;
 
   @override
@@ -46,21 +46,23 @@ final class AppPageIntro extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: AppSpacing.xSmall),
-          Semantics(
-            key: const Key('page-description'),
-            container: true,
-            label: description,
-            child: ExcludeSemantics(
-              child: Text(
-                description,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  fontSize: large ? 16 : 14,
-                  color: theme.colorScheme.onSurfaceVariant,
+          if (description != null && description!.isNotEmpty) ...[
+            const SizedBox(height: AppSpacing.xSmall),
+            Semantics(
+              key: const Key('page-description'),
+              container: true,
+              label: description!,
+              child: ExcludeSemantics(
+                child: Text(
+                  description!,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontSize: large ? 16 : 14,
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
                 ),
               ),
             ),
-          ),
+          ],
         ],
       ),
     );

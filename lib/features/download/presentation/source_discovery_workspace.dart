@@ -37,13 +37,6 @@ final class SourceDiscoveryWorkspace extends StatelessWidget {
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
-        const SizedBox(height: 8),
-        Text(
-          localizations.sourceCandidatesDescription,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
-        ),
         const SizedBox(height: 20),
         if (expired)
           Text(localizations.intentExpired)

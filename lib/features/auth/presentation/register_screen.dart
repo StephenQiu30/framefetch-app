@@ -80,7 +80,6 @@ final class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     ).toString();
     return AuthPageScaffold(
       title: localizations.createAccountTitle,
-      description: localizations.registerDescription,
       child: AutofillGroup(
         child: ShadForm(
           key: _formKey,
@@ -128,8 +127,6 @@ final class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     setState(() => _sendingCode = sending),
               ),
               if (_emailVerified) ...[
-                const SizedBox(height: AppSpacing.small),
-                Text(localizations.registrationPasswordPrompt),
                 const SizedBox(height: AppSpacing.small),
                 PasswordField(
                   newPassword: true,
@@ -197,27 +194,18 @@ final class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   ),
                 ),
               const SizedBox(height: AppSpacing.small),
-              Wrap(
-                spacing: 4,
-                runSpacing: 4,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  Text(
-                    localizations.hasAccountPrompt,
-                    textAlign: TextAlign.start,
-                    style: ShadTheme.of(context).textTheme.muted,
-                  ),
-                  ShadButton.link(
-                    key: const Key('go-login-button'),
-                    onPressed: session.isBusy
-                        ? null
-                        : () => context.pushReplacement(loginLocation),
-                    enabled: !session.isBusy,
-                    height: 0,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    child: Flexible(child: Text(localizations.goLogin)),
-                  ),
-                ],
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: ShadButton.link(
+                  key: const Key('go-login-button'),
+                  onPressed: session.isBusy
+                      ? null
+                      : () => context.pushReplacement(loginLocation),
+                  enabled: !session.isBusy,
+                  height: 0,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Flexible(child: Text(localizations.goLogin)),
+                ),
               ),
             ],
           ),

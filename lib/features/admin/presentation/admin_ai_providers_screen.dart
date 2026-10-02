@@ -90,7 +90,6 @@ final class _AdminAiProvidersScreenState
     final busy = ref.watch(adminAiMutationProvider) || _busyKey != null;
     return AdminPage(
       title: l.adminAiProvidersTitle,
-      description: l.adminAiProvidersDescription,
       refreshLabel: l.refreshAction,
       onRefresh: () =>
           ref.refresh(adminAiProvidersProvider.future).then((_) {}),
@@ -127,11 +126,7 @@ final class _AdminAiProvidersScreenState
                     : l.adminAgentUnavailable,
               ),
               const SizedBox(height: AppSpacing.medium),
-              if (items.isEmpty)
-                DataStateMessage(
-                  title: l.adminAiEmpty,
-                  description: l.adminAiEmptyDescription,
-                ),
+              if (items.isEmpty) DataStateMessage(title: l.adminAiEmpty),
               for (final item in items)
                 AdminAiProviderRow(
                   key: ValueKey('ai-${item.key}'),

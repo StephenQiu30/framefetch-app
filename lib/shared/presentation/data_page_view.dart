@@ -10,7 +10,7 @@ enum DataStateActionEmphasis { subtle, primary }
 final class DataPageView extends StatelessWidget {
   const DataPageView({
     required this.children,
-    required this.description,
+    this.description,
     required this.onRefresh,
     required this.refreshLabel,
     required this.title,
@@ -20,7 +20,7 @@ final class DataPageView extends StatelessWidget {
 
   final List<Widget> children;
   final bool compactTitle;
-  final String description;
+  final String? description;
   final Future<void> Function() onRefresh;
   final String refreshLabel;
   final String title;
@@ -176,7 +176,7 @@ final class _DataMetric extends StatelessWidget {
 
 final class DataStateMessage extends StatelessWidget {
   const DataStateMessage({
-    required this.description,
+    this.description,
     required this.title,
     this.actionEmphasis = DataStateActionEmphasis.subtle,
     this.actionLabel,
@@ -189,7 +189,7 @@ final class DataStateMessage extends StatelessWidget {
   final DataStateActionEmphasis actionEmphasis;
   final IconData? actionIcon;
   final String? actionLabel;
-  final String description;
+  final String? description;
   final IconData icon;
   final VoidCallback? onAction;
   final String title;
@@ -203,23 +203,28 @@ final class DataStateMessage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: AppSpacing.xxLarge),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(icon, color: theme.colorScheme.onSurfaceVariant, size: 28),
             const SizedBox(height: AppSpacing.medium),
             Text(
               title,
-              textAlign: TextAlign.start,
+              textAlign: TextAlign.center,
               style: theme.textTheme.titleSmall,
             ),
-            const SizedBox(height: AppSpacing.xSmall),
-            Text(
-              description,
-              textAlign: TextAlign.start,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
+            if (description != null && description!.isNotEmpty) ...[
+              const SizedBox(height: AppSpacing.xSmall),
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Text(
+                  description!,
+                  textAlign: TextAlign.start,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
               ),
-            ),
+            ],
             if (actionLabel != null && onAction != null) ...[
               const SizedBox(height: AppSpacing.large),
               if (actionEmphasis == DataStateActionEmphasis.primary)

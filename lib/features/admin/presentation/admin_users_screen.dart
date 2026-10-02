@@ -58,7 +58,6 @@ final class AdminUsersScreen extends ConsumerWidget {
     final busy = ref.watch(adminUserMutationProvider);
     return AdminPage(
       title: l.adminUsersTitle,
-      description: l.adminUsersDescription,
       refreshLabel: l.refreshAction,
       onRefresh: () => ref.refresh(adminUsersProvider.future).then((_) {}),
       children: [
@@ -97,11 +96,7 @@ final class AdminUsersScreen extends ConsumerWidget {
         ),
         ...result.when(
           data: (data) => [
-            if (data.items.isEmpty)
-              DataStateMessage(
-                title: l.adminUsersEmpty,
-                description: l.adminUsersEmptyDescription,
-              ),
+            if (data.items.isEmpty) DataStateMessage(title: l.adminUsersEmpty),
             for (final user in data.items)
               AdminUserRow(
                 key: ValueKey('admin-user-${user.id}'),

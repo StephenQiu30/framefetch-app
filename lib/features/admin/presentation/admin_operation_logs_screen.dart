@@ -38,7 +38,6 @@ final class _AdminOperationLogsScreenState
         : null;
     return AdminPage(
       title: l.adminOperationLogsTitle,
-      description: l.adminOperationLogsDescription,
       refreshLabel: l.refreshAction,
       onRefresh: () async {
         if (query.hasValidDates) {
@@ -120,11 +119,6 @@ final class _AdminOperationLogsScreenState
             onChanged: (v) => controller.filters(to: v),
           ),
         ),
-        const SizedBox(height: AppSpacing.medium),
-        Text(
-          l.adminOperationLogsHint,
-          style: ShadTheme.of(context).textTheme.muted,
-        ),
         const SizedBox(height: AppSpacing.large),
         if (!query.hasValidDates)
           ShadAlert.destructive(
@@ -134,10 +128,7 @@ final class _AdminOperationLogsScreenState
           ...result.when(
             data: (data) => [
               if (data.items.isEmpty)
-                DataStateMessage(
-                  title: l.adminOperationLogsEmpty,
-                  description: l.adminOperationLogsEmptyDescription,
-                ),
+                DataStateMessage(title: l.adminOperationLogsEmpty),
               for (final item in data.items)
                 Padding(
                   key: ValueKey('admin-log-${item.id}'),

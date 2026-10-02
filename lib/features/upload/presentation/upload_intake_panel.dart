@@ -10,7 +10,6 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 final class UploadIntakePanel extends StatelessWidget {
   const UploadIntakePanel({
     required this.actionLabel,
-    required this.description,
     required this.icon,
     required this.kind,
     required this.onPressed,
@@ -21,7 +20,6 @@ final class UploadIntakePanel extends StatelessWidget {
   });
 
   final String actionLabel;
-  final String description;
   final IconData icon;
   final ContentUploadKind kind;
   final VoidCallback onPressed;
@@ -49,16 +47,7 @@ final class UploadIntakePanel extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(title, style: theme.textTheme.titleSmall),
-                    const SizedBox(height: AppSpacing.xSmall),
-                    Text(
-                      description,
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ],
+                  children: [Text(title, style: theme.textTheme.titleSmall)],
                 ),
               ),
             ],
