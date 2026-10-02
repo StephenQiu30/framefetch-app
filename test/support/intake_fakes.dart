@@ -82,13 +82,10 @@ final class FakeDownloadIntentRepository implements DownloadIntentRepository {
   Object? cancelError;
   Future<IntentResponse>? pendingCreate;
   Future<IntentResponse>? pendingGet;
-  final Map<String?, IntentHistoryResponse> historyPages = {};
-  final List<String?> historyBefore = [];
   final List<String> inputs = [];
   final List<String> keys = [];
   final List<String> reads = [];
   int refreshCount = 0;
-  int historyReads = 0;
   int cancelCount = 0;
 
   @override
@@ -116,14 +113,6 @@ final class FakeDownloadIntentRepository implements DownloadIntentRepository {
     if (getError case final failure?) throw failure;
     if (pendingGet case final pending?) return pending;
     return intentFixture(status: status);
-  }
-
-  @override
-  Future<IntentHistoryResponse> history({String? before}) async {
-    historyReads++;
-    historyBefore.add(before);
-    return historyPages[before] ??
-        IntentHistoryResponse((builder) => builder..items.replace([]));
   }
 
   @override

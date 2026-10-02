@@ -203,19 +203,19 @@ final class DataStateMessage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: AppSpacing.xxLarge),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Icon(icon, color: theme.colorScheme.onSurfaceVariant, size: 28),
             const SizedBox(height: AppSpacing.medium),
             Text(
               title,
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start,
               style: theme.textTheme.titleSmall,
             ),
             const SizedBox(height: AppSpacing.xSmall),
             Text(
               description,
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),

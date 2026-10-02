@@ -73,10 +73,15 @@ final class AdminSectionLink extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: theme.textTheme.titleMedium),
+                  Text(
+                    title,
+                    textAlign: TextAlign.start,
+                    style: theme.textTheme.titleMedium,
+                  ),
                   const SizedBox(height: AppSpacing.xSmall),
                   Text(
                     description,
+                    textAlign: TextAlign.start,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: theme.colorScheme.onSurfaceVariant,
                     ),

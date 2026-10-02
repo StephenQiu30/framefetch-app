@@ -79,28 +79,6 @@ final class SettingsScreen extends ConsumerWidget {
                       title: localizations.activityHistoryTitle,
                       description: localizations.activityHistoryDescription,
                     ),
-                    const SizedBox(height: AppSpacing.section),
-                    SettingsSectionLabel(label: localizations.helpSection),
-                    const SizedBox(height: AppSpacing.small),
-                    SettingsNavigationEntry(
-                      key: const Key('public-guide-entry'),
-                      icon: PhosphorIconsRegular.bookOpenText,
-                      onTap: () => context.push('/guide'),
-                      title: localizations.guideNavigation,
-                      description: localizations.guideEntryDescription,
-                    ),
-                    SettingsNavigationEntry(
-                      icon: PhosphorIconsRegular.desktopTower,
-                      onTap: () => context.push('/self-hosting'),
-                      title: localizations.selfHostingNavigation,
-                      description: localizations.selfHostingDescription,
-                    ),
-                    SettingsNavigationEntry(
-                      icon: PhosphorIconsRegular.info,
-                      onTap: () => context.push('/about'),
-                      title: localizations.aboutNavigation,
-                      description: localizations.aboutDescription,
-                    ),
                     if (isAdmin) ...[
                       const SizedBox(height: AppSpacing.section),
                       SettingsSectionLabel(

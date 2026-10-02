@@ -7,13 +7,11 @@ import 'package:framegrab/app/router/app_router.dart';
 import 'package:framegrab/features/documents/application/document_list_provider.dart';
 import 'package:framegrab/features/documents/presentation/document_list_screen.dart';
 import 'package:framegrab/features/download/application/download_intake_controller.dart';
-import 'package:framegrab/features/download/application/download_intent_history_controller.dart';
 import 'package:framegrab/features/download/application/public_input.dart';
 import 'package:framegrab/features/download/presentation/content_intake_controls.dart';
 import 'package:framegrab/features/download/presentation/download_app_bar.dart';
 import 'package:framegrab/features/download/presentation/download_home_content.dart';
 import 'package:framegrab/features/download/presentation/download_intake_workspace.dart';
-import 'package:framegrab/features/download/presentation/download_intent_history.dart';
 import 'package:framegrab/features/download/presentation/download_status.dart';
 import 'package:framegrab/features/download/presentation/intake_failure_message.dart';
 import 'package:framegrab/features/history/application/download_history_provider.dart';
@@ -49,13 +47,6 @@ final class _DownloadHomeScreenState extends ConsumerState<DownloadHomeScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    unawaited(
-      Future<void>.microtask(() {
-        if (mounted) {
-          return ref.read(downloadIntentHistoryProvider.notifier).load();
-        }
-      }),
-    );
   }
 
   @override
@@ -147,7 +138,6 @@ final class _DownloadHomeScreenState extends ConsumerState<DownloadHomeScreen>
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     final intake = ref.watch(downloadIntakeControllerProvider);
-    final intentHistory = ref.watch(downloadIntentHistoryProvider);
     final upload = ref.watch(contentUploadControllerProvider);
     ref.listen(
       contentUploadControllerProvider.select((state) => state.result),
@@ -170,21 +160,6 @@ final class _DownloadHomeScreenState extends ConsumerState<DownloadHomeScreen>
             busy: intake.busy || intake.cancelling || upload.busy,
             controller: _urlController,
             error: error,
-            history: DownloadIntentHistory(
-              busy: intake.busy || intake.cancelling,
-              onLoad: () => unawaited(
-                ref.read(downloadIntentHistoryProvider.notifier).load(),
-              ),
-              onMore: () => unawaited(
-                ref
-                    .read(downloadIntentHistoryProvider.notifier)
-                    .load(more: true),
-              ),
-              onResume: (id) => unawaited(
-                ref.read(downloadIntakeControllerProvider.notifier).resume(id),
-              ),
-              state: intentHistory,
-            ),
             invalid: _urlInvalid,
             mode: _selectedIntakeMode,
             onChanged: (_) {

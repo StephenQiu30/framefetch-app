@@ -37,7 +37,7 @@ void main() {
     );
   });
 
-  testWidgets('keeps metrics left aligned and recovery states centered', (
+  testWidgets('keeps metrics and recovery content left aligned', (
     tester,
   ) async {
     await pumpShadWidget(
@@ -63,13 +63,13 @@ void main() {
     expect(tester.widget<Text>(find.text('全部')).textAlign, TextAlign.start);
     expect(
       tester.widget<Text>(find.text('请检查网络连接后重试。')).textAlign,
-      TextAlign.center,
+      TextAlign.start,
     );
     final stateColumn = tester.widget<Column>(
       find
           .ancestor(of: find.text('暂时无法读取数据'), matching: find.byType(Column))
           .first,
     );
-    expect(stateColumn.crossAxisAlignment, CrossAxisAlignment.center);
+    expect(stateColumn.crossAxisAlignment, CrossAxisAlignment.start);
   });
 }

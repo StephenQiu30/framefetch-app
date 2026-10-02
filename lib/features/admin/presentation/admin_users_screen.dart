@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:framegrab/features/admin/application/admin_mutation_controller.dart';
 import 'package:framegrab/features/admin/application/admin_providers.dart';
-import 'package:framegrab/features/admin/application/admin_selection_controller.dart';
 import 'package:framegrab/features/admin/data/admin_repository.dart';
-import 'package:framegrab/features/admin/presentation/admin_bulk_delete_bar.dart';
 import 'package:framegrab/features/admin/presentation/admin_edit_sheet.dart';
 import 'package:framegrab/features/admin/presentation/admin_page.dart';
 import 'package:framegrab/features/admin/presentation/admin_user_editor.dart';
@@ -15,40 +14,35 @@ import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
 import 'package:framegrab/shared/presentation/list_filters.dart';
 import 'package:framegrab/shared/presentation/list_query.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:video_server_api/video_server_api.dart';
 
 final class AdminUsersScreen extends ConsumerWidget {
   const AdminUsersScreen({super.key});
 
-  Future<void> _delete(
-    BuildContext context,
-    WidgetRef ref, [
-    String? id,
-  ]) async {
+  Future<void> _delete(BuildContext context, WidgetRef ref, String id) async {
     final l = AppLocalizations.of(context);
     if (!await confirmAdminDelete(
           context,
-          title: id == null ? l.adminDeleteSelectionTitle : l.deleteAction,
+          title: l.deleteAction,
           description: l.adminDeleteUserDescription,
         ) ||
         !context.mounted) {
       return;
     }
-    final selection = ref.read(adminUserSelectionProvider.notifier);
-    if (id != null) selection.selectPage([id], true);
     final query = ref.read(userListQueryProvider);
     final total = ref.read(adminUsersProvider).value?.total ?? 0;
-    final requestedCount = ref.read(adminUserSelectionProvider).selected.length;
-    final current = await selection.deleteSelected(
-      ref.read(adminRepositoryProvider).deleteUser,
-    );
-    if (!current || !context.mounted) return;
-    final removed =
-        requestedCount - ref.read(adminUserSelectionProvider).selected.length;
-    final lastPage = ((total - removed) / query.pageSize).ceil().clamp(
-      1,
-      1000000,
-    );
+    final result = await ref
+        .read(adminUserMutationProvider.notifier)
+        .run(() => ref.read(adminRepositoryProvider).deleteUser(id));
+    if (!context.mounted || result == AdminMutationResult.stale) return;
+    if (result == AdminMutationResult.failed) {
+      ShadSonner.of(
+        context,
+      ).show(ShadToast(description: Text(l.adminActionFailed)));
+      return;
+    }
+    final lastPage = ((total - 1) / query.pageSize).ceil().clamp(1, 1000000);
     if (query.page > lastPage) {
       ref.read(userListQueryProvider.notifier).page(lastPage);
     }
@@ -61,10 +55,7 @@ final class AdminUsersScreen extends ConsumerWidget {
     final currentUserId = ref.watch(authSessionProvider).user?.id;
     final result = ref.watch(adminUsersProvider);
     final query = ref.watch(userListQueryProvider);
-    final selection = ref.watch(adminUserSelectionProvider);
-    final controller = ref.read(adminUserSelectionProvider.notifier);
-    ref.listen(userListQueryProvider, (_, _) => controller.clear());
-    ref.listen(userRoleFilterProvider, (_, _) => controller.clear());
+    final busy = ref.watch(adminUserMutationProvider);
     return AdminPage(
       title: l.adminUsersTitle,
       description: l.adminUsersDescription,
@@ -72,7 +63,7 @@ final class AdminUsersScreen extends ConsumerWidget {
       onRefresh: () => ref.refresh(adminUsersProvider.future).then((_) {}),
       children: [
         AppDropdownField<String>(
-          enabled: !selection.busy,
+          enabled: !busy,
           value: ref.watch(userRoleFilterProvider)?.name ?? '',
           label: l.adminRoleLabel,
           options: [
@@ -92,14 +83,14 @@ final class AdminUsersScreen extends ConsumerWidget {
             'inactive': l.adminAccountDisabled,
           },
           onSearch: (v) {
-            if (!selection.busy) {
+            if (!busy) {
               ref
                   .read(userListQueryProvider.notifier)
                   .filter(search: v, status: query.status);
             }
           },
           onStatus: (v) {
-            if (!selection.busy) {
+            if (!busy) {
               ref.read(userListQueryProvider.notifier).filter(status: v);
             }
           },
@@ -111,42 +102,21 @@ final class AdminUsersScreen extends ConsumerWidget {
                 title: l.adminUsersEmpty,
                 description: l.adminUsersEmptyDescription,
               ),
-            if (data.items.isNotEmpty)
-              AdminBulkDeleteBar(
-                state: selection,
-                eligibleIds: [
-                  for (final u in data.items)
-                    if (u.id != currentUserId) u.id,
-                ],
-                onSelectPage: (v) => controller.selectPage(
-                  data.items
-                      .where((u) => u.id != currentUserId)
-                      .map((u) => u.id),
-                  v,
-                ),
-                onDelete: () => _delete(context, ref),
-              ),
             for (final user in data.items)
-              AdminSelectionRow(
+              AdminUserRow(
                 key: ValueKey('admin-user-${user.id}'),
-                selected: selection.selected.contains(user.id),
-                enabled: !selection.busy && user.id != currentUserId,
-                label: user.username,
-                onChanged: (v) => controller.toggle(user.id, v),
-                child: AdminUserRow(
-                  user: user,
-                  isCurrent: user.id == currentUserId,
-                  busy: selection.busy,
-                  onEdit: () => editAdminUser(context, ref, user),
-                  onDelete: () => _delete(context, ref, user.id),
-                ),
+                user: user,
+                isCurrent: user.id == currentUserId,
+                busy: busy,
+                onEdit: () => editAdminUser(context, ref, user),
+                onDelete: () => _delete(context, ref, user.id),
               ),
             if (data.total > 0)
               ListPagination(
                 page: query.page,
                 pageSize: query.pageSize,
                 total: data.total,
-                busy: selection.busy,
+                busy: busy,
                 onPage: ref.read(userListQueryProvider.notifier).page,
                 onPageSize: ref.read(userListQueryProvider.notifier).pageSize,
               ),

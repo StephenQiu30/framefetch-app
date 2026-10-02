@@ -31,24 +31,27 @@ final class _ProviderStatusScreenState
       refreshLabel: localizations.refreshAction,
       onRefresh: () => ref.refresh(providerStatusProvider.future).then((_) {}),
       children: [
-        ShadTabs<String>(
-          key: const Key('provider-status-filter'),
-          value: _filter,
-          scrollable: true,
-          onChanged: (value) => setState(() => _filter = value),
-          tabs: [
-            for (final entry in {
-              'all': localizations.allStatuses,
-              'enabled': localizations.providerRegistered,
-              'disabled': localizations.providerUnavailable,
-            }.entries)
-              ShadTab<String>(
-                key: Key('provider-filter-${entry.key}'),
-                value: entry.key,
-                height: 44,
-                child: Text(entry.value),
-              ),
-          ],
+        Align(
+          alignment: AlignmentDirectional.centerStart,
+          child: ShadTabs<String>(
+            key: const Key('provider-status-filter'),
+            value: _filter,
+            scrollable: true,
+            onChanged: (value) => setState(() => _filter = value),
+            tabs: [
+              for (final entry in {
+                'all': localizations.allStatuses,
+                'enabled': localizations.providerRegistered,
+                'disabled': localizations.providerUnavailable,
+              }.entries)
+                ShadTab<String>(
+                  key: Key('provider-filter-${entry.key}'),
+                  value: entry.key,
+                  height: 44,
+                  child: Text(entry.value),
+                ),
+            ],
+          ),
         ),
         ...result.when(
           skipLoadingOnRefresh: true,
@@ -85,7 +88,7 @@ final class _ProviderStatusScreenState
       for (final item in data.items.where(
         (item) =>
             _filter == 'all' ||
-            item.downloadSupported == (_filter == 'enabled'),
+            isProviderDownloadEnabled(item) == (_filter == 'enabled'),
       ))
         ProviderStatusItem(item: item),
     ];

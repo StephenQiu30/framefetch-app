@@ -10,16 +10,10 @@ final class ActivityHistoryItem extends StatelessWidget {
   const ActivityHistoryItem({
     required this.record,
     required this.onOpen,
-    required this.selected,
-    required this.onSelected,
-    this.busy = false,
     super.key,
   });
   final Object record;
   final VoidCallback onOpen;
-  final bool selected;
-  final ValueChanged<bool> onSelected;
-  final bool busy;
 
   @override
   Widget build(BuildContext context) {
@@ -30,22 +24,12 @@ final class ActivityHistoryItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (item.selectable) ...[
-            ShadCheckbox(
-              checkboxPadding: const EdgeInsets.all(12),
-              key: Key('select-activity-${item.id}'),
-              value: selected,
-              enabled: !busy,
-              onChanged: onSelected,
-            ),
-            const SizedBox(width: AppSpacing.small),
-          ],
           Expanded(
             child: ShadButton.ghost(
               key: Key('activity-record-${item.id}'),
               height: 0,
               padding: const EdgeInsets.symmetric(vertical: AppSpacing.small),
-              onPressed: busy ? null : onOpen,
+              onPressed: onOpen,
               mainAxisAlignment: MainAxisAlignment.start,
               child: Expanded(
                 child: Column(
@@ -53,6 +37,7 @@ final class ActivityHistoryItem extends StatelessWidget {
                   children: [
                     Text(
                       item.title,
+                      textAlign: TextAlign.start,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.titleMedium,
@@ -60,17 +45,20 @@ final class ActivityHistoryItem extends StatelessWidget {
                     const SizedBox(height: AppSpacing.xSmall),
                     Text(
                       '${item.kind} · ${item.status}',
+                      textAlign: TextAlign.start,
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     const SizedBox(height: AppSpacing.xSmall),
                     Text(
                       formatDataTime(context, item.createdAt),
+                      textAlign: TextAlign.start,
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     if (item.sourceUnavailable) ...[
                       const SizedBox(height: AppSpacing.xSmall),
                       Text(
                         l10n.activitySourceUnavailable,
+                        textAlign: TextAlign.start,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),

@@ -218,7 +218,8 @@ final class DocumentDetailSkeleton extends StatelessWidget {
   Widget build(BuildContext context) => Semantics(
     liveRegion: true,
     label: AppLocalizations.of(context).loadingData,
-    child: const Center(
+    child: const Align(
+      alignment: Alignment.centerLeft,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: AppSpacing.section),
         child: AppSpinner(),

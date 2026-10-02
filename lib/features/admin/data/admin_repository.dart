@@ -31,7 +31,6 @@ abstract interface class AdminRepository {
   });
   Future<ProviderCatalogListResponse> fetchProviders();
   Future<AiProviderProfileListResponse> fetchAiProviders();
-  Future<StorageCleanupResponse> cleanupFiles(int olderThanDays);
   Future<void> updateUser(
     ManagedUserResponse user,
     UserRole role,
@@ -95,17 +94,6 @@ final class GeneratedAdminRepository implements AdminRepository {
   @override
   Future<AiProviderProfileListResponse> fetchAiProviders() => _required(
     (api) => api.listAiProviderProfiles().then((value) => value.data?.data),
-  );
-
-  @override
-  Future<StorageCleanupResponse> cleanupFiles(int olderThanDays) => _required(
-    (api) => api
-        .cleanupStoredFiles(
-          storageCleanupRequest: StorageCleanupRequest(
-            (builder) => builder..olderThanDays = olderThanDays,
-          ),
-        )
-        .then((value) => value.data?.data),
   );
 
   @override

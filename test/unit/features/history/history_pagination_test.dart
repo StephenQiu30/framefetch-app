@@ -8,7 +8,8 @@ import '../../../support/data_fakes.dart';
 final class RecordingHistory implements DownloadHistoryRepository {
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-  final queries = <({int page, String? search, DownloadStatus? status})>[];
+  final queries =
+      <({int page, int pageSize, String? search, DownloadStatus? status})>[];
   @override
   Future<DownloadHistoryResponse> fetchPage({
     int page = 1,
@@ -16,7 +17,12 @@ final class RecordingHistory implements DownloadHistoryRepository {
     String? search,
     DownloadStatus? status,
   }) {
-    queries.add((page: page, search: search, status: status));
+    queries.add((
+      page: page,
+      pageSize: pageSize,
+      search: search,
+      status: status,
+    ));
     return FakeDownloadHistoryRepository().fetchPage();
   }
 }
@@ -41,7 +47,12 @@ void main() {
           .read(downloadListQueryProvider.notifier)
           .filter(search: 'lesson', status: DownloadStatus.retryWait.name);
       await container.read(downloadHistoryProvider.future);
-      expect(repository.queries.map((q) => q.page), [1, 2, 1]);
+      container.read(downloadListQueryProvider.notifier).page(3);
+      await container.read(downloadHistoryProvider.future);
+      container.read(downloadListQueryProvider.notifier).pageSize(50);
+      await container.read(downloadHistoryProvider.future);
+      expect(repository.queries.map((q) => q.page), [1, 2, 1, 3, 1]);
+      expect(repository.queries.map((q) => q.pageSize), [10, 10, 10, 10, 50]);
       expect(repository.queries.last.search, 'lesson');
       expect(repository.queries.last.status, DownloadStatus.retryWait);
     },

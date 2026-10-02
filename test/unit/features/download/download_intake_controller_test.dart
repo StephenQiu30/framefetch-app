@@ -7,7 +7,6 @@ import 'package:framegrab/features/auth/application/auth_session_controller.dart
 import 'package:framegrab/features/auth/data/native_auth_gateway.dart';
 import 'package:framegrab/features/auth/data/refresh_credential_store.dart';
 import 'package:framegrab/features/download/application/download_intake_controller.dart';
-import 'package:framegrab/features/download/application/download_intent_history_controller.dart';
 import 'package:framegrab/features/download/data/download_intake_repository.dart';
 import 'package:framegrab/features/download/data/download_intent_repository.dart';
 import 'package:video_server_api/video_server_api.dart';
@@ -408,68 +407,6 @@ void main() {
     },
   );
 
-  test(
-    'history paginates independently of active input and result clear',
-    () async {
-      final container = _container(FakeDownloadIntakeRepository());
-      addTearDown(container.dispose);
-      await _signIn(container, '00000000-0000-0000-0000-000000000001');
-      final intents =
-          container.read(downloadIntentRepositoryProvider)
-              as FakeDownloadIntentRepository;
-      intents.historyPages[null] = IntentHistoryResponse(
-        (builder) => builder
-          ..items.replace([_historyItem('older-1')])
-          ..nextCursor = 'cursor-2',
-      );
-      intents.historyPages['cursor-2'] = IntentHistoryResponse(
-        (builder) => builder..items.replace([_historyItem('older-2')]),
-      );
-      final history = container.read(downloadIntentHistoryProvider.notifier);
-
-      await history.load();
-      await container
-          .read(downloadIntakeControllerProvider.notifier)
-          .inspect('https://media.example/new');
-      container.read(downloadIntakeControllerProvider.notifier).clearResult();
-      await history.load(more: true);
-
-      expect(intents.historyBefore, [null, 'cursor-2']);
-      expect(
-        container
-            .read(downloadIntentHistoryProvider)
-            .items
-            .map((item) => item.id),
-        ['older-1', 'older-2'],
-      );
-    },
-  );
-
-  test('history clears immediately when the signed-in owner changes', () async {
-    final container = _container(FakeDownloadIntakeRepository());
-    addTearDown(container.dispose);
-    await _signIn(container, '00000000-0000-0000-0000-000000000001');
-    final intents =
-        container.read(downloadIntentRepositoryProvider)
-            as FakeDownloadIntentRepository;
-    intents.historyPages[null] = IntentHistoryResponse(
-      (builder) => builder..items.replace([_historyItem('account-a')]),
-    );
-    final history = container.read(downloadIntentHistoryProvider.notifier);
-    await history.load();
-    expect(container.read(downloadIntentHistoryProvider).items, hasLength(1));
-
-    intents.historyPages[null] = IntentHistoryResponse(
-      (builder) => builder..items.replace([]),
-    );
-    await container.read(authSessionProvider.notifier).logout();
-    expect(container.read(downloadIntentHistoryProvider).items, isEmpty);
-    await _signIn(container, '00000000-0000-0000-0000-000000000002');
-    await Future<void>.delayed(Duration.zero);
-
-    expect(container.read(downloadIntentHistoryProvider).items, isEmpty);
-  });
-
   test('a failed refresh keeps the prior result and visible error', () async {
     final container = _container(FakeDownloadIntakeRepository());
     addTearDown(container.dispose);
@@ -579,16 +516,6 @@ void main() {
     );
   });
 }
-
-IntentHistoryItemResponse _historyItem(String id) => IntentHistoryItemResponse(
-  (builder) => builder
-    ..id = id
-    ..version = 1
-    ..status = IntentStatus.ready
-    ..createdAt = DateTime.utc(2026)
-    ..deadline = DateTime.utc(2027)
-    ..title = id,
-);
 
 ProviderContainer _container(
   DownloadIntakeRepository repository,

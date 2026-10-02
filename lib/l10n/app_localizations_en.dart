@@ -1014,10 +1014,17 @@ class AppLocalizationsEn extends AppLocalizations {
       'The system chooses a public route automatically. Select another policy only with explicit authorization.';
 
   @override
-  String get intentHistoryTitle => 'Recent inspections';
+  String get activityHistoryEmpty => 'No processing records';
 
   @override
-  String get intentHistoryEmpty => 'No previous inspections';
+  String get clearFiltersAction => 'Clear filters';
+
+  @override
+  String get providerNoCapabilities => 'No registered capabilities';
+
+  @override
+  String get providerFileResultHint =>
+      'Download availability depends on the actual file.';
 
   @override
   String get intentQueued => 'Waiting to inspect';
@@ -1042,9 +1049,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get intentCancelAction => 'Cancel inspection';
-
-  @override
-  String get intentRestoreAction => 'Open previous inspection';
 
   @override
   String get intentHistoryAction => 'View recent inspections';
@@ -1524,7 +1528,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminFilesDescription =>
-      'Review persisted files and clean up resources beyond retention.';
+      'Review saved file types, sizes, and creation times, or delete a single file.';
 
   @override
   String get adminUsersTitle => 'User management';
@@ -1560,26 +1564,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminSourceBreakdown => 'Source breakdown';
-
-  @override
-  String get adminCleanupTitle => 'Clean up historical files?';
-
-  @override
-  String get adminCleanupDescription =>
-      'Permanently delete videos, screenplays, and analysis reports older than the specified days. Source files used by active analysis are skipped.';
-
-  @override
-  String adminCleanupDays(int days) {
-    return 'Clean up files older than $days days';
-  }
-
-  @override
-  String get adminCleanupAction => 'Clean up files';
-
-  @override
-  String adminCleanupComplete(int count, String size) {
-    return 'Removed $count resources and freed $size.';
-  }
 
   @override
   String adminFileCount(int count) {
@@ -1862,9 +1846,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exportDocx => 'Export DOCX';
 
   @override
-  String get cleanupDaysLabel => 'Delete files older than this many days';
-
-  @override
   String get videoFile => 'Video file';
 
   @override
@@ -1955,9 +1936,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get providerUnavailable => 'Not enabled';
-
-  @override
-  String get providerDownloadEnabled => 'Download enabled';
 
   @override
   String get providerIdentityUnavailableError =>
@@ -2075,27 +2053,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get activityHistoryAll => 'All types';
-
-  @override
-  String get bulkSelectAll => 'Select this page';
-
-  @override
-  String get bulkClear => 'Clear selection';
-
-  @override
-  String get bulkDownload => 'Download selected';
-
-  @override
-  String get bulkRetry => 'Retry selected';
-
-  @override
-  String get bulkDelete => 'Delete selected';
-
-  @override
-  String get bulkActionResult => 'Operation complete';
-
-  @override
-  String get bulkActionSummary => 'Completed';
 
   @override
   String get pageSizeLabel => 'Page size';
@@ -2310,21 +2267,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminOperationErrorCode => 'Error code';
 
   @override
-  String get adminSelectAll => 'Select this page';
-
-  @override
-  String get adminDeleteSelected => 'Delete selected';
-
-  @override
-  String get adminDeleteSelectionTitle => 'Delete the selected records?';
-
-  @override
   String get adminDeleteSelectionDescription =>
       'Deletion cannot be undone. Deleted records are removed from the list; failed deletions can be retried.';
-
-  @override
-  String get adminDeletePartialFailure =>
-      'Some records could not be deleted. Review them and retry.';
 
   @override
   String get adminDeleteUserDescription =>

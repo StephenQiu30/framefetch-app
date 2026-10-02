@@ -22,14 +22,12 @@ final class DownloadHomeContent extends StatelessWidget {
     required this.result,
     required this.statusTone,
     required this.uploadState,
-    this.history,
     super.key,
   });
 
   final bool busy;
   final TextEditingController controller;
   final String? error;
-  final Widget? history;
   final bool invalid;
   final ContentIntakeMode mode;
   final ValueChanged<String> onChanged;
@@ -86,11 +84,6 @@ final class DownloadHomeContent extends StatelessWidget {
                       if (result != null) ...[
                         const SizedBox(height: 32),
                         result!,
-                      ],
-                      if (mode == ContentIntakeMode.link &&
-                          history != null) ...[
-                        const SizedBox(height: 32),
-                        history!,
                       ],
                     ],
                   ),
