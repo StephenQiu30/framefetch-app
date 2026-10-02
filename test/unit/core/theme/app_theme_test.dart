@@ -61,6 +61,27 @@ void main() {
     expect(AppSpacing.section, 40);
     expect(AppTheme.radius, 10);
   });
+
+  test(
+    'borderless controls preserve filled surfaces and visible focus/error rings',
+    () {
+      for (final shad in [AppTheme.shadLight, AppTheme.shadDark]) {
+        expect(shad.inputTheme.decoration?.color, shad.colorScheme.muted);
+        expect(shad.selectTheme.decoration?.color, shad.colorScheme.muted);
+        expect(shad.inputTheme.decoration?.border?.top?.color?.a, 0);
+        expect(shad.cardTheme.border?.top?.width ?? 0, 0);
+        expect(shad.primaryToastTheme.border?.top?.width ?? 0, 0);
+        expect(
+          shad.decoration.secondaryFocusedBorder?.top?.color?.a,
+          greaterThan(0),
+        );
+        expect(
+          shad.decoration.errorBorder?.top?.color,
+          shad.colorScheme.destructive,
+        );
+      }
+    },
+  );
 }
 
 double _contrastRatio(Color first, Color second) {

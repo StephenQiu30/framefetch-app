@@ -1,27 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
 import 'package:framegrab/features/analysis/presentation/analysis_report_preview.dart';
+import 'package:framegrab/features/analysis/presentation/analysis_result_details.dart';
+import 'package:framegrab/features/analysis/presentation/screenplay_review_section.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framegrab/shared/presentation/app_dropdown_field.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:video_server_api/video_server_api.dart';
 
-final class ScreenplayAnalysisResultView extends StatelessWidget {
+final class ScreenplayAnalysisResultView extends StatefulWidget {
   const ScreenplayAnalysisResultView({
     required this.reportMarkdown,
     required this.result,
     super.key,
   });
-
   final String? reportMarkdown;
   final ScreenplayAnalysisResultResponse result;
 
   @override
+  State<ScreenplayAnalysisResultView> createState() =>
+      _ScreenplayAnalysisResultViewState();
+}
+
+final class _ScreenplayAnalysisResultViewState
+    extends State<ScreenplayAnalysisResultView> {
+  String _section = 'structure';
+
+  @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final result = widget.result;
     return Column(
       key: const Key('screenplay-analysis-result'),
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        AnalysisFindingList(
+          title: l10n.analysisPriorityRevisions,
+          items: result.priorityRevisions,
+        ),
+        const SizedBox(height: AppSpacing.xLarge),
+        AnalysisFindingList(
+          title: l10n.analysisStrengths,
+          items: result.strengths,
+        ),
+        const SizedBox(height: AppSpacing.xLarge),
         DataMetricGrid(
           keyPrefix: 'screenplay-analysis',
           metrics: [
@@ -42,32 +64,44 @@ final class ScreenplayAnalysisResultView extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: AppSpacing.section),
-        Text(
-          l10n.screenplayStoryOverview,
-          style: Theme.of(context).textTheme.titleLarge,
+        const SizedBox(height: AppSpacing.xLarge),
+        AnalysisLabeledText(
+          label: l10n.screenplayLoglineLabel,
+          value: result.logline,
         ),
-        const SizedBox(height: AppSpacing.large),
-        _LabeledText(label: l10n.screenplayLoglineLabel, value: result.logline),
-        const SizedBox(height: AppSpacing.large),
-        _LabeledText(
+        AnalysisLabeledText(
           label: l10n.screenplaySynopsisLabel,
           value: result.synopsis,
         ),
-        const SizedBox(height: AppSpacing.large),
-        _LabeledText(
-          label: l10n.screenplayStructuredResultTitle,
-          value: result.structure.pacingSummary,
+        AppDropdownField<String>(
+          key: const Key('screenplay-result-section'),
+          value: _section,
+          label: l10n.analysisResultSectionLabel,
+          options: [
+            AppDropdownOption(
+              value: 'structure',
+              label: l10n.screenplayStructuredResultTitle,
+            ),
+            AppDropdownOption(
+              value: 'characters',
+              label: l10n.analysisCharacters,
+            ),
+            AppDropdownOption(value: 'dialogue', label: l10n.analysisDialogue),
+            AppDropdownOption(value: 'scenes', label: l10n.analysisScenesTab),
+            if (_report(widget.reportMarkdown) != null)
+              AppDropdownOption(value: 'report', label: l10n.analysisReportTab),
+          ],
+          onSelected: (value) {
+            if (value != null) setState(() => _section = value);
+          },
         ),
-        if (_report(reportMarkdown) case final report?) ...[
-          const SizedBox(height: AppSpacing.section),
-          Text(
-            l10n.screenplayFullReportTitle,
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          const SizedBox(height: AppSpacing.large),
-          AnalysisReportPreview(markdown: report),
-        ],
+        const SizedBox(height: AppSpacing.xLarge),
+        ScreenplayReviewSection(
+          key: ValueKey(_section),
+          result: result,
+          section: _section,
+          reportMarkdown: widget.reportMarkdown,
+        ),
       ],
     );
   }
@@ -146,23 +180,6 @@ final class ScreenplayRewriteResultView extends StatelessWidget {
       ],
     );
   }
-}
-
-final class _LabeledText extends StatelessWidget {
-  const _LabeledText({required this.label, required this.value});
-
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(label, style: Theme.of(context).textTheme.labelMedium),
-      const SizedBox(height: AppSpacing.xSmall),
-      SelectableText(value, style: Theme.of(context).textTheme.bodyLarge),
-    ],
-  );
 }
 
 String? _report(String? value) {

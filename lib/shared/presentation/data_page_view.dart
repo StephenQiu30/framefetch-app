@@ -43,7 +43,7 @@ final class DataPageView extends StatelessWidget {
           children: [
             Center(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 720),
+                constraints: const BoxConstraints(maxWidth: 1280),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -52,7 +52,7 @@ final class DataPageView extends StatelessWidget {
                       description: description,
                       title: title,
                     ),
-                    const SizedBox(height: AppSpacing.section),
+                    const SizedBox(height: AppSpacing.xLarge),
                     ...children,
                   ],
                 ),
@@ -203,15 +203,19 @@ final class DataStateMessage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: AppSpacing.xxLarge),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(icon, color: theme.colorScheme.onSurfaceVariant, size: 28),
             const SizedBox(height: AppSpacing.medium),
-            Text(title, style: theme.textTheme.titleSmall),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.titleSmall,
+            ),
             const SizedBox(height: AppSpacing.xSmall),
             Text(
               description,
-              textAlign: TextAlign.start,
+              textAlign: TextAlign.center,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),

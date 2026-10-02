@@ -29,6 +29,7 @@ final class AdminPage extends StatelessWidget {
     return Scaffold(
       appBar: DownloadAppBar(backFallbackLocation: backFallbackLocation),
       body: DataPageView(
+        compactTitle: true,
         title: title,
         description: description,
         refreshLabel: refreshLabel,

@@ -368,7 +368,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get capabilityPlaylist => '播放列表';
 
   @override
-  String get accountDescription => '查看当前账户，管理登录状态。';
+  String get accountDescription => '管理用户名与头像；管理员还可调整账户身份。';
 
   @override
   String get appearanceSection => '外观';
@@ -841,10 +841,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get loggingOut => '正在退出…';
 
   @override
-  String get downloadHomeTitle => '把素材，\n带回本地。';
+  String get downloadHomeTitle => '把素材，带回本地。';
 
   @override
-  String get downloadHomeDescription => '解析公开视频链接，或导入你有权处理的本地视频与剧本文档。';
+  String get downloadHomeDescription => '解析公开视频、图片与合集链接，或上传本地视频与剧本文档。';
 
   @override
   String get linkIntakeMode => '链接解析';
@@ -1394,10 +1394,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get adminCenterDescription => '查看全局运行数据，并处理高频管理事项。';
 
   @override
-  String get adminAnalyticsTitle => '下载分析';
+  String get adminAnalyticsTitle => '使用统计';
 
   @override
-  String get adminAnalyticsDescription => '按 UTC 自然日查看全局下载量、成功率与来源分布。';
+  String get adminAnalyticsDescription => '查看下载表现与 AI 分析执行情况。';
 
   @override
   String get adminFilesTitle => '文件管理';
@@ -1440,7 +1440,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get adminSourceBreakdown => '来源分布';
 
   @override
-  String get adminCleanupTitle => '清理过期文件';
+  String get adminCleanupTitle => '清理历史文件？';
 
   @override
   String get adminCleanupDescription =>
@@ -1506,7 +1506,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get adminSystemRegistered => '系统已注册';
 
   @override
-  String get adminSystemMissing => '系统未注册';
+  String get adminSystemMissing => '仅目录';
 
   @override
   String get adminAgentAvailable => '本机分析 Agent 可用。';
@@ -1825,4 +1825,560 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get reparseDownloadAction => '重新解析';
+
+  @override
+  String get inspectionContainerLabel => '容器';
+
+  @override
+  String get inspectionCompatibilityLabel => '兼容策略';
+
+  @override
+  String get inspectionVideoCodecLabel => '视频编码';
+
+  @override
+  String get inspectionAudioCodecLabel => '音频编码';
+
+  @override
+  String get compatibilityQuality => '画质优先';
+
+  @override
+  String get compatibilitySmallest => '体积优先';
+
+  @override
+  String get compatibilityBalanced => '均衡';
+
+  @override
+  String get analysisPriorityRevisions => '优先修改';
+
+  @override
+  String get analysisStrengths => '值得保留';
+
+  @override
+  String get analysisStructure => '幕结构';
+
+  @override
+  String get analysisTurningPoints => '关键转折';
+
+  @override
+  String get analysisCharacters => '人物';
+
+  @override
+  String get analysisDialogue => '对白发现';
+
+  @override
+  String get analysisConflict => '冲突';
+
+  @override
+  String get analysisTurn => '变化';
+
+  @override
+  String get analysisPacing => '节奏';
+
+  @override
+  String get analysisGoal => '目标';
+
+  @override
+  String get analysisCharacterArc => '人物弧';
+
+  @override
+  String get analysisVisualRules => '视觉规则';
+
+  @override
+  String get analysisContinuityRisks => '连续性风险';
+
+  @override
+  String get analysisNarrativeFunction => '叙事作用';
+
+  @override
+  String get analysisTransition => '转场';
+
+  @override
+  String get analysisRecommendedExtensions => '建议延展';
+
+  @override
+  String get analysisPriorityShots => '优先分镜';
+
+  @override
+  String get analysisEvidenceShots => '依据分镜';
+
+  @override
+  String get analysisReportSections => '报告章节';
+
+  @override
+  String get activityHistoryTitle => '我的处理记录';
+
+  @override
+  String get activityHistoryDescription => '统一查看链接、文档和 AI 分析记录。';
+
+  @override
+  String get activityHistorySearch => '搜索处理记录';
+
+  @override
+  String get activityHistoryLink => '链接解析';
+
+  @override
+  String get activityHistoryVideo => '视频 AI';
+
+  @override
+  String get activityHistoryScreenplay => '剧本解析';
+
+  @override
+  String get activityHistoryBasic => '基础解析';
+
+  @override
+  String get activityHistoryRewrite => 'AI 改写';
+
+  @override
+  String get activityHistoryAll => '全部类型';
+
+  @override
+  String get bulkSelectAll => '选择本页';
+
+  @override
+  String get bulkClear => '清除选择';
+
+  @override
+  String get bulkDownload => '批量下载';
+
+  @override
+  String get bulkRetry => '批量重试';
+
+  @override
+  String get bulkDelete => '批量删除';
+
+  @override
+  String get bulkActionResult => '操作完成';
+
+  @override
+  String get bulkActionSummary => '已完成';
+
+  @override
+  String get pageSizeLabel => '每页条数';
+
+  @override
+  String get profileAvatarUpload => '上传头像';
+
+  @override
+  String get profileAvatarRemove => '移除头像';
+
+  @override
+  String get profileAvatarBusy => '正在处理头像';
+
+  @override
+  String get profileAvatarHelp => 'JPEG、PNG 或 WebP，最大 4 MB。上传后自动裁切为方形。';
+
+  @override
+  String get profileAvatarInvalidType => '请选择 JPEG、PNG 或 WebP 图片。';
+
+  @override
+  String get profileAvatarInvalidSize => '头像文件不能超过 4 MB，且不能为空。';
+
+  @override
+  String get profileAvatarSaved => '头像已更新。';
+
+  @override
+  String get profileAvatarRemoved => '头像已移除。';
+
+  @override
+  String get profileEmailHelp => '用于登录账户，暂不支持在此修改。';
+
+  @override
+  String get profileRoleLabel => '账户身份';
+
+  @override
+  String get profileRoleAdminHelp => '更改为普通用户前，必须保留另一位启用的管理员。';
+
+  @override
+  String get profileRoleUserHelp => '仅管理员可以修改账户身份。';
+
+  @override
+  String get profileFieldsTitle => '资料字段';
+
+  @override
+  String get profilePartialSave => '用户名已保存；账户身份修改失败。';
+
+  @override
+  String get selfHostingNavigation => '自托管部署';
+
+  @override
+  String get selfHostingDescription => '从环境准备到首次登录，在自己的基础设施上运行帧取。';
+
+  @override
+  String get aboutNavigation => '关于帧取';
+
+  @override
+  String get aboutDescription => '了解开源媒体工作流的定位、工程原则与授权边界。';
+
+  @override
+  String get resourcesNavigation => '资源';
+
+  @override
+  String get adminDownloadsTab => '下载';
+
+  @override
+  String get adminAnalysisTab => 'AI 分析';
+
+  @override
+  String get adminAnalysisExecutions => '执行次数';
+
+  @override
+  String get adminAnalysisDuration => '平均完成耗时';
+
+  @override
+  String get adminAnalysisDurationCount => '有效完成记录';
+
+  @override
+  String get adminAnalysisStatus => '执行状态';
+
+  @override
+  String get adminAnalysisInput => '输入类型';
+
+  @override
+  String get adminAnalysisEmpty => '当前周期还没有 AI 分析记录';
+
+  @override
+  String get adminAnalysisEmptyDescription => '切换统计周期，或发起分析后再查看。';
+
+  @override
+  String get adminAnalysisScopeHint =>
+      '按 UTC 日期统计分析执行；重试与重新分析分别计次。执行次数不代表模型请求次数。';
+
+  @override
+  String get adminCompletionRate => '完成率';
+
+  @override
+  String get adminTrendDetails => '精确数据';
+
+  @override
+  String get adminOperationLogsTitle => '系统操作日志';
+
+  @override
+  String get adminOperationLogsDescription => '查看全系统业务请求与管理员操作，追踪操作人、对象和执行结果。';
+
+  @override
+  String get adminOperationLogSearch => '操作人或操作名称';
+
+  @override
+  String get adminOperationScope => '操作范围';
+
+  @override
+  String get adminAllOperations => '全部操作';
+
+  @override
+  String get adminRequestOperations => '接口请求';
+
+  @override
+  String get adminTaskOperations => '系统任务';
+
+  @override
+  String get adminAdminOperations => '管理员操作';
+
+  @override
+  String get adminOperationOutcome => '执行结果';
+
+  @override
+  String get adminAllOutcomes => '全部结果';
+
+  @override
+  String get adminOperationStarted => '结果未确认';
+
+  @override
+  String get adminOperationSucceeded => '请求成功';
+
+  @override
+  String get adminOperationFailed => '请求失败';
+
+  @override
+  String get adminOperationSucceededFilter => '成功 / 状态更新';
+
+  @override
+  String get adminOperationFrom => '开始时间';
+
+  @override
+  String get adminOperationTo => '结束时间';
+
+  @override
+  String get adminOperationDateHint => 'YYYY-MM-DD HH:mm';
+
+  @override
+  String get adminOperationInvalidDates =>
+      '结束时间不能早于开始时间，时间格式为 YYYY-MM-DD HH:mm。';
+
+  @override
+  String get adminOperationLogsHint =>
+      '展示日志启用后的操作。请求结果与系统任务状态分别记录；结果未确认表示请求尚未结束或执行曾中断。';
+
+  @override
+  String get adminOperationLogsEmpty => '暂无操作日志';
+
+  @override
+  String get adminOperationLogsEmptyDescription => '尚未产生符合条件的操作。可以调整筛选条件或稍后刷新。';
+
+  @override
+  String get adminOperationDetails => '操作详情';
+
+  @override
+  String get adminOperationDetailsDescription => '只读记录，用于定位请求和核对执行结果。';
+
+  @override
+  String get adminOperationActor => '操作人';
+
+  @override
+  String get adminUnknownAccount => '未识别账户';
+
+  @override
+  String get adminOperationObject => '对象';
+
+  @override
+  String get adminOperationId => '日志 ID';
+
+  @override
+  String get adminActorId => '账户 ID';
+
+  @override
+  String get adminOperationLabel => '操作';
+
+  @override
+  String get adminOperationKey => '操作标识';
+
+  @override
+  String get adminOperationEndpoint => '接口';
+
+  @override
+  String get adminOperationFinished => '结束时间';
+
+  @override
+  String get adminOperationStatusCode => 'HTTP 状态';
+
+  @override
+  String get adminOperationErrorCode => '错误码';
+
+  @override
+  String get adminSelectAll => '选择本页';
+
+  @override
+  String get adminDeleteSelected => '删除所选';
+
+  @override
+  String get adminDeleteSelectionTitle => '删除所选记录？';
+
+  @override
+  String get adminDeleteSelectionDescription =>
+      '删除后无法恢复。已删除的记录会从列表移除；失败的记录可以重试。';
+
+  @override
+  String get adminDeletePartialFailure => '部分记录未能删除，请核对并重试。';
+
+  @override
+  String get adminDeleteUserDescription =>
+      '账户、登录凭据、角色、配额和会话会一并移除；历史下载文件与任务记录不会自动删除。';
+
+  @override
+  String get adminDeleteFileDescription => '文件及其持久对象将永久删除。正在分析的源文件无法删除。';
+
+  @override
+  String get adminUsersEmpty => '没有匹配的账户';
+
+  @override
+  String get adminUsersEmptyDescription => '调整搜索词、角色或账户状态后重试。';
+
+  @override
+  String get adminQuotaTitle => '用量限制';
+
+  @override
+  String get adminQuotaDescription => '留空使用系统默认。启用豁免后跳过用量限制。';
+
+  @override
+  String get adminQuotaExempt => '豁免用量限制';
+
+  @override
+  String get adminQuotaActive => '同时活跃任务';
+
+  @override
+  String get adminQuotaDailyTasks => '24 小时任务数';
+
+  @override
+  String get adminQuotaDailyGiB => '24 小时处理量（GiB）';
+
+  @override
+  String get adminQuotaStorageGiB => '保留存储（GiB）';
+
+  @override
+  String get adminQuotaAnalysis => '24 小时分析尝试';
+
+  @override
+  String get adminUseSystemDefault => '使用系统默认';
+
+  @override
+  String get adminPlatformsEmpty => '没有匹配的平台';
+
+  @override
+  String get adminPlatformsEmptyDescription => '调整搜索词或公开状态后重试。';
+
+  @override
+  String get adminAiSearch => '搜索 AI 配置';
+
+  @override
+  String get adminAiEmpty => '没有匹配的 AI 配置';
+
+  @override
+  String get adminAiEmptyDescription => '调整搜索词，或新增 AI 配置。';
+
+  @override
+  String get adminEngineCodex => 'Codex CLI · Responses';
+
+  @override
+  String get adminEngineClaude => 'Claude CLI · Messages';
+
+  @override
+  String get adminEngineOpenRouter => 'OpenRouter API';
+
+  @override
+  String get adminEngineOpenAi => 'OpenAI 兼容 API';
+
+  @override
+  String get adminEngineDeepSeek => 'DeepSeek API · LangChain 视觉';
+
+  @override
+  String get adminOpenRouterUrlHint =>
+      '使用 OpenRouter 官方地址；视频分析要求模型支持图像输入与结构化输出。';
+
+  @override
+  String get adminApiUrlHint => '公网地址必须使用 HTTPS；本机 localhost 可使用 HTTP。';
+
+  @override
+  String get adminFixedDeepSeekModel => '当前视觉适配器固定使用此模型。';
+
+  @override
+  String get adminHostLoginHint => 'Agent 将读取当前系统用户的 CLI 登录状态，无需在项目中保存 Key。';
+
+  @override
+  String get adminReadModels => '读取 OpenRouter 模型';
+
+  @override
+  String get adminModelSearch => '搜索模型名称或 ID';
+
+  @override
+  String get adminModelsHint => '仅列出声明支持结构化输出的模型；视频请选择支持图像的模型。目录信息不代表实际调用已验证。';
+
+  @override
+  String get adminImageSupported => '支持图像';
+
+  @override
+  String get adminTextOnly => '仅文本';
+
+  @override
+  String get adminModelsEmpty => '没有匹配的模型';
+
+  @override
+  String get adminModelDirectory => '目录中的模型';
+
+  @override
+  String pageSizeOption(int size) {
+    return '每页 $size 条';
+  }
+
+  @override
+  String get uploadVideoAction => '导入自有视频';
+
+  @override
+  String get aboutContent =>
+      '## 帧取为谁而做？\n\n### 创作者\n\n整理自己拥有或已获授权的素材，用分镜、场景与关键帧证据复盘作品结构。\n\n### 内容研究者\n\n把视频与剧本文档组织为可追踪的任务，并导出 Markdown / DOCX 报告用于审阅。\n\n### 开发者与团队\n\n在自己的基础设施上运行 FastAPI、Next.js 与 Worker，通过 OpenAPI 契约扩展 Web 或移动端。\n\n## 为什么采用异步工作流架构？\n\n### 可恢复\n\nPostgreSQL 保存任务事实，Transactional Outbox 保证数据库状态与消息意图一致；实时连接只用于展示进度。\n\n### 可隔离\n\n下载、媒体命令与 AI 长任务不在 HTTP 请求进程中执行，Runner 经过阻断私网的受控出口代理。\n\n### 可验证\n\nProvider 返回值不会直接成为最终文件；Worker 重新解析并校验格式、时长、大小与 SHA-256 后才写入存储。\n\n### 可自托管\n\n数据保存在部署者配置的基础设施中，项目不依赖官方托管服务，也不内置第三方追踪器。\n\n## 帧取不做什么？\n\n帧取不是规避平台限制的下载脚本。默认只处理用户有权使用、公开、免费且非 DRM 的 HTTP(S) 内容；受保护、会员、私密、购买或地域限制内容不属于项目目标。私网 URL、任意 yt-dlp 参数和 shell 输入始终禁止。\n\nMIT 许可证授予软件的使用、修改和分发权，不代表授予任何第三方媒体内容的下载、复制或分析权。项目不提供官方 SaaS、公共演示站或服务可用性 SLA。\n\n## 源码在哪里？\n\n[video-server](https://github.com/StephenQiu30/video-server)：FastAPI API、Next.js Web、下载 / 文档 / 报告 Worker、隔离 Media Runner 与 Docker Compose 部署。\n\n[video-app](https://github.com/StephenQiu30/video-app)：连接自托管 video-server 的 Flutter iOS / Android 客户端；媒体处理与 AI 推理仍在服务端执行。\n\n项目由 [StephenQiu](https://github.com/StephenQiu30) 维护，欢迎通过 Issue 或 Pull Request 参与。安全问题请按[安全策略](https://github.com/StephenQiu30/video-server/blob/main/SECURITY.md)私下报告。';
+
+  @override
+  String get selfHostingContent =>
+      '本页摘录当前部署流程。命令与配置以仓库 README 为准；平台登录、换机与故障恢复请阅读对应设计文档。\n\n## 运行帧取需要准备什么？\n\n- Docker Engine 与 Docker Compose。\n- 部署者已有的 PostgreSQL、RabbitMQ、Redis 与 MinIO；Compose 只管理帧取自身的业务服务并复用这些基础环境。\n- macOS 平台会话来源需要 uv（Python 3.12）、日常 Chrome 与帧取扩展。\n- 生产部署需要强随机密钥、稳定的 HTTPS 访问地址和规划好的对象存储容量。\n\n## 如何用 Docker Compose 部署？\n\n### 克隆仓库并准备环境文件\n\n复制示例配置后，把 .env 中的连接信息改为本机已运行的 PostgreSQL、RabbitMQ、Redis 与 MinIO。真实密钥只写入未提交的 .env 或 Secret Manager。\n\n```sh\ngit clone https://github.com/StephenQiu30/video-server.git\ncd video-server\ntest -f .env || cp .env.example .env\n```\n\n### 为空数据库加载当前态结构\n\n首次使用空项目数据库时，以该库的 DDL 账号加载 schema.sql。已有数据库升级前先备份。\n\n```sh\npsql -X -v ON_ERROR_STOP=1 -W -h 127.0.0.1 -U video -d video \\\n  -f backend/sql/schema.sql\n```\n\n### 安装登录来源并启动业务服务\n\nmacOS 上安装 Chrome 会话来源，并在 chrome://extensions 加载命令输出目录中的扩展。复用日常 Chrome 已有平台登录；Compose 启动 Web、API、Worker、Runner 与出口代理。公开链接优先匿名解析。生产配置见 README。\n\n```sh\nuv run --project backend python -m app.workers.session.source_cli install --env-file .env\ndocker compose up -d --build --wait --remove-orphans\n```\n\n### 初始化首个管理员\n\n全新空库在部署机终端执行一次，密码交互输入。命令只在用户表为空时创建管理员，不开放 HTTP 初始化接口。\n\n```sh\nuv run --project backend python -m app.workers.bootstrap_admin \\\n  --env-file .env --username your-admin --email you@example.com\n```\n\n### 检查服务健康状态\n\n默认 Web 端口为 8101，API 端口为 8111，Swagger UI 位于 :8111/docs。健康检查只证明服务可运行，不代表每个平台都有可下载的媒体。\n\n```sh\ncurl --fail http://127.0.0.1:8111/health/live\ncurl --fail http://127.0.0.1:8111/health/ready\ncurl --fail --head http://127.0.0.1:8101/\n```\n\n## AI 视频分析是否必须启用？\n\n不是。AI Worker 独立于业务 Compose 运行，可复用宿主机已登录的 Codex App Server，或由管理员配置受支持的模型 Provider。只需要下载与剧本文档导入时，在 .env 中设置 ANALYSIS_ENABLED=false；关闭 AI 不影响下载和文档导入。\n\n使用外部模型时，分析所需内容会发送到该服务，并可能产生费用。启用前应确认素材授权和模型服务的数据处理约定。\n\n## 公开上线前应检查什么？\n\n- 替换 .env.prod 中所有占位凭据，并确认密钥来源可在换机时恢复。\n- 外部媒体访问必须经过阻断私网的出口代理；入口 URL 校验不能替代网络隔离。\n- 为 MinIO 规划容量、备份与显式清理策略；预签名链接过期不会删除最终文件。\n- 只在计划公开介绍项目的网站设置 SITE_INDEXABLE=true，并把 SITE_URL 设为稳定的 HTTPS 域名。\n- 更新代码后执行 git pull --ff-only 并按 README 重新安装来源并执行 Compose 构建启动；docker compose restart 不会应用新镜像或环境配置。\n\n[README 快速开始](https://github.com/StephenQiu30/video-server#快速开始) · [系统设计](https://github.com/StephenQiu30/video-server/blob/main/docs/design/README.md)';
+
+  @override
+  String get activityHistoryFrom => '起始日期';
+
+  @override
+  String get activityHistoryTo => '结束日期';
+
+  @override
+  String get activityHistorySkill => '分析 Skill';
+
+  @override
+  String get activitySourceUnavailable => '源文件不可用，已有结果仍可查看。';
+
+  @override
+  String get analysisRunsTitle => '运行记录';
+
+  @override
+  String get verifyRegistrationEmail => '验证邮箱';
+
+  @override
+  String get verifyingRegistrationEmail => '验证中…';
+
+  @override
+  String get registrationEmailVerified => '邮箱已验证';
+
+  @override
+  String get registrationEmailVerificationSuccess => '邮箱已验证，可以设置密码。';
+
+  @override
+  String get registrationPasswordPrompt => '邮箱已验证，现在设置密码完成注册。';
+
+  @override
+  String currentPageLabel(int page) {
+    return '第 $page 页';
+  }
+
+  @override
+  String get adminAnalysisRateFormula => '成功 ÷（成功 + 失败）';
+
+  @override
+  String get adminAnalysisTrendTitle => '每日分析趋势';
+
+  @override
+  String get adminDownloadTrendTitle => '每日下载趋势';
+
+  @override
+  String get adminStatusDistribution => '状态分布';
+
+  @override
+  String get adminSourcePerformance => '各视频源下载表现';
+
+  @override
+  String get adminCompletionTrend => '完成率走势';
+
+  @override
+  String get adminOperationDeleted => '已删除';
+
+  @override
+  String get adminDeleteAiDescription => '所选 AI 配置与凭据将永久删除。当前线路和系统兜底线路不可删除。';
+
+  @override
+  String get adminDeleteCatalogDescription =>
+      '该条目会从平台目录和公开状态页移除。系统下载 Profile 不会因此被删除。';
+
+  @override
+  String get exportMarkdown => '导出 Markdown';
+
+  @override
+  String get publicWorkflowEyebrow => '工作流';
+
+  @override
+  String get publicWorkflowDescription => '从识别到交付，每一步都有明确边界。';
+
+  @override
+  String get adminObjectCount => '对象数';
+
+  @override
+  String analysisRunNumber(int run) {
+    return '第 $run 次执行';
+  }
+
+  @override
+  String get analysisRetryTitle => '按原配置重新运行';
+
+  @override
+  String get analysisRetryDescription =>
+      '将保留任务编号并增加执行次数，可能消耗模型额度。修改配置请从源文件新建分析。';
+
+  @override
+  String get confirmRetryAnalysis => '确认执行';
+
+  @override
+  String get adminPeriodLabel => '统计周期';
 }

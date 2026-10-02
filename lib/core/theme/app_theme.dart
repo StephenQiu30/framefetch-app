@@ -33,7 +33,11 @@ abstract final class AppTheme {
       input: c['input']!,
       ring: c['ring']!,
       selection: c['foreground']!.withValues(alpha: .18),
-      custom: {'success': c['success']!, 'warning': c['warning']!},
+      custom: {
+        'success': c['success']!,
+        'warning': c['warning']!,
+        for (var i = 1; i <= 5; i++) 'chart-$i': c['chart-$i']!,
+      },
     );
     const font = 'packages/shadcn_ui/Geist';
     const body = TextStyle(fontFamily: font, fontSize: 14, height: 1.5);
@@ -44,6 +48,12 @@ abstract final class AppTheme {
         fontFamily: font,
         fontSize: 14,
         fontWeight: FontWeight.w500,
+      ),
+    );
+    final borderless = ShadDecoration(
+      border: ShadBorder.all(
+        color: Colors.transparent,
+        radius: BorderRadius.circular(radius),
       ),
     );
     return ShadThemeData(
@@ -79,7 +89,7 @@ abstract final class AppTheme {
       ),
       secondaryButtonTheme: button,
       ghostButtonTheme: button,
-      outlineButtonTheme: button,
+      outlineButtonTheme: button.copyWith(decoration: borderless),
       linkButtonTheme: button,
       destructiveButtonTheme: button.copyWith(
         backgroundColor: colors.destructive.withValues(
@@ -111,15 +121,36 @@ abstract final class AppTheme {
         ),
       ),
       inputTheme: ShadInputTheme(
-        decoration: ShadDecoration(
-          color: brightness == Brightness.dark
-              ? colors.input.withValues(alpha: colors.input.a * .3)
-              : Colors.transparent,
-        ),
+        decoration: borderless.copyWith(color: colors.muted),
         style: body.copyWith(fontSize: 16),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         constraints: const BoxConstraints(minHeight: 44),
       ),
+      textareaTheme: ShadTextareaTheme(
+        decoration: borderless.copyWith(color: colors.muted),
+      ),
+      selectTheme: ShadSelectTheme(
+        decoration: borderless.copyWith(color: colors.muted),
+      ),
+      checkboxTheme: ShadCheckboxTheme(
+        uncheckedColor: colors.muted,
+        decoration: borderless,
+      ),
+      radioTheme: ShadRadioTheme(
+        decoration: borderless.copyWith(color: colors.muted),
+      ),
+      cardTheme: const ShadCardTheme(border: ShadBorder.none, shadows: []),
+      primaryAlertTheme: ShadAlertTheme(decoration: borderless),
+      destructiveAlertTheme: ShadAlertTheme(decoration: borderless),
+      primaryDialogTheme: const ShadDialogTheme(border: Border()),
+      alertDialogTheme: const ShadDialogTheme(border: Border()),
+      sheetTheme: const ShadSheetTheme(border: Border()),
+      popoverTheme: ShadPopoverTheme(decoration: borderless),
+      tooltipTheme: ShadTooltipTheme(decoration: borderless),
+      primaryToastTheme: const ShadToastTheme(border: ShadBorder.none),
+      destructiveToastTheme: const ShadToastTheme(border: ShadBorder.none),
+      separatorTheme: const ShadSeparatorTheme(color: Colors.transparent),
+      outlineBadgeTheme: const ShadBadgeTheme(shape: RoundedRectangleBorder()),
       progressTheme: const ShadProgressTheme(minHeight: 6),
     );
   }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
 import 'package:framegrab/features/landing/presentation/public_guide_sections.dart';
-import 'package:framegrab/features/landing/presentation/public_home_section_intro.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
 import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
+import 'package:framegrab/shared/presentation/app_page_intro.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -44,14 +44,12 @@ final class PublicGuideScreen extends StatelessWidget {
           children: [
             Center(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 720),
+                constraints: const BoxConstraints(maxWidth: 1280),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    PublicHomeSectionIntro(
+                    AppPageIntro(
                       description: l10n.publicGuideDescription,
-                      eyebrow: l10n.publicGuideEyebrow,
-                      prominent: true,
                       title: l10n.publicGuideTitle,
                     ),
                     const SizedBox(height: AppSpacing.large),

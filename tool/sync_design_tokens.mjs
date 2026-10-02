@@ -18,7 +18,7 @@ const blocks = [':root', '.dark'].map(selector => {
   const body = css.slice(start, css.indexOf('}', start));
   return Object.fromEntries([...body.matchAll(/--([\w-]+):\s*([^;]+);/g)].map(([, k, v]) => [k, v]));
 });
-const names = ['background', 'foreground', 'card', 'card-foreground', 'popover', 'popover-foreground', 'primary', 'primary-foreground', 'secondary', 'secondary-foreground', 'muted', 'muted-foreground', 'accent', 'accent-foreground', 'destructive', 'border', 'input', 'ring', 'success', 'warning'];
+const names = ['background', 'foreground', 'card', 'card-foreground', 'popover', 'popover-foreground', 'primary', 'primary-foreground', 'secondary', 'secondary-foreground', 'muted', 'muted-foreground', 'accent', 'accent-foreground', 'destructive', 'border', 'input', 'ring', 'success', 'warning', 'chart-1', 'chart-2', 'chart-3', 'chart-4', 'chart-5'];
 const palettes = blocks.map((block, i) => `const ${i ? 'dark' : 'light'}WebColors = <String, Color>{\n${names.map(name => {
   const value = block[name];
   const match = /^oklch\(([\d.]+) ([\d.]+) ([\d.]+)(?: \/ ([\d.]+)(%)?)?\)$/.exec(value);

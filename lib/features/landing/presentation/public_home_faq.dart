@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
+import 'package:framegrab/features/landing/presentation/public_home_layout.dart';
 import 'package:framegrab/features/landing/presentation/public_home_section_intro.dart';
 
 typedef PublicHomeQuestion = ({String answer, String question});
@@ -30,24 +30,40 @@ final class PublicHomeFaq extends StatelessWidget {
           eyebrow: eyebrow,
           title: title,
         ),
-        const SizedBox(height: AppSpacing.xLarge),
-        for (final item in items)
-          Padding(
-            padding: const EdgeInsets.only(bottom: AppSpacing.xLarge),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(item.question, style: theme.textTheme.titleMedium),
-                const SizedBox(height: AppSpacing.small),
-                Text(
-                  item.answer,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant,
+        const SizedBox(height: 48),
+        PublicHomeGrid(
+          columns: 2,
+          spacing: 80,
+          children: [
+            for (final (index, item) in items.indexed)
+              Column(
+                key: Key('public-home-question-$index'),
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Semantics(
+                    header: true,
+                    child: Text(
+                      item.question,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        height: 1.4,
+                      ),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
+                  const SizedBox(height: 12),
+                  Text(
+                    item.answer,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      fontSize: 14,
+                      height: 2,
+                    ),
+                  ),
+                ],
+              ),
+          ],
+        ),
       ],
     );
   }

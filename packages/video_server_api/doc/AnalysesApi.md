@@ -13,10 +13,13 @@ Method | HTTP request | Description
 [**createAnalysis**](AnalysesApi.md#createanalysis) | **POST** /api/downloads/{download_id}/analyses | 创建视频分析任务
 [**createDocumentAnalysis**](AnalysesApi.md#createdocumentanalysis) | **POST** /api/documents/{document_id}/analyses | 创建剧本分析或改写任务
 [**deleteAnalysis**](AnalysesApi.md#deleteanalysis) | **DELETE** /api/analyses/{analysis_id} | 删除视频分析与报告
+[**exportAnalysisMarkdown**](AnalysesApi.md#exportanalysismarkdown) | **GET** /api/analyses/{analysis_id}/report.md | 导出 Markdown 视频分析报告
 [**exportAnalysisReport**](AnalysesApi.md#exportanalysisreport) | **GET** /api/analyses/{analysis_id}/report.docx | 导出视频分析报告
 [**getAnalysis**](AnalysesApi.md#getanalysis) | **GET** /api/analyses/{analysis_id} | 查询视频分析任务
+[**getAnalysisHistoryRecord**](AnalysesApi.md#getanalysishistoryrecord) | **GET** /api/analyses/{analysis_id}/history-record | 读取分析来源与历史摘要
 [**getLatestDocumentAnalysis**](AnalysesApi.md#getlatestdocumentanalysis) | **GET** /api/documents/{document_id}/analysis | 读取文档最近的剧本分析
 [**getLatestDownloadAnalysis**](AnalysesApi.md#getlatestdownloadanalysis) | **GET** /api/downloads/{download_id}/analysis | 读取下载任务最近的视频分析
+[**listAnalysisRuns**](AnalysesApi.md#listanalysisruns) | **GET** /api/analyses/{analysis_id}/runs | 分页读取分析运行记录
 [**listAnalysisSkills**](AnalysesApi.md#listanalysisskills) | **GET** /api/analysis-skills | 列出输入兼容的分析 Skill
 [**retryAnalysis**](AnalysesApi.md#retryanalysis) | **POST** /api/analyses/{analysis_id}/retry | 重试原视频分析任务
 
@@ -200,6 +203,49 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **exportAnalysisMarkdown**
+> Uint8List exportAnalysisMarkdown(analysisId)
+
+导出 Markdown 视频分析报告
+
+导出与前端预览、DOCX 转换共用的唯一 Markdown 报告。
+
+### Example
+```dart
+import 'package:video_server_api/api.dart';
+
+final api = VideoServerApi().getAnalysesApi();
+final String analysisId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // String |
+
+try {
+    final response = api.exportAnalysisMarkdown(analysisId);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling AnalysesApi->exportAnalysisMarkdown: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **analysisId** | **String**|  |
+
+### Return type
+
+[**Uint8List**](Uint8List.md)
+
+### Authorization
+
+[NativeBearerAuth](../README.md#NativeBearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/markdown, application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **exportAnalysisReport**
 > Uint8List exportAnalysisReport(analysisId)
 
@@ -286,6 +332,47 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getAnalysisHistoryRecord**
+> ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse getAnalysisHistoryRecord(analysisId)
+
+读取分析来源与历史摘要
+
+### Example
+```dart
+import 'package:video_server_api/api.dart';
+
+final api = VideoServerApi().getAnalysesApi();
+final String analysisId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // String |
+
+try {
+    final response = api.getAnalysisHistoryRecord(analysisId);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling AnalysesApi->getAnalysisHistoryRecord: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **analysisId** | **String**|  |
+
+### Return type
+
+[**ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse**](ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse.md)
+
+### Authorization
+
+[NativeBearerAuth](../README.md#NativeBearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getLatestDocumentAnalysis**
 > ApiResponseUnionAnalysisResponseNoneType getLatestDocumentAnalysis(documentId)
 
@@ -360,6 +447,51 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ApiResponseUnionAnalysisResponseNoneType**](ApiResponseUnionAnalysisResponseNoneType.md)
+
+### Authorization
+
+[NativeBearerAuth](../README.md#NativeBearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **listAnalysisRuns**
+> ApiResponseAnalysisRunHistoryPageResponse listAnalysisRuns(analysisId, beforeRunNo, limit)
+
+分页读取分析运行记录
+
+### Example
+```dart
+import 'package:video_server_api/api.dart';
+
+final api = VideoServerApi().getAnalysesApi();
+final String analysisId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // String |
+final int beforeRunNo = 56; // int |
+final int limit = 56; // int |
+
+try {
+    final response = api.listAnalysisRuns(analysisId, beforeRunNo, limit);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling AnalysesApi->listAnalysisRuns: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **analysisId** | **String**|  |
+ **beforeRunNo** | **int**|  | [optional]
+ **limit** | **int**|  | [optional] [default to 20]
+
+### Return type
+
+[**ApiResponseAnalysisRunHistoryPageResponse**](ApiResponseAnalysisRunHistoryPageResponse.md)
 
 ### Authorization
 

@@ -9,6 +9,7 @@ import 'package:framegrab/features/auth/data/refresh_credential_store.dart';
 import 'package:framegrab/features/documents/data/document_repository.dart';
 import 'package:framegrab/features/download/data/download_intake_repository.dart';
 import 'package:framegrab/features/download/data/download_intent_repository.dart';
+import 'package:framegrab/features/history/data/activity_history_repository.dart';
 import 'package:framegrab/features/history/data/download_history_repository.dart';
 import 'package:framegrab/features/providers/data/provider_status_repository.dart';
 import 'package:framegrab/features/upload/data/content_upload_repository.dart';
@@ -23,6 +24,7 @@ import '../../support/upload_fakes.dart';
 
 Future<void> pumpFramegrabApp(
   WidgetTester tester, {
+  ActivityHistoryRepository? activityHistoryRepository,
   AnalysisRepository? analysisRepository,
   NativeAuthGateway? authGateway,
   RefreshCredentialStore? credentialStore,
@@ -40,6 +42,10 @@ Future<void> pumpFramegrabApp(
   await tester.pumpWidget(
     ProviderScope(
       overrides: [
+        if (activityHistoryRepository != null)
+          activityHistoryRepositoryProvider.overrideWithValue(
+            activityHistoryRepository,
+          ),
         analysisRepositoryProvider.overrideWithValue(
           analysisRepository ?? FakeAnalysisRepository(),
         ),

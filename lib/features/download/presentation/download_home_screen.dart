@@ -25,7 +25,11 @@ import 'package:framegrab/features/upload/domain/content_upload.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
 
 final class DownloadHomeScreen extends ConsumerStatefulWidget {
-  const DownloadHomeScreen({super.key});
+  const DownloadHomeScreen({
+    this.initialIntakeMode = ContentIntakeMode.link,
+    super.key,
+  });
+  final ContentIntakeMode initialIntakeMode;
 
   @override
   ConsumerState<DownloadHomeScreen> createState() => _DownloadHomeScreenState();
@@ -38,7 +42,7 @@ final class _DownloadHomeScreenState extends ConsumerState<DownloadHomeScreen>
   bool _urlInvalid = false;
   int _selectedIndex = 0;
   final Set<int> _visitedIndexes = {0};
-  ContentIntakeMode _selectedIntakeMode = ContentIntakeMode.link;
+  late ContentIntakeMode _selectedIntakeMode = widget.initialIntakeMode;
   DownloadNoticeTone _statusTone = DownloadNoticeTone.destructive;
 
   @override
@@ -52,6 +56,14 @@ final class _DownloadHomeScreenState extends ConsumerState<DownloadHomeScreen>
         }
       }),
     );
+  }
+
+  @override
+  void didUpdateWidget(DownloadHomeScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialIntakeMode != widget.initialIntakeMode) {
+      _openIntake(widget.initialIntakeMode);
+    }
   }
 
   @override
@@ -206,6 +218,10 @@ final class _DownloadHomeScreenState extends ConsumerState<DownloadHomeScreen>
             },
             result: _selectedIntakeMode == ContentIntakeMode.link
                 ? DownloadIntakeWorkspace(
+                    onReparse: () => ref
+                        .read(downloadIntakeControllerProvider.notifier)
+                        .clearResult(),
+                    onUseUpload: () => _openIntake(ContentIntakeMode.video),
                     onCancelIntent: () => unawaited(
                       ref
                           .read(downloadIntakeControllerProvider.notifier)

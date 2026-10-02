@@ -91,15 +91,19 @@ void main() {
         (selectedUsers['get'] as Map<String, dynamic>)['parameters']
             as List<dynamic>;
 
-    expect(selectedPaths, hasLength(52));
+    expect(selectedPaths, hasLength(65));
     expect(
       selectedPaths.values.cast<Map<String, dynamic>>().fold<int>(
         0,
         (total, path) => total + path.length,
       ),
-      61,
+      77,
     );
     expect(selectedPaths['/api/users/me'], contains('patch'));
+    expect(
+      (selectedPaths['/api/users/me/avatar'] as Map<String, dynamic>).keys,
+      containsAll(['get', 'put', 'delete']),
+    );
     expect(selectedPaths['/api/admin/ai-providers'], contains('post'));
     expect(selectedPaths, isNot(contains('/api/admin/provider-runtime')));
     expect(
@@ -157,6 +161,31 @@ void main() {
       containsPair('delete', isA<Map<String, dynamic>>()),
     );
     expect(selectedPaths, contains('/api/admin/users'));
+    expect(selectedPaths['/api/admin/users/{user_id}'], contains('delete'));
+    expect(selectedPaths, contains('/api/admin/files/{category}/{file_id}'));
+    expect(selectedPaths, contains('/api/admin/operation-logs'));
+    expect(selectedPaths, contains('/api/admin/analyses/analytics'));
+    expect(
+      selectedPaths,
+      contains('/api/admin/ai-providers/models/openrouter'),
+    );
+    expect(
+      selectedPaths,
+      contains('/api/admin/provider-runtime/engine-catalog'),
+    );
+    expect(selectedPaths, contains('/api/download-intents/history/records'));
+    expect(
+      selectedPaths,
+      contains('/api/analyses/{analysis_id}/history-record'),
+    );
+    expect(selectedPaths, contains('/api/analyses/{analysis_id}/runs'));
+    expect(selectedPaths, contains('/api/analyses/{analysis_id}/report.md'));
+    expect(selectedPaths, contains('/api/media-imports/{resource_id}'));
+    expect(selectedPaths, contains('/api/downloads/{job_id}/file'));
+    expect(
+      selectedPaths,
+      contains('/api/app/v1/auth/registration-code/verify'),
+    );
     expect(
       selectedParameters.map((value) {
         return (value as Map<String, dynamic>)['name'];
@@ -192,6 +221,13 @@ void main() {
     expect(schemas, contains('DocumentDetailResponse'));
     expect(schemas, contains('DocumentParseSummaryResponse'));
     expect(schemas, contains('DocumentUploadSessionResponse'));
+    expect(schemas, contains('AnalysisAnalyticsResponse'));
+    expect(schemas, contains('OperationLogPageResponse'));
+    expect(schemas, contains('AiModelListResponse'));
+    expect(schemas, contains('EngineCatalogResponse'));
+    expect(schemas, contains('HistoryRecordPageResponse'));
+    expect(schemas, contains('AnalysisRunHistoryPageResponse'));
+    expect(schemas, contains('RegistrationCodeVerificationRequest'));
     final errorResponse = schemas['ErrorResponse'] as Map<String, dynamic>;
     final errorProperties = errorResponse['properties'] as Map<String, dynamic>;
     expect(errorProperties['data'], {
@@ -210,5 +246,77 @@ void main() {
         thumbnailSuccess['content'] as Map<String, dynamic>;
     final jpeg = thumbnailContent['image/jpeg'] as Map<String, dynamic>;
     expect(jpeg['schema'], {'type': 'string', 'format': 'binary'});
+  });
+
+  test('keeps native history and log filters typed and absent when unset', () {
+    final source =
+        jsonDecode(
+              File(
+                'contracts/openapi/video-server.openapi.json',
+              ).readAsStringSync(),
+            )
+            as Map<String, dynamic>;
+    final contract = buildAppOpenApi(source, appOpenApiConfig);
+    final paths = contract['paths'] as Map<String, dynamic>;
+    for (final path in [
+      '/api/download-intents/history/records',
+      '/api/admin/operation-logs',
+    ]) {
+      final operation =
+          (paths[path] as Map<String, dynamic>)['get'] as Map<String, dynamic>;
+      final parameters = operation['parameters'] as List<dynamic>;
+      for (final value in parameters) {
+        final parameter = value as Map<String, dynamic>;
+        if (parameter['in'] != 'query' || parameter['required'] == true) {
+          continue;
+        }
+        final schema = parameter['schema'] as Map<String, dynamic>;
+        expect(
+          schema,
+          isNot(contains('anyOf')),
+          reason: parameter['name'] as String,
+        );
+      }
+    }
+    final history =
+        (paths['/api/download-intents/history/records']
+                as Map<String, dynamic>)['get']
+            as Map<String, dynamic>;
+    final parameters = history['parameters'] as List<dynamic>;
+    final recordTypes = parameters.cast<Map<String, dynamic>>().firstWhere(
+      (parameter) => parameter['name'] == 'record_type',
+    );
+    expect(recordTypes['schema'], containsPair('type', 'array'));
+  });
+
+  test('freezes avatar and media streaming as binary responses', () {
+    final source =
+        jsonDecode(
+              File(
+                'contracts/openapi/video-server.openapi.json',
+              ).readAsStringSync(),
+            )
+            as Map<String, dynamic>;
+    final paths =
+        buildAppOpenApi(source, appOpenApiConfig)['paths']
+            as Map<String, dynamic>;
+    for (final path in [
+      '/api/users/me/avatar',
+      '/api/downloads/{job_id}/file',
+      '/api/analyses/{analysis_id}/report.md',
+    ]) {
+      final operation =
+          (paths[path] as Map<String, dynamic>)['get'] as Map<String, dynamic>;
+      final responses = operation['responses'] as Map<String, dynamic>;
+      final success = responses['200'] as Map<String, dynamic>;
+      final content = success['content'] as Map<String, dynamic>;
+      expect(content, isNotEmpty);
+      for (final media in content.values.cast<Map<String, dynamic>>()) {
+        expect(media['schema'], {'type': 'string', 'format': 'binary'});
+      }
+      expect(operation['security'], [
+        {'NativeBearerAuth': <String>[]},
+      ]);
+    }
   });
 }

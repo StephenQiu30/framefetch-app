@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
 import 'package:framegrab/features/analysis/application/analysis_state.dart';
 import 'package:framegrab/features/analysis/presentation/analysis_docx_button.dart';
+import 'package:framegrab/features/analysis/presentation/analysis_markdown_button.dart';
 import 'package:framegrab/features/analysis/presentation/analysis_presentation_labels.dart';
 import 'package:framegrab/features/analysis/presentation/analysis_result_view.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
@@ -19,6 +20,8 @@ final class AnalysisJobState extends StatelessWidget {
     required this.onDelete,
     required this.onRefresh,
     required this.onRetry,
+    this.canRetry = true,
+    this.cancelling = false,
     super.key,
   });
 
@@ -29,6 +32,8 @@ final class AnalysisJobState extends StatelessWidget {
   final Future<void> Function() onDelete;
   final Future<void> Function() onRefresh;
   final Future<void> Function() onRetry;
+  final bool canRetry;
+  final bool cancelling;
 
   bool get _active =>
       job.status == AnalysisStatus.queued ||
@@ -116,30 +121,42 @@ final class AnalysisJobState extends StatelessWidget {
           runSpacing: AppSpacing.small,
           children: [
             if (job.report?.status == AnalysisReportStatus.available &&
+                (job.report?.artifacts.any((a) => a.format == 'markdown') ??
+                    false))
+              AnalysisMarkdownButton(analysisId: job.id),
+            if (job.report?.status == AnalysisReportStatus.available &&
                 (job.report?.artifacts.any((a) => a.format == 'docx') ?? false))
               AnalysisDocxButton(analysisId: job.id),
             if (_active)
               ShadButton.secondary(
                 key: const Key('cancel-analysis-button'),
-                onPressed: busy ? null : () => _confirmCancel(context),
+                onPressed: busy || cancelling
+                    ? null
+                    : () => _confirmCancel(context),
                 leading: const Icon(PhosphorIconsRegular.x, size: 18),
-                enabled: (busy ? null : () => _confirmCancel(context)) != null,
+                enabled: !busy && !cancelling,
                 height: 0,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
                   vertical: 12,
                 ),
-                child: Flexible(child: Text(l10n.cancelAnalysisAction)),
+                child: Flexible(
+                  child: Text(
+                    cancelling
+                        ? l10n.intentCancelling
+                        : l10n.cancelAnalysisAction,
+                  ),
+                ),
               ),
             if (_retryable)
               ShadButton(
                 key: const Key('retry-analysis-button'),
-                onPressed: busy ? null : onRetry,
+                onPressed: busy || !canRetry ? null : onRetry,
                 leading: const Icon(
                   PhosphorIconsRegular.arrowCounterClockwise,
                   size: 18,
                 ),
-                enabled: (busy ? null : onRetry) != null,
+                enabled: !busy && canRetry,
                 height: 0,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,

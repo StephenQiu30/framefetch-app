@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
+import 'package:framegrab/features/analysis/data/analysis_markdown_repository.dart';
 import 'package:framegrab/features/analysis/data/analysis_report_file_actions.dart';
 import 'package:framegrab/features/download/presentation/download_app_bar.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
@@ -104,8 +106,8 @@ final class AnalysisReportPreview extends StatelessWidget {
         vertical: AppSpacing.small,
       ),
       blockquoteDecoration: BoxDecoration(
-        color: colors.surface,
-        border: Border(left: BorderSide(color: colors.outline, width: 2)),
+        color: colors.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(6),
       ),
       blockSpacing: AppSpacing.small,
       listIndent: AppSpacing.xLarge,
@@ -121,14 +123,9 @@ final class AnalysisReportPreview extends StatelessWidget {
         horizontal: AppSpacing.small,
         vertical: AppSpacing.xSmall,
       ),
-      tableBorder: TableBorder(
-        horizontalInside: BorderSide(color: colors.outline),
-        bottom: BorderSide(color: colors.outline),
-      ),
+      tableBorder: const TableBorder(),
       tableColumnWidth: const IntrinsicColumnWidth(),
-      horizontalRuleDecoration: BoxDecoration(
-        border: Border(top: BorderSide(color: colors.outline)),
-      ),
+      horizontalRuleDecoration: const BoxDecoration(),
     );
   }
 }
@@ -137,6 +134,7 @@ final class AnalysisReportLauncher extends StatelessWidget {
   const AnalysisReportLauncher({
     required this.markdown,
     required this.title,
+    this.analysisId,
     this.fileActions = const NativeAnalysisReportFileActions(),
     super.key,
   });
@@ -144,6 +142,7 @@ final class AnalysisReportLauncher extends StatelessWidget {
   final AnalysisReportFileActions fileActions;
   final String markdown;
   final String title;
+  final String? analysisId;
 
   @override
   Widget build(BuildContext context) {
@@ -156,6 +155,7 @@ final class AnalysisReportLauncher extends StatelessWidget {
             fileActions: fileActions,
             markdown: markdown,
             title: title,
+            analysisId: analysisId,
           ),
         ),
       ),
@@ -167,10 +167,11 @@ final class AnalysisReportLauncher extends StatelessWidget {
   }
 }
 
-final class AnalysisReportScreen extends StatefulWidget {
+final class AnalysisReportScreen extends ConsumerStatefulWidget {
   const AnalysisReportScreen({
     required this.markdown,
     required this.title,
+    this.analysisId,
     this.fileActions = const NativeAnalysisReportFileActions(),
     super.key,
   });
@@ -178,12 +179,15 @@ final class AnalysisReportScreen extends StatefulWidget {
   final AnalysisReportFileActions fileActions;
   final String markdown;
   final String title;
+  final String? analysisId;
 
   @override
-  State<AnalysisReportScreen> createState() => _AnalysisReportScreenState();
+  ConsumerState<AnalysisReportScreen> createState() =>
+      _AnalysisReportScreenState();
 }
 
-final class _AnalysisReportScreenState extends State<AnalysisReportScreen> {
+final class _AnalysisReportScreenState
+    extends ConsumerState<AnalysisReportScreen> {
   Animation<double>? _routeAnimation;
   var _downloadBusy = false;
   var _exportBusy = false;
@@ -353,8 +357,10 @@ final class _AnalysisReportScreenState extends State<AnalysisReportScreen> {
     final l10n = AppLocalizations.of(context);
     setState(() => _downloadBusy = true);
     try {
+      final markdown = await _canonicalMarkdown();
+      if (!mounted) return;
       await widget.fileActions.download(
-        markdown: widget.markdown,
+        markdown: markdown,
         title: widget.title,
       );
       if (!mounted) return;
@@ -379,8 +385,10 @@ final class _AnalysisReportScreenState extends State<AnalysisReportScreen> {
         : renderBox.localToGlobal(Offset.zero) & renderBox.size;
     setState(() => _exportBusy = true);
     try {
+      final markdown = await _canonicalMarkdown();
+      if (!mounted) return;
       await widget.fileActions.export(
-        markdown: widget.markdown,
+        markdown: markdown,
         shareOrigin: shareOrigin,
         title: widget.title,
       );
@@ -392,5 +400,12 @@ final class _AnalysisReportScreenState extends State<AnalysisReportScreen> {
     } finally {
       if (mounted) setState(() => _exportBusy = false);
     }
+  }
+
+  Future<String> _canonicalMarkdown() {
+    final id = widget.analysisId;
+    return id == null
+        ? Future.value(widget.markdown)
+        : ref.read(analysisMarkdownRepositoryProvider).fetchText(id);
   }
 }

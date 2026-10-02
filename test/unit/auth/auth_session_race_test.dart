@@ -190,6 +190,12 @@ final class _DeferredGateway implements NativeAuthGateway {
     required String email,
     required String password,
   }) async => testSession(suffix: email);
+
+  @override
+  Future<void> verifyRegistrationCode({
+    required String email,
+    required String verificationCode,
+  }) async {}
 }
 
 final class _DelayedStore implements RefreshCredentialStore {

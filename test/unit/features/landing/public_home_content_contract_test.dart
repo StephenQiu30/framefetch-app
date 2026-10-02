@@ -13,6 +13,8 @@ void main() {
       '开源、自托管地完成公开视频解析、本地视频与剧本文档导入、制品管理和 AI 分析。数据与运行边界由你掌控。',
     );
     expect(l10n.publicWorkflowTitle, '一套可审计的完整链路');
+    expect(l10n.publicWorkflowEyebrow, '工作流');
+    expect(l10n.publicWorkflowDescription, '从识别到交付，每一步都有明确边界。');
     expect(
       [
         (

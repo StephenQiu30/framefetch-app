@@ -39,6 +39,10 @@ void main() {
       final username = 'uploadqa${suffix.substring(suffix.length - 10)}';
       await gateway.sendRegistrationCode('$username@example.com');
       final code = await registrationCodeFromTestInbox('$username@example.com');
+      await gateway.verifyRegistrationCode(
+        email: '$username@example.com',
+        verificationCode: code,
+      );
       final session = await gateway.register(
         verificationCode: code,
         username: username,

@@ -2,22 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
 import 'package:framegrab/features/admin/application/admin_providers.dart';
+import 'package:framegrab/features/admin/application/admin_selection_controller.dart';
 import 'package:framegrab/features/admin/data/admin_configuration_repository.dart';
 import 'package:framegrab/features/admin/data/admin_repository.dart';
+import 'package:framegrab/features/admin/presentation/admin_bulk_delete_bar.dart';
+import 'package:framegrab/features/admin/presentation/admin_catalog_row.dart';
 import 'package:framegrab/features/admin/presentation/admin_edit_sheet.dart';
 import 'package:framegrab/features/admin/presentation/admin_page.dart';
 import 'package:framegrab/features/admin/presentation/catalog_editor.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
 import 'package:framegrab/shared/presentation/list_filters.dart';
 import 'package:framegrab/shared/presentation/list_query.dart';
-import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:video_server_api/video_server_api.dart';
 
 final class AdminProvidersScreen extends ConsumerStatefulWidget {
   const AdminProvidersScreen({super.key});
-
   @override
   ConsumerState<AdminProvidersScreen> createState() =>
       _AdminProvidersScreenState();
@@ -28,13 +30,27 @@ final class _AdminProvidersScreenState
   final Set<String> _busy = {};
   ListQuery _query = const ListQuery();
 
+  void _filter({String? search, String? status}) {
+    if (_busy.isNotEmpty || ref.read(adminCatalogSelectionProvider).busy) {
+      return;
+    }
+    ref.read(adminCatalogSelectionProvider.notifier).clear();
+    setState(
+      () => _query = ListQuery(
+        search: search ?? _query.search,
+        status: status,
+        pageSize: _query.pageSize,
+      ),
+    );
+  }
+
   Future<void> _toggle(ProviderCatalogEntryResponse item, bool value) async {
     setState(() => _busy.add(item.key));
     try {
       await ref
           .read(adminRepositoryProvider)
           .updateProviderVisibility(item, value);
-      ref.invalidate(adminProviderCatalogProvider);
+      if (mounted) ref.invalidate(adminProviderCatalogProvider);
     } catch (_) {
       if (mounted) {
         ShadSonner.of(context).show(
@@ -48,127 +64,143 @@ final class _AdminProvidersScreenState
     }
   }
 
-  Future<void> _delete(ProviderCatalogEntryResponse item) async {
-    if (!await confirmAdminDelete(context) || !mounted) return;
-    setState(() => _busy.add(item.key));
-    try {
-      await ref
-          .read(adminConfigurationRepositoryProvider)
-          .deleteCatalog(item.key);
-      ref.invalidate(adminProviderCatalogProvider);
-    } catch (_) {
-      if (mounted) {
-        ShadSonner.of(context).show(
-          ShadToast(
-            description: Text(AppLocalizations.of(context).adminActionFailed),
-          ),
-        );
-      }
-    } finally {
-      if (mounted) setState(() => _busy.remove(item.key));
+  Future<void> _delete([ProviderCatalogEntryResponse? item]) async {
+    final l = AppLocalizations.of(context);
+    if (!await confirmAdminDelete(
+          context,
+          title: item == null ? l.adminDeleteSelectionTitle : null,
+          description: l.adminDeleteCatalogDescription,
+        ) ||
+        !mounted) {
+      return;
     }
+    final controller = ref.read(adminCatalogSelectionProvider.notifier);
+    if (item != null) controller.selectPage([item.key], true);
+    final current = await controller.deleteSelected(
+      ref.read(adminConfigurationRepositoryProvider).deleteCatalog,
+    );
+    if (current && mounted) ref.invalidate(adminProviderCatalogProvider);
   }
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final l = AppLocalizations.of(context);
     final result = ref.watch(adminProviderCatalogProvider);
+    final selection = ref.watch(adminCatalogSelectionProvider);
+    final controller = ref.read(adminCatalogSelectionProvider.notifier);
+    final busy = selection.busy || _busy.isNotEmpty;
     return AdminPage(
-      title: l10n.adminProvidersTitle,
-      description: l10n.adminProvidersDescription,
-      refreshLabel: l10n.refreshAction,
+      title: l.adminProvidersTitle,
+      description: l.adminProvidersDescription,
+      refreshLabel: l.refreshAction,
       onRefresh: () =>
           ref.refresh(adminProviderCatalogProvider.future).then((_) {}),
       children: [
+        ShadButton(
+          enabled: !busy,
+          onPressed: busy ? null : () => editCatalog(context, ref),
+          child: Text(l.createPlatform),
+        ),
+        const SizedBox(height: AppSpacing.medium),
+        Text(
+          l.catalogScopeDescription,
+          style: ShadTheme.of(context).textTheme.muted,
+        ),
+        const SizedBox(height: AppSpacing.medium),
         ListFilters(
           query: _query,
-          searchLabel: l10n.searchPlatforms,
-          statuses: {
-            'visible': l10n.visiblePlatform,
-            'hidden': l10n.hiddenPlatform,
-          },
-          onSearch: (v) => setState(
-            () => _query = ListQuery(search: v, status: _query.status),
-          ),
-          onStatus: (v) => setState(
-            () => _query = ListQuery(search: _query.search, status: v),
-          ),
+          searchLabel: l.searchPlatforms,
+          statuses: {'visible': l.visiblePlatform, 'hidden': l.hiddenPlatform},
+          onSearch: (v) => _filter(search: v, status: _query.status),
+          onStatus: (v) => _filter(status: v),
         ),
         ...result.when(
-          data: (data) => [
-            ShadButton.ghost(
-              onPressed: () => editCatalog(context, ref),
-              leading: const Icon(PhosphorIconsRegular.plus),
-              height: 0,
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-              child: Flexible(child: Text(l10n.createPlatform)),
-            ),
-            for (final item in data.items.where(
-              (item) =>
-                  ('${item.key} ${item.displayName}').toLowerCase().contains(
-                    _query.search.toLowerCase(),
-                  ) &&
-                  (_query.status == null ||
-                      item.isVisible == (_query.status == 'visible')),
-            ))
-              Padding(
-                key: ValueKey('catalog-${item.key}'),
-                padding: const EdgeInsets.symmetric(vertical: AppSpacing.small),
-                child: Column(
-                  children: [
-                    ShadSwitch(
-                      sublabel: Text(
-                        '${item.key} · ${item.systemStatus.name} · '
-                        '${item.systemRegistered ? l10n.adminSystemRegistered : l10n.adminSystemMissing}',
-                      ),
-                      value: item.isVisible,
-                      enabled: !_busy.contains(item.key),
-                      onChanged: _busy.contains(item.key)
-                          ? null
-                          : (value) => _toggle(item, value),
-                      label: Text(item.displayName),
-                    ),
-                    Wrap(
-                      children: [
-                        ShadButton.ghost(
-                          onPressed: () => editCatalog(context, ref, item),
-                          height: 0,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 12,
-                          ),
-                          child: Flexible(child: Text(l10n.editAction)),
-                        ),
-                        if (!item.systemRegistered)
-                          ShadButton.ghost(
-                            onPressed: _busy.contains(item.key)
-                                ? null
-                                : () => _delete(item),
-                            enabled:
-                                (_busy.contains(item.key)
-                                    ? null
-                                    : () => _delete(item)) !=
-                                null,
-                            height: 0,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 12,
-                            ),
-                            child: Flexible(child: Text(l10n.deleteAction)),
-                          ),
-                      ],
-                    ),
-                  ],
+          data: (data) {
+            final filtered = data.items
+                .where(
+                  (item) =>
+                      '${item.key} ${item.displayName}'.toLowerCase().contains(
+                        _query.search.toLowerCase(),
+                      ) &&
+                      (_query.status == null ||
+                          item.isVisible == (_query.status == 'visible')),
+                )
+                .toList();
+            final page = _query.page.clamp(
+              1,
+              (filtered.length / _query.pageSize).ceil().clamp(1, 1000000),
+            );
+            final items = filtered
+                .skip((page - 1) * _query.pageSize)
+                .take(_query.pageSize)
+                .toList();
+            return [
+              if (items.isEmpty)
+                DataStateMessage(
+                  title: l.adminPlatformsEmpty,
+                  description: l.adminPlatformsEmptyDescription,
                 ),
-              ),
-          ],
+              if (items.isNotEmpty)
+                AdminBulkDeleteBar(
+                  disabled: busy,
+                  state: selection,
+                  eligibleIds: items.map((item) => item.key).toList(),
+                  onSelectPage: (v) =>
+                      controller.selectPage(items.map((item) => item.key), v),
+                  onDelete: () => _delete(),
+                ),
+              for (final item in items)
+                AdminSelectionRow(
+                  key: ValueKey('catalog-${item.key}'),
+                  selected: selection.selected.contains(item.key),
+                  enabled: !busy,
+                  label: item.displayName,
+                  onChanged: (v) => controller.toggle(item.key, v),
+                  child: AdminCatalogRow(
+                    item: item,
+                    busy: busy,
+                    onToggle: (v) => _toggle(item, v),
+                    onEdit: () => editCatalog(context, ref, item),
+                    onDelete: () => _delete(item),
+                  ),
+                ),
+              if (filtered.isNotEmpty)
+                ListPagination(
+                  page: page,
+                  pageSize: _query.pageSize,
+                  total: filtered.length,
+                  busy: busy,
+                  onPage: (v) {
+                    controller.clear();
+                    setState(
+                      () => _query = ListQuery(
+                        page: v,
+                        pageSize: _query.pageSize,
+                        search: _query.search,
+                        status: _query.status,
+                      ),
+                    );
+                  },
+                  onPageSize: (v) {
+                    controller.clear();
+                    setState(
+                      () => _query = ListQuery(
+                        pageSize: v,
+                        search: _query.search,
+                        status: _query.status,
+                      ),
+                    );
+                  },
+                ),
+            ];
+          },
           error: (error, _) => adminError(
-            action: l10n.retryAction,
-            title: l10n.loadFailedTitle,
-            description: dataRequestFailureMessage(l10n, error),
+            action: l.retryAction,
+            title: l.loadFailedTitle,
+            description: dataRequestFailureMessage(l, error),
             retry: () => ref.invalidate(adminProviderCatalogProvider),
           ),
-          loading: () => adminLoading(l10n.loadingData),
+          loading: () => adminLoading(l.loadingData),
         ),
       ],
     );

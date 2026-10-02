@@ -6,6 +6,7 @@ import 'package:framegrab/features/upload/application/content_upload_controller.
 import 'package:framegrab/features/upload/domain/content_upload.dart';
 import 'package:framegrab/features/upload/presentation/upload_intake_panel.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framegrab/shared/presentation/app_page_intro.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 
 final class DownloadHero extends StatelessWidget {
@@ -39,34 +40,17 @@ final class DownloadHero extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
-    final theme = Theme.of(context);
-    final wide = MediaQuery.sizeOf(context).width >= 600;
-    final textScale = MediaQuery.textScalerOf(context).scale(1);
-    final titleStyle = wide
-        ? theme.textTheme.displayLarge
-        : textScale > 1.25
-        ? theme.textTheme.headlineLarge
-        : theme.textTheme.displayMedium;
+    final wide = MediaQuery.sizeOf(context).width >= 640;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Semantics(
-          container: true,
-          header: true,
-          label: localizations.downloadHomeTitle.replaceAll('\n', ' '),
-          child: ExcludeSemantics(
-            child: Text(localizations.downloadHomeTitle, style: titleStyle),
-          ),
+        AppPageIntro(
+          large: true,
+          title: localizations.downloadHomeTitle,
+          description: localizations.downloadHomeDescription,
         ),
-        const SizedBox(height: AppSpacing.large),
-        Text(
-          localizations.downloadHomeDescription,
-          style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
-        ),
-        const SizedBox(height: AppSpacing.xxLarge),
+        SizedBox(height: wide ? 48 : 40),
         ContentIntakeSelector(
           enabled: !busy && !uploadState.busy,
           linkLabel: localizations.linkIntakeMode,
@@ -75,7 +59,7 @@ final class DownloadHero extends StatelessWidget {
           selected: mode,
           videoLabel: localizations.videoIntakeMode,
         ),
-        const SizedBox(height: AppSpacing.large),
+        const SizedBox(height: AppSpacing.xLarge),
         if (mode == ContentIntakeMode.link)
           LinkIntakeForm(
             busy: busy,

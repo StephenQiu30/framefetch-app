@@ -14,13 +14,17 @@ final class RegistrationCodeField extends ConsumerStatefulWidget {
     required this.email,
     required this.controller,
     required this.disabled,
+    required this.verified,
     required this.onSendingChanged,
+    required this.onVerifiedChanged,
     super.key,
   });
   final String email;
   final TextEditingController controller;
   final bool disabled;
+  final bool verified;
   final ValueChanged<bool> onSendingChanged;
+  final ValueChanged<bool> onVerifiedChanged;
   @override
   ConsumerState<RegistrationCodeField> createState() =>
       _RegistrationCodeFieldState();
@@ -29,10 +33,17 @@ final class RegistrationCodeField extends ConsumerStatefulWidget {
 final class _RegistrationCodeFieldState
     extends ConsumerState<RegistrationCodeField> {
   bool _sending = false;
+  bool _verifying = false;
   bool _sent = false;
   AuthFailureKind? _failure;
   DateTime? _retryAt;
   Timer? _timer;
+  bool get _busy =>
+      widget.disabled || _sending || _verifying || widget.verified;
+  bool get _canVerify =>
+      !_busy && _sent && RegExp(r'^[0-9]{6}$').hasMatch(widget.controller.text);
+  bool get _canSend =>
+      !_busy && _remaining == 0 && isValidAuthEmail(widget.email);
   int get _remaining => _retryAt == null
       ? 0
       : ((_retryAt!.difference(DateTime.now()).inMilliseconds / 1000).ceil())
@@ -45,7 +56,7 @@ final class _RegistrationCodeFieldState
   }
 
   Future<void> _send() async {
-    if (_sending || _remaining > 0) return;
+    if (_sending || _verifying || widget.verified || _remaining > 0) return;
     final email = widget.email.trim();
     if (widget.disabled || !isValidAuthEmail(email)) return;
     setState(() {
@@ -60,6 +71,7 @@ final class _RegistrationCodeFieldState
           .sendRegistrationCode(email);
       if (!mounted) return;
       widget.controller.clear();
+      widget.onVerifiedChanged(false);
       setState(() {
         _sent = true;
         _retryAt = DateTime.now().add(
@@ -83,17 +95,55 @@ final class _RegistrationCodeFieldState
     }
   }
 
+  Future<void> _verify() async {
+    final email = widget.email.trim();
+    final code = widget.controller.text;
+    if (widget.disabled ||
+        _sending ||
+        _verifying ||
+        widget.verified ||
+        !_sent ||
+        !isValidAuthEmail(email) ||
+        !RegExp(r'^[0-9]{6}$').hasMatch(code)) {
+      return;
+    }
+    setState(() {
+      _verifying = true;
+      _failure = null;
+    });
+    widget.onSendingChanged(true);
+    try {
+      await ref
+          .read(nativeAuthGatewayProvider)
+          .verifyRegistrationCode(email: email, verificationCode: code);
+      if (mounted &&
+          widget.email.trim() == email &&
+          widget.controller.text == code) {
+        widget.onVerifiedChanged(true);
+      }
+    } on AuthRequestFailure catch (error) {
+      if (mounted) setState(() => _failure = error.kind);
+    } catch (_) {
+      if (mounted) setState(() => _failure = AuthFailureKind.unknown);
+    } finally {
+      if (mounted) {
+        setState(() => _verifying = false);
+        widget.onSendingChanged(false);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
-    final validEmail = isValidAuthEmail(widget.email);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         ShadInputFormField(
           key: const Key('register-code-field'),
           controller: widget.controller,
-          enabled: !widget.disabled,
+          enabled: !_busy,
+          onChanged: (_) => setState(() => _failure = null),
           keyboardType: TextInputType.number,
           autofillHints: const [AutofillHints.oneTimeCode],
           inputFormatters: [
@@ -107,17 +157,27 @@ final class _RegistrationCodeFieldState
           label: Text(l.verificationCodeLabel),
         ),
         const SizedBox(height: 8),
+        ShadButton(
+          key: const Key('register-verify-code-button'),
+          onPressed: _canVerify ? () => unawaited(_verify()) : null,
+          enabled: _canVerify,
+          height: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          child: Flexible(
+            child: Text(
+              widget.verified
+                  ? l.registrationEmailVerified
+                  : _verifying
+                  ? l.verifyingRegistrationEmail
+                  : l.verifyRegistrationEmail,
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
         ShadButton.outline(
           key: const Key('register-send-code-button'),
-          onPressed:
-              widget.disabled || _sending || _remaining > 0 || !validEmail
-              ? null
-              : () => unawaited(_send()),
-          enabled:
-              (widget.disabled || _sending || _remaining > 0 || !validEmail
-                  ? null
-                  : () => unawaited(_send())) !=
-              null,
+          onPressed: _canSend ? () => unawaited(_send()) : null,
+          enabled: _canSend,
           height: 0,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           child: Flexible(
@@ -136,6 +196,8 @@ final class _RegistrationCodeFieldState
             child: Text(
               _failure != null
                   ? authFailureMessage(l, _failure!)
+                  : widget.verified
+                  ? l.registrationEmailVerificationSuccess
                   : l.verificationCodeSent,
             ),
           ),

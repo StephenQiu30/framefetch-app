@@ -47,7 +47,7 @@ void main() {
       expect(sent.last['status'], 'retry_wait');
       expect(sent.last['search'], 'lesson');
       await GeneratedAdminRepository(request).fetchUsers();
-      expect(sent.last, {'page': 1, 'page_size': 20});
+      expect(sent.last, {'page': 1, 'page_size': 10});
       await GeneratedAdminRepository(
         request,
       ).fetchUsers(active: false, role: UserRole.user);

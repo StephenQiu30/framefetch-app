@@ -1,28 +1,132 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:framegrab/app/router/app_router.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
+import 'package:framegrab/features/auth/application/auth_session_controller.dart';
+import 'package:framegrab/features/history/application/download_bulk_actions.dart';
 import 'package:framegrab/features/history/application/download_history_provider.dart';
-import 'package:framegrab/features/history/presentation/download_history_item.dart';
+import 'package:framegrab/features/history/presentation/download_history_content.dart';
+import 'package:framegrab/features/history/presentation/download_presentation_labels.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
 import 'package:framegrab/shared/presentation/app_spinner.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
+import 'package:framegrab/shared/presentation/destructive_confirmation.dart';
 import 'package:framegrab/shared/presentation/list_filters.dart';
-import 'package:framegrab/shared/presentation/list_query.dart';
-import 'package:framegrab/shared/presentation/swipe_action_hint.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:video_server_api/video_server_api.dart';
 
-final class DownloadHistoryScreen extends ConsumerWidget {
+final class DownloadHistoryScreen extends ConsumerStatefulWidget {
   const DownloadHistoryScreen({this.onCreateDownload, super.key});
 
   final VoidCallback? onCreateDownload;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DownloadHistoryScreen> createState() =>
+      _DownloadHistoryScreenState();
+}
+
+final class _DownloadHistoryScreenState
+    extends ConsumerState<DownloadHistoryScreen> {
+  final Set<String> _selected = {};
+  bool _busy = false;
+  int _completed = 0;
+  int _total = 0;
+  String? _message;
+
+  Future<void> _bulk(
+    List<DownloadHistoryItemResponse> items,
+    DownloadBulkAction action,
+  ) async {
+    if (_busy || items.isEmpty) return;
+    final l = AppLocalizations.of(context);
+    final session = ref.read(authSessionProvider.notifier);
+    final generation = session.sessionGeneration;
+    if (action == DownloadBulkAction.delete) {
+      final confirmed = await showDestructiveConfirmation(
+        context: context,
+        title: '${l.bulkDelete} (${items.length})',
+        description: items.any((i) => isActiveDownloadStatus(i.status.name))
+            ? l.deleteDownloadActiveDescription
+            : l.deleteDownloadDescription,
+        cancelLabel: l.keepDownloadAction,
+        confirmLabel: l.confirmDeleteAction,
+      );
+      if (!confirmed || !mounted || generation != session.sessionGeneration) {
+        return;
+      }
+    }
+    setState(() {
+      _busy = true;
+      _message = null;
+      _completed = 0;
+      _total = items.length;
+    });
+    try {
+      final result = await ref
+          .read(downloadBulkActionsProvider)
+          .run(
+            items.map((i) => i.id).toList(),
+            action,
+            onProgress: (done, total) {
+              if (mounted) {
+                setState(() {
+                  _completed = done;
+                  _total = total;
+                });
+              }
+            },
+          );
+      if (!mounted || !result.current) return;
+      setState(() {
+        _selected.removeAll(result.completed);
+        _message =
+            '${l.bulkActionSummary}: ${result.completed.length} · ${l.failedLabel}: ${result.errors.length}';
+      });
+      ref.invalidate(downloadHistoryProvider);
+    } finally {
+      if (mounted && generation == session.sessionGeneration) {
+        setState(() => _busy = false);
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
+    ref.watch(downloadBulkActionsProvider);
+    ref.listen(downloadListQueryProvider, (_, _) {
+      _selected.clear();
+      _message = null;
+    });
+    ref.listen(authSessionProvider.select((s) => s.user?.id), (previous, next) {
+      if (previous != next) {
+        setState(() {
+          _selected.clear();
+          _message = null;
+          _busy = false;
+        });
+      }
+    });
+    ref.listen(downloadHistoryProvider, (_, next) {
+      final data = next.value;
+      final query = ref.read(downloadListQueryProvider);
+      if (data == null ||
+          data.page != query.page ||
+          data.pageSize != query.pageSize) {
+        return;
+      }
+      final last = (data.total / query.pageSize).ceil().clamp(1, 1000000);
+      if (query.page > last) {
+        unawaited(
+          Future<void>.microtask(() {
+            if (mounted) {
+              ref.read(downloadListQueryProvider.notifier).page(last);
+            }
+          }),
+        );
+      }
+    });
     final result = ref.watch(downloadHistoryProvider);
     return DataPageView(
       title: localizations.downloadHistoryNavigation,
@@ -50,7 +154,7 @@ final class DownloadHistoryScreen extends ConsumerWidget {
               .filter(status: value),
         ),
         ...result.when(
-          data: (data) => _content(context, ref, data),
+          data: (data) => _content(context, data),
           error: (error, _) => [
             DataStateMessage(
               icon: PhosphorIconsRegular.cloudSlash,
@@ -75,79 +179,28 @@ final class DownloadHistoryScreen extends ConsumerWidget {
     );
   }
 
-  List<Widget> _content(
-    BuildContext context,
-    WidgetRef ref,
-    DownloadHistoryResponse data,
-  ) {
-    final localizations = AppLocalizations.of(context);
-    if (data.items.isEmpty) {
-      return [
-        ListPagination(
-          page: ref.watch(downloadListQueryProvider).page,
-          total: data.total,
-          onPage: ref.read(downloadListQueryProvider.notifier).page,
-        ),
-        DataStateMessage(
-          title: localizations.downloadHistoryEmptyTitle,
-          description: localizations.downloadHistoryEmptyDescription,
-          actionLabel: onCreateDownload == null
-              ? null
-              : localizations.createDownloadFromHomeAction,
-          actionIcon: PhosphorIconsRegular.caretRight,
-          onAction: onCreateDownload,
-        ),
-      ];
-    }
-    final summary = data.summary;
-    return [
-      DataMetricGrid(
-        keyPrefix: 'download-summary',
-        metrics: [
-          DataMetricValue(
-            key: 'total',
-            label: localizations.totalLabel,
-            value: '${summary.total}',
-          ),
-          DataMetricValue(
-            key: 'succeeded',
-            label: localizations.succeededLabel,
-            value: '${summary.succeeded}',
-          ),
-          DataMetricValue(
-            key: 'active',
-            label: localizations.activeLabel,
-            value: '${summary.active}',
-          ),
-          DataMetricValue(
-            key: 'failed',
-            label: localizations.failedLabel,
-            value: '${summary.failed}',
-          ),
-        ],
-      ),
-      const SizedBox(height: AppSpacing.xLarge),
-      SwipeActionHint(label: localizations.downloadRowActionsHint),
-      const SizedBox(height: AppSpacing.small),
-      SlidableAutoCloseBehavior(
-        child: Column(
-          children: [
-            for (final item in data.items)
-              DownloadHistoryItem(
-                item: item,
-                onTap: () =>
-                    DownloadDetailRoute(jobId: item.id).push<void>(context),
-              ),
-          ],
-        ),
-      ),
-      ListPagination(
-        page: ref.watch(downloadListQueryProvider).page,
-        total: data.total,
-        onPage: ref.read(downloadListQueryProvider.notifier).page,
-      ),
-    ];
-  }
+  List<Widget> _content(BuildContext context, DownloadHistoryResponse data) => [
+    DownloadHistoryContent(
+      data: data,
+      selected: Set.unmodifiable(_selected),
+      busy: _busy,
+      message: _message,
+      completed: _completed,
+      total: _total,
+      onCreateDownload: widget.onCreateDownload,
+      onBulk: _bulk,
+      onSelectAll: () =>
+          setState(() => _selected.addAll(data.items.map((i) => i.id))),
+      onClear: () => setState(_selected.clear),
+      onSelected: (id, value) => setState(() {
+        if (value) {
+          _selected.add(id);
+        } else {
+          _selected.remove(id);
+        }
+      }),
+    ),
+  ];
 }
 
 String _statusLabel(DownloadStatus status, AppLocalizations l) =>

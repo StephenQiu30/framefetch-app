@@ -9,6 +9,7 @@ final downloadHistoryProvider =
           .watch(downloadHistoryRepositoryProvider)
           .fetchPage(
             page: ref.watch(downloadListQueryProvider).page,
+            pageSize: ref.watch(downloadListQueryProvider).pageSize,
             search: ref.watch(downloadListQueryProvider).search,
             status: ref.watch(downloadListQueryProvider).status == null
                 ? null

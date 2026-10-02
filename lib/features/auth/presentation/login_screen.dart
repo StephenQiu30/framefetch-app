@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:framegrab/core/routing/auth_return_location.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
 import 'package:framegrab/features/auth/application/auth_session_controller.dart';
 import 'package:framegrab/features/auth/presentation/auth_error_text.dart';
@@ -36,14 +37,19 @@ final class _LoginScreenState extends ConsumerState<LoginScreen> {
   Future<void> _submit() async {
     if (ref.read(authSessionProvider).isBusy) return;
     if (!(_formKey.currentState?.validate() ?? false)) return;
+    final returnLocation = safeAuthReturnLocation(
+      GoRouterState.of(context).uri.queryParameters['from'],
+    );
     FocusManager.instance.primaryFocus?.unfocus();
-    final success = await ref
+    final authenticated = await ref
         .read(authSessionProvider.notifier)
         .login(
           email: _emailController.text.trim(),
           password: _passwordController.text,
         );
-    if (success && mounted) context.go('/');
+    if (mounted && authenticated && ref.read(authSessionProvider).isSignedIn) {
+      context.go(returnLocation);
+    }
   }
 
   @override
@@ -51,6 +57,11 @@ final class _LoginScreenState extends ConsumerState<LoginScreen> {
     final localizations = AppLocalizations.of(context);
     final session = ref.watch(authSessionProvider);
     final failure = session.failure;
+    final from = GoRouterState.of(context).uri.queryParameters['from'];
+    final registerLocation = Uri(
+      path: '/auth/register',
+      queryParameters: from == null ? null : {'from': from},
+    ).toString();
     return AuthPageScaffold(
       title: localizations.welcomeBack,
       description: localizations.loginDescription,
@@ -118,11 +129,11 @@ final class _LoginScreenState extends ConsumerState<LoginScreen> {
                 key: const Key('go-register-button'),
                 onPressed: session.isBusy
                     ? null
-                    : () => context.pushReplacement('/auth/register'),
+                    : () => context.pushReplacement(registerLocation),
                 enabled:
                     (session.isBusy
                         ? null
-                        : () => context.pushReplacement('/auth/register')) !=
+                        : () => context.pushReplacement(registerLocation)) !=
                     null,
                 height: 0,
                 padding: const EdgeInsets.symmetric(

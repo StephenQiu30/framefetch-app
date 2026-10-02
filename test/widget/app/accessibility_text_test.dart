@@ -18,7 +18,7 @@ void main() {
       intakeLabels: const ['链接解析', '本地视频', '剧本文档'],
       intakeTitles: const ['导入本地视频', '导入剧本文档'],
       navigationLabels: const ['首页', '历史', '文档', '状态', '我的'],
-      navigationTitles: const ['把素材，\n带回本地。', '下载记录', '剧本文档', '平台状态', '我的'],
+      navigationTitles: const ['把素材，带回本地。', '下载记录', '剧本文档', '平台状态', '个人资料'],
     ),
     (
       locale: const Locale('en'),
@@ -26,11 +26,11 @@ void main() {
       intakeTitles: const ['Import a local video', 'Import a screenplay'],
       navigationLabels: const ['Home', 'History', 'Documents', 'Status', 'Me'],
       navigationTitles: const [
-        'Bring content\nback to your device.',
+        'Bring content back to your device.',
         'Download history',
         'Screenplays',
         'Provider status',
-        'Me',
+        'Profile',
       ],
     ),
   ];

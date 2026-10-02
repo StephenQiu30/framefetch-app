@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:framegrab/core/routing/auth_return_location.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
 import 'package:framegrab/features/auth/application/auth_session_controller.dart';
 import 'package:framegrab/features/auth/domain/username.dart';
@@ -30,6 +31,7 @@ final class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final _confirmController = TextEditingController();
   final _codeController = TextEditingController();
   bool _sendingCode = false;
+  bool _emailVerified = false;
   bool _obscurePassword = true;
 
   @override
@@ -43,10 +45,17 @@ final class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   Future<void> _submit() async {
-    if (ref.read(authSessionProvider).isBusy || _sendingCode) return;
+    if (ref.read(authSessionProvider).isBusy ||
+        _sendingCode ||
+        !_emailVerified) {
+      return;
+    }
     if (!(_formKey.currentState?.validate() ?? false)) return;
+    final returnLocation = safeAuthReturnLocation(
+      GoRouterState.of(context).uri.queryParameters['from'],
+    );
     FocusManager.instance.primaryFocus?.unfocus();
-    final success = await ref
+    final authenticated = await ref
         .read(authSessionProvider.notifier)
         .register(
           verificationCode: _codeController.text,
@@ -54,7 +63,9 @@ final class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           email: _emailController.text.trim(),
           password: _passwordController.text,
         );
-    if (success && mounted) context.go('/');
+    if (mounted && authenticated && ref.read(authSessionProvider).isSignedIn) {
+      context.go(returnLocation);
+    }
   }
 
   @override
@@ -62,6 +73,11 @@ final class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     final localizations = AppLocalizations.of(context);
     final session = ref.watch(authSessionProvider);
     final failure = session.failure;
+    final from = GoRouterState.of(context).uri.queryParameters['from'];
+    final loginLocation = Uri(
+      path: '/auth/login',
+      queryParameters: from == null ? null : {'from': from},
+    ).toString();
     return AuthPageScaffold(
       title: localizations.createAccountTitle,
       description: localizations.registerDescription,
@@ -87,6 +103,9 @@ final class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 enabled: !session.isBusy && !_sendingCode,
                 onChanged: (_) => setState(() {
                   _codeController.clear();
+                  _emailVerified = false;
+                  _passwordController.clear();
+                  _confirmController.clear();
                 }),
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -102,43 +121,50 @@ final class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 email: _emailController.text,
                 controller: _codeController,
                 disabled: session.isBusy,
+                verified: _emailVerified,
+                onVerifiedChanged: (verified) =>
+                    setState(() => _emailVerified = verified),
                 onSendingChanged: (sending) =>
                     setState(() => _sendingCode = sending),
               ),
-              const SizedBox(height: AppSpacing.small),
-              PasswordField(
-                newPassword: true,
-                controller: _passwordController,
-                label: localizations.passwordLabel,
-                fieldKey: const Key('register-password-field'),
-                obscure: _obscurePassword,
-                onToggle: () {
-                  setState(() => _obscurePassword = !_obscurePassword);
-                },
-                validator: (value) => validateAuthPassword(
-                  value,
-                  localizations,
-                  registering: true,
+              if (_emailVerified) ...[
+                const SizedBox(height: AppSpacing.small),
+                Text(localizations.registrationPasswordPrompt),
+                const SizedBox(height: AppSpacing.small),
+                PasswordField(
+                  newPassword: true,
+                  controller: _passwordController,
+                  label: localizations.passwordLabel,
+                  fieldKey: const Key('register-password-field'),
+                  obscure: _obscurePassword,
+                  onToggle: () {
+                    setState(() => _obscurePassword = !_obscurePassword);
+                  },
+                  validator: (value) => validateAuthPassword(
+                    value,
+                    localizations,
+                    registering: true,
+                  ),
                 ),
-              ),
-              const SizedBox(height: AppSpacing.small),
-              PasswordField(
-                newPassword: true,
-                controller: _confirmController,
-                label: localizations.confirmPasswordLabel,
-                fieldKey: const Key('register-confirm-field'),
-                obscure: _obscurePassword,
-                onToggle: () {
-                  setState(() => _obscurePassword = !_obscurePassword);
-                },
-                validator: (value) => (value ?? '').isEmpty
-                    ? localizations.requiredConfirmPassword
-                    : value == _passwordController.text
-                    ? null
-                    : localizations.passwordMismatch,
-                textInputAction: TextInputAction.done,
-                onFieldSubmitted: (_) => unawaited(_submit()),
-              ),
+                const SizedBox(height: AppSpacing.small),
+                PasswordField(
+                  newPassword: true,
+                  controller: _confirmController,
+                  label: localizations.confirmPasswordLabel,
+                  fieldKey: const Key('register-confirm-field'),
+                  obscure: _obscurePassword,
+                  onToggle: () {
+                    setState(() => _obscurePassword = !_obscurePassword);
+                  },
+                  validator: (value) => (value ?? '').isEmpty
+                      ? localizations.requiredConfirmPassword
+                      : value == _passwordController.text
+                      ? null
+                      : localizations.passwordMismatch,
+                  textInputAction: TextInputAction.done,
+                  onFieldSubmitted: (_) => unawaited(_submit()),
+                ),
+              ],
               const SizedBox(height: AppSpacing.medium),
               AuthErrorText(
                 message: failure == null
@@ -146,39 +172,40 @@ final class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     : authFailureMessage(localizations, failure),
               ),
               if (failure != null) const SizedBox(height: AppSpacing.medium),
-              ShadButton(
-                key: const Key('register-submit-button'),
-                onPressed: session.isBusy || _sendingCode
-                    ? null
-                    : () => unawaited(_submit()),
-                enabled:
-                    (session.isBusy || _sendingCode
-                        ? null
-                        : () => unawaited(_submit())) !=
-                    null,
-                height: 0,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 12,
-                ),
-                child: Flexible(
-                  child: Text(
-                    session.phase == AuthSessionPhase.submitting
-                        ? localizations.registerSubmitting
-                        : localizations.registerSubmit,
+              if (_emailVerified)
+                ShadButton(
+                  key: const Key('register-submit-button'),
+                  onPressed: session.isBusy || _sendingCode
+                      ? null
+                      : () => unawaited(_submit()),
+                  enabled:
+                      (session.isBusy || _sendingCode
+                          ? null
+                          : () => unawaited(_submit())) !=
+                      null,
+                  height: 0,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 12,
+                  ),
+                  child: Flexible(
+                    child: Text(
+                      session.phase == AuthSessionPhase.submitting
+                          ? localizations.registerSubmitting
+                          : localizations.registerSubmit,
+                    ),
                   ),
                 ),
-              ),
               const SizedBox(height: AppSpacing.small),
               ShadButton.ghost(
                 key: const Key('go-login-button'),
                 onPressed: session.isBusy
                     ? null
-                    : () => context.pushReplacement('/auth/login'),
+                    : () => context.pushReplacement(loginLocation),
                 enabled:
                     (session.isBusy
                         ? null
-                        : () => context.pushReplacement('/auth/login')) !=
+                        : () => context.pushReplacement(loginLocation)) !=
                     null,
                 height: 0,
                 padding: const EdgeInsets.symmetric(

@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**refreshNativeSession**](AppAuthApi.md#refreshnativesession) | **POST** /api/app/v1/auth/refresh | 轮换原生应用会话
 [**registerNativeUser**](AppAuthApi.md#registernativeuser) | **POST** /api/app/v1/auth/register | 注册原生应用用户
 [**sendNativeRegistrationCode**](AppAuthApi.md#sendnativeregistrationcode) | **POST** /api/app/v1/auth/registration-code | 发送注册邮箱验证码
+[**verifyNativeRegistrationCode**](AppAuthApi.md#verifynativeregistrationcode) | **POST** /api/app/v1/auth/registration-code/verify | 验证注册邮箱验证码
 
 
 # **getNativeCurrentUser**
@@ -246,6 +247,47 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RegistrationCodeResponse**](RegistrationCodeResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **verifyNativeRegistrationCode**
+> RegistrationCodeVerificationResponse verifyNativeRegistrationCode(registrationCodeVerificationRequest)
+
+验证注册邮箱验证码
+
+### Example
+```dart
+import 'package:video_server_api/api.dart';
+
+final api = VideoServerApi().getAppAuthApi();
+final RegistrationCodeVerificationRequest registrationCodeVerificationRequest = ; // RegistrationCodeVerificationRequest |
+
+try {
+    final response = api.verifyNativeRegistrationCode(registrationCodeVerificationRequest);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling AppAuthApi->verifyNativeRegistrationCode: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **registrationCodeVerificationRequest** | [**RegistrationCodeVerificationRequest**](RegistrationCodeVerificationRequest.md)|  |
+
+### Return type
+
+[**RegistrationCodeVerificationResponse**](RegistrationCodeVerificationResponse.md)
 
 ### Authorization
 

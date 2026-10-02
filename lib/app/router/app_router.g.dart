@@ -9,13 +9,20 @@ part of 'app_router.dart';
 List<RouteBase> get $appRoutes => [
   $adminHomeRoute,
   $adminAnalyticsRoute,
+  $adminOperationLogsRoute,
   $adminFilesRoute,
   $adminUsersRoute,
   $adminProvidersRoute,
   $adminAiProvidersRoute,
   $downloadHomeRoute,
   $publicGuideRoute,
+  $inspectionWorkspaceRoute,
   $downloadDetailRoute,
+  $activityHistoryRoute,
+  $inspectionResultRoute,
+  $analysisDetailRoute,
+  $selfHostingRoute,
+  $aboutRoute,
   $documentDetailRoute,
   $loginRoute,
   $sessionRestoreRoute,
@@ -61,6 +68,33 @@ mixin $AdminAnalyticsRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/admin/analytics');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $adminOperationLogsRoute => GoRouteData.$route(
+  path: '/admin/operation-logs',
+  hasOverriddenOnExit: false,
+  factory: $AdminOperationLogsRoute._fromState,
+);
+
+mixin $AdminOperationLogsRoute on GoRouteData {
+  static AdminOperationLogsRoute _fromState(GoRouterState state) =>
+      const AdminOperationLogsRoute();
+
+  @override
+  String get location => GoRouteData.$location('/admin/operation-logs');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -238,6 +272,33 @@ mixin $PublicGuideRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
+RouteBase get $inspectionWorkspaceRoute => GoRouteData.$route(
+  path: '/downloads/new',
+  hasOverriddenOnExit: false,
+  factory: $InspectionWorkspaceRoute._fromState,
+);
+
+mixin $InspectionWorkspaceRoute on GoRouteData {
+  static InspectionWorkspaceRoute _fromState(GoRouterState state) =>
+      const InspectionWorkspaceRoute();
+
+  @override
+  String get location => GoRouteData.$location('/downloads/new');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
 RouteBase get $downloadDetailRoute => GoRouteData.$route(
   path: '/downloads/:jobId',
   hasOverriddenOnExit: false,
@@ -253,6 +314,148 @@ mixin $DownloadDetailRoute on GoRouteData {
   @override
   String get location =>
       GoRouteData.$location('/downloads/${Uri.encodeComponent(_self.jobId)}');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $activityHistoryRoute => GoRouteData.$route(
+  path: '/history/activity',
+  hasOverriddenOnExit: false,
+  factory: $ActivityHistoryRoute._fromState,
+);
+
+mixin $ActivityHistoryRoute on GoRouteData {
+  static ActivityHistoryRoute _fromState(GoRouterState state) =>
+      const ActivityHistoryRoute();
+
+  @override
+  String get location => GoRouteData.$location('/history/activity');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $inspectionResultRoute => GoRouteData.$route(
+  path: '/download-intents/:intentId',
+  hasOverriddenOnExit: false,
+  factory: $InspectionResultRoute._fromState,
+);
+
+mixin $InspectionResultRoute on GoRouteData {
+  static InspectionResultRoute _fromState(GoRouterState state) =>
+      InspectionResultRoute(intentId: state.pathParameters['intentId']!);
+
+  InspectionResultRoute get _self => this as InspectionResultRoute;
+
+  @override
+  String get location => GoRouteData.$location(
+    '/download-intents/${Uri.encodeComponent(_self.intentId)}',
+  );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $analysisDetailRoute => GoRouteData.$route(
+  path: '/analyses/:analysisId',
+  hasOverriddenOnExit: false,
+  factory: $AnalysisDetailRoute._fromState,
+);
+
+mixin $AnalysisDetailRoute on GoRouteData {
+  static AnalysisDetailRoute _fromState(GoRouterState state) =>
+      AnalysisDetailRoute(analysisId: state.pathParameters['analysisId']!);
+
+  AnalysisDetailRoute get _self => this as AnalysisDetailRoute;
+
+  @override
+  String get location => GoRouteData.$location(
+    '/analyses/${Uri.encodeComponent(_self.analysisId)}',
+  );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $selfHostingRoute => GoRouteData.$route(
+  path: '/self-hosting',
+  hasOverriddenOnExit: false,
+  factory: $SelfHostingRoute._fromState,
+);
+
+mixin $SelfHostingRoute on GoRouteData {
+  static SelfHostingRoute _fromState(GoRouterState state) =>
+      const SelfHostingRoute();
+
+  @override
+  String get location => GoRouteData.$location('/self-hosting');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $aboutRoute => GoRouteData.$route(
+  path: '/about',
+  hasOverriddenOnExit: false,
+  factory: $AboutRoute._fromState,
+);
+
+mixin $AboutRoute on GoRouteData {
+  static AboutRoute _fromState(GoRouterState state) => const AboutRoute();
+
+  @override
+  String get location => GoRouteData.$location('/about');
 
   @override
   void go(BuildContext context) => context.go(location);

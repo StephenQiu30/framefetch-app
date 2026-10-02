@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
+import 'package:framegrab/features/analysis/presentation/analysis_result_details.dart';
 import 'package:framegrab/features/analysis/presentation/video_analysis_section.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
 import 'package:framegrab/shared/presentation/app_dropdown_field.dart';
@@ -13,10 +14,12 @@ final class VideoAnalysisResultView extends StatefulWidget {
   const VideoAnalysisResultView({
     required this.reportMarkdown,
     required this.result,
+    this.analysisId,
     super.key,
   });
 
   final String? reportMarkdown;
+  final String? analysisId;
   final VideoAnalysisResultResponse result;
 
   @override
@@ -84,6 +87,15 @@ final class _VideoAnalysisResultViewState
         ),
         const SizedBox(height: AppSpacing.xSmall),
         SelectableText(result.productionAdvice.summary),
+        const SizedBox(height: AppSpacing.large),
+        AnalysisStringList(
+          title: l10n.analysisPriorityShots,
+          items: result.productionAdvice.priorityShotIds,
+        ),
+        AnalysisStringList(
+          title: l10n.analysisRecommendedExtensions,
+          items: result.productionAdvice.recommendedExtensions,
+        ),
         const SizedBox(height: AppSpacing.xLarge),
         AppDropdownField<_VisualResultSection>(
           key: const Key('analysis-result-section'),
@@ -104,6 +116,7 @@ final class _VideoAnalysisResultViewState
         VideoAnalysisSection(
           key: ValueKey(_section),
           reportMarkdown: widget.reportMarkdown,
+          analysisId: widget.analysisId,
           result: result,
           section: _section.name,
         ),

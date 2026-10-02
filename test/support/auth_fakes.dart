@@ -81,6 +81,12 @@ final class FakeAuthGateway implements NativeAuthGateway {
       );
 
   @override
+  Future<void> verifyRegistrationCode({
+    required String email,
+    required String verificationCode,
+  }) async => _throwIfNeeded();
+
+  @override
   Future<NativeSessionResponse> register({
     required String verificationCode,
     required String username,
