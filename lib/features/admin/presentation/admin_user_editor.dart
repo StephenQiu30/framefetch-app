@@ -140,7 +140,6 @@ final class _AdminUserEditorState extends ConsumerState<AdminUserEditor> {
           onChanged: (value) => setState(() => _active = value),
         ),
         Text(l.adminQuotaTitle, style: ShadTheme.of(context).textTheme.h4),
-        Text(l.adminQuotaDescription),
         ShadSwitch(
           value: _exempt,
           label: Text(l.adminQuotaExempt),

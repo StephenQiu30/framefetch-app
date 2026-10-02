@@ -26,6 +26,8 @@ void main() {
     );
     expect(find.text('选择本页'), findsNothing);
     expect(find.textContaining('批量删除'), findsNothing);
+    expect(find.text('向左轻扫可管理剧本文档。'), findsNothing);
+    expect(find.text('查看导入状态、解析信息和剧本正文。'), findsNothing);
     expect(find.byType(ListPagination), findsOneWidget);
     final item = find.byKey(const Key('document-list-item-$id'));
     for (final value in ['真实剧本', 'framegrab.docx']) {

@@ -6,7 +6,6 @@ import 'package:framegrab/features/admin/presentation/admin_trend_chart.dart';
 import 'package:framegrab/features/admin/presentation/analytics_chart_point.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:video_server_api/video_server_api.dart';
 
 final class AdminAnalysisAnalyticsContent extends StatelessWidget {
@@ -17,10 +16,7 @@ final class AdminAnalysisAnalyticsContent extends StatelessWidget {
     final l = AppLocalizations.of(context);
     final summary = data.summary;
     if (summary.total == 0) {
-      return DataStateMessage(
-        title: l.adminAnalysisEmpty,
-        description: l.adminAnalysisEmptyDescription,
-      );
+      return DataStateMessage(title: l.adminAnalysisEmpty);
     }
     final decided = summary.succeeded + summary.failed;
     final points = [
@@ -58,11 +54,6 @@ final class AdminAnalysisAnalyticsContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          l.adminAnalysisScopeHint,
-          style: ShadTheme.of(context).textTheme.muted,
-        ),
-        const SizedBox(height: AppSpacing.medium),
         AdminTrendChart(points: points, title: l.adminAnalysisTrendTitle),
         const SizedBox(height: AppSpacing.section),
         AdminAnalyticsMetrics(

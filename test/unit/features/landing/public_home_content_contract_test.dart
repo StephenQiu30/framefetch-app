@@ -3,7 +3,7 @@ import 'package:framegrab/features/landing/domain/public_home_links.dart';
 import 'package:framegrab/l10n/app_localizations_zh.dart';
 
 void main() {
-  test('matches the Web public project introduction content baseline', () {
+  test('retains public product and self-hosting content', () {
     final l10n = AppLocalizationsZh();
 
     expect(l10n.publicHomeEyebrow, '帧取 FrameFetch · 开源视频工作流');
@@ -12,9 +12,7 @@ void main() {
       l10n.publicHomeDescription,
       '开源、自托管地完成公开视频解析、本地视频与剧本文档导入、制品管理和 AI 分析。数据与运行边界由你掌控。',
     );
-    expect(l10n.publicWorkflowTitle, '一套可审计的完整链路');
     expect(l10n.publicWorkflowEyebrow, '工作流');
-    expect(l10n.publicWorkflowDescription, '从识别到交付，每一步都有明确边界。');
     expect(
       [
         (
@@ -38,12 +36,7 @@ void main() {
         ('交付', '通过授权短时入口预览或获取制品'),
       ],
     );
-    expect(l10n.publicCapabilitiesEyebrow, '核心功能');
     expect(l10n.publicHomeCapabilitiesTitle, '视频解析、剧本处理与 AI 分析');
-    expect(
-      l10n.publicHomeCapabilitiesDescription,
-      'Web 控制面、API 与 Worker 共享同一套权限、任务和制品模型，适合个人本地使用，也便于团队自托管。',
-    );
     expect(
       [
         (l10n.publicVideoTitle, l10n.publicVideoDescription),
@@ -56,27 +49,13 @@ void main() {
         ('结构化 AI 视频分析', '围绕场景、分镜、高光和内容资产生成结构化结果与运行证据。'),
       ],
     );
-    expect(l10n.publicTrustTitle, '开源，不交出数据控制权');
+    expect(l10n.publicTrustEyebrow, '自托管架构');
     expect(
       l10n.publicTrustDescription,
       'FastAPI、Next.js、PostgreSQL、RabbitMQ、MinIO、FFmpeg 与 yt-dlp 组成可独立部署的工作流。MIT 许可证允许你免费检查、修改和自托管。',
     );
-    expect(
-      [
-        l10n.publicSafeguardSession,
-        l10n.publicSafeguardWorkers,
-        l10n.publicSafeguardArtifacts,
-        l10n.publicSafeguardAuthorization,
-      ],
-      [
-        '浏览器会话采用 HttpOnly Cookie；原生客户端使用可轮换令牌。',
-        '下载、导入与 AI 分析通过独立队列和 Worker 执行。',
-        '短时制品入口、所有者隔离与授权边界贯穿完整链路。',
-        '公开视频并不等于可自由使用，请仅处理已获授权的内容。',
-      ],
-    );
-    expect(l10n.publicSafetyTitle, '运行与授权边界');
-    expect(l10n.publicFaqTitle, '开始使用前，先了解这些');
+    expect(l10n.publicSafeguardAuthorization, '公开视频并不等于可自由使用，请仅处理已获授权的内容。');
+    expect(l10n.publicFaqEyebrow, '常见问题');
     expect(
       [
         l10n.publicFaqWhatQuestion,
@@ -97,10 +76,6 @@ void main() {
     );
     expect(l10n.publicGuideAction, '阅读视频分析与自托管使用指南');
     expect(l10n.publicStartTitle, '在自己的基础设施上运行 FrameFetch');
-    expect(
-      l10n.publicStartDescription,
-      '从仓库的 Quick Start、架构文档和安全边界开始，按需启用媒体解析、剧本工作流与 AI 服务。',
-    );
   });
 
   test('uses the Web repository as the shared project source', () {

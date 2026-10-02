@@ -81,7 +81,7 @@ final class _CatalogEditorState extends ConsumerState<_CatalogEditor> {
       title: widget.item == null ? l.createPlatform : l.editAction,
       onSave: _save,
       fields: [
-        Text(l.catalogScopeDescription),
+        if (widget.item == null) Text(l.catalogScopeDescription),
         ShadInputFormField(
           controller: _key,
           enabled: widget.item == null,

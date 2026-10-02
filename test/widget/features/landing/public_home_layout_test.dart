@@ -27,7 +27,10 @@ void main() {
     expect(title.data, '把素材，\n带回本地。');
     expect(title.style?.fontSize, 40);
     expect(find.text('工作流'), findsOneWidget);
-    expect(find.text('从识别到交付，每一步都有明确边界。'), findsOneWidget);
+    expect(find.text('从识别到交付，每一步都有明确边界。'), findsNothing);
+    expect(find.text('识别公开媒体或文章中的候选视频'), findsOneWidget);
+    expect(find.text('浏览器会话采用 HttpOnly Cookie；原生客户端使用可轮换令牌。'), findsNothing);
+    expect(find.text('公开视频并不等于可自由使用，请仅处理已获授权的内容。'), findsOneWidget);
 
     final first = tester.getRect(
       find.byKey(const Key('public-home-capability-0')),

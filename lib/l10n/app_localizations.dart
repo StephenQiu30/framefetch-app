@@ -164,35 +164,11 @@ abstract class AppLocalizations {
   /// **'我的'**
   String get accountNavigation;
 
-  /// No description provided for @downloadHistoryDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'继续查看、获取或分析已创建的任务。'**
-  String get downloadHistoryDescription;
-
   /// No description provided for @downloadRowActionsHint.
   ///
   /// In zh, this message translates to:
   /// **'向左轻扫可查看任务操作。'**
   String get downloadRowActionsHint;
-
-  /// No description provided for @screenplayDocumentsDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'查看导入状态、解析信息和剧本正文。'**
-  String get screenplayDocumentsDescription;
-
-  /// No description provided for @documentRowActionsHint.
-  ///
-  /// In zh, this message translates to:
-  /// **'向左轻扫可管理剧本文档。'**
-  String get documentRowActionsHint;
-
-  /// No description provided for @providerStatusDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'这里展示平台的接入与身份要求。下载是否成功以实际文件结果为准。'**
-  String get providerStatusDescription;
 
   /// No description provided for @loadingData.
   ///
@@ -283,12 +259,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'还没有下载记录'**
   String get downloadHistoryEmptyTitle;
-
-  /// No description provided for @downloadHistoryEmptyDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'从首页解析链接或导入本地视频后，下载任务会显示在这里。'**
-  String get downloadHistoryEmptyDescription;
 
   /// No description provided for @createDownloadFromHomeAction.
   ///
@@ -386,12 +356,6 @@ abstract class AppLocalizations {
   /// **'还没有剧本文档'**
   String get documentEmptyTitle;
 
-  /// No description provided for @documentEmptyDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'从首页上传剧本文档后，可在这里查看解析状态与正文。'**
-  String get documentEmptyDescription;
-
   /// No description provided for @goToScreenplayUploadAction.
   ///
   /// In zh, this message translates to:
@@ -451,12 +415,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'文档详情'**
   String get screenplayDocumentDetailNavigation;
-
-  /// No description provided for @screenplayDocumentDetailDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'查看导入信息、解析摘要和规范化剧本。'**
-  String get screenplayDocumentDetailDescription;
 
   /// No description provided for @documentInformationTitle.
   ///
@@ -728,12 +686,6 @@ abstract class AppLocalizations {
   /// **'暂无平台状态'**
   String get providerEmptyTitle;
 
-  /// No description provided for @providerEmptyDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'服务端当前没有公开的平台能力记录，请稍后刷新。'**
-  String get providerEmptyDescription;
-
   /// No description provided for @downloadAvailableLabel.
   ///
   /// In zh, this message translates to:
@@ -811,12 +763,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'播放列表'**
   String get capabilityPlaylist;
-
-  /// No description provided for @accountDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'管理用户名与头像；管理员还可调整账户身份。'**
-  String get accountDescription;
 
   /// No description provided for @appearanceSection.
   ///
@@ -902,12 +848,6 @@ abstract class AppLocalizations {
   /// **'查看源代码'**
   String get publicSourceAction;
 
-  /// No description provided for @publicWorkflowTitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'一套可审计的完整链路'**
-  String get publicWorkflowTitle;
-
   /// No description provided for @publicWorkflowInspectTitle.
   ///
   /// In zh, this message translates to:
@@ -956,29 +896,11 @@ abstract class AppLocalizations {
   /// **'通过授权短时入口预览或获取制品'**
   String get publicWorkflowDeliverDescription;
 
-  /// No description provided for @publicCapabilitiesEyebrow.
-  ///
-  /// In zh, this message translates to:
-  /// **'核心功能'**
-  String get publicCapabilitiesEyebrow;
-
   /// No description provided for @publicHomeCapabilitiesTitle.
   ///
   /// In zh, this message translates to:
   /// **'视频解析、剧本处理与 AI 分析'**
   String get publicHomeCapabilitiesTitle;
-
-  /// No description provided for @publicHomeCapabilitiesDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'Web 控制面、API 与 Worker 共享同一套权限、任务和制品模型，适合个人本地使用，也便于团队自托管。'**
-  String get publicHomeCapabilitiesDescription;
-
-  /// No description provided for @publicVideoEyebrow.
-  ///
-  /// In zh, this message translates to:
-  /// **'公开视频'**
-  String get publicVideoEyebrow;
 
   /// No description provided for @publicVideoTitle.
   ///
@@ -992,12 +914,6 @@ abstract class AppLocalizations {
   /// **'解析有权处理的公开链接，选择真实可用格式，并跟踪下载与最终制品。'**
   String get publicVideoDescription;
 
-  /// No description provided for @publicDocumentEyebrow.
-  ///
-  /// In zh, this message translates to:
-  /// **'剧本文档'**
-  String get publicDocumentEyebrow;
-
   /// No description provided for @publicDocumentTitle.
   ///
   /// In zh, this message translates to:
@@ -1009,12 +925,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'导入获授权的剧本文档，在同一工作区完成规范化、分析与处理记录。'**
   String get publicDocumentDescription;
-
-  /// No description provided for @publicAnalysisEyebrow.
-  ///
-  /// In zh, this message translates to:
-  /// **'AI 分析'**
-  String get publicAnalysisEyebrow;
 
   /// No description provided for @publicAnalysisTitle.
   ///
@@ -1034,35 +944,11 @@ abstract class AppLocalizations {
   /// **'自托管架构'**
   String get publicTrustEyebrow;
 
-  /// No description provided for @publicTrustTitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'开源，不交出数据控制权'**
-  String get publicTrustTitle;
-
   /// No description provided for @publicTrustDescription.
   ///
   /// In zh, this message translates to:
   /// **'FastAPI、Next.js、PostgreSQL、RabbitMQ、MinIO、FFmpeg 与 yt-dlp 组成可独立部署的工作流。MIT 许可证允许你免费检查、修改和自托管。'**
   String get publicTrustDescription;
-
-  /// No description provided for @publicSafeguardSession.
-  ///
-  /// In zh, this message translates to:
-  /// **'浏览器会话采用 HttpOnly Cookie；原生客户端使用可轮换令牌。'**
-  String get publicSafeguardSession;
-
-  /// No description provided for @publicSafeguardWorkers.
-  ///
-  /// In zh, this message translates to:
-  /// **'下载、导入与 AI 分析通过独立队列和 Worker 执行。'**
-  String get publicSafeguardWorkers;
-
-  /// No description provided for @publicSafeguardArtifacts.
-  ///
-  /// In zh, this message translates to:
-  /// **'短时制品入口、所有者隔离与授权边界贯穿完整链路。'**
-  String get publicSafeguardArtifacts;
 
   /// No description provided for @publicSafeguardAuthorization.
   ///
@@ -1070,41 +956,11 @@ abstract class AppLocalizations {
   /// **'公开视频并不等于可自由使用，请仅处理已获授权的内容。'**
   String get publicSafeguardAuthorization;
 
-  /// No description provided for @publicSafetyEyebrow.
-  ///
-  /// In zh, this message translates to:
-  /// **'安全边界'**
-  String get publicSafetyEyebrow;
-
-  /// No description provided for @publicSafetyTitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'运行与授权边界'**
-  String get publicSafetyTitle;
-
-  /// No description provided for @publicSafetyDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'把访问、执行和交付拆成可检查的边界。'**
-  String get publicSafetyDescription;
-
   /// No description provided for @publicFaqEyebrow.
   ///
   /// In zh, this message translates to:
   /// **'常见问题'**
   String get publicFaqEyebrow;
-
-  /// No description provided for @publicFaqTitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'开始使用前，先了解这些'**
-  String get publicFaqTitle;
-
-  /// No description provided for @publicFaqDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'了解输入、分析结果、运行成本与移动端支持范围。'**
-  String get publicFaqDescription;
 
   /// No description provided for @publicFaqWhatQuestion.
   ///
@@ -1184,23 +1040,11 @@ abstract class AppLocalizations {
   /// **'阅读视频分析与自托管使用指南'**
   String get publicGuideAction;
 
-  /// No description provided for @publicStartEyebrow.
-  ///
-  /// In zh, this message translates to:
-  /// **'快速开始'**
-  String get publicStartEyebrow;
-
   /// No description provided for @publicStartTitle.
   ///
   /// In zh, this message translates to:
   /// **'在自己的基础设施上运行 FrameFetch'**
   String get publicStartTitle;
-
-  /// No description provided for @publicStartDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'从仓库的 Quick Start、架构文档和安全边界开始，按需启用媒体解析、剧本工作流与 AI 服务。'**
-  String get publicStartDescription;
 
   /// No description provided for @publicDeploymentAction.
   ///
@@ -1219,18 +1063,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'从素材到分析报告'**
   String get publicGuideTitle;
-
-  /// No description provided for @publicGuideDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'了解 FrameFetch 如何导入授权视频与剧本文档、执行 AI 分镜分析并导出 Markdown / DOCX 报告，以及 Web、Flutter 客户端和自托管服务端的分工。'**
-  String get publicGuideDescription;
-
-  /// No description provided for @publicGuideNotice.
-  ///
-  /// In zh, this message translates to:
-  /// **'本指南介绍当前产品流程。配置与实现以链接的仓库文档为准，实例可用性以实际检查结果为准。'**
-  String get publicGuideNotice;
 
   /// No description provided for @publicGuideVideoTitle.
   ///
@@ -1376,12 +1208,6 @@ abstract class AppLocalizations {
   /// **'任务详情'**
   String get downloadDetailNavigation;
 
-  /// No description provided for @downloadDetailDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'查看任务当前执行状态、文件可用性与处理信息。'**
-  String get downloadDetailDescription;
-
   /// No description provided for @sourceLabel.
   ///
   /// In zh, this message translates to:
@@ -1502,23 +1328,11 @@ abstract class AppLocalizations {
   /// **'欢迎回来'**
   String get welcomeBack;
 
-  /// No description provided for @loginDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'使用你的帧取账户继续管理下载、文档与分析。'**
-  String get loginDescription;
-
   /// No description provided for @createAccountTitle.
   ///
   /// In zh, this message translates to:
   /// **'创建你的帧取账户'**
   String get createAccountTitle;
-
-  /// No description provided for @registerDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'验证邮箱后创建账户，保存和管理你的下载、文档与分析。'**
-  String get registerDescription;
 
   /// No description provided for @emailLabel.
   ///
@@ -1597,18 +1411,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'返回登录'**
   String get goLogin;
-
-  /// No description provided for @noAccountPrompt.
-  ///
-  /// In zh, this message translates to:
-  /// **'还没有账户？'**
-  String get noAccountPrompt;
-
-  /// No description provided for @hasAccountPrompt.
-  ///
-  /// In zh, this message translates to:
-  /// **'已有账户？'**
-  String get hasAccountPrompt;
 
   /// No description provided for @invalidEmail.
   ///
@@ -1718,12 +1520,6 @@ abstract class AppLocalizations {
   /// **'把素材，带回本地。'**
   String get downloadHomeTitle;
 
-  /// No description provided for @downloadHomeDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'解析公开视频、图片与合集链接，或上传本地视频与剧本文档。'**
-  String get downloadHomeDescription;
-
   /// No description provided for @linkIntakeMode.
   ///
   /// In zh, this message translates to:
@@ -1754,12 +1550,6 @@ abstract class AppLocalizations {
   /// **'导入本地视频'**
   String get videoIntakeTitle;
 
-  /// No description provided for @videoIntakeDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'选择你拥有或已获授权的 MP4 视频，服务端完成隔离校验后进入下载记录与 AI 分析。'**
-  String get videoIntakeDescription;
-
   /// No description provided for @selectVideoFile.
   ///
   /// In zh, this message translates to:
@@ -1777,12 +1567,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'导入剧本文档'**
   String get screenplayIntakeTitle;
-
-  /// No description provided for @screenplayIntakeDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'选择 DOCX、PDF、TXT、Markdown 或 Fountain 文件，服务端会生成可分析和改写的规范化预览。'**
-  String get screenplayIntakeDescription;
 
   /// No description provided for @selectScreenplayFile.
   ///
@@ -1916,12 +1700,6 @@ abstract class AppLocalizations {
   /// **'暂无已登记能力'**
   String get providerNoCapabilities;
 
-  /// No description provided for @providerFileResultHint.
-  ///
-  /// In zh, this message translates to:
-  /// **'下载结果以实际文件为准。'**
-  String get providerFileResultHint;
-
   /// No description provided for @intentQueued.
   ///
   /// In zh, this message translates to:
@@ -2030,12 +1808,6 @@ abstract class AppLocalizations {
   /// **'选择下载格式'**
   String get formatSelectionTitle;
 
-  /// No description provided for @formatSelectionDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'格式来自本次真实解析结果，创建后可在下载记录查看进度。'**
-  String get formatSelectionDescription;
-
   /// No description provided for @createDownloadAction.
   ///
   /// In zh, this message translates to:
@@ -2053,12 +1825,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'选择文章中的视频'**
   String get sourceCandidatesTitle;
-
-  /// No description provided for @sourceCandidatesDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'该文章包含多个媒体来源，请明确选择要处理的视频。'**
-  String get sourceCandidatesDescription;
 
   /// No description provided for @sourceCandidatesEmpty.
   ///
@@ -2228,23 +1994,11 @@ abstract class AppLocalizations {
   /// **'AI 智能分析'**
   String get aiAnalysisTitle;
 
-  /// No description provided for @aiAnalysisDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'由 AI 观察视频画面，生成连续分镜、视觉高光、资产目录，或将视频整理成文章。'**
-  String get aiAnalysisDescription;
-
   /// No description provided for @screenplayAnalysisTitle.
   ///
   /// In zh, this message translates to:
   /// **'剧本分析与改写'**
   String get screenplayAnalysisTitle;
-
-  /// No description provided for @screenplayAnalysisDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'选择综合分析、结构审阅或中英文改写；任务绑定当前规范化剧本，不会修改原文。'**
-  String get screenplayAnalysisDescription;
 
   /// No description provided for @analysisSkillLabel.
   ///
@@ -2786,23 +2540,11 @@ abstract class AppLocalizations {
   /// **'管理中心'**
   String get adminCenterTitle;
 
-  /// No description provided for @adminCenterDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'查看全局运行数据，并处理高频管理事项。'**
-  String get adminCenterDescription;
-
   /// No description provided for @adminAnalyticsTitle.
   ///
   /// In zh, this message translates to:
   /// **'使用统计'**
   String get adminAnalyticsTitle;
-
-  /// No description provided for @adminAnalyticsDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'查看下载表现与 AI 分析执行情况。'**
-  String get adminAnalyticsDescription;
 
   /// No description provided for @adminFilesTitle.
   ///
@@ -2810,23 +2552,11 @@ abstract class AppLocalizations {
   /// **'文件管理'**
   String get adminFilesTitle;
 
-  /// No description provided for @adminFilesDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'查看已保存文件的类型、大小和创建时间，或删除单个文件。'**
-  String get adminFilesDescription;
-
   /// No description provided for @adminUsersTitle.
   ///
   /// In zh, this message translates to:
   /// **'用户管理'**
   String get adminUsersTitle;
-
-  /// No description provided for @adminUsersDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'查找账户，并在不离开当前页面的情况下调整角色与启用状态。'**
-  String get adminUsersDescription;
 
   /// No description provided for @adminProvidersTitle.
   ///
@@ -2834,23 +2564,11 @@ abstract class AppLocalizations {
   /// **'平台目录'**
   String get adminProvidersTitle;
 
-  /// No description provided for @adminProvidersDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'维护平台状态页的名称、排序与可见性。下载域名和执行能力由系统 Profile 控制。'**
-  String get adminProvidersDescription;
-
   /// No description provided for @adminAiProvidersTitle.
   ///
   /// In zh, this message translates to:
   /// **'AI 服务'**
   String get adminAiProvidersTitle;
-
-  /// No description provided for @adminAiProvidersDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'默认使用服务端本机 Codex；可在这里新增并启用第三方 API。切换后从下一次分析任务生效，无需修改环境文件。'**
-  String get adminAiProvidersDescription;
 
   /// No description provided for @adminDays.
   ///
@@ -2887,12 +2605,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'暂无持久文件'**
   String get adminFilesEmpty;
-
-  /// No description provided for @adminFilesEmptyDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'当前没有需要管理员处理的持久文件。'**
-  String get adminFilesEmptyDescription;
 
   /// No description provided for @adminUserCount.
   ///
@@ -3365,7 +3077,7 @@ abstract class AppLocalizations {
   /// No description provided for @localCodexRestriction.
   ///
   /// In zh, this message translates to:
-  /// **'这是服务端保留的本机 Codex 线路，只能修改显示名称和模型。'**
+  /// **'系统兜底线路，仅可修改名称和模型。'**
   String get localCodexRestriction;
 
   /// No description provided for @hostLoginLabel.
@@ -3467,7 +3179,7 @@ abstract class AppLocalizations {
   /// No description provided for @catalogScopeDescription.
   ///
   /// In zh, this message translates to:
-  /// **'此处只维护状态页名称、排序与可见性，不会新增下载域名或执行能力。'**
+  /// **'新增目录条目不会增加下载支持。'**
   String get catalogScopeDescription;
 
   /// No description provided for @saveConfiguration.
@@ -3740,12 +3452,6 @@ abstract class AppLocalizations {
   /// **'我的处理记录'**
   String get activityHistoryTitle;
 
-  /// No description provided for @activityHistoryDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'统一查看链接、文档和 AI 分析记录。'**
-  String get activityHistoryDescription;
-
   /// No description provided for @activityHistorySearch.
   ///
   /// In zh, this message translates to:
@@ -3815,7 +3521,7 @@ abstract class AppLocalizations {
   /// No description provided for @profileAvatarHelp.
   ///
   /// In zh, this message translates to:
-  /// **'JPEG、PNG 或 WebP，最大 4 MB。上传后自动裁切为方形。'**
+  /// **'JPEG、PNG、WebP · 最大 4 MB · 自动裁切为方形'**
   String get profileAvatarHelp;
 
   /// No description provided for @profileAvatarInvalidType.
@@ -3842,12 +3548,6 @@ abstract class AppLocalizations {
   /// **'头像已移除。'**
   String get profileAvatarRemoved;
 
-  /// No description provided for @profileEmailHelp.
-  ///
-  /// In zh, this message translates to:
-  /// **'用于登录账户，暂不支持在此修改。'**
-  String get profileEmailHelp;
-
   /// No description provided for @profileRoleLabel.
   ///
   /// In zh, this message translates to:
@@ -3859,18 +3559,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'更改为普通用户前，必须保留另一位启用的管理员。'**
   String get profileRoleAdminHelp;
-
-  /// No description provided for @profileRoleUserHelp.
-  ///
-  /// In zh, this message translates to:
-  /// **'仅管理员可以修改账户身份。'**
-  String get profileRoleUserHelp;
-
-  /// No description provided for @profileFieldsTitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'资料字段'**
-  String get profileFieldsTitle;
 
   /// No description provided for @profilePartialSave.
   ///
@@ -3884,23 +3572,11 @@ abstract class AppLocalizations {
   /// **'自托管部署'**
   String get selfHostingNavigation;
 
-  /// No description provided for @selfHostingDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'从环境准备到首次登录，在自己的基础设施上运行帧取。'**
-  String get selfHostingDescription;
-
   /// No description provided for @aboutNavigation.
   ///
   /// In zh, this message translates to:
   /// **'关于帧取'**
   String get aboutNavigation;
-
-  /// No description provided for @aboutDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'了解开源媒体工作流的定位、工程原则与授权边界。'**
-  String get aboutDescription;
 
   /// No description provided for @resourcesNavigation.
   ///
@@ -3956,18 +3632,6 @@ abstract class AppLocalizations {
   /// **'当前周期还没有 AI 分析记录'**
   String get adminAnalysisEmpty;
 
-  /// No description provided for @adminAnalysisEmptyDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'切换统计周期，或发起分析后再查看。'**
-  String get adminAnalysisEmptyDescription;
-
-  /// No description provided for @adminAnalysisScopeHint.
-  ///
-  /// In zh, this message translates to:
-  /// **'按 UTC 日期统计分析执行；重试与重新分析分别计次。执行次数不代表模型请求次数。'**
-  String get adminAnalysisScopeHint;
-
   /// No description provided for @adminCompletionRate.
   ///
   /// In zh, this message translates to:
@@ -3985,12 +3649,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'系统操作日志'**
   String get adminOperationLogsTitle;
-
-  /// No description provided for @adminOperationLogsDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'查看全系统业务请求与管理员操作，追踪操作人、对象和执行结果。'**
-  String get adminOperationLogsDescription;
 
   /// No description provided for @adminOperationLogSearch.
   ///
@@ -4088,35 +3746,17 @@ abstract class AppLocalizations {
   /// **'结束时间不能早于开始时间，时间格式为 YYYY-MM-DD HH:mm。'**
   String get adminOperationInvalidDates;
 
-  /// No description provided for @adminOperationLogsHint.
-  ///
-  /// In zh, this message translates to:
-  /// **'展示日志启用后的操作。请求结果与系统任务状态分别记录；结果未确认表示请求尚未结束或执行曾中断。'**
-  String get adminOperationLogsHint;
-
   /// No description provided for @adminOperationLogsEmpty.
   ///
   /// In zh, this message translates to:
   /// **'暂无操作日志'**
   String get adminOperationLogsEmpty;
 
-  /// No description provided for @adminOperationLogsEmptyDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'尚未产生符合条件的操作。可以调整筛选条件或稍后刷新。'**
-  String get adminOperationLogsEmptyDescription;
-
   /// No description provided for @adminOperationDetails.
   ///
   /// In zh, this message translates to:
   /// **'操作详情'**
   String get adminOperationDetails;
-
-  /// No description provided for @adminOperationDetailsDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'只读记录，用于定位请求和核对执行结果。'**
-  String get adminOperationDetailsDescription;
 
   /// No description provided for @adminOperationActor.
   ///
@@ -4208,23 +3848,11 @@ abstract class AppLocalizations {
   /// **'没有匹配的账户'**
   String get adminUsersEmpty;
 
-  /// No description provided for @adminUsersEmptyDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'调整搜索词、角色或账户状态后重试。'**
-  String get adminUsersEmptyDescription;
-
   /// No description provided for @adminQuotaTitle.
   ///
   /// In zh, this message translates to:
   /// **'用量限制'**
   String get adminQuotaTitle;
-
-  /// No description provided for @adminQuotaDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'留空使用系统默认。启用豁免后跳过用量限制。'**
-  String get adminQuotaDescription;
 
   /// No description provided for @adminQuotaExempt.
   ///
@@ -4274,12 +3902,6 @@ abstract class AppLocalizations {
   /// **'没有匹配的平台'**
   String get adminPlatformsEmpty;
 
-  /// No description provided for @adminPlatformsEmptyDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'调整搜索词或公开状态后重试。'**
-  String get adminPlatformsEmptyDescription;
-
   /// No description provided for @adminAiSearch.
   ///
   /// In zh, this message translates to:
@@ -4291,12 +3913,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'没有匹配的 AI 配置'**
   String get adminAiEmpty;
-
-  /// No description provided for @adminAiEmptyDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'调整搜索词，或新增 AI 配置。'**
-  String get adminAiEmptyDescription;
 
   /// No description provided for @adminEngineCodex.
   ///
@@ -4328,28 +3944,16 @@ abstract class AppLocalizations {
   /// **'DeepSeek API · LangChain 视觉'**
   String get adminEngineDeepSeek;
 
-  /// No description provided for @adminOpenRouterUrlHint.
-  ///
-  /// In zh, this message translates to:
-  /// **'使用 OpenRouter 官方地址；视频分析要求模型支持图像输入与结构化输出。'**
-  String get adminOpenRouterUrlHint;
-
   /// No description provided for @adminApiUrlHint.
   ///
   /// In zh, this message translates to:
   /// **'公网地址必须使用 HTTPS；本机 localhost 可使用 HTTP。'**
   String get adminApiUrlHint;
 
-  /// No description provided for @adminFixedDeepSeekModel.
-  ///
-  /// In zh, this message translates to:
-  /// **'当前视觉适配器固定使用此模型。'**
-  String get adminFixedDeepSeekModel;
-
   /// No description provided for @adminHostLoginHint.
   ///
   /// In zh, this message translates to:
-  /// **'Agent 将读取当前系统用户的 CLI 登录状态，无需在项目中保存 Key。'**
+  /// **'使用服务端已登录的 CLI 账号。'**
   String get adminHostLoginHint;
 
   /// No description provided for @adminReadModels.
@@ -4367,7 +3971,7 @@ abstract class AppLocalizations {
   /// No description provided for @adminModelsHint.
   ///
   /// In zh, this message translates to:
-  /// **'仅列出声明支持结构化输出的模型；视频请选择支持图像的模型。目录信息不代表实际调用已验证。'**
+  /// **'视频分析请选择支持图像的模型。'**
   String get adminModelsHint;
 
   /// No description provided for @adminImageSupported.
@@ -4472,12 +4076,6 @@ abstract class AppLocalizations {
   /// **'邮箱已验证，可以设置密码。'**
   String get registrationEmailVerificationSuccess;
 
-  /// No description provided for @registrationPasswordPrompt.
-  ///
-  /// In zh, this message translates to:
-  /// **'邮箱已验证，现在设置密码完成注册。'**
-  String get registrationPasswordPrompt;
-
   /// No description provided for @currentPageLabel.
   ///
   /// In zh, this message translates to:
@@ -4549,12 +4147,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'工作流'**
   String get publicWorkflowEyebrow;
-
-  /// No description provided for @publicWorkflowDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'从识别到交付，每一步都有明确边界。'**
-  String get publicWorkflowDescription;
 
   /// No description provided for @adminObjectCount.
   ///

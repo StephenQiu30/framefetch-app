@@ -29,6 +29,8 @@ void main() {
     );
     expect(find.text('选择本页'), findsNothing);
     expect(find.text('批量下载'), findsNothing);
+    expect(find.text('向左轻扫可查看任务操作。'), findsNothing);
+    expect(find.text('继续查看、获取或分析已创建的任务。'), findsNothing);
     expect(find.byType(ListFilters), findsOneWidget);
     expect(find.byType(ListPagination), findsOneWidget);
     final item = find.byKey(const Key('download-history-item-$id'));

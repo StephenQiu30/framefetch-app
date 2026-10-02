@@ -61,17 +61,12 @@ final class _AdminStorageScreenState extends ConsumerState<AdminStorageScreen> {
     final busy = ref.watch(adminFileMutationProvider);
     return AdminPage(
       title: l.adminFilesTitle,
-      description: l.adminFilesDescription,
       refreshLabel: l.refreshAction,
       onRefresh: () => ref.refresh(adminFilesProvider.future).then((_) {}),
       children: [
         ...result.when(
           data: (data) => [
-            if (data.items.isEmpty)
-              DataStateMessage(
-                title: l.adminFilesEmpty,
-                description: l.adminFilesEmptyDescription,
-              ),
+            if (data.items.isEmpty) DataStateMessage(title: l.adminFilesEmpty),
             for (final file in data.items)
               Padding(
                 key: ValueKey('admin-file-${_fileKey(file)}'),

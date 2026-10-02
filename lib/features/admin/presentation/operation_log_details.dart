@@ -62,7 +62,6 @@ Future<void> showOperationLogDetails(
     ];
     return ShadDialog(
       title: Text(l.adminOperationDetails),
-      description: Text(l.adminOperationDetailsDescription),
       scrollable: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

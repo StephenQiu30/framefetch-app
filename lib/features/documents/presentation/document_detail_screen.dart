@@ -87,7 +87,6 @@ final class _DocumentDetailScreenState
         ),
         error: (error, _) => DataPageView(
           title: l10n.screenplayDocumentDetailNavigation,
-          description: l10n.screenplayDocumentDetailDescription,
           refreshLabel: l10n.refreshAction,
           onRefresh: refresh,
           children: [
@@ -103,7 +102,6 @@ final class _DocumentDetailScreenState
         ),
         loading: () => DataPageView(
           title: l10n.screenplayDocumentDetailNavigation,
-          description: l10n.screenplayDocumentDetailDescription,
           refreshLabel: l10n.refreshAction,
           onRefresh: refresh,
           children: const [DocumentDetailSkeleton()],

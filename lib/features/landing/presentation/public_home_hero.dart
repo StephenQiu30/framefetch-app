@@ -71,9 +71,7 @@ final class PublicHomeHero extends StatelessWidget {
         ],
       ),
       second: PublicHomeWorkflow(
-        title: l.publicWorkflowTitle,
-        eyebrow: l.publicWorkflowEyebrow,
-        description: l.publicWorkflowDescription,
+        title: l.publicWorkflowEyebrow,
         items: [
           (
             title: l.publicWorkflowInspectTitle,

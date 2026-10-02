@@ -5,16 +5,8 @@ import 'package:framegrab/features/landing/presentation/public_home_section_intr
 typedef PublicHomeQuestion = ({String answer, String question});
 
 final class PublicHomeFaq extends StatelessWidget {
-  const PublicHomeFaq({
-    required this.description,
-    required this.eyebrow,
-    required this.items,
-    required this.title,
-    super.key,
-  });
+  const PublicHomeFaq({required this.items, required this.title, super.key});
 
-  final String description;
-  final String eyebrow;
   final List<PublicHomeQuestion> items;
   final String title;
 
@@ -25,11 +17,7 @@ final class PublicHomeFaq extends StatelessWidget {
       key: const Key('public-home-faq'),
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        PublicHomeSectionIntro(
-          description: description,
-          eyebrow: eyebrow,
-          title: title,
-        ),
+        PublicHomeSectionIntro(title: title),
         const SizedBox(height: 48),
         PublicHomeGrid(
           columns: 2,

@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:framegrab/core/network/data_request_failure.dart';
 import 'package:framegrab/features/auth/data/native_auth_gateway.dart';
 import 'package:framegrab/features/upload/domain/content_upload.dart';
+import 'package:framegrab/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:video_server_api/video_server_api.dart';
@@ -40,7 +41,8 @@ void main() {
     expect(find.text('链接解析'), findsOneWidget);
     expect(find.text('本地视频'), findsOneWidget);
     expect(find.text('剧本文档'), findsOneWidget);
-    expect(find.textContaining('解析公开视频、图片与合集链接'), findsOneWidget);
+    expect(find.textContaining('解析公开视频、图片与合集链接'), findsNothing);
+    expect(find.byKey(const Key('page-description')), findsNothing);
     expect(find.textContaining('账号或访问凭据'), findsNothing);
     expect(find.byKey(const Key('app-bottom-navigation')), findsOneWidget);
     expect(find.text('首页'), findsOneWidget);
@@ -399,24 +401,20 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('还没有下载记录'), findsOneWidget);
-    expect(find.textContaining('从首页解析链接'), findsOneWidget);
+    expect(find.textContaining('从首页解析链接'), findsNothing);
     expect(find.text('去首页创建任务'), findsOneWidget);
 
     final title = tester.getSemantics(
       find.byKey(const Key('page-title-heading')),
     );
-    final description = tester.getSemantics(
-      find.byKey(const Key('page-description')),
-    );
     expect(title.label, '下载记录');
     expect(title.flagsCollection.isHeader, isTrue);
-    expect(description.label, contains('继续查看、获取或分析'));
-    expect(description.flagsCollection.isHeader, isFalse);
+    expect(find.byKey(const Key('page-description')), findsNothing);
 
     await tester.tap(find.byKey(const Key('app-tab-2')));
     await tester.pumpAndSettle();
     expect(find.text('还没有剧本文档'), findsOneWidget);
-    expect(find.textContaining('从首页上传剧本文档'), findsOneWidget);
+    expect(find.textContaining('从首页上传剧本文档'), findsNothing);
     final uploadFromHome = find.widgetWithText(ShadButton, '去首页上传剧本');
     expect(uploadFromHome, findsOneWidget);
     expect(
@@ -1113,15 +1111,16 @@ void main() {
     expect(find.textContaining('数据与运行边界由你掌控'), findsOneWidget);
     expect(find.text('创建本地账户'), findsOneWidget);
     expect(find.text('查看源代码'), findsOneWidget);
-    expect(find.text('一套可审计的完整链路'), findsOneWidget);
+    expect(find.text('工作流'), findsOneWidget);
     expect(find.text('解析'), findsOneWidget);
     expect(find.text('选择'), findsOneWidget);
     expect(find.text('执行'), findsOneWidget);
     expect(find.text('交付'), findsOneWidget);
     expect(find.text('视频解析、剧本处理与 AI 分析'), findsOneWidget);
-    expect(find.text('开源，不交出数据控制权'), findsOneWidget);
-    expect(find.text('运行与授权边界'), findsOneWidget);
-    expect(find.text('开始使用前，先了解这些'), findsOneWidget);
+    expect(find.text('自托管架构'), findsOneWidget);
+    expect(find.text('运行与授权边界'), findsNothing);
+    expect(find.text('常见问题'), findsOneWidget);
+    expect(find.textContaining('请仅处理已获授权的内容'), findsOneWidget);
     expect(find.text('帧取 FrameFetch 是什么？'), findsOneWidget);
     expect(find.byKey(const Key('public-home-guide')), findsOneWidget);
     expect(find.text('在自己的基础设施上运行 FrameFetch'), findsOneWidget);
@@ -1179,6 +1178,8 @@ void main() {
   });
 
   testWidgets('registers, exposes the account, and signs out', (tester) async {
+    await setMobileViewport(tester);
+
     Future<void> verifyEmail() async {
       final send = find.byKey(const Key('register-send-code-button'));
       await tester.ensureVisible(send);
@@ -1252,6 +1253,42 @@ void main() {
     await tester.tap(find.byKey(const Key('app-tab-4')));
     await tester.pumpAndSettle();
     expect(find.text('member@example.com'), findsNWidgets(2));
+
+    for (final width in [390.0, 1280.0]) {
+      tester.view.physicalSize = Size(width, 844);
+      await tester.pumpAndSettle();
+      final identity = find.byKey(const Key('profile-avatar-identity'));
+      final identityRect = tester.getRect(identity);
+      final localizations = AppLocalizations.of(tester.element(identity));
+      for (final child in [
+        find.descendant(of: identity, matching: find.byType(ShadAvatar)),
+        find.descendant(of: identity, matching: find.text('member')),
+        find.descendant(
+          of: identity,
+          matching: find.text('member@example.com'),
+        ),
+        find.descendant(of: identity, matching: find.byType(ShadBadge)),
+        find.byKey(const Key('profile-avatar-upload')),
+      ]) {
+        expect(
+          tester.getRect(child).center.dx,
+          closeTo(identityRect.center.dx, 0.1),
+        );
+      }
+      final avatarHelp = find.text(localizations.profileAvatarHelp);
+      expect(tester.widget<Text>(avatarHelp).textAlign, TextAlign.start);
+      expect(tester.getRect(avatarHelp).left, closeTo(identityRect.left, 0.1));
+      final usernameField = find.byKey(const Key('profile-username-field'));
+      final usernameLabel = find.descendant(
+        of: usernameField,
+        matching: find.text(localizations.usernameLabel),
+      );
+      expect(
+        tester.getRect(usernameLabel).left,
+        closeTo(tester.getRect(usernameField).left, 0.1),
+      );
+      expect(tester.takeException(), isNull);
+    }
 
     await tester.ensureVisible(find.byKey(const Key('logout-button')));
     await tester.pumpAndSettle();

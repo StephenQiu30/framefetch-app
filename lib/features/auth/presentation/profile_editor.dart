@@ -81,11 +81,6 @@ final class _ProfileEditorState extends ConsumerState<ProfileEditor> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            l.profileFieldsTitle,
-            style: ShadTheme.of(context).textTheme.small,
-          ),
-          const SizedBox(height: 16),
           ShadInputFormField(
             key: const Key('profile-username-field'),
             controller: _username,
@@ -101,7 +96,6 @@ final class _ProfileEditorState extends ConsumerState<ProfileEditor> {
             initialValue: user.email,
             readOnly: true,
             label: Text(l.emailLabel),
-            description: Text(l.profileEmailHelp),
           ),
           const SizedBox(height: 16),
           AppDropdownField<UserRole>(
@@ -121,13 +115,13 @@ final class _ProfileEditorState extends ConsumerState<ProfileEditor> {
               }
             },
           ),
-          const SizedBox(height: 8),
-          Text(
-            user.role == UserRole.admin
-                ? l.profileRoleAdminHelp
-                : l.profileRoleUserHelp,
-            style: ShadTheme.of(context).textTheme.muted,
-          ),
+          if (user.role == UserRole.admin) ...[
+            const SizedBox(height: 8),
+            Text(
+              l.profileRoleAdminHelp,
+              style: ShadTheme.of(context).textTheme.muted,
+            ),
+          ],
           if (_notice != null)
             Semantics(liveRegion: true, child: Text(_notice!)),
           const SizedBox(height: 16),

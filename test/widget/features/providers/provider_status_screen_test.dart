@@ -68,7 +68,7 @@ void main() {
     expect(find.textContaining('优先登录', findRichText: true), findsNWidgets(2));
     expect(find.text('单视频 · 字幕'), findsOneWidget);
     expect(find.text('暂无已登记能力'), findsOneWidget);
-    expect(find.text('下载结果以实际文件为准。'), findsOneWidget);
+    expect(find.text('下载结果以实际文件为准。'), findsNothing);
     expect(find.text('请先检查配置'), findsOneWidget);
     expect(find.textContaining('下载已开放'), findsNothing);
     expect(find.text('需要处理的平台'), findsOneWidget);

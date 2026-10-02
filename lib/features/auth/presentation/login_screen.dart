@@ -64,7 +64,6 @@ final class _LoginScreenState extends ConsumerState<LoginScreen> {
     ).toString();
     return AuthPageScaffold(
       title: localizations.welcomeBack,
-      description: localizations.loginDescription,
       child: AutofillGroup(
         child: ShadForm(
           key: _formKey,
@@ -125,27 +124,18 @@ final class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
               ),
               const SizedBox(height: AppSpacing.small),
-              Wrap(
-                spacing: 4,
-                runSpacing: 4,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  Text(
-                    localizations.noAccountPrompt,
-                    textAlign: TextAlign.start,
-                    style: ShadTheme.of(context).textTheme.muted,
-                  ),
-                  ShadButton.link(
-                    key: const Key('go-register-button'),
-                    onPressed: session.isBusy
-                        ? null
-                        : () => context.pushReplacement(registerLocation),
-                    enabled: !session.isBusy,
-                    height: 0,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    child: Flexible(child: Text(localizations.goRegister)),
-                  ),
-                ],
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: ShadButton.link(
+                  key: const Key('go-register-button'),
+                  onPressed: session.isBusy
+                      ? null
+                      : () => context.pushReplacement(registerLocation),
+                  enabled: !session.isBusy,
+                  height: 0,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Flexible(child: Text(localizations.goRegister)),
+                ),
               ),
             ],
           ),

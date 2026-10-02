@@ -37,7 +37,6 @@ final class _AdminAnalyticsScreenState
         : ref.invalidate(adminAnalysisAnalyticsProvider(_days));
     return AdminPage(
       title: l.adminAnalyticsTitle,
-      description: l.adminAnalyticsDescription,
       refreshLabel: l.refreshAction,
       onRefresh: () async {
         if (_tab == 'downloads') {

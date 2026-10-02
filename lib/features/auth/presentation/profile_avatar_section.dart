@@ -71,26 +71,36 @@ final class _ProfileAvatarSectionState
     final avatar = ref.watch(profileAvatarProvider);
     final initials = user.username.characters.take(2).toString().toUpperCase();
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        ShadAvatar(avatar.asData?.value, placeholder: Text(initials)),
-        const SizedBox(height: AppSpacing.small),
-        Text(user.username, style: Theme.of(context).textTheme.titleMedium),
-        const SizedBox(height: AppSpacing.xSmall),
-        Text(
-          user.email,
-          textAlign: TextAlign.start,
-          style: ShadTheme.of(context).textTheme.muted,
-        ),
-        const SizedBox(height: AppSpacing.xSmall),
-        ShadBadge.secondary(
-          child: Text(
-            user.role.name == 'admin' ? l.adminRoleAdmin : l.adminRoleUser,
-          ),
+        Column(
+          key: const Key('profile-avatar-identity'),
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ShadAvatar(avatar.asData?.value, placeholder: Text(initials)),
+            const SizedBox(height: AppSpacing.small),
+            Text(
+              user.username,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: AppSpacing.xSmall),
+            Text(
+              user.email,
+              textAlign: TextAlign.center,
+              style: ShadTheme.of(context).textTheme.muted,
+            ),
+            const SizedBox(height: AppSpacing.xSmall),
+            ShadBadge.secondary(
+              child: Text(
+                user.role.name == 'admin' ? l.adminRoleAdmin : l.adminRoleUser,
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: AppSpacing.medium),
         Wrap(
-          alignment: WrapAlignment.start,
+          alignment: WrapAlignment.center,
           spacing: 8,
           runSpacing: 8,
           children: [
@@ -142,9 +152,12 @@ final class _ProfileAvatarSectionState
             ),
           ),
         if (avatar.hasError)
-          ShadButton.ghost(
-            onPressed: () => ref.invalidate(profileAvatarProvider),
-            child: Text(l.retryAction),
+          Align(
+            alignment: Alignment.center,
+            child: ShadButton.ghost(
+              onPressed: () => ref.invalidate(profileAvatarProvider),
+              child: Text(l.retryAction),
+            ),
           ),
       ],
     );

@@ -27,7 +27,6 @@ final class _ProviderStatusScreenState
     final result = ref.watch(providerStatusProvider);
     return DataPageView(
       title: localizations.providerStatusNavigation,
-      description: localizations.providerStatusDescription,
       refreshLabel: localizations.refreshAction,
       onRefresh: () => ref.refresh(providerStatusProvider.future).then((_) {}),
       children: [
@@ -79,7 +78,6 @@ final class _ProviderStatusScreenState
       return [
         DataStateMessage(
           title: localizations.providerEmptyTitle,
-          description: localizations.providerEmptyDescription,
           icon: PhosphorIconsRegular.pulse,
         ),
       ];

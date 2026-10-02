@@ -45,11 +45,7 @@ final class DownloadHero extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppPageIntro(
-          large: true,
-          title: localizations.downloadHomeTitle,
-          description: localizations.downloadHomeDescription,
-        ),
+        AppPageIntro(large: true, title: localizations.downloadHomeTitle),
         SizedBox(height: wide ? 48 : 40),
         ContentIntakeSelector(
           enabled: !busy && !uploadState.busy,
@@ -72,7 +68,6 @@ final class DownloadHero extends StatelessWidget {
         else if (mode == ContentIntakeMode.video)
           UploadIntakePanel(
             actionLabel: localizations.selectVideoFile,
-            description: localizations.videoIntakeDescription,
             icon: PhosphorIconsRegular.videoCamera,
             kind: ContentUploadKind.video,
             onCancel: onUploadCancel,
@@ -83,7 +78,6 @@ final class DownloadHero extends StatelessWidget {
         else
           UploadIntakePanel(
             actionLabel: localizations.selectScreenplayFile,
-            description: localizations.screenplayIntakeDescription,
             icon: PhosphorIconsRegular.fileText,
             kind: ContentUploadKind.screenplay,
             onCancel: onUploadCancel,

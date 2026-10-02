@@ -44,10 +44,7 @@ final class SettingsScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    AppPageIntro(
-                      description: localizations.accountDescription,
-                      title: localizations.profileTitle,
-                    ),
+                    AppPageIntro(title: localizations.profileTitle),
                     const SizedBox(height: AppSpacing.section),
                     LayoutBuilder(
                       builder: (context, constraints) {
@@ -77,20 +74,14 @@ final class SettingsScreen extends ConsumerWidget {
                       icon: PhosphorIconsRegular.listBullets,
                       onTap: () => context.push('/history/activity'),
                       title: localizations.activityHistoryTitle,
-                      description: localizations.activityHistoryDescription,
                     ),
                     if (isAdmin) ...[
                       const SizedBox(height: AppSpacing.section),
-                      SettingsSectionLabel(
-                        label: localizations.adminCenterTitle,
-                      ),
-                      const SizedBox(height: AppSpacing.small),
                       SettingsNavigationEntry(
                         key: const Key('admin-center-entry'),
                         icon: PhosphorIconsRegular.shieldCheck,
                         onTap: () => context.push('/admin'),
                         title: localizations.adminCenterTitle,
-                        description: localizations.adminCenterDescription,
                       ),
                     ],
                     const SizedBox(height: AppSpacing.section),

@@ -34,7 +34,6 @@ final class DownloadDetailScreen extends ConsumerWidget {
         ),
         error: (error, _) => DataPageView(
           title: localizations.downloadDetailNavigation,
-          description: localizations.downloadDetailDescription,
           refreshLabel: localizations.refreshAction,
           onRefresh: () =>
               ref.refresh(downloadDetailProvider(jobId).future).then((_) {}),
@@ -50,7 +49,6 @@ final class DownloadDetailScreen extends ConsumerWidget {
         ),
         loading: () => DataPageView(
           title: localizations.downloadDetailNavigation,
-          description: localizations.downloadDetailDescription,
           refreshLabel: localizations.refreshAction,
           onRefresh: () =>
               ref.refresh(downloadDetailProvider(jobId).future).then((_) {}),

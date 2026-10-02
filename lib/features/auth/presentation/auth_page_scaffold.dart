@@ -5,14 +5,12 @@ import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
 final class AuthPageScaffold extends StatelessWidget {
   const AuthPageScaffold({
     required this.title,
-    required this.description,
     required this.child,
     this.showBackButton = true,
     super.key,
   });
 
   final String title;
-  final String description;
   final Widget child;
   final bool showBackButton;
 
@@ -42,13 +40,6 @@ final class AuthPageScaffold extends StatelessWidget {
                     child: Text(
                       title,
                       style: Theme.of(context).textTheme.headlineLarge,
-                    ),
-                  ),
-                  const SizedBox(height: AppSpacing.small),
-                  Text(
-                    description,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(height: AppSpacing.xxLarge),

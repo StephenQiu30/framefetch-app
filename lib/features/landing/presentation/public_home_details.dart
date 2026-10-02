@@ -2,13 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:framegrab/core/theme/app_colors.dart';
 import 'package:framegrab/features/landing/presentation/public_home_layout.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 
-typedef PublicHomeCapability = ({
-  String description,
-  String eyebrow,
-  String title,
-});
+typedef PublicHomeCapability = ({String description, String title});
 
 final class PublicHomeCapabilities extends StatelessWidget {
   const PublicHomeCapabilities({required this.items, super.key});
@@ -28,25 +23,6 @@ final class PublicHomeCapabilities extends StatelessWidget {
             key: Key('public-home-capability-$index'),
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ShadBadge.secondary(
-                    child: Text('${index + 1}'.padLeft(2, '0')),
-                  ),
-                  Expanded(
-                    child: Text(
-                      item.eyebrow,
-                      textAlign: TextAlign.end,
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
               Semantics(
                 header: true,
                 child: Text(
