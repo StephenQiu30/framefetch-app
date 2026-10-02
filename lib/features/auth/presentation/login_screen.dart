@@ -125,27 +125,27 @@ final class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
               ),
               const SizedBox(height: AppSpacing.small),
-              ShadButton.ghost(
-                key: const Key('go-register-button'),
-                onPressed: session.isBusy
-                    ? null
-                    : () => context.pushReplacement(registerLocation),
-                enabled:
-                    (session.isBusy
-                        ? null
-                        : () => context.pushReplacement(registerLocation)) !=
-                    null,
-                height: 0,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 12,
-                ),
-                child: Flexible(
-                  child: Text(
-                    '${localizations.noAccountPrompt} '
-                    '${localizations.goRegister}',
+              Wrap(
+                spacing: 4,
+                runSpacing: 4,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Text(
+                    localizations.noAccountPrompt,
+                    textAlign: TextAlign.start,
+                    style: ShadTheme.of(context).textTheme.muted,
                   ),
-                ),
+                  ShadButton.link(
+                    key: const Key('go-register-button'),
+                    onPressed: session.isBusy
+                        ? null
+                        : () => context.pushReplacement(registerLocation),
+                    enabled: !session.isBusy,
+                    height: 0,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Flexible(child: Text(localizations.goRegister)),
+                  ),
+                ],
               ),
             ],
           ),

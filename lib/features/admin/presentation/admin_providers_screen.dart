@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
+import 'package:framegrab/features/admin/application/admin_mutation_controller.dart';
 import 'package:framegrab/features/admin/application/admin_providers.dart';
-import 'package:framegrab/features/admin/application/admin_selection_controller.dart';
 import 'package:framegrab/features/admin/data/admin_configuration_repository.dart';
 import 'package:framegrab/features/admin/data/admin_repository.dart';
-import 'package:framegrab/features/admin/presentation/admin_bulk_delete_bar.dart';
 import 'package:framegrab/features/admin/presentation/admin_catalog_row.dart';
 import 'package:framegrab/features/admin/presentation/admin_edit_sheet.dart';
 import 'package:framegrab/features/admin/presentation/admin_page.dart';
@@ -31,10 +30,9 @@ final class _AdminProvidersScreenState
   ListQuery _query = const ListQuery();
 
   void _filter({String? search, String? status}) {
-    if (_busy.isNotEmpty || ref.read(adminCatalogSelectionProvider).busy) {
+    if (_busy.isNotEmpty || ref.read(adminCatalogMutationProvider)) {
       return;
     }
-    ref.read(adminCatalogSelectionProvider.notifier).clear();
     setState(
       () => _query = ListQuery(
         search: search ?? _query.search,
@@ -64,31 +62,37 @@ final class _AdminProvidersScreenState
     }
   }
 
-  Future<void> _delete([ProviderCatalogEntryResponse? item]) async {
+  Future<void> _delete(ProviderCatalogEntryResponse item) async {
     final l = AppLocalizations.of(context);
     if (!await confirmAdminDelete(
           context,
-          title: item == null ? l.adminDeleteSelectionTitle : null,
           description: l.adminDeleteCatalogDescription,
         ) ||
         !mounted) {
       return;
     }
-    final controller = ref.read(adminCatalogSelectionProvider.notifier);
-    if (item != null) controller.selectPage([item.key], true);
-    final current = await controller.deleteSelected(
-      ref.read(adminConfigurationRepositoryProvider).deleteCatalog,
-    );
-    if (current && mounted) ref.invalidate(adminProviderCatalogProvider);
+    final result = await ref
+        .read(adminCatalogMutationProvider.notifier)
+        .run(
+          () => ref
+              .read(adminConfigurationRepositoryProvider)
+              .deleteCatalog(item.key),
+        );
+    if (!mounted || result == AdminMutationResult.stale) return;
+    if (result == AdminMutationResult.failed) {
+      ShadSonner.of(
+        context,
+      ).show(ShadToast(description: Text(l.adminActionFailed)));
+      return;
+    }
+    ref.invalidate(adminProviderCatalogProvider);
   }
 
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final result = ref.watch(adminProviderCatalogProvider);
-    final selection = ref.watch(adminCatalogSelectionProvider);
-    final controller = ref.read(adminCatalogSelectionProvider.notifier);
-    final busy = selection.busy || _busy.isNotEmpty;
+    final busy = ref.watch(adminCatalogMutationProvider) || _busy.isNotEmpty;
     return AdminPage(
       title: l.adminProvidersTitle,
       description: l.adminProvidersDescription,
@@ -140,29 +144,14 @@ final class _AdminProvidersScreenState
                   title: l.adminPlatformsEmpty,
                   description: l.adminPlatformsEmptyDescription,
                 ),
-              if (items.isNotEmpty)
-                AdminBulkDeleteBar(
-                  disabled: busy,
-                  state: selection,
-                  eligibleIds: items.map((item) => item.key).toList(),
-                  onSelectPage: (v) =>
-                      controller.selectPage(items.map((item) => item.key), v),
-                  onDelete: () => _delete(),
-                ),
               for (final item in items)
-                AdminSelectionRow(
+                AdminCatalogRow(
                   key: ValueKey('catalog-${item.key}'),
-                  selected: selection.selected.contains(item.key),
-                  enabled: !busy,
-                  label: item.displayName,
-                  onChanged: (v) => controller.toggle(item.key, v),
-                  child: AdminCatalogRow(
-                    item: item,
-                    busy: busy,
-                    onToggle: (v) => _toggle(item, v),
-                    onEdit: () => editCatalog(context, ref, item),
-                    onDelete: () => _delete(item),
-                  ),
+                  item: item,
+                  busy: busy,
+                  onToggle: (v) => _toggle(item, v),
+                  onEdit: () => editCatalog(context, ref, item),
+                  onDelete: () => _delete(item),
                 ),
               if (filtered.isNotEmpty)
                 ListPagination(
@@ -171,7 +160,6 @@ final class _AdminProvidersScreenState
                   total: filtered.length,
                   busy: busy,
                   onPage: (v) {
-                    controller.clear();
                     setState(
                       () => _query = ListQuery(
                         page: v,
@@ -182,7 +170,6 @@ final class _AdminProvidersScreenState
                     );
                   },
                   onPageSize: (v) {
-                    controller.clear();
                     setState(
                       () => _query = ListQuery(
                         pageSize: v,

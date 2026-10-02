@@ -12,61 +12,86 @@ final class ProviderStatusItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
-    final status = item.downloadSupported && item.status.name == 'unknown'
+    final theme = Theme.of(context);
+    final status = isProviderDownloadEnabled(item)
         ? localizations.providerRegistered
-        : _statusLabel(localizations, item.status.name);
+        : item.status == ProviderSupportStatus.unsupported
+        ? localizations.providerStatusUnsupported
+        : localizations.providerUnavailable;
     final capabilities = item.capabilities
         .map((value) => _capabilityLabel(localizations, value.name))
-        .join('、');
+        .join(' · ');
+    final capabilitySummary = capabilities.isEmpty
+        ? localizations.providerNoCapabilities
+        : capabilities;
+    final identity = switch (item.identity.name) {
+      'required' => localizations.providerIdentityRequired,
+      'prefer' => localizations.providerIdentityPrefer,
+      _ => localizations.providerIdentityNone,
+    };
+    final description = item.userAction?.trim().isNotEmpty ?? false
+        ? item.userAction!.trim()
+        : localizations.providerFileResultHint;
 
     return Semantics(
       container: true,
-      label: '${item.displayName}, $status',
+      label:
+          '${item.displayName}, ${item.key}, $status, $identity, '
+          '$capabilitySummary, $description',
       child: ExcludeSemantics(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.large),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              Text(
+                item.displayName,
+                textAlign: TextAlign.start,
+                style: theme.textTheme.titleMedium,
+              ),
+              const SizedBox(height: AppSpacing.xSmall),
+              Text(
+                item.key,
+                textAlign: TextAlign.start,
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.small),
+              Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: AppSpacing.small,
+                runSpacing: AppSpacing.xSmall,
                 children: [
-                  Expanded(
-                    child: Text(
-                      item.displayName,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  ),
                   DataStatusLabel(
-                    color: _statusColor(context, item.status.name),
+                    color: theme.colorScheme.onSurfaceVariant,
                     label: status,
+                  ),
+                  Text(
+                    identity,
+                    textAlign: TextAlign.start,
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: AppSpacing.small),
-              _DetailLine(
-                label: localizations.providerDownloadEnabled,
-                value: item.downloadSupported
-                    ? localizations.yesLabel
-                    : localizations.noLabel,
-              ),
-              if (capabilities.isNotEmpty)
-                _DetailLine(
-                  label: localizations.capabilitiesLabel,
-                  value: capabilities,
+              Text(
+                capabilitySummary,
+                textAlign: TextAlign.start,
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
                 ),
-              _DetailLine(
-                label: localizations.providerIdentityLabel,
-                value: switch (item.identity.name) {
-                  'required' => localizations.providerIdentityRequired,
-                  'prefer' => localizations.providerIdentityPrefer,
-                  _ => localizations.providerIdentityNone,
-                },
               ),
-              if (item.userAction?.trim().isNotEmpty ?? false)
-                _DetailLine(
-                  label: localizations.userActionLabel,
-                  value: item.userAction!.trim(),
-                ),
+              const SizedBox(height: AppSpacing.small),
+              Text(
+                description,
+                textAlign: TextAlign.start,
+                style: theme.textTheme.bodyMedium,
+              ),
             ],
           ),
         ),
@@ -75,44 +100,12 @@ final class ProviderStatusItem extends StatelessWidget {
   }
 }
 
-final class _DetailLine extends StatelessWidget {
-  const _DetailLine({required this.label, required this.value});
-
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.only(top: AppSpacing.xSmall),
-      child: Text.rich(
-        TextSpan(
-          children: [
-            TextSpan(
-              text: '$label  ',
-              style: theme.textTheme.labelMedium?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
-            ),
-            TextSpan(text: value, style: theme.textTheme.bodySmall),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-Color _statusColor(BuildContext context, String status) => switch (status) {
-  'blocked' || 'unsupported' => Theme.of(context).colorScheme.error,
-  _ => Theme.of(context).colorScheme.onSurfaceVariant,
-};
-
-String _statusLabel(AppLocalizations l10n, String status) => switch (status) {
-  'disabled' => l10n.providerStatusDisabled,
-  'unsupported' => l10n.providerStatusUnsupported,
-  _ => l10n.providerUnavailable,
-};
+/// Uses the same registered runtime and download conditions as the Web status.
+bool isProviderDownloadEnabled(ProviderStatusResponse item) =>
+    item.registered &&
+    item.extractorExists &&
+    item.downloadSupported &&
+    item.status == ProviderSupportStatus.unknown;
 
 String _capabilityLabel(AppLocalizations l10n, String value) => switch (value) {
   'singleVideo' => l10n.capabilitySingleVideo,

@@ -310,8 +310,10 @@
   "clearMediaUrl": "清空链接",
   "inspectMedia": "解析媒体",
   "intentAutomaticAccess": "系统会自动选择公开访问路线。仅在明确获得授权时选择其他策略。",
-  "intentHistoryTitle": "解析记录",
-  "intentHistoryEmpty": "暂无解析记录",
+  "activityHistoryEmpty": "暂无处理记录",
+  "clearFiltersAction": "清空筛选",
+  "providerNoCapabilities": "暂无已登记能力",
+  "providerFileResultHint": "下载结果以实际文件为准。",
   "intentQueued": "等待解析",
   "intentResolving": "正在解析媒体",
   "intentExpired": "解析结果已过期",
@@ -320,7 +322,6 @@
   "intentRefreshAction": "更新解析结果",
   "intentCancelling": "正在取消解析",
   "intentCancelAction": "取消解析",
-  "intentRestoreAction": "打开历史解析",
   "intentHistoryAction": "查看解析记录",
   "intentHandedOff": "已创建下载任务",
   "intentRefreshHint": "更新后需重新确认下载规格。",
@@ -492,7 +493,7 @@
   "adminAnalyticsTitle": "使用统计",
   "adminAnalyticsDescription": "查看下载表现与 AI 分析执行情况。",
   "adminFilesTitle": "文件管理",
-  "adminFilesDescription": "查看持久文件，并清理超过保留周期的资源。",
+  "adminFilesDescription": "查看已保存文件的类型、大小和创建时间，或删除单个文件。",
   "adminUsersTitle": "用户管理",
   "adminUsersDescription": "查找账户，并在不离开当前页面的情况下调整角色与启用状态。",
   "adminProvidersTitle": "平台目录",
@@ -510,28 +511,6 @@
   "adminSuccessRate": "成功率",
   "adminDownloadedBytes": "下载量",
   "adminSourceBreakdown": "来源分布",
-  "adminCleanupTitle": "清理历史文件？",
-  "adminCleanupDescription": "将永久删除指定天数前的视频、剧本文档和分析报告。正在执行分析的源文件会被跳过。",
-  "adminCleanupDays": "清理 {days} 天前的文件",
-  "@adminCleanupDays": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      }
-    }
-  },
-  "adminCleanupAction": "清理文件",
-  "adminCleanupComplete": "已清理 {count} 项资源，释放 {size}。",
-  "@adminCleanupComplete": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      },
-      "size": {
-        "type": "String"
-      }
-    }
-  },
   "adminFileCount": "共 {count} 项持久文件",
   "@adminFileCount": {
     "placeholders": {
@@ -639,7 +618,6 @@
   "deleteAction": "删除",
   "cancelAction": "取消",
   "exportDocx": "导出 DOCX",
-  "cleanupDaysLabel": "清理多少天前的文件",
   "videoFile": "视频文件",
   "analysisReport": "分析报告",
   "uniqueUsers": "独立用户",
@@ -668,7 +646,6 @@
   "providerLoginRequiredError": "该内容需要登录，请确认部署主机已登录对应平台。",
   "providerContentProtectedError": "该内容受加密保护，无法下载；可导入已取得的文件。",
   "providerUnavailable": "未开放",
-  "providerDownloadEnabled": "下载已开放",
   "providerIdentityUnavailableError": "平台登录材料暂不可用，请检查部署主机的登录状态后重新解析。",
   "providerContextChangedError": "媒体执行上下文已变化，请重新解析链接并确认下载规格。",
   "reparseDownloadAction": "重新解析",
@@ -707,13 +684,6 @@
   "activityHistoryBasic": "基础解析",
   "activityHistoryRewrite": "AI 改写",
   "activityHistoryAll": "全部类型",
-  "bulkSelectAll": "选择本页",
-  "bulkClear": "清除选择",
-  "bulkDownload": "批量下载",
-  "bulkRetry": "批量重试",
-  "bulkDelete": "批量删除",
-  "bulkActionResult": "操作完成",
-  "bulkActionSummary": "已完成",
   "pageSizeLabel": "每页条数",
   "profileAvatarUpload": "上传头像",
   "profileAvatarRemove": "移除头像",
@@ -780,11 +750,7 @@
   "adminOperationFinished": "结束时间",
   "adminOperationStatusCode": "HTTP 状态",
   "adminOperationErrorCode": "错误码",
-  "adminSelectAll": "选择本页",
-  "adminDeleteSelected": "删除所选",
-  "adminDeleteSelectionTitle": "删除所选记录？",
   "adminDeleteSelectionDescription": "删除后无法恢复。已删除的记录会从列表移除；失败的记录可以重试。",
-  "adminDeletePartialFailure": "部分记录未能删除，请核对并重试。",
   "adminDeleteUserDescription": "账户、登录凭据、角色、配额和会话会一并移除；历史下载文件与任务记录不会自动删除。",
   "adminDeleteFileDescription": "文件及其持久对象将永久删除。正在分析的源文件无法删除。",
   "adminUsersEmpty": "没有匹配的账户",

@@ -937,10 +937,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get intentAutomaticAccess => '系统会自动选择公开访问路线。仅在明确获得授权时选择其他策略。';
 
   @override
-  String get intentHistoryTitle => '解析记录';
+  String get activityHistoryEmpty => '暂无处理记录';
 
   @override
-  String get intentHistoryEmpty => '暂无解析记录';
+  String get clearFiltersAction => '清空筛选';
+
+  @override
+  String get providerNoCapabilities => '暂无已登记能力';
+
+  @override
+  String get providerFileResultHint => '下载结果以实际文件为准。';
 
   @override
   String get intentQueued => '等待解析';
@@ -965,9 +971,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get intentCancelAction => '取消解析';
-
-  @override
-  String get intentRestoreAction => '打开历史解析';
 
   @override
   String get intentHistoryAction => '查看解析记录';
@@ -1403,7 +1406,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get adminFilesTitle => '文件管理';
 
   @override
-  String get adminFilesDescription => '查看持久文件，并清理超过保留周期的资源。';
+  String get adminFilesDescription => '查看已保存文件的类型、大小和创建时间，或删除单个文件。';
 
   @override
   String get adminUsersTitle => '用户管理';
@@ -1438,26 +1441,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get adminSourceBreakdown => '来源分布';
-
-  @override
-  String get adminCleanupTitle => '清理历史文件？';
-
-  @override
-  String get adminCleanupDescription =>
-      '将永久删除指定天数前的视频、剧本文档和分析报告。正在执行分析的源文件会被跳过。';
-
-  @override
-  String adminCleanupDays(int days) {
-    return '清理 $days 天前的文件';
-  }
-
-  @override
-  String get adminCleanupAction => '清理文件';
-
-  @override
-  String adminCleanupComplete(int count, String size) {
-    return '已清理 $count 项资源，释放 $size。';
-  }
 
   @override
   String adminFileCount(int count) {
@@ -1727,9 +1710,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get exportDocx => '导出 DOCX';
 
   @override
-  String get cleanupDaysLabel => '清理多少天前的文件';
-
-  @override
   String get videoFile => '视频文件';
 
   @override
@@ -1812,9 +1792,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get providerUnavailable => '未开放';
-
-  @override
-  String get providerDownloadEnabled => '下载已开放';
 
   @override
   String get providerIdentityUnavailableError =>
@@ -1930,27 +1907,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get activityHistoryAll => '全部类型';
-
-  @override
-  String get bulkSelectAll => '选择本页';
-
-  @override
-  String get bulkClear => '清除选择';
-
-  @override
-  String get bulkDownload => '批量下载';
-
-  @override
-  String get bulkRetry => '批量重试';
-
-  @override
-  String get bulkDelete => '批量删除';
-
-  @override
-  String get bulkActionResult => '操作完成';
-
-  @override
-  String get bulkActionSummary => '已完成';
 
   @override
   String get pageSizeLabel => '每页条数';
@@ -2154,20 +2110,8 @@ class AppLocalizationsZh extends AppLocalizations {
   String get adminOperationErrorCode => '错误码';
 
   @override
-  String get adminSelectAll => '选择本页';
-
-  @override
-  String get adminDeleteSelected => '删除所选';
-
-  @override
-  String get adminDeleteSelectionTitle => '删除所选记录？';
-
-  @override
   String get adminDeleteSelectionDescription =>
       '删除后无法恢复。已删除的记录会从列表移除；失败的记录可以重试。';
-
-  @override
-  String get adminDeletePartialFailure => '部分记录未能删除，请核对并重试。';
 
   @override
   String get adminDeleteUserDescription =>

@@ -83,12 +83,17 @@ final class SourceDiscoveryWorkspace extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(item.title, style: theme.textTheme.titleSmall),
+                            Text(
+                              item.title,
+                              textAlign: TextAlign.start,
+                              style: theme.textTheme.titleSmall,
+                            ),
                             const SizedBox(height: 4),
                             Text(
                               ready
                                   ? _duration(item.durationMs)
                                   : localizations.candidateUnavailable,
+                              textAlign: TextAlign.start,
                               style: theme.textTheme.bodySmall?.copyWith(
                                 color: theme.colorScheme.onSurfaceVariant,
                               ),

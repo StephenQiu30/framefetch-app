@@ -310,8 +310,10 @@
   "clearMediaUrl": "Clear link",
   "inspectMedia": "Inspect media",
   "intentAutomaticAccess": "The system chooses a public route automatically. Select another policy only with explicit authorization.",
-  "intentHistoryTitle": "Recent inspections",
-  "intentHistoryEmpty": "No previous inspections",
+  "activityHistoryEmpty": "No processing records",
+  "clearFiltersAction": "Clear filters",
+  "providerNoCapabilities": "No registered capabilities",
+  "providerFileResultHint": "Download availability depends on the actual file.",
   "intentQueued": "Waiting to inspect",
   "intentResolving": "Inspecting media",
   "intentExpired": "Inspection result expired",
@@ -320,7 +322,6 @@
   "intentRefreshAction": "Update inspection",
   "intentCancelling": "Cancelling inspection",
   "intentCancelAction": "Cancel inspection",
-  "intentRestoreAction": "Open previous inspection",
   "intentHistoryAction": "View recent inspections",
   "intentHandedOff": "Download task created",
   "intentRefreshHint": "New download formats must be confirmed again.",
@@ -492,7 +493,7 @@
   "adminAnalyticsTitle": "Usage analytics",
   "adminAnalyticsDescription": "Review download performance and AI analysis executions.",
   "adminFilesTitle": "File management",
-  "adminFilesDescription": "Review persisted files and clean up resources beyond retention.",
+  "adminFilesDescription": "Review saved file types, sizes, and creation times, or delete a single file.",
   "adminUsersTitle": "User management",
   "adminUsersDescription": "Review users and adjust roles or account access.",
   "adminProvidersTitle": "Provider catalog",
@@ -510,28 +511,6 @@
   "adminSuccessRate": "Success rate",
   "adminDownloadedBytes": "Downloaded",
   "adminSourceBreakdown": "Source breakdown",
-  "adminCleanupTitle": "Clean up historical files?",
-  "adminCleanupDescription": "Permanently delete videos, screenplays, and analysis reports older than the specified days. Source files used by active analysis are skipped.",
-  "adminCleanupDays": "Clean up files older than {days} days",
-  "@adminCleanupDays": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      }
-    }
-  },
-  "adminCleanupAction": "Clean up files",
-  "adminCleanupComplete": "Removed {count} resources and freed {size}.",
-  "@adminCleanupComplete": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      },
-      "size": {
-        "type": "String"
-      }
-    }
-  },
   "adminFileCount": "{count} persisted files",
   "@adminFileCount": {
     "placeholders": {
@@ -639,7 +618,6 @@
   "deleteAction": "Delete",
   "cancelAction": "Cancel",
   "exportDocx": "Export DOCX",
-  "cleanupDaysLabel": "Delete files older than this many days",
   "videoFile": "Video file",
   "analysisReport": "Analysis report",
   "uniqueUsers": "Unique users",
@@ -668,7 +646,6 @@
   "providerLoginRequiredError": "This content requires login. Confirm the deployment host is signed into the platform.",
   "providerContentProtectedError": "This content is protected and cannot be downloaded. Import a file you have already obtained.",
   "providerUnavailable": "Not enabled",
-  "providerDownloadEnabled": "Download enabled",
   "providerIdentityUnavailableError": "Platform login material is unavailable. Check the deployment host login and inspect the link again.",
   "providerContextChangedError": "The media execution context changed. Inspect the link again and confirm the download format.",
   "reparseDownloadAction": "Inspect link again",
@@ -707,13 +684,6 @@
   "activityHistoryBasic": "Basic parsing",
   "activityHistoryRewrite": "AI rewrite",
   "activityHistoryAll": "All types",
-  "bulkSelectAll": "Select this page",
-  "bulkClear": "Clear selection",
-  "bulkDownload": "Download selected",
-  "bulkRetry": "Retry selected",
-  "bulkDelete": "Delete selected",
-  "bulkActionResult": "Operation complete",
-  "bulkActionSummary": "Completed",
   "pageSizeLabel": "Page size",
   "profileAvatarUpload": "Upload avatar",
   "profileAvatarRemove": "Remove avatar",
@@ -780,11 +750,7 @@
   "adminOperationFinished": "Finished at",
   "adminOperationStatusCode": "HTTP status",
   "adminOperationErrorCode": "Error code",
-  "adminSelectAll": "Select this page",
-  "adminDeleteSelected": "Delete selected",
-  "adminDeleteSelectionTitle": "Delete the selected records?",
   "adminDeleteSelectionDescription": "Deletion cannot be undone. Deleted records are removed from the list; failed deletions can be retried.",
-  "adminDeletePartialFailure": "Some records could not be deleted. Review them and retry.",
   "adminDeleteUserDescription": "The account, credentials, role, quotas, and sessions are removed. Historical download files and task records are retained.",
   "adminDeleteFileDescription": "The file and its persistent objects are permanently deleted. Source files used by active analysis cannot be deleted.",
   "adminUsersEmpty": "No matching accounts",

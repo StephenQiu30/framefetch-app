@@ -332,17 +332,28 @@ final class _AnalysisReportScreenState
                       ),
                       scrollable: true,
                     )
-                  : Center(
+                  : Align(
                       key: const Key('analysis-report-loading'),
-                      child: Semantics(
-                        liveRegion: true,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const AppSpinner(),
-                            const SizedBox(height: AppSpacing.medium),
-                            Text(l10n.analysisReportLoading),
-                          ],
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.pageHorizontal,
+                          vertical: AppSpacing.medium,
+                        ),
+                        child: Semantics(
+                          liveRegion: true,
+                          child: Row(
+                            children: [
+                              const AppSpinner(),
+                              const SizedBox(width: AppSpacing.medium),
+                              Expanded(
+                                child: Text(
+                                  l10n.analysisReportLoading,
+                                  textAlign: TextAlign.start,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

@@ -11,13 +11,11 @@ final class ActivityHistoryFilters extends StatefulWidget {
     required this.query,
     required this.onFilter,
     required this.skills,
-    this.busy = false,
     super.key,
   });
   final ActivityHistoryQuery query;
   final ValueChanged<ActivityHistoryQuery> onFilter;
   final List<AnalysisSkillResponse> skills;
-  final bool busy;
 
   @override
   State<ActivityHistoryFilters> createState() => _ActivityHistoryFiltersState();
@@ -70,15 +68,13 @@ final class _ActivityHistoryFiltersState extends State<ActivityHistoryFilters> {
             for (final category in ActivityCategory.values)
               ShadButton.ghost(
                 key: Key('activity-category-${category.name}'),
-                onPressed: widget.busy
-                    ? null
-                    : () => widget.onFilter(
-                        query.filter(
-                          category: category,
-                          screenplayMode: ScreenplayHistoryMode.all,
-                          skillId: null,
-                        ),
-                      ),
+                onPressed: () => widget.onFilter(
+                  query.filter(
+                    category: category,
+                    screenplayMode: ScreenplayHistoryMode.all,
+                    skillId: null,
+                  ),
+                ),
                 backgroundColor: query.category == category
                     ? Theme.of(context).colorScheme.surfaceContainerHighest
                     : null,
@@ -95,7 +91,6 @@ final class _ActivityHistoryFiltersState extends State<ActivityHistoryFilters> {
         ShadInput(
           key: const Key('activity-search'),
           controller: _search,
-          enabled: !widget.busy,
           placeholder: Text(l.activityHistorySearch),
           onSubmitted: (_) => _apply(),
         ),
@@ -109,38 +104,29 @@ final class _ActivityHistoryFiltersState extends State<ActivityHistoryFilters> {
               child: _DateField(
                 label: l.activityHistoryFrom,
                 controller: _from,
-                enabled: !widget.busy,
               ),
             ),
             SizedBox(
               width: 160,
-              child: _DateField(
-                label: l.activityHistoryTo,
-                controller: _to,
-                enabled: !widget.busy,
-              ),
+              child: _DateField(label: l.activityHistoryTo, controller: _to),
             ),
-            ShadButton.outline(
-              onPressed: widget.busy ? null : _apply,
-              child: Text(l.searchAction),
-            ),
+            ShadButton.outline(onPressed: _apply, child: Text(l.searchAction)),
             ShadButton.ghost(
-              onPressed: widget.busy
-                  ? null
-                  : () {
-                      _search.clear();
-                      _from.clear();
-                      _to.clear();
-                      setState(() => _invalidDates = false);
-                      widget.onFilter(
-                        ActivityHistoryQuery(
-                          pageSize: query.pageSize,
-                          documentId: query.documentId,
-                          downloadId: query.downloadId,
-                        ),
-                      );
-                    },
-              child: Text(l.bulkClear),
+              key: const Key('activity-clear-filters'),
+              onPressed: () {
+                _search.clear();
+                _from.clear();
+                _to.clear();
+                setState(() => _invalidDates = false);
+                widget.onFilter(
+                  ActivityHistoryQuery(
+                    pageSize: query.pageSize,
+                    documentId: query.documentId,
+                    downloadId: query.downloadId,
+                  ),
+                );
+              },
+              child: Text(l.clearFiltersAction),
             ),
           ],
         ),
@@ -159,7 +145,6 @@ final class _ActivityHistoryFiltersState extends State<ActivityHistoryFilters> {
               child: AppDropdownField<HistoryStatusGroup?>(
                 label: l.statusLabel,
                 value: query.status,
-                enabled: !widget.busy,
                 options: [
                   AppDropdownOption(value: null, label: l.allStatuses),
                   AppDropdownOption(
@@ -193,7 +178,6 @@ final class _ActivityHistoryFiltersState extends State<ActivityHistoryFilters> {
                 child: AppDropdownField<ScreenplayHistoryMode>(
                   label: l.activityHistoryScreenplay,
                   value: query.screenplayMode,
-                  enabled: !widget.busy,
                   options: [
                     for (final mode in ScreenplayHistoryMode.values)
                       AppDropdownOption(
@@ -224,7 +208,6 @@ final class _ActivityHistoryFiltersState extends State<ActivityHistoryFilters> {
                 child: AppDropdownField<String?>(
                   label: l.activityHistorySkill,
                   value: query.skillId,
-                  enabled: !widget.busy,
                   options: [
                     AppDropdownOption(value: null, label: l.activityHistoryAll),
                     for (final skill in widget.skills.where(
@@ -254,14 +237,9 @@ final class _ActivityHistoryFiltersState extends State<ActivityHistoryFilters> {
 }
 
 final class _DateField extends StatelessWidget {
-  const _DateField({
-    required this.label,
-    required this.controller,
-    required this.enabled,
-  });
+  const _DateField({required this.label, required this.controller});
   final String label;
   final TextEditingController controller;
-  final bool enabled;
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -270,7 +248,6 @@ final class _DateField extends StatelessWidget {
       const SizedBox(height: AppSpacing.xSmall),
       ShadInput(
         controller: controller,
-        enabled: enabled,
         placeholder: const Text('YYYY-MM-DD'),
         maxLength: 10,
         keyboardType: TextInputType.datetime,

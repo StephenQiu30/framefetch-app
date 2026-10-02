@@ -247,6 +247,7 @@ final class _DownloadHistoryItemState
                       children: [
                         Text(
                           item.title,
+                          textAlign: TextAlign.start,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.titleMedium,
@@ -255,6 +256,7 @@ final class _DownloadHistoryItemState
                           const SizedBox(height: AppSpacing.xSmall),
                           Text(
                             meta,
+                            textAlign: TextAlign.start,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.bodySmall
@@ -272,6 +274,7 @@ final class _DownloadHistoryItemState
                           const SizedBox(height: AppSpacing.xSmall),
                           Text(
                             failure,
+                            textAlign: TextAlign.start,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(color: colors.error),

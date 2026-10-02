@@ -1898,17 +1898,29 @@ abstract class AppLocalizations {
   /// **'系统会自动选择公开访问路线。仅在明确获得授权时选择其他策略。'**
   String get intentAutomaticAccess;
 
-  /// No description provided for @intentHistoryTitle.
+  /// No description provided for @activityHistoryEmpty.
   ///
   /// In zh, this message translates to:
-  /// **'解析记录'**
-  String get intentHistoryTitle;
+  /// **'暂无处理记录'**
+  String get activityHistoryEmpty;
 
-  /// No description provided for @intentHistoryEmpty.
+  /// No description provided for @clearFiltersAction.
   ///
   /// In zh, this message translates to:
-  /// **'暂无解析记录'**
-  String get intentHistoryEmpty;
+  /// **'清空筛选'**
+  String get clearFiltersAction;
+
+  /// No description provided for @providerNoCapabilities.
+  ///
+  /// In zh, this message translates to:
+  /// **'暂无已登记能力'**
+  String get providerNoCapabilities;
+
+  /// No description provided for @providerFileResultHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'下载结果以实际文件为准。'**
+  String get providerFileResultHint;
 
   /// No description provided for @intentQueued.
   ///
@@ -1957,12 +1969,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'取消解析'**
   String get intentCancelAction;
-
-  /// No description provided for @intentRestoreAction.
-  ///
-  /// In zh, this message translates to:
-  /// **'打开历史解析'**
-  String get intentRestoreAction;
 
   /// No description provided for @intentHistoryAction.
   ///
@@ -2807,7 +2813,7 @@ abstract class AppLocalizations {
   /// No description provided for @adminFilesDescription.
   ///
   /// In zh, this message translates to:
-  /// **'查看持久文件，并清理超过保留周期的资源。'**
+  /// **'查看已保存文件的类型、大小和创建时间，或删除单个文件。'**
   String get adminFilesDescription;
 
   /// No description provided for @adminUsersTitle.
@@ -2869,36 +2875,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'来源分布'**
   String get adminSourceBreakdown;
-
-  /// No description provided for @adminCleanupTitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'清理历史文件？'**
-  String get adminCleanupTitle;
-
-  /// No description provided for @adminCleanupDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'将永久删除指定天数前的视频、剧本文档和分析报告。正在执行分析的源文件会被跳过。'**
-  String get adminCleanupDescription;
-
-  /// No description provided for @adminCleanupDays.
-  ///
-  /// In zh, this message translates to:
-  /// **'清理 {days} 天前的文件'**
-  String adminCleanupDays(int days);
-
-  /// No description provided for @adminCleanupAction.
-  ///
-  /// In zh, this message translates to:
-  /// **'清理文件'**
-  String get adminCleanupAction;
-
-  /// No description provided for @adminCleanupComplete.
-  ///
-  /// In zh, this message translates to:
-  /// **'已清理 {count} 项资源，释放 {size}。'**
-  String adminCleanupComplete(int count, String size);
 
   /// No description provided for @adminFileCount.
   ///
@@ -3416,12 +3392,6 @@ abstract class AppLocalizations {
   /// **'导出 DOCX'**
   String get exportDocx;
 
-  /// No description provided for @cleanupDaysLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'清理多少天前的文件'**
-  String get cleanupDaysLabel;
-
   /// No description provided for @videoFile.
   ///
   /// In zh, this message translates to:
@@ -3589,12 +3559,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'未开放'**
   String get providerUnavailable;
-
-  /// No description provided for @providerDownloadEnabled.
-  ///
-  /// In zh, this message translates to:
-  /// **'下载已开放'**
-  String get providerDownloadEnabled;
 
   /// No description provided for @providerIdentityUnavailableError.
   ///
@@ -3823,48 +3787,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'全部类型'**
   String get activityHistoryAll;
-
-  /// No description provided for @bulkSelectAll.
-  ///
-  /// In zh, this message translates to:
-  /// **'选择本页'**
-  String get bulkSelectAll;
-
-  /// No description provided for @bulkClear.
-  ///
-  /// In zh, this message translates to:
-  /// **'清除选择'**
-  String get bulkClear;
-
-  /// No description provided for @bulkDownload.
-  ///
-  /// In zh, this message translates to:
-  /// **'批量下载'**
-  String get bulkDownload;
-
-  /// No description provided for @bulkRetry.
-  ///
-  /// In zh, this message translates to:
-  /// **'批量重试'**
-  String get bulkRetry;
-
-  /// No description provided for @bulkDelete.
-  ///
-  /// In zh, this message translates to:
-  /// **'批量删除'**
-  String get bulkDelete;
-
-  /// No description provided for @bulkActionResult.
-  ///
-  /// In zh, this message translates to:
-  /// **'操作完成'**
-  String get bulkActionResult;
-
-  /// No description provided for @bulkActionSummary.
-  ///
-  /// In zh, this message translates to:
-  /// **'已完成'**
-  String get bulkActionSummary;
 
   /// No description provided for @pageSizeLabel.
   ///
@@ -4262,35 +4184,11 @@ abstract class AppLocalizations {
   /// **'错误码'**
   String get adminOperationErrorCode;
 
-  /// No description provided for @adminSelectAll.
-  ///
-  /// In zh, this message translates to:
-  /// **'选择本页'**
-  String get adminSelectAll;
-
-  /// No description provided for @adminDeleteSelected.
-  ///
-  /// In zh, this message translates to:
-  /// **'删除所选'**
-  String get adminDeleteSelected;
-
-  /// No description provided for @adminDeleteSelectionTitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'删除所选记录？'**
-  String get adminDeleteSelectionTitle;
-
   /// No description provided for @adminDeleteSelectionDescription.
   ///
   /// In zh, this message translates to:
   /// **'删除后无法恢复。已删除的记录会从列表移除；失败的记录可以重试。'**
   String get adminDeleteSelectionDescription;
-
-  /// No description provided for @adminDeletePartialFailure.
-  ///
-  /// In zh, this message translates to:
-  /// **'部分记录未能删除，请核对并重试。'**
-  String get adminDeletePartialFailure;
 
   /// No description provided for @adminDeleteUserDescription.
   ///

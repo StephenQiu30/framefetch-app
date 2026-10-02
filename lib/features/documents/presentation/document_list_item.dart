@@ -120,11 +120,13 @@ final class _DocumentListItemState extends ConsumerState<DocumentListItem> {
                 children: [
                   Text(
                     item.title,
+                    textAlign: TextAlign.start,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: AppSpacing.xSmall),
                   Text(
                     item.originalFilename,
+                    textAlign: TextAlign.start,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: colors.onSurfaceVariant,
                     ),
@@ -137,12 +139,14 @@ final class _DocumentListItemState extends ConsumerState<DocumentListItem> {
                   const SizedBox(height: AppSpacing.small),
                   Text(
                     details.join(' · '),
+                    textAlign: TextAlign.start,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   const SizedBox(height: AppSpacing.small),
                   Text(
                     '${l10n.updatedAtLabel} '
                     '${formatDataTime(context, item.updatedAt)}',
+                    textAlign: TextAlign.start,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: colors.onSurfaceVariant,
                     ),

@@ -11,6 +11,7 @@ import 'package:framegrab/l10n/app_localizations.dart';
 import 'package:framegrab/shared/presentation/app_spinner.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
+import 'package:video_server_api/video_server_api.dart';
 
 final class AnalysisPanel extends ConsumerWidget {
   AnalysisPanel({required String downloadId, super.key})
@@ -32,6 +33,9 @@ final class AnalysisPanel extends ConsumerWidget {
     final description = target.isScreenplay
         ? l10n.screenplayAnalysisDescription
         : l10n.aiAnalysisDescription;
+    final job = result.value?.job;
+    final showIntroduction =
+        job?.status != AnalysisStatus.succeeded || job?.result == null;
     return Semantics(
       container: true,
       explicitChildNodes: true,
@@ -40,15 +44,17 @@ final class AnalysisPanel extends ConsumerWidget {
         key: const Key('analysis-panel'),
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(title, style: Theme.of(context).textTheme.headlineLarge),
-          const SizedBox(height: AppSpacing.small),
-          Text(
-            description,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
+          if (showIntroduction) ...[
+            Text(title, style: Theme.of(context).textTheme.headlineLarge),
+            const SizedBox(height: AppSpacing.small),
+            Text(
+              description,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
             ),
-          ),
-          const SizedBox(height: AppSpacing.xLarge),
+            const SizedBox(height: AppSpacing.xLarge),
+          ],
           result.when(
             data: (state) => _content(context, state, controller),
             error: (_, _) => DataStateMessage(

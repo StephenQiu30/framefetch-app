@@ -35,6 +35,8 @@ void main() {
     expect(find.textContaining(RegExp(r'^\d{2} /')), findsNothing);
     expect(find.text('把素材，带回本地。'), findsOneWidget);
     expect(find.text('解析媒体'), findsOneWidget);
+    expect(find.text('解析记录'), findsNothing);
+    expect(find.byKey(const Key('intent-history')), findsNothing);
     expect(find.text('链接解析'), findsOneWidget);
     expect(find.text('本地视频'), findsOneWidget);
     expect(find.text('剧本文档'), findsOneWidget);
@@ -785,6 +787,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(Divider), findsNothing);
+    expect(find.byType(ShadCheckbox), findsNothing);
+    expect(find.text('选择本页'), findsNothing);
+    expect(find.text('批量下载'), findsNothing);
   });
 
   testWidgets('deletes a download from its detail and returns safely', (
@@ -917,6 +922,7 @@ void main() {
 
       expect(analysis.createKeys, hasLength(1));
       expect(find.byKey(const Key('video-analysis-result')), findsOneWidget);
+      expect(find.text('AI 智能分析'), findsNothing);
       expect(find.text('舞台表演视觉分析'), findsOneWidget);
       expect(find.text('镜头围绕主体动作与舞台调度形成连续节奏。'), findsOneWidget);
       expect(find.textContaining('等待调度'), findsNothing);

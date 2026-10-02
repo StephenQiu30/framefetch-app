@@ -7,17 +7,11 @@ final class AdminEditSheet extends StatefulWidget {
     required this.title,
     required this.fields,
     required this.onSave,
-    this.saveLabel,
-    this.savingLabel,
-    this.destructiveAction = false,
     super.key,
   });
   final String title;
   final List<Widget> fields;
   final Future<void> Function() onSave;
-  final String? saveLabel;
-  final String? savingLabel;
-  final bool destructiveAction;
   @override
   State<AdminEditSheet> createState() => _AdminEditSheetState();
 }
@@ -94,10 +88,7 @@ final class _AdminEditSheetState extends State<AdminEditSheet> {
                   child: Text(AppLocalizations.of(context).cancelAction),
                 ),
               ),
-              ShadButton.raw(
-                variant: widget.destructiveAction
-                    ? ShadButtonVariant.destructive
-                    : ShadButtonVariant.primary,
+              ShadButton(
                 onPressed: _saving ? null : _save,
                 enabled: (_saving ? null : _save) != null,
                 height: 0,
@@ -108,10 +99,8 @@ final class _AdminEditSheetState extends State<AdminEditSheet> {
                 child: Flexible(
                   child: Text(
                     _saving
-                        ? widget.savingLabel ??
-                              AppLocalizations.of(context).savingProfile
-                        : widget.saveLabel ??
-                              AppLocalizations.of(context).saveAction,
+                        ? AppLocalizations.of(context).savingProfile
+                        : AppLocalizations.of(context).saveAction,
                   ),
                 ),
               ),

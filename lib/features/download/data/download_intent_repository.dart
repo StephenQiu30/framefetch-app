@@ -16,7 +16,6 @@ abstract interface class DownloadIntentRepository {
   });
   Future<IntentResponse> find(String idempotencyKey);
   Future<IntentResponse> get(String id);
-  Future<IntentHistoryResponse> history({String? before});
   Future<IntentResponse> refresh(String id);
   Future<IntentResponse> cancel(String id);
   Future<InspectionResponse> inspection(String id);
@@ -55,14 +54,6 @@ final class GeneratedDownloadIntentRepository
     (client) => client
         .getDownloadIntentsApi()
         .getDownloadIntent(intentId: id)
-        .then((response) => response.data?.data),
-  );
-
-  @override
-  Future<IntentHistoryResponse> history({String? before}) => _required(
-    (client) => client
-        .getDownloadIntentsApi()
-        .listDownloadIntents(before: before)
         .then((response) => response.data?.data),
   );
 

@@ -71,7 +71,7 @@ final class _ProfileAvatarSectionState
     final avatar = ref.watch(profileAvatarProvider);
     final initials = user.username.characters.take(2).toString().toUpperCase();
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ShadAvatar(avatar.asData?.value, placeholder: Text(initials)),
         const SizedBox(height: AppSpacing.small),
@@ -79,7 +79,7 @@ final class _ProfileAvatarSectionState
         const SizedBox(height: AppSpacing.xSmall),
         Text(
           user.email,
-          textAlign: TextAlign.center,
+          textAlign: TextAlign.start,
           style: ShadTheme.of(context).textTheme.muted,
         ),
         const SizedBox(height: AppSpacing.xSmall),
@@ -90,7 +90,7 @@ final class _ProfileAvatarSectionState
         ),
         const SizedBox(height: AppSpacing.medium),
         Wrap(
-          alignment: WrapAlignment.center,
+          alignment: WrapAlignment.start,
           spacing: 8,
           runSpacing: 8,
           children: [
@@ -124,7 +124,7 @@ final class _ProfileAvatarSectionState
         const SizedBox(height: AppSpacing.xSmall),
         Text(
           l.profileAvatarHelp,
-          textAlign: TextAlign.center,
+          textAlign: TextAlign.start,
           style: ShadTheme.of(context).textTheme.muted,
         ),
         if (_error != null)
@@ -134,7 +134,7 @@ final class _ProfileAvatarSectionState
               liveRegion: true,
               child: Text(
                 _error!,
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.start,
                 style: TextStyle(
                   color: ShadTheme.of(context).colorScheme.destructive,
                 ),

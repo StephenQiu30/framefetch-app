@@ -9,7 +9,6 @@ typedef HistoryRecordPresentation = ({
   String kind,
   String status,
   DateTime createdAt,
-  bool selectable,
   bool sourceUnavailable,
 });
 
@@ -32,7 +31,6 @@ HistoryRecordPresentation presentHistoryRecord(
       _ => l.inspectionResultTitle,
     },
     createdAt: item.createdAt,
-    selectable: item.status == IntentStatus.ready && item.inspectionId != null,
     sourceUnavailable:
         item.sourceAvailability == HistoryAvailability.unavailable,
   ),
@@ -42,7 +40,6 @@ HistoryRecordPresentation presentHistoryRecord(
     kind: l.activityHistoryBasic,
     status: documentStatusLabel(l, item.status.name),
     createdAt: item.createdAt,
-    selectable: false,
     sourceUnavailable:
         item.sourceAvailability == HistoryAvailability.unavailable,
   ),
@@ -52,7 +49,6 @@ HistoryRecordPresentation presentHistoryRecord(
     kind: '${l.activityHistoryVideo} · ${item.skillId}',
     status: analysisStatusLabel(l, item.status),
     createdAt: item.createdAt,
-    selectable: false,
     sourceUnavailable:
         item.sourceAvailability == HistoryAvailability.unavailable,
   ),
@@ -63,7 +59,6 @@ HistoryRecordPresentation presentHistoryRecord(
         '${item.resultContract == AnalysisResultContract.screenplayRewrite ? l.activityHistoryRewrite : l.screenplayAnalysisTitle} · ${item.skillId}',
     status: analysisStatusLabel(l, item.status),
     createdAt: item.createdAt,
-    selectable: false,
     sourceUnavailable:
         item.sourceAvailability == HistoryAvailability.unavailable,
   ),
