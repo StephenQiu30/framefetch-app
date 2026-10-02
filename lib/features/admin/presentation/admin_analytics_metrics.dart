@@ -22,21 +22,27 @@ final class AdminAnalyticsMetrics extends StatelessWidget {
                 label: '${metric.$1}: ${metric.$2}. ${metric.$3}',
                 child: ExcludeSemantics(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
                         metric.$1,
+                        textAlign: TextAlign.center,
                         style: ShadTheme.of(context).textTheme.small,
                       ),
                       const SizedBox(height: AppSpacing.small),
                       Text(
                         metric.$2,
+                        textAlign: TextAlign.center,
                         style: ShadTheme.of(context).textTheme.h3,
                       ),
                       const SizedBox(height: AppSpacing.small),
-                      Text(
-                        metric.$3,
-                        style: ShadTheme.of(context).textTheme.muted,
+                      Align(
+                        alignment: AlignmentDirectional.centerStart,
+                        child: Text(
+                          metric.$3,
+                          textAlign: TextAlign.start,
+                          style: ShadTheme.of(context).textTheme.muted,
+                        ),
                       ),
                     ],
                   ),
