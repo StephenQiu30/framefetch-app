@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:framegrab/core/theme/app_spacing.dart';
 import 'package:framegrab/features/download/application/download_intent_history_controller.dart';
 import 'package:framegrab/features/download/presentation/intake_failure_message.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
@@ -50,10 +51,14 @@ final class DownloadIntentHistory extends StatelessWidget {
                 for (final item in state.items)
                   ShadButton.ghost(
                     onPressed: busy ? null : () => onResume(item.id),
-                    child: Text(
-                      item.title ?? localizations.intentRestoreAction,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                    height: 0,
+                    padding: const EdgeInsets.all(AppSpacing.medium),
+                    child: Flexible(
+                      child: Text(
+                        item.title ?? localizations.intentRestoreAction,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ),
               if (state.hasMore)
