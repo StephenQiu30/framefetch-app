@@ -8,8 +8,7 @@ import 'package:framegrab/features/documents/application/document_list_provider.
 import 'package:framegrab/features/documents/presentation/document_list_screen.dart';
 import 'package:framegrab/features/download/application/download_intake_controller.dart';
 import 'package:framegrab/features/download/application/public_input.dart';
-import 'package:framegrab/features/download/presentation/content_intake_controls.dart';
-import 'package:framegrab/features/download/presentation/download_app_bar.dart';
+import 'package:framegrab/features/download/presentation/content_intake_selector.dart';
 import 'package:framegrab/features/download/presentation/download_home_content.dart';
 import 'package:framegrab/features/download/presentation/download_intake_workspace.dart';
 import 'package:framegrab/features/download/presentation/download_status.dart';
@@ -21,6 +20,7 @@ import 'package:framegrab/features/settings/presentation/settings_screen.dart';
 import 'package:framegrab/features/upload/application/content_upload_controller.dart';
 import 'package:framegrab/features/upload/domain/content_upload.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
 
 final class DownloadHomeScreen extends ConsumerStatefulWidget {
   const DownloadHomeScreen({
@@ -152,7 +152,7 @@ final class _DownloadHomeScreenState extends ConsumerState<DownloadHomeScreen>
         ? _error
         : intakeFailureMessage(localizations, remoteError);
     return Scaffold(
-      appBar: const DownloadAppBar(),
+      appBar: const AppNavigationBar(),
       body: IndexedStack(
         index: _selectedIndex,
         children: [

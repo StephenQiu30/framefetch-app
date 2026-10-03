@@ -12,13 +12,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Framegrab';
 
   @override
-  String get openNavigation => 'Open navigation menu';
-
-  @override
-  String get navigationDescription =>
-      'Open content intake, download history, screenplay documents, provider status, and account settings.';
-
-  @override
   String get homeNavigation => 'Home';
 
   @override
@@ -52,9 +45,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loadFailedTitle => 'Data is temporarily unavailable';
 
   @override
-  String get loadFailedDescription => 'Check your connection and try again.';
-
-  @override
   String get invalidResponseError =>
       'The service response is incompatible with this app version. Update the app or contact the service administrator.';
 
@@ -72,9 +62,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get totalLabel => 'Total';
 
   @override
-  String get availableLabel => 'Available';
-
-  @override
   String get succeededLabel => 'Completed';
 
   @override
@@ -82,12 +69,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get failedLabel => 'Failed';
-
-  @override
-  String get yesLabel => 'Yes';
-
-  @override
-  String get noLabel => 'No';
 
   @override
   String get downloadHistoryEmptyTitle => 'No download records yet';
@@ -117,19 +98,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get downloadStatusUnknown => 'Unknown status';
 
   @override
-  String get progressLabel => 'Progress';
-
-  @override
   String get updatedAtLabel => 'Updated';
 
   @override
-  String get showingFirstPage => 'Showing the 20 most recent items';
-
-  @override
   String get failureCancelled => 'The task was cancelled';
-
-  @override
-  String get failureTimeout => 'Processing timed out';
 
   @override
   String get failureStorage => 'Storage is temporarily unavailable';
@@ -327,18 +299,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get providerEmptyTitle => 'No provider status';
 
   @override
-  String get downloadAvailableLabel => 'Download available';
-
-  @override
-  String get capabilitiesLabel => 'Capabilities';
-
-  @override
-  String get userActionLabel => 'Suggested action';
-
-  @override
-  String get providerStatusDisabled => 'Disabled';
-
-  @override
   String get providerStatusUnsupported => 'Unsupported';
 
   @override
@@ -366,26 +326,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get capabilityPlaylist => 'Playlist';
 
   @override
-  String get appearanceSection => 'Appearance';
-
-  @override
-  String get accountSection => 'Account';
-
-  @override
-  String get helpSection => 'Help and product';
-
-  @override
   String get guideNavigation => 'User guide';
-
-  @override
-  String get guideEntryDescription =>
-      'Learn about content imports, AI analysis, client responsibilities, and self-hosting boundaries.';
-
-  @override
-  String get darkThemeLabel => 'Dark appearance';
-
-  @override
-  String get themeToggleDescription => 'Switch between dark and light themes';
 
   @override
   String get switchToDarkTheme => 'Switch to dark theme';
@@ -531,9 +472,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get publicDeploymentAction => 'Read deployment guide';
-
-  @override
-  String get publicGuideEyebrow => 'FrameFetch guide';
 
   @override
   String get publicGuideTitle => 'From source material to an analysis report';
@@ -687,9 +625,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginAction => 'Sign in';
 
   @override
-  String get registerAction => 'Register';
-
-  @override
   String get welcomeBack => 'Welcome back';
 
   @override
@@ -772,19 +707,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'The operation did not complete. Try again later.';
 
   @override
-  String get sessionRestoring => 'Restoring your session…';
-
-  @override
-  String get signedOutTitle => 'Sign in to continue';
-
-  @override
-  String get signedOutDescription =>
-      'Sign in or register to view your profile and access tasks tied to your account.';
-
-  @override
-  String get signedInAs => 'Current account';
-
-  @override
   String get logoutAction => 'Sign out';
 
   @override
@@ -801,10 +723,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get screenplayIntakeMode => 'Screenplay';
-
-  @override
-  String get linkIntakeSupport =>
-      'Paste a public link or share message. If an article contains multiple videos, choose the one to process.';
 
   @override
   String get videoIntakeTitle => 'Import a local video';
@@ -878,10 +796,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get inspectMedia => 'Inspect media';
 
   @override
-  String get intentAutomaticAccess =>
-      'The system chooses a public route automatically. Select another policy only with explicit authorization.';
-
-  @override
   String get activityHistoryEmpty => 'No processing records';
 
   @override
@@ -913,9 +827,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get intentCancelAction => 'Cancel inspection';
-
-  @override
-  String get intentHistoryAction => 'View recent inspections';
 
   @override
   String get intentHandedOff => 'Download task created';
@@ -965,9 +876,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get candidateUnavailable => 'This source cannot be processed';
 
   @override
-  String get mediaUnavailableTitle => 'This media cannot be downloaded';
-
-  @override
   String get mediaUnavailableDescription =>
       'The server did not approve a download task. Follow the guidance or submit another public link.';
 
@@ -986,36 +894,12 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get providerTemporaryError =>
-      'The media provider cannot complete verification right now. Try again later.';
-
-  @override
-  String routeCooldownUntil(String time) {
-    return 'Default route: retry no earlier than $time; recovery still needs verification.';
-  }
-
-  @override
-  String get providerRouteConfigured => 'Route configured';
-
-  @override
-  String get providerContextObserved =>
-      'Context reachable; source and content authorization still require verification';
-
-  @override
-  String get providerContextMissing =>
-      'Context unreachable or not yet confirmed';
-
-  @override
   String get providerRestrictedError =>
       'This media is private or access-restricted and cannot be processed.';
 
   @override
   String get providerLinkError =>
       'The sharing link has expired or no longer resolves to a video. Copy a fresh public link.';
-
-  @override
-  String get providerUnsupportedError =>
-      'The submitted link does not contain one supported public video.';
 
   @override
   String get durationLimitError =>
@@ -1028,14 +912,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get articleDiscoveryError =>
       'Media sources could not be read from this article. Confirm that the article is public and the link is valid.';
-
-  @override
-  String get legalMediaStatus =>
-      'Submit only public links you are authorized to process';
-
-  @override
-  String get privacyStatus =>
-      'Do not submit links containing accounts or access credentials';
 
   @override
   String get mediaCoverPending => 'Generating cover';
@@ -1080,10 +956,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get analysisPromptLabel => 'Analysis focus';
-
-  @override
-  String get analysisPromptDescription =>
-      'Edit or clear the focus. Tool permissions, safety boundaries, and result structure cannot be changed.';
 
   @override
   String get restoreDefaultPrompt => 'Restore default';
@@ -1158,9 +1030,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'This stops the current run. You can start the analysis again later.';
 
   @override
-  String get continueAnalysisAction => 'Keep analyzing';
-
-  @override
   String get confirmCancelAnalysis => 'Cancel analysis';
 
   @override
@@ -1207,9 +1076,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get analysisInvalidResult =>
       'The AI result failed structure and evidence validation. Retry the analysis.';
-
-  @override
-  String get screenplayStoryOverview => 'Story overview';
 
   @override
   String get screenplayLoglineLabel => 'Logline';
@@ -1390,17 +1256,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminSourceBreakdown => 'Source breakdown';
 
   @override
-  String adminFileCount(int count) {
-    return '$count persisted files';
-  }
-
-  @override
   String get adminFilesEmpty => 'No persisted files';
-
-  @override
-  String adminUserCount(int count) {
-    return '$count users';
-  }
 
   @override
   String get adminRoleLabel => 'Role';
@@ -1582,10 +1438,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileTitle => 'Profile';
 
   @override
-  String get profileDescription =>
-      'Manage your public username and account identity.';
-
-  @override
   String get searchAction => 'Search';
 
   @override
@@ -1678,9 +1530,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get averageDuration => 'Average video duration (seconds)';
 
   @override
-  String get dailyTrend => 'Daily trend';
-
-  @override
   String get cancelledLabel => 'Cancelled';
 
   @override
@@ -1696,17 +1545,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hiddenPlatform => 'Hidden';
 
   @override
-  String get needsAttention => 'Needs attention';
-
-  @override
   String get previousAnalysisResult => 'Previous completed result';
 
   @override
   String get catalogScopeDescription =>
       'Adding a catalog entry does not add download support.';
-
-  @override
-  String get saveConfiguration => 'Save configuration';
 
   @override
   String get analysisRateLimited => 'Too many AI requests. Try again later.';
@@ -1733,9 +1576,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get providerRegistered => 'Registered';
-
-  @override
-  String get providerIdentityLabel => 'Identity';
 
   @override
   String get providerIdentityRequired => 'Login required';
@@ -1944,9 +1784,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminAnalysisEmpty => 'No AI analysis records in this period';
 
   @override
-  String get adminCompletionRate => 'Completion rate';
-
-  @override
   String get adminTrendDetails => 'Exact data';
 
   @override
@@ -2041,10 +1878,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminOperationErrorCode => 'Error code';
 
   @override
-  String get adminDeleteSelectionDescription =>
-      'Deletion cannot be undone. Deleted records are removed from the list; failed deletions can be retried.';
-
-  @override
   String get adminDeleteUserDescription =>
       'The account, credentials, role, quotas, and sessions are removed. Historical download files and task records are retained.';
 
@@ -2137,9 +1970,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String pageSizeOption(int size) {
     return '$size per page';
   }
-
-  @override
-  String get uploadVideoAction => 'Import your video';
 
   @override
   String get aboutContent =>

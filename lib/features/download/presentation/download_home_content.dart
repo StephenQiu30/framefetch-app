@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/features/download/presentation/content_intake_controls.dart';
+import 'package:framegrab/features/download/presentation/content_intake_selector.dart';
 import 'package:framegrab/features/download/presentation/download_hero.dart';
 import 'package:framegrab/features/download/presentation/download_status.dart';
 import 'package:framegrab/features/upload/application/content_upload_controller.dart';

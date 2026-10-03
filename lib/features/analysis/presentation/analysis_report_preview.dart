@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
 import 'package:framegrab/features/analysis/data/analysis_markdown_repository.dart';
 import 'package:framegrab/features/analysis/data/analysis_report_file_actions.dart';
-import 'package:framegrab/features/download/presentation/download_app_bar.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
 import 'package:framegrab/shared/presentation/app_page_intro.dart';
 import 'package:framegrab/shared/presentation/app_spinner.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
@@ -232,7 +232,7 @@ final class _AnalysisReportScreenState
     final l10n = AppLocalizations.of(context);
     return Scaffold(
       key: const Key('analysis-report-screen'),
-      appBar: const DownloadAppBar(backFallbackLocation: '/'),
+      appBar: const AppNavigationBar(backFallbackLocation: '/'),
       body: SafeArea(
         top: false,
         child: Column(
