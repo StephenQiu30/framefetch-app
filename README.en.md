@@ -1,162 +1,241 @@
+<img src="assets/brand/logo.png" width="88" alt="Official FrameFetch logo" />
+
 # FrameFetch App
 
-[简体中文](README.md) · [Server / Web](https://github.com/StephenQiu30/video-server) · [Documentation](docs/design/README.md)
+**An open-source, self-hosted personal video and screenplay workstation, on your phone.**
+
+[简体中文](README.md) · [Server / Web](https://github.com/StephenQiu30/video-server) · [Desktop](https://github.com/StephenQiu30/video-electron) · [Get started](#get-started) · [Design documentation](docs/design/README.md)
 
 [![Flutter quality](https://github.com/StephenQiu30/video-app/actions/workflows/flutter-quality.yml/badge.svg)](https://github.com/StephenQiu30/video-app/actions/workflows/flutter-quality.yml)
-[![Flutter 3.44.7](https://img.shields.io/badge/Flutter-3.44.7-02569B?logo=flutter)](https://flutter.dev/)
-[![Platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20Android-111827)](#scope-and-limitations)
-[![Release](https://img.shields.io/github/v/release/StephenQiu30/video-app?color=111827)](https://github.com/StephenQiu30/video-app/releases)
-[![License: MIT](https://img.shields.io/badge/license-MIT-16a34a.svg)](LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/StephenQiu30/video-app?style=flat&color=111827)](https://github.com/StephenQiu30/video-app/stargazers)
+[![Platforms](https://img.shields.io/badge/platform-iOS%20%7C%20Android-171717)](#platforms-and-installation)
+[![Source preview](https://img.shields.io/github/v/release/StephenQiu30/video-app?include_prereleases&color=171717)](https://github.com/StephenQiu30/video-app/releases)
+[![License: MIT](https://img.shields.io/badge/license-MIT-171717.svg)](LICENSE)
 
-**FrameFetch is an open-source Flutter client for self-hosted media workflows on iOS and Android.** It connects to [`video-server`](https://github.com/StephenQiu30/video-server) to inspect authorized public-video links, upload local MP4 videos and screenplays, create and track download jobs, access completed media, inspect provider health, and run server-side AI video analysis.
+FrameFetch is an open-source, self-hosted personal video and screenplay workstation, connecting media acquisition, video review, screenplay coverage and report preparation. This repository provides its **native iOS and Android client**: inspect public links, import local videos and screenplays, confirm formats, follow jobs, play videos, read AI results, and save or share reports.
 
-FrameFetch does not run extractors, transcoders, or AI models on the phone. It does not bypass DRM, memberships, regional controls, or provider access rules.
+The app, Web interface and Electron desktop client connect to the same FrameFetch server and share accounts, media, jobs and reports. The phone handles native interaction and presentation; your [`video-server`](https://github.com/StephenQiu30/video-server) owns inspection, downloading, storage, authorization and AI execution.
 
-## Frequently asked questions
-
-**Which repository should I deploy first?** Start with the [video-server quick start](https://github.com/StephenQiu30/video-server/blob/main/README.en.md#quick-start), then configure a server URL reachable from the phone. `localhost` on a phone refers to the phone, not the computer hosting the server.
-
-**Does AI analysis run on the phone?** Media processing and inference run on the server; the app handles input, job tracking and results. With an external model provider, content needed for analysis is sent to that service. Offline AI is not included.
-
-**Which inputs are supported?** Authorized public-media links, local MP4 files, and Markdown, Fountain, TXT, PDF or DOCX screenplays. The server's inspection result determines whether a platform link is available.
-
-**Where can I install it?** Build the iOS/Android client from source. There are no prebuilt App Store or Google Play packages. The source is MIT licensed; deployment and external-model costs are separate.
+Latest public source preview: [v0.2.0-beta.1](https://github.com/StephenQiu30/video-app/releases/tag/v0.2.0-beta.1). Deploy the server first, then run the app from source below; see [platforms and installation](#platforms-and-installation) for distribution details.
 
 ## App preview
 
 <p align="center">
-  <img src="docs/images/app-home.png" width="320" alt="FrameFetch iOS home screen for public-video inspection and download workflows" />
+  <img src="docs/images/app-home.png" width="250" alt="Current native FrameFetch home with the official logo and public-link, local-video and screenplay entry points" />
   &nbsp;&nbsp;
-  <img src="docs/images/app-provider-status.png" width="320" alt="FrameFetch iOS provider health screen backed by a self-hosted video-server" />
+  <img src="docs/images/app-provider-status.png" width="250" alt="Current native FrameFetch provider screen with All statuses, Registered and Not enabled filters, identity requirements and declared capabilities" />
 </p>
 
-<p align="center">
-  <sub>Public-link intake and server provider health on iPhone Simulator</sub>
-</p>
+<p align="center"><sub>Current native iOS home and provider status, sharing the official logo, neutral palette and component semantics with Web. These screenshots show native UI and platform declarations; they do not replace real-account, provider, model or device workflow acceptance.</sub></p>
 
-## Workflow
+## What you can do
 
-1. Review the open-source, self-hosted project overview without signing in.
-2. Sign in to a self-hosted `video-server` with the native Bearer session.
-3. Paste a public media link you own or are authorized to process.
-4. Review the server's access decision, metadata, and available formats.
-5. Create a download job and track progress in the native app.
-6. Preview or retrieve the completed artifact through a short-lived server authorization.
-7. Optionally start a server-side AI analysis and read its structured result.
+### Bring three types of input into one workflow
 
-## Feature status
+- **Public links:** paste one media URL or share text containing one URL for a single video, image gallery or bounded video collection according to the platform's actual capabilities. Review the source, cover, duration and actual formats. WeChat official-account articles provide source discovery only; current candidates expose no downloadable formats. Follow the returned action for official playback or import a file you are authorized to use.
+- **Local videos:** choose an MP4 through the system file picker, upload it to your server, and continue with the same media details, playback and analysis workflow.
+- **Screenplays:** import DOCX, text-based PDF with extractable text, TXT, Markdown or Fountain. Review language, scene and character counts, parsing summaries, quality notes and normalized text. Screenplay files are limited to 50 MB.
 
-Version `0.1.0+1` is intended for self-hosted evaluation and open-source collaboration. APIs and UX may still evolve with the server contract.
+Uploads use streaming SHA-256 and bounded multipart transfer, validate parts and ETags, and expose progress and cancellation. System file access is explicitly authorized by the user; a complete video is not loaded into memory at once.
 
-| Capability | Status | Notes |
-| --- | --- | --- |
-| Native Bearer authentication and session restore | Available | Access tokens stay in memory; refresh credentials use platform secure storage |
-| Public-link inspection, format selection, and job creation | Available | A job is created only after the server returns a downloadable decision |
-| History, details, private covers, playback, and file access | Available | Playback depends on platform codec support |
-| Video AI analysis | Available | `video-server` runs inference; the app configures jobs and renders results |
-| Screenplay document list | Available | Reads real server data with loading, empty, failure, and refresh states |
-| Local-video and screenplay upload | Available | System picker, streaming SHA-256, bounded multipart PUT, ETag validation, and real completion requests |
-| Document AI and native report export | Available | Screenplay analysis/rewriting, structured reports, and Markdown save/share; see [AI analysis and reports](docs/design/08-AI分析与报告.md) (Chinese) |
-| WebSocket token updates | Planned | Active jobs and analyses currently converge through controlled polling |
-| Offline AI, persistent background downloads, offline library | Out of scope for the first release | No mobile extractor or embedded AI model |
+### Confirm the format before downloading
 
-See [`docs/design/README.md`](docs/design/README.md) for the App design, including the reviewed App OpenAPI boundary, and [status and backlog](docs/design/README.md) (Chinese) for progress on each capability.
+Inspection shows the server's actual resolution, container, compatibility policy, video/audio codecs, and image-set or collection counts. A download starts after you confirm a format. Its detail screen shows status, stage, progress, execution count, file availability and failure reasons, with individual cancellation, retry and deletion actions. Galleries and bounded video collections are delivered as ZIP files containing `manifest.json`, recording the title, media kind and item count.
 
-## Quick start
+Inspection has a persistent record of its own. Opening the app again or entering from another screen can recover that record; expired ready results can be refreshed and confirmed again. Uncertain requests converge by reading the original record to avoid duplicate jobs.
 
-Requirements:
+### Read complete AI results on your phone
 
-- Flutter `3.44.7` stable / Dart `3.12.2`
-- Xcode `27` for iOS `16+`
-- JDK `21` and Android API `24+` for Android
-- A reachable [`video-server`](https://github.com/StephenQiu30/video-server) instance
+The app reads the server's Skill catalog. Choose a video or screenplay method, Chinese or English output, and your analysis focus. The current server bundles **12 video methods and 8 screenplay methods**, with the same catalog shared by App, Web and desktop. Video methods include storyboard creation (`visual-shots`), director breakdown (`director-breakdown`), highlight extraction (`highlights`), WeChat articles (`video-to-article`) and short-video packaging (`short-video-packaging`). Screenplay methods include story review, structure review, character/conflict review, dialogue review and Chinese/English rewriting. The complete catalog and purposes are maintained in the server's [12 video analysis methods](https://github.com/StephenQiu30/video-server/blob/main/README.en.md#12-video-analysis-methods) and [8 screenplay analysis methods](https://github.com/StephenQiu30/video-server/blob/main/README.en.md#8-screenplay-analysis-methods); see the [server Skill design](https://github.com/StephenQiu30/video-server/blob/main/docs/design/16-Skill体系与结果契约.md) for method and result contracts.
+
+Method counts describe the current catalog; they do not mean every method has passed real-model and device workflow acceptance.
+
+Five result types have native readers:
+
+| Result | Content you can explore |
+| --- | --- |
+| Video visual analysis | Shots, visual scene rules, narrative functions, transitions, continuity risks and asset evidence |
+| Video article | Article content, timecodes and media evidence |
+| General structured report | Metrics, sections, findings, recommendations and limitations |
+| Screenplay analysis | Story overview, act structure, turning points, pacing, character goals/conflicts, dialogue and paginated scene reviews |
+| Screenplay rewrite | Glossary, revision summary and the complete rewritten report |
+
+The server's strict continuous-shot timeline validation applies to video visual analysis results; other results follow their own validation and presentation contracts.
+
+Start, cancel, retry, rerun or delete analyses independently of download status. Save available Markdown or DOCX artifacts to the device, and send the complete Markdown report through the system share sheet. Report export retrieves the server's canonical full text. Both exports come from the same structured result without another model call; article drafts, packaging copy and screenplay rewrites remain editable candidates for human review.
+
+### Keep media and every processing run connected
+
+Download and screenplay lists support search, status filters and pagination. **Unified activity history** brings link inspection, document parsing, video analysis and screenplay analysis together, with type, status, method, keyword and date filters. You can also view the records associated with one source.
+
+A historical analysis opens the exact selected analysis ID, including its method, language and run count. Execution history shows each run's time, status and failure reason. Completed historical reports remain readable when their source is no longer available.
+
+### Use native playback, account tools and mobile administration
+
+- **Playback and files:** media_kit/libmpv provides native video playback and controls. File access uses short-lived server authorization and preserves the original artifact format.
+- **Account:** email-code registration, sign-in, startup session restoration, username and avatar management, and sign-out. Protected deep links resume their intended screen after login.
+- **Provider status:** read platform registration status, identity requirements and declared capabilities. Filter by All statuses, Registered or Not enabled, and refresh.
+- **Administration:** six areas for analytics, files, users, provider catalog, AI services and operation logs. Download/AI analytics offer 7/30/90-day windows; administrators can configure roles, active status and task/data/storage/analysis quotas, and configure or activate AI routes.
+- **Experience:** five bottom-navigation destinations, persistent light/dark switching, Chinese/English localization, scalable text, screen-reader semantics and native save/share flows, with the Web shadcn neutral design baseline.
+
+## Typical workflows
+
+### From material to report
+
+1. **Bring it in:** sign in to your server and paste one public link or share message, or upload your own MP4 or screenplay.
+2. **Confirm:** review access decisions, source and actual formats; choose a video format, or check gallery/collection counts and confirm the ZIP download.
+3. **Obtain:** create a download or import job, follow progress, and cancel, retry or recover historical records as its state allows.
+4. **Manage:** play videos, retrieve files or read normalized screenplay text in details; all clients use the server's originals, media states and reports.
+5. **Analyze:** select a video or screenplay Skill, output language and focus, and start server-side analysis independently of media acquisition.
+6. **Deliver:** read results with video time or screenplay scene references, save Markdown/DOCX, or share the complete Markdown report for further editing.
+
+For an existing MP4, upload it from the local-video entry point, open its media details and continue from step 5. Shared workflow and deliverables are documented in the [server's complete workflow](https://github.com/StephenQiu30/video-server/blob/main/README.en.md#from-material-to-report).
+
+### Review or rewrite a screenplay
+
+1. Choose and upload a document from the screenplay entry point.
+2. Check parsing quality, scene information and normalized text.
+3. Select an analysis or rewrite method and describe your focus.
+4. Explore structure, character, dialogue and scene findings, then read or export the complete report.
+5. Use the source's activity records to revisit different analysis runs.
+
+### Administer your service
+
+Administrators open the management center from the account tab to inspect download/AI usage, maintain quotas, files, provider catalog and AI routes, and inspect operations and job results. The server validates roles, ownership and state for every management action.
+
+## How the three projects work together
+
+| Project | Entry point and responsibility |
+| --- | --- |
+| [`video-server`](https://github.com/StephenQiu30/video-server) | FastAPI API, Next.js Web, inspection/downloads, AI workers, identity, permissions, queues, storage and reports |
+| [`video-electron`](https://github.com/StephenQiu30/video-electron) | Electron desktop entry point with bundled React pages reusing Web business source, the same server, native windows and system file saving |
+| **`video-app`** | Native Flutter iOS/Android screens, Bearer sessions, system file entry points, playback and mobile administration |
+
+All three clients share the same server business data; switching clients does not create a separate media-job or business database. The app's client is generated from a reviewed mobile-only OpenAPI snapshot. It does not maintain parallel server DTOs. Active inspections, downloads, documents and analyses converge through REST queries; history and results follow server state. The app currently does not use WebSocket status updates.
+
+## Technology choices
+
+| Technology | Product capability |
+| --- | --- |
+| Flutter 3.44.7 / Dart 3.12.2 | One native business codebase for iOS and Android |
+| Riverpod 3 | One-way state, dependency assembly and replaceable data boundaries |
+| go_router | Typed routes, deep links and return after authentication |
+| Dio + OpenAPI Generator 7.22.0 | Shared networking and a generated `dart-dio` contract client |
+| shadcn_ui + Phosphor | Shared Web component semantics, neutral colors and line icons |
+| media_kit + libmpv | Native playback and a cross-platform decoding runtime |
+| file_selector + multipart upload | System-authorized file access and streaming transfer |
+| flutter_secure_storage | Keychain/Keystore-backed native refresh credentials |
+| Flutter ARB + shared_preferences | Chinese/English UI and non-sensitive theme preferences |
+
+Exact dependency versions are defined in [`pubspec.yaml`](pubspec.yaml) and [`pubspec.lock`](pubspec.lock).
+
+## Get started
+
+### 1. Prepare the server and toolchain
+
+Deploy the API, Web and workers with the [video-server quick start](https://github.com/StephenQiu30/video-server/blob/main/README.en.md#quick-start), then obtain a server address reachable from your device.
+
+| Environment | Requirement |
+| --- | --- |
+| Flutter / Dart | Flutter 3.44.7 stable / Dart 3.12.2 |
+| iOS | Xcode 27, iOS 16+, CocoaPods |
+| Android | JDK 21, Android API 24+, JVM target 17 |
+| Server | A reachable `video-server`; valid HTTPS in production |
 
 ```bash
 git clone https://github.com/StephenQiu30/video-app.git
 cd video-app
+git checkout v0.2.0-beta.1
 flutter doctor -v
-flutter pub get
-dart run tool/check.dart
+flutter pub get --enforce-lockfile
 ```
 
-Run against a local server from iOS Simulator:
+### 2. Connect and run
+
+iOS Simulator with a server on your computer:
 
 ```bash
 flutter run \
   --dart-define=VIDEO_SERVER_BASE_URL=http://127.0.0.1:8111
 ```
 
-Run from Android Emulator:
+Android Emulator with a server on its host:
 
 ```bash
 flutter run \
   --dart-define=VIDEO_SERVER_BASE_URL=http://10.0.2.2:8111
 ```
 
-Use a device-reachable address on physical devices. Production builds must use a valid HTTPS origin.
+Physical devices and production instances:
 
-## App and server responsibilities
+```bash
+flutter run \
+  --dart-define=VIDEO_SERVER_BASE_URL=https://your-framefetch.example.com
+```
 
-| `video-app` | `video-server` |
-| --- | --- |
-| Native iOS/Android UI, routing, accessibility | FastAPI API and Next.js Web platform |
-| Bearer session, secure storage, app lifecycle | Identity, roles, ownership, and authorization facts |
-| Request orchestration, state, and system file entry points | Inspection, downloads, remuxing, and object storage |
-| Playback capability checks and result presentation | Providers, queues, workers, and AI inference |
+`VIDEO_SERVER_BASE_URL` points to the API service. `localhost` on a phone refers to the phone itself; use a reachable address for physical devices. Sign in to that service to access its account and media.
 
-The app does not maintain parallel server DTOs. Its REST client is generated from a reviewed mobile-only OpenAPI snapshot.
+### 3. Build the client
 
-## Stack
+```bash
+flutter build apk --debug \
+  --dart-define=VIDEO_SERVER_BASE_URL=https://your-framefetch.example.com
 
-- Flutter 3.44.7 and Dart 3.12.2
-- Riverpod for state and dependency assembly
-- go_router for typed navigation and auth redirects
-- Dio plus OpenAPI Generator 7.22.0 for the generated REST client
-- Chewie plus video_player for standard controls and device-codec capability checks
-- file_selector for Flutter-maintained system file access without broad photo or storage permissions
-- flutter_secure_storage for Keychain/Keystore-backed credentials
-- shared_preferences for the non-sensitive light/dark theme preference
-- shadcn_ui with the Web neutral theme and ARB localization for Chinese and English
+flutter build ios --simulator --no-codesign \
+  --dart-define=VIDEO_SERVER_BASE_URL=https://your-framefetch.example.com
+```
+
+The debug APK is written to `build/app/outputs/flutter-apk/app-debug.apk`; iOS Simulator artifacts are in `build/ios/iphonesimulator/`. See [accessibility and quality](docs/design/11-可访问性与质量.md) for the current Xcode 27 universal Simulator build issue and the arm64 run path. Device and store distribution require platform release signing; signing materials do not belong in the repository.
+
+## Platforms and installation
+
+The client targets **iOS 16+ and Android API 24+** and is built from source. [v0.2.0-beta.1](https://github.com/StephenQiu30/video-app/releases/tag/v0.2.0-beta.1) is a public source preview: the GitHub tag identifies the source snapshot, while the embedded app build version remains **`0.1.0+1`**. This release has no attached APK/IPA and no prebuilt App Store/Google Play package. This repository does not enable Flutter Web; the desktop entry point is [`video-electron`](https://github.com/StephenQiu30/video-electron).
+
+The app depends on an online self-hosted service. Inspection, downloading and AI analysis run on the server. Offline AI, persistent background downloading, offline media libraries and batch jobs are outside the current scope. Server inspection determines platform access and available formats.
 
 ## Security and privacy
 
-- Process only public content you own or are explicitly authorized to use.
-- Access tokens stay in memory; refresh credentials use platform secure storage.
-- Tokens, cookies, full media URL queries, presigned URLs, user media, and raw AI responses must not enter logs or analytics.
-- Inspection, downloading, and AI inference run on the user's `video-server`; explicitly selected local files are sent only through its authorized object-storage sessions.
-- Read [`SECURITY.md`](SECURITY.md) before reporting a vulnerability; never disclose credentials or exploit details in a public issue.
+- Access tokens remain in memory; refresh credentials use Keychain/Keystore-backed storage. Concurrent authentication failures share one refresh and isolate responses from old sessions.
+- Explicitly selected local files are sent through bounded upload sessions to your server's object storage. The native app does not store third-party provider cookies or run extractors or AI models on the phone.
+- When you choose an external model route, content needed for analysis is sent to that provider. Use media in accordance with your authorization and the selected service's rules.
+- Tokens, full media URL queries, presigned URLs, user media and raw AI responses must not enter logs. Process content you own or are explicitly authorized to use.
+- Report vulnerabilities according to [`SECURITY.md`](SECURITY.md).
 
-## Verification
+## Development and documentation
 
-```bash
-flutter pub get
-dart format --output=none --set-exit-if-changed .
-flutter analyze
-flutter test
-flutter test integration_test
-flutter build apk --debug
-flutter build ios --simulator --no-codesign
+```text
+lib/app/                      Bootstrap, dependency assembly and routing
+lib/core/                     Configuration, networking, credentials and theme
+lib/features/                 Media, downloads, documents, analysis, account and admin
+lib/l10n/                     ARB localization
+lib/shared/                   Reusable presentation components and models
+contracts/openapi/            Mobile-only OpenAPI snapshot
+packages/video_server_api/    Generated Dart API client
+test/ · integration_test/     Unit, Widget and native workflow tests
+tool/                         Contract generation, checks and theme synchronization
+docs/design/                  Product, architecture and verification conditions
 ```
 
-Integration tests require a usable server and device/simulator environment. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for generation and contract-drift checks.
+Documentation entry points:
 
-## Scope and limitations
+- [Product and architecture](docs/design/README.md), [engineering conventions](PROJECT.md), [visual design](design.md)
+- [Link inspection and downloading](docs/design/06-链接解析与下载.md), [uploads and screenplays](docs/design/07-文件上传与剧本文档.md)
+- [AI analysis and reports](docs/design/08-AI分析与报告.md), [mobile administration](docs/design/09-移动管理中心.md)
+- [OpenAPI generation](tool/openapi/README.md), [contributing](CONTRIBUTING.md)
 
-- Android and iOS only; this repository does not enable Flutter Web or desktop platforms.
-- Public, single-media workflows and explicitly selected MP4/screenplay files only. Provider cookies, platform secrets, arbitrary downloader arguments, shell input, private-network URLs, DRM, and membership bypasses are not supported.
-- Native playback depends on device codecs; incompatible formats can still be retrieved through an authorized server URL.
-- No App Store or Google Play binaries are currently published; build from source.
+Routine code checks:
+
+```bash
+dart run tool/openapi.dart --from-snapshot --check
+dart run tool/check.dart
+```
+
+`tool/check.dart` checks the toolchain and runs dependency installation, generation, formatting, static analysis and unit/Widget tests. Integration verification for real authentication, uploads, models and system save/share also requires the matching server and device conditions; see [quality requirements](docs/design/11-可访问性与质量.md).
 
 ## Contributing
 
-Read [`CONTRIBUTING.md`](CONTRIBUTING.md), [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md), and [`SECURITY.md`](SECURITY.md). Use this repository for mobile UI, native-session, and device issues. Report API, Web, provider, queue, storage, or AI Worker issues to [`video-server`](https://github.com/StephenQiu30/video-server/issues).
+Issues and suggestions are welcome at [GitHub Issues](https://github.com/StephenQiu30/video-app/issues). Read [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) before contributing. Report mobile UI, native sessions and device behavior here; API, Web, inspection, storage and AI worker issues belong in [video-server](https://github.com/StephenQiu30/video-server/issues).
 
-If FrameFetch is useful to you, please give it a **Star** and watch [Releases](https://github.com/StephenQiu30/video-app/releases). Issues labeled `good first issue` or `help wanted` are a good place to start.
-
-## Citation
-
-To cite this client in papers, reports or course material, use “Cite this repository” in the GitHub sidebar or the root [`CITATION.cff`](CITATION.cff). See [Releases](https://github.com/StephenQiu30/video-app/releases) for version history.
+For research, reports or teaching materials, cite [`CITATION.cff`](CITATION.cff).
 
 ## License
 
