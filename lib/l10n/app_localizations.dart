@@ -104,18 +104,6 @@ abstract class AppLocalizations {
   /// **'帧取'**
   String get appTitle;
 
-  /// No description provided for @openNavigation.
-  ///
-  /// In zh, this message translates to:
-  /// **'打开导航菜单'**
-  String get openNavigation;
-
-  /// No description provided for @navigationDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'访问素材导入、下载记录、剧本文档、平台状态与账户设置。'**
-  String get navigationDescription;
-
   /// No description provided for @homeNavigation.
   ///
   /// In zh, this message translates to:
@@ -182,12 +170,6 @@ abstract class AppLocalizations {
   /// **'暂时无法读取数据'**
   String get loadFailedTitle;
 
-  /// No description provided for @loadFailedDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'请检查网络连接后重试。'**
-  String get loadFailedDescription;
-
   /// No description provided for @invalidResponseError.
   ///
   /// In zh, this message translates to:
@@ -218,12 +200,6 @@ abstract class AppLocalizations {
   /// **'全部'**
   String get totalLabel;
 
-  /// No description provided for @availableLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'可用'**
-  String get availableLabel;
-
   /// No description provided for @succeededLabel.
   ///
   /// In zh, this message translates to:
@@ -241,18 +217,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'失败'**
   String get failedLabel;
-
-  /// No description provided for @yesLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'是'**
-  String get yesLabel;
-
-  /// No description provided for @noLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'否'**
-  String get noLabel;
 
   /// No description provided for @downloadHistoryEmptyTitle.
   ///
@@ -308,35 +272,17 @@ abstract class AppLocalizations {
   /// **'状态未知'**
   String get downloadStatusUnknown;
 
-  /// No description provided for @progressLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'进度'**
-  String get progressLabel;
-
   /// No description provided for @updatedAtLabel.
   ///
   /// In zh, this message translates to:
   /// **'更新于'**
   String get updatedAtLabel;
 
-  /// No description provided for @showingFirstPage.
-  ///
-  /// In zh, this message translates to:
-  /// **'当前显示最近 20 条'**
-  String get showingFirstPage;
-
   /// No description provided for @failureCancelled.
   ///
   /// In zh, this message translates to:
   /// **'任务已取消'**
   String get failureCancelled;
-
-  /// No description provided for @failureTimeout.
-  ///
-  /// In zh, this message translates to:
-  /// **'处理超时'**
-  String get failureTimeout;
 
   /// No description provided for @failureStorage.
   ///
@@ -686,30 +632,6 @@ abstract class AppLocalizations {
   /// **'暂无平台状态'**
   String get providerEmptyTitle;
 
-  /// No description provided for @downloadAvailableLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'下载可用'**
-  String get downloadAvailableLabel;
-
-  /// No description provided for @capabilitiesLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'能力'**
-  String get capabilitiesLabel;
-
-  /// No description provided for @userActionLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'建议操作'**
-  String get userActionLabel;
-
-  /// No description provided for @providerStatusDisabled.
-  ///
-  /// In zh, this message translates to:
-  /// **'已停用'**
-  String get providerStatusDisabled;
-
   /// No description provided for @providerStatusUnsupported.
   ///
   /// In zh, this message translates to:
@@ -764,47 +686,11 @@ abstract class AppLocalizations {
   /// **'播放列表'**
   String get capabilityPlaylist;
 
-  /// No description provided for @appearanceSection.
-  ///
-  /// In zh, this message translates to:
-  /// **'外观'**
-  String get appearanceSection;
-
-  /// No description provided for @accountSection.
-  ///
-  /// In zh, this message translates to:
-  /// **'账户'**
-  String get accountSection;
-
-  /// No description provided for @helpSection.
-  ///
-  /// In zh, this message translates to:
-  /// **'帮助与产品'**
-  String get helpSection;
-
   /// No description provided for @guideNavigation.
   ///
   /// In zh, this message translates to:
   /// **'使用指南'**
   String get guideNavigation;
-
-  /// No description provided for @guideEntryDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'了解素材导入、AI 分析、客户端分工与自托管边界。'**
-  String get guideEntryDescription;
-
-  /// No description provided for @darkThemeLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'深色外观'**
-  String get darkThemeLabel;
-
-  /// No description provided for @themeToggleDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'在深色与浅色主题间切换'**
-  String get themeToggleDescription;
 
   /// No description provided for @switchToDarkTheme.
   ///
@@ -1051,12 +937,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'阅读部署说明'**
   String get publicDeploymentAction;
-
-  /// No description provided for @publicGuideEyebrow.
-  ///
-  /// In zh, this message translates to:
-  /// **'FrameFetch 使用指南'**
-  String get publicGuideEyebrow;
 
   /// No description provided for @publicGuideTitle.
   ///
@@ -1316,12 +1196,6 @@ abstract class AppLocalizations {
   /// **'登录'**
   String get loginAction;
 
-  /// No description provided for @registerAction.
-  ///
-  /// In zh, this message translates to:
-  /// **'注册'**
-  String get registerAction;
-
   /// No description provided for @welcomeBack.
   ///
   /// In zh, this message translates to:
@@ -1478,30 +1352,6 @@ abstract class AppLocalizations {
   /// **'操作未完成，请稍后重试。'**
   String get unknownAuthError;
 
-  /// No description provided for @sessionRestoring.
-  ///
-  /// In zh, this message translates to:
-  /// **'正在恢复登录状态…'**
-  String get sessionRestoring;
-
-  /// No description provided for @signedOutTitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'登录后继续'**
-  String get signedOutTitle;
-
-  /// No description provided for @signedOutDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'登录或注册后可查看账户资料，并访问与身份关联的任务。'**
-  String get signedOutDescription;
-
-  /// No description provided for @signedInAs.
-  ///
-  /// In zh, this message translates to:
-  /// **'当前账户'**
-  String get signedInAs;
-
   /// No description provided for @logoutAction.
   ///
   /// In zh, this message translates to:
@@ -1537,12 +1387,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'剧本文档'**
   String get screenplayIntakeMode;
-
-  /// No description provided for @linkIntakeSupport.
-  ///
-  /// In zh, this message translates to:
-  /// **'支持粘贴公开链接或分享文案；文章包含多个视频时，请选择要处理的内容。'**
-  String get linkIntakeSupport;
 
   /// No description provided for @videoIntakeTitle.
   ///
@@ -1676,12 +1520,6 @@ abstract class AppLocalizations {
   /// **'解析媒体'**
   String get inspectMedia;
 
-  /// No description provided for @intentAutomaticAccess.
-  ///
-  /// In zh, this message translates to:
-  /// **'系统会自动选择公开访问路线。仅在明确获得授权时选择其他策略。'**
-  String get intentAutomaticAccess;
-
   /// No description provided for @activityHistoryEmpty.
   ///
   /// In zh, this message translates to:
@@ -1747,12 +1585,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'取消解析'**
   String get intentCancelAction;
-
-  /// No description provided for @intentHistoryAction.
-  ///
-  /// In zh, this message translates to:
-  /// **'查看解析记录'**
-  String get intentHistoryAction;
 
   /// No description provided for @intentHandedOff.
   ///
@@ -1838,12 +1670,6 @@ abstract class AppLocalizations {
   /// **'当前来源不可处理'**
   String get candidateUnavailable;
 
-  /// No description provided for @mediaUnavailableTitle.
-  ///
-  /// In zh, this message translates to:
-  /// **'当前媒体不可下载'**
-  String get mediaUnavailableTitle;
-
   /// No description provided for @mediaUnavailableDescription.
   ///
   /// In zh, this message translates to:
@@ -1868,36 +1694,6 @@ abstract class AppLocalizations {
   /// **'{count} 个视频 · ZIP'**
   String videoCollectionFormatDetails(Object count);
 
-  /// No description provided for @providerTemporaryError.
-  ///
-  /// In zh, this message translates to:
-  /// **'媒体平台当前无法完成验证，请稍后重试。'**
-  String get providerTemporaryError;
-
-  /// No description provided for @routeCooldownUntil.
-  ///
-  /// In zh, this message translates to:
-  /// **'默认线路最早重试时间：{time}；到期仍需验证恢复。'**
-  String routeCooldownUntil(String time);
-
-  /// No description provided for @providerRouteConfigured.
-  ///
-  /// In zh, this message translates to:
-  /// **'线路已配置'**
-  String get providerRouteConfigured;
-
-  /// No description provided for @providerContextObserved.
-  ///
-  /// In zh, this message translates to:
-  /// **'上下文可达；来源和内容授权仍需验证'**
-  String get providerContextObserved;
-
-  /// No description provided for @providerContextMissing.
-  ///
-  /// In zh, this message translates to:
-  /// **'上下文不可达或尚未确认'**
-  String get providerContextMissing;
-
   /// No description provided for @providerRestrictedError.
   ///
   /// In zh, this message translates to:
@@ -1909,12 +1705,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'分享链接已失效或无法定位视频，请复制新的公开分享链接。'**
   String get providerLinkError;
-
-  /// No description provided for @providerUnsupportedError.
-  ///
-  /// In zh, this message translates to:
-  /// **'该链接不包含受支持的可下载视频，请更换链接。'**
-  String get providerUnsupportedError;
 
   /// No description provided for @durationLimitError.
   ///
@@ -1933,18 +1723,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'无法读取文章中的媒体来源，请确认文章公开且链接有效。'**
   String get articleDiscoveryError;
-
-  /// No description provided for @legalMediaStatus.
-  ///
-  /// In zh, this message translates to:
-  /// **'请仅提交你有权处理的公开链接'**
-  String get legalMediaStatus;
-
-  /// No description provided for @privacyStatus.
-  ///
-  /// In zh, this message translates to:
-  /// **'请勿提交包含账号或访问凭据的链接'**
-  String get privacyStatus;
 
   /// No description provided for @mediaCoverPending.
   ///
@@ -2029,12 +1807,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'分析重点'**
   String get analysisPromptLabel;
-
-  /// No description provided for @analysisPromptDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'可修改或清空分析重点；工具权限、安全边界与结果结构不可修改。'**
-  String get analysisPromptDescription;
 
   /// No description provided for @restoreDefaultPrompt.
   ///
@@ -2168,12 +1940,6 @@ abstract class AppLocalizations {
   /// **'确认后将停止当前分析。你之后仍可重新发起分析任务。'**
   String get cancelAnalysisDescription;
 
-  /// No description provided for @continueAnalysisAction.
-  ///
-  /// In zh, this message translates to:
-  /// **'继续分析'**
-  String get continueAnalysisAction;
-
   /// No description provided for @confirmCancelAnalysis.
   ///
   /// In zh, this message translates to:
@@ -2257,12 +2023,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'AI 返回结果未通过校验，请重新分析。'**
   String get analysisInvalidResult;
-
-  /// No description provided for @screenplayStoryOverview.
-  ///
-  /// In zh, this message translates to:
-  /// **'故事概览'**
-  String get screenplayStoryOverview;
 
   /// No description provided for @screenplayLoglineLabel.
   ///
@@ -2594,23 +2354,11 @@ abstract class AppLocalizations {
   /// **'来源分布'**
   String get adminSourceBreakdown;
 
-  /// No description provided for @adminFileCount.
-  ///
-  /// In zh, this message translates to:
-  /// **'共 {count} 项持久文件'**
-  String adminFileCount(int count);
-
   /// No description provided for @adminFilesEmpty.
   ///
   /// In zh, this message translates to:
   /// **'暂无持久文件'**
   String get adminFilesEmpty;
-
-  /// No description provided for @adminUserCount.
-  ///
-  /// In zh, this message translates to:
-  /// **'共 {count} 位用户'**
-  String adminUserCount(int count);
 
   /// No description provided for @adminRoleLabel.
   ///
@@ -2942,12 +2690,6 @@ abstract class AppLocalizations {
   /// **'个人资料'**
   String get profileTitle;
 
-  /// No description provided for @profileDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'管理公开用户名，并查看不会随任务变化的账户身份信息。'**
-  String get profileDescription;
-
   /// No description provided for @searchAction.
   ///
   /// In zh, this message translates to:
@@ -3128,12 +2870,6 @@ abstract class AppLocalizations {
   /// **'平均视频时长（秒）'**
   String get averageDuration;
 
-  /// No description provided for @dailyTrend.
-  ///
-  /// In zh, this message translates to:
-  /// **'每日趋势'**
-  String get dailyTrend;
-
   /// No description provided for @cancelledLabel.
   ///
   /// In zh, this message translates to:
@@ -3164,12 +2900,6 @@ abstract class AppLocalizations {
   /// **'已隐藏'**
   String get hiddenPlatform;
 
-  /// No description provided for @needsAttention.
-  ///
-  /// In zh, this message translates to:
-  /// **'需要关注'**
-  String get needsAttention;
-
   /// No description provided for @previousAnalysisResult.
   ///
   /// In zh, this message translates to:
@@ -3181,12 +2911,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'新增目录条目不会增加下载支持。'**
   String get catalogScopeDescription;
-
-  /// No description provided for @saveConfiguration.
-  ///
-  /// In zh, this message translates to:
-  /// **'保存配置'**
-  String get saveConfiguration;
 
   /// No description provided for @analysisRateLimited.
   ///
@@ -3229,12 +2953,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'已接入'**
   String get providerRegistered;
-
-  /// No description provided for @providerIdentityLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'身份要求'**
-  String get providerIdentityLabel;
 
   /// No description provided for @providerIdentityRequired.
   ///
@@ -3632,12 +3350,6 @@ abstract class AppLocalizations {
   /// **'当前周期还没有 AI 分析记录'**
   String get adminAnalysisEmpty;
 
-  /// No description provided for @adminCompletionRate.
-  ///
-  /// In zh, this message translates to:
-  /// **'完成率'**
-  String get adminCompletionRate;
-
   /// No description provided for @adminTrendDetails.
   ///
   /// In zh, this message translates to:
@@ -3824,12 +3536,6 @@ abstract class AppLocalizations {
   /// **'错误码'**
   String get adminOperationErrorCode;
 
-  /// No description provided for @adminDeleteSelectionDescription.
-  ///
-  /// In zh, this message translates to:
-  /// **'删除后无法恢复。已删除的记录会从列表移除；失败的记录可以重试。'**
-  String get adminDeleteSelectionDescription;
-
   /// No description provided for @adminDeleteUserDescription.
   ///
   /// In zh, this message translates to:
@@ -4003,12 +3709,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'每页 {size} 条'**
   String pageSizeOption(int size);
-
-  /// No description provided for @uploadVideoAction.
-  ///
-  /// In zh, this message translates to:
-  /// **'导入自有视频'**
-  String get uploadVideoAction;
 
   /// No description provided for @aboutContent.
   ///

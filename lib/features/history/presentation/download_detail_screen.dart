@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/features/download/presentation/download_app_bar.dart';
 import 'package:framegrab/features/history/application/download_detail_provider.dart';
 import 'package:framegrab/features/history/presentation/download_detail_content.dart';
 import 'package:framegrab/features/history/presentation/download_presentation_labels.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
@@ -19,7 +19,7 @@ final class DownloadDetailScreen extends ConsumerWidget {
     final localizations = AppLocalizations.of(context);
     final result = ref.watch(downloadDetailProvider(jobId));
     return Scaffold(
-      appBar: const DownloadAppBar(backFallbackLocation: '/'),
+      appBar: const AppNavigationBar(backFallbackLocation: '/'),
       body: result.when(
         skipLoadingOnRefresh: true,
         data: (job) => DataPageView(

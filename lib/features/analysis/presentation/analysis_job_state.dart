@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
 import 'package:framegrab/features/analysis/application/analysis_state.dart';
-import 'package:framegrab/features/analysis/presentation/analysis_docx_button.dart';
-import 'package:framegrab/features/analysis/presentation/analysis_markdown_button.dart';
 import 'package:framegrab/features/analysis/presentation/analysis_presentation_labels.dart';
+import 'package:framegrab/features/analysis/presentation/analysis_report_download_button.dart';
 import 'package:framegrab/features/analysis/presentation/analysis_result_view.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
@@ -123,10 +122,18 @@ final class AnalysisJobState extends StatelessWidget {
             if (job.report?.status == AnalysisReportStatus.available &&
                 (job.report?.artifacts.any((a) => a.format == 'markdown') ??
                     false))
-              AnalysisMarkdownButton(analysisId: job.id),
+              AnalysisReportDownloadButton(
+                key: const ValueKey(AnalysisReportFormat.markdown),
+                analysisId: job.id,
+                format: AnalysisReportFormat.markdown,
+              ),
             if (job.report?.status == AnalysisReportStatus.available &&
                 (job.report?.artifacts.any((a) => a.format == 'docx') ?? false))
-              AnalysisDocxButton(analysisId: job.id),
+              AnalysisReportDownloadButton(
+                key: const ValueKey(AnalysisReportFormat.docx),
+                analysisId: job.id,
+                format: AnalysisReportFormat.docx,
+              ),
             if (_active)
               ShadButton.secondary(
                 key: const Key('cancel-analysis-button'),

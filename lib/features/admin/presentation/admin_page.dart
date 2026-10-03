@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/features/download/presentation/download_app_bar.dart';
+import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
 import 'package:framegrab/shared/presentation/app_spinner.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
@@ -27,7 +27,7 @@ final class AdminPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DownloadAppBar(backFallbackLocation: backFallbackLocation),
+      appBar: AppNavigationBar(backFallbackLocation: backFallbackLocation),
       body: DataPageView(
         compactTitle: true,
         title: title,

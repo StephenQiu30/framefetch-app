@@ -12,12 +12,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get appTitle => '帧取';
 
   @override
-  String get openNavigation => '打开导航菜单';
-
-  @override
-  String get navigationDescription => '访问素材导入、下载记录、剧本文档、平台状态与账户设置。';
-
-  @override
   String get homeNavigation => '首页';
 
   @override
@@ -51,9 +45,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get loadFailedTitle => '暂时无法读取数据';
 
   @override
-  String get loadFailedDescription => '请检查网络连接后重试。';
-
-  @override
   String get invalidResponseError => '服务响应与当前 App 版本不兼容，请更新 App 或联系服务管理员。';
 
   @override
@@ -69,9 +60,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get totalLabel => '全部';
 
   @override
-  String get availableLabel => '可用';
-
-  @override
   String get succeededLabel => '已完成';
 
   @override
@@ -79,12 +67,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get failedLabel => '失败';
-
-  @override
-  String get yesLabel => '是';
-
-  @override
-  String get noLabel => '否';
 
   @override
   String get downloadHistoryEmptyTitle => '还没有下载记录';
@@ -114,19 +96,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get downloadStatusUnknown => '状态未知';
 
   @override
-  String get progressLabel => '进度';
-
-  @override
   String get updatedAtLabel => '更新于';
 
   @override
-  String get showingFirstPage => '当前显示最近 20 条';
-
-  @override
   String get failureCancelled => '任务已取消';
-
-  @override
-  String get failureTimeout => '处理超时';
 
   @override
   String get failureStorage => '存储暂时不可用';
@@ -305,18 +278,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get providerEmptyTitle => '暂无平台状态';
 
   @override
-  String get downloadAvailableLabel => '下载可用';
-
-  @override
-  String get capabilitiesLabel => '能力';
-
-  @override
-  String get userActionLabel => '建议操作';
-
-  @override
-  String get providerStatusDisabled => '已停用';
-
-  @override
   String get providerStatusUnsupported => '不支持';
 
   @override
@@ -344,25 +305,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get capabilityPlaylist => '播放列表';
 
   @override
-  String get appearanceSection => '外观';
-
-  @override
-  String get accountSection => '账户';
-
-  @override
-  String get helpSection => '帮助与产品';
-
-  @override
   String get guideNavigation => '使用指南';
-
-  @override
-  String get guideEntryDescription => '了解素材导入、AI 分析、客户端分工与自托管边界。';
-
-  @override
-  String get darkThemeLabel => '深色外观';
-
-  @override
-  String get themeToggleDescription => '在深色与浅色主题间切换';
 
   @override
   String get switchToDarkTheme => '切换到深色主题';
@@ -494,9 +437,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get publicDeploymentAction => '阅读部署说明';
-
-  @override
-  String get publicGuideEyebrow => 'FrameFetch 使用指南';
 
   @override
   String get publicGuideTitle => '从素材到分析报告';
@@ -640,9 +580,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get loginAction => '登录';
 
   @override
-  String get registerAction => '注册';
-
-  @override
   String get welcomeBack => '欢迎回来';
 
   @override
@@ -721,18 +658,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get unknownAuthError => '操作未完成，请稍后重试。';
 
   @override
-  String get sessionRestoring => '正在恢复登录状态…';
-
-  @override
-  String get signedOutTitle => '登录后继续';
-
-  @override
-  String get signedOutDescription => '登录或注册后可查看账户资料，并访问与身份关联的任务。';
-
-  @override
-  String get signedInAs => '当前账户';
-
-  @override
   String get logoutAction => '退出登录';
 
   @override
@@ -749,9 +674,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get screenplayIntakeMode => '剧本文档';
-
-  @override
-  String get linkIntakeSupport => '支持粘贴公开链接或分享文案；文章包含多个视频时，请选择要处理的内容。';
 
   @override
   String get videoIntakeTitle => '导入本地视频';
@@ -821,9 +743,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get inspectMedia => '解析媒体';
 
   @override
-  String get intentAutomaticAccess => '系统会自动选择公开访问路线。仅在明确获得授权时选择其他策略。';
-
-  @override
   String get activityHistoryEmpty => '暂无处理记录';
 
   @override
@@ -855,9 +774,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get intentCancelAction => '取消解析';
-
-  @override
-  String get intentHistoryAction => '查看解析记录';
 
   @override
   String get intentHandedOff => '已创建下载任务';
@@ -902,9 +818,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get candidateUnavailable => '当前来源不可处理';
 
   @override
-  String get mediaUnavailableTitle => '当前媒体不可下载';
-
-  @override
   String get mediaUnavailableDescription => '服务端未批准创建下载任务。请根据提示更换公开链接或处理方式。';
 
   @override
@@ -921,30 +834,10 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get providerTemporaryError => '媒体平台当前无法完成验证，请稍后重试。';
-
-  @override
-  String routeCooldownUntil(String time) {
-    return '默认线路最早重试时间：$time；到期仍需验证恢复。';
-  }
-
-  @override
-  String get providerRouteConfigured => '线路已配置';
-
-  @override
-  String get providerContextObserved => '上下文可达；来源和内容授权仍需验证';
-
-  @override
-  String get providerContextMissing => '上下文不可达或尚未确认';
-
-  @override
   String get providerRestrictedError => '该媒体为私有或受访问权限限制，无法处理。';
 
   @override
   String get providerLinkError => '分享链接已失效或无法定位视频，请复制新的公开分享链接。';
-
-  @override
-  String get providerUnsupportedError => '该链接不包含受支持的可下载视频，请更换链接。';
 
   @override
   String get durationLimitError => '该媒体时长超过服务允许的上限。';
@@ -954,12 +847,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get articleDiscoveryError => '无法读取文章中的媒体来源，请确认文章公开且链接有效。';
-
-  @override
-  String get legalMediaStatus => '请仅提交你有权处理的公开链接';
-
-  @override
-  String get privacyStatus => '请勿提交包含账号或访问凭据的链接';
 
   @override
   String get mediaCoverPending => '封面生成中';
@@ -1002,9 +889,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get analysisPromptLabel => '分析重点';
-
-  @override
-  String get analysisPromptDescription => '可修改或清空分析重点；工具权限、安全边界与结果结构不可修改。';
 
   @override
   String get restoreDefaultPrompt => '恢复默认值';
@@ -1077,9 +961,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cancelAnalysisDescription => '确认后将停止当前分析。你之后仍可重新发起分析任务。';
 
   @override
-  String get continueAnalysisAction => '继续分析';
-
-  @override
   String get confirmCancelAnalysis => '确认取消分析';
 
   @override
@@ -1120,9 +1001,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get analysisInvalidResult => 'AI 返回结果未通过校验，请重新分析。';
-
-  @override
-  String get screenplayStoryOverview => '故事概览';
 
   @override
   String get screenplayLoglineLabel => '一句话梗概';
@@ -1294,17 +1172,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get adminSourceBreakdown => '来源分布';
 
   @override
-  String adminFileCount(int count) {
-    return '共 $count 项持久文件';
-  }
-
-  @override
   String get adminFilesEmpty => '暂无持久文件';
-
-  @override
-  String adminUserCount(int count) {
-    return '共 $count 位用户';
-  }
 
   @override
   String get adminRoleLabel => '角色';
@@ -1477,9 +1345,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get profileTitle => '个人资料';
 
   @override
-  String get profileDescription => '管理公开用户名，并查看不会随任务变化的账户身份信息。';
-
-  @override
   String get searchAction => '搜索';
 
   @override
@@ -1570,9 +1435,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get averageDuration => '平均视频时长（秒）';
 
   @override
-  String get dailyTrend => '每日趋势';
-
-  @override
   String get cancelledLabel => '已取消';
 
   @override
@@ -1588,16 +1450,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get hiddenPlatform => '已隐藏';
 
   @override
-  String get needsAttention => '需要关注';
-
-  @override
   String get previousAnalysisResult => '上一版已完成的结果';
 
   @override
   String get catalogScopeDescription => '新增目录条目不会增加下载支持。';
-
-  @override
-  String get saveConfiguration => '保存配置';
 
   @override
   String get analysisRateLimited => 'AI 服务请求过于频繁，请稍后重试。';
@@ -1619,9 +1475,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get providerRegistered => '已接入';
-
-  @override
-  String get providerIdentityLabel => '身份要求';
 
   @override
   String get providerIdentityRequired => '需要登录';
@@ -1823,9 +1676,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get adminAnalysisEmpty => '当前周期还没有 AI 分析记录';
 
   @override
-  String get adminCompletionRate => '完成率';
-
-  @override
   String get adminTrendDetails => '精确数据';
 
   @override
@@ -1920,10 +1770,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get adminOperationErrorCode => '错误码';
 
   @override
-  String get adminDeleteSelectionDescription =>
-      '删除后无法恢复。已删除的记录会从列表移除；失败的记录可以重试。';
-
-  @override
   String get adminDeleteUserDescription =>
       '账户、登录凭据、角色、配额和会话会一并移除；历史下载文件与任务记录不会自动删除。';
 
@@ -2012,9 +1858,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String pageSizeOption(int size) {
     return '每页 $size 条';
   }
-
-  @override
-  String get uploadVideoAction => '导入自有视频';
 
   @override
   String get aboutContent =>
