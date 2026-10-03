@@ -61,7 +61,7 @@ Version `0.1.0+1` is intended for self-hosted evaluation and open-source collabo
 | WebSocket token updates | Planned | Active jobs and analyses currently converge through controlled polling |
 | Offline AI, persistent background downloads, offline library | Out of scope for the first release | No mobile extractor or embedded AI model |
 
-See [`docs/design/README.md`](docs/design/README.md) for the App design, including the reviewed App OpenAPI boundary, and [status and backlog](docs/design/13-状态与待办.md) (Chinese) for progress on each capability.
+See [`docs/design/README.md`](docs/design/README.md) for the App design, including the reviewed App OpenAPI boundary, and [status and backlog](docs/design/README.md) (Chinese) for progress on each capability.
 
 ## Quick start
 

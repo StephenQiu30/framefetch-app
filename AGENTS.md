@@ -2,7 +2,7 @@
 
 本仓库负责 Flutter 原生客户端。`video-server` 负责 API、Web 平台、异步任务、Provider、对象存储和 AI Worker；默认只读，不在本仓库复制或修改服务端实现。
 
-Phase 1 Flutter 工程基座已经建立。新增业务能力须先在 `docs/design/README.md` 更新设计后实现；服务端原生鉴权契约未冻结前，不得接入浏览器 Cookie、WebView 登录或宣称真实业务 E2E 已完成。
+新增业务能力同步更新对应 `docs/design/` 主题。原生鉴权使用冻结的 App OpenAPI 与 Bearer 契约；不接入浏览器 Cookie 或 WebView 登录，真实业务 E2E 需独立证据。
 
 ## 唯一事实与交付链
 
@@ -60,7 +60,7 @@ Phase 1 Flutter 工程基座已经建立。新增业务能力须先在 `docs/des
 
 ## 体验与可访问性
 
-- 设计采用 shadcn_ui 全套组件，与 frontend 的 radix-nova / neutral 视觉保持统一（见 021 设计）；为 iOS 保留系统导航、返回和权限反馈。
+- 设计采用 shadcn_ui 全套组件，与 frontend 的 radix-nova / neutral 视觉保持统一（见 `design.md` 与 `docs/design/10-视觉与交互.md`）；为 iOS 保留系统导航、返回和权限反馈。
 - 页面必须覆盖初始、加载、成功、空、校验失败、请求失败、离线、禁用、重试和会话过期状态。
 - 支持系统深浅主题、文字缩放、屏幕阅读器、动态字体和 reduced motion。
 - 触控目标、对比度、焦点顺序和语义标签满足 WCAG 2.2 AA 对应要求。
