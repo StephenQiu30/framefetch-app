@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:framegrab/core/theme/app_spacing.dart';
+import 'package:framegrab/shared/presentation/app_loading.dart';
 import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
-import 'package:framegrab/shared/presentation/app_spinner.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -88,19 +88,7 @@ final class AdminSectionLink extends StatelessWidget {
   }
 }
 
-List<Widget> adminLoading(String label) => [
-  Semantics(
-    liveRegion: true,
-    label: label,
-    child: const Padding(
-      padding: EdgeInsets.symmetric(vertical: 56),
-      child: Align(
-        alignment: AlignmentDirectional.centerStart,
-        child: AppSpinner(),
-      ),
-    ),
-  ),
-];
+List<Widget> adminLoading(String label) => [AppLoading(label: label)];
 
 List<Widget> adminError({
   required String action,

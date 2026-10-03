@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
 import 'package:framegrab/features/providers/application/provider_status_provider.dart';
 import 'package:framegrab/features/providers/presentation/provider_status_item.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framegrab/shared/presentation/app_loading.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
@@ -64,9 +64,7 @@ final class _ProviderStatusScreenState
               onAction: () => ref.invalidate(providerStatusProvider),
             ),
           ],
-          loading: () => [
-            ProviderStatusSkeleton(label: localizations.loadingData),
-          ],
+          loading: () => const [AppLoading()],
         ),
       ],
     );
@@ -90,44 +88,5 @@ final class _ProviderStatusScreenState
       ))
         ProviderStatusItem(item: item),
     ];
-  }
-}
-
-final class ProviderStatusSkeleton extends StatelessWidget {
-  const ProviderStatusSkeleton({required this.label, super.key});
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme.surfaceContainerHighest;
-    return Semantics(
-      container: true,
-      liveRegion: true,
-      label: label,
-      child: ExcludeSemantics(
-        child: Column(
-          key: const Key('provider-status-skeleton'),
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            for (var index = 0; index < 3; index += 1) ...[
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: AppSpacing.large),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(width: 132, height: 18, color: color),
-                    const SizedBox(height: AppSpacing.small),
-                    Container(height: 13, color: color),
-                    const SizedBox(height: AppSpacing.xSmall),
-                    Container(width: 220, height: 13, color: color),
-                  ],
-                ),
-              ),
-            ],
-          ],
-        ),
-      ),
-    );
   }
 }

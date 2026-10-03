@@ -5,6 +5,7 @@ import 'package:framegrab/features/documents/application/document_list_provider.
 import 'package:framegrab/features/documents/data/document_repository.dart';
 import 'package:framegrab/features/documents/presentation/document_detail_content.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framegrab/shared/presentation/app_loading.dart';
 import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
@@ -104,7 +105,7 @@ final class _DocumentDetailScreenState
           title: l10n.screenplayDocumentDetailNavigation,
           refreshLabel: l10n.refreshAction,
           onRefresh: refresh,
-          children: const [DocumentDetailSkeleton()],
+          children: const [AppLoading()],
         ),
       ),
     );

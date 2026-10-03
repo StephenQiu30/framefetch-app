@@ -100,37 +100,6 @@ final class DownloadDetailContent extends StatelessWidget {
   }
 }
 
-final class DownloadDetailSkeleton extends StatelessWidget {
-  const DownloadDetailSkeleton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme.surfaceContainerHighest;
-    return Semantics(
-      liveRegion: true,
-      label: AppLocalizations.of(context).loadingData,
-      child: ExcludeSemantics(
-        child: Column(
-          key: const Key('download-detail-skeleton'),
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(width: 112, height: 18, color: color),
-            const SizedBox(height: AppSpacing.xLarge),
-            for (var index = 0; index < 6; index += 1) ...[
-              const SizedBox(height: AppSpacing.large),
-              Container(
-                width: index.isEven ? 240 : 180,
-                height: 14,
-                color: color,
-              ),
-            ],
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 final class _DetailLine extends StatelessWidget {
   const _DetailLine({required this.label, required this.value});
 

@@ -1,9 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:framegrab/features/providers/application/provider_status_provider.dart';
 import 'package:framegrab/features/providers/data/provider_status_repository.dart';
 import 'package:framegrab/features/providers/presentation/provider_status_screen.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framegrab/shared/presentation/app_loading.dart';
+import 'package:framegrab/shared/presentation/app_spinner.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:video_server_api/video_server_api.dart';
 
@@ -11,6 +16,77 @@ import '../../../support/data_fakes.dart';
 import '../../../support/shad_test_app.dart';
 
 void main() {
+  testWidgets(
+    'initial loading uses spinner and refresh retains provider rows',
+    (tester) async {
+      final first = Completer<ProviderListResponse>();
+      final refresh = Completer<ProviderListResponse>();
+      var requests = 0;
+      final container = ProviderContainer(
+        overrides: [
+          providerStatusProvider.overrideWith(
+            (ref) => ++requests == 1 ? first.future : refresh.future,
+          ),
+        ],
+      );
+      addTearDown(container.dispose);
+      await pumpShadWidget(
+        tester,
+        UncontrolledProviderScope(
+          container: container,
+          child: const ShadTestApp(
+            locale: Locale('zh'),
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: Scaffold(body: ProviderStatusScreen()),
+          ),
+        ),
+      );
+      expect(find.byType(AppLoading), findsOneWidget);
+      expect(find.byType(AppSpinner), findsOneWidget);
+      expect(find.byType(ShadProgress), findsNothing);
+      expect(find.text('YouTube'), findsNothing);
+      first.complete(providerFixture());
+      await tester.pumpAndSettle();
+      expect(find.byType(AppLoading), findsNothing);
+      expect(find.text('YouTube'), findsOneWidget);
+      await tester.drag(find.byType(ListView), const Offset(0, 800));
+      await tester.pump();
+      await tester.pump(const Duration(seconds: 1));
+      await tester.pump();
+      expect(requests, 2);
+      expect(find.text('YouTube'), findsOneWidget);
+      expect(find.byType(AppLoading), findsOneWidget);
+      expect(tester.getSize(find.byType(AppLoading)).height, 20);
+      expect(
+        tester.getBottomLeft(find.byType(AppLoading)).dy,
+        lessThanOrEqualTo(
+          tester.getTopLeft(find.byKey(const Key('page-title-heading'))).dy,
+        ),
+      );
+      expect(find.byType(ShadProgress), findsNothing);
+      refresh.complete(providerFixture());
+      await tester.pumpAndSettle();
+      expect(find.byType(AppLoading), findsNothing);
+      expect(find.text('YouTube'), findsOneWidget);
+      expect(
+        tester
+            .state<ScrollableState>(
+              find
+                  .descendant(
+                    of: find.byType(ListView),
+                    matching: find.byType(Scrollable),
+                  )
+                  .first,
+            )
+            .position
+            .pixels,
+        0,
+      );
+      expect(tester.takeException(), isNull);
+    },
+  );
+
   testWidgets('filters provider status with Shad tabs', (tester) async {
     final available = providerFixture().items.single.rebuild(
       (builder) => builder.capabilities.add(ProviderCapability.subtitles),

@@ -4,6 +4,7 @@ import 'package:framegrab/features/history/application/download_detail_provider.
 import 'package:framegrab/features/history/presentation/download_detail_content.dart';
 import 'package:framegrab/features/history/presentation/download_presentation_labels.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framegrab/shared/presentation/app_loading.dart';
 import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
@@ -52,7 +53,7 @@ final class DownloadDetailScreen extends ConsumerWidget {
           refreshLabel: localizations.refreshAction,
           onRefresh: () =>
               ref.refresh(downloadDetailProvider(jobId).future).then((_) {}),
-          children: const [DownloadDetailSkeleton()],
+          children: const [AppLoading()],
         ),
       ),
     );

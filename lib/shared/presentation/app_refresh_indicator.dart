@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
+import 'package:framegrab/shared/presentation/app_loading.dart';
 
-/// Native pull gesture, with Shad Progress instead of a Material indicator.
+/// Native pull gesture with the same compact loading indicator as pages.
 final class AppRefreshIndicator extends StatefulWidget {
   const AppRefreshIndicator({
     required this.child,
@@ -32,7 +32,9 @@ final class _AppRefreshIndicatorState extends State<AppRefreshIndicator> {
               status == RefreshIndicatorStatus.armed ||
               status == RefreshIndicatorStatus.snap ||
               status == RefreshIndicatorStatus.refresh;
-          if (_visible != visible) setState(() => _visible = visible);
+          if (mounted && _visible != visible) {
+            setState(() => _visible = visible);
+          }
         },
         child: widget.child,
       ),
@@ -41,10 +43,12 @@ final class _AppRefreshIndicatorState extends State<AppRefreshIndicator> {
           top: 0,
           left: 0,
           right: 0,
-          child: Semantics(
-            label: widget.label,
-            liveRegion: true,
-            child: const ShadProgress(),
+          child: IgnorePointer(
+            child: AppLoading(
+              key: const Key('app-refresh-loading'),
+              label: widget.label,
+              compact: true,
+            ),
           ),
         ),
     ],

@@ -210,19 +210,3 @@ final class _Notice extends StatelessWidget {
     );
   }
 }
-
-final class DocumentDetailSkeleton extends StatelessWidget {
-  const DocumentDetailSkeleton({super.key});
-
-  @override
-  Widget build(BuildContext context) => Semantics(
-    liveRegion: true,
-    label: AppLocalizations.of(context).loadingData,
-    child: const Center(
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: AppSpacing.section),
-        child: AppSpinner(),
-      ),
-    ),
-  );
-}
