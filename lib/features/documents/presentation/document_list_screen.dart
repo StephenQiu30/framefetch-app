@@ -7,7 +7,7 @@ import 'package:framegrab/core/theme/app_spacing.dart';
 import 'package:framegrab/features/documents/application/document_list_provider.dart';
 import 'package:framegrab/features/documents/presentation/document_list_item.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/app_spinner.dart';
+import 'package:framegrab/shared/presentation/app_loading.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
 import 'package:framegrab/shared/presentation/list_query.dart';
@@ -62,13 +62,7 @@ final class _DocumentListScreenState extends ConsumerState<DocumentListScreen> {
             onAction: () => ref.invalidate(documentListProvider),
           ),
         ],
-        loading: () => [
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 64),
-            child: Align(alignment: Alignment.centerLeft, child: AppSpinner()),
-          ),
-          Text(localizations.loadingData),
-        ],
+        loading: () => const [AppLoading()],
       ),
     );
   }

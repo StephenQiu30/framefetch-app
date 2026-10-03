@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:framegrab/shared/presentation/app_dropdown_field.dart';
+import 'package:framegrab/shared/presentation/app_loading.dart';
 import 'package:framegrab/shared/presentation/app_refresh_indicator.dart';
+import 'package:framegrab/shared/presentation/app_spinner.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../../support/shad_test_app.dart';
@@ -44,7 +46,7 @@ void main() {
   );
 
   testWidgets(
-    'native refresh gesture displays Shad progress until completion',
+    'native refresh shows a compact spinner and clears on completion',
     (tester) async {
       final done = Completer<void>();
       var calls = 0;
@@ -71,11 +73,26 @@ void main() {
       await tester.pump(const Duration(seconds: 1));
       await tester.pump();
       expect(calls, 1);
-      expect(find.byType(ShadProgress), findsOneWidget);
+      expect(find.byType(ShadProgress), findsNothing);
+      expect(find.byType(AppLoading), findsOneWidget);
+      expect(find.byType(AppSpinner), findsOneWidget);
+      final loading = tester.getRect(find.byType(AppLoading));
+      final page = tester.getRect(find.byType(Scaffold));
+      expect(loading.width, page.width);
+      expect(loading.height, 20);
+      expect(
+        tester.getCenter(find.byType(AppSpinner)).dx,
+        closeTo(page.center.dx, .01),
+      );
       expect(find.byType(CircularProgressIndicator), findsNothing);
       done.complete();
       await tester.pumpAndSettle();
-      expect(find.byType(ShadProgress), findsNothing);
+      expect(find.byType(AppLoading), findsNothing);
+      expect(
+        tester.state<ScrollableState>(find.byType(Scrollable)).position.pixels,
+        0,
+      );
+      expect(tester.takeException(), isNull);
     },
   );
 }

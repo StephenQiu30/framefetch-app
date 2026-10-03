@@ -14,8 +14,8 @@ import 'package:framegrab/features/analysis/presentation/analysis_run_history.da
 import 'package:framegrab/features/auth/application/auth_session_controller.dart';
 import 'package:framegrab/features/history/application/activity_history_provider.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framegrab/shared/presentation/app_loading.dart';
 import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
-import 'package:framegrab/shared/presentation/app_spinner.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
 import 'package:go_router/go_router.dart';
@@ -34,7 +34,7 @@ final class AnalysisDetailScreen extends ConsumerWidget {
       appBar: const AppNavigationBar(backFallbackLocation: '/history/activity'),
       body: record.when(
         data: (value) => _AnalysisDetail(record: value),
-        loading: () => const Center(child: AppSpinner()),
+        loading: () => const AppLoading(),
         error: (error, _) => DataStateMessage(
           title: l.analysisLoadFailed,
           description: dataRequestFailureMessage(l, error),
@@ -179,7 +179,7 @@ final class _AnalysisDetail extends ConsumerWidget {
             ] else
               DataStateMessage(title: l.analysisInvalidResult),
           ],
-          loading: () => [const Center(child: AppSpinner())],
+          loading: () => [const AppLoading()],
           error: (error, _) => [
             DataStateMessage(
               title: l.analysisLoadFailed,

@@ -8,8 +8,8 @@ import 'package:framegrab/features/history/application/activity_history_query.da
 import 'package:framegrab/features/history/presentation/activity_history_filters.dart';
 import 'package:framegrab/features/history/presentation/activity_history_item.dart';
 import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framegrab/shared/presentation/app_loading.dart';
 import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
-import 'package:framegrab/shared/presentation/app_spinner.dart';
 import 'package:framegrab/shared/presentation/cursor_pagination.dart';
 import 'package:framegrab/shared/presentation/data_page_view.dart';
 import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
@@ -87,9 +87,7 @@ final class _ActivityHistoryScreenState
                 onAction: () => ref.invalidate(activityHistoryProvider(_query)),
               ),
             ],
-            loading: () => [
-              const Align(alignment: Alignment.centerLeft, child: AppSpinner()),
-            ],
+            loading: () => const [AppLoading()],
           ),
         ],
       ),
