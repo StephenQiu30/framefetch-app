@@ -1,22 +1,10 @@
-# Contributing
+# 贡献指南
 
-感谢你愿意改进“帧取 App”。
+感谢你改进帧取 App。开始前请阅读 [AGENTS.md](AGENTS.md) 与 [PROJECT.md](PROJECT.md)；运行方式见 [README.md](README.md)，安全问题按 [SECURITY.md](SECURITY.md) 私下报告。
 
-## 当前边界
+本仓库只维护 Flutter iOS/Android 客户端。API、Web、管理后台、媒体执行、AI Worker 与对象存储属于 [`video-server`](https://github.com/StephenQiu30/video-server)；接口变化先在服务端完成，再更新本仓库的冻结快照。
 
-本仓库是 Flutter iOS/Android 客户端，不再建设 Web 平台。API 与浏览器 Web 由 [`video-server`](https://github.com/StephenQiu30/video-server) 维护；管理后台、Provider 执行、媒体解析、AI Worker 和对象存储不进入 App。
-
-Phase 1 工程基座已经建立。每个后续能力须先更新 `docs/design/README.md`；原生鉴权契约未冻结前不得接入浏览器 Cookie、WebView 登录或伪造业务 E2E。详细规则见 [`AGENTS.md`](AGENTS.md)。
-
-## 实现原则
-
-- 一套 Flutter/Dart 业务代码覆盖 Android 与 iOS，不建立平行原生页面。
-- 优先使用 Flutter 官方能力和已接受的统一依赖，不重复引入状态、路由、网络或序列化方案。
-- 核心逻辑遵循 Red → Green → Refactor；平台能力同时覆盖 Dart 测试与真机/模拟器验证。
-- OpenAPI 生成代码禁止手工修改；接口变化先在 `video-server` 冻结契约。
-- 不提交 Secret、Token、Cookie、用户媒体、签名材料、构建产物或临时文件。
-
-## 本地门禁
+## 本地检查
 
 ```bash
 flutter pub get --enforce-lockfile
@@ -26,18 +14,32 @@ flutter build apk --debug
 flutter build ios --simulator --no-codesign
 ```
 
-修改 `@TypedGoRoute` 后运行 `dart run build_runner build` 并提交生成结果；修改 ARB 后运行 `flutter gen-l10n`。生成文件只能通过对应工具更新。
+`tool/check.dart` 校验 Flutter 版本并依次执行 `gen-l10n`、`dart format`、`flutter analyze` 与 `flutter test`。涉及核心旅程或平台能力时再运行 `flutter test integration_test`。
+
+生成文件只通过工具更新：
+
+| 修改 | 命令 |
+| --- | --- |
+| `@TypedGoRoute` | `dart run build_runner build` |
+| ARB | `flutter gen-l10n` |
+| 冻结 OpenAPI 快照 | `dart run tool/openapi.dart` |
+| Web 设计 Token | `node tool/sync_design_tokens.mjs`（`--check` 检查漂移） |
+
+## CI
+
+`flutter-quality.yml` 执行锁文件安装、冻结 OpenAPI 客户端重生成、路由与本地化重生成、生成漂移检查、format、analyze、test 与 Android debug 构建；独立 macOS Job 构建 iOS 模拟器应用。冻结快照检查不连接在线 API，不证明与服务端最新提交一致。
 
 ## 提交规范
 
-提交信息使用中文 Conventional Commits：
+提交信息使用 Conventional Commits，类型与作用域为小写英文，描述为中文：
 
 ```text
 <type>(<scope>): <中文描述>
 ```
 
-常用类型包括 `feat`、`fix`、`refactor`、`docs`、`test`、`build`、`ci`、`chore` 和 `style`。标题不超过 72 个字符，末尾不加标点。只有用户明确要求时才推送或创建 PR。
+- 类型：`feat`、`fix`、`refactor`、`docs`、`test`、`perf`、`build`、`ci`、`chore`、`style`、`revert`。
+- 作用域使用 feature 或模块名，如 `auth`、`download`、`analysis`、`theme`、`openapi`；无法准确归属时省略，不留空括号。
+- 标题不超过 72 个字符，末尾不加标点。
+- 破坏性变更在类型或作用域后加 `!`，并在正文写 `BREAKING CHANGE: <中文说明>`。
 
-## CI 覆盖范围
-
-质量 Job 执行锁文件安装、冻结 OpenAPI 客户端重生成、路由与本地化重生成、tracked/untracked 漂移检查、format/analyze/test 和 Android debug 构建；独立 macOS Job 构建 iOS 模拟器应用。冻结快照检查不连接在线 API，也不证明与服务端最新 main 一致。真实后端集成、真机媒体播放、系统权限和视觉验收仍按 AGENTS.md 执行。当前 main 未配置 required checks，推送触发的 CI 是事后检测。
+不提交 Secret、Token、Cookie、用户媒体、签名材料、构建产物或临时文件。
