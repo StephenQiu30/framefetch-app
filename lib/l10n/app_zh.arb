@@ -699,5 +699,6 @@
   "analysisRetryTitle": "按原配置重新运行",
   "analysisRetryDescription": "将保留任务编号并增加执行次数，可能消耗模型额度。修改配置请从源文件新建分析。",
   "confirmRetryAnalysis": "确认执行",
-  "adminPeriodLabel": "统计周期"
+  "adminPeriodLabel": "统计周期",
+  "analysisOutcomeUnknown": "执行回执未知，请先刷新或在处理记录中核对；暂不能重复执行。"
 }

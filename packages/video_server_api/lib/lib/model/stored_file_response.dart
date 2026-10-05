@@ -15,6 +15,7 @@ part 'stored_file_response.g.dart';
 /// * [id]
 /// * [category]
 /// * [name]
+/// * [uploaderUsername] - 文件所属账号的当前用户名；无法关联账号时为空。报告使用分析任务发起账号。
 /// * [objectCount]
 /// * [sizeBytes]
 /// * [createdAt]
@@ -30,6 +31,10 @@ abstract class StoredFileResponse
 
   @BuiltValueField(wireName: r'name')
   String get name;
+
+  /// 文件所属账号的当前用户名；无法关联账号时为空。报告使用分析任务发起账号。
+  @BuiltValueField(wireName: r'uploader_username')
+  String? get uploaderUsername;
 
   @BuiltValueField(wireName: r'object_count')
   int get objectCount;
@@ -81,6 +86,13 @@ class _$StoredFileResponseSerializer
       object.name,
       specifiedType: const FullType(String),
     );
+    if (object.uploaderUsername != null) {
+      yield r'uploader_username';
+      yield serializers.serialize(
+        object.uploaderUsername,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
     yield r'object_count';
     yield serializers.serialize(
       object.objectCount,
@@ -141,6 +153,14 @@ class _$StoredFileResponseSerializer
             specifiedType: const FullType(String),
           ) as String;
           result.name = valueDes;
+          break;
+        case r'uploader_username':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.uploaderUsername = valueDes;
           break;
         case r'object_count':
           final valueDes = serializers.deserialize(

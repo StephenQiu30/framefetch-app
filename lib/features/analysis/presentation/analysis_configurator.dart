@@ -12,10 +12,12 @@ final class AnalysisConfigurator extends StatefulWidget {
     required this.busy,
     required this.onStart,
     required this.skills,
+    this.blocked = false,
     super.key,
   });
 
   final bool busy;
+  final bool blocked;
   final Future<void> Function({
     required String customPrompt,
     required String outputLanguage,
@@ -94,7 +96,7 @@ final class _AnalysisConfiguratorState extends State<AnalysisConfigurator> {
             for (final skill in widget.skills)
               AppDropdownOption(value: skill.id, label: skill.displayName),
           ],
-          enabled: !widget.busy,
+          enabled: !widget.busy && !widget.blocked,
           onSelected: _selectSkill,
         ),
         const SizedBox(height: AppSpacing.xSmall),
@@ -116,7 +118,7 @@ final class _AnalysisConfiguratorState extends State<AnalysisConfigurator> {
             ),
             AppDropdownOption(value: 'en-US', label: l10n.englishLabel),
           ],
-          enabled: !widget.busy,
+          enabled: !widget.busy && !widget.blocked,
           onSelected: (value) {
             if (value != null) setState(() => _language = value);
           },
@@ -133,7 +135,7 @@ final class _AnalysisConfiguratorState extends State<AnalysisConfigurator> {
               style: Theme.of(context).textTheme.labelLarge,
             ),
             ShadButton.ghost(
-              onPressed: widget.busy
+              onPressed: widget.busy || widget.blocked
                   ? null
                   : () => _promptController.text = selected.defaultPrompt,
               leading: const Icon(
@@ -141,7 +143,7 @@ final class _AnalysisConfiguratorState extends State<AnalysisConfigurator> {
                 size: 16,
               ),
               enabled:
-                  (widget.busy
+                  (widget.busy || widget.blocked
                       ? null
                       : () =>
                             _promptController.text = selected.defaultPrompt) !=
@@ -156,7 +158,7 @@ final class _AnalysisConfiguratorState extends State<AnalysisConfigurator> {
         ShadInput(
           key: const Key('analysis-prompt-field'),
           controller: _promptController,
-          enabled: !widget.busy,
+          enabled: !widget.busy && !widget.blocked,
           maxLength: 4000,
           maxLines: 6,
           minLines: 4,
@@ -164,7 +166,7 @@ final class _AnalysisConfiguratorState extends State<AnalysisConfigurator> {
         const SizedBox(height: AppSpacing.large),
         ShadButton(
           key: const Key('start-analysis-button'),
-          onPressed: widget.busy
+          onPressed: widget.busy || widget.blocked
               ? null
               : () => widget.onStart(
                   customPrompt: _promptController.text,
@@ -175,7 +177,7 @@ final class _AnalysisConfiguratorState extends State<AnalysisConfigurator> {
               ? const SizedBox.square(dimension: 18, child: AppSpinner())
               : const Icon(PhosphorIconsRegular.sparkle, size: 18),
           enabled:
-              (widget.busy
+              (widget.busy || widget.blocked
                   ? null
                   : () => widget.onStart(
                       customPrompt: _promptController.text,

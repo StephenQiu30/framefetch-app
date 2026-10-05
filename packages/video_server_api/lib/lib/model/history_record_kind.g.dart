@@ -13,6 +13,10 @@ const HistoryRecordKind _$documentParse =
     const HistoryRecordKind._('documentParse');
 const HistoryRecordKind _$screenplayAnalysis =
     const HistoryRecordKind._('screenplayAnalysis');
+const HistoryRecordKind _$contentCreation =
+    const HistoryRecordKind._('contentCreation');
+const HistoryRecordKind _$skillAnalysis =
+    const HistoryRecordKind._('skillAnalysis');
 const HistoryRecordKind _$unknownDefaultOpenApi =
     const HistoryRecordKind._('unknownDefaultOpenApi');
 
@@ -26,6 +30,10 @@ HistoryRecordKind _$valueOf(String name) {
       return _$documentParse;
     case 'screenplayAnalysis':
       return _$screenplayAnalysis;
+    case 'contentCreation':
+      return _$contentCreation;
+    case 'skillAnalysis':
+      return _$skillAnalysis;
     case 'unknownDefaultOpenApi':
       return _$unknownDefaultOpenApi;
     default:
@@ -39,6 +47,8 @@ final BuiltSet<HistoryRecordKind> _$values =
   _$videoAnalysis,
   _$documentParse,
   _$screenplayAnalysis,
+  _$contentCreation,
+  _$skillAnalysis,
   _$unknownDefaultOpenApi,
 ]);
 
@@ -48,6 +58,8 @@ class _$HistoryRecordKindMeta {
   HistoryRecordKind get videoAnalysis => _$videoAnalysis;
   HistoryRecordKind get documentParse => _$documentParse;
   HistoryRecordKind get screenplayAnalysis => _$screenplayAnalysis;
+  HistoryRecordKind get contentCreation => _$contentCreation;
+  HistoryRecordKind get skillAnalysis => _$skillAnalysis;
   HistoryRecordKind get unknownDefaultOpenApi => _$unknownDefaultOpenApi;
   HistoryRecordKind valueOf(String name) => _$valueOf(name);
   BuiltSet<HistoryRecordKind> get values => _$values;
@@ -69,6 +81,8 @@ class _$HistoryRecordKindSerializer
     'videoAnalysis': 'video_analysis',
     'documentParse': 'document_parse',
     'screenplayAnalysis': 'screenplay_analysis',
+    'contentCreation': 'content_creation',
+    'skillAnalysis': 'skill_analysis',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
@@ -76,6 +90,8 @@ class _$HistoryRecordKindSerializer
     'video_analysis': 'videoAnalysis',
     'document_parse': 'documentParse',
     'screenplay_analysis': 'screenplayAnalysis',
+    'content_creation': 'contentCreation',
+    'skill_analysis': 'skillAnalysis',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 

@@ -14,6 +14,12 @@ class AnalysisStage extends EnumClass {
   static const AnalysisStage preparing = _$preparing;
   @BuiltValueEnumConst(wireName: r'analyzing')
   static const AnalysisStage analyzing = _$analyzing;
+  @BuiltValueEnumConst(wireName: r'drafting')
+  static const AnalysisStage drafting = _$drafting;
+  @BuiltValueEnumConst(wireName: r'reviewing')
+  static const AnalysisStage reviewing = _$reviewing;
+  @BuiltValueEnumConst(wireName: r'revising')
+  static const AnalysisStage revising = _$revising;
   @BuiltValueEnumConst(wireName: r'validating')
   static const AnalysisStage validating = _$validating;
   @BuiltValueEnumConst(wireName: r'publishing')

@@ -21,7 +21,7 @@ abstract class AnalysisAnalyticsInputResponse
             AnalysisAnalyticsInputResponseBuilder> {
   @BuiltValueField(wireName: r'input_kind')
   AnalysisInputKind get inputKind;
-  // enum inputKindEnum {  video,  screenplay,  };
+  // enum inputKindEnum {  video,  screenplay,  content,  skill,  };
 
   @BuiltValueField(wireName: r'total')
   int get total;

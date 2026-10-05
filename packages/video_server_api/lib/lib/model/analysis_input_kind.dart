@@ -14,6 +14,10 @@ class AnalysisInputKind extends EnumClass {
   static const AnalysisInputKind video = _$video;
   @BuiltValueEnumConst(wireName: r'screenplay')
   static const AnalysisInputKind screenplay = _$screenplay;
+  @BuiltValueEnumConst(wireName: r'content')
+  static const AnalysisInputKind content = _$content;
+  @BuiltValueEnumConst(wireName: r'skill')
+  static const AnalysisInputKind skill = _$skill;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const AnalysisInputKind unknownDefaultOpenApi =
       _$unknownDefaultOpenApi;

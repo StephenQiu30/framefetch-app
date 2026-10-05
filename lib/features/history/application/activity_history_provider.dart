@@ -43,6 +43,8 @@ final activityHistoryProvider = FutureProvider.autoDispose
     }, retry: (_, _) => null);
 
 bool _processing(ItemsInner item) => switch (item.oneOf.value) {
+  final SkillAnalysisHistoryRecordResponse record =>
+    record.statusGroup == HistoryStatusGroup.processing,
   final ParseHistoryRecordResponse record =>
     record.statusGroup == HistoryStatusGroup.processing,
   final DocumentParseHistoryRecordResponse record =>

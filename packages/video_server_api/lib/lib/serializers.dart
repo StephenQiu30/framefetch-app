@@ -72,14 +72,20 @@ import 'package:video_server_api/lib/model/api_response_storage_cleanup_response
 import 'package:video_server_api/lib/model/api_response_stored_file_list_response.dart';
 import 'package:video_server_api/lib/model/api_response_tuple_analysis_skill_response.dart';
 import 'package:video_server_api/lib/model/api_response_union_analysis_response_none_type.dart';
-import 'package:video_server_api/lib/model/api_response_union_video_analysis_history_record_response_screenplay_analysis_history_record_response.dart';
+import 'package:video_server_api/lib/model/api_response_union_video_analysis_history_record_response_screenplay_analysis_history_record_response_content_creation_history_record_response_skill_analysis_history_record_response.dart';
 import 'package:video_server_api/lib/model/api_response_user_response.dart';
 import 'package:video_server_api/lib/model/audio_codec_family.dart';
+import 'package:video_server_api/lib/model/blocks_inner.dart';
 import 'package:video_server_api/lib/model/compatibility_profile.dart';
 import 'package:video_server_api/lib/model/complete_document_import_request.dart';
 import 'package:video_server_api/lib/model/complete_media_import_request.dart';
 import 'package:video_server_api/lib/model/completed_part_request.dart';
 import 'package:video_server_api/lib/model/container_preference.dart';
+import 'package:video_server_api/lib/model/content_citation.dart';
+import 'package:video_server_api/lib/model/content_creation_history_record_response.dart';
+import 'package:video_server_api/lib/model/content_document_result.dart';
+import 'package:video_server_api/lib/model/content_finding.dart';
+import 'package:video_server_api/lib/model/content_review.dart';
 import 'package:video_server_api/lib/model/create_ai_provider_profile_request.dart';
 import 'package:video_server_api/lib/model/create_provider_catalog_entry_request.dart';
 import 'package:video_server_api/lib/model/data.dart';
@@ -126,6 +132,7 @@ import 'package:video_server_api/lib/model/execution_mode.dart';
 import 'package:video_server_api/lib/model/failure_class.dart';
 import 'package:video_server_api/lib/model/format_response.dart';
 import 'package:video_server_api/lib/model/fps_bucket.dart';
+import 'package:video_server_api/lib/model/heading_block.dart';
 import 'package:video_server_api/lib/model/highlight_response.dart';
 import 'package:video_server_api/lib/model/history_availability.dart';
 import 'package:video_server_api/lib/model/history_record_cursor_response.dart';
@@ -145,6 +152,7 @@ import 'package:video_server_api/lib/model/intent_request.dart';
 import 'package:video_server_api/lib/model/intent_response.dart';
 import 'package:video_server_api/lib/model/intent_status.dart';
 import 'package:video_server_api/lib/model/items_inner.dart';
+import 'package:video_server_api/lib/model/list_block.dart';
 import 'package:video_server_api/lib/model/managed_user_list_response.dart';
 import 'package:video_server_api/lib/model/managed_user_response.dart';
 import 'package:video_server_api/lib/model/media_import_request.dart';
@@ -157,6 +165,7 @@ import 'package:video_server_api/lib/model/native_refresh_request.dart';
 import 'package:video_server_api/lib/model/native_session_response.dart';
 import 'package:video_server_api/lib/model/operation_log_page_response.dart';
 import 'package:video_server_api/lib/model/operation_log_response.dart';
+import 'package:video_server_api/lib/model/paragraph_block.dart';
 import 'package:video_server_api/lib/model/parse_history_record_response.dart';
 import 'package:video_server_api/lib/model/problem_details.dart';
 import 'package:video_server_api/lib/model/production_advice_response.dart';
@@ -169,6 +178,7 @@ import 'package:video_server_api/lib/model/provider_list_response.dart';
 import 'package:video_server_api/lib/model/provider_status_response.dart';
 import 'package:video_server_api/lib/model/provider_support_status.dart';
 import 'package:video_server_api/lib/model/public_url_inspection_source.dart';
+import 'package:video_server_api/lib/model/quote_block.dart';
 import 'package:video_server_api/lib/model/register_request.dart';
 import 'package:video_server_api/lib/model/registration_code_request.dart';
 import 'package:video_server_api/lib/model/registration_code_response.dart';
@@ -185,6 +195,10 @@ import 'package:video_server_api/lib/model/screenplay_scene_response.dart';
 import 'package:video_server_api/lib/model/screenplay_structure_response.dart';
 import 'package:video_server_api/lib/model/semantic_plan_response.dart';
 import 'package:video_server_api/lib/model/shot_response.dart';
+import 'package:video_server_api/lib/model/skill_analysis_history_record_response.dart';
+import 'package:video_server_api/lib/model/skill_media_evidence.dart';
+import 'package:video_server_api/lib/model/skill_report_result.dart';
+import 'package:video_server_api/lib/model/skill_text_evidence.dart';
 import 'package:video_server_api/lib/model/source_discovery_item_response.dart';
 import 'package:video_server_api/lib/model/source_discovery_request.dart';
 import 'package:video_server_api/lib/model/source_discovery_response.dart';
@@ -194,6 +208,7 @@ import 'package:video_server_api/lib/model/storage_cleanup_response.dart';
 import 'package:video_server_api/lib/model/stored_file_category.dart';
 import 'package:video_server_api/lib/model/stored_file_list_response.dart';
 import 'package:video_server_api/lib/model/stored_file_response.dart';
+import 'package:video_server_api/lib/model/structured_report_citation_response.dart';
 import 'package:video_server_api/lib/model/structured_report_result_response.dart';
 import 'package:video_server_api/lib/model/structured_report_section_response.dart';
 import 'package:video_server_api/lib/model/update_ai_provider_profile_request.dart';
@@ -274,14 +289,20 @@ part 'serializers.g.dart';
   ApiResponseStoredFileListResponse,
   ApiResponseTupleAnalysisSkillResponse,
   ApiResponseUnionAnalysisResponseNoneType,
-  ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse,
+  ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponseContentCreationHistoryRecordResponseSkillAnalysisHistoryRecordResponse,
   ApiResponseUserResponse,
   AudioCodecFamily,
+  BlocksInner,
   CompatibilityProfile,
   CompleteDocumentImportRequest,
   CompleteMediaImportRequest,
   CompletedPartRequest,
   ContainerPreference,
+  ContentCitation,
+  ContentCreationHistoryRecordResponse,
+  ContentDocumentResult,
+  ContentFinding,
+  ContentReview,
   CreateAiProviderProfileRequest,
   CreateProviderCatalogEntryRequest,
   Data,
@@ -328,6 +349,7 @@ part 'serializers.g.dart';
   FailureClass,
   FormatResponse,
   FpsBucket,
+  HeadingBlock,
   HighlightResponse,
   HistoryAvailability,
   HistoryRecordCursorResponse,
@@ -347,6 +369,7 @@ part 'serializers.g.dart';
   IntentResponse,
   IntentStatus,
   ItemsInner,
+  ListBlock,
   ManagedUserListResponse,
   ManagedUserResponse,
   MediaImportRequest,
@@ -359,6 +382,7 @@ part 'serializers.g.dart';
   NativeSessionResponse,
   OperationLogPageResponse,
   OperationLogResponse,
+  ParagraphBlock,
   ParseHistoryRecordResponse,
   ProblemDetails,
   ProductionAdviceResponse,
@@ -371,6 +395,7 @@ part 'serializers.g.dart';
   ProviderStatusResponse,
   ProviderSupportStatus,
   PublicUrlInspectionSource,
+  QuoteBlock,
   RegisterRequest,
   RegistrationCodeRequest,
   RegistrationCodeResponse,
@@ -387,6 +412,10 @@ part 'serializers.g.dart';
   ScreenplayStructureResponse,
   SemanticPlanResponse,
   ShotResponse,
+  SkillAnalysisHistoryRecordResponse,
+  SkillMediaEvidence,
+  SkillReportResult,
+  SkillTextEvidence,
   SourceDiscoveryItemResponse,
   SourceDiscoveryRequest,
   SourceDiscoveryResponse,
@@ -396,6 +425,7 @@ part 'serializers.g.dart';
   StoredFileCategory,
   StoredFileListResponse,
   StoredFileResponse,
+  StructuredReportCitationResponse,
   StructuredReportResultResponse,
   StructuredReportSectionResponse,
   UpdateAiProviderProfileRequest,

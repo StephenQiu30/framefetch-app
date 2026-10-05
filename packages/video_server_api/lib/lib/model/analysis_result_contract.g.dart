@@ -16,6 +16,10 @@ const AnalysisResultContract _$screenplayRewrite =
     const AnalysisResultContract._('screenplayRewrite');
 const AnalysisResultContract _$structuredReport =
     const AnalysisResultContract._('structuredReport');
+const AnalysisResultContract _$contentDocument =
+    const AnalysisResultContract._('contentDocument');
+const AnalysisResultContract _$skillReport =
+    const AnalysisResultContract._('skillReport');
 const AnalysisResultContract _$unknownDefaultOpenApi =
     const AnalysisResultContract._('unknownDefaultOpenApi');
 
@@ -31,6 +35,10 @@ AnalysisResultContract _$valueOf(String name) {
       return _$screenplayRewrite;
     case 'structuredReport':
       return _$structuredReport;
+    case 'contentDocument':
+      return _$contentDocument;
+    case 'skillReport':
+      return _$skillReport;
     case 'unknownDefaultOpenApi':
       return _$unknownDefaultOpenApi;
     default:
@@ -45,6 +53,8 @@ final BuiltSet<AnalysisResultContract> _$values =
   _$screenplayAnalysis,
   _$screenplayRewrite,
   _$structuredReport,
+  _$contentDocument,
+  _$skillReport,
   _$unknownDefaultOpenApi,
 ]);
 
@@ -55,6 +65,8 @@ class _$AnalysisResultContractMeta {
   AnalysisResultContract get screenplayAnalysis => _$screenplayAnalysis;
   AnalysisResultContract get screenplayRewrite => _$screenplayRewrite;
   AnalysisResultContract get structuredReport => _$structuredReport;
+  AnalysisResultContract get contentDocument => _$contentDocument;
+  AnalysisResultContract get skillReport => _$skillReport;
   AnalysisResultContract get unknownDefaultOpenApi => _$unknownDefaultOpenApi;
   AnalysisResultContract valueOf(String name) => _$valueOf(name);
   BuiltSet<AnalysisResultContract> get values => _$values;
@@ -77,6 +89,8 @@ class _$AnalysisResultContractSerializer
     'screenplayAnalysis': 'screenplay-analysis',
     'screenplayRewrite': 'screenplay-rewrite',
     'structuredReport': 'structured-report',
+    'contentDocument': 'content-document',
+    'skillReport': 'skill-report',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
@@ -85,6 +99,8 @@ class _$AnalysisResultContractSerializer
     'screenplay-analysis': 'screenplayAnalysis',
     'screenplay-rewrite': 'screenplayRewrite',
     'structured-report': 'structuredReport',
+    'content-document': 'contentDocument',
+    'skill-report': 'skillReport',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 

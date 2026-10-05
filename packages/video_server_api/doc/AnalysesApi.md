@@ -11,17 +11,17 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**cancelAnalysis**](AnalysesApi.md#cancelanalysis) | **POST** /api/analyses/{analysis_id}/cancel | 取消视频分析任务
 [**createAnalysis**](AnalysesApi.md#createanalysis) | **POST** /api/downloads/{download_id}/analyses | 创建视频分析任务
-[**createDocumentAnalysis**](AnalysesApi.md#createdocumentanalysis) | **POST** /api/documents/{document_id}/analyses | 创建剧本分析或改写任务
+[**createDocumentAnalysis**](AnalysesApi.md#createdocumentanalysis) | **POST** /api/documents/{document_id}/analyses | 创建剧本分析任务
 [**deleteAnalysis**](AnalysesApi.md#deleteanalysis) | **DELETE** /api/analyses/{analysis_id} | 删除视频分析与报告
-[**exportAnalysisMarkdown**](AnalysesApi.md#exportanalysismarkdown) | **GET** /api/analyses/{analysis_id}/report.md | 导出 Markdown 视频分析报告
+[**exportAnalysisMarkdown**](AnalysesApi.md#exportanalysismarkdown) | **GET** /api/analyses/{analysis_id}/report.md | 导出 Markdown 分析报告
 [**exportAnalysisReport**](AnalysesApi.md#exportanalysisreport) | **GET** /api/analyses/{analysis_id}/report.docx | 导出视频分析报告
-[**getAnalysis**](AnalysesApi.md#getanalysis) | **GET** /api/analyses/{analysis_id} | 查询视频分析任务
+[**getAnalysis**](AnalysesApi.md#getanalysis) | **GET** /api/analyses/{analysis_id} | 查询分析任务
 [**getAnalysisHistoryRecord**](AnalysesApi.md#getanalysishistoryrecord) | **GET** /api/analyses/{analysis_id}/history-record | 读取分析来源与历史摘要
 [**getLatestDocumentAnalysis**](AnalysesApi.md#getlatestdocumentanalysis) | **GET** /api/documents/{document_id}/analysis | 读取文档最近的剧本分析
 [**getLatestDownloadAnalysis**](AnalysesApi.md#getlatestdownloadanalysis) | **GET** /api/downloads/{download_id}/analysis | 读取下载任务最近的视频分析
 [**listAnalysisRuns**](AnalysesApi.md#listanalysisruns) | **GET** /api/analyses/{analysis_id}/runs | 分页读取分析运行记录
 [**listAnalysisSkills**](AnalysesApi.md#listanalysisskills) | **GET** /api/analysis-skills | 列出输入兼容的分析 Skill
-[**retryAnalysis**](AnalysesApi.md#retryanalysis) | **POST** /api/analyses/{analysis_id}/retry | 重试原视频分析任务
+[**retryAnalysis**](AnalysesApi.md#retryanalysis) | **POST** /api/analyses/{analysis_id}/retry | 重新执行原分析任务
 
 
 # **cancelAnalysis**
@@ -72,8 +72,6 @@ Name | Type | Description  | Notes
 
 创建视频分析任务
 
-基于已完成的下载制品创建异步 AI 分析任务。
-
 ### Example
 ```dart
 import 'package:video_server_api/api.dart';
@@ -117,9 +115,7 @@ Name | Type | Description  | Notes
 # **createDocumentAnalysis**
 > ApiResponseAnalysisResponse createDocumentAnalysis(documentId, idempotencyKey, analysisRequest)
 
-创建剧本分析或改写任务
-
-基于已规范化的剧本文档创建异步分析或改写任务。
+创建剧本分析任务
 
 ### Example
 ```dart
@@ -206,7 +202,7 @@ void (empty response body)
 # **exportAnalysisMarkdown**
 > Uint8List exportAnalysisMarkdown(analysisId)
 
-导出 Markdown 视频分析报告
+导出 Markdown 分析报告
 
 导出与前端预览、DOCX 转换共用的唯一 Markdown 报告。
 
@@ -292,7 +288,7 @@ Name | Type | Description  | Notes
 # **getAnalysis**
 > ApiResponseAnalysisResponse getAnalysis(analysisId)
 
-查询视频分析任务
+查询分析任务
 
 查询分析进度及经过证据校验的结果。
 
@@ -333,7 +329,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getAnalysisHistoryRecord**
-> ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse getAnalysisHistoryRecord(analysisId)
+> ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponseContentCreationHistoryRecordResponseSkillAnalysisHistoryRecordResponse getAnalysisHistoryRecord(analysisId)
 
 读取分析来源与历史摘要
 
@@ -360,7 +356,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse**](ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse.md)
+[**ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponseContentCreationHistoryRecordResponseSkillAnalysisHistoryRecordResponse**](ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponseContentCreationHistoryRecordResponseSkillAnalysisHistoryRecordResponse.md)
 
 ### Authorization
 
@@ -509,8 +505,6 @@ Name | Type | Description  | Notes
 
 列出输入兼容的分析 Skill
 
-按输入类型返回可选 Skill 及用户可编辑的默认提示词。
-
 ### Example
 ```dart
 import 'package:video_server_api/api.dart';
@@ -550,9 +544,7 @@ No authorization required
 # **retryAnalysis**
 > ApiResponseAnalysisResponse retryAnalysis(analysisId, idempotencyKey)
 
-重试原视频分析任务
-
-为同一分析任务创建下一执行代次，不改变任务资源 ID。  Retry 是上一运行的无参数重放；带请求体的请求按校验错误拒绝。
+重新执行原分析任务
 
 ### Example
 ```dart

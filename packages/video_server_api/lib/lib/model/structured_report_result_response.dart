@@ -4,6 +4,7 @@
 
 // ignore_for_file: unused_element, unused_element_parameter
 import 'package:built_collection/built_collection.dart';
+import 'package:video_server_api/lib/model/content_review.dart';
 import 'package:video_server_api/lib/model/structured_report_section_response.dart';
 import 'package:video_server_api/lib/model/analysis_media_response.dart';
 import 'package:built_value/built_value.dart';
@@ -21,6 +22,8 @@ part 'structured_report_result_response.g.dart';
 /// * [sections]
 /// * [limitations]
 /// * [media]
+/// * [reviewStatus]
+/// * [reviewHistory]
 @BuiltValue()
 abstract class StructuredReportResultResponse
     implements
@@ -46,7 +49,14 @@ abstract class StructuredReportResultResponse
   BuiltList<String> get limitations;
 
   @BuiltValueField(wireName: r'media')
-  AnalysisMediaResponse get media;
+  AnalysisMediaResponse? get media;
+
+  @BuiltValueField(wireName: r'review_status')
+  StructuredReportResultResponseReviewStatusEnum? get reviewStatus;
+  // enum reviewStatusEnum {  not_reviewed,  passed,  needs_review,  needs_material,  };
+
+  @BuiltValueField(wireName: r'review_history')
+  BuiltList<ContentReview>? get reviewHistory;
 
   StructuredReportResultResponse._();
 
@@ -55,7 +65,8 @@ abstract class StructuredReportResultResponse
       _$StructuredReportResultResponse;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(StructuredReportResultResponseBuilder b) => b;
+  static void _defaults(StructuredReportResultResponseBuilder b) =>
+      b..reviewHistory = ListBuilder();
 
   @BuiltValueSerializer(custom: true)
   static Serializer<StructuredReportResultResponse> get serializer =>
@@ -110,10 +121,27 @@ class _$StructuredReportResultResponseSerializer
       specifiedType: const FullType(BuiltList, [FullType(String)]),
     );
     yield r'media';
-    yield serializers.serialize(
-      object.media,
-      specifiedType: const FullType(AnalysisMediaResponse),
-    );
+    yield object.media == null
+        ? null
+        : serializers.serialize(
+            object.media,
+            specifiedType: const FullType.nullable(AnalysisMediaResponse),
+          );
+    if (object.reviewStatus != null) {
+      yield r'review_status';
+      yield serializers.serialize(
+        object.reviewStatus,
+        specifiedType:
+            const FullType(StructuredReportResultResponseReviewStatusEnum),
+      );
+    }
+    if (object.reviewHistory != null) {
+      yield r'review_history';
+      yield serializers.serialize(
+        object.reviewHistory,
+        specifiedType: const FullType(BuiltList, [FullType(ContentReview)]),
+      );
+    }
   }
 
   @override
@@ -186,9 +214,25 @@ class _$StructuredReportResultResponseSerializer
         case r'media':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(AnalysisMediaResponse),
-          ) as AnalysisMediaResponse;
+            specifiedType: const FullType.nullable(AnalysisMediaResponse),
+          ) as AnalysisMediaResponse?;
+          if (valueDes == null) continue;
           result.media.replace(valueDes);
+          break;
+        case r'review_status':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType:
+                const FullType(StructuredReportResultResponseReviewStatusEnum),
+          ) as StructuredReportResultResponseReviewStatusEnum;
+          result.reviewStatus = valueDes;
+          break;
+        case r'review_history':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(BuiltList, [FullType(ContentReview)]),
+          ) as BuiltList<ContentReview>;
+          result.reviewHistory.replace(valueDes);
           break;
         default:
           unhandled.add(key);
@@ -236,4 +280,35 @@ class StructuredReportResultResponseKindEnum extends EnumClass {
       _$structuredReportResultResponseKindEnumValues;
   static StructuredReportResultResponseKindEnum valueOf(String name) =>
       _$structuredReportResultResponseKindEnumValueOf(name);
+}
+
+class StructuredReportResultResponseReviewStatusEnum extends EnumClass {
+  @BuiltValueEnumConst(wireName: r'not_reviewed')
+  static const StructuredReportResultResponseReviewStatusEnum notReviewed =
+      _$structuredReportResultResponseReviewStatusEnum_notReviewed;
+  @BuiltValueEnumConst(wireName: r'passed')
+  static const StructuredReportResultResponseReviewStatusEnum passed =
+      _$structuredReportResultResponseReviewStatusEnum_passed;
+  @BuiltValueEnumConst(wireName: r'needs_review')
+  static const StructuredReportResultResponseReviewStatusEnum needsReview =
+      _$structuredReportResultResponseReviewStatusEnum_needsReview;
+  @BuiltValueEnumConst(wireName: r'needs_material')
+  static const StructuredReportResultResponseReviewStatusEnum needsMaterial =
+      _$structuredReportResultResponseReviewStatusEnum_needsMaterial;
+  @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
+  static const StructuredReportResultResponseReviewStatusEnum
+      unknownDefaultOpenApi =
+      _$structuredReportResultResponseReviewStatusEnum_unknownDefaultOpenApi;
+
+  static Serializer<StructuredReportResultResponseReviewStatusEnum>
+      get serializer =>
+          _$structuredReportResultResponseReviewStatusEnumSerializer;
+
+  const StructuredReportResultResponseReviewStatusEnum._(String name)
+      : super(name);
+
+  static BuiltSet<StructuredReportResultResponseReviewStatusEnum> get values =>
+      _$structuredReportResultResponseReviewStatusEnumValues;
+  static StructuredReportResultResponseReviewStatusEnum valueOf(String name) =>
+      _$structuredReportResultResponseReviewStatusEnumValueOf(name);
 }

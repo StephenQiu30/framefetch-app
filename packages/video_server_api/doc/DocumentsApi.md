@@ -9,19 +9,19 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**cancelDocumentImport**](DocumentsApi.md#canceldocumentimport) | **POST** /api/documents/{document_id}/cancel | 取消剧本文档导入
+[**cancelDocumentImport**](DocumentsApi.md#canceldocumentimport) | **POST** /api/documents/{document_id}/cancel | 取消文档导入
 [**completeDocumentImport**](DocumentsApi.md#completedocumentimport) | **POST** /api/documents/{document_id}/complete | 完成文档上传并触发验证
-[**createDocumentImport**](DocumentsApi.md#createdocumentimport) | **POST** /api/documents | 创建剧本文档导入
+[**createDocumentImport**](DocumentsApi.md#createdocumentimport) | **POST** /api/documents | 创建文档导入
 [**createDocumentUploadSession**](DocumentsApi.md#createdocumentuploadsession) | **POST** /api/documents/{document_id}/upload-sessions | 创建或刷新文档上传会话
-[**deleteDocument**](DocumentsApi.md#deletedocument) | **DELETE** /api/documents/{document_id} | 删除剧本文档及其制品
-[**getDocumentImport**](DocumentsApi.md#getdocumentimport) | **GET** /api/documents/{document_id} | 查询剧本文档导入
-[**listDocuments**](DocumentsApi.md#listdocuments) | **GET** /api/documents | 查询剧本文档列表
+[**deleteDocument**](DocumentsApi.md#deletedocument) | **DELETE** /api/documents/{document_id} | 删除文档及其制品
+[**getDocumentImport**](DocumentsApi.md#getdocumentimport) | **GET** /api/documents/{document_id} | 查询文档导入
+[**listDocuments**](DocumentsApi.md#listdocuments) | **GET** /api/documents | 查询文档列表
 
 
 # **cancelDocumentImport**
 > ApiResponseDocumentImportResponse cancelDocumentImport(documentId)
 
-取消剧本文档导入
+取消文档导入
 
 ### Example
 ```dart
@@ -105,7 +105,7 @@ Name | Type | Description  | Notes
 # **createDocumentImport**
 > ApiResponseDocumentImportResponse createDocumentImport(idempotencyKey, documentImportRequest)
 
-创建剧本文档导入
+创建文档导入
 
 ### Example
 ```dart
@@ -189,7 +189,7 @@ Name | Type | Description  | Notes
 # **deleteDocument**
 > deleteDocument(documentId)
 
-删除剧本文档及其制品
+删除文档及其制品
 
 ### Example
 ```dart
@@ -229,7 +229,7 @@ void (empty response body)
 # **getDocumentImport**
 > ApiResponseDocumentDetailResponse getDocumentImport(documentId)
 
-查询剧本文档导入
+查询文档导入
 
 ### Example
 ```dart
@@ -270,7 +270,7 @@ Name | Type | Description  | Notes
 # **listDocuments**
 > ApiResponseDocumentPageResponse listDocuments(page, pageSize)
 
-查询剧本文档列表
+查询文档列表
 
 ### Example
 ```dart

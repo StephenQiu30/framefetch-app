@@ -5,6 +5,8 @@
 // ignore_for_file: unused_element, unused_element_parameter
 import 'package:video_server_api/lib/model/video_analysis_history_record_response.dart';
 import 'package:built_collection/built_collection.dart';
+import 'package:video_server_api/lib/model/content_creation_history_record_response.dart';
+import 'package:video_server_api/lib/model/skill_analysis_history_record_response.dart';
 import 'package:video_server_api/lib/model/screenplay_analysis_history_record_response.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -40,13 +42,15 @@ part 'data.g.dart';
 /// * [errorCode]
 @BuiltValue()
 abstract class Data implements Built<Data, DataBuilder> {
-  /// One Of [ScreenplayAnalysisHistoryRecordResponse], [VideoAnalysisHistoryRecordResponse]
+  /// One Of [ContentCreationHistoryRecordResponse], [ScreenplayAnalysisHistoryRecordResponse], [SkillAnalysisHistoryRecordResponse], [VideoAnalysisHistoryRecordResponse]
   OneOf get oneOf;
 
   static const String discriminatorFieldName = r'record_type';
 
   static const Map<String, Type> discriminatorMapping = {
+    r'content_creation': ContentCreationHistoryRecordResponse,
     r'screenplay_analysis': ScreenplayAnalysisHistoryRecordResponse,
+    r'skill_analysis': SkillAnalysisHistoryRecordResponse,
     r'video_analysis': VideoAnalysisHistoryRecordResponse,
   };
 
@@ -63,8 +67,14 @@ abstract class Data implements Built<Data, DataBuilder> {
 
 extension DataDiscriminatorExt on Data {
   String? get discriminatorValue {
+    if (this is ContentCreationHistoryRecordResponse) {
+      return r'content_creation';
+    }
     if (this is ScreenplayAnalysisHistoryRecordResponse) {
       return r'screenplay_analysis';
+    }
+    if (this is SkillAnalysisHistoryRecordResponse) {
+      return r'skill_analysis';
     }
     if (this is VideoAnalysisHistoryRecordResponse) {
       return r'video_analysis';
@@ -75,8 +85,14 @@ extension DataDiscriminatorExt on Data {
 
 extension DataBuilderDiscriminatorExt on DataBuilder {
   String? get discriminatorValue {
+    if (this is ContentCreationHistoryRecordResponseBuilder) {
+      return r'content_creation';
+    }
     if (this is ScreenplayAnalysisHistoryRecordResponseBuilder) {
       return r'screenplay_analysis';
+    }
+    if (this is SkillAnalysisHistoryRecordResponseBuilder) {
+      return r'skill_analysis';
     }
     if (this is VideoAnalysisHistoryRecordResponseBuilder) {
       return r'video_analysis';
@@ -123,18 +139,34 @@ class _$DataSerializer implements PrimitiveSerializer<Data> {
         specifiedType: FullType(String)) as String;
     oneOfDataSrc = serialized;
     final oneOfTypes = [
+      ContentCreationHistoryRecordResponse,
       ScreenplayAnalysisHistoryRecordResponse,
+      SkillAnalysisHistoryRecordResponse,
       VideoAnalysisHistoryRecordResponse,
     ];
     Object oneOfResult;
     Type oneOfType;
     switch (discValue) {
+      case r'content_creation':
+        oneOfResult = serializers.deserialize(
+          oneOfDataSrc,
+          specifiedType: FullType(ContentCreationHistoryRecordResponse),
+        ) as ContentCreationHistoryRecordResponse;
+        oneOfType = ContentCreationHistoryRecordResponse;
+        break;
       case r'screenplay_analysis':
         oneOfResult = serializers.deserialize(
           oneOfDataSrc,
           specifiedType: FullType(ScreenplayAnalysisHistoryRecordResponse),
         ) as ScreenplayAnalysisHistoryRecordResponse;
         oneOfType = ScreenplayAnalysisHistoryRecordResponse;
+        break;
+      case r'skill_analysis':
+        oneOfResult = serializers.deserialize(
+          oneOfDataSrc,
+          specifiedType: FullType(SkillAnalysisHistoryRecordResponse),
+        ) as SkillAnalysisHistoryRecordResponse;
+        oneOfType = SkillAnalysisHistoryRecordResponse;
         break;
       case r'video_analysis':
         oneOfResult = serializers.deserialize(
@@ -156,9 +188,9 @@ class _$DataSerializer implements PrimitiveSerializer<Data> {
 }
 
 class DataRecordTypeEnum extends EnumClass {
-  @BuiltValueEnumConst(wireName: r'screenplay_analysis')
-  static const DataRecordTypeEnum screenplayAnalysis =
-      _$dataRecordTypeEnum_screenplayAnalysis;
+  @BuiltValueEnumConst(wireName: r'skill_analysis')
+  static const DataRecordTypeEnum skillAnalysis =
+      _$dataRecordTypeEnum_skillAnalysis;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const DataRecordTypeEnum unknownDefaultOpenApi =
       _$dataRecordTypeEnum_unknownDefaultOpenApi;

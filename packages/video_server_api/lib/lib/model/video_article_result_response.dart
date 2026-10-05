@@ -4,6 +4,7 @@
 
 // ignore_for_file: unused_element, unused_element_parameter
 import 'package:built_collection/built_collection.dart';
+import 'package:video_server_api/lib/model/content_review.dart';
 import 'package:video_server_api/lib/model/video_article_section_response.dart';
 import 'package:video_server_api/lib/model/analysis_media_response.dart';
 import 'package:built_value/built_value.dart';
@@ -23,6 +24,8 @@ part 'video_article_result_response.g.dart';
 /// * [closing]
 /// * [limitations]
 /// * [media]
+/// * [reviewStatus]
+/// * [reviewHistory]
 @BuiltValue()
 abstract class VideoArticleResultResponse
     implements
@@ -55,6 +58,13 @@ abstract class VideoArticleResultResponse
   @BuiltValueField(wireName: r'media')
   AnalysisMediaResponse get media;
 
+  @BuiltValueField(wireName: r'review_status')
+  VideoArticleResultResponseReviewStatusEnum? get reviewStatus;
+  // enum reviewStatusEnum {  not_reviewed,  passed,  needs_review,  needs_material,  };
+
+  @BuiltValueField(wireName: r'review_history')
+  BuiltList<ContentReview>? get reviewHistory;
+
   VideoArticleResultResponse._();
 
   factory VideoArticleResultResponse(
@@ -62,7 +72,8 @@ abstract class VideoArticleResultResponse
       _$VideoArticleResultResponse;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(VideoArticleResultResponseBuilder b) => b;
+  static void _defaults(VideoArticleResultResponseBuilder b) =>
+      b..reviewHistory = ListBuilder();
 
   @BuiltValueSerializer(custom: true)
   static Serializer<VideoArticleResultResponse> get serializer =>
@@ -131,6 +142,21 @@ class _$VideoArticleResultResponseSerializer
       object.media,
       specifiedType: const FullType(AnalysisMediaResponse),
     );
+    if (object.reviewStatus != null) {
+      yield r'review_status';
+      yield serializers.serialize(
+        object.reviewStatus,
+        specifiedType:
+            const FullType(VideoArticleResultResponseReviewStatusEnum),
+      );
+    }
+    if (object.reviewHistory != null) {
+      yield r'review_history';
+      yield serializers.serialize(
+        object.reviewHistory,
+        specifiedType: const FullType(BuiltList, [FullType(ContentReview)]),
+      );
+    }
   }
 
   @override
@@ -220,6 +246,21 @@ class _$VideoArticleResultResponseSerializer
           ) as AnalysisMediaResponse;
           result.media.replace(valueDes);
           break;
+        case r'review_status':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType:
+                const FullType(VideoArticleResultResponseReviewStatusEnum),
+          ) as VideoArticleResultResponseReviewStatusEnum;
+          result.reviewStatus = valueDes;
+          break;
+        case r'review_history':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(BuiltList, [FullType(ContentReview)]),
+          ) as BuiltList<ContentReview>;
+          result.reviewHistory.replace(valueDes);
+          break;
         default:
           unhandled.add(key);
           unhandled.add(value);
@@ -266,4 +307,33 @@ class VideoArticleResultResponseKindEnum extends EnumClass {
       _$videoArticleResultResponseKindEnumValues;
   static VideoArticleResultResponseKindEnum valueOf(String name) =>
       _$videoArticleResultResponseKindEnumValueOf(name);
+}
+
+class VideoArticleResultResponseReviewStatusEnum extends EnumClass {
+  @BuiltValueEnumConst(wireName: r'not_reviewed')
+  static const VideoArticleResultResponseReviewStatusEnum notReviewed =
+      _$videoArticleResultResponseReviewStatusEnum_notReviewed;
+  @BuiltValueEnumConst(wireName: r'passed')
+  static const VideoArticleResultResponseReviewStatusEnum passed =
+      _$videoArticleResultResponseReviewStatusEnum_passed;
+  @BuiltValueEnumConst(wireName: r'needs_review')
+  static const VideoArticleResultResponseReviewStatusEnum needsReview =
+      _$videoArticleResultResponseReviewStatusEnum_needsReview;
+  @BuiltValueEnumConst(wireName: r'needs_material')
+  static const VideoArticleResultResponseReviewStatusEnum needsMaterial =
+      _$videoArticleResultResponseReviewStatusEnum_needsMaterial;
+  @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
+  static const VideoArticleResultResponseReviewStatusEnum
+      unknownDefaultOpenApi =
+      _$videoArticleResultResponseReviewStatusEnum_unknownDefaultOpenApi;
+
+  static Serializer<VideoArticleResultResponseReviewStatusEnum>
+      get serializer => _$videoArticleResultResponseReviewStatusEnumSerializer;
+
+  const VideoArticleResultResponseReviewStatusEnum._(String name) : super(name);
+
+  static BuiltSet<VideoArticleResultResponseReviewStatusEnum> get values =>
+      _$videoArticleResultResponseReviewStatusEnumValues;
+  static VideoArticleResultResponseReviewStatusEnum valueOf(String name) =>
+      _$videoArticleResultResponseReviewStatusEnumValueOf(name);
 }

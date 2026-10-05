@@ -13,6 +13,8 @@ const DocumentSourceFormat _$markdown =
     const DocumentSourceFormat._('markdown');
 const DocumentSourceFormat _$fountain =
     const DocumentSourceFormat._('fountain');
+const DocumentSourceFormat _$srt = const DocumentSourceFormat._('srt');
+const DocumentSourceFormat _$vtt = const DocumentSourceFormat._('vtt');
 const DocumentSourceFormat _$unknownDefaultOpenApi =
     const DocumentSourceFormat._('unknownDefaultOpenApi');
 
@@ -28,6 +30,10 @@ DocumentSourceFormat _$valueOf(String name) {
       return _$markdown;
     case 'fountain':
       return _$fountain;
+    case 'srt':
+      return _$srt;
+    case 'vtt':
+      return _$vtt;
     case 'unknownDefaultOpenApi':
       return _$unknownDefaultOpenApi;
     default:
@@ -42,6 +48,8 @@ final BuiltSet<DocumentSourceFormat> _$values =
   _$txt,
   _$markdown,
   _$fountain,
+  _$srt,
+  _$vtt,
   _$unknownDefaultOpenApi,
 ]);
 
@@ -52,6 +60,8 @@ class _$DocumentSourceFormatMeta {
   DocumentSourceFormat get txt => _$txt;
   DocumentSourceFormat get markdown => _$markdown;
   DocumentSourceFormat get fountain => _$fountain;
+  DocumentSourceFormat get srt => _$srt;
+  DocumentSourceFormat get vtt => _$vtt;
   DocumentSourceFormat get unknownDefaultOpenApi => _$unknownDefaultOpenApi;
   DocumentSourceFormat valueOf(String name) => _$valueOf(name);
   BuiltSet<DocumentSourceFormat> get values => _$values;
@@ -74,6 +84,8 @@ class _$DocumentSourceFormatSerializer
     'txt': 'txt',
     'markdown': 'markdown',
     'fountain': 'fountain',
+    'srt': 'srt',
+    'vtt': 'vtt',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
@@ -82,6 +94,8 @@ class _$DocumentSourceFormatSerializer
     'txt': 'txt',
     'markdown': 'markdown',
     'fountain': 'fountain',
+    'srt': 'srt',
+    'vtt': 'vtt',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 

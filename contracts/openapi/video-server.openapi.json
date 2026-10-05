@@ -5902,7 +5902,6 @@
           "analyses"
         ],
         "summary": "列出输入兼容的分析 Skill",
-        "description": "按输入类型返回可选 Skill 及用户可编辑的默认提示词。",
         "operationId": "listAnalysisSkills",
         "parameters": [
           {
@@ -6034,7 +6033,6 @@
           "analyses"
         ],
         "summary": "创建视频分析任务",
-        "description": "基于已完成的下载制品创建异步 AI 分析任务。",
         "operationId": "createAnalysis",
         "security": [
           {
@@ -6337,7 +6335,7 @@
         "tags": [
           "analyses"
         ],
-        "summary": "查询视频分析任务",
+        "summary": "查询分析任务",
         "description": "查询分析进度及经过证据校验的结果。",
         "operationId": "getAnalysis",
         "security": [
@@ -6631,7 +6629,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiResponse_Union_VideoAnalysisHistoryRecordResponse__ScreenplayAnalysisHistoryRecordResponse__"
+                  "$ref": "#/components/schemas/ApiResponse_Union_VideoAnalysisHistoryRecordResponse__ScreenplayAnalysisHistoryRecordResponse__ContentCreationHistoryRecordResponse__SkillAnalysisHistoryRecordResponse__"
                 }
               }
             }
@@ -6904,7 +6902,7 @@
         "tags": [
           "analyses"
         ],
-        "summary": "导出 Markdown 视频分析报告",
+        "summary": "导出 Markdown 分析报告",
         "description": "导出与前端预览、DOCX 转换共用的唯一 Markdown 报告。",
         "operationId": "exportAnalysisMarkdown",
         "security": [
@@ -7183,8 +7181,7 @@
         "tags": [
           "analyses"
         ],
-        "summary": "重试原视频分析任务",
-        "description": "为同一分析任务创建下一执行代次，不改变任务资源 ID。\n\nRetry 是上一运行的无参数重放；带请求体的请求按校验错误拒绝。",
+        "summary": "重新执行原分析任务",
         "operationId": "retryAnalysis",
         "security": [
           {
@@ -7917,7 +7914,7 @@
         "tags": [
           "documents"
         ],
-        "summary": "创建剧本文档导入",
+        "summary": "创建文档导入",
         "operationId": "createDocumentImport",
         "security": [
           {
@@ -8069,7 +8066,7 @@
         "tags": [
           "documents"
         ],
-        "summary": "查询剧本文档列表",
+        "summary": "查询文档列表",
         "operationId": "listDocuments",
         "security": [
           {
@@ -8221,7 +8218,7 @@
         "tags": [
           "documents"
         ],
-        "summary": "查询剧本文档导入",
+        "summary": "查询文档导入",
         "operationId": "getDocumentImport",
         "security": [
           {
@@ -8357,7 +8354,7 @@
         "tags": [
           "documents"
         ],
-        "summary": "删除剧本文档及其制品",
+        "summary": "删除文档及其制品",
         "operationId": "deleteDocument",
         "security": [
           {
@@ -8488,8 +8485,7 @@
         "tags": [
           "analyses"
         ],
-        "summary": "创建剧本分析或改写任务",
-        "description": "基于已规范化的剧本文档创建异步分析或改写任务。",
+        "summary": "创建剧本分析任务",
         "operationId": "createDocumentAnalysis",
         "security": [
           {
@@ -9078,7 +9074,7 @@
         "tags": [
           "documents"
         ],
-        "summary": "取消剧本文档导入",
+        "summary": "取消文档导入",
         "operationId": "cancelDocumentImport",
         "security": [
           {
@@ -11506,7 +11502,9 @@
           "analysis_report_unavailable",
           "internal_error",
           "worker_lost",
-          "analysis_outcome_unknown"
+          "analysis_outcome_unknown",
+          "analysis_needs_material",
+          "analysis_configuration_changed"
         ],
         "title": "AnalysisErrorCode"
       },
@@ -11514,7 +11512,9 @@
         "type": "string",
         "enum": [
           "video",
-          "screenplay"
+          "screenplay",
+          "content",
+          "skill"
         ],
         "title": "AnalysisInputKind"
       },
@@ -11641,9 +11641,9 @@
             "minLength": 1,
             "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
             "title": "Skill Id",
-            "description": "分析 Skill 的稳定标识，由分析 Skill 清单接口提供。",
+            "description": "由分析 Skill 清单提供的稳定任务标识。",
             "examples": [
-              "director-breakdown"
+              "video-review"
             ]
           },
           "output_language": {
@@ -11652,9 +11652,10 @@
             "minLength": 2,
             "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$",
             "title": "Output Language",
-            "description": "分析结果使用的 BCP 47 语言标签。",
+            "description": "结果语言；本项目支持 zh-CN 和 en-US。",
             "examples": [
-              "zh-CN"
+              "zh-CN",
+              "en-US"
             ]
           },
           "custom_prompt": {
@@ -11668,10 +11669,7 @@
               }
             ],
             "title": "Custom Prompt",
-            "description": "用户可编辑的分析要求，仅影响观察重点和表达，不能覆盖工具、安全边界或结果结构。",
-            "examples": [
-              "重点识别产品功能演示和界面切换。"
-            ]
+            "description": "可编辑的任务要求；不能覆盖来源、安全、工具或结果结构。"
           }
         },
         "additionalProperties": false,
@@ -11778,6 +11776,12 @@
               {
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/SkillReportResult"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ContentDocumentResult"
+                  },
+                  {
                     "$ref": "#/components/schemas/VideoAnalysisResultResponse"
                   },
                   {
@@ -11796,8 +11800,10 @@
                 "discriminator": {
                   "propertyName": "kind",
                   "mapping": {
+                    "content_document": "#/components/schemas/ContentDocumentResult",
                     "screenplay_analysis": "#/components/schemas/ScreenplayAnalysisResultResponse",
                     "screenplay_rewrite": "#/components/schemas/ScreenplayRewriteResultResponse",
+                    "skill_report": "#/components/schemas/SkillReportResult",
                     "structured_report": "#/components/schemas/StructuredReportResultResponse",
                     "video_article": "#/components/schemas/VideoArticleResultResponse",
                     "video_visual_analysis": "#/components/schemas/VideoAnalysisResultResponse"
@@ -11878,7 +11884,9 @@
           "video-article",
           "screenplay-analysis",
           "screenplay-rewrite",
-          "structured-report"
+          "structured-report",
+          "content-document",
+          "skill-report"
         ],
         "title": "AnalysisResultContract"
       },
@@ -12029,6 +12037,9 @@
         "enum": [
           "preparing",
           "analyzing",
+          "drafting",
+          "reviewing",
+          "revising",
           "validating",
           "publishing"
         ],
@@ -12828,7 +12839,7 @@
         ],
         "title": "ApiResponse[Union[AnalysisResponse, NoneType]]"
       },
-      "ApiResponse_Union_VideoAnalysisHistoryRecordResponse__ScreenplayAnalysisHistoryRecordResponse__": {
+      "ApiResponse_Union_VideoAnalysisHistoryRecordResponse__ScreenplayAnalysisHistoryRecordResponse__ContentCreationHistoryRecordResponse__SkillAnalysisHistoryRecordResponse__": {
         "properties": {
           "code": {
             "$ref": "#/components/schemas/ErrorCode",
@@ -12848,13 +12859,21 @@
               },
               {
                 "$ref": "#/components/schemas/ScreenplayAnalysisHistoryRecordResponse"
+              },
+              {
+                "$ref": "#/components/schemas/ContentCreationHistoryRecordResponse"
+              },
+              {
+                "$ref": "#/components/schemas/SkillAnalysisHistoryRecordResponse"
               }
             ],
             "discriminator": {
               "propertyName": "record_type",
               "mapping": {
                 "video_analysis": "#/components/schemas/VideoAnalysisHistoryRecordResponse",
-                "screenplay_analysis": "#/components/schemas/ScreenplayAnalysisHistoryRecordResponse"
+                "screenplay_analysis": "#/components/schemas/ScreenplayAnalysisHistoryRecordResponse",
+                "content_creation": "#/components/schemas/ContentCreationHistoryRecordResponse",
+                "skill_analysis": "#/components/schemas/SkillAnalysisHistoryRecordResponse"
               }
             }
           }
@@ -12866,7 +12885,7 @@
           "message",
           "data"
         ],
-        "title": "ApiResponse[Union[VideoAnalysisHistoryRecordResponse, ScreenplayAnalysisHistoryRecordResponse]]"
+        "title": "ApiResponse[Union[VideoAnalysisHistoryRecordResponse, ScreenplayAnalysisHistoryRecordResponse, ContentCreationHistoryRecordResponse, SkillAnalysisHistoryRecordResponse]]"
       },
       "ApiResponse_UserResponse_": {
         "properties": {
@@ -13012,6 +13031,411 @@
           "source"
         ],
         "title": "ContainerPreference"
+      },
+      "ContentCitation": {
+        "properties": {
+          "block_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,63}$",
+            "title": "Block Id"
+          },
+          "material_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,63}$",
+            "title": "Material Id"
+          },
+          "segment_id": {
+            "type": "string",
+            "pattern": "^segment-[0-9]{3}$",
+            "title": "Segment Id"
+          },
+          "quote": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Quote"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "block_id",
+          "material_id",
+          "segment_id",
+          "quote"
+        ],
+        "title": "ContentCitation"
+      },
+      "ContentCreationHistoryRecordResponse": {
+        "properties": {
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "status_group": {
+            "$ref": "#/components/schemas/HistoryStatusGroup"
+          },
+          "source_availability": {
+            "$ref": "#/components/schemas/HistoryAvailability"
+          },
+          "result_availability": {
+            "$ref": "#/components/schemas/HistoryAvailability"
+          },
+          "record_type": {
+            "type": "string",
+            "const": "content_creation",
+            "title": "Record Type"
+          },
+          "document_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Document Id"
+          },
+          "artifact_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Artifact Id"
+          },
+          "output_language": {
+            "type": "string",
+            "title": "Output Language"
+          },
+          "result_contract": {
+            "$ref": "#/components/schemas/AnalysisResultContract"
+          },
+          "current_run_no": {
+            "type": "integer",
+            "title": "Current Run No"
+          },
+          "cancel_requested_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cancel Requested At"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "allowed_actions": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "view",
+                "retry",
+                "cancel",
+                "delete"
+              ]
+            },
+            "type": "array",
+            "title": "Allowed Actions"
+          },
+          "action_unavailable_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Action Unavailable Reason"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "download_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Download Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "skill_id": {
+            "type": "string",
+            "title": "Skill Id"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "status": {
+            "$ref": "#/components/schemas/AnalysisStatus"
+          },
+          "progress": {
+            "type": "integer",
+            "title": "Progress"
+          },
+          "stage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AnalysisStage"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AnalysisErrorCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "updated_at",
+          "status_group",
+          "source_availability",
+          "result_availability",
+          "record_type",
+          "document_id",
+          "artifact_id",
+          "output_language",
+          "result_contract",
+          "current_run_no",
+          "cancel_requested_at",
+          "version",
+          "allowed_actions",
+          "action_unavailable_reason",
+          "id",
+          "download_id",
+          "title",
+          "skill_id",
+          "created_at",
+          "status",
+          "progress",
+          "stage",
+          "error_code"
+        ],
+        "title": "ContentCreationHistoryRecordResponse"
+      },
+      "ContentDocumentResult": {
+        "properties": {
+          "document_type": {
+            "type": "string",
+            "enum": [
+              "article",
+              "post",
+              "guide"
+            ],
+            "title": "Document Type"
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "zh-CN",
+              "en-US"
+            ],
+            "title": "Language"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "blocks": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/ParagraphBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/HeadingBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/ListBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/QuoteBlock"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "type",
+                "mapping": {
+                  "heading": "#/components/schemas/HeadingBlock",
+                  "list": "#/components/schemas/ListBlock",
+                  "paragraph": "#/components/schemas/ParagraphBlock",
+                  "quote": "#/components/schemas/QuoteBlock"
+                }
+              }
+            },
+            "type": "array",
+            "maxItems": 120,
+            "minItems": 1,
+            "title": "Blocks"
+          },
+          "evidence_index": {
+            "items": {
+              "$ref": "#/components/schemas/ContentCitation"
+            },
+            "type": "array",
+            "maxItems": 200,
+            "title": "Evidence Index"
+          },
+          "kind": {
+            "type": "string",
+            "const": "content_document",
+            "title": "Kind"
+          },
+          "source_set_ref": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Source Set Ref"
+          },
+          "review_status": {
+            "type": "string",
+            "enum": [
+              "passed",
+              "needs_review",
+              "needs_material"
+            ],
+            "title": "Review Status"
+          },
+          "review_history": {
+            "items": {
+              "$ref": "#/components/schemas/ContentReview"
+            },
+            "type": "array",
+            "maxItems": 2,
+            "title": "Review History"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "document_type",
+          "language",
+          "title",
+          "blocks",
+          "evidence_index",
+          "kind",
+          "source_set_ref",
+          "review_status",
+          "review_history"
+        ],
+        "title": "ContentDocumentResult"
+      },
+      "ContentFinding": {
+        "properties": {
+          "block_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,63}$",
+            "title": "Block Id"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "blocking",
+              "major",
+              "minor"
+            ],
+            "title": "Severity"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "fact",
+              "purpose",
+              "structure",
+              "expression",
+              "missing_material"
+            ],
+            "title": "Category"
+          },
+          "problem": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Problem"
+          },
+          "correction": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Correction"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "block_id",
+          "severity",
+          "category",
+          "problem",
+          "correction"
+        ],
+        "title": "ContentFinding"
+      },
+      "ContentReview": {
+        "properties": {
+          "needs_material": {
+            "type": "boolean",
+            "title": "Needs Material"
+          },
+          "findings": {
+            "items": {
+              "$ref": "#/components/schemas/ContentFinding"
+            },
+            "type": "array",
+            "maxItems": 30,
+            "title": "Findings"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "needs_material",
+          "findings"
+        ],
+        "title": "ContentReview"
       },
       "CreateAiProviderProfileRequest": {
         "properties": {
@@ -13758,7 +14182,9 @@
           "pdf",
           "txt",
           "markdown",
-          "fountain"
+          "fountain",
+          "srt",
+          "vtt"
         ]
       },
       "DocumentUploadSessionResponse": {
@@ -14585,8 +15011,7 @@
           "scope": {
             "type": "string",
             "const": "anonymous_runner",
-            "title": "Scope",
-            "default": "anonymous_runner"
+            "title": "Scope"
           },
           "engine_version": {
             "type": "string",
@@ -14954,6 +15379,43 @@
         ],
         "title": "FpsBucket"
       },
+      "HeadingBlock": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,63}$",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "const": "heading",
+            "title": "Type"
+          },
+          "level": {
+            "type": "integer",
+            "enum": [
+              2,
+              3
+            ],
+            "title": "Level"
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Text"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "level",
+          "text"
+        ],
+        "title": "HeadingBlock"
+      },
       "HighlightResponse": {
         "properties": {
           "id": {
@@ -15047,7 +15509,9 @@
           "parse",
           "video_analysis",
           "document_parse",
-          "screenplay_analysis"
+          "screenplay_analysis",
+          "content_creation",
+          "skill_analysis"
         ],
         "title": "HistoryRecordKind"
       },
@@ -15066,15 +15530,23 @@
                   "$ref": "#/components/schemas/ScreenplayAnalysisHistoryRecordResponse"
                 },
                 {
+                  "$ref": "#/components/schemas/ContentCreationHistoryRecordResponse"
+                },
+                {
+                  "$ref": "#/components/schemas/SkillAnalysisHistoryRecordResponse"
+                },
+                {
                   "$ref": "#/components/schemas/DocumentParseHistoryRecordResponse"
                 }
               ],
               "discriminator": {
                 "propertyName": "record_type",
                 "mapping": {
+                  "content_creation": "#/components/schemas/ContentCreationHistoryRecordResponse",
                   "document_parse": "#/components/schemas/DocumentParseHistoryRecordResponse",
                   "parse": "#/components/schemas/ParseHistoryRecordResponse",
                   "screenplay_analysis": "#/components/schemas/ScreenplayAnalysisHistoryRecordResponse",
+                  "skill_analysis": "#/components/schemas/SkillAnalysisHistoryRecordResponse",
                   "video_analysis": "#/components/schemas/VideoAnalysisHistoryRecordResponse"
                 }
               }
@@ -15146,7 +15618,9 @@
           "pdf",
           "txt",
           "markdown",
-          "fountain"
+          "fountain",
+          "srt",
+          "vtt"
         ],
         "title": "ImportSourceFormat"
       },
@@ -15668,6 +16142,45 @@
           "failed"
         ],
         "title": "IntentStatus"
+      },
+      "JsonValue": {},
+      "ListBlock": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,63}$",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "const": "list",
+            "title": "Type"
+          },
+          "ordered": {
+            "type": "boolean",
+            "title": "Ordered"
+          },
+          "items": {
+            "items": {
+              "type": "string",
+              "maxLength": 12000,
+              "minLength": 1
+            },
+            "type": "array",
+            "maxItems": 30,
+            "minItems": 1,
+            "title": "Items"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "ordered",
+          "items"
+        ],
+        "title": "ListBlock"
       },
       "ManagedUserListResponse": {
         "properties": {
@@ -16199,6 +16712,34 @@
         ],
         "title": "OperationLogResponse"
       },
+      "ParagraphBlock": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,63}$",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "const": "paragraph",
+            "title": "Type"
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 12000,
+            "minLength": 1,
+            "title": "Text"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "text"
+        ],
+        "title": "ParagraphBlock"
+      },
       "ParseHistoryRecordResponse": {
         "properties": {
           "updated_at": {
@@ -16636,6 +17177,34 @@
           "url"
         ],
         "title": "PublicUrlInspectionSource"
+      },
+      "QuoteBlock": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,63}$",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "const": "quote",
+            "title": "Type"
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 12000,
+            "minLength": 1,
+            "title": "Text"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "text"
+        ],
+        "title": "QuoteBlock"
       },
       "RegisterRequest": {
         "properties": {
@@ -17377,6 +17946,396 @@
         ],
         "title": "ShotResponse"
       },
+      "SkillAnalysisHistoryRecordResponse": {
+        "properties": {
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "status_group": {
+            "$ref": "#/components/schemas/HistoryStatusGroup"
+          },
+          "source_availability": {
+            "$ref": "#/components/schemas/HistoryAvailability"
+          },
+          "result_availability": {
+            "$ref": "#/components/schemas/HistoryAvailability"
+          },
+          "record_type": {
+            "type": "string",
+            "const": "skill_analysis",
+            "title": "Record Type"
+          },
+          "document_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Document Id"
+          },
+          "artifact_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Artifact Id"
+          },
+          "output_language": {
+            "type": "string",
+            "title": "Output Language"
+          },
+          "result_contract": {
+            "$ref": "#/components/schemas/AnalysisResultContract"
+          },
+          "current_run_no": {
+            "type": "integer",
+            "title": "Current Run No"
+          },
+          "cancel_requested_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cancel Requested At"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "allowed_actions": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "view",
+                "retry",
+                "cancel",
+                "delete"
+              ]
+            },
+            "type": "array",
+            "title": "Allowed Actions"
+          },
+          "action_unavailable_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Action Unavailable Reason"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "download_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Download Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "skill_id": {
+            "type": "string",
+            "title": "Skill Id"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "status": {
+            "$ref": "#/components/schemas/AnalysisStatus"
+          },
+          "progress": {
+            "type": "integer",
+            "title": "Progress"
+          },
+          "stage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AnalysisStage"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AnalysisErrorCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "updated_at",
+          "status_group",
+          "source_availability",
+          "result_availability",
+          "record_type",
+          "document_id",
+          "artifact_id",
+          "output_language",
+          "result_contract",
+          "current_run_no",
+          "cancel_requested_at",
+          "version",
+          "allowed_actions",
+          "action_unavailable_reason",
+          "id",
+          "download_id",
+          "title",
+          "skill_id",
+          "created_at",
+          "status",
+          "progress",
+          "stage",
+          "error_code"
+        ],
+        "title": "SkillAnalysisHistoryRecordResponse"
+      },
+      "SkillMediaEvidence": {
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "enum": [
+              "primary",
+              "secondary"
+            ],
+            "title": "Source Id"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Sha256"
+          },
+          "frame_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Frame Id"
+          },
+          "frame_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Frame Sha256"
+          },
+          "timestamp_ms": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Timestamp Ms"
+          },
+          "claim": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Claim"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "observation",
+              "inference",
+              "suggestion",
+              "unverified"
+            ],
+            "title": "Status"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "source_id",
+          "sha256",
+          "frame_id",
+          "frame_sha256",
+          "timestamp_ms",
+          "claim",
+          "status"
+        ],
+        "title": "SkillMediaEvidence"
+      },
+      "SkillReportResult": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "skill_report"
+            ],
+            "const": "skill_report",
+            "title": "Kind"
+          },
+          "schema_version": {
+            "type": "integer",
+            "const": 1,
+            "title": "Schema Version"
+          },
+          "skill_id": {
+            "type": "string",
+            "title": "Skill Id"
+          },
+          "language": {
+            "type": "string",
+            "const": "zh-CN",
+            "title": "Language"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Title"
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 2000,
+            "title": "Summary"
+          },
+          "body": {
+            "type": "string",
+            "maxLength": 60000,
+            "minLength": 1,
+            "title": "Body"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/SkillTextEvidence"
+            },
+            "type": "array",
+            "maxItems": 200,
+            "title": "Evidence",
+            "default": []
+          },
+          "media_evidence": {
+            "items": {
+              "$ref": "#/components/schemas/SkillMediaEvidence"
+            },
+            "type": "array",
+            "maxItems": 200,
+            "title": "Media Evidence",
+            "default": []
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Limitations",
+            "default": []
+          },
+          "data": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Data"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "kind",
+          "skill_id",
+          "title",
+          "summary",
+          "body"
+        ],
+        "title": "SkillReportResult"
+      },
+      "SkillTextEvidence": {
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "enum": [
+              "primary",
+              "secondary"
+            ],
+            "title": "Source Id"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Sha256"
+          },
+          "start": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Start"
+          },
+          "end": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "End"
+          },
+          "quote": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Quote"
+          },
+          "claim": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Claim"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "observation",
+              "inference",
+              "suggestion",
+              "unverified"
+            ],
+            "title": "Status"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "source_id",
+          "sha256",
+          "start",
+          "end",
+          "quote",
+          "claim",
+          "status"
+        ],
+        "title": "SkillTextEvidence"
+      },
       "SourceDiscoveryItemResponse": {
         "properties": {
           "item_ref": {
@@ -17610,6 +18569,20 @@
             "minLength": 1,
             "title": "Name"
           },
+          "uploader_username": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 32,
+                "minLength": 2
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Uploader Username",
+            "description": "文件所属账号的当前用户名；无法关联账号时为空。报告使用分析任务发起账号。"
+          },
           "object_count": {
             "type": "integer",
             "minimum": 1.0,
@@ -17637,6 +18610,38 @@
           "created_at"
         ],
         "title": "StoredFileResponse"
+      },
+      "StructuredReportCitationResponse": {
+        "properties": {
+          "source_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Source Sha256"
+          },
+          "start": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Start"
+          },
+          "end": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "End"
+          },
+          "quote": {
+            "type": "string",
+            "title": "Quote"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "source_sha256",
+          "start",
+          "end",
+          "quote"
+        ],
+        "title": "StructuredReportCitationResponse"
       },
       "StructuredReportResultResponse": {
         "properties": {
@@ -17675,7 +18680,32 @@
             "title": "Limitations"
           },
           "media": {
-            "$ref": "#/components/schemas/AnalysisMediaResponse"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AnalysisMediaResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "review_status": {
+            "type": "string",
+            "enum": [
+              "not_reviewed",
+              "passed",
+              "needs_review",
+              "needs_material"
+            ],
+            "title": "Review Status"
+          },
+          "review_history": {
+            "items": {
+              "$ref": "#/components/schemas/ContentReview"
+            },
+            "type": "array",
+            "title": "Review History",
+            "default": []
           }
         },
         "additionalProperties": false,
@@ -17718,6 +18748,14 @@
             },
             "type": "array",
             "title": "Evidence"
+          },
+          "citations": {
+            "items": {
+              "$ref": "#/components/schemas/StructuredReportCitationResponse"
+            },
+            "type": "array",
+            "title": "Citations",
+            "default": []
           }
         },
         "additionalProperties": false,
@@ -18393,6 +19431,24 @@
           },
           "media": {
             "$ref": "#/components/schemas/AnalysisMediaResponse"
+          },
+          "review_status": {
+            "type": "string",
+            "enum": [
+              "not_reviewed",
+              "passed",
+              "needs_review",
+              "needs_material"
+            ],
+            "title": "Review Status"
+          },
+          "review_history": {
+            "items": {
+              "$ref": "#/components/schemas/ContentReview"
+            },
+            "type": "array",
+            "title": "Review History",
+            "default": []
           }
         },
         "additionalProperties": false,

@@ -6,15 +6,15 @@ part of 'data.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-const DataRecordTypeEnum _$dataRecordTypeEnum_screenplayAnalysis =
-    const DataRecordTypeEnum._('screenplayAnalysis');
+const DataRecordTypeEnum _$dataRecordTypeEnum_skillAnalysis =
+    const DataRecordTypeEnum._('skillAnalysis');
 const DataRecordTypeEnum _$dataRecordTypeEnum_unknownDefaultOpenApi =
     const DataRecordTypeEnum._('unknownDefaultOpenApi');
 
 DataRecordTypeEnum _$dataRecordTypeEnumValueOf(String name) {
   switch (name) {
-    case 'screenplayAnalysis':
-      return _$dataRecordTypeEnum_screenplayAnalysis;
+    case 'skillAnalysis':
+      return _$dataRecordTypeEnum_skillAnalysis;
     case 'unknownDefaultOpenApi':
       return _$dataRecordTypeEnum_unknownDefaultOpenApi;
     default:
@@ -24,7 +24,7 @@ DataRecordTypeEnum _$dataRecordTypeEnumValueOf(String name) {
 
 final BuiltSet<DataRecordTypeEnum> _$dataRecordTypeEnumValues =
     BuiltSet<DataRecordTypeEnum>(const <DataRecordTypeEnum>[
-  _$dataRecordTypeEnum_screenplayAnalysis,
+  _$dataRecordTypeEnum_skillAnalysis,
   _$dataRecordTypeEnum_unknownDefaultOpenApi,
 ]);
 
@@ -73,11 +73,11 @@ Serializer<DataAllowedActionsEnum> _$dataAllowedActionsEnumSerializer =
 class _$DataRecordTypeEnumSerializer
     implements PrimitiveSerializer<DataRecordTypeEnum> {
   static const Map<String, Object> _toWire = const <String, Object>{
-    'screenplayAnalysis': 'screenplay_analysis',
+    'skillAnalysis': 'skill_analysis',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
-    'screenplay_analysis': 'screenplayAnalysis',
+    'skill_analysis': 'skillAnalysis',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 

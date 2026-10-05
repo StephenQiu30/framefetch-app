@@ -21,6 +21,20 @@ final class StructuredReportResultView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final media = result.media;
+    if (media == null) {
+      return AnalysisReportLauncher(
+        analysisId: analysisId,
+        title: result.title,
+        markdown: reportMarkdown?.trim().isNotEmpty == true
+            ? reportMarkdown!
+            : result.sections
+                  .map(
+                    (section) => [section.body, ...section.items].join('\n\n'),
+                  )
+                  .join('\n\n'),
+      );
+    }
     return Column(
       key: const Key('structured-report-result'),
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -38,7 +52,7 @@ final class StructuredReportResultView extends StatelessWidget {
             DataMetricValue(
               key: 'duration',
               label: l10n.durationLabel,
-              value: formatDurationClock(result.media.durationMs ~/ 1000),
+              value: formatDurationClock(media.durationMs ~/ 1000),
             ),
           ],
         ),

@@ -8,6 +8,8 @@ part of 'analysis_input_kind.dart';
 
 const AnalysisInputKind _$video = const AnalysisInputKind._('video');
 const AnalysisInputKind _$screenplay = const AnalysisInputKind._('screenplay');
+const AnalysisInputKind _$content = const AnalysisInputKind._('content');
+const AnalysisInputKind _$skill = const AnalysisInputKind._('skill');
 const AnalysisInputKind _$unknownDefaultOpenApi =
     const AnalysisInputKind._('unknownDefaultOpenApi');
 
@@ -17,6 +19,10 @@ AnalysisInputKind _$valueOf(String name) {
       return _$video;
     case 'screenplay':
       return _$screenplay;
+    case 'content':
+      return _$content;
+    case 'skill':
+      return _$skill;
     case 'unknownDefaultOpenApi':
       return _$unknownDefaultOpenApi;
     default:
@@ -28,6 +34,8 @@ final BuiltSet<AnalysisInputKind> _$values =
     BuiltSet<AnalysisInputKind>(const <AnalysisInputKind>[
   _$video,
   _$screenplay,
+  _$content,
+  _$skill,
   _$unknownDefaultOpenApi,
 ]);
 
@@ -35,6 +43,8 @@ class _$AnalysisInputKindMeta {
   const _$AnalysisInputKindMeta();
   AnalysisInputKind get video => _$video;
   AnalysisInputKind get screenplay => _$screenplay;
+  AnalysisInputKind get content => _$content;
+  AnalysisInputKind get skill => _$skill;
   AnalysisInputKind get unknownDefaultOpenApi => _$unknownDefaultOpenApi;
   AnalysisInputKind valueOf(String name) => _$valueOf(name);
   BuiltSet<AnalysisInputKind> get values => _$values;
@@ -54,11 +64,15 @@ class _$AnalysisInputKindSerializer
   static const Map<String, Object> _toWire = const <String, Object>{
     'video': 'video',
     'screenplay': 'screenplay',
+    'content': 'content',
+    'skill': 'skill',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
     'video': 'video',
     'screenplay': 'screenplay',
+    'content': 'content',
+    'skill': 'skill',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 

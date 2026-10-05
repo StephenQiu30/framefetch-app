@@ -9,9 +9,22 @@ import 'package:video_server_api/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **kind** | **String** |  |
+**schemaVersion** | **int** |  | [optional]
+**skillId** | **String** |  |
 **language** | **String** |  |
 **title** | **String** |  |
 **summary** | **String** |  |
+**body** | **String** |  |
+**evidence** | [**BuiltList&lt;SkillTextEvidence&gt;**](SkillTextEvidence.md) |  | [optional] [default to ListBuilder()]
+**mediaEvidence** | [**BuiltList&lt;SkillMediaEvidence&gt;**](SkillMediaEvidence.md) |  | [optional] [default to ListBuilder()]
+**limitations** | **BuiltList&lt;String&gt;** |  |
+**data** | [**BuiltMap&lt;String, JsonObject&gt;**](JsonObject.md) |  | [optional]
+**documentType** | **String** |  |
+**blocks** | [**BuiltList&lt;BlocksInner&gt;**](BlocksInner.md) |  |
+**evidenceIndex** | [**BuiltList&lt;ContentCitation&gt;**](ContentCitation.md) |  |
+**sourceSetRef** | **String** |  |
+**reviewStatus** | **String** |  |
+**reviewHistory** | [**BuiltList&lt;ContentReview&gt;**](ContentReview.md) |  | [default to ListBuilder()]
 **media** | [**AnalysisMediaResponse**](AnalysisMediaResponse.md) |  |
 **shotCount** | **int** |  |
 **shots** | [**BuiltList&lt;ShotResponse&gt;**](ShotResponse.md) |  |
@@ -23,7 +36,6 @@ Name | Type | Description | Notes
 **sections** | [**BuiltList&lt;StructuredReportSectionResponse&gt;**](StructuredReportSectionResponse.md) |  |
 **keyPoints** | **BuiltList&lt;String&gt;** |  |
 **closing** | **String** |  |
-**limitations** | **BuiltList&lt;String&gt;** |  |
 **logline** | **String** |  |
 **synopsis** | **String** |  |
 **structure** | [**ScreenplayStructureResponse**](ScreenplayStructureResponse.md) |  |

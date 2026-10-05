@@ -14,6 +14,8 @@ class _$StoredFileResponse extends StoredFileResponse {
   @override
   final String name;
   @override
+  final String? uploaderUsername;
+  @override
   final int objectCount;
   @override
   final int sizeBytes;
@@ -28,6 +30,7 @@ class _$StoredFileResponse extends StoredFileResponse {
       {required this.id,
       required this.category,
       required this.name,
+      this.uploaderUsername,
       required this.objectCount,
       required this.sizeBytes,
       required this.createdAt})
@@ -48,6 +51,7 @@ class _$StoredFileResponse extends StoredFileResponse {
         id == other.id &&
         category == other.category &&
         name == other.name &&
+        uploaderUsername == other.uploaderUsername &&
         objectCount == other.objectCount &&
         sizeBytes == other.sizeBytes &&
         createdAt == other.createdAt;
@@ -59,6 +63,7 @@ class _$StoredFileResponse extends StoredFileResponse {
     _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, category.hashCode);
     _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, uploaderUsername.hashCode);
     _$hash = $jc(_$hash, objectCount.hashCode);
     _$hash = $jc(_$hash, sizeBytes.hashCode);
     _$hash = $jc(_$hash, createdAt.hashCode);
@@ -72,6 +77,7 @@ class _$StoredFileResponse extends StoredFileResponse {
           ..add('id', id)
           ..add('category', category)
           ..add('name', name)
+          ..add('uploaderUsername', uploaderUsername)
           ..add('objectCount', objectCount)
           ..add('sizeBytes', sizeBytes)
           ..add('createdAt', createdAt))
@@ -95,6 +101,11 @@ class StoredFileResponseBuilder
   String? get name => _$this._name;
   set name(String? name) => _$this._name = name;
 
+  String? _uploaderUsername;
+  String? get uploaderUsername => _$this._uploaderUsername;
+  set uploaderUsername(String? uploaderUsername) =>
+      _$this._uploaderUsername = uploaderUsername;
+
   int? _objectCount;
   int? get objectCount => _$this._objectCount;
   set objectCount(int? objectCount) => _$this._objectCount = objectCount;
@@ -117,6 +128,7 @@ class StoredFileResponseBuilder
       _id = $v.id;
       _category = $v.category;
       _name = $v.name;
+      _uploaderUsername = $v.uploaderUsername;
       _objectCount = $v.objectCount;
       _sizeBytes = $v.sizeBytes;
       _createdAt = $v.createdAt;
@@ -147,6 +159,7 @@ class StoredFileResponseBuilder
               category, r'StoredFileResponse', 'category'),
           name: BuiltValueNullFieldError.checkNotNull(
               name, r'StoredFileResponse', 'name'),
+          uploaderUsername: uploaderUsername,
           objectCount: BuiltValueNullFieldError.checkNotNull(
               objectCount, r'StoredFileResponse', 'objectCount'),
           sizeBytes: BuiltValueNullFieldError.checkNotNull(

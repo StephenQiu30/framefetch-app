@@ -8,7 +8,7 @@ import 'package:video_server_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**scope** | **String** |  | [optional] [default to 'anonymous_runner']
+**scope** | **String** |  | [optional]
 **engineVersion** | **String** |  |
 **engineCommit** | **String** |  | [optional]
 **expectedEngineCommit** | **String** |  |

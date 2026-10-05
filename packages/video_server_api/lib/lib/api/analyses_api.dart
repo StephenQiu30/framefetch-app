@@ -15,7 +15,7 @@ import 'package:video_server_api/lib/model/api_response_analysis_response.dart';
 import 'package:video_server_api/lib/model/api_response_analysis_run_history_page_response.dart';
 import 'package:video_server_api/lib/model/api_response_tuple_analysis_skill_response.dart';
 import 'package:video_server_api/lib/model/api_response_union_analysis_response_none_type.dart';
-import 'package:video_server_api/lib/model/api_response_union_video_analysis_history_record_response_screenplay_analysis_history_record_response.dart';
+import 'package:video_server_api/lib/model/api_response_union_video_analysis_history_record_response_screenplay_analysis_history_record_response_content_creation_history_record_response_skill_analysis_history_record_response.dart';
 
 class AnalysesApi {
   final Dio _dio;
@@ -110,7 +110,7 @@ class AnalysesApi {
   }
 
   /// 创建视频分析任务
-  /// 基于已完成的下载制品创建异步 AI 分析任务。
+  ///
   ///
   /// Parameters:
   /// * [downloadId]
@@ -218,8 +218,8 @@ class AnalysesApi {
     );
   }
 
-  /// 创建剧本分析或改写任务
-  /// 基于已规范化的剧本文档创建异步分析或改写任务。
+  /// 创建剧本分析任务
+  ///
   ///
   /// Parameters:
   /// * [documentId]
@@ -383,7 +383,7 @@ class AnalysesApi {
     return _response;
   }
 
-  /// 导出 Markdown 视频分析报告
+  /// 导出 Markdown 分析报告
   /// 导出与前端预览、DOCX 转换共用的唯一 Markdown 报告。
   ///
   /// Parameters:
@@ -545,7 +545,7 @@ class AnalysesApi {
     );
   }
 
-  /// 查询视频分析任务
+  /// 查询分析任务
   /// 查询分析进度及经过证据校验的结果。
   ///
   /// Parameters:
@@ -642,11 +642,11 @@ class AnalysesApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse] as data
+  /// Returns a [Future] containing a [Response] with a [ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponseContentCreationHistoryRecordResponseSkillAnalysisHistoryRecordResponse] as data
   /// Throws [DioException] if API call or serialization fails
   Future<
           Response<
-              ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse>>
+              ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponseContentCreationHistoryRecordResponseSkillAnalysisHistoryRecordResponse>>
       getAnalysisHistoryRecord({
     required String analysisId,
     CancelToken? cancelToken,
@@ -686,7 +686,7 @@ class AnalysesApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse?
+    ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponseContentCreationHistoryRecordResponseSkillAnalysisHistoryRecordResponse?
         _responseData;
 
     try {
@@ -696,8 +696,8 @@ class AnalysesApi {
           : _serializers.deserialize(
               rawResponse,
               specifiedType: const FullType(
-                  ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse),
-            ) as ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse;
+                  ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponseContentCreationHistoryRecordResponseSkillAnalysisHistoryRecordResponse),
+            ) as ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponseContentCreationHistoryRecordResponseSkillAnalysisHistoryRecordResponse;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -709,7 +709,7 @@ class AnalysesApi {
     }
 
     return Response<
-        ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse>(
+        ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponseContentCreationHistoryRecordResponseSkillAnalysisHistoryRecordResponse>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -996,7 +996,7 @@ class AnalysesApi {
   }
 
   /// 列出输入兼容的分析 Skill
-  /// 按输入类型返回可选 Skill 及用户可编辑的默认提示词。
+  ///
   ///
   /// Parameters:
   /// * [inputKind]
@@ -1078,8 +1078,8 @@ class AnalysesApi {
     );
   }
 
-  /// 重试原视频分析任务
-  /// 为同一分析任务创建下一执行代次，不改变任务资源 ID。  Retry 是上一运行的无参数重放；带请求体的请求按校验错误拒绝。
+  /// 重新执行原分析任务
+  ///
   ///
   /// Parameters:
   /// * [analysisId]

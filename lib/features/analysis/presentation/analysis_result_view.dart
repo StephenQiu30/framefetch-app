@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:framegrab/features/analysis/presentation/analysis_report_preview.dart';
 import 'package:framegrab/features/analysis/presentation/screenplay_analysis_result_view.dart';
 import 'package:framegrab/features/analysis/presentation/structured_report_result_view.dart';
 import 'package:framegrab/features/analysis/presentation/video_analysis_result_view.dart';
@@ -15,6 +16,13 @@ final class AnalysisResultView extends StatelessWidget {
   Widget build(BuildContext context) {
     final result = job.result?.oneOf.value;
     return switch (result) {
+      final SkillReportResult report => AnalysisReportLauncher(
+        analysisId: job.id,
+        title: report.title,
+        markdown: job.reportMarkdown?.trim().isNotEmpty == true
+            ? job.reportMarkdown!
+            : report.body,
+      ),
       final VideoAnalysisResultResponse visual => VideoAnalysisResultView(
         reportMarkdown: job.reportMarkdown,
         analysisId: job.id,

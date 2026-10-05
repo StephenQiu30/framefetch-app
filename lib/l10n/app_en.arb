@@ -699,5 +699,6 @@
   "analysisRetryTitle": "Run again with the original settings",
   "analysisRetryDescription": "Keeps the analysis ID and starts another run, which may consume model quota. Create a new analysis from the source to change settings.",
   "confirmRetryAnalysis": "Confirm run",
-  "adminPeriodLabel": "Period"
+  "adminPeriodLabel": "Period",
+  "analysisOutcomeUnknown": "The execution receipt is unknown. Refresh or check activity history before running it again."
 }

@@ -6,12 +6,14 @@ final class AnalysisState {
   const AnalysisState({
     this.action = AnalysisAction.idle,
     this.actionError,
+    this.submissionUnknown = false,
     this.job,
     this.skills = const [],
   });
 
   final AnalysisAction action;
   final Object? actionError;
+  final bool submissionUnknown;
   final AnalysisResponse? job;
   final List<AnalysisSkillResponse> skills;
 
@@ -19,6 +21,7 @@ final class AnalysisState {
 
   AnalysisState copyWith({
     AnalysisAction? action,
+    bool? submissionUnknown,
     Object? actionError,
     bool clearActionError = false,
     AnalysisResponse? job,
@@ -26,6 +29,7 @@ final class AnalysisState {
     List<AnalysisSkillResponse>? skills,
   }) => AnalysisState(
     action: action ?? this.action,
+    submissionUnknown: submissionUnknown ?? this.submissionUnknown,
     actionError: clearActionError ? null : actionError ?? this.actionError,
     job: clearJob ? null : job ?? this.job,
     skills: skills ?? this.skills,

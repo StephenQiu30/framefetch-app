@@ -50,13 +50,13 @@ void main() {
   test('decodes each single analysis history record without ambiguous union', () {
     for (final item in historyRecords.skip(2)) {
       final value = standardSerializers.deserializeWith(
-        ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse
+        ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponseContentCreationHistoryRecordResponseSkillAnalysisHistoryRecordResponse
             .serializer,
         envelope(item),
       )!;
       final wire =
           standardSerializers.serializeWith(
-                ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse
+                ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponseContentCreationHistoryRecordResponseSkillAnalysisHistoryRecordResponse
                     .serializer,
                 value,
               )!

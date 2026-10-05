@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:framegrab/core/network/data_request_failure.dart';
 import 'package:framegrab/features/analysis/application/analysis_job_snapshot.dart';
 import 'package:framegrab/features/analysis/application/analysis_operation_keys.dart';
 import 'package:framegrab/features/analysis/application/analysis_state.dart';
@@ -56,7 +57,13 @@ final class AnalysisController extends AsyncNotifier<AnalysisState> {
     required String outputLanguage,
     required String skillId,
   }) async {
-    if (target.isRecord) return;
+    if (target.isRecord ||
+        state.value?.submissionUnknown == true ||
+        isActiveAnalysis(state.value?.job) ||
+        state.value?.job?.errorCode ==
+            AnalysisErrorCode.analysisOutcomeUnknown) {
+      return;
+    }
     final payload =
         '${target.inputKind.name}\u0000${target.id}\u0000$skillId\u0000'
         '$outputLanguage\u0000$customPrompt';
@@ -70,6 +77,7 @@ final class AnalysisController extends AsyncNotifier<AnalysisState> {
         skillId: skillId,
         sourceId: target.id,
       ),
+      onSuccess: () => _keys.clear('create'),
     );
   }
 
@@ -82,6 +90,9 @@ final class AnalysisController extends AsyncNotifier<AnalysisState> {
   Future<void> retry() async {
     final job = state.value?.job;
     if (job == null ||
+        state.value?.submissionUnknown == true ||
+        job.result?.oneOf.value is SkillReportResult ||
+        job.errorCode == AnalysisErrorCode.analysisOutcomeUnknown ||
         (job.status != AnalysisStatus.succeeded &&
             job.status != AnalysisStatus.failed &&
             job.status != AnalysisStatus.cancelled)) {
@@ -111,24 +122,30 @@ final class AnalysisController extends AsyncNotifier<AnalysisState> {
     }, onSuccess: _keys.clearAll);
   }
 
-  Future<void> refresh() =>
-      _runAction(AnalysisAction.refresh, (current, generation) async {
-        final repository = _repository;
-        final job = target.isRecord
-            ? await repository.fetch(target.id)
-            : await repository.fetchLatest(
-                inputKind: target.inputKind,
-                sourceId: target.id,
-              );
-        if (!_isCurrent(generation)) return current;
-        final skills = !target.isRecord && job == null && current.skills.isEmpty
-            ? await repository.fetchSkills(target.inputKind)
-            : current.skills;
-        return AnalysisState(
-          job: latestAnalysisJob(current.job, job),
-          skills: skills,
-        );
-      });
+  Future<void> refresh() => _runAction(AnalysisAction.refresh, (
+    current,
+    generation,
+  ) async {
+    final repository = _repository;
+    final job = target.isRecord
+        ? await repository.fetch(target.id)
+        : await repository.fetchLatest(
+            inputKind: target.inputKind,
+            sourceId: target.id,
+          );
+    if (!_isCurrent(generation)) return current;
+    final skills = !target.isRecord && job == null && current.skills.isEmpty
+        ? await repository.fetchSkills(target.inputKind)
+        : current.skills;
+    return AnalysisState(
+      submissionUnknown:
+          current.submissionUnknown &&
+          (job == null ||
+              (job.id == current.job?.id && job.runNo == current.job?.runNo)),
+      job: latestAnalysisJob(current.job, job),
+      skills: skills,
+    );
+  });
 
   Future<void> _mutate(
     AnalysisAction action,
@@ -156,12 +173,36 @@ final class AnalysisController extends AsyncNotifier<AnalysisState> {
       if (!_isCurrent(generation)) return;
       onSuccess?.call();
       state = AsyncData(
-        next.copyWith(action: AnalysisAction.idle, clearActionError: true),
+        next.copyWith(
+          action: AnalysisAction.idle,
+          clearActionError: !next.submissionUnknown,
+          actionError: next.submissionUnknown
+              ? const DataRequestFailure(
+                  DataRequestFailureKind.unavailable,
+                  code: 'analysis_outcome_unknown',
+                )
+              : null,
+        ),
       );
       _schedulePoll(next.job);
     } catch (error) {
       if (!_isCurrent(generation)) return;
-      _setFailure(current, error);
+      final unknown =
+          (action == AnalysisAction.start || action == AnalysisAction.retry) &&
+          error is DataRequestFailure &&
+          (error.kind == DataRequestFailureKind.unavailable ||
+              error.kind == DataRequestFailureKind.invalidResponse);
+      _setFailure(
+        current.copyWith(
+          submissionUnknown: current.submissionUnknown || unknown,
+        ),
+        unknown
+            ? const DataRequestFailure(
+                DataRequestFailureKind.unavailable,
+                code: 'analysis_outcome_unknown',
+              )
+            : error,
+      );
       _schedulePoll(current.job);
     }
   }

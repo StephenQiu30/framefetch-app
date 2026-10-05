@@ -64,6 +64,20 @@ final class _AnalysisDetail extends ConsumerWidget {
       sourceAvailable,
       cancelling,
     ) = switch (record) {
+      final SkillAnalysisHistoryRecordResponse item => (
+        item.id,
+        item.title,
+        item.downloadId != null
+            ? AnalysisInputKind.video
+            : item.documentId != null
+            ? AnalysisInputKind.screenplay
+            : AnalysisInputKind.content,
+        item.downloadId ?? item.documentId,
+        item.outputLanguage,
+        item.skillId,
+        item.sourceAvailability == HistoryAvailability.available,
+        item.cancelRequestedAt != null,
+      ),
       final VideoAnalysisHistoryRecordResponse item => (
         item.id,
         item.title,
@@ -147,7 +161,11 @@ final class _AnalysisDetail extends ConsumerWidget {
                 action: current.action,
                 isScreenplay: target.isScreenplay,
                 job: job,
-                canRetry: sourceAvailable,
+                canRetry:
+                    sourceAvailable &&
+                    record is! SkillAnalysisHistoryRecordResponse &&
+                    !current.submissionUnknown &&
+                    job.errorCode != AnalysisErrorCode.analysisOutcomeUnknown,
                 cancelling: cancelling,
                 onCancel: () async {
                   await controller.cancel();
