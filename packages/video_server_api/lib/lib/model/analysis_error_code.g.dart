@@ -42,6 +42,10 @@ const AnalysisErrorCode _$internalError =
 const AnalysisErrorCode _$workerLost = const AnalysisErrorCode._('workerLost');
 const AnalysisErrorCode _$analysisOutcomeUnknown =
     const AnalysisErrorCode._('analysisOutcomeUnknown');
+const AnalysisErrorCode _$analysisNeedsMaterial =
+    const AnalysisErrorCode._('analysisNeedsMaterial');
+const AnalysisErrorCode _$analysisConfigurationChanged =
+    const AnalysisErrorCode._('analysisConfigurationChanged');
 const AnalysisErrorCode _$unknownDefaultOpenApi =
     const AnalysisErrorCode._('unknownDefaultOpenApi');
 
@@ -85,6 +89,10 @@ AnalysisErrorCode _$valueOf(String name) {
       return _$workerLost;
     case 'analysisOutcomeUnknown':
       return _$analysisOutcomeUnknown;
+    case 'analysisNeedsMaterial':
+      return _$analysisNeedsMaterial;
+    case 'analysisConfigurationChanged':
+      return _$analysisConfigurationChanged;
     case 'unknownDefaultOpenApi':
       return _$unknownDefaultOpenApi;
     default:
@@ -113,6 +121,8 @@ final BuiltSet<AnalysisErrorCode> _$values =
   _$internalError,
   _$workerLost,
   _$analysisOutcomeUnknown,
+  _$analysisNeedsMaterial,
+  _$analysisConfigurationChanged,
   _$unknownDefaultOpenApi,
 ]);
 
@@ -143,6 +153,9 @@ class _$AnalysisErrorCodeMeta {
   AnalysisErrorCode get internalError => _$internalError;
   AnalysisErrorCode get workerLost => _$workerLost;
   AnalysisErrorCode get analysisOutcomeUnknown => _$analysisOutcomeUnknown;
+  AnalysisErrorCode get analysisNeedsMaterial => _$analysisNeedsMaterial;
+  AnalysisErrorCode get analysisConfigurationChanged =>
+      _$analysisConfigurationChanged;
   AnalysisErrorCode get unknownDefaultOpenApi => _$unknownDefaultOpenApi;
   AnalysisErrorCode valueOf(String name) => _$valueOf(name);
   BuiltSet<AnalysisErrorCode> get values => _$values;
@@ -179,6 +192,8 @@ class _$AnalysisErrorCodeSerializer
     'internalError': 'internal_error',
     'workerLost': 'worker_lost',
     'analysisOutcomeUnknown': 'analysis_outcome_unknown',
+    'analysisNeedsMaterial': 'analysis_needs_material',
+    'analysisConfigurationChanged': 'analysis_configuration_changed',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
@@ -201,6 +216,8 @@ class _$AnalysisErrorCodeSerializer
     'internal_error': 'internalError',
     'worker_lost': 'workerLost',
     'analysis_outcome_unknown': 'analysisOutcomeUnknown',
+    'analysis_needs_material': 'analysisNeedsMaterial',
+    'analysis_configuration_changed': 'analysisConfigurationChanged',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 

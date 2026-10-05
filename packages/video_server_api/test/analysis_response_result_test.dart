@@ -12,6 +12,16 @@ void main() {
       // TODO
     });
 
+    // int schemaVersion
+    test('to test the property `schemaVersion`', () async {
+      // TODO
+    });
+
+    // String skillId
+    test('to test the property `skillId`', () async {
+      // TODO
+    });
+
     // String language
     test('to test the property `language`', () async {
       // TODO
@@ -22,8 +32,63 @@ void main() {
       // TODO
     });
 
-    // EvidenceSummaryResponse summary
+    // String summary
     test('to test the property `summary`', () async {
+      // TODO
+    });
+
+    // String body
+    test('to test the property `body`', () async {
+      // TODO
+    });
+
+    // BuiltList<SkillTextEvidence> evidence (default value: ListBuilder())
+    test('to test the property `evidence`', () async {
+      // TODO
+    });
+
+    // BuiltList<SkillMediaEvidence> mediaEvidence (default value: ListBuilder())
+    test('to test the property `mediaEvidence`', () async {
+      // TODO
+    });
+
+    // BuiltList<String> limitations
+    test('to test the property `limitations`', () async {
+      // TODO
+    });
+
+    // BuiltMap<String, JsonObject> data
+    test('to test the property `data`', () async {
+      // TODO
+    });
+
+    // String documentType
+    test('to test the property `documentType`', () async {
+      // TODO
+    });
+
+    // BuiltList<BlocksInner> blocks
+    test('to test the property `blocks`', () async {
+      // TODO
+    });
+
+    // BuiltList<ContentCitation> evidenceIndex
+    test('to test the property `evidenceIndex`', () async {
+      // TODO
+    });
+
+    // String sourceSetRef
+    test('to test the property `sourceSetRef`', () async {
+      // TODO
+    });
+
+    // String reviewStatus
+    test('to test the property `reviewStatus`', () async {
+      // TODO
+    });
+
+    // BuiltList<ContentReview> reviewHistory (default value: ListBuilder())
+    test('to test the property `reviewHistory`', () async {
       // TODO
     });
 
@@ -67,7 +132,7 @@ void main() {
       // TODO
     });
 
-    // BuiltList<VideoArticleSectionResponse> sections
+    // BuiltList<StructuredReportSectionResponse> sections
     test('to test the property `sections`', () async {
       // TODO
     });
@@ -79,11 +144,6 @@ void main() {
 
     // String closing
     test('to test the property `closing`', () async {
-      // TODO
-    });
-
-    // BuiltList<String> limitations
-    test('to test the property `limitations`', () async {
       // TODO
     });
 
@@ -107,17 +167,17 @@ void main() {
       // TODO
     });
 
-    // BuiltList<ScreenplayEvidenceItemResponse> dialogueFindings
+    // BuiltList<ScreenplayFindingResponse> dialogueFindings
     test('to test the property `dialogueFindings`', () async {
       // TODO
     });
 
-    // BuiltList<ScreenplayEvidenceItemResponse> strengths
+    // BuiltList<ScreenplayFindingResponse> strengths
     test('to test the property `strengths`', () async {
       // TODO
     });
 
-    // BuiltList<ScreenplayEvidenceItemResponse> priorityRevisions
+    // BuiltList<ScreenplayFindingResponse> priorityRevisions
     test('to test the property `priorityRevisions`', () async {
       // TODO
     });

@@ -40,7 +40,7 @@ abstract class AnalysisSkillResponse
 
   @BuiltValueField(wireName: r'result_contract')
   AnalysisResultContract get resultContract;
-  // enum resultContractEnum {  video-visual-analysis,  video-article,  screenplay-analysis,  screenplay-rewrite,  structured-report,  };
+  // enum resultContractEnum {  video-visual-analysis,  video-article,  screenplay-analysis,  screenplay-rewrite,  structured-report,  content-document,  skill-report,  };
 
   AnalysisSkillResponse._();
 

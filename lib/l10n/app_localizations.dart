@@ -3883,6 +3883,12 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'统计周期'**
   String get adminPeriodLabel;
+
+  /// No description provided for @analysisOutcomeUnknown.
+  ///
+  /// In zh, this message translates to:
+  /// **'执行回执未知，请先刷新或在处理记录中核对；暂不能重复执行。'**
+  String get analysisOutcomeUnknown;
 }
 
 class _AppLocalizationsDelegate

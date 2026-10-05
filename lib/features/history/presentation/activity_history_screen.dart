@@ -42,6 +42,8 @@ final class _ActivityHistoryScreenState
 
   void _open(Object record) {
     final destination = switch (record) {
+      final SkillAnalysisHistoryRecordResponse item =>
+        '/analyses/${Uri.encodeComponent(item.id)}',
       final ParseHistoryRecordResponse item when item.jobId != null =>
         '/downloads/${Uri.encodeComponent(item.jobId!)}',
       final ParseHistoryRecordResponse item =>

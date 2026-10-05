@@ -63,4 +63,67 @@ void main() {
       },
     );
   });
+  test('free-form JSON references preserve arbitrary map values', () {
+    expect(
+      normalizeGeneratorSchema(
+        {
+          'type': 'object',
+          'additionalProperties': {r'$ref': '#/components/schemas/JsonValue'},
+        },
+        {'JsonValue': <String, Object?>{}},
+      ),
+      {'type': 'object', 'additionalProperties': true},
+    );
+  });
+  test(
+    'nullable source discriminator is preserved and report null union stays nullable',
+    () {
+      final union = {
+        'oneOf': branches,
+        'discriminator': {'propertyName': 'type'},
+      };
+      expect(
+        normalizeGeneratorSchema({
+          'anyOf': [
+            union,
+            {'type': 'null'},
+          ],
+        }, {}),
+        {...union, 'nullable': true},
+      );
+      final report = {
+        'oneOf': branches,
+        'discriminator': {'propertyName': 'kind'},
+      };
+      expect(
+        normalizeGeneratorSchema({
+          'anyOf': [
+            report,
+            {'type': 'null'},
+          ],
+        }, {}),
+        {
+          'anyOf': [
+            report,
+            {'type': 'null'},
+          ],
+        },
+      );
+    },
+  );
+  test(
+    'enum constant defaults do not generate invalid Dart valueOf initializers',
+    () {
+      for (final constant in ['skill_report', 'zh-CN', 1]) {
+        final normalized =
+            normalizeGeneratorSchema({
+                  'const': constant,
+                  'default': constant,
+                }, {})
+                as Map;
+        expect(normalized['const'], constant);
+        expect(normalized, isNot(contains('default')));
+      }
+    },
+  );
 }

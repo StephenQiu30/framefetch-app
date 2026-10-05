@@ -11,21 +11,21 @@ part 'analysis_request.g.dart';
 /// AnalysisRequest
 ///
 /// Properties:
-/// * [skillId] - 分析 Skill 的稳定标识，由分析 Skill 清单接口提供。
-/// * [outputLanguage] - 分析结果使用的 BCP 47 语言标签。
-/// * [customPrompt] - 用户可编辑的分析要求，仅影响观察重点和表达，不能覆盖工具、安全边界或结果结构。
+/// * [skillId] - 由分析 Skill 清单提供的稳定任务标识。
+/// * [outputLanguage] - 结果语言；本项目支持 zh-CN 和 en-US。
+/// * [customPrompt] - 可编辑的任务要求；不能覆盖来源、安全、工具或结果结构。
 @BuiltValue()
 abstract class AnalysisRequest
     implements Built<AnalysisRequest, AnalysisRequestBuilder> {
-  /// 分析 Skill 的稳定标识，由分析 Skill 清单接口提供。
+  /// 由分析 Skill 清单提供的稳定任务标识。
   @BuiltValueField(wireName: r'skill_id')
   String get skillId;
 
-  /// 分析结果使用的 BCP 47 语言标签。
+  /// 结果语言；本项目支持 zh-CN 和 en-US。
   @BuiltValueField(wireName: r'output_language')
   String get outputLanguage;
 
-  /// 用户可编辑的分析要求，仅影响观察重点和表达，不能覆盖工具、安全边界或结果结构。
+  /// 可编辑的任务要求；不能覆盖来源、安全、工具或结果结构。
   @BuiltValueField(wireName: r'custom_prompt')
   String? get customPrompt;
 

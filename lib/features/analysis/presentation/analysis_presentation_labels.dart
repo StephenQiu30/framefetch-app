@@ -73,6 +73,8 @@ String analysisFailureMessage(
     'analysis_provider_rate_limited' => l10n.analysisRateLimited,
     'analysisProviderUsageLimited' ||
     'analysis_provider_usage_limited' => l10n.analysisUsageLimited,
+    'analysisOutcomeUnknown' ||
+    'analysis_outcome_unknown' => l10n.analysisOutcomeUnknown,
     'workerLost' || 'worker_lost' => l10n.analysisWorkerLost,
     _ => switch (error) {
       DataRequestFailure(kind: DataRequestFailureKind.rateLimited) =>

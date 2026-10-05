@@ -12,6 +12,8 @@ const ImportSourceFormat _$pdf = const ImportSourceFormat._('pdf');
 const ImportSourceFormat _$txt = const ImportSourceFormat._('txt');
 const ImportSourceFormat _$markdown = const ImportSourceFormat._('markdown');
 const ImportSourceFormat _$fountain = const ImportSourceFormat._('fountain');
+const ImportSourceFormat _$srt = const ImportSourceFormat._('srt');
+const ImportSourceFormat _$vtt = const ImportSourceFormat._('vtt');
 const ImportSourceFormat _$unknownDefaultOpenApi =
     const ImportSourceFormat._('unknownDefaultOpenApi');
 
@@ -29,6 +31,10 @@ ImportSourceFormat _$valueOf(String name) {
       return _$markdown;
     case 'fountain':
       return _$fountain;
+    case 'srt':
+      return _$srt;
+    case 'vtt':
+      return _$vtt;
     case 'unknownDefaultOpenApi':
       return _$unknownDefaultOpenApi;
     default:
@@ -44,6 +50,8 @@ final BuiltSet<ImportSourceFormat> _$values =
   _$txt,
   _$markdown,
   _$fountain,
+  _$srt,
+  _$vtt,
   _$unknownDefaultOpenApi,
 ]);
 
@@ -55,6 +63,8 @@ class _$ImportSourceFormatMeta {
   ImportSourceFormat get txt => _$txt;
   ImportSourceFormat get markdown => _$markdown;
   ImportSourceFormat get fountain => _$fountain;
+  ImportSourceFormat get srt => _$srt;
+  ImportSourceFormat get vtt => _$vtt;
   ImportSourceFormat get unknownDefaultOpenApi => _$unknownDefaultOpenApi;
   ImportSourceFormat valueOf(String name) => _$valueOf(name);
   BuiltSet<ImportSourceFormat> get values => _$values;
@@ -78,6 +88,8 @@ class _$ImportSourceFormatSerializer
     'txt': 'txt',
     'markdown': 'markdown',
     'fountain': 'fountain',
+    'srt': 'srt',
+    'vtt': 'vtt',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
@@ -87,6 +99,8 @@ class _$ImportSourceFormatSerializer
     'txt': 'txt',
     'markdown': 'markdown',
     'fountain': 'fountain',
+    'srt': 'srt',
+    'vtt': 'vtt',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 

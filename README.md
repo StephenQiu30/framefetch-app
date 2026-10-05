@@ -45,7 +45,7 @@ App、Web 与 Electron 桌面端连接同一套 FrameFetch 服务端，共享账
 
 ### 在手机上阅读完整 AI 结果
 
-App 读取服务端 Skill 方法目录，按视频或剧本选择方法、中文／英文输出和分析重点。当前服务端内置 **12 种视频方法与 8 种剧本方法**，App、Web 与桌面端共享方法目录。视频方法包括“分镜表制作”“导演拉片”“高光提炼”“公众号文章”“短视频包装”等；剧本方法包括“剧本故事审稿”“剧本结构审阅”“剧本人物与冲突审阅”“剧本对白审阅”“剧本中英改写”等。完整目录和用途统一见 Server 的 [12 种视频分析方法](https://github.com/StephenQiu30/video-server#12-种视频分析方法)与 [8 种剧本分析方法](https://github.com/StephenQiu30/video-server#8-种剧本分析方法)；方法与结果契约见 [服务端 Skill 设计](https://github.com/StephenQiu30/video-server/blob/main/docs/design/16-Skill体系与结果契约.md)。
+App 继续使用原有视频／剧本文档分析入口：选择 Skill、中文／英文输出，编辑分析重点或恢复该方法的默认要求。可调用方法以服务端目录为准；本轮优化成片审阅（`video-review`）、素材拆解（`video-breakdown`）、剧本审阅（`screenplay-analysis`），以及文章／公众号／小红书整理（`article-format`、`wechat-format`、`xhs-format`）。原有报告阅读、运行历史及 Markdown／DOCX 导出保持原页面和操作。方法与结果契约见 [服务端 Skill 设计](https://github.com/StephenQiu30/video-server/blob/main/docs/design/16-Skill体系与结果契约.md)。
 
 方法数量表示当前目录，不表示所有方法的真实模型与设备业务验收均已通过。
 
@@ -61,7 +61,7 @@ App 读取服务端 Skill 方法目录，按视频或剧本选择方法、中文
 
 服务端的严格连续分镜时间轴校验针对视频视觉分析结果；其他结果按各自结果契约校验与呈现。
 
-分析支持开始、取消、重试、重新分析和删除，状态独立于下载任务。Markdown／DOCX 制品可用时可保存到设备；完整 Markdown 报告还可以通过系统分享交给其他应用。报告读取服务端规范原文，包含完整内容。两种导出来自同一结构化结果，不需要重新调用模型；文章、包装文案与剧本改写可继续人工修订。
+分析支持开始、取消、重试、重新分析和删除，状态独立于下载任务。Markdown／DOCX 制品可用时可保存到设备；完整 Markdown 报告还可以通过系统分享交给其他应用。报告读取服务端规范原文，包含完整内容。两种导出来自同一结构化结果，不需要重新调用模型；App 只读展示服务端保存的结果。
 
 ### 一份历史，串起素材与每次处理
 

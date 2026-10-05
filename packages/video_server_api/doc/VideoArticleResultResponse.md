@@ -17,5 +17,7 @@ Name | Type | Description | Notes
 **closing** | **String** |  |
 **limitations** | **BuiltList&lt;String&gt;** |  |
 **media** | [**AnalysisMediaResponse**](AnalysisMediaResponse.md) |  |
+**reviewStatus** | **String** |  | [optional]
+**reviewHistory** | [**BuiltList&lt;ContentReview&gt;**](ContentReview.md) |  | [optional] [default to ListBuilder()]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

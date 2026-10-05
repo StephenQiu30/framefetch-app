@@ -18,6 +18,8 @@ class _$StructuredReportSectionResponse
   final BuiltList<String> items;
   @override
   final BuiltList<VideoArticleEvidenceResponse> evidence;
+  @override
+  final BuiltList<StructuredReportCitationResponse>? citations;
 
   factory _$StructuredReportSectionResponse(
           [void Function(StructuredReportSectionResponseBuilder)? updates]) =>
@@ -28,7 +30,8 @@ class _$StructuredReportSectionResponse
       required this.heading,
       required this.body,
       required this.items,
-      required this.evidence})
+      required this.evidence,
+      this.citations})
       : super._();
   @override
   StructuredReportSectionResponse rebuild(
@@ -47,7 +50,8 @@ class _$StructuredReportSectionResponse
         heading == other.heading &&
         body == other.body &&
         items == other.items &&
-        evidence == other.evidence;
+        evidence == other.evidence &&
+        citations == other.citations;
   }
 
   @override
@@ -58,6 +62,7 @@ class _$StructuredReportSectionResponse
     _$hash = $jc(_$hash, body.hashCode);
     _$hash = $jc(_$hash, items.hashCode);
     _$hash = $jc(_$hash, evidence.hashCode);
+    _$hash = $jc(_$hash, citations.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -69,7 +74,8 @@ class _$StructuredReportSectionResponse
           ..add('heading', heading)
           ..add('body', body)
           ..add('items', items)
-          ..add('evidence', evidence))
+          ..add('evidence', evidence)
+          ..add('citations', citations))
         .toString();
   }
 }
@@ -102,6 +108,12 @@ class StructuredReportSectionResponseBuilder
   set evidence(ListBuilder<VideoArticleEvidenceResponse>? evidence) =>
       _$this._evidence = evidence;
 
+  ListBuilder<StructuredReportCitationResponse>? _citations;
+  ListBuilder<StructuredReportCitationResponse> get citations =>
+      _$this._citations ??= ListBuilder<StructuredReportCitationResponse>();
+  set citations(ListBuilder<StructuredReportCitationResponse>? citations) =>
+      _$this._citations = citations;
+
   StructuredReportSectionResponseBuilder() {
     StructuredReportSectionResponse._defaults(this);
   }
@@ -114,6 +126,7 @@ class StructuredReportSectionResponseBuilder
       _body = $v.body;
       _items = $v.items.toBuilder();
       _evidence = $v.evidence.toBuilder();
+      _citations = $v.citations?.toBuilder();
       _$v = null;
     }
     return this;
@@ -145,6 +158,7 @@ class StructuredReportSectionResponseBuilder
                 body, r'StructuredReportSectionResponse', 'body'),
             items: items.build(),
             evidence: evidence.build(),
+            citations: _citations?.build(),
           );
     } catch (_) {
       late String _$failedField;
@@ -153,6 +167,8 @@ class StructuredReportSectionResponseBuilder
         items.build();
         _$failedField = 'evidence';
         evidence.build();
+        _$failedField = 'citations';
+        _citations?.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
             r'StructuredReportSectionResponse', _$failedField, e.toString());

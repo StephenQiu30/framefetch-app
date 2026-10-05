@@ -3,11 +3,13 @@
 //
 
 // ignore_for_file: unused_element, unused_element_parameter
+import 'package:video_server_api/lib/model/screenplay_analysis_history_record_response.dart';
 import 'package:video_server_api/lib/model/parse_history_record_response.dart';
 import 'package:video_server_api/lib/model/video_analysis_history_record_response.dart';
 import 'package:built_collection/built_collection.dart';
+import 'package:video_server_api/lib/model/content_creation_history_record_response.dart';
+import 'package:video_server_api/lib/model/skill_analysis_history_record_response.dart';
 import 'package:video_server_api/lib/model/document_parse_history_record_response.dart';
-import 'package:video_server_api/lib/model/screenplay_analysis_history_record_response.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:one_of/one_of.dart';
@@ -49,15 +51,17 @@ part 'items_inner.g.dart';
 /// * [sourceFormat]
 @BuiltValue()
 abstract class ItemsInner implements Built<ItemsInner, ItemsInnerBuilder> {
-  /// One Of [DocumentParseHistoryRecordResponse], [ParseHistoryRecordResponse], [ScreenplayAnalysisHistoryRecordResponse], [VideoAnalysisHistoryRecordResponse]
+  /// One Of [ContentCreationHistoryRecordResponse], [DocumentParseHistoryRecordResponse], [ParseHistoryRecordResponse], [ScreenplayAnalysisHistoryRecordResponse], [SkillAnalysisHistoryRecordResponse], [VideoAnalysisHistoryRecordResponse]
   OneOf get oneOf;
 
   static const String discriminatorFieldName = r'record_type';
 
   static const Map<String, Type> discriminatorMapping = {
+    r'content_creation': ContentCreationHistoryRecordResponse,
     r'document_parse': DocumentParseHistoryRecordResponse,
     r'parse': ParseHistoryRecordResponse,
     r'screenplay_analysis': ScreenplayAnalysisHistoryRecordResponse,
+    r'skill_analysis': SkillAnalysisHistoryRecordResponse,
     r'video_analysis': VideoAnalysisHistoryRecordResponse,
   };
 
@@ -74,6 +78,9 @@ abstract class ItemsInner implements Built<ItemsInner, ItemsInnerBuilder> {
 
 extension ItemsInnerDiscriminatorExt on ItemsInner {
   String? get discriminatorValue {
+    if (this is ContentCreationHistoryRecordResponse) {
+      return r'content_creation';
+    }
     if (this is DocumentParseHistoryRecordResponse) {
       return r'document_parse';
     }
@@ -82,6 +89,9 @@ extension ItemsInnerDiscriminatorExt on ItemsInner {
     }
     if (this is ScreenplayAnalysisHistoryRecordResponse) {
       return r'screenplay_analysis';
+    }
+    if (this is SkillAnalysisHistoryRecordResponse) {
+      return r'skill_analysis';
     }
     if (this is VideoAnalysisHistoryRecordResponse) {
       return r'video_analysis';
@@ -92,6 +102,9 @@ extension ItemsInnerDiscriminatorExt on ItemsInner {
 
 extension ItemsInnerBuilderDiscriminatorExt on ItemsInnerBuilder {
   String? get discriminatorValue {
+    if (this is ContentCreationHistoryRecordResponseBuilder) {
+      return r'content_creation';
+    }
     if (this is DocumentParseHistoryRecordResponseBuilder) {
       return r'document_parse';
     }
@@ -100,6 +113,9 @@ extension ItemsInnerBuilderDiscriminatorExt on ItemsInnerBuilder {
     }
     if (this is ScreenplayAnalysisHistoryRecordResponseBuilder) {
       return r'screenplay_analysis';
+    }
+    if (this is SkillAnalysisHistoryRecordResponseBuilder) {
+      return r'skill_analysis';
     }
     if (this is VideoAnalysisHistoryRecordResponseBuilder) {
       return r'video_analysis';
@@ -147,14 +163,23 @@ class _$ItemsInnerSerializer implements PrimitiveSerializer<ItemsInner> {
         specifiedType: FullType(String)) as String;
     oneOfDataSrc = serialized;
     final oneOfTypes = [
+      ContentCreationHistoryRecordResponse,
       DocumentParseHistoryRecordResponse,
       ParseHistoryRecordResponse,
       ScreenplayAnalysisHistoryRecordResponse,
+      SkillAnalysisHistoryRecordResponse,
       VideoAnalysisHistoryRecordResponse,
     ];
     Object oneOfResult;
     Type oneOfType;
     switch (discValue) {
+      case r'content_creation':
+        oneOfResult = serializers.deserialize(
+          oneOfDataSrc,
+          specifiedType: FullType(ContentCreationHistoryRecordResponse),
+        ) as ContentCreationHistoryRecordResponse;
+        oneOfType = ContentCreationHistoryRecordResponse;
+        break;
       case r'document_parse':
         oneOfResult = serializers.deserialize(
           oneOfDataSrc,
@@ -175,6 +200,13 @@ class _$ItemsInnerSerializer implements PrimitiveSerializer<ItemsInner> {
           specifiedType: FullType(ScreenplayAnalysisHistoryRecordResponse),
         ) as ScreenplayAnalysisHistoryRecordResponse;
         oneOfType = ScreenplayAnalysisHistoryRecordResponse;
+        break;
+      case r'skill_analysis':
+        oneOfResult = serializers.deserialize(
+          oneOfDataSrc,
+          specifiedType: FullType(SkillAnalysisHistoryRecordResponse),
+        ) as SkillAnalysisHistoryRecordResponse;
+        oneOfType = SkillAnalysisHistoryRecordResponse;
         break;
       case r'video_analysis':
         oneOfResult = serializers.deserialize(

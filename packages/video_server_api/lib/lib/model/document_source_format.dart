@@ -20,6 +20,10 @@ class DocumentSourceFormat extends EnumClass {
   static const DocumentSourceFormat markdown = _$markdown;
   @BuiltValueEnumConst(wireName: r'fountain')
   static const DocumentSourceFormat fountain = _$fountain;
+  @BuiltValueEnumConst(wireName: r'srt')
+  static const DocumentSourceFormat srt = _$srt;
+  @BuiltValueEnumConst(wireName: r'vtt')
+  static const DocumentSourceFormat vtt = _$vtt;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const DocumentSourceFormat unknownDefaultOpenApi =
       _$unknownDefaultOpenApi;

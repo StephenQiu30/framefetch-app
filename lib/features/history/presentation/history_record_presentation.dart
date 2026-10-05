@@ -16,6 +16,15 @@ HistoryRecordPresentation presentHistoryRecord(
   Object record,
   AppLocalizations l,
 ) => switch (record) {
+  final SkillAnalysisHistoryRecordResponse item => (
+    id: item.id,
+    title: item.title,
+    kind: item.skillId,
+    status: analysisStatusLabel(l, item.status),
+    createdAt: item.createdAt,
+    sourceUnavailable:
+        item.sourceAvailability == HistoryAvailability.unavailable,
+  ),
   final ParseHistoryRecordResponse item => (
     id: item.id,
     title: item.title ?? l.inspectionResultTitle,

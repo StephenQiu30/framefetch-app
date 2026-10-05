@@ -59,8 +59,7 @@ abstract class EngineCatalogResponse
       [void updates(EngineCatalogResponseBuilder b)]) = _$EngineCatalogResponse;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EngineCatalogResponseBuilder b) =>
-      b..scope = EngineCatalogResponseScopeEnum.valueOf('anonymous_runner');
+  static void _defaults(EngineCatalogResponseBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EngineCatalogResponse> get serializer =>

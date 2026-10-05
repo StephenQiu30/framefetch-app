@@ -22,7 +22,7 @@ class DocumentsApi {
 
   const DocumentsApi(this._dio, this._serializers);
 
-  /// 取消剧本文档导入
+  /// 取消文档导入
   ///
   ///
   /// Parameters:
@@ -214,7 +214,7 @@ class DocumentsApi {
     );
   }
 
-  /// 创建剧本文档导入
+  /// 创建文档导入
   ///
   ///
   /// Parameters:
@@ -406,7 +406,7 @@ class DocumentsApi {
     );
   }
 
-  /// 删除剧本文档及其制品
+  /// 删除文档及其制品
   ///
   ///
   /// Parameters:
@@ -462,7 +462,7 @@ class DocumentsApi {
     return _response;
   }
 
-  /// 查询剧本文档导入
+  /// 查询文档导入
   ///
   ///
   /// Parameters:
@@ -547,7 +547,7 @@ class DocumentsApi {
     );
   }
 
-  /// 查询剧本文档列表
+  /// 查询文档列表
   ///
   ///
   /// Parameters:

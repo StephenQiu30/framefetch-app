@@ -24,7 +24,7 @@ abstract class HistoryRecordCursorResponse
 
   @BuiltValueField(wireName: r'record_type')
   HistoryRecordKind get recordType;
-  // enum recordTypeEnum {  parse,  video_analysis,  document_parse,  screenplay_analysis,  };
+  // enum recordTypeEnum {  parse,  video_analysis,  document_parse,  screenplay_analysis,  content_creation,  skill_analysis,  };
 
   @BuiltValueField(wireName: r'id')
   String get id;

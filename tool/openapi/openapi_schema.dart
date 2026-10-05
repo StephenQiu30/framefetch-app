@@ -25,6 +25,41 @@ Object? normalizeGeneratorSchema(
       preserveNullBranch: key == 'anyOf' || key == 'oneOf',
     );
   }
+  // An unconstrained schema reference as a map value is identical to the
+  // OpenAPI free-form map. dart-dio 7.22 crashes on the referenced empty model.
+  final additional = normalized['additionalProperties'];
+  if (additional is Map && additional.length == 1) {
+    final reference = additional[r'$ref'];
+    const prefix = '#/components/schemas/';
+    final schema = reference is String && reference.startsWith(prefix)
+        ? definitions[reference.substring(prefix.length)]
+        : null;
+    if (schema is Map && schema.isEmpty) {
+      normalized['additionalProperties'] = true;
+    }
+  }
+  // Preserve the nullable discriminator union without generating a wrapper
+  // around oneOf and null, which dart-dio cannot serialize correctly.
+  final nullableVariants = normalized['anyOf'];
+  if (nullableVariants is List && nullableVariants.length == 2) {
+    final concrete = nullableVariants
+        .where(
+          (v) =>
+              v is Map &&
+              v['oneOf'] is List &&
+              v['discriminator'] is Map &&
+              (v['discriminator'] as Map)['propertyName'] == 'type',
+        )
+        .firstOrNull;
+    if (concrete is Map &&
+        nullableVariants.any((v) => v is Map && v['type'] == 'null')) {
+      normalized.remove('anyOf');
+      normalized.addAll(
+        concrete.map((key, value) => MapEntry(key.toString(), value)),
+      );
+      normalized['nullable'] = true;
+    }
+  }
   // dart-dio 7.22 cannot generate a BuiltValue field for an independent
   // OpenAPI 3.1 null-only field. Keep union null branches unchanged.
   if (!preserveNullBranch && normalized['type'] == 'null') {
@@ -47,6 +82,13 @@ Object? normalizeGeneratorSchema(
     normalized['oneOf'] = variants;
   } else if (variants is List) {
     _normalizeRecordUnion(normalized, variants, definitions);
+  }
+  // Generated enum default initializers use wire values as Dart names.
+  // Leave nullable response constants to actual wire values and send request
+  // constants explicitly; server defaults retain the same protocol behavior.
+  if (normalized.containsKey('const') &&
+      normalized['default'] == normalized['const']) {
+    normalized.remove('default');
   }
   final enumValues = normalized['enum'];
   // Official generator enum names preserve the circled gate wire values.

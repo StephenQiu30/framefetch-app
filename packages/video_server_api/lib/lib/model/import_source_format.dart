@@ -22,6 +22,10 @@ class ImportSourceFormat extends EnumClass {
   static const ImportSourceFormat markdown = _$markdown;
   @BuiltValueEnumConst(wireName: r'fountain')
   static const ImportSourceFormat fountain = _$fountain;
+  @BuiltValueEnumConst(wireName: r'srt')
+  static const ImportSourceFormat srt = _$srt;
+  @BuiltValueEnumConst(wireName: r'vtt')
+  static const ImportSourceFormat vtt = _$vtt;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const ImportSourceFormat unknownDefaultOpenApi =
       _$unknownDefaultOpenApi;

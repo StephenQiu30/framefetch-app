@@ -18,6 +18,10 @@ class HistoryRecordKind extends EnumClass {
   static const HistoryRecordKind documentParse = _$documentParse;
   @BuiltValueEnumConst(wireName: r'screenplay_analysis')
   static const HistoryRecordKind screenplayAnalysis = _$screenplayAnalysis;
+  @BuiltValueEnumConst(wireName: r'content_creation')
+  static const HistoryRecordKind contentCreation = _$contentCreation;
+  @BuiltValueEnumConst(wireName: r'skill_analysis')
+  static const HistoryRecordKind skillAnalysis = _$skillAnalysis;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const HistoryRecordKind unknownDefaultOpenApi =
       _$unknownDefaultOpenApi;

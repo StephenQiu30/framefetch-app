@@ -39,7 +39,7 @@ abstract class MediaImportResponse
 
   @BuiltValueField(wireName: r'source_format')
   ImportSourceFormat get sourceFormat;
-  // enum sourceFormatEnum {  mp4,  docx,  pdf,  txt,  markdown,  fountain,  };
+  // enum sourceFormatEnum {  mp4,  docx,  pdf,  txt,  markdown,  fountain,  srt,  vtt,  };
 
   @BuiltValueField(wireName: r'display_name')
   String get displayName;

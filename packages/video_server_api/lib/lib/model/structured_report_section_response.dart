@@ -5,6 +5,7 @@
 // ignore_for_file: unused_element, unused_element_parameter
 import 'package:video_server_api/lib/model/video_article_evidence_response.dart';
 import 'package:built_collection/built_collection.dart';
+import 'package:video_server_api/lib/model/structured_report_citation_response.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -18,6 +19,7 @@ part 'structured_report_section_response.g.dart';
 /// * [body]
 /// * [items]
 /// * [evidence]
+/// * [citations]
 @BuiltValue()
 abstract class StructuredReportSectionResponse
     implements
@@ -38,6 +40,9 @@ abstract class StructuredReportSectionResponse
   @BuiltValueField(wireName: r'evidence')
   BuiltList<VideoArticleEvidenceResponse> get evidence;
 
+  @BuiltValueField(wireName: r'citations')
+  BuiltList<StructuredReportCitationResponse>? get citations;
+
   StructuredReportSectionResponse._();
 
   factory StructuredReportSectionResponse(
@@ -45,7 +50,8 @@ abstract class StructuredReportSectionResponse
       _$StructuredReportSectionResponse;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(StructuredReportSectionResponseBuilder b) => b;
+  static void _defaults(StructuredReportSectionResponseBuilder b) =>
+      b..citations = ListBuilder();
 
   @BuiltValueSerializer(custom: true)
   static Serializer<StructuredReportSectionResponse> get serializer =>
@@ -94,6 +100,14 @@ class _$StructuredReportSectionResponseSerializer
       specifiedType:
           const FullType(BuiltList, [FullType(VideoArticleEvidenceResponse)]),
     );
+    if (object.citations != null) {
+      yield r'citations';
+      yield serializers.serialize(
+        object.citations,
+        specifiedType: const FullType(
+            BuiltList, [FullType(StructuredReportCitationResponse)]),
+      );
+    }
   }
 
   @override
@@ -154,6 +168,14 @@ class _$StructuredReportSectionResponseSerializer
                 BuiltList, [FullType(VideoArticleEvidenceResponse)]),
           ) as BuiltList<VideoArticleEvidenceResponse>;
           result.evidence.replace(valueDes);
+          break;
+        case r'citations':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(
+                BuiltList, [FullType(StructuredReportCitationResponse)]),
+          ) as BuiltList<StructuredReportCitationResponse>;
+          result.citations.replace(valueDes);
           break;
         default:
           unhandled.add(key);

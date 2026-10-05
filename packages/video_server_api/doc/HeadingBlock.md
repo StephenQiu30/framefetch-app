@@ -1,4 +1,4 @@
-# video_server_api.model.ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse
+# video_server_api.model.HeadingBlock
 
 ## Load the model package
 ```dart
@@ -8,8 +8,9 @@ import 'package:video_server_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | [**ErrorCode**](ErrorCode.md) | 稳定的业务结果码。 |
-**message** | **String** | 安全的结果说明。 |
-**data** | [**Data**](Data.md) |  |
+**id** | **String** |  |
+**type** | **String** |  |
+**level** | **int** |  |
+**text** | **String** |  |
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

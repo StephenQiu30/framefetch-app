@@ -14,13 +14,20 @@ import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:video_server_api/video_server_api.dart';
 
 final class AnalysisPanel extends ConsumerWidget {
-  AnalysisPanel({required String downloadId, super.key})
-    : target = AnalysisTarget.video(downloadId);
+  AnalysisPanel({
+    required String downloadId,
+    this.sourceAvailable = true,
+    super.key,
+  }) : target = AnalysisTarget.video(downloadId);
 
-  AnalysisPanel.screenplay({required String documentId, super.key})
-    : target = AnalysisTarget.screenplay(documentId);
+  AnalysisPanel.screenplay({
+    required String documentId,
+    this.sourceAvailable = true,
+    super.key,
+  }) : target = AnalysisTarget.screenplay(documentId);
 
   final AnalysisTarget target;
+  final bool sourceAvailable;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -95,11 +102,16 @@ final class AnalysisPanel extends ConsumerWidget {
             onCancel: controller.cancel,
             onDelete: controller.delete,
             onRefresh: controller.refresh,
+            canRetry:
+                sourceAvailable &&
+                !state.submissionUnknown &&
+                job.errorCode != AnalysisErrorCode.analysisOutcomeUnknown,
             onRetry: controller.retry,
           )
         else
           AnalysisConfigurator(
             busy: state.action == AnalysisAction.start,
+            blocked: state.submissionUnknown || !sourceAvailable,
             skills: state.skills,
             onStart: controller.start,
           ),

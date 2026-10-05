@@ -8,6 +8,9 @@ part of 'analysis_stage.dart';
 
 const AnalysisStage _$preparing = const AnalysisStage._('preparing');
 const AnalysisStage _$analyzing = const AnalysisStage._('analyzing');
+const AnalysisStage _$drafting = const AnalysisStage._('drafting');
+const AnalysisStage _$reviewing = const AnalysisStage._('reviewing');
+const AnalysisStage _$revising = const AnalysisStage._('revising');
 const AnalysisStage _$validating = const AnalysisStage._('validating');
 const AnalysisStage _$publishing = const AnalysisStage._('publishing');
 const AnalysisStage _$unknownDefaultOpenApi =
@@ -19,6 +22,12 @@ AnalysisStage _$valueOf(String name) {
       return _$preparing;
     case 'analyzing':
       return _$analyzing;
+    case 'drafting':
+      return _$drafting;
+    case 'reviewing':
+      return _$reviewing;
+    case 'revising':
+      return _$revising;
     case 'validating':
       return _$validating;
     case 'publishing':
@@ -34,6 +43,9 @@ final BuiltSet<AnalysisStage> _$values =
     BuiltSet<AnalysisStage>(const <AnalysisStage>[
   _$preparing,
   _$analyzing,
+  _$drafting,
+  _$reviewing,
+  _$revising,
   _$validating,
   _$publishing,
   _$unknownDefaultOpenApi,
@@ -43,6 +55,9 @@ class _$AnalysisStageMeta {
   const _$AnalysisStageMeta();
   AnalysisStage get preparing => _$preparing;
   AnalysisStage get analyzing => _$analyzing;
+  AnalysisStage get drafting => _$drafting;
+  AnalysisStage get reviewing => _$reviewing;
+  AnalysisStage get revising => _$revising;
   AnalysisStage get validating => _$validating;
   AnalysisStage get publishing => _$publishing;
   AnalysisStage get unknownDefaultOpenApi => _$unknownDefaultOpenApi;
@@ -62,6 +77,9 @@ class _$AnalysisStageSerializer implements PrimitiveSerializer<AnalysisStage> {
   static const Map<String, Object> _toWire = const <String, Object>{
     'preparing': 'preparing',
     'analyzing': 'analyzing',
+    'drafting': 'drafting',
+    'reviewing': 'reviewing',
+    'revising': 'revising',
     'validating': 'validating',
     'publishing': 'publishing',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
@@ -69,6 +87,9 @@ class _$AnalysisStageSerializer implements PrimitiveSerializer<AnalysisStage> {
   static const Map<Object, String> _fromWire = const <Object, String>{
     'preparing': 'preparing',
     'analyzing': 'analyzing',
+    'drafting': 'drafting',
+    'reviewing': 'reviewing',
+    'revising': 'revising',
     'validating': 'validating',
     'publishing': 'publishing',
     'unknown_default_open_api': 'unknownDefaultOpenApi',

@@ -2068,4 +2068,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminPeriodLabel => 'Period';
+
+  @override
+  String get analysisOutcomeUnknown =>
+      'The execution receipt is unknown. Refresh or check activity history before running it again.';
 }

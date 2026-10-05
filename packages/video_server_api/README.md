@@ -87,17 +87,17 @@ Class | Method | HTTP request | Description
 [*AdminApi*](doc/AdminApi.md) | [**updateUserAccess**](doc/AdminApi.md#updateuseraccess) | **PATCH** /api/admin/users/{user_id} | 更新用户角色与账号状态
 [*AnalysesApi*](doc/AnalysesApi.md) | [**cancelAnalysis**](doc/AnalysesApi.md#cancelanalysis) | **POST** /api/analyses/{analysis_id}/cancel | 取消视频分析任务
 [*AnalysesApi*](doc/AnalysesApi.md) | [**createAnalysis**](doc/AnalysesApi.md#createanalysis) | **POST** /api/downloads/{download_id}/analyses | 创建视频分析任务
-[*AnalysesApi*](doc/AnalysesApi.md) | [**createDocumentAnalysis**](doc/AnalysesApi.md#createdocumentanalysis) | **POST** /api/documents/{document_id}/analyses | 创建剧本分析或改写任务
+[*AnalysesApi*](doc/AnalysesApi.md) | [**createDocumentAnalysis**](doc/AnalysesApi.md#createdocumentanalysis) | **POST** /api/documents/{document_id}/analyses | 创建剧本分析任务
 [*AnalysesApi*](doc/AnalysesApi.md) | [**deleteAnalysis**](doc/AnalysesApi.md#deleteanalysis) | **DELETE** /api/analyses/{analysis_id} | 删除视频分析与报告
-[*AnalysesApi*](doc/AnalysesApi.md) | [**exportAnalysisMarkdown**](doc/AnalysesApi.md#exportanalysismarkdown) | **GET** /api/analyses/{analysis_id}/report.md | 导出 Markdown 视频分析报告
+[*AnalysesApi*](doc/AnalysesApi.md) | [**exportAnalysisMarkdown**](doc/AnalysesApi.md#exportanalysismarkdown) | **GET** /api/analyses/{analysis_id}/report.md | 导出 Markdown 分析报告
 [*AnalysesApi*](doc/AnalysesApi.md) | [**exportAnalysisReport**](doc/AnalysesApi.md#exportanalysisreport) | **GET** /api/analyses/{analysis_id}/report.docx | 导出视频分析报告
-[*AnalysesApi*](doc/AnalysesApi.md) | [**getAnalysis**](doc/AnalysesApi.md#getanalysis) | **GET** /api/analyses/{analysis_id} | 查询视频分析任务
+[*AnalysesApi*](doc/AnalysesApi.md) | [**getAnalysis**](doc/AnalysesApi.md#getanalysis) | **GET** /api/analyses/{analysis_id} | 查询分析任务
 [*AnalysesApi*](doc/AnalysesApi.md) | [**getAnalysisHistoryRecord**](doc/AnalysesApi.md#getanalysishistoryrecord) | **GET** /api/analyses/{analysis_id}/history-record | 读取分析来源与历史摘要
 [*AnalysesApi*](doc/AnalysesApi.md) | [**getLatestDocumentAnalysis**](doc/AnalysesApi.md#getlatestdocumentanalysis) | **GET** /api/documents/{document_id}/analysis | 读取文档最近的剧本分析
 [*AnalysesApi*](doc/AnalysesApi.md) | [**getLatestDownloadAnalysis**](doc/AnalysesApi.md#getlatestdownloadanalysis) | **GET** /api/downloads/{download_id}/analysis | 读取下载任务最近的视频分析
 [*AnalysesApi*](doc/AnalysesApi.md) | [**listAnalysisRuns**](doc/AnalysesApi.md#listanalysisruns) | **GET** /api/analyses/{analysis_id}/runs | 分页读取分析运行记录
 [*AnalysesApi*](doc/AnalysesApi.md) | [**listAnalysisSkills**](doc/AnalysesApi.md#listanalysisskills) | **GET** /api/analysis-skills | 列出输入兼容的分析 Skill
-[*AnalysesApi*](doc/AnalysesApi.md) | [**retryAnalysis**](doc/AnalysesApi.md#retryanalysis) | **POST** /api/analyses/{analysis_id}/retry | 重试原视频分析任务
+[*AnalysesApi*](doc/AnalysesApi.md) | [**retryAnalysis**](doc/AnalysesApi.md#retryanalysis) | **POST** /api/analyses/{analysis_id}/retry | 重新执行原分析任务
 [*AppAuthApi*](doc/AppAuthApi.md) | [**getNativeCurrentUser**](doc/AppAuthApi.md#getnativecurrentuser) | **GET** /api/app/v1/auth/me | 查询原生应用当前用户
 [*AppAuthApi*](doc/AppAuthApi.md) | [**loginNativeUser**](doc/AppAuthApi.md#loginnativeuser) | **POST** /api/app/v1/auth/login | 登录原生应用
 [*AppAuthApi*](doc/AppAuthApi.md) | [**logoutNativeSession**](doc/AppAuthApi.md#logoutnativesession) | **POST** /api/app/v1/auth/logout | 退出原生应用
@@ -105,13 +105,13 @@ Class | Method | HTTP request | Description
 [*AppAuthApi*](doc/AppAuthApi.md) | [**registerNativeUser**](doc/AppAuthApi.md#registernativeuser) | **POST** /api/app/v1/auth/register | 注册原生应用用户
 [*AppAuthApi*](doc/AppAuthApi.md) | [**sendNativeRegistrationCode**](doc/AppAuthApi.md#sendnativeregistrationcode) | **POST** /api/app/v1/auth/registration-code | 发送注册邮箱验证码
 [*AppAuthApi*](doc/AppAuthApi.md) | [**verifyNativeRegistrationCode**](doc/AppAuthApi.md#verifynativeregistrationcode) | **POST** /api/app/v1/auth/registration-code/verify | 验证注册邮箱验证码
-[*DocumentsApi*](doc/DocumentsApi.md) | [**cancelDocumentImport**](doc/DocumentsApi.md#canceldocumentimport) | **POST** /api/documents/{document_id}/cancel | 取消剧本文档导入
+[*DocumentsApi*](doc/DocumentsApi.md) | [**cancelDocumentImport**](doc/DocumentsApi.md#canceldocumentimport) | **POST** /api/documents/{document_id}/cancel | 取消文档导入
 [*DocumentsApi*](doc/DocumentsApi.md) | [**completeDocumentImport**](doc/DocumentsApi.md#completedocumentimport) | **POST** /api/documents/{document_id}/complete | 完成文档上传并触发验证
-[*DocumentsApi*](doc/DocumentsApi.md) | [**createDocumentImport**](doc/DocumentsApi.md#createdocumentimport) | **POST** /api/documents | 创建剧本文档导入
+[*DocumentsApi*](doc/DocumentsApi.md) | [**createDocumentImport**](doc/DocumentsApi.md#createdocumentimport) | **POST** /api/documents | 创建文档导入
 [*DocumentsApi*](doc/DocumentsApi.md) | [**createDocumentUploadSession**](doc/DocumentsApi.md#createdocumentuploadsession) | **POST** /api/documents/{document_id}/upload-sessions | 创建或刷新文档上传会话
-[*DocumentsApi*](doc/DocumentsApi.md) | [**deleteDocument**](doc/DocumentsApi.md#deletedocument) | **DELETE** /api/documents/{document_id} | 删除剧本文档及其制品
-[*DocumentsApi*](doc/DocumentsApi.md) | [**getDocumentImport**](doc/DocumentsApi.md#getdocumentimport) | **GET** /api/documents/{document_id} | 查询剧本文档导入
-[*DocumentsApi*](doc/DocumentsApi.md) | [**listDocuments**](doc/DocumentsApi.md#listdocuments) | **GET** /api/documents | 查询剧本文档列表
+[*DocumentsApi*](doc/DocumentsApi.md) | [**deleteDocument**](doc/DocumentsApi.md#deletedocument) | **DELETE** /api/documents/{document_id} | 删除文档及其制品
+[*DocumentsApi*](doc/DocumentsApi.md) | [**getDocumentImport**](doc/DocumentsApi.md#getdocumentimport) | **GET** /api/documents/{document_id} | 查询文档导入
+[*DocumentsApi*](doc/DocumentsApi.md) | [**listDocuments**](doc/DocumentsApi.md#listdocuments) | **GET** /api/documents | 查询文档列表
 [*DownloadIntentsApi*](doc/DownloadIntentsApi.md) | [**cancelDownloadIntent**](doc/DownloadIntentsApi.md#canceldownloadintent) | **POST** /api/download-intents/{intent_id}/cancel | 取消当前用户的解析意图
 [*DownloadIntentsApi*](doc/DownloadIntentsApi.md) | [**createDownloadIntent**](doc/DownloadIntentsApi.md#createdownloadintent) | **POST** /api/download-intents | 提交持久解析意图
 [*DownloadIntentsApi*](doc/DownloadIntentsApi.md) | [**findDownloadIntent**](doc/DownloadIntentsApi.md#finddownloadintent) | **GET** /api/download-intents | 按幂等键找回当前用户已提交的解析意图
@@ -204,14 +204,20 @@ Class | Method | HTTP request | Description
  - [ApiResponseStoredFileListResponse](doc/ApiResponseStoredFileListResponse.md)
  - [ApiResponseTupleAnalysisSkillResponse](doc/ApiResponseTupleAnalysisSkillResponse.md)
  - [ApiResponseUnionAnalysisResponseNoneType](doc/ApiResponseUnionAnalysisResponseNoneType.md)
- - [ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse](doc/ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponse.md)
+ - [ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponseContentCreationHistoryRecordResponseSkillAnalysisHistoryRecordResponse](doc/ApiResponseUnionVideoAnalysisHistoryRecordResponseScreenplayAnalysisHistoryRecordResponseContentCreationHistoryRecordResponseSkillAnalysisHistoryRecordResponse.md)
  - [ApiResponseUserResponse](doc/ApiResponseUserResponse.md)
  - [AudioCodecFamily](doc/AudioCodecFamily.md)
+ - [BlocksInner](doc/BlocksInner.md)
  - [CompatibilityProfile](doc/CompatibilityProfile.md)
  - [CompleteDocumentImportRequest](doc/CompleteDocumentImportRequest.md)
  - [CompleteMediaImportRequest](doc/CompleteMediaImportRequest.md)
  - [CompletedPartRequest](doc/CompletedPartRequest.md)
  - [ContainerPreference](doc/ContainerPreference.md)
+ - [ContentCitation](doc/ContentCitation.md)
+ - [ContentCreationHistoryRecordResponse](doc/ContentCreationHistoryRecordResponse.md)
+ - [ContentDocumentResult](doc/ContentDocumentResult.md)
+ - [ContentFinding](doc/ContentFinding.md)
+ - [ContentReview](doc/ContentReview.md)
  - [CreateAiProviderProfileRequest](doc/CreateAiProviderProfileRequest.md)
  - [CreateProviderCatalogEntryRequest](doc/CreateProviderCatalogEntryRequest.md)
  - [Data](doc/Data.md)
@@ -258,6 +264,7 @@ Class | Method | HTTP request | Description
  - [FailureClass](doc/FailureClass.md)
  - [FormatResponse](doc/FormatResponse.md)
  - [FpsBucket](doc/FpsBucket.md)
+ - [HeadingBlock](doc/HeadingBlock.md)
  - [HighlightResponse](doc/HighlightResponse.md)
  - [HistoryAvailability](doc/HistoryAvailability.md)
  - [HistoryRecordCursorResponse](doc/HistoryRecordCursorResponse.md)
@@ -277,6 +284,7 @@ Class | Method | HTTP request | Description
  - [IntentResponse](doc/IntentResponse.md)
  - [IntentStatus](doc/IntentStatus.md)
  - [ItemsInner](doc/ItemsInner.md)
+ - [ListBlock](doc/ListBlock.md)
  - [ManagedUserListResponse](doc/ManagedUserListResponse.md)
  - [ManagedUserResponse](doc/ManagedUserResponse.md)
  - [MediaImportRequest](doc/MediaImportRequest.md)
@@ -289,6 +297,7 @@ Class | Method | HTTP request | Description
  - [NativeSessionResponse](doc/NativeSessionResponse.md)
  - [OperationLogPageResponse](doc/OperationLogPageResponse.md)
  - [OperationLogResponse](doc/OperationLogResponse.md)
+ - [ParagraphBlock](doc/ParagraphBlock.md)
  - [ParseHistoryRecordResponse](doc/ParseHistoryRecordResponse.md)
  - [ProblemDetails](doc/ProblemDetails.md)
  - [ProductionAdviceResponse](doc/ProductionAdviceResponse.md)
@@ -301,6 +310,7 @@ Class | Method | HTTP request | Description
  - [ProviderStatusResponse](doc/ProviderStatusResponse.md)
  - [ProviderSupportStatus](doc/ProviderSupportStatus.md)
  - [PublicUrlInspectionSource](doc/PublicUrlInspectionSource.md)
+ - [QuoteBlock](doc/QuoteBlock.md)
  - [RegisterRequest](doc/RegisterRequest.md)
  - [RegistrationCodeRequest](doc/RegistrationCodeRequest.md)
  - [RegistrationCodeResponse](doc/RegistrationCodeResponse.md)
@@ -317,6 +327,10 @@ Class | Method | HTTP request | Description
  - [ScreenplayStructureResponse](doc/ScreenplayStructureResponse.md)
  - [SemanticPlanResponse](doc/SemanticPlanResponse.md)
  - [ShotResponse](doc/ShotResponse.md)
+ - [SkillAnalysisHistoryRecordResponse](doc/SkillAnalysisHistoryRecordResponse.md)
+ - [SkillMediaEvidence](doc/SkillMediaEvidence.md)
+ - [SkillReportResult](doc/SkillReportResult.md)
+ - [SkillTextEvidence](doc/SkillTextEvidence.md)
  - [SourceDiscoveryItemResponse](doc/SourceDiscoveryItemResponse.md)
  - [SourceDiscoveryRequest](doc/SourceDiscoveryRequest.md)
  - [SourceDiscoveryResponse](doc/SourceDiscoveryResponse.md)
@@ -326,6 +340,7 @@ Class | Method | HTTP request | Description
  - [StoredFileCategory](doc/StoredFileCategory.md)
  - [StoredFileListResponse](doc/StoredFileListResponse.md)
  - [StoredFileResponse](doc/StoredFileResponse.md)
+ - [StructuredReportCitationResponse](doc/StructuredReportCitationResponse.md)
  - [StructuredReportResultResponse](doc/StructuredReportResultResponse.md)
  - [StructuredReportSectionResponse](doc/StructuredReportSectionResponse.md)
  - [UpdateAiProviderProfileRequest](doc/UpdateAiProviderProfileRequest.md)

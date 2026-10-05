@@ -49,7 +49,7 @@ abstract class DocumentDetailResponse
 
   @BuiltValueField(wireName: r'source_format')
   DocumentSourceFormat get sourceFormat;
-  // enum sourceFormatEnum {  docx,  pdf,  txt,  markdown,  fountain,  };
+  // enum sourceFormatEnum {  docx,  pdf,  txt,  markdown,  fountain,  srt,  vtt,  };
 
   @BuiltValueField(wireName: r'declared_size_bytes')
   int get declaredSizeBytes;

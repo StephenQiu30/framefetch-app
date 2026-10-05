@@ -93,7 +93,7 @@ final class DownloadDetailContent extends StatelessWidget {
           ),
         if (job.status == DownloadStatus.succeeded) ...[
           const SizedBox(height: AppSpacing.section),
-          AnalysisPanel(downloadId: job.id),
+          AnalysisPanel(downloadId: job.id, sourceAvailable: job.fileAvailable),
         ],
       ],
     );
