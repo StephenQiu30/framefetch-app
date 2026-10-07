@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.stephenqiu.framegrab"
+    namespace = "com.stephenqiu.framefetch"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
