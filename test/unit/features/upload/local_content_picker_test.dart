@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/upload/data/local_content_picker.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
+import 'package:framefetch/features/upload/data/local_content_picker.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
 
 void main() {
   test('provides platform filters for MP4 selection', () {

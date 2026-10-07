@@ -38,7 +38,7 @@ void main() {
     );
   });
 
-  test('native launchers and Framegrab bundle identity are configured', () {
+  test('native launchers and Framefetch bundle identity are configured', () {
     for (final density in ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi', 'xxxhdpi']) {
       final directory = Directory('android/app/src/main/res/mipmap-$density');
       expect(File('${directory.path}/ic_launcher.png').existsSync(), isTrue);

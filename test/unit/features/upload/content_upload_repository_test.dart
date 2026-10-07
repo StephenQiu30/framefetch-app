@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
 
 import '../../../support/upload_http_fixture.dart';
 

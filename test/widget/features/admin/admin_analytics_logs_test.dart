@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/admin/application/admin_providers.dart';
-import 'package:framegrab/features/admin/application/operation_log_query.dart';
-import 'package:framegrab/features/admin/presentation/admin_analytics_screen.dart';
-import 'package:framegrab/features/admin/presentation/admin_operation_logs_screen.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/features/admin/application/admin_providers.dart';
+import 'package:framefetch/features/admin/application/operation_log_query.dart';
+import 'package:framefetch/features/admin/presentation/admin_analytics_screen.dart';
+import 'package:framefetch/features/admin/presentation/admin_operation_logs_screen.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../../../support/admin_fixtures.dart';

@@ -22,7 +22,7 @@ void main() {
   testWidgets('public resources remain reachable without a session', (
     tester,
   ) async {
-    await pumpFramegrabApp(tester, credentialStore: MemoryCredentialStore());
+    await pumpFramefetchApp(tester, credentialStore: MemoryCredentialStore());
     await capture(tester, 'web-sync-public-home-light');
     await tester.tap(find.byKey(const Key('resource-menu-button')));
     await tester.pumpAndSettle();
@@ -45,7 +45,7 @@ void main() {
   testWidgets('profile and navigation fit native accessibility text', (
     tester,
   ) async {
-    await pumpFramegrabApp(tester);
+    await pumpFramefetchApp(tester);
     await capture(tester, 'web-sync-workspace-light');
     await tester.tap(find.byKey(const Key('app-tab-4')));
     await tester.pumpAndSettle();

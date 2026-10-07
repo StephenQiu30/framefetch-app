@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/network/data_request_failure.dart';
-import 'package:framegrab/features/history/application/download_retry.dart';
-import 'package:framegrab/features/history/presentation/download_presentation_labels.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/core/network/data_request_failure.dart';
+import 'package:framefetch/features/history/application/download_retry.dart';
+import 'package:framefetch/features/history/presentation/download_presentation_labels.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 import '../../../support/data_fakes.dart';
 

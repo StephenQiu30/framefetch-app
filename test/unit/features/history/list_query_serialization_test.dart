@@ -1,16 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/admin/data/admin_repository.dart';
-import 'package:framegrab/features/auth/application/authenticated_request.dart';
-import 'package:framegrab/features/history/data/download_history_repository.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/admin/data/admin_repository.dart';
+import 'package:framefetch/features/auth/application/authenticated_request.dart';
+import 'package:framefetch/features/history/data/download_history_repository.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import '../../../support/data_fakes.dart';
 
 void main() {
   test(
     'unset filters are omitted; selected false and enums are serialized',
     () async {
-      final client = VideoServerApi();
+      final client = FramefetchServerApi();
       final sent = <Map<String, dynamic>>[];
       client.dio.interceptors.add(
         InterceptorsWrapper(

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/core/network/data_request_failure.dart';
-import 'package:framegrab/features/auth/application/auth_session_controller.dart';
-import 'package:framegrab/features/auth/data/profile_repository.dart';
-import 'package:framegrab/features/auth/domain/username.dart';
-import 'package:framegrab/features/auth/presentation/auth_validation.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/app_dropdown_field.dart';
-import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
+import 'package:framefetch/core/network/data_request_failure.dart';
+import 'package:framefetch/features/auth/application/auth_session_controller.dart';
+import 'package:framefetch/features/auth/data/profile_repository.dart';
+import 'package:framefetch/features/auth/domain/username.dart';
+import 'package:framefetch/features/auth/presentation/auth_validation.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/app_dropdown_field.dart';
+import 'package:framefetch/shared/presentation/data_request_failure_message.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 final class ProfileEditor extends ConsumerStatefulWidget {
   const ProfileEditor({super.key});

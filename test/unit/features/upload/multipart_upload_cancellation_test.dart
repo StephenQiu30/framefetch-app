@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/upload/data/multipart_uploader.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
+import 'package:framefetch/features/upload/data/multipart_uploader.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
 
 void main() {
   test(

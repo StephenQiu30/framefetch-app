@@ -1,6 +1,6 @@
-import 'package:framegrab/features/auth/data/native_auth_gateway.dart';
-import 'package:framegrab/features/auth/data/refresh_credential_store.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/auth/data/native_auth_gateway.dart';
+import 'package:framefetch/features/auth/data/refresh_credential_store.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 NativeSessionResponse testSession({
   UserRole role = UserRole.user,

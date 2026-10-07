@@ -3,27 +3,27 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/admin/application/admin_mutation_controller.dart';
-import 'package:framegrab/features/admin/data/admin_repository.dart';
-import 'package:framegrab/features/auth/application/auth_session_controller.dart';
-import 'package:framegrab/features/auth/data/native_auth_gateway.dart';
-import 'package:framegrab/features/auth/data/refresh_credential_store.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/admin/application/admin_mutation_controller.dart';
+import 'package:framefetch/features/admin/data/admin_repository.dart';
+import 'package:framefetch/features/auth/application/auth_session_controller.dart';
+import 'package:framefetch/features/auth/data/native_auth_gateway.dart';
+import 'package:framefetch/features/auth/data/refresh_credential_store.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 import '../../../support/auth_fakes.dart';
 
 void main() {
-  late VideoServerApi client;
+  late FramefetchServerApi client;
   late FakeAuthGateway gateway;
   late ProviderContainer container;
   setUp(() async {
-    client = VideoServerApi();
+    client = FramefetchServerApi();
     gateway = FakeAuthGateway(
       session: testSession(role: UserRole.admin, suffix: 'admin-a'),
     );
     container = ProviderContainer(
       overrides: [
-        videoServerApiProvider.overrideWithValue(client),
+        framefetchServerApiProvider.overrideWithValue(client),
         nativeAuthGatewayProvider.overrideWithValue(gateway),
         refreshCredentialStoreProvider.overrideWithValue(
           MemoryCredentialStore('synthetic-refresh'),

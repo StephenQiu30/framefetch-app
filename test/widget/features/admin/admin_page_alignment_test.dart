@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/admin/presentation/admin_page.dart';
+import 'package:framefetch/features/admin/presentation/admin_page.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 
 import '../../../support/shad_test_app.dart';

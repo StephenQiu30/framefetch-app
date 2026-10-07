@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/analysis/application/analysis_state.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/analysis/application/analysis_state.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 import '../../../support/analysis_fakes.dart';
 import '../../../support/deferred_analysis_repository.dart';

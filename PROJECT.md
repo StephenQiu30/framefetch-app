@@ -1,6 +1,6 @@
-# video-app 工程规范
+# framefetch-app 工程规范
 
-本文规定 `video-app` 的技术栈、架构、目录、命名与接口规则。协作与交付见 [AGENTS.md](AGENTS.md)，产品与技术设计见 [docs/design](docs/design/README.md)，精确依赖版本以 `pubspec.yaml` 与 `pubspec.lock` 为准。
+本文规定 `framefetch-app` 的技术栈、架构、目录、命名与接口规则。协作与交付见 [AGENTS.md](AGENTS.md)，产品与技术设计见 [docs/design](docs/design/README.md)，精确依赖版本以 `pubspec.yaml` 与 `pubspec.lock` 为准。
 
 ## 1. 职责
 
@@ -50,9 +50,9 @@
 ## 4. 目录
 
 ```text
-video-app/
+framefetch-app/
 ├── contracts/openapi/          App 专用 OpenAPI 冻结快照
-├── packages/video_server_api/  生成的 Dart API 客户端
+├── packages/framefetch_server_api/  生成的 Dart API 客户端
 ├── lib/
 │   ├── main.dart / bootstrap.dart
 │   ├── app/                    根装配、根路由、根页面与生命周期
@@ -103,7 +103,7 @@ video-app/
 - 路由目的地一律叫 `Screen`，不用 `Page`、`Content` 或编号命名。
 - 一个文件聚焦一个主要公开概念，按职责拆分，不按行数机械拆分。
 - ARB key 用语义化的 `lowerCamelCase`；测试 Key 用稳定的 `feature-element[-id]` 小写连字符格式。
-- 跨目录引用使用 `package:framegrab/...`，同一小目录内可相对引用；不导入其他包的 `lib/src/`；不建 barrel export。
+- 跨目录引用使用 `package:framefetch/...`，同一小目录内可相对引用；不导入其他包的 `lib/src/`；不建 barrel export。
 - import 顺序为 Dart SDK、Flutter 与第三方包、本项目，由格式化工具维护。
 
 ## 6. 视觉同步
@@ -118,10 +118,10 @@ App 与 Web 共享视觉语义与交互状态，不复制 Radix 的 Web 实现�
 
 ## 7. 接口与运行
 
-- 契约来源是服务端 `/openapi.json`。变更顺序：更新冻结快照 → 生成 `packages/video_server_api/` → 调整 Repository。允许进入 App 的 operation 只在 `tool/openapi/openapi_config.dart` 声明，使用方法见 [tool/openapi/README.md](tool/openapi/README.md)。
+- 契约来源是服务端 `/openapi.json`。变更顺序：更新冻结快照 → 生成 `packages/framefetch_server_api/` → 调整 Repository。允许进入 App 的 operation 只在 `tool/openapi/openapi_config.dart` 声明，使用方法见 [tool/openapi/README.md](tool/openapi/README.md)。
 - 共享业务接口为 `{code, message, data}` 包装：生成客户端保留 `ApiResponse*` 类型，Repository 是唯一的解包与必填 `data` 校验边界；原生认证接口按 OpenAPI 声明的直接响应处理。错误文案读取 `message`。
 - 反序列化、权限、认证与限流失败分别呈现，不统一描述为网络中断。
 - 页面不散落 Dio 调用、状态码映射或 Token 刷新；刷新请求单飞，失败后清除会话回到登录。
 - 自动重试只用于幂等且可安全重放的请求；创建任务使用服务端幂等键。
 - 活动任务与分析通过受控轮询收敛；前后台切换与网络恢复后以服务端查询结果为准。
-- `VIDEO_SERVER_BASE_URL` 指定服务端地址；真机使用设备可达地址，生产构建必须使用有效 HTTPS。
+- `FRAMEFETCH_SERVER_BASE_URL` 指定服务端地址；真机使用设备可达地址，生产构建必须使用有效 HTTPS。

@@ -1,5 +1,5 @@
-import 'package:framegrab/features/analysis/data/analysis_repository.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/analysis/data/analysis_repository.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 final class FakeAnalysisRepository implements AnalysisRepository {
   FakeAnalysisRepository({

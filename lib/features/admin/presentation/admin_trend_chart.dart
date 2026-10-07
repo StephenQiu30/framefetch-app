@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/features/admin/presentation/analytics_chart_point.dart';
-import 'package:framegrab/features/admin/presentation/analytics_trend_painter.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/core/theme/app_spacing.dart';
+import 'package:framefetch/features/admin/presentation/analytics_chart_point.dart';
+import 'package:framefetch/features/admin/presentation/analytics_trend_painter.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 final class AdminTrendChart extends StatefulWidget {

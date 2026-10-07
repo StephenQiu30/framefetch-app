@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 /// The single HTTP transport used by the generated API client.
 ///
@@ -22,11 +22,11 @@ final class DioHttpClient {
            },
          ),
        ) {
-    api = VideoServerApi(dio: dio);
+    api = FramefetchServerApi(dio: dio);
   }
 
   final Dio dio;
-  late final VideoServerApi api;
+  late final FramefetchServerApi api;
 
   void close() => dio.close(force: true);
 }

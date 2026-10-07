@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/features/providers/application/provider_status_provider.dart';
-import 'package:framegrab/features/providers/presentation/provider_status_item.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/app_loading.dart';
-import 'package:framegrab/shared/presentation/data_page_view.dart';
-import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
+import 'package:framefetch/features/providers/application/provider_status_provider.dart';
+import 'package:framefetch/features/providers/presentation/provider_status_item.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/app_loading.dart';
+import 'package:framefetch/shared/presentation/data_page_view.dart';
+import 'package:framefetch/shared/presentation/data_request_failure_message.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 final class ProviderStatusScreen extends ConsumerStatefulWidget {
   const ProviderStatusScreen({super.key});

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_file_saver/flutter_file_saver.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/features/analysis/data/analysis_docx_repository.dart';
-import 'package:framegrab/features/analysis/data/analysis_markdown_repository.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/features/analysis/data/analysis_docx_repository.dart';
+import 'package:framefetch/features/analysis/data/analysis_markdown_repository.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 

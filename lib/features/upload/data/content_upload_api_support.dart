@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:framegrab/features/upload/data/multipart_uploader.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/upload/data/multipart_uploader.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 String uploadIdempotencyKey(
   ContentUploadKind kind,

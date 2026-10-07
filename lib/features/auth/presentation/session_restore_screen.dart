@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/shared/presentation/app_brand.dart';
-import 'package:framegrab/shared/presentation/app_spinner.dart';
+import 'package:framefetch/shared/presentation/app_brand.dart';
+import 'package:framefetch/shared/presentation/app_spinner.dart';
 
 final class SessionRestoreScreen extends StatelessWidget {
   const SessionRestoreScreen({super.key});

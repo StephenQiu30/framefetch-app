@@ -1,4 +1,4 @@
-import 'package:framegrab/features/auth/data/refresh_credential_store.dart';
+import 'package:framefetch/features/auth/data/refresh_credential_store.dart';
 
 /// Keeps credential writes and logout cleanup in invocation order.
 final class SessionCredentialAccess {

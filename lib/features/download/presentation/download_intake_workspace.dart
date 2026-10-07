@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/core/network/data_request_failure.dart';
-import 'package:framegrab/features/download/application/download_intake_controller.dart';
-import 'package:framegrab/features/download/presentation/download_status.dart';
-import 'package:framegrab/features/download/presentation/inspection_workspace.dart';
-import 'package:framegrab/features/download/presentation/intake_failure_message.dart';
-import 'package:framegrab/features/download/presentation/source_discovery_workspace.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/core/network/data_request_failure.dart';
+import 'package:framefetch/features/download/application/download_intake_controller.dart';
+import 'package:framefetch/features/download/presentation/download_status.dart';
+import 'package:framefetch/features/download/presentation/inspection_workspace.dart';
+import 'package:framefetch/features/download/presentation/intake_failure_message.dart';
+import 'package:framefetch/features/download/presentation/source_discovery_workspace.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 final class DownloadIntakeWorkspace extends StatelessWidget {
   const DownloadIntakeWorkspace({

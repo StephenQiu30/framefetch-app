@@ -1,10 +1,10 @@
-# video-app 协作规范
+# framefetch-app 协作规范
 
 本文件约束在本仓库工作的代码代理与贡献者。技术栈、目录与命名见 [PROJECT.md](PROJECT.md)，视觉映射见 [design.md](design.md)，安全边界见 [SECURITY.md](SECURITY.md)，提交格式与本地检查见 [CONTRIBUTING.md](CONTRIBUTING.md)。规则冲突时以用户最新要求为准，其次是本文件。
 
 ## 定位
 
-`video-app` 是帧取的 Flutter 原生客户端，只支持 Android 与 iOS。`video-server` 负责 API、Web、Provider、媒体执行、存储与 AI 分析；本仓库只通过 App 专用 OpenAPI 契约与其协作，不复制、不修改服务端实现。
+`framefetch-app` 是帧取的 Flutter 原生客户端，只支持 Android 与 iOS。`framefetch-server` 负责 API、Web、Provider、媒体执行、存储与 AI 分析；本仓库只通过 App 专用 OpenAPI 契约与其协作，不复制、不修改服务端实现。
 
 ## 文档
 
@@ -32,7 +32,7 @@
 ## 验证
 
 - 每次改动运行 [CONTRIBUTING.md](CONTRIBUTING.md#本地检查) 中的相关检查。
-- 真实鉴权、文件上传下载、深链接、权限与生命周期以与 `video-server` 的真实集成为准；Mock、生成客户端与服务端测试不能替代。
+- 真实鉴权、文件上传下载、深链接、权限与生命周期以与 `framefetch-server` 的真实集成为准；Mock、生成客户端与服务端测试不能替代。
 - 视觉改动在模拟器检查明暗主题、窄屏与宽屏、文字缩放、焦点与错误恢复。
 - 验证结论只有 `passed`、`failed`、`blocked` 三种；缺少环境、凭据、设备或证据时为 `blocked`。
 

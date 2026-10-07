@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/history/application/download_history_provider.dart';
-import 'package:framegrab/features/history/data/download_history_repository.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/history/application/download_history_provider.dart';
+import 'package:framefetch/features/history/data/download_history_repository.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import '../../../support/data_fakes.dart';
 
 final class RecordingHistory implements DownloadHistoryRepository {

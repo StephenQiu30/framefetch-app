@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/features/landing/presentation/public_home_layout.dart';
-import 'package:framegrab/features/landing/presentation/public_home_section_intro.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/features/landing/presentation/public_home_layout.dart';
+import 'package:framefetch/features/landing/presentation/public_home_section_intro.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 

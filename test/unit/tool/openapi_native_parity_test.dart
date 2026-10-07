@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 import 'openapi_parity_fixtures.dart';
 
@@ -93,7 +93,7 @@ void main() {
           },
         ),
       );
-      final result = await VideoServerApi(dio: dio)
+      final result = await FramefetchServerApi(dio: dio)
           .getDownloadIntentsApi()
           .listHistoryRecords(
             recordType: BuiltList([
@@ -144,7 +144,7 @@ void main() {
           },
         ),
       );
-      final api = VideoServerApi(dio: dio).getUsersApi();
+      final api = FramefetchServerApi(dio: dio).getUsersApi();
       final uploaded = await api.uploadCurrentUserAvatar(
         body: MultipartFile.fromBytes(bytes),
       );

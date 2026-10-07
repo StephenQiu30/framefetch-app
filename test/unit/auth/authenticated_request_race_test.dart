@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/network/data_request_failure.dart';
-import 'package:framegrab/features/auth/application/authenticated_request.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/core/network/data_request_failure.dart';
+import 'package:framefetch/features/auth/application/authenticated_request.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 void main() {
   for (final unauthorized in [false, true]) {
@@ -16,7 +16,7 @@ void main() {
         var operationCalls = 0;
         final pending = Completer<String>();
         final request = AuthenticatedRequest(
-          client: VideoServerApi(),
+          client: FramefetchServerApi(),
           accessToken: () => 'access-$generation',
           sessionGeneration: () => generation,
           refreshSession: () async {
@@ -52,7 +52,7 @@ void main() {
     final replayStarted = Completer<void>();
     final replay = Completer<String>();
     final request = AuthenticatedRequest(
-      client: VideoServerApi(),
+      client: FramefetchServerApi(),
       accessToken: () => 'access-$generation',
       sessionGeneration: () => generation,
       refreshSession: () async => true,

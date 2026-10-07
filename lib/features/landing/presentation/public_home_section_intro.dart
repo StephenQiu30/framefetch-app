@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/features/landing/presentation/public_home_layout.dart';
+import 'package:framefetch/features/landing/presentation/public_home_layout.dart';
 
 final class PublicHomeSectionIntro extends StatelessWidget {
   const PublicHomeSectionIntro({

@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/core/network/data_request_failure.dart';
-import 'package:framegrab/features/auth/application/auth_session_controller.dart';
-import 'package:framegrab/features/history/data/download_history_repository.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/core/network/data_request_failure.dart';
+import 'package:framefetch/features/auth/application/auth_session_controller.dart';
+import 'package:framefetch/features/history/data/download_history_repository.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 final downloadRetryProvider = Provider.autoDispose
     .family<DownloadRetry, String>((ref, jobId) {

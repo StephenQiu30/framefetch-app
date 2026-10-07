@@ -1,7 +1,7 @@
 // Generates the Flutter palette from frontend CSS. Usage: node tool/sync_design_tokens.mjs [globals.css] [--check]
 import fs from 'node:fs';
 import crypto from 'node:crypto';
-const source = process.argv.find((v, i) => i > 1 && !v.startsWith('--')) ?? '../video-server/frontend/src/app/globals.css';
+const source = process.argv.find((v, i) => i > 1 && !v.startsWith('--')) ?? '../framefetch-server/frontend/src/app/globals.css';
 const css = fs.readFileSync(source, 'utf8');
 const channels = (l, c, h) => {
   const a = c * Math.cos(h * Math.PI / 180), b = c * Math.sin(h * Math.PI / 180);

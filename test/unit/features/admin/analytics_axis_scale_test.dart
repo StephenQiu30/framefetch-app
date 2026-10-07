@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/admin/presentation/analytics_axis_scale.dart';
+import 'package:framefetch/features/admin/presentation/analytics_axis_scale.dart';
 
 void main() {
   test(

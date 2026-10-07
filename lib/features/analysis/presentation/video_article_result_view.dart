@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/features/analysis/presentation/analysis_report_preview.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/data_formatters.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/core/theme/app_spacing.dart';
+import 'package:framefetch/features/analysis/presentation/analysis_report_preview.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/data_formatters.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 final class VideoArticleResultView extends StatelessWidget {
   const VideoArticleResultView({

@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Framegrab';
+  String get appTitle => 'Framefetch';
 
   @override
   String get homeNavigation => 'Home';
@@ -335,7 +335,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get switchToLightTheme => 'Switch to light theme';
 
   @override
-  String get publicHomeEyebrow => 'FrameFetch · Open-source video workflow';
+  String get publicHomeEyebrow => 'Framefetch · Open-source video workflow';
 
   @override
   String get publicHomeTitle => 'Bring content\nback to your device.';
@@ -418,11 +418,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get publicFaqEyebrow => 'Common questions';
 
   @override
-  String get publicFaqWhatQuestion => 'What is FrameFetch?';
+  String get publicFaqWhatQuestion => 'What is Framefetch?';
 
   @override
   String get publicFaqWhatAnswer =>
-      'FrameFetch is an MIT-licensed, open-source, self-hosted video parsing and AI analysis platform for creators, content researchers, and developers. It organizes authorized media links, local videos, and screenplay documents into tasks with artifact management, structured analysis, and report exports.';
+      'Framefetch is an MIT-licensed, open-source, self-hosted video parsing and AI analysis platform for creators, content researchers, and developers. It organizes authorized media links, local videos, and screenplay documents into tasks with artifact management, structured analysis, and report exports.';
 
   @override
   String get publicFaqReportsQuestion => 'What can AI video analysis produce?';
@@ -461,14 +461,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get publicFaqMobileAnswer =>
-      'The Flutter iOS and Android client connects to a self-hosted video-server. Media processing and AI inference run on the server; the mobile client does not bundle an offline extractor or offline AI model.';
+      'The Flutter iOS and Android client connects to a self-hosted framefetch-server. Media processing and AI inference run on the server; the mobile client does not bundle an offline extractor or offline AI model.';
 
   @override
   String get publicGuideAction =>
       'Read the video analysis and self-hosting guide';
 
   @override
-  String get publicStartTitle => 'Run FrameFetch on your own infrastructure';
+  String get publicStartTitle => 'Run Framefetch on your own infrastructure';
 
   @override
   String get publicDeploymentAction => 'Read deployment guide';
@@ -518,7 +518,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get publicGuideDeploymentParagraphOne =>
-      'video-server includes the Next.js Web interface, FastAPI API, and separate download, media-processing, and AI workers. Docker Compose manages the business services and connects to PostgreSQL, RabbitMQ, Redis, and MinIO. The default Web and API ports are 8101 and 8111.';
+      'framefetch-server includes the Next.js Web interface, FastAPI API, and separate download, media-processing, and AI workers. Docker Compose manages the business services and connects to PostgreSQL, RabbitMQ, Redis, and MinIO. The default Web and API ports are 8101 and 8111.';
 
   @override
   String get publicGuideDeploymentParagraphTwo =>
@@ -538,7 +538,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get publicGuideClientsParagraphOne =>
-      'The Web UI ships with video-server and is suited to managing media, tasks, analysis reports, and administrator configuration. video-app is the separately maintained Flutter client for iOS and Android and connects to a reachable video-server.';
+      'The Web UI ships with framefetch-server and is suited to managing media, tasks, analysis reports, and administrator configuration. framefetch-app is the separately maintained Flutter client for iOS and Android and connects to a reachable framefetch-server.';
 
   @override
   String get publicGuideClientsParagraphTwo =>
@@ -628,7 +628,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcomeBack => 'Welcome back';
 
   @override
-  String get createAccountTitle => 'Create your Framegrab account';
+  String get createAccountTitle => 'Create your Framefetch account';
 
   @override
   String get emailLabel => 'Email';
@@ -1754,7 +1754,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get selfHostingNavigation => 'Self-hosting';
 
   @override
-  String get aboutNavigation => 'About FrameFetch';
+  String get aboutNavigation => 'About Framefetch';
 
   @override
   String get resourcesNavigation => 'Resources';
@@ -1973,11 +1973,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aboutContent =>
-      '## Who is FrameFetch for?\n\n### Creators\n\nOrganize media you own or are authorized to use. Review structure using shots, scenes and keyframe evidence.\n\n### Content researchers\n\nTrack videos and screenplay documents as tasks. Export Markdown and DOCX reports for review.\n\n### Developers and teams\n\nRun FastAPI, Next.js and workers on your infrastructure, and extend Web or mobile clients through OpenAPI.\n\n## Why asynchronous workflows?\n\n### Recoverable\n\nPostgreSQL stores task facts. Transactional Outbox keeps database state and message intent consistent. Realtime connections display progress.\n\n### Isolated\n\nDownloads, media commands and AI tasks run outside HTTP request processes. Runners use controlled egress that blocks private networks.\n\n### Verifiable\n\nProvider responses do not become final files directly. Workers resolve again and verify format, duration, size and SHA-256 before storage.\n\n### Self-hosted\n\nData stays on infrastructure configured by the deployer. No official hosted service or embedded third-party tracking is required.\n\n## Content and service boundaries\n\nProcess only authorized, public, free, non-DRM HTTP(S) content by default. Protected, paid, private or region-restricted content is outside that scope. Private-network URLs, arbitrary yt-dlp arguments and shell inputs are prohibited.\n\nThe MIT license grants software rights, not rights to download, copy or analyze third-party media. The project offers no official SaaS, public demo service or availability SLA.\n\n## Source repositories\n\n[video-server](https://github.com/StephenQiu30/video-server): FastAPI API, Next.js Web, download/document/report workers, isolated media runner and Compose deployment.\n\n[video-app](https://github.com/StephenQiu30/video-app): Flutter iOS and Android client. Media processing and AI inference run on the server.\n\nMaintained by [StephenQiu](https://github.com/StephenQiu30). Contributions through issues and pull requests are welcome. Report security issues privately using the [security policy](https://github.com/StephenQiu30/video-server/blob/main/SECURITY.md).';
+      '## Who is Framefetch for?\n\n### Creators\n\nOrganize media you own or are authorized to use. Review structure using shots, scenes and keyframe evidence.\n\n### Content researchers\n\nTrack videos and screenplay documents as tasks. Export Markdown and DOCX reports for review.\n\n### Developers and teams\n\nRun FastAPI, Next.js and workers on your infrastructure, and extend Web or mobile clients through OpenAPI.\n\n## Why asynchronous workflows?\n\n### Recoverable\n\nPostgreSQL stores task facts. Transactional Outbox keeps database state and message intent consistent. Realtime connections display progress.\n\n### Isolated\n\nDownloads, media commands and AI tasks run outside HTTP request processes. Runners use controlled egress that blocks private networks.\n\n### Verifiable\n\nProvider responses do not become final files directly. Workers resolve again and verify format, duration, size and SHA-256 before storage.\n\n### Self-hosted\n\nData stays on infrastructure configured by the deployer. No official hosted service or embedded third-party tracking is required.\n\n## Content and service boundaries\n\nProcess only authorized, public, free, non-DRM HTTP(S) content by default. Protected, paid, private or region-restricted content is outside that scope. Private-network URLs, arbitrary yt-dlp arguments and shell inputs are prohibited.\n\nThe MIT license grants software rights, not rights to download, copy or analyze third-party media. The project offers no official SaaS, public demo service or availability SLA.\n\n## Source repositories\n\n[framefetch-server](https://github.com/StephenQiu30/framefetch-server): FastAPI API, Next.js Web, download/document/report workers, isolated media runner and Compose deployment.\n\n[framefetch-app](https://github.com/StephenQiu30/framefetch-app): Flutter iOS and Android client. Media processing and AI inference run on the server.\n\nMaintained by [StephenQiu](https://github.com/StephenQiu30). Contributions through issues and pull requests are welcome. Report security issues privately using the [security policy](https://github.com/StephenQiu30/framefetch-server/blob/main/SECURITY.md).';
 
   @override
   String get selfHostingContent =>
-      'Commands and configuration follow the repository README. Consult the design documents for platform sign-in and recovery.\n\n## Requirements\n\n- Docker Engine and Docker Compose.\n- Existing PostgreSQL, RabbitMQ, Redis and MinIO. Compose manages FrameFetch business services and reuses this infrastructure.\n- macOS platform identity requires uv (Python 3.12), your regular Chrome profile and the FrameFetch extension.\n- Production needs strong random secrets, a stable HTTPS address and planned object storage capacity.\n\n## Deploy with Docker Compose\n\n### Clone and configure\n\nConfigure .env to connect to your existing infrastructure. Store real secrets in an untracked .env or a secret manager.\n\n```sh\ngit clone https://github.com/StephenQiu30/video-server.git\ncd video-server\ntest -f .env || cp .env.example .env\n```\n\n### Load the current schema\n\nFor an empty project database, load schema.sql using the DDL account. Back up existing databases before upgrades.\n\n```sh\npsql -X -v ON_ERROR_STOP=1 -W -h 127.0.0.1 -U video -d video -f backend/sql/schema.sql\n```\n\n### Install identity source and start services\n\nOn macOS install the identity source and load the printed extension directory in chrome://extensions. Reuse your regular Chrome sign-in. Compose starts Web, API, workers, runner and egress proxy. Public links prefer anonymous parsing. See README for production.\n\n```sh\nuv run --project backend python -m app.workers.session.source_cli install --env-file .env\ndocker compose up -d --build --wait --remove-orphans\n```\n\n### Bootstrap the first administrator\n\nRun once on the deployment host for an empty user table. Enter the password interactively. There is no HTTP bootstrap endpoint.\n\n```sh\nuv run --project backend python -m app.workers.bootstrap_admin --env-file .env --username your-admin --email you@example.com\n```\n\n### Check health\n\nWeb defaults to port 8101, API to 8111 and Swagger to :8111/docs. Health does not prove platform media can be downloaded.\n\n```sh\ncurl --fail http://127.0.0.1:8111/health/live\ncurl --fail http://127.0.0.1:8111/health/ready\ncurl --fail --head http://127.0.0.1:8101/\n```\n\n## Is AI required?\n\nAI workers run independently of business Compose. Use a signed-in host Codex App Server or configure a supported model provider. Set ANALYSIS_ENABLED=false for download/document-only use. This does not disable downloads or document imports.\n\nExternal models receive analysis content and may incur fees. Check media authorization and provider data policies before enabling them.\n\n## Before publishing\n\n- Replace all placeholder .env.prod credentials and make secret recovery possible.\n- Route external media through egress that blocks private networks. URL validation alone is insufficient.\n- Plan MinIO capacity, backup and explicit cleanup. Expired signed URLs do not delete final files.\n- Use SITE_INDEXABLE=true only for a public project introduction site and set SITE_URL to a stable HTTPS domain.\n- Update with git pull --ff-only, reinstall identity source and rebuild/start Compose per README. Restart alone does not apply new images or environment settings.\n\n[Quick Start](https://github.com/StephenQiu30/video-server#快速开始) · [System design](https://github.com/StephenQiu30/video-server/blob/main/docs/design/README.md)';
+      'Commands and configuration follow the repository README. Consult the design documents for platform sign-in and recovery.\n\n## Requirements\n\n- Docker Engine and Docker Compose.\n- Existing PostgreSQL, RabbitMQ, Redis and MinIO. Compose manages Framefetch business services and reuses this infrastructure.\n- macOS platform identity requires uv (Python 3.12), your regular Chrome profile and the Framefetch extension.\n- Production needs strong random secrets, a stable HTTPS address and planned object storage capacity.\n\n## Deploy with Docker Compose\n\n### Clone and configure\n\nConfigure .env to connect to your existing infrastructure. Store real secrets in an untracked .env or a secret manager.\n\n```sh\ngit clone https://github.com/StephenQiu30/framefetch-server.git\ncd framefetch-server\ntest -f .env || cp .env.example .env\n```\n\n### Load the current schema\n\nFor an empty project database, load schema.sql using the DDL account. Back up existing databases before upgrades.\n\n```sh\npsql -X -v ON_ERROR_STOP=1 -W -h 127.0.0.1 -U video -d video -f backend/sql/schema.sql\n```\n\n### Install identity source and start services\n\nOn macOS install the identity source and load the printed extension directory in chrome://extensions. Reuse your regular Chrome sign-in. Compose starts Web, API, workers, runner and egress proxy. Public links prefer anonymous parsing. See README for production.\n\n```sh\nuv run --project backend python -m app.workers.session.source_cli install --env-file .env\ndocker compose up -d --build --wait --remove-orphans\n```\n\n### Bootstrap the first administrator\n\nRun once on the deployment host for an empty user table. Enter the password interactively. There is no HTTP bootstrap endpoint.\n\n```sh\nuv run --project backend python -m app.workers.bootstrap_admin --env-file .env --username your-admin --email you@example.com\n```\n\n### Check health\n\nWeb defaults to port 8101, API to 8111 and Swagger to :8111/docs. Health does not prove platform media can be downloaded.\n\n```sh\ncurl --fail http://127.0.0.1:8111/health/live\ncurl --fail http://127.0.0.1:8111/health/ready\ncurl --fail --head http://127.0.0.1:8101/\n```\n\n## Is AI required?\n\nAI workers run independently of business Compose. Use a signed-in host Codex App Server or configure a supported model provider. Set ANALYSIS_ENABLED=false for download/document-only use. This does not disable downloads or document imports.\n\nExternal models receive analysis content and may incur fees. Check media authorization and provider data policies before enabling them.\n\n## Before publishing\n\n- Replace all placeholder .env.prod credentials and make secret recovery possible.\n- Route external media through egress that blocks private networks. URL validation alone is insufficient.\n- Plan MinIO capacity, backup and explicit cleanup. Expired signed URLs do not delete final files.\n- Use SITE_INDEXABLE=true only for a public project introduction site and set SITE_URL to a stable HTTPS domain.\n- Update with git pull --ff-only, reinstall identity source and rebuild/start Compose per README. Restart alone does not apply new images or environment settings.\n\n[Quick Start](https://github.com/StephenQiu30/framefetch-server#快速开始) · [System design](https://github.com/StephenQiu30/framefetch-server/blob/main/docs/design/README.md)';
 
   @override
   String get activityHistoryFrom => 'From date';

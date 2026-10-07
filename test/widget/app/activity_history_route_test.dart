@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/app/app.dart';
-import 'package:framegrab/app/router/app_router.dart';
-import 'package:framegrab/features/auth/application/authenticated_request.dart';
-import 'package:framegrab/features/history/data/activity_history_repository.dart';
-import 'package:framegrab/features/history/presentation/activity_history_screen.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/app/app.dart';
+import 'package:framefetch/app/router/app_router.dart';
+import 'package:framefetch/features/auth/application/authenticated_request.dart';
+import 'package:framefetch/features/history/data/activity_history_repository.dart';
+import 'package:framefetch/features/history/presentation/activity_history_screen.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 import 'test_app.dart';
 
@@ -23,12 +23,12 @@ void main() {
       (tester) async {
         final requests = <Map<String, String>>[];
         await setMobileViewport(tester);
-        await pumpFramegrabApp(
+        await pumpFramefetchApp(
           tester,
           activityHistoryRepository: _repository(requests),
         );
         final router = ProviderScope.containerOf(
-          tester.element(find.byType(FramegrabApp)),
+          tester.element(find.byType(FramefetchApp)),
         ).read(appRouterProvider);
 
         router.go('/history/activity?${scope.$1}=${scope.$2}');
@@ -48,12 +48,12 @@ void main() {
   ) async {
     final requests = <Map<String, String>>[];
     await setMobileViewport(tester);
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       activityHistoryRepository: _repository(requests),
     );
     final router = ProviderScope.containerOf(
-      tester.element(find.byType(FramegrabApp)),
+      tester.element(find.byType(FramefetchApp)),
     ).read(appRouterProvider);
 
     router.go('/history/activity?document_id=$documentId');
@@ -96,7 +96,7 @@ GeneratedActivityHistoryRepository _repository(
   );
   return GeneratedActivityHistoryRepository(
     AuthenticatedRequest(
-      client: VideoServerApi(dio: dio),
+      client: FramefetchServerApi(dio: dio),
       accessToken: () => 'test',
       sessionGeneration: () => 0,
       refreshSession: () async => false,

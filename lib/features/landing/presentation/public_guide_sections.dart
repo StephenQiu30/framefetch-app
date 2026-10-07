@@ -1,5 +1,5 @@
-import 'package:framegrab/features/landing/domain/public_home_links.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/features/landing/domain/public_home_links.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 
 typedef PublicGuideSection = ({
   List<String> paragraphs,

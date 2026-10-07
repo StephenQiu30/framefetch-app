@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
 
 void main() {
   test('accepts MP4 and the documented screenplay extensions', () {

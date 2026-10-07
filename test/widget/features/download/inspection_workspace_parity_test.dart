@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/download/application/download_intake_controller.dart';
-import 'package:framegrab/features/download/presentation/inspection_workspace.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/features/download/application/download_intake_controller.dart';
+import 'package:framefetch/features/download/presentation/inspection_workspace.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 
 import '../../../support/intake_fakes.dart';
 import '../../../support/shad_test_app.dart';

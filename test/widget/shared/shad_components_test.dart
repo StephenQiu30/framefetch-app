@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/shared/presentation/app_dropdown_field.dart';
-import 'package:framegrab/shared/presentation/app_loading.dart';
-import 'package:framegrab/shared/presentation/app_refresh_indicator.dart';
-import 'package:framegrab/shared/presentation/app_spinner.dart';
+import 'package:framefetch/shared/presentation/app_dropdown_field.dart';
+import 'package:framefetch/shared/presentation/app_loading.dart';
+import 'package:framefetch/shared/presentation/app_refresh_indicator.dart';
+import 'package:framefetch/shared/presentation/app_spinner.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../../support/shad_test_app.dart';

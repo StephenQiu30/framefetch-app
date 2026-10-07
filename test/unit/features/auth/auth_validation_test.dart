@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/auth/presentation/auth_validation.dart';
-import 'package:framegrab/l10n/app_localizations_zh.dart';
+import 'package:framefetch/features/auth/presentation/auth_validation.dart';
+import 'package:framefetch/l10n/app_localizations_zh.dart';
 
 void main() {
   final l = AppLocalizationsZh();

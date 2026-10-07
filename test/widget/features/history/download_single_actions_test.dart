@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/history/presentation/download_history_screen.dart';
-import 'package:framegrab/shared/presentation/list_filters.dart';
-import 'package:framegrab/shared/presentation/list_query.dart';
+import 'package:framefetch/features/history/presentation/download_history_screen.dart';
+import 'package:framefetch/shared/presentation/list_filters.dart';
+import 'package:framefetch/shared/presentation/list_query.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../../../support/data_fakes.dart';
@@ -19,7 +19,7 @@ void main() {
       data: downloadHistoryFixture(),
     );
     await setMobileViewport(tester);
-    await pumpFramegrabApp(tester, downloadHistoryRepository: repository);
+    await pumpFramefetchApp(tester, downloadHistoryRepository: repository);
     await tester.tap(find.byKey(const Key('app-tab-1')));
     await tester.pumpAndSettle();
 
@@ -75,7 +75,7 @@ void main() {
       data: downloadHistoryFixture(),
     );
     await setMobileViewport(tester);
-    await pumpFramegrabApp(tester, downloadHistoryRepository: repository);
+    await pumpFramefetchApp(tester, downloadHistoryRepository: repository);
     await tester.tap(find.byKey(const Key('app-tab-1')));
     await tester.pumpAndSettle();
 

@@ -1,8 +1,8 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:framegrab/features/admin/presentation/analytics_axis_scale.dart';
-import 'package:framegrab/features/admin/presentation/analytics_chart_point.dart';
+import 'package:framefetch/features/admin/presentation/analytics_axis_scale.dart';
+import 'package:framefetch/features/admin/presentation/analytics_chart_point.dart';
 
 final class AnalyticsTrendPainter extends CustomPainter {
   AnalyticsTrendPainter({

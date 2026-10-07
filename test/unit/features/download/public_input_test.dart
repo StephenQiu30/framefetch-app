@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/download/application/public_input.dart';
+import 'package:framefetch/features/download/application/public_input.dart';
 
 void main() {
   test('only the empty-input guard runs on the client', () {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/theme/theme_mode_controller.dart';
-import 'package:framegrab/core/theme/theme_preference_store.dart';
+import 'package:framefetch/core/theme/theme_mode_controller.dart';
+import 'package:framefetch/core/theme/theme_preference_store.dart';
 
 import '../../../support/theme_fakes.dart';
 

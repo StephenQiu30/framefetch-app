@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 
 final class MediaCoverFallback extends StatelessWidget {
   const MediaCoverFallback({

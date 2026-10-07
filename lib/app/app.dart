@@ -3,23 +3,23 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/app/router/app_router.dart';
-import 'package:framegrab/core/theme/app_theme.dart';
-import 'package:framegrab/core/theme/theme_mode_controller.dart';
-import 'package:framegrab/features/auth/application/auth_session_controller.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/app/router/app_router.dart';
+import 'package:framefetch/core/theme/app_theme.dart';
+import 'package:framefetch/core/theme/theme_mode_controller.dart';
+import 'package:framefetch/features/auth/application/auth_session_controller.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-final class FramegrabApp extends ConsumerStatefulWidget {
-  const FramegrabApp({this.locale, super.key});
+final class FramefetchApp extends ConsumerStatefulWidget {
+  const FramefetchApp({this.locale, super.key});
 
   final Locale? locale;
 
   @override
-  ConsumerState<FramegrabApp> createState() => _FramegrabAppState();
+  ConsumerState<FramefetchApp> createState() => _FramefetchAppState();
 }
 
-final class _FramegrabAppState extends ConsumerState<FramegrabApp> {
+final class _FramefetchAppState extends ConsumerState<FramefetchApp> {
   @override
   void initState() {
     super.initState();

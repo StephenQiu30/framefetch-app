@@ -1,5 +1,5 @@
-import 'package:framegrab/core/network/data_request_failure.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/core/network/data_request_failure.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 
 String dataRequestFailureMessage(AppLocalizations localizations, Object error) {
   if (error is! DataRequestFailure) return localizations.operationFailed;

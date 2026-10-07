@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/features/auth/application/auth_session_controller.dart';
-import 'package:framegrab/features/download/presentation/content_intake_selector.dart';
-import 'package:framegrab/features/download/presentation/download_home_screen.dart';
-import 'package:framegrab/features/landing/presentation/public_home_screen.dart';
+import 'package:framefetch/features/auth/application/auth_session_controller.dart';
+import 'package:framefetch/features/download/presentation/content_intake_selector.dart';
+import 'package:framefetch/features/download/presentation/download_home_screen.dart';
+import 'package:framefetch/features/landing/presentation/public_home_screen.dart';
 
 final class RootScreen extends ConsumerWidget {
   const RootScreen({

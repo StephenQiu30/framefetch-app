@@ -1,0 +1,311 @@
+# framefetch_server_api.api.DocumentsApi
+
+## Load the API package
+```dart
+import 'package:framefetch_server_api/api.dart';
+```
+
+All URIs are relative to *http://localhost*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**cancelDocumentImport**](DocumentsApi.md#canceldocumentimport) | **POST** /api/documents/{document_id}/cancel | 取消文档导入
+[**completeDocumentImport**](DocumentsApi.md#completedocumentimport) | **POST** /api/documents/{document_id}/complete | 完成文档上传并触发验证
+[**createDocumentImport**](DocumentsApi.md#createdocumentimport) | **POST** /api/documents | 创建文档导入
+[**createDocumentUploadSession**](DocumentsApi.md#createdocumentuploadsession) | **POST** /api/documents/{document_id}/upload-sessions | 创建或刷新文档上传会话
+[**deleteDocument**](DocumentsApi.md#deletedocument) | **DELETE** /api/documents/{document_id} | 删除文档及其制品
+[**getDocumentImport**](DocumentsApi.md#getdocumentimport) | **GET** /api/documents/{document_id} | 查询文档导入
+[**listDocuments**](DocumentsApi.md#listdocuments) | **GET** /api/documents | 查询文档列表
+
+
+# **cancelDocumentImport**
+> ApiResponseDocumentImportResponse cancelDocumentImport(documentId)
+
+取消文档导入
+
+### Example
+```dart
+import 'package:framefetch_server_api/api.dart';
+
+final api = FramefetchServerApi().getDocumentsApi();
+final String documentId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // String |
+
+try {
+    final response = api.cancelDocumentImport(documentId);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling DocumentsApi->cancelDocumentImport: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **documentId** | **String**|  |
+
+### Return type
+
+[**ApiResponseDocumentImportResponse**](ApiResponseDocumentImportResponse.md)
+
+### Authorization
+
+[NativeBearerAuth](../README.md#NativeBearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **completeDocumentImport**
+> ApiResponseDocumentImportResponse completeDocumentImport(documentId, completeDocumentImportRequest)
+
+完成文档上传并触发验证
+
+### Example
+```dart
+import 'package:framefetch_server_api/api.dart';
+
+final api = FramefetchServerApi().getDocumentsApi();
+final String documentId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // String |
+final CompleteDocumentImportRequest completeDocumentImportRequest = ; // CompleteDocumentImportRequest |
+
+try {
+    final response = api.completeDocumentImport(documentId, completeDocumentImportRequest);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling DocumentsApi->completeDocumentImport: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **documentId** | **String**|  |
+ **completeDocumentImportRequest** | [**CompleteDocumentImportRequest**](CompleteDocumentImportRequest.md)|  |
+
+### Return type
+
+[**ApiResponseDocumentImportResponse**](ApiResponseDocumentImportResponse.md)
+
+### Authorization
+
+[NativeBearerAuth](../README.md#NativeBearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **createDocumentImport**
+> ApiResponseDocumentImportResponse createDocumentImport(idempotencyKey, documentImportRequest)
+
+创建文档导入
+
+### Example
+```dart
+import 'package:framefetch_server_api/api.dart';
+
+final api = FramefetchServerApi().getDocumentsApi();
+final String idempotencyKey = idempotencyKey_example; // String | 同一业务操作的安全重试必须复用相同键值。
+final DocumentImportRequest documentImportRequest = ; // DocumentImportRequest |
+
+try {
+    final response = api.createDocumentImport(idempotencyKey, documentImportRequest);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling DocumentsApi->createDocumentImport: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **idempotencyKey** | **String**| 同一业务操作的安全重试必须复用相同键值。 |
+ **documentImportRequest** | [**DocumentImportRequest**](DocumentImportRequest.md)|  |
+
+### Return type
+
+[**ApiResponseDocumentImportResponse**](ApiResponseDocumentImportResponse.md)
+
+### Authorization
+
+[NativeBearerAuth](../README.md#NativeBearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **createDocumentUploadSession**
+> ApiResponseDocumentUploadSessionResponse createDocumentUploadSession(documentId)
+
+创建或刷新文档上传会话
+
+### Example
+```dart
+import 'package:framefetch_server_api/api.dart';
+
+final api = FramefetchServerApi().getDocumentsApi();
+final String documentId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // String |
+
+try {
+    final response = api.createDocumentUploadSession(documentId);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling DocumentsApi->createDocumentUploadSession: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **documentId** | **String**|  |
+
+### Return type
+
+[**ApiResponseDocumentUploadSessionResponse**](ApiResponseDocumentUploadSessionResponse.md)
+
+### Authorization
+
+[NativeBearerAuth](../README.md#NativeBearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **deleteDocument**
+> deleteDocument(documentId)
+
+删除文档及其制品
+
+### Example
+```dart
+import 'package:framefetch_server_api/api.dart';
+
+final api = FramefetchServerApi().getDocumentsApi();
+final String documentId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // String |
+
+try {
+    api.deleteDocument(documentId);
+} on DioException catch (e) {
+    print('Exception when calling DocumentsApi->deleteDocument: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **documentId** | **String**|  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[NativeBearerAuth](../README.md#NativeBearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getDocumentImport**
+> ApiResponseDocumentDetailResponse getDocumentImport(documentId)
+
+查询文档导入
+
+### Example
+```dart
+import 'package:framefetch_server_api/api.dart';
+
+final api = FramefetchServerApi().getDocumentsApi();
+final String documentId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // String |
+
+try {
+    final response = api.getDocumentImport(documentId);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling DocumentsApi->getDocumentImport: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **documentId** | **String**|  |
+
+### Return type
+
+[**ApiResponseDocumentDetailResponse**](ApiResponseDocumentDetailResponse.md)
+
+### Authorization
+
+[NativeBearerAuth](../README.md#NativeBearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **listDocuments**
+> ApiResponseDocumentPageResponse listDocuments(page, pageSize)
+
+查询文档列表
+
+### Example
+```dart
+import 'package:framefetch_server_api/api.dart';
+
+final api = FramefetchServerApi().getDocumentsApi();
+final int page = 56; // int |
+final int pageSize = 56; // int |
+
+try {
+    final response = api.listDocuments(page, pageSize);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling DocumentsApi->listDocuments: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page** | **int**|  | [optional] [default to 1]
+ **pageSize** | **int**|  | [optional] [default to 20]
+
+### Return type
+
+[**ApiResponseDocumentPageResponse**](ApiResponseDocumentPageResponse.md)
+
+### Authorization
+
+[NativeBearerAuth](../README.md#NativeBearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

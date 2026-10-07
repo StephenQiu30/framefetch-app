@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/core/network/data_request_failure.dart';
-import 'package:framegrab/features/analysis/application/analysis_job_snapshot.dart';
-import 'package:framegrab/features/analysis/application/analysis_operation_keys.dart';
-import 'package:framegrab/features/analysis/application/analysis_state.dart';
-import 'package:framegrab/features/analysis/application/analysis_target.dart';
-import 'package:framegrab/features/analysis/data/analysis_repository.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/core/network/data_request_failure.dart';
+import 'package:framefetch/features/analysis/application/analysis_job_snapshot.dart';
+import 'package:framefetch/features/analysis/application/analysis_operation_keys.dart';
+import 'package:framefetch/features/analysis/application/analysis_state.dart';
+import 'package:framefetch/features/analysis/application/analysis_target.dart';
+import 'package:framefetch/features/analysis/data/analysis_repository.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 const analysisPollingInterval = Duration(seconds: 2);
 

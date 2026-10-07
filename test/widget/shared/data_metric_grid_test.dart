@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/theme/app_theme.dart';
-import 'package:framegrab/shared/presentation/data_page_view.dart';
+import 'package:framefetch/core/theme/app_theme.dart';
+import 'package:framefetch/shared/presentation/data_page_view.dart';
 
 import '../../support/shad_test_app.dart';
 

@@ -24,7 +24,7 @@
 
 ## 适用范围
 
-本准则适用于仓库、Issue、Pull Request、代码评审、社区讨论，以及参与者代表 FrameFetch 项目的其他公开或私下场合。
+本准则适用于仓库、Issue、Pull Request、代码评审、社区讨论，以及参与者代表 Framefetch 项目的其他公开或私下场合。
 
 ## 执行与报告
 
@@ -38,4 +38,4 @@
 
 ## English summary
 
-Be respectful, inclusive, and constructive. Harassment, discrimination, doxxing, disclosure of private user data or credentials, and publication of exploitable security details are not accepted. This policy applies to repository activity and any space where someone represents FrameFetch. Report conduct concerns privately through the maintainer's current contact method; follow [`SECURITY.md`](SECURITY.md) for vulnerabilities.
+Be respectful, inclusive, and constructive. Harassment, discrimination, doxxing, disclosure of private user data or credentials, and publication of exploitable security details are not accepted. This policy applies to repository activity and any space where someone represents Framefetch. Report conduct concerns privately through the maintainer's current contact method; follow [`SECURITY.md`](SECURITY.md) for vulnerabilities.

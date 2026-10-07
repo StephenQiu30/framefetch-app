@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/core/theme/theme_toggle_button.dart';
-import 'package:framegrab/shared/presentation/app_brand.dart';
-import 'package:framegrab/shared/presentation/app_resource_menu.dart';
+import 'package:framefetch/core/theme/theme_toggle_button.dart';
+import 'package:framefetch/shared/presentation/app_brand.dart';
+import 'package:framefetch/shared/presentation/app_resource_menu.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';

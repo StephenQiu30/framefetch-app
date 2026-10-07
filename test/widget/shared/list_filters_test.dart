@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/theme/app_theme.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/list_filters.dart';
-import 'package:framegrab/shared/presentation/list_query.dart';
+import 'package:framefetch/core/theme/app_theme.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/list_filters.dart';
+import 'package:framefetch/shared/presentation/list_query.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../../support/shad_test_app.dart';

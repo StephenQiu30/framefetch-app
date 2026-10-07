@@ -3,14 +3,14 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/config/app_config.dart';
-import 'package:framegrab/features/auth/application/authenticated_request.dart';
-import 'package:framegrab/features/auth/data/native_auth_gateway.dart';
-import 'package:framegrab/features/upload/data/content_upload_repository.dart';
-import 'package:framegrab/features/upload/data/multipart_uploader.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
+import 'package:framefetch/core/config/app_config.dart';
+import 'package:framefetch/features/auth/application/authenticated_request.dart';
+import 'package:framefetch/features/auth/data/native_auth_gateway.dart';
+import 'package:framefetch/features/upload/data/content_upload_repository.dart';
+import 'package:framefetch/features/upload/data/multipart_uploader.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 import 'registration_mailbox.dart';
 
@@ -31,7 +31,7 @@ void main() {
         'INT. TEST LAB - NIGHT\n\nA verified upload reaches the server.\n',
       );
 
-      final client = VideoServerApi(
+      final client = FramefetchServerApi(
         dio: Dio(BaseOptions(baseUrl: AppConfig.serverBaseUrl)),
       );
       final gateway = GeneratedNativeAuthGateway(client);

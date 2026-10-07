@@ -1,4 +1,4 @@
-import 'package:framegrab/bootstrap.dart';
+import 'package:framefetch/bootstrap.dart';
 
 void main() {
   bootstrap();

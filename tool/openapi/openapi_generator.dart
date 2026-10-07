@@ -7,7 +7,9 @@ Future<void> generateDartClient({
   required Directory projectRoot,
   required AppOpenApiConfig config,
 }) async {
-  final package = Directory('${projectRoot.path}/packages/video_server_api');
+  final package = Directory(
+    '${projectRoot.path}/packages/framefetch_server_api',
+  );
   final manifest = File('${package.path}/.openapi-generator/FILES');
   final previous = await manifest.exists()
       ? await readGeneratedFiles(package)
@@ -21,11 +23,11 @@ Future<void> generateDartClient({
     generatorJar,
     'generate',
     '--input-spec',
-    '${projectRoot.path}/contracts/openapi/video-server.openapi.json',
+    '${projectRoot.path}/contracts/openapi/framefetch-server.openapi.json',
     '--generator-name',
     'dart-dio',
     '--output',
-    '${projectRoot.path}/packages/video_server_api',
+    '${projectRoot.path}/packages/framefetch_server_api',
     '--config',
     '${projectRoot.path}/tool/openapi/config.yaml',
   ], workingDirectory: projectRoot.path);
@@ -86,8 +88,8 @@ Future<void> verifyGeneratedClient(Directory projectRoot) async {
     '--porcelain',
     '--untracked-files=all',
     '--',
-    'contracts/openapi/video-server.openapi.json',
-    'packages/video_server_api',
+    'contracts/openapi/framefetch-server.openapi.json',
+    'packages/framefetch_server_api',
   ], workingDirectory: projectRoot.path);
   final changes = (result.stdout as String).trim();
   if (result.exitCode != 0 || changes.isNotEmpty) {
@@ -106,15 +108,15 @@ Future<void> _normalizeGeneratedSources(Directory package) async {
     "  sdk: '>=2.18.0 <4.0.0'",
     "  sdk: '>=3.0.0 <4.0.0'",
   );
-  await pubspec.writeAsString(contents);
-
-  final optional = File('${package.path}/lib/lib/optional.dart');
-  contents = await optional.readAsString();
-  contents = contents.replaceAll(
-    'Object? readOptionalValue(Map map,',
-    'Object? readOptionalValue(Map<dynamic, dynamic> map,',
+  contents = contents.replaceFirst(
+    "  built_value_generator: '>=8.4.0 <9.0.0'",
+    '  built_value_generator: 8.12.7',
   );
-  await optional.writeAsString(contents);
+  contents = contents.replaceFirst(
+    '  build_runner: any',
+    '  build_runner: 2.16.0\n  analyzer: 14.1.0',
+  );
+  await pubspec.writeAsString(contents);
 
   final generatedRoot = Directory('${package.path}/lib');
   await for (final entity in generatedRoot.list(

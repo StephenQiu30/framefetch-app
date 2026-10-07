@@ -2,17 +2,17 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/admin/application/admin_providers.dart';
-import 'package:framegrab/features/admin/presentation/admin_ai_providers_screen.dart';
-import 'package:framegrab/features/admin/presentation/admin_providers_screen.dart';
-import 'package:framegrab/features/admin/presentation/admin_storage_screen.dart';
-import 'package:framegrab/features/admin/presentation/admin_users_screen.dart';
-import 'package:framegrab/features/auth/application/auth_session_controller.dart';
-import 'package:framegrab/features/auth/data/native_auth_gateway.dart';
-import 'package:framegrab/features/auth/data/refresh_credential_store.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/features/admin/application/admin_providers.dart';
+import 'package:framefetch/features/admin/presentation/admin_ai_providers_screen.dart';
+import 'package:framefetch/features/admin/presentation/admin_providers_screen.dart';
+import 'package:framefetch/features/admin/presentation/admin_storage_screen.dart';
+import 'package:framefetch/features/admin/presentation/admin_users_screen.dart';
+import 'package:framefetch/features/auth/application/auth_session_controller.dart';
+import 'package:framefetch/features/auth/data/native_auth_gateway.dart';
+import 'package:framefetch/features/auth/data/refresh_credential_store.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 import '../../../support/auth_fakes.dart';
 import '../../../support/shad_test_app.dart';
@@ -45,7 +45,7 @@ void main() {
     testWidgets('${item.rowKey} offers only confirmed single deletion', (
       tester,
     ) async {
-      final client = VideoServerApi();
+      final client = FramefetchServerApi();
       addTearDown(client.dio.close);
       final sent = <RequestOptions>[];
       client.dio.interceptors.add(
@@ -58,7 +58,7 @@ void main() {
       );
       final container = ProviderContainer(
         overrides: [
-          videoServerApiProvider.overrideWithValue(client),
+          framefetchServerApiProvider.overrideWithValue(client),
           nativeAuthGatewayProvider.overrideWithValue(
             FakeAuthGateway(session: testSession(role: UserRole.admin)),
           ),

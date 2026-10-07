@@ -1,12 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/landing/domain/public_home_links.dart';
-import 'package:framegrab/l10n/app_localizations_zh.dart';
+import 'package:framefetch/features/landing/domain/public_home_links.dart';
+import 'package:framefetch/l10n/app_localizations_zh.dart';
 
 void main() {
   test('retains public product and self-hosting content', () {
     final l10n = AppLocalizationsZh();
 
-    expect(l10n.publicHomeEyebrow, '帧取 FrameFetch · 开源视频工作流');
+    expect(l10n.publicHomeEyebrow, '帧取 Framefetch · 开源视频工作流');
     expect(l10n.publicHomeTitle, '把素材，\n带回本地。');
     expect(
       l10n.publicHomeDescription,
@@ -66,7 +66,7 @@ void main() {
         l10n.publicFaqMobileQuestion,
       ],
       [
-        '帧取 FrameFetch 是什么？',
+        '帧取 Framefetch 是什么？',
         'AI 视频分析可以输出什么？',
         '可以直接分析本地视频和剧本吗？',
         '开源免费是否意味着运行没有成本？',
@@ -75,21 +75,21 @@ void main() {
       ],
     );
     expect(l10n.publicGuideAction, '阅读视频分析与自托管使用指南');
-    expect(l10n.publicStartTitle, '在自己的基础设施上运行 FrameFetch');
+    expect(l10n.publicStartTitle, '在自己的基础设施上运行 Framefetch');
   });
 
   test('uses the Web repository as the shared project source', () {
     expect(
       PublicHomeLinks.repository.toString(),
-      'https://github.com/StephenQiu30/video-server',
+      'https://github.com/StephenQiu30/framefetch-server',
     );
     expect(
       PublicHomeLinks.quickStart.toString(),
-      'https://github.com/StephenQiu30/video-server/blob/main/README.md#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B',
+      'https://github.com/StephenQiu30/framefetch-server/blob/main/README.md#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B',
     );
     expect(
       PublicHomeLinks.mobileRepository.toString(),
-      'https://github.com/StephenQiu30/video-app',
+      'https://github.com/StephenQiu30/framefetch-app',
     );
   });
 }

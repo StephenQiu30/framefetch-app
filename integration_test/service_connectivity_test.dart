@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/config/app_config.dart';
-import 'package:framegrab/core/network/dio_http_client.dart';
+import 'package:framefetch/core/config/app_config.dart';
+import 'package:framefetch/core/network/dio_http_client.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 // Runs on the target device without signing in or touching secure storage.
 void main() {

@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/features/analysis/application/analysis_history_provider.dart';
-import 'package:framegrab/features/analysis/presentation/analysis_presentation_labels.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/app_spinner.dart';
-import 'package:framegrab/shared/presentation/cursor_pagination.dart';
-import 'package:framegrab/shared/presentation/data_formatters.dart';
-import 'package:framegrab/shared/presentation/data_page_view.dart';
-import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
+import 'package:framefetch/core/theme/app_spacing.dart';
+import 'package:framefetch/features/analysis/application/analysis_history_provider.dart';
+import 'package:framefetch/features/analysis/presentation/analysis_presentation_labels.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/app_spinner.dart';
+import 'package:framefetch/shared/presentation/cursor_pagination.dart';
+import 'package:framefetch/shared/presentation/data_formatters.dart';
+import 'package:framefetch/shared/presentation/data_page_view.dart';
+import 'package:framefetch/shared/presentation/data_request_failure_message.dart';
 
 final class AnalysisRunHistory extends ConsumerStatefulWidget {
   const AnalysisRunHistory({

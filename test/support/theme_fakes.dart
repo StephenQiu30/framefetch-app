@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/core/theme/theme_preference_store.dart';
+import 'package:framefetch/core/theme/theme_preference_store.dart';
 
 final class MemoryThemePreferenceStore implements ThemePreferenceStore {
   MemoryThemePreferenceStore([this.value]);

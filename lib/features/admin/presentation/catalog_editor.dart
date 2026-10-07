@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/features/admin/application/admin_providers.dart';
-import 'package:framegrab/features/admin/data/admin_configuration_repository.dart';
-import 'package:framegrab/features/admin/presentation/admin_edit_sheet.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/features/admin/application/admin_providers.dart';
+import 'package:framefetch/features/admin/data/admin_configuration_repository.dart';
+import 'package:framefetch/features/admin/presentation/admin_edit_sheet.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 Future<void> editCatalog(
   BuildContext context,

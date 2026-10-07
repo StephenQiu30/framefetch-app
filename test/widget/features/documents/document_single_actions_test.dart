@@ -1,7 +1,7 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/documents/presentation/document_list_screen.dart';
-import 'package:framegrab/shared/presentation/list_query.dart';
+import 'package:framefetch/features/documents/presentation/document_list_screen.dart';
+import 'package:framefetch/shared/presentation/list_query.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../../../support/data_fakes.dart';
@@ -15,7 +15,7 @@ void main() {
   ) async {
     final repository = FakeDocumentRepository(data: documentFixture());
     await setMobileViewport(tester);
-    await pumpFramegrabApp(tester, documentRepository: repository);
+    await pumpFramefetchApp(tester, documentRepository: repository);
     await tester.tap(find.byKey(const Key('app-tab-2')));
     await tester.pumpAndSettle();
 
@@ -52,7 +52,7 @@ void main() {
   ) async {
     final repository = FakeDocumentRepository(data: documentFixture());
     await setMobileViewport(tester);
-    await pumpFramegrabApp(tester, documentRepository: repository);
+    await pumpFramefetchApp(tester, documentRepository: repository);
     await tester.tap(find.byKey(const Key('app-tab-2')));
     await tester.pumpAndSettle();
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/theme/app_colors.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/core/theme/app_theme.dart';
-import 'package:framegrab/core/theme/web_colors.g.dart';
+import 'package:framefetch/core/theme/app_colors.dart';
+import 'package:framefetch/core/theme/app_spacing.dart';
+import 'package:framefetch/core/theme/app_theme.dart';
+import 'package:framefetch/core/theme/web_colors.g.dart';
 
 void main() {
   test('secondary text meets WCAG AA contrast in both themes', () {

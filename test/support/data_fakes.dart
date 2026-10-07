@@ -1,7 +1,7 @@
-import 'package:framegrab/features/documents/data/document_repository.dart';
-import 'package:framegrab/features/history/data/download_history_repository.dart';
-import 'package:framegrab/features/providers/data/provider_status_repository.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/documents/data/document_repository.dart';
+import 'package:framefetch/features/history/data/download_history_repository.dart';
+import 'package:framefetch/features/providers/data/provider_status_repository.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 final class FakeDownloadHistoryRepository implements DownloadHistoryRepository {
   FakeDownloadHistoryRepository({

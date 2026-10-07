@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/core/theme/app_colors.dart';
-import 'package:framegrab/core/theme/web_colors.g.dart';
+import 'package:framefetch/core/theme/app_colors.dart';
+import 'package:framefetch/core/theme/web_colors.g.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 /// Shad is the only component theme. Material is a bridge for Scaffold/media.

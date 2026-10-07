@@ -1,6 +1,6 @@
-# FrameFetch App 视觉规范
+# Framefetch App 视觉规范
 
-App 的视觉标准是 `video-server/design.md`。本文只记录 Flutter 映射与原生差异，不另设品牌或组件系统；未提及的规则以服务端 `design.md` 为准。
+App 的视觉标准是 `framefetch-server/design.md`。本文只记录 Flutter 映射与原生差异，不另设品牌或组件系统；未提及的规则以服务端 `design.md` 为准。
 
 ## Token 与组件
 

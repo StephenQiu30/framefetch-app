@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/shared/presentation/app_loading.dart';
+import 'package:framefetch/shared/presentation/app_loading.dart';
 
 /// Native pull gesture with the same compact loading indicator as pages.
 final class AppRefreshIndicator extends StatefulWidget {

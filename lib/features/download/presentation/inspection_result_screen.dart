@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/features/download/application/download_intake_controller.dart';
-import 'package:framegrab/features/download/presentation/download_intake_workspace.dart';
-import 'package:framegrab/features/download/presentation/intake_failure_message.dart';
-import 'package:framegrab/features/history/application/activity_history_provider.dart';
-import 'package:framegrab/features/history/application/download_history_provider.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
-import 'package:framegrab/shared/presentation/app_spinner.dart';
-import 'package:framegrab/shared/presentation/data_page_view.dart';
+import 'package:framefetch/features/download/application/download_intake_controller.dart';
+import 'package:framefetch/features/download/presentation/download_intake_workspace.dart';
+import 'package:framefetch/features/download/presentation/intake_failure_message.dart';
+import 'package:framefetch/features/history/application/activity_history_provider.dart';
+import 'package:framefetch/features/history/application/download_history_provider.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/app_navigation_bar.dart';
+import 'package:framefetch/shared/presentation/app_spinner.dart';
+import 'package:framefetch/shared/presentation/data_page_view.dart';
 import 'package:go_router/go_router.dart';
 
 final class InspectionResultScreen extends ConsumerStatefulWidget {

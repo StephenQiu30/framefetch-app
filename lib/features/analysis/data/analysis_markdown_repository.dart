@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/core/network/data_request_failure.dart';
-import 'package:framegrab/features/auth/application/authenticated_request.dart';
+import 'package:framefetch/core/network/data_request_failure.dart';
+import 'package:framefetch/features/auth/application/authenticated_request.dart';
 
 final analysisMarkdownRepositoryProvider = Provider(
   (ref) => AnalysisMarkdownRepository(ref.watch(authenticatedRequestProvider)),

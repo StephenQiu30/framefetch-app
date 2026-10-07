@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/features/analysis/presentation/analysis_report_preview.dart';
-import 'package:framegrab/features/analysis/presentation/screenplay_analysis_result_view.dart';
-import 'package:framegrab/features/analysis/presentation/structured_report_result_view.dart';
-import 'package:framegrab/features/analysis/presentation/video_analysis_result_view.dart';
-import 'package:framegrab/features/analysis/presentation/video_article_result_view.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/analysis/presentation/analysis_report_preview.dart';
+import 'package:framefetch/features/analysis/presentation/screenplay_analysis_result_view.dart';
+import 'package:framefetch/features/analysis/presentation/structured_report_result_view.dart';
+import 'package:framefetch/features/analysis/presentation/video_analysis_result_view.dart';
+import 'package:framefetch/features/analysis/presentation/video_article_result_view.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 final class AnalysisResultView extends StatelessWidget {
   const AnalysisResultView({required this.job, super.key});

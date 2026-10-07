@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/network/data_request_failure.dart';
-import 'package:framegrab/features/auth/application/authenticated_request.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/core/network/data_request_failure.dart';
+import 'package:framefetch/features/auth/application/authenticated_request.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 void main() {
   test('refreshes once and replays a protected GET after 401', () async {
-    final client = VideoServerApi();
+    final client = FramefetchServerApi();
     var token = 'old-access';
     var calls = 0;
     var refreshes = 0;
@@ -36,7 +36,7 @@ void main() {
   });
 
   test('expires the session when the replay is also unauthorized', () async {
-    final client = VideoServerApi();
+    final client = FramefetchServerApi();
     var expirations = 0;
     final request = AuthenticatedRequest(
       client: client,
@@ -61,7 +61,7 @@ void main() {
 
   test('maps a transport failure without refreshing', () async {
     final request = AuthenticatedRequest(
-      client: VideoServerApi(),
+      client: FramefetchServerApi(),
       accessToken: () => 'access',
       sessionGeneration: () => 0,
       refreshSession: () async => fail('must not refresh'),
@@ -84,7 +84,7 @@ void main() {
 
   test('reads the unified API message from an error response', () async {
     final request = AuthenticatedRequest(
-      client: VideoServerApi(),
+      client: FramefetchServerApi(),
       accessToken: () => 'access',
       sessionGeneration: () => 0,
       refreshSession: () async => fail('must not refresh'),

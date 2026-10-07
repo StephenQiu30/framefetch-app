@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/features/analysis/data/analysis_repository.dart';
-import 'package:framegrab/features/history/application/activity_history_lifecycle.dart';
-import 'package:framegrab/features/history/application/activity_history_query.dart';
-import 'package:framegrab/features/history/data/activity_history_repository.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/analysis/data/analysis_repository.dart';
+import 'package:framefetch/features/history/application/activity_history_lifecycle.dart';
+import 'package:framefetch/features/history/application/activity_history_query.dart';
+import 'package:framefetch/features/history/data/activity_history_repository.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 final activitySkillsProvider =
     FutureProvider.autoDispose<List<AnalysisSkillResponse>>((ref) async {

@@ -1,11 +1,11 @@
-name: framegrab
-description: FrameFetch is an open-source Flutter client for self-hosted media workflows and server-side AI video analysis on iOS and Android.
+name: framefetch
+description: Framefetch is an open-source Flutter client for self-hosted media workflows and server-side AI video analysis on iOS and Android.
 publish_to: "none"
 version: 0.1.0+1
-homepage: https://github.com/StephenQiu30/video-app#readme
-repository: https://github.com/StephenQiu30/video-app
-issue_tracker: https://github.com/StephenQiu30/video-app/issues
-documentation: https://github.com/StephenQiu30/video-app/tree/main/docs
+homepage: https://github.com/StephenQiu30/framefetch-app#readme
+repository: https://github.com/StephenQiu30/framefetch-app
+issue_tracker: https://github.com/StephenQiu30/framefetch-app/issues
+documentation: https://github.com/StephenQiu30/framefetch-app/tree/main/docs
 
 environment:
   sdk: ">=3.12.0 <4.0.0"
@@ -24,6 +24,8 @@ dependencies:
   flutter_riverpod: ^3.4.2
   flutter_secure_storage: ^10.3.1
   flutter_slidable: ^4.0.3
+  framefetch_server_api:
+    path: packages/framefetch_server_api
   go_router: ^18.0.0
   intl: ^0.20.2
   media_kit: ^1.2.6
@@ -40,8 +42,6 @@ dependencies:
   shared_preferences: ^2.5.5
   unorm_dart: ^0.3.2
   url_launcher: ^6.3.2
-  video_server_api:
-    path: packages/video_server_api
   # See the AGP 9 compatibility note above package_info_plus.
   wakelock_plus: 1.5.2
 

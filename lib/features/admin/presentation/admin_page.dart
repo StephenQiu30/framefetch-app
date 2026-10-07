@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/shared/presentation/app_loading.dart';
-import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
-import 'package:framegrab/shared/presentation/data_page_view.dart';
+import 'package:framefetch/core/theme/app_spacing.dart';
+import 'package:framefetch/shared/presentation/app_loading.dart';
+import 'package:framefetch/shared/presentation/app_navigation_bar.dart';
+import 'package:framefetch/shared/presentation/data_page_view.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 

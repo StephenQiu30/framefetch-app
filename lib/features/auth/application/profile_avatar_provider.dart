@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/features/auth/application/auth_session_controller.dart';
-import 'package:framegrab/features/auth/data/profile_repository.dart';
+import 'package:framefetch/features/auth/application/auth_session_controller.dart';
+import 'package:framefetch/features/auth/data/profile_repository.dart';
 
 final profileAvatarProvider = FutureProvider.autoDispose<Uint8List?>((
   ref,

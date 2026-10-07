@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/auth/data/native_auth_gateway.dart';
-import 'package:framegrab/features/auth/presentation/registration_code_field.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/features/auth/data/native_auth_gateway.dart';
+import 'package:framefetch/features/auth/presentation/registration_code_field.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 import '../../../support/shad_test_app.dart';
 
