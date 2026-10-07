@@ -1,7 +1,7 @@
-import 'package:framegrab/features/analysis/presentation/analysis_presentation_labels.dart';
-import 'package:framegrab/features/documents/presentation/document_presentation_labels.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/analysis/presentation/analysis_presentation_labels.dart';
+import 'package:framefetch/features/documents/presentation/document_presentation_labels.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 typedef HistoryRecordPresentation = ({
   String id,

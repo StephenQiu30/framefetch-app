@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/features/auth/application/auth_session_controller.dart';
-import 'package:framegrab/features/media/data/media_repository.dart';
+import 'package:framefetch/features/auth/application/auth_session_controller.dart';
+import 'package:framefetch/features/media/data/media_repository.dart';
 
 final mediaThumbnailProvider = FutureProvider.autoDispose
     .family<Uint8List, String>((ref, resourcePath) async {

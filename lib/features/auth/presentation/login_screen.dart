@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/core/routing/auth_return_location.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/features/auth/application/auth_session_controller.dart';
-import 'package:framegrab/features/auth/presentation/auth_error_text.dart';
-import 'package:framegrab/features/auth/presentation/auth_failure_message.dart';
-import 'package:framegrab/features/auth/presentation/auth_page_scaffold.dart';
-import 'package:framegrab/features/auth/presentation/auth_validation.dart';
-import 'package:framegrab/features/auth/presentation/password_field.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/core/routing/auth_return_location.dart';
+import 'package:framefetch/core/theme/app_spacing.dart';
+import 'package:framefetch/features/auth/application/auth_session_controller.dart';
+import 'package:framefetch/features/auth/presentation/auth_error_text.dart';
+import 'package:framefetch/features/auth/presentation/auth_failure_message.dart';
+import 'package:framefetch/features/auth/presentation/auth_page_scaffold.dart';
+import 'package:framefetch/features/auth/presentation/auth_validation.dart';
+import 'package:framefetch/features/auth/presentation/password_field.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 

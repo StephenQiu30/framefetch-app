@@ -4,21 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:framegrab/app/router/app_router.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/features/history/application/download_history_provider.dart';
-import 'package:framegrab/features/history/application/download_retry.dart';
-import 'package:framegrab/features/history/data/download_history_repository.dart';
-import 'package:framegrab/features/history/presentation/download_presentation_labels.dart';
-import 'package:framegrab/features/media/presentation/authenticated_media_cover.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/app_swipe_action.dart';
-import 'package:framegrab/shared/presentation/data_page_view.dart';
-import 'package:framegrab/shared/presentation/deletion_failure_message.dart';
-import 'package:framegrab/shared/presentation/destructive_confirmation.dart';
+import 'package:framefetch/app/router/app_router.dart';
+import 'package:framefetch/core/theme/app_spacing.dart';
+import 'package:framefetch/features/history/application/download_history_provider.dart';
+import 'package:framefetch/features/history/application/download_retry.dart';
+import 'package:framefetch/features/history/data/download_history_repository.dart';
+import 'package:framefetch/features/history/presentation/download_presentation_labels.dart';
+import 'package:framefetch/features/media/presentation/authenticated_media_cover.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/app_swipe_action.dart';
+import 'package:framefetch/shared/presentation/data_page_view.dart';
+import 'package:framefetch/shared/presentation/deletion_failure_message.dart';
+import 'package:framefetch/shared/presentation/destructive_confirmation.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 final class DownloadHistoryItem extends ConsumerStatefulWidget {
   const DownloadHistoryItem({

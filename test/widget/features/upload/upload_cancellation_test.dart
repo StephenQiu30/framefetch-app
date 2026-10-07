@@ -13,7 +13,7 @@ void main() {
     ) async {
       await setMobileViewport(tester);
       final repository = DeferredContentUploadRepository();
-      await pumpFramegrabApp(
+      await pumpFramefetchApp(
         tester,
         locale: Locale(locale),
         uploadRepository: repository,

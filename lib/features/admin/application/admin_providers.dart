@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/features/admin/data/admin_repository.dart';
-import 'package:framegrab/features/auth/application/auth_session_controller.dart';
-import 'package:framegrab/shared/presentation/list_query.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/admin/data/admin_repository.dart';
+import 'package:framefetch/features/auth/application/auth_session_controller.dart';
+import 'package:framefetch/shared/presentation/list_query.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 final adminAnalyticsProvider = FutureProvider.autoDispose
     .family<DownloadAnalyticsResponse, int>((ref, days) {

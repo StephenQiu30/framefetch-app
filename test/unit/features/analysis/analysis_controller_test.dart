@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/analysis/application/analysis_controller.dart';
-import 'package:framegrab/features/analysis/application/analysis_target.dart';
-import 'package:framegrab/features/analysis/data/analysis_repository.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/analysis/application/analysis_controller.dart';
+import 'package:framefetch/features/analysis/application/analysis_target.dart';
+import 'package:framefetch/features/analysis/data/analysis_repository.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 import '../../../support/analysis_fakes.dart';
 

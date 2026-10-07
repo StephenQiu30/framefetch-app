@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/analysis/presentation/analysis_result_view.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/features/analysis/presentation/analysis_result_view.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 
 import '../../../support/shad_test_app.dart';
 import '../../../support/workspace_parity_fixtures.dart';

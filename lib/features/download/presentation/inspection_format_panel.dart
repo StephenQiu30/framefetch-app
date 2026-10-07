@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/features/download/application/download_intake_controller.dart';
-import 'package:framegrab/features/download/presentation/download_status.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/app_spinner.dart';
+import 'package:framefetch/core/theme/app_spacing.dart';
+import 'package:framefetch/features/download/application/download_intake_controller.dart';
+import 'package:framefetch/features/download/presentation/download_status.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/app_spinner.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 final class InspectionFormatPanel extends StatelessWidget {
   const InspectionFormatPanel({

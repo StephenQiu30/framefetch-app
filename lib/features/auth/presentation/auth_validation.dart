@@ -1,5 +1,5 @@
-import 'package:framegrab/features/auth/domain/username.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/features/auth/domain/username.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 
 bool isValidAuthEmail(String value) {
   final parts = value.trim().split('@');

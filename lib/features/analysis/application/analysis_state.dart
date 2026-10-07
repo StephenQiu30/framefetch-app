@@ -1,4 +1,4 @@
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 enum AnalysisAction { idle, start, cancel, retry, delete, refresh }
 

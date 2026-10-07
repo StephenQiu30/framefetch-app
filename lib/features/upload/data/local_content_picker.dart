@@ -2,7 +2,7 @@ import 'dart:developer' as developer;
 
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
 
 typedef LocalFileOpener =
     Future<XFile?> Function(List<XTypeGroup> acceptedTypeGroups);

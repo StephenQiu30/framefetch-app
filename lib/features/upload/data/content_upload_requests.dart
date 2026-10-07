@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:framegrab/core/network/data_request_failure.dart';
-import 'package:framegrab/features/auth/application/authenticated_request.dart';
-import 'package:framegrab/features/upload/data/content_upload_api_support.dart';
-import 'package:framegrab/features/upload/data/multipart_uploader.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/core/network/data_request_failure.dart';
+import 'package:framefetch/features/auth/application/authenticated_request.dart';
+import 'package:framefetch/features/upload/data/content_upload_api_support.dart';
+import 'package:framefetch/features/upload/data/multipart_uploader.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 /// Keeps every stage and any authenticated retry on the initiating session.
 final class ContentUploadRequests {
@@ -145,7 +145,7 @@ final class ContentUploadRequests {
   }
 
   Future<T> _required<T>(
-    Future<T?> Function(VideoServerApi client) operation,
+    Future<T?> Function(FramefetchServerApi client) operation,
   ) async {
     checkActive();
     final result = await request.execute((client) async {

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/features/admin/application/admin_providers.dart';
-import 'package:framegrab/features/admin/presentation/admin_analysis_analytics_content.dart';
-import 'package:framegrab/features/admin/presentation/admin_download_analytics_content.dart';
-import 'package:framegrab/features/admin/presentation/admin_page.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/app_dropdown_field.dart';
-import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
+import 'package:framefetch/core/theme/app_spacing.dart';
+import 'package:framefetch/features/admin/application/admin_providers.dart';
+import 'package:framefetch/features/admin/presentation/admin_analysis_analytics_content.dart';
+import 'package:framefetch/features/admin/presentation/admin_download_analytics_content.dart';
+import 'package:framefetch/features/admin/presentation/admin_page.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/app_dropdown_field.dart';
+import 'package:framefetch/shared/presentation/data_request_failure_message.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 final class AdminAnalyticsScreen extends ConsumerStatefulWidget {

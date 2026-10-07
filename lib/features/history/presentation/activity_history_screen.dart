@@ -2,19 +2,19 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/features/history/application/activity_history_provider.dart';
-import 'package:framegrab/features/history/application/activity_history_query.dart';
-import 'package:framegrab/features/history/presentation/activity_history_filters.dart';
-import 'package:framegrab/features/history/presentation/activity_history_item.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/app_loading.dart';
-import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
-import 'package:framegrab/shared/presentation/cursor_pagination.dart';
-import 'package:framegrab/shared/presentation/data_page_view.dart';
-import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
+import 'package:framefetch/core/theme/app_spacing.dart';
+import 'package:framefetch/features/history/application/activity_history_provider.dart';
+import 'package:framefetch/features/history/application/activity_history_query.dart';
+import 'package:framefetch/features/history/presentation/activity_history_filters.dart';
+import 'package:framefetch/features/history/presentation/activity_history_item.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/app_loading.dart';
+import 'package:framefetch/shared/presentation/app_navigation_bar.dart';
+import 'package:framefetch/shared/presentation/cursor_pagination.dart';
+import 'package:framefetch/shared/presentation/data_page_view.dart';
+import 'package:framefetch/shared/presentation/data_request_failure_message.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:go_router/go_router.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 final class ActivityHistoryScreen extends ConsumerStatefulWidget {
   const ActivityHistoryScreen({this.documentId, this.downloadId, super.key});

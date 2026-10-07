@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/features/download/presentation/content_intake_selector.dart';
-import 'package:framegrab/features/download/presentation/download_hero.dart';
-import 'package:framegrab/features/download/presentation/download_status.dart';
-import 'package:framegrab/features/upload/application/content_upload_controller.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
+import 'package:framefetch/core/theme/app_spacing.dart';
+import 'package:framefetch/features/download/presentation/content_intake_selector.dart';
+import 'package:framefetch/features/download/presentation/download_hero.dart';
+import 'package:framefetch/features/download/presentation/download_status.dart';
+import 'package:framefetch/features/upload/application/content_upload_controller.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
 
 final class DownloadHomeContent extends StatelessWidget {
   const DownloadHomeContent({

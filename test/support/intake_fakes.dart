@@ -1,6 +1,6 @@
-import 'package:framegrab/features/download/data/download_intake_repository.dart';
-import 'package:framegrab/features/download/data/download_intent_repository.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/download/data/download_intake_repository.dart';
+import 'package:framefetch/features/download/data/download_intent_repository.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 final class FakeDownloadIntakeRepository implements DownloadIntakeRepository {
   FakeDownloadIntakeRepository({

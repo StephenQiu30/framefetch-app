@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/app/app.dart';
-import 'package:framegrab/app/router/app_router.dart';
-import 'package:framegrab/features/history/application/activity_history_query.dart';
-import 'package:framegrab/features/history/data/activity_history_repository.dart';
-import 'package:framegrab/features/history/presentation/activity_history_item.dart';
-import 'package:framegrab/features/history/presentation/activity_history_screen.dart';
-import 'package:framegrab/shared/presentation/cursor_pagination.dart';
+import 'package:framefetch/app/app.dart';
+import 'package:framefetch/app/router/app_router.dart';
+import 'package:framefetch/features/history/application/activity_history_query.dart';
+import 'package:framefetch/features/history/data/activity_history_repository.dart';
+import 'package:framefetch/features/history/presentation/activity_history_item.dart';
+import 'package:framefetch/features/history/presentation/activity_history_screen.dart';
+import 'package:framefetch/shared/presentation/cursor_pagination.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 import '../../../support/workspace_parity_fixtures.dart';
 import '../../app/test_app.dart';
@@ -20,9 +20,9 @@ void main() {
     (tester) async {
       final repository = _Repository();
       await setMobileViewport(tester);
-      await pumpFramegrabApp(tester, activityHistoryRepository: repository);
+      await pumpFramefetchApp(tester, activityHistoryRepository: repository);
       final router = ProviderScope.containerOf(
-        tester.element(find.byType(FramegrabApp)),
+        tester.element(find.byType(FramefetchApp)),
       ).read(appRouterProvider);
       router.go('/history/activity?document_id=document');
       await tester.pumpAndSettle();

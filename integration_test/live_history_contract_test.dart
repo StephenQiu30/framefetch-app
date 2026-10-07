@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/bootstrap.dart';
+import 'package:framefetch/bootstrap.dart';
 import 'package:integration_test/integration_test.dart';
 
 // Optional, non-mutating QA against the configured service and an existing

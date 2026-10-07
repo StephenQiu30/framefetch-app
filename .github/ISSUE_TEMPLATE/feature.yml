@@ -1,11 +1,11 @@
 name: 功能建议
-description: 为 FrameFetch iOS/Android 客户端提出可验证的改进建议
+description: 为 Framefetch iOS/Android 客户端提出可验证的改进建议
 title: "[Feature]: "
 body:
   - type: markdown
     attributes:
       value: |
-        FrameFetch 以 docs/design/README.md 为设计基线交付。请先描述用户问题与移动端价值；服务端能力建议应提交到 video-server。
+        Framefetch 以 docs/design/README.md 为设计基线交付。请先描述用户问题与移动端价值；服务端能力建议应提交到 framefetch-server。
 
   - type: textarea
     id: problem
@@ -37,7 +37,7 @@ body:
   - type: dropdown
     id: server_change
     attributes:
-      label: 是否需要 video-server 变化
+      label: 是否需要 framefetch-server 变化
       options:
         - 不确定
         - 不需要，现有 App 契约足够

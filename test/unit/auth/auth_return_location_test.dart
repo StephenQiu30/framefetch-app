@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/routing/auth_return_location.dart';
+import 'package:framefetch/core/routing/auth_return_location.dart';
 
 void main() {
   test('preserves the in-app target, query and fragment', () {

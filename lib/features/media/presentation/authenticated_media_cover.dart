@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/features/media/application/media_thumbnail_provider.dart';
-import 'package:framegrab/features/media/presentation/media_cover_fallback.dart';
-import 'package:framegrab/shared/presentation/app_spinner.dart';
+import 'package:framefetch/core/theme/app_spacing.dart';
+import 'package:framefetch/features/media/application/media_thumbnail_provider.dart';
+import 'package:framefetch/features/media/presentation/media_cover_fallback.dart';
+import 'package:framefetch/shared/presentation/app_spinner.dart';
 
 export 'media_cover_fallback.dart';
 

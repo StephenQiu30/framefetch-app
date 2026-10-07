@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/admin/presentation/admin_edit_sheet.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/features/admin/presentation/admin_edit_sheet.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../../../support/shad_test_app.dart';

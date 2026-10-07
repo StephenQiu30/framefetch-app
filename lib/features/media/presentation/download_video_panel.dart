@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/features/history/presentation/download_presentation_labels.dart';
-import 'package:framegrab/features/media/data/media_repository.dart';
-import 'package:framegrab/features/media/presentation/authenticated_media_cover.dart';
-import 'package:framegrab/features/media/presentation/media_action_bar.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/features/history/presentation/download_presentation_labels.dart';
+import 'package:framefetch/features/media/data/media_repository.dart';
+import 'package:framefetch/features/media/presentation/authenticated_media_cover.dart';
+import 'package:framefetch/features/media/presentation/media_action_bar.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 final class DownloadVideoPanel extends ConsumerStatefulWidget {
   const DownloadVideoPanel({required this.job, super.key});

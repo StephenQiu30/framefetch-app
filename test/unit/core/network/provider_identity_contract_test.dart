@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 void main() {
   test('generated client reads prefer from the public provider contract', () {

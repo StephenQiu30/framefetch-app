@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/admin/application/ai_provider_protocol.dart';
-import 'package:framegrab/features/admin/application/operation_log_query.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/admin/application/ai_provider_protocol.dart';
+import 'package:framefetch/features/admin/application/operation_log_query.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 void main() {
   test(

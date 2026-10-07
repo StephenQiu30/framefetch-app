@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/auth/application/auth_session_controller.dart';
-import 'package:framegrab/features/auth/data/native_auth_gateway.dart';
-import 'package:framegrab/features/auth/data/refresh_credential_store.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/auth/application/auth_session_controller.dart';
+import 'package:framefetch/features/auth/data/native_auth_gateway.dart';
+import 'package:framefetch/features/auth/data/refresh_credential_store.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 import '../../support/auth_fakes.dart';
 

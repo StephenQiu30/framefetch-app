@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/features/auth/application/authenticated_request.dart';
-import 'package:framegrab/features/upload/data/content_upload_requests.dart';
-import 'package:framegrab/features/upload/data/multipart_uploader.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
+import 'package:framefetch/features/auth/application/authenticated_request.dart';
+import 'package:framefetch/features/upload/data/content_upload_requests.dart';
+import 'package:framefetch/features/upload/data/multipart_uploader.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
 
 final contentUploadRepositoryProvider = Provider<ContentUploadRepository>(
   (ref) => GeneratedContentUploadRepository(

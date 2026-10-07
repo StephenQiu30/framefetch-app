@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
 
 final class UploadPartTarget {
   const UploadPartTarget({required this.number, required this.url});

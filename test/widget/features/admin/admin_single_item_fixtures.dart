@@ -1,4 +1,4 @@
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 final _createdAt = DateTime.utc(2026, 10, 2);
 

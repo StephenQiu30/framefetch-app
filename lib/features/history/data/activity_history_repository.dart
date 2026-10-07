@@ -1,9 +1,9 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/core/network/data_request_failure.dart';
-import 'package:framegrab/features/auth/application/authenticated_request.dart';
-import 'package:framegrab/features/history/application/activity_history_query.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/core/network/data_request_failure.dart';
+import 'package:framefetch/features/auth/application/authenticated_request.dart';
+import 'package:framefetch/features/history/application/activity_history_query.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 final activityHistoryRepositoryProvider = Provider<ActivityHistoryRepository>(
   (ref) => GeneratedActivityHistoryRepository(

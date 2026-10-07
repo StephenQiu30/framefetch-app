@@ -3,10 +3,10 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/network/data_request_failure.dart';
-import 'package:framegrab/features/analysis/data/analysis_markdown_repository.dart';
-import 'package:framegrab/features/auth/application/authenticated_request.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/core/network/data_request_failure.dart';
+import 'package:framefetch/features/analysis/data/analysis_markdown_repository.dart';
+import 'package:framefetch/features/auth/application/authenticated_request.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 void main() {
   test(
@@ -14,7 +14,7 @@ void main() {
     () async {
       final dio = Dio();
       addTearDown(() => dio.close(force: true));
-      final client = VideoServerApi(dio: dio);
+      final client = FramefetchServerApi(dio: dio);
       final content = '# 服务端报告\n\n唯一原文。\n';
       dio.interceptors.add(
         InterceptorsWrapper(
@@ -45,7 +45,7 @@ void main() {
       ]) {
         final dio = Dio();
         addTearDown(() => dio.close(force: true));
-        final client = VideoServerApi(dio: dio);
+        final client = FramefetchServerApi(dio: dio);
         dio.interceptors.add(
           InterceptorsWrapper(
             onRequest: (options, handler) {
@@ -74,7 +74,7 @@ void main() {
   );
 }
 
-AnalysisMarkdownRepository _repository(VideoServerApi client) =>
+AnalysisMarkdownRepository _repository(FramefetchServerApi client) =>
     AnalysisMarkdownRepository(
       AuthenticatedRequest(
         client: client,

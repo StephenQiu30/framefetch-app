@@ -58,7 +58,7 @@ String analysisReportFileName(String title) {
       .replaceAll(RegExp(r'-+'), '-')
       .trim();
   final safeTitle = sanitized.isEmpty
-      ? 'FrameFetch'
+      ? 'Framefetch'
       : String.fromCharCodes(sanitized.runes.take(48));
   return '$safeTitle-analysis-report.md';
 }

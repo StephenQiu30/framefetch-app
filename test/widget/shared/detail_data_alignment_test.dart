@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/admin/presentation/admin_analytics_metrics.dart';
-import 'package:framegrab/features/documents/presentation/document_detail_summary.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/features/admin/presentation/admin_analytics_metrics.dart';
+import 'package:framefetch/features/documents/presentation/document_detail_summary.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 
 import '../../support/data_fakes.dart';
 import '../../support/shad_test_app.dart';

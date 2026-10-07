@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/auth/data/native_auth_gateway.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/auth/data/native_auth_gateway.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 void main() {
   test(
@@ -29,7 +29,7 @@ void main() {
           },
         ),
       );
-      final gateway = GeneratedNativeAuthGateway(VideoServerApi(dio: dio));
+      final gateway = GeneratedNativeAuthGateway(FramefetchServerApi(dio: dio));
       await gateway.verifyRegistrationCode(
         email: 'member@example.com',
         verificationCode: '123456',
@@ -75,7 +75,7 @@ void main() {
       );
       await expectLater(
         GeneratedNativeAuthGateway(
-          VideoServerApi(dio: dio),
+          FramefetchServerApi(dio: dio),
         ).verifyRegistrationCode(
           email: 'member@example.com',
           verificationCode: '123456',

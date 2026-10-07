@@ -1,25 +1,25 @@
 <p align="center">
-  <img src="assets/readme/hero.en.svg" width="100%" alt="FrameFetch App — The native iOS / Android client for your FrameFetch workstation" />
+  <img src="assets/readme/hero.en.svg" width="100%" alt="Framefetch App — The native iOS / Android client for your Framefetch workstation" />
 </p>
 
-# <img src="assets/brand/logo.png" width="36" alt="Official FrameFetch logo" /> FrameFetch App
+# <img src="assets/brand/logo.png" width="36" alt="Official Framefetch logo" /> Framefetch App
 
-**The native iOS / Android client for your FrameFetch workstation.** Bring in material, follow jobs, play video, read reports, save files and share through the system. Connect to your FrameFetch Server to share accounts, material and reports with Web and desktop.
+**The native iOS / Android client for your Framefetch workstation.** Bring in material, follow jobs, play video, read reports, save files and share through the system. Connect to your Framefetch Server to share accounts, material and reports with Web and desktop.
 
-[![Flutter quality](https://github.com/StephenQiu30/video-app/actions/workflows/flutter-quality.yml/badge.svg)](https://github.com/StephenQiu30/video-app/actions/workflows/flutter-quality.yml)
+[![Flutter quality](https://github.com/StephenQiu30/framefetch-app/actions/workflows/flutter-quality.yml/badge.svg)](https://github.com/StephenQiu30/framefetch-app/actions/workflows/flutter-quality.yml)
 [![Platforms](https://img.shields.io/badge/platform-iOS%20%7C%20Android-171717)](#platforms-and-installation)
-[![Source preview](https://img.shields.io/github/v/release/StephenQiu30/video-app?include_prereleases&color=171717)](https://github.com/StephenQiu30/video-app/releases)
+[![Source preview](https://img.shields.io/github/v/release/StephenQiu30/framefetch-app?include_prereleases&color=171717)](https://github.com/StephenQiu30/framefetch-app/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-171717.svg)](LICENSE)
 
-[Get started](#get-started) · [Capabilities](#what-you-can-do) · [Installation](#platforms-and-installation) · [Server / Web](https://github.com/StephenQiu30/video-server) · [Desktop](https://github.com/StephenQiu30/video-electron) · [简体中文](README.md)
+[Get started](#get-started) · [Capabilities](#what-you-can-do) · [Installation](#platforms-and-installation) · [Server / Web](https://github.com/StephenQiu30/framefetch-server) · [Desktop](https://github.com/StephenQiu30/framefetch-electron) · [简体中文](README.md)
 
-> **Source preview**: [v0.2.0-beta.1](https://github.com/StephenQiu30/video-app/releases/tag/v0.2.0-beta.1) has no APK / IPA or app-store installer. Deploy Server first, then build this native client.
+> **Source preview**: [v0.2.0-beta.1](https://github.com/StephenQiu30/framefetch-app/releases/tag/v0.2.0-beta.1) has no APK / IPA or app-store installer. Deploy Server first, then build this native client.
 
 ## App preview
 
 <p align="center">
-  <img src="docs/images/app-home.png" width="240" alt="Current native FrameFetch home with the official logo and public-link, local-video and screenplay entry points" />
-  <img src="docs/images/app-provider-status.png" width="240" alt="Current native FrameFetch provider screen with All statuses, Registered and Not enabled filters, identity requirements and declared capabilities" />
+  <img src="docs/images/app-home.png" width="240" alt="Current native Framefetch home with the official logo and public-link, local-video and screenplay entry points" />
+  <img src="docs/images/app-provider-status.png" width="240" alt="Current native Framefetch provider screen with All statuses, Registered and Not enabled filters, identity requirements and declared capabilities" />
 </p>
 
 <p align="center"><sub>Current native iOS home and provider status, sharing the official logo, neutral palette and component semantics with Web. These screenshots show native UI and platform declarations; they do not replace real-account, provider, model or device workflow acceptance.</sub></p>
@@ -28,18 +28,18 @@
 
 ### 1. Prepare the server and toolchain
 
-Deploy the API, Web and workers with the [video-server quick start](https://github.com/StephenQiu30/video-server/blob/main/README.en.md#quick-start), then obtain a server address reachable from your device.
+Deploy the API, Web and workers with the [framefetch-server quick start](https://github.com/StephenQiu30/framefetch-server/blob/main/README.en.md#quick-start), then obtain a server address reachable from your device.
 
 | Environment    | Requirement                                           |
 | -------------- | ----------------------------------------------------- |
 | Flutter / Dart | Flutter 3.44.7 stable / Dart 3.12.2                   |
 | iOS            | Xcode 27, iOS 16+, CocoaPods                          |
 | Android        | JDK 21, Android API 24+, JVM target 17                |
-| Server         | A reachable `video-server`; valid HTTPS in production |
+| Server         | A reachable `framefetch-server`; valid HTTPS in production |
 
 ```bash
-git clone https://github.com/StephenQiu30/video-app.git
-cd video-app
+git clone https://github.com/StephenQiu30/framefetch-app.git
+cd framefetch-app
 git checkout v0.2.0-beta.1
 flutter doctor -v
 flutter pub get --enforce-lockfile
@@ -51,33 +51,33 @@ iOS Simulator with a server on your computer:
 
 ```bash
 flutter run \
-  --dart-define=VIDEO_SERVER_BASE_URL=http://127.0.0.1:8111
+  --dart-define=FRAMEFETCH_SERVER_BASE_URL=http://127.0.0.1:8111
 ```
 
 Android Emulator with a server on its host:
 
 ```bash
 flutter run \
-  --dart-define=VIDEO_SERVER_BASE_URL=http://10.0.2.2:8111
+  --dart-define=FRAMEFETCH_SERVER_BASE_URL=http://10.0.2.2:8111
 ```
 
 Physical devices and production instances:
 
 ```bash
 flutter run \
-  --dart-define=VIDEO_SERVER_BASE_URL=https://your-framefetch.example.com
+  --dart-define=FRAMEFETCH_SERVER_BASE_URL=https://your-framefetch.example.com
 ```
 
-`VIDEO_SERVER_BASE_URL` points to the API service. `localhost` on a phone refers to the phone itself; use a reachable address for physical devices. Sign in to that service to access its account and media.
+`FRAMEFETCH_SERVER_BASE_URL` points to the API service. `localhost` on a phone refers to the phone itself; use a reachable address for physical devices. Sign in to that service to access its account and media.
 
 ### 3. Build the client
 
 ```bash
 flutter build apk --debug \
-  --dart-define=VIDEO_SERVER_BASE_URL=https://your-framefetch.example.com
+  --dart-define=FRAMEFETCH_SERVER_BASE_URL=https://your-framefetch.example.com
 
 flutter build ios --simulator --no-codesign \
-  --dart-define=VIDEO_SERVER_BASE_URL=https://your-framefetch.example.com
+  --dart-define=FRAMEFETCH_SERVER_BASE_URL=https://your-framefetch.example.com
 ```
 
 The debug APK is written to `build/app/outputs/flutter-apk/app-debug.apk`; iOS Simulator artifacts are in `build/ios/iphonesimulator/`. See [accessibility and quality](docs/design/11-可访问性与质量.md) for the current Xcode 27 universal Simulator build issue and the arm64 run path. Device and store distribution require platform release signing; signing materials do not belong in the repository.
@@ -100,7 +100,7 @@ Inspection has a persistent record of its own. Opening the app again or entering
 
 ### Read complete AI results on your phone
 
-The existing video and screenplay analysis forms remain in place: select a Skill, Chinese or English output, and a custom focus or the method's default instructions. Available methods come from the server catalog. This update improves video review (`video-review`), video breakdown (`video-breakdown`), screenplay analysis (`screenplay-analysis`), and document, WeChat, and Xiaohongshu formatting (`article-format`, `wechat-format`, `xhs-format`). Report reading, run history, and Markdown/DOCX exports keep the existing pages and controls. See the [server Skill design](https://github.com/StephenQiu30/video-server/blob/main/workspace/content/design/09-AI分析.md) for method and result contracts.
+The existing video and screenplay analysis forms remain in place: select a Skill, Chinese or English output, and a custom focus or the method's default instructions. Available methods come from the server catalog. This update improves video review (`video-review`), video breakdown (`video-breakdown`), screenplay analysis (`screenplay-analysis`), and document, WeChat, and Xiaohongshu formatting (`article-format`, `wechat-format`, `xhs-format`). Report reading, run history, and Markdown/DOCX exports keep the existing pages and controls. See the [server Skill design](https://github.com/StephenQiu30/framefetch-server/blob/main/workspace/content/design/09-AI分析.md) for method and result contracts.
 
 Method counts describe the current catalog; they do not mean every method has passed real-model and device workflow acceptance.
 
@@ -143,7 +143,7 @@ A historical analysis opens the exact selected analysis ID, including its method
 5. **Analyze:** select a video or screenplay Skill, output language and focus, and start server-side analysis independently of media acquisition.
 6. **Deliver:** read results with video time or screenplay scene references, save Markdown/DOCX, or share the complete Markdown report for further editing.
 
-For an existing MP4, upload it from the local-video entry point, open its media details and continue from step 5. Shared workflow and deliverables are documented in the [server's complete workflow](https://github.com/StephenQiu30/video-server/blob/main/README.en.md#from-material-to-report).
+For an existing MP4, upload it from the local-video entry point, open its media details and continue from step 5. Shared workflow and deliverables are documented in the [server's complete workflow](https://github.com/StephenQiu30/framefetch-server/blob/main/README.en.md#from-material-to-report).
 
 ### Administer your service
 
@@ -153,15 +153,15 @@ Administrators open the management center from the account tab to inspect downlo
 
 | Project                                                            | Entry point and responsibility                                                                                                            |
 | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| [`video-server`](https://github.com/StephenQiu30/video-server)     | FastAPI API, Next.js Web, inspection/downloads, AI workers, identity, permissions, queues, storage and reports                            |
-| [`video-electron`](https://github.com/StephenQiu30/video-electron) | Electron desktop entry point with bundled React pages reusing Web business source, the same server, native windows and system file saving |
-| **`video-app`**                                                    | Native Flutter iOS/Android screens, Bearer sessions, system file entry points, playback and mobile administration                         |
+| [`framefetch-server`](https://github.com/StephenQiu30/framefetch-server)     | FastAPI API, Next.js Web, inspection/downloads, AI workers, identity, permissions, queues, storage and reports                            |
+| [`framefetch-electron`](https://github.com/StephenQiu30/framefetch-electron) | Electron desktop entry point with bundled React pages reusing Web business source, the same server, native windows and system file saving |
+| **`framefetch-app`**                                                    | Native Flutter iOS/Android screens, Bearer sessions, system file entry points, playback and mobile administration                         |
 
 All three clients share the same server business data; switching clients does not create a separate media-job or business database. The app's client is generated from a reviewed mobile-only OpenAPI snapshot. It does not maintain parallel server DTOs. Active inspections, downloads, documents and analyses converge through REST queries; history and results follow server state. The app currently does not use WebSocket status updates.
 
 ## Platforms and installation
 
-The client targets **iOS 16+ and Android API 24+** and is built from source. [v0.2.0-beta.1](https://github.com/StephenQiu30/video-app/releases/tag/v0.2.0-beta.1) is a public source preview: the GitHub tag identifies the source snapshot, while the embedded app build version remains **`0.1.0+1`**. This release has no attached APK/IPA and no prebuilt App Store/Google Play package. This repository does not enable Flutter Web; the desktop entry point is [`video-electron`](https://github.com/StephenQiu30/video-electron).
+The client targets **iOS 16+ and Android API 24+** and is built from source. [v0.2.0-beta.1](https://github.com/StephenQiu30/framefetch-app/releases/tag/v0.2.0-beta.1) is a public source preview: the GitHub tag identifies the source snapshot, while the embedded app build version remains **`0.1.0+1`**. This release has no attached APK/IPA and no prebuilt App Store/Google Play package. This repository does not enable Flutter Web; the desktop entry point is [`framefetch-electron`](https://github.com/StephenQiu30/framefetch-electron).
 
 The app depends on an online self-hosted service. Inspection, downloading and AI analysis run on the server. Offline AI, persistent background downloading, offline media libraries and batch jobs are outside the current scope. Server inspection determines platform access and available formats.
 
@@ -203,7 +203,7 @@ lib/features/                 Media, downloads, documents, analysis, account and
 lib/l10n/                     ARB localization
 lib/shared/                   Reusable presentation components and models
 contracts/openapi/            Mobile-only OpenAPI snapshot
-packages/video_server_api/    Generated Dart API client
+packages/framefetch_server_api/    Generated Dart API client
 test/ · integration_test/     Unit, Widget and native workflow tests
 tool/                         Contract generation, checks and theme synchronization
 docs/design/                  Product, architecture and verification conditions
@@ -227,7 +227,7 @@ dart run tool/check.dart
 
 ## Contributing
 
-Issues and suggestions are welcome at [GitHub Issues](https://github.com/StephenQiu30/video-app/issues). Read [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) before contributing. Report mobile UI, native sessions and device behavior here; API, Web, inspection, storage and AI worker issues belong in [video-server](https://github.com/StephenQiu30/video-server/issues).
+Issues and suggestions are welcome at [GitHub Issues](https://github.com/StephenQiu30/framefetch-app/issues). Read [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) before contributing. Report mobile UI, native sessions and device behavior here; API, Web, inspection, storage and AI worker issues belong in [framefetch-server](https://github.com/StephenQiu30/framefetch-server/issues).
 
 For research, reports or teaching materials, cite [`CITATION.cff`](CITATION.cff).
 

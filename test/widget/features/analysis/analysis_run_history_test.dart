@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/analysis/data/analysis_history_repository.dart';
-import 'package:framegrab/features/analysis/presentation/analysis_run_history.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/cursor_pagination.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/analysis/data/analysis_history_repository.dart';
+import 'package:framefetch/features/analysis/presentation/analysis_run_history.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/cursor_pagination.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 import '../../../support/shad_test_app.dart';
 

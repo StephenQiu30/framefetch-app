@@ -2,17 +2,17 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:framegrab/features/auth/application/authenticated_request.dart';
-import 'package:framegrab/features/upload/data/content_upload_repository.dart';
-import 'package:framegrab/features/upload/data/multipart_uploader.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/auth/application/authenticated_request.dart';
+import 'package:framefetch/features/upload/data/content_upload_repository.dart';
+import 'package:framefetch/features/upload/data/multipart_uploader.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 final class UploadHttpFixture {
   UploadHttpFixture(this.directory, this.file, this.server, this.kind) {
     dio = Dio(BaseOptions(baseUrl: baseUrl));
     request = AuthenticatedRequest(
-      client: VideoServerApi(dio: dio),
+      client: FramefetchServerApi(dio: dio),
       accessToken: () => 'access-$generation',
       sessionGeneration: () => generation,
       refreshSession: () async => true,

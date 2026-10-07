@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/theme/app_theme.dart';
-import 'package:framegrab/features/analysis/presentation/analysis_report_preview.dart';
+import 'package:framefetch/core/theme/app_theme.dart';
+import 'package:framefetch/features/analysis/presentation/analysis_report_preview.dart';
 
 import '../../../support/shad_test_app.dart';
 

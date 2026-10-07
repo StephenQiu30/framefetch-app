@@ -2,7 +2,7 @@
 
 本入口参考 `@umijs/openapi` 的工作方式：配置声明 Swagger 来源和允许进入 App 的 operation，单一 Dart 命令负责拉取、校验、裁剪、冻结并生成客户端。
 
-默认读取正在运行的 `video-server`：
+默认读取正在运行的 `framefetch-server`：
 
 ```bash
 dart run tool/openapi.dart
@@ -11,7 +11,7 @@ dart run tool/openapi.dart
 命令从 `http://127.0.0.1:8111/openapi.json` 读取 Swagger/OpenAPI，生成经过评审的 App 专用快照：
 
 ```text
-contracts/openapi/video-server.openapi.json
+contracts/openapi/framefetch-server.openapi.json
 ```
 
 临时使用其他契约地址时，不修改代码：
@@ -20,9 +20,11 @@ contracts/openapi/video-server.openapi.json
 OPENAPI_SCHEMA_URL=https://api.example.com/openapi.json dart run tool/openapi.dart
 ```
 
-`--from-snapshot --check` 使用已提交的冻结快照重新生成并检查客户端漂移，不连接运行中的 API，供 CI 使用；它验证客户端与冻结契约一致，不代表与服务端最新提交同步。`--snapshot-only` 只更新冻结快照；`--check` 在干净工作区生成后检查契约与客户端漂移。生成器继续固定为 OpenAPI Generator `7.22.0` 的稳定 `dart-dio` 模板，使用 Homebrew 环境中的 Java 与 Maven 在本机解析固定版本 JAR，输出到 `packages/video_server_api/`，不依赖 Docker 服务。
+`--from-snapshot --check` 使用已提交的冻结快照重新生成并检查客户端漂移，不连接运行中的 API，供 CI 使用；它验证客户端与冻结契约一致，不代表与服务端最新提交同步。`--snapshot-only` 只更新冻结快照；`--check` 在干净工作区生成后检查契约与客户端漂移。生成器继续固定为 OpenAPI Generator `7.22.0` 的稳定 `dart-dio` 模板，使用 Homebrew 环境中的 Java 与 Maven 在本机解析固定版本 JAR，输出到 `packages/framefetch_server_api/`，不依赖 Docker 服务。
 
 允许的端点和查询参数集中声明在 `openapi_config.dart`。生成入口会验证 operationId、传递依赖 schema 和 `NativeBearerAuth`，包括经服务端管理员鉴权的 App 管理操作，排除 Web Cookie 契约；禁止手工修改生成目录或维护平行 DTO。
+
+生成包的构建工具固定为 `build_runner 2.16.0`、`built_value_generator 8.12.7` 与 `analyzer 14.1.0`，由生成入口写入包配置，保证无本地缓存时也使用相同的可构建组合。
 
 生成前读取 `.openapi-generator/FILES`，生成后按新清单删除旧清单中已失效的模型、API 和文档，以及对应的 `.g.dart` 和生成测试桩。清理只处理生成器原有文件，不遍历符号链接，也不删除无归属的文件或包配置。契约删除字段或模型后无需手工修补生成包。
 

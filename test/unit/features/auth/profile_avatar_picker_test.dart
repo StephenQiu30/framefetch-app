@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/auth/data/profile_avatar_picker.dart';
+import 'package:framefetch/features/auth/data/profile_avatar_picker.dart';
 
 void main() {
   test('rejects renamed nonimages, empty files and files beyond the limit', () {

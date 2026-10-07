@@ -1,0 +1,209 @@
+//
+// AUTO-GENERATED FILE, DO NOT MODIFY!
+//
+
+import 'package:dio/dio.dart';
+import 'package:built_value/serializer.dart';
+import 'package:framefetch_server_api/lib/serializers.dart';
+import 'package:framefetch_server_api/lib/auth/api_key_auth.dart';
+import 'package:framefetch_server_api/lib/auth/basic_auth.dart';
+import 'package:framefetch_server_api/lib/auth/bearer_auth.dart';
+import 'package:framefetch_server_api/lib/auth/oauth.dart';
+import 'package:framefetch_server_api/lib/api/admin_api.dart';
+import 'package:framefetch_server_api/lib/api/analyses_api.dart';
+import 'package:framefetch_server_api/lib/api/app_auth_api.dart';
+import 'package:framefetch_server_api/lib/api/documents_api.dart';
+import 'package:framefetch_server_api/lib/api/download_intents_api.dart';
+import 'package:framefetch_server_api/lib/api/downloads_api.dart';
+import 'package:framefetch_server_api/lib/api/inspections_api.dart';
+import 'package:framefetch_server_api/lib/api/media_imports_api.dart';
+import 'package:framefetch_server_api/lib/api/providers_api.dart';
+import 'package:framefetch_server_api/lib/api/source_discoveries_api.dart';
+import 'package:framefetch_server_api/lib/api/users_api.dart';
+
+class FramefetchServerApi {
+  static const String basePath = r'http://localhost';
+
+  final Dio dio;
+  final Serializers serializers;
+
+  FramefetchServerApi({
+    Dio? dio,
+    Serializers? serializers,
+    String? basePathOverride,
+    List<Interceptor>? interceptors,
+  })  : this.serializers = serializers ?? standardSerializers,
+        this.dio = dio ??
+            Dio(BaseOptions(
+              baseUrl: basePathOverride ?? basePath,
+              connectTimeout: const Duration(milliseconds: 5000),
+              receiveTimeout: const Duration(milliseconds: 3000),
+            )) {
+    if (interceptors == null) {
+      this.dio.interceptors.addAll([
+        OAuthInterceptor(),
+        BasicAuthInterceptor(),
+        BearerAuthInterceptor(),
+        ApiKeyAuthInterceptor(),
+      ]);
+    } else {
+      this.dio.interceptors.addAll(interceptors);
+    }
+  }
+
+  void setOAuthToken(String name, String token) {
+    if (this.dio.interceptors.any((i) => i is OAuthInterceptor)) {
+      (this.dio.interceptors.firstWhere((i) => i is OAuthInterceptor)
+              as OAuthInterceptor)
+          .tokens[name] = token;
+    }
+  }
+
+  /// Removes the OAuth token associated with the given [name].
+  ///
+  /// If no [OAuthInterceptor] is registered or no token exists for the given
+  /// [name], this method has no effect.
+  void removeOAuthToken(String name) {
+    if (this.dio.interceptors.any((i) => i is OAuthInterceptor)) {
+      (this.dio.interceptors.firstWhere((i) => i is OAuthInterceptor)
+              as OAuthInterceptor)
+          .tokens
+          .remove(name);
+    }
+  }
+
+  void setBearerAuth(String name, String token) {
+    if (this.dio.interceptors.any((i) => i is BearerAuthInterceptor)) {
+      (this.dio.interceptors.firstWhere((i) => i is BearerAuthInterceptor)
+              as BearerAuthInterceptor)
+          .tokens[name] = token;
+    }
+  }
+
+  /// Removes the bearer authentication token associated with the given [name].
+  ///
+  /// If no [BearerAuthInterceptor] is registered or no token exists for the
+  /// given [name], this method has no effect.
+  void removeBearerAuth(String name) {
+    if (this.dio.interceptors.any((i) => i is BearerAuthInterceptor)) {
+      (this.dio.interceptors.firstWhere((i) => i is BearerAuthInterceptor)
+              as BearerAuthInterceptor)
+          .tokens
+          .remove(name);
+    }
+  }
+
+  void setBasicAuth(String name, String username, String password) {
+    if (this.dio.interceptors.any((i) => i is BasicAuthInterceptor)) {
+      (this.dio.interceptors.firstWhere((i) => i is BasicAuthInterceptor)
+              as BasicAuthInterceptor)
+          .authInfo[name] = BasicAuthInfo(username, password);
+    }
+  }
+
+  /// Removes the basic authentication credentials associated with the given [name].
+  ///
+  /// If no [BasicAuthInterceptor] is registered or no credentials exist for the
+  /// given [name], this method has no effect.
+  void removeBasicAuth(String name) {
+    if (this.dio.interceptors.any((i) => i is BasicAuthInterceptor)) {
+      (this.dio.interceptors.firstWhere((i) => i is BasicAuthInterceptor)
+              as BasicAuthInterceptor)
+          .authInfo
+          .remove(name);
+    }
+  }
+
+  void setApiKey(String name, String apiKey) {
+    if (this.dio.interceptors.any((i) => i is ApiKeyAuthInterceptor)) {
+      (this
+                  .dio
+                  .interceptors
+                  .firstWhere((element) => element is ApiKeyAuthInterceptor)
+              as ApiKeyAuthInterceptor)
+          .apiKeys[name] = apiKey;
+    }
+  }
+
+  /// Removes the API key associated with the given [name].
+  ///
+  /// If no [ApiKeyAuthInterceptor] is registered or no API key exists for the
+  /// given [name], this method has no effect.
+  void removeApiKey(String name) {
+    if (this.dio.interceptors.any((i) => i is ApiKeyAuthInterceptor)) {
+      (this
+                  .dio
+                  .interceptors
+                  .firstWhere((element) => element is ApiKeyAuthInterceptor)
+              as ApiKeyAuthInterceptor)
+          .apiKeys
+          .remove(name);
+    }
+  }
+
+  /// Get AdminApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  AdminApi getAdminApi() {
+    return AdminApi(dio, serializers);
+  }
+
+  /// Get AnalysesApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  AnalysesApi getAnalysesApi() {
+    return AnalysesApi(dio, serializers);
+  }
+
+  /// Get AppAuthApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  AppAuthApi getAppAuthApi() {
+    return AppAuthApi(dio, serializers);
+  }
+
+  /// Get DocumentsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  DocumentsApi getDocumentsApi() {
+    return DocumentsApi(dio, serializers);
+  }
+
+  /// Get DownloadIntentsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  DownloadIntentsApi getDownloadIntentsApi() {
+    return DownloadIntentsApi(dio, serializers);
+  }
+
+  /// Get DownloadsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  DownloadsApi getDownloadsApi() {
+    return DownloadsApi(dio, serializers);
+  }
+
+  /// Get InspectionsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  InspectionsApi getInspectionsApi() {
+    return InspectionsApi(dio, serializers);
+  }
+
+  /// Get MediaImportsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  MediaImportsApi getMediaImportsApi() {
+    return MediaImportsApi(dio, serializers);
+  }
+
+  /// Get ProvidersApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  ProvidersApi getProvidersApi() {
+    return ProvidersApi(dio, serializers);
+  }
+
+  /// Get SourceDiscoveriesApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  SourceDiscoveriesApi getSourceDiscoveriesApi() {
+    return SourceDiscoveriesApi(dio, serializers);
+  }
+
+  /// Get UsersApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  UsersApi getUsersApi() {
+    return UsersApi(dio, serializers);
+  }
+}

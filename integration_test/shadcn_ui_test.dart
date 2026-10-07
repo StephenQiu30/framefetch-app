@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/theme/app_theme.dart';
-import 'package:framegrab/features/admin/presentation/admin_edit_sheet.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/core/theme/app_theme.dart';
+import 'package:framefetch/features/admin/presentation/admin_edit_sheet.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
@@ -24,7 +24,7 @@ void main() {
   testWidgets('native Shad public, validation, and signed-in home', (
     tester,
   ) async {
-    await pumpFramegrabApp(tester, credentialStore: MemoryCredentialStore());
+    await pumpFramefetchApp(tester, credentialStore: MemoryCredentialStore());
     await capture(tester, 'shad-public-light');
     await tester.tap(find.byKey(const Key('public-home-login')));
     await tester.pumpAndSettle();
@@ -59,7 +59,7 @@ void main() {
     final history = FakeDownloadHistoryRepository(
       data: downloadHistoryFixture(),
     );
-    await pumpFramegrabApp(tester, downloadHistoryRepository: history);
+    await pumpFramefetchApp(tester, downloadHistoryRepository: history);
     await tester.tap(find.byKey(const Key('app-tab-1')));
     await tester.pumpAndSettle();
     final row = find.byKey(

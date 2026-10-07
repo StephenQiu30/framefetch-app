@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/features/auth/application/auth_session_controller.dart';
-import 'package:framegrab/features/upload/data/content_upload_repository.dart';
-import 'package:framegrab/features/upload/data/local_content_picker.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
+import 'package:framefetch/features/auth/application/auth_session_controller.dart';
+import 'package:framefetch/features/upload/data/content_upload_repository.dart';
+import 'package:framefetch/features/upload/data/local_content_picker.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
 
 final class ContentUploadState {
   const ContentUploadState({

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/analysis/data/analysis_repository.dart';
-import 'package:framegrab/features/analysis/presentation/analysis_result_view.dart';
-import 'package:framegrab/features/auth/data/native_auth_gateway.dart';
-import 'package:framegrab/features/auth/data/refresh_credential_store.dart';
-import 'package:framegrab/features/download/application/download_intake_controller.dart';
-import 'package:framegrab/features/download/presentation/inspection_workspace.dart';
-import 'package:framegrab/features/history/data/activity_history_repository.dart';
-import 'package:framegrab/features/history/presentation/activity_history_screen.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/features/analysis/data/analysis_repository.dart';
+import 'package:framefetch/features/analysis/presentation/analysis_result_view.dart';
+import 'package:framefetch/features/auth/data/native_auth_gateway.dart';
+import 'package:framefetch/features/auth/data/refresh_credential_store.dart';
+import 'package:framefetch/features/download/application/download_intake_controller.dart';
+import 'package:framefetch/features/download/presentation/inspection_workspace.dart';
+import 'package:framefetch/features/history/data/activity_history_repository.dart';
+import 'package:framefetch/features/history/presentation/activity_history_screen.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 import 'package:integration_test/integration_test.dart';
 
 import '../test/support/analysis_fakes.dart';

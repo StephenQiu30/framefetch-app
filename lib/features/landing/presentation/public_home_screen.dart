@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/features/landing/domain/public_home_links.dart';
-import 'package:framegrab/features/landing/presentation/public_home_content_sections.dart';
-import 'package:framegrab/features/landing/presentation/public_home_hero.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
+import 'package:framefetch/features/landing/domain/public_home_links.dart';
+import 'package:framefetch/features/landing/presentation/public_home_content_sections.dart';
+import 'package:framefetch/features/landing/presentation/public_home_hero.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/app_navigation_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:url_launcher/url_launcher.dart';

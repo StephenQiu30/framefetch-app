@@ -6,10 +6,10 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/theme/app_theme.dart';
-import 'package:framegrab/features/media/application/media_thumbnail_provider.dart';
-import 'package:framegrab/features/media/presentation/authenticated_media_cover.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/core/theme/app_theme.dart';
+import 'package:framefetch/features/media/application/media_thumbnail_provider.dart';
+import 'package:framefetch/features/media/presentation/authenticated_media_cover.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 
 import '../../../support/shad_test_app.dart';
 

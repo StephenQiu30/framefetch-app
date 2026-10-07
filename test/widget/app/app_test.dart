@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/network/data_request_failure.dart';
-import 'package:framegrab/features/auth/data/native_auth_gateway.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/core/network/data_request_failure.dart';
+import 'package:framefetch/features/auth/data/native_auth_gateway.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 import '../../support/analysis_fakes.dart';
 import '../../support/auth_fakes.dart';
@@ -27,7 +27,7 @@ void main() {
     tester,
   ) async {
     await setMobileViewport(tester);
-    await pumpFramegrabApp(tester);
+    await pumpFramefetchApp(tester);
 
     expect(find.text('帧取'), findsOneWidget);
     final wordmark = find.byKey(const Key('app-brand-wordmark'));
@@ -81,7 +81,7 @@ void main() {
   ) async {
     final picker = FakeLocalContentPicker();
     await setMobileViewport(tester);
-    await pumpFramegrabApp(tester, localContentPicker: picker);
+    await pumpFramefetchApp(tester, localContentPicker: picker);
 
     await tester.tap(find.text('本地视频'));
     await tester.pumpAndSettle();
@@ -120,7 +120,7 @@ void main() {
       ),
     );
     final upload = FakeContentUploadRepository();
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       localContentPicker: picker,
       uploadRepository: upload,
@@ -143,7 +143,7 @@ void main() {
         ContentUploadFailureCode.fileSelectionFailed,
       ),
     );
-    await pumpFramegrabApp(tester, localContentPicker: picker);
+    await pumpFramefetchApp(tester, localContentPicker: picker);
 
     await tester.tap(find.text('剧本文档').first);
     await tester.pumpAndSettle();
@@ -165,7 +165,7 @@ void main() {
       ),
     );
     final upload = FakeContentUploadRepository();
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       downloadHistoryRepository: FakeDownloadHistoryRepository(),
       localContentPicker: picker,
@@ -192,7 +192,7 @@ void main() {
       ),
     );
     final upload = FakeContentUploadRepository();
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       documentRepository: FakeDocumentRepository(data: documentFixture()),
       localContentPicker: picker,
@@ -215,7 +215,7 @@ void main() {
     tester,
   ) async {
     final repository = FakeDownloadIntakeRepository();
-    await pumpFramegrabApp(tester, downloadIntakeRepository: repository);
+    await pumpFramefetchApp(tester, downloadIntakeRepository: repository);
 
     await tester.enterText(find.byKey(const Key('media-url-input')), '');
     await tester.tap(find.byKey(const Key('inspect-media-button')));
@@ -230,7 +230,7 @@ void main() {
   ) async {
     final repository = FakeDownloadIntakeRepository();
     final intents = FakeDownloadIntentRepository(repository);
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       downloadIntakeRepository: repository,
       downloadIntentRepository: intents,
@@ -256,7 +256,7 @@ void main() {
     (tester) async {
       final repository = FakeDownloadIntakeRepository();
       final intents = FakeDownloadIntentRepository(repository);
-      await pumpFramegrabApp(
+      await pumpFramefetchApp(
         tester,
         downloadIntakeRepository: repository,
         downloadIntentRepository: intents,
@@ -278,7 +278,7 @@ void main() {
   ) async {
     final repository = FakeDownloadIntakeRepository();
     final intents = FakeDownloadIntentRepository(repository);
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       downloadIntakeRepository: repository,
       downloadIntentRepository: intents,
@@ -303,7 +303,7 @@ void main() {
   ) async {
     final repository = FakeDownloadIntakeRepository();
     final intents = FakeDownloadIntentRepository(repository);
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       downloadIntakeRepository: repository,
       downloadIntentRepository: intents,
@@ -325,7 +325,7 @@ void main() {
 
   testWidgets('discovers and opens an article candidate', (tester) async {
     final repository = FakeDownloadIntakeRepository();
-    await pumpFramegrabApp(tester, downloadIntakeRepository: repository);
+    await pumpFramefetchApp(tester, downloadIntakeRepository: repository);
 
     await tester.enterText(
       find.byKey(const Key('media-url-input')),
@@ -355,7 +355,7 @@ void main() {
     final history = FakeDownloadHistoryRepository(
       data: downloadHistoryFixture(),
     );
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       downloadHistoryRepository: history,
       downloadIntakeRepository: repository,
@@ -395,7 +395,7 @@ void main() {
   testWidgets('shows real empty states for the signed-in account', (
     tester,
   ) async {
-    await pumpFramegrabApp(tester);
+    await pumpFramefetchApp(tester);
 
     await tester.tap(find.byKey(const Key('app-tab-1')));
     await tester.pumpAndSettle();
@@ -436,7 +436,7 @@ void main() {
     final providerRepository = FakeProviderStatusRepository(
       data: providerFixture(),
     );
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       downloadHistoryRepository: FakeDownloadHistoryRepository(
         data: downloadHistoryFixture(),
@@ -476,7 +476,7 @@ void main() {
   ) async {
     await tester.binding.setSurfaceSize(const Size(390, 844));
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       downloadHistoryRepository: FakeDownloadHistoryRepository(
         data: downloadHistoryFixture(),
@@ -507,7 +507,7 @@ void main() {
     final repository = FakeDownloadHistoryRepository(
       data: downloadHistoryFixture(),
     );
-    await pumpFramegrabApp(tester, downloadHistoryRepository: repository);
+    await pumpFramefetchApp(tester, downloadHistoryRepository: repository);
 
     await tester.tap(find.byKey(const Key('app-tab-1')));
     await tester.pumpAndSettle();
@@ -543,7 +543,7 @@ void main() {
     tester,
   ) async {
     final repository = FakeDocumentRepository(data: documentFixture());
-    await pumpFramegrabApp(tester, documentRepository: repository);
+    await pumpFramefetchApp(tester, documentRepository: repository);
 
     await tester.tap(find.byKey(const Key('app-tab-2')));
     await tester.pumpAndSettle();
@@ -576,7 +576,7 @@ void main() {
     tester,
   ) async {
     final repository = FakeDocumentRepository(data: documentFixture());
-    await pumpFramegrabApp(tester, documentRepository: repository);
+    await pumpFramefetchApp(tester, documentRepository: repository);
 
     await tester.tap(find.byKey(const Key('app-tab-2')));
     await tester.pumpAndSettle();
@@ -600,7 +600,7 @@ void main() {
     tester,
   ) async {
     final repository = FakeDocumentRepository(data: documentFixture());
-    await pumpFramegrabApp(tester, documentRepository: repository);
+    await pumpFramefetchApp(tester, documentRepository: repository);
 
     tester
         .element(find.byKey(const Key('app-bottom-navigation')))
@@ -626,7 +626,7 @@ void main() {
       latest: screenplayAnalysisJobFixture(),
       skills: [screenplayAnalysisSkillFixture()],
     );
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       analysisRepository: analysis,
       documentRepository: FakeDocumentRepository(data: documentFixture()),
@@ -667,7 +667,7 @@ void main() {
     final repository = FakeDownloadHistoryRepository(
       data: downloadHistoryFixture(),
     );
-    await pumpFramegrabApp(tester, downloadHistoryRepository: repository);
+    await pumpFramefetchApp(tester, downloadHistoryRepository: repository);
 
     await tester.tap(find.byKey(const Key('app-tab-1')));
     await tester.pumpAndSettle();
@@ -710,7 +710,7 @@ void main() {
     tester,
   ) async {
     final repository = FakeDocumentRepository(data: documentFixture());
-    await pumpFramegrabApp(tester, documentRepository: repository);
+    await pumpFramefetchApp(tester, documentRepository: repository);
 
     await tester.tap(find.byKey(const Key('app-tab-2')));
     await tester.pumpAndSettle();
@@ -748,7 +748,7 @@ void main() {
         statusCode: 409,
       ),
     );
-    await pumpFramegrabApp(tester, documentRepository: repository);
+    await pumpFramefetchApp(tester, documentRepository: repository);
 
     await tester.tap(find.byKey(const Key('app-tab-2')));
     await tester.pumpAndSettle();
@@ -774,7 +774,7 @@ void main() {
   testWidgets('keeps authenticated data pages free of decorative dividers', (
     tester,
   ) async {
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       downloadHistoryRepository: FakeDownloadHistoryRepository(
         data: downloadHistoryFixture(),
@@ -796,7 +796,7 @@ void main() {
     final repository = FakeDownloadHistoryRepository(
       data: downloadHistoryFixture(),
     );
-    await pumpFramegrabApp(tester, downloadHistoryRepository: repository);
+    await pumpFramefetchApp(tester, downloadHistoryRepository: repository);
 
     await tester.tap(find.byKey(const Key('app-tab-1')));
     await tester.pumpAndSettle();
@@ -832,7 +832,7 @@ void main() {
     final repository = FakeDownloadHistoryRepository(
       data: downloadHistoryFixture(),
     );
-    await pumpFramegrabApp(tester, downloadHistoryRepository: repository);
+    await pumpFramefetchApp(tester, downloadHistoryRepository: repository);
 
     tester
         .element(find.byKey(const Key('app-bottom-navigation')))
@@ -860,7 +860,7 @@ void main() {
     final repository = FakeDownloadHistoryRepository(
       detail: downloadDetailFixture(title: title),
     );
-    await pumpFramegrabApp(tester, downloadHistoryRepository: repository);
+    await pumpFramefetchApp(tester, downloadHistoryRepository: repository);
 
     tester
         .element(find.byKey(const Key('app-bottom-navigation')))
@@ -882,7 +882,7 @@ void main() {
       final analysis = FakeAnalysisRepository(
         createResult: analysisJobFixture(status: AnalysisStatus.succeeded),
       );
-      await pumpFramegrabApp(
+      await pumpFramefetchApp(
         tester,
         analysisRepository: analysis,
         downloadHistoryRepository: FakeDownloadHistoryRepository(
@@ -937,7 +937,7 @@ void main() {
         resultKind: 'video_article',
       ),
     );
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       analysisRepository: analysis,
       downloadHistoryRepository: FakeDownloadHistoryRepository(
@@ -961,7 +961,7 @@ void main() {
     final analysis = FakeAnalysisRepository(
       latest: analysisJobFixture(status: AnalysisStatus.failed),
     );
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       analysisRepository: analysis,
       downloadHistoryRepository: FakeDownloadHistoryRepository(
@@ -993,7 +993,7 @@ void main() {
     final repository = FakeDownloadHistoryRepository(
       error: StateError('offline'),
     );
-    await pumpFramegrabApp(tester, downloadHistoryRepository: repository);
+    await pumpFramefetchApp(tester, downloadHistoryRepository: repository);
 
     await tester.tap(find.byKey(const Key('app-tab-1')));
     await tester.pumpAndSettle();
@@ -1015,7 +1015,7 @@ void main() {
   testWidgets('keeps the link input when navigating between destinations', (
     tester,
   ) async {
-    await pumpFramegrabApp(tester);
+    await pumpFramefetchApp(tester);
 
     await tester.enterText(
       find.byKey(const Key('media-url-input')),
@@ -1038,7 +1038,7 @@ void main() {
     tester.platformDispatcher.platformBrightnessTestValue = Brightness.light;
     addTearDown(tester.platformDispatcher.clearPlatformBrightnessTestValue);
     final preferenceStore = MemoryThemePreferenceStore();
-    await pumpFramegrabApp(tester, themePreferenceStore: preferenceStore);
+    await pumpFramefetchApp(tester, themePreferenceStore: preferenceStore);
 
     expect(find.byKey(const Key('navbar-theme-toggle')), findsOneWidget);
     await tester.tap(find.byKey(const Key('navbar-theme-toggle')));
@@ -1057,7 +1057,7 @@ void main() {
   testWidgets('shows the mobile admin entry only for an admin session', (
     tester,
   ) async {
-    await pumpFramegrabApp(tester);
+    await pumpFramefetchApp(tester);
     await tester.tap(find.byKey(const Key('app-tab-4')));
     await tester.pumpAndSettle();
     expect(find.byKey(const Key('admin-center-entry')), findsNothing);
@@ -1067,7 +1067,7 @@ void main() {
     expect(find.byKey(const Key('app-bottom-navigation')), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox.shrink());
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       authGateway: FakeAuthGateway(
         session: testSession(role: UserRole.admin, suffix: 'admin'),
@@ -1099,14 +1099,14 @@ void main() {
     tester,
   ) async {
     await setMobileViewport(tester);
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       authGateway: FakeAuthGateway(),
       credentialStore: MemoryCredentialStore(),
     );
 
     expect(find.byKey(const Key('public-home-screen')), findsOneWidget);
-    expect(find.text('帧取 FrameFetch · 开源视频工作流'), findsOneWidget);
+    expect(find.text('帧取 Framefetch · 开源视频工作流'), findsOneWidget);
     expect(find.text('把素材，\n带回本地。'), findsOneWidget);
     expect(find.textContaining('数据与运行边界由你掌控'), findsOneWidget);
     expect(find.text('创建本地账户'), findsOneWidget);
@@ -1121,9 +1121,9 @@ void main() {
     expect(find.text('运行与授权边界'), findsNothing);
     expect(find.text('常见问题'), findsOneWidget);
     expect(find.textContaining('请仅处理已获授权的内容'), findsOneWidget);
-    expect(find.text('帧取 FrameFetch 是什么？'), findsOneWidget);
+    expect(find.text('帧取 Framefetch 是什么？'), findsOneWidget);
     expect(find.byKey(const Key('public-home-guide')), findsOneWidget);
-    expect(find.text('在自己的基础设施上运行 FrameFetch'), findsOneWidget);
+    expect(find.text('在自己的基础设施上运行 Framefetch'), findsOneWidget);
     expect(find.text('阅读部署说明'), findsOneWidget);
     expect(find.byKey(const Key('public-home-login')), findsOneWidget);
     expect(find.byKey(const Key('app-bottom-navigation')), findsNothing);
@@ -1147,7 +1147,7 @@ void main() {
   testWidgets('keeps protected deep links behind native authentication', (
     tester,
   ) async {
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       authGateway: FakeAuthGateway(),
       credentialStore: MemoryCredentialStore(),
@@ -1163,7 +1163,7 @@ void main() {
   });
 
   testWidgets('validates login fields before making a request', (tester) async {
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       authGateway: FakeAuthGateway(),
       credentialStore: MemoryCredentialStore(),
@@ -1198,7 +1198,7 @@ void main() {
 
     final gateway = FakeAuthGateway();
     final store = MemoryCredentialStore();
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       authGateway: gateway,
       credentialStore: store,
@@ -1301,7 +1301,7 @@ void main() {
   });
 
   testWidgets('shows a readable server failure on login', (tester) async {
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       authGateway: FakeAuthGateway(failure: AuthFailureKind.invalidCredentials),
       credentialStore: MemoryCredentialStore(),

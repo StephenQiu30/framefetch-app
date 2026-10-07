@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/features/history/application/download_history_provider.dart';
-import 'package:framegrab/features/history/presentation/download_history_content.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/app_loading.dart';
-import 'package:framegrab/shared/presentation/data_page_view.dart';
-import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
-import 'package:framegrab/shared/presentation/list_filters.dart';
+import 'package:framefetch/features/history/application/download_history_provider.dart';
+import 'package:framefetch/features/history/presentation/download_history_content.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/app_loading.dart';
+import 'package:framefetch/shared/presentation/data_page_view.dart';
+import 'package:framefetch/shared/presentation/data_request_failure_message.dart';
+import 'package:framefetch/shared/presentation/list_filters.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 final class DownloadHistoryScreen extends ConsumerStatefulWidget {
   const DownloadHistoryScreen({this.onCreateDownload, super.key});

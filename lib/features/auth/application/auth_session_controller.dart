@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/features/auth/data/native_auth_gateway.dart';
-import 'package:framegrab/features/auth/data/refresh_credential_store.dart';
-import 'package:framegrab/features/auth/data/session_credential_access.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/auth/data/native_auth_gateway.dart';
+import 'package:framefetch/features/auth/data/refresh_credential_store.dart';
+import 'package:framefetch/features/auth/data/session_credential_access.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 final authSessionProvider =
     NotifierProvider<AuthSessionController, AuthSessionState>(
@@ -183,7 +183,7 @@ final class AuthSessionController extends Notifier<AuthSessionState> {
     _generation++;
     _refreshOperation = null;
     _accessToken = null;
-    ref.read(videoServerApiProvider).removeBearerAuth('NativeBearerAuth');
+    ref.read(framefetchServerApiProvider).removeBearerAuth('NativeBearerAuth');
     return _generation;
   }
 

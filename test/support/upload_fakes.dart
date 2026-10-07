@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:framegrab/features/upload/data/content_upload_repository.dart';
-import 'package:framegrab/features/upload/data/local_content_picker.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
+import 'package:framefetch/features/upload/data/content_upload_repository.dart';
+import 'package:framefetch/features/upload/data/local_content_picker.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
 
 final class FakeLocalContentPicker implements LocalContentPicker {
   FakeLocalContentPicker({this.error, this.file});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/core/theme/app_colors.dart';
-import 'package:framegrab/features/landing/presentation/public_home_layout.dart';
+import 'package:framefetch/core/theme/app_colors.dart';
+import 'package:framefetch/features/landing/presentation/public_home_layout.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 
 typedef PublicHomeCapability = ({String description, String title});

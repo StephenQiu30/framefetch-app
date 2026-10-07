@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/theme/theme_preference_store.dart';
-import 'package:framegrab/features/landing/presentation/public_home_screen.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/core/theme/theme_preference_store.dart';
+import 'package:framefetch/features/landing/presentation/public_home_screen.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 
 import '../../../support/shad_test_app.dart';
 import '../../../support/theme_fakes.dart';

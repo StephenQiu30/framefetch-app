@@ -2,7 +2,7 @@
 
 感谢你改进帧取 App。开始前请阅读 [AGENTS.md](AGENTS.md) 与 [PROJECT.md](PROJECT.md)；运行方式见 [README.md](README.md)，安全问题按 [SECURITY.md](SECURITY.md) 私下报告。
 
-本仓库只维护 Flutter iOS/Android 客户端。API、Web、管理后台、媒体执行、AI Worker 与对象存储属于 [`video-server`](https://github.com/StephenQiu30/video-server)；接口变化先在服务端完成，再更新本仓库的冻结快照。
+本仓库只维护 Flutter iOS/Android 客户端。API、Web、管理后台、媒体执行、AI Worker 与对象存储属于 [`framefetch-server`](https://github.com/StephenQiu30/framefetch-server)；接口变化先在服务端完成，再更新本仓库的冻结快照。
 
 ## 本地检查
 

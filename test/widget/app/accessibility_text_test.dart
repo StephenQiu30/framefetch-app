@@ -2,7 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/download/presentation/content_intake_selector.dart';
+import 'package:framefetch/features/download/presentation/content_intake_selector.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
@@ -41,7 +41,7 @@ void main() {
       (tester) async {
         await setMobileViewport(tester);
         setAccessibilityTextScale(tester);
-        await pumpFramegrabApp(tester, locale: scenario.locale);
+        await pumpFramefetchApp(tester, locale: scenario.locale);
         final semanticsHandle = tester.ensureSemantics();
 
         expect(tester.takeException(), isNull);
@@ -150,7 +150,7 @@ void main() {
       (tester) async {
         await setMobileViewport(tester);
         setAccessibilityTextScale(tester);
-        await pumpFramegrabApp(
+        await pumpFramefetchApp(
           tester,
           authGateway: FakeAuthGateway(),
           credentialStore: MemoryCredentialStore(),
@@ -173,7 +173,7 @@ void main() {
   ) async {
     await setMobileViewport(tester);
     setAccessibilityTextScale(tester);
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       authGateway: FakeAuthGateway(),
       credentialStore: MemoryCredentialStore(),
@@ -189,7 +189,7 @@ void main() {
     tester,
   ) async {
     await setMobileViewport(tester);
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       authGateway: FakeAuthGateway(),
       credentialStore: MemoryCredentialStore(),
@@ -213,7 +213,7 @@ void main() {
   ) async {
     await setMobileViewport(tester);
     setAccessibilityTextScale(tester);
-    await pumpFramegrabApp(
+    await pumpFramefetchApp(
       tester,
       analysisRepository: FakeAnalysisRepository(),
       downloadHistoryRepository: FakeDownloadHistoryRepository(
@@ -258,7 +258,7 @@ void main() {
     (tester) async {
       await setMobileViewport(tester);
       setAccessibilityTextScale(tester);
-      await pumpFramegrabApp(
+      await pumpFramefetchApp(
         tester,
         documentRepository: FakeDocumentRepository(data: documentFixture()),
         locale: const Locale('en'),
@@ -281,7 +281,7 @@ void main() {
     (tester) async {
       await setMobileViewport(tester);
       setAccessibilityTextScale(tester);
-      await pumpFramegrabApp(
+      await pumpFramefetchApp(
         tester,
         analysisRepository: FakeAnalysisRepository(
           latest: screenplayAnalysisJobFixture(),

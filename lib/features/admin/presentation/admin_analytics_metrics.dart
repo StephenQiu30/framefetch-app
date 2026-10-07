@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
+import 'package:framefetch/core/theme/app_spacing.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 final class AdminAnalyticsMetrics extends StatelessWidget {

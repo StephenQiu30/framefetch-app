@@ -1,5 +1,5 @@
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 String aiEngineLabel(AppLocalizations l, AiProviderEngine engine) =>
     switch (engine) {

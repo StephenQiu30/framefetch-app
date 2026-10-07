@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/features/landing/presentation/public_home_layout.dart';
-import 'package:framegrab/features/landing/presentation/public_home_section_intro.dart';
+import 'package:framefetch/features/landing/presentation/public_home_layout.dart';
+import 'package:framefetch/features/landing/presentation/public_home_section_intro.dart';
 
 typedef PublicHomeQuestion = ({String answer, String question});
 

@@ -10,7 +10,7 @@ Future<void> main(List<String> arguments) async {
     final options = _Options.parse(arguments);
     final root = _findProjectRoot();
     final snapshot = File(
-      '${root.path}/contracts/openapi/video-server.openapi.json',
+      '${root.path}/contracts/openapi/framefetch-server.openapi.json',
     );
     if (options.fromSnapshot) {
       if (!snapshot.existsSync()) {
@@ -29,7 +29,7 @@ Future<void> main(List<String> arguments) async {
     if (!options.snapshotOnly) {
       await generateDartClient(projectRoot: root, config: appOpenApiConfig);
       stdout.writeln(
-        'Generated packages/video_server_api with '
+        'Generated packages/framefetch_server_api with '
         '${appOpenApiConfig.generatorVersion}.',
       );
     }
@@ -74,7 +74,9 @@ Directory _findProjectRoot() {
     }
     final parent = current.parent;
     if (parent.path == current.path) {
-      throw StateError('Run this command inside the video-app repository.');
+      throw StateError(
+        'Run this command inside the framefetch-app repository.',
+      );
     }
     current = parent;
   }

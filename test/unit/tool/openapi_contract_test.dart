@@ -11,7 +11,7 @@ void main() {
     final source =
         jsonDecode(
               File(
-                'contracts/openapi/video-server.openapi.json',
+                'contracts/openapi/framefetch-server.openapi.json',
               ).readAsStringSync(),
             )
             as Map<String, dynamic>;
@@ -74,7 +74,7 @@ void main() {
     final decoded =
         jsonDecode(
               File(
-                'contracts/openapi/video-server.openapi.json',
+                'contracts/openapi/framefetch-server.openapi.json',
               ).readAsStringSync(),
             )
             as Map<String, dynamic>;
@@ -252,7 +252,7 @@ void main() {
     final source =
         jsonDecode(
               File(
-                'contracts/openapi/video-server.openapi.json',
+                'contracts/openapi/framefetch-server.openapi.json',
               ).readAsStringSync(),
             )
             as Map<String, dynamic>;
@@ -293,7 +293,7 @@ void main() {
     final source =
         jsonDecode(
               File(
-                'contracts/openapi/video-server.openapi.json',
+                'contracts/openapi/framefetch-server.openapi.json',
               ).readAsStringSync(),
             )
             as Map<String, dynamic>;

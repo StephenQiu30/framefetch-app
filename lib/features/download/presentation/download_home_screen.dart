@@ -2,25 +2,25 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/app/presentation/app_bottom_navigation.dart';
-import 'package:framegrab/app/router/app_router.dart';
-import 'package:framegrab/features/documents/application/document_list_provider.dart';
-import 'package:framegrab/features/documents/presentation/document_list_screen.dart';
-import 'package:framegrab/features/download/application/download_intake_controller.dart';
-import 'package:framegrab/features/download/application/public_input.dart';
-import 'package:framegrab/features/download/presentation/content_intake_selector.dart';
-import 'package:framegrab/features/download/presentation/download_home_content.dart';
-import 'package:framegrab/features/download/presentation/download_intake_workspace.dart';
-import 'package:framegrab/features/download/presentation/download_status.dart';
-import 'package:framegrab/features/download/presentation/intake_failure_message.dart';
-import 'package:framegrab/features/history/application/download_history_provider.dart';
-import 'package:framegrab/features/history/presentation/download_history_screen.dart';
-import 'package:framegrab/features/providers/presentation/provider_status_screen.dart';
-import 'package:framegrab/features/settings/presentation/settings_screen.dart';
-import 'package:framegrab/features/upload/application/content_upload_controller.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
+import 'package:framefetch/app/presentation/app_bottom_navigation.dart';
+import 'package:framefetch/app/router/app_router.dart';
+import 'package:framefetch/features/documents/application/document_list_provider.dart';
+import 'package:framefetch/features/documents/presentation/document_list_screen.dart';
+import 'package:framefetch/features/download/application/download_intake_controller.dart';
+import 'package:framefetch/features/download/application/public_input.dart';
+import 'package:framefetch/features/download/presentation/content_intake_selector.dart';
+import 'package:framefetch/features/download/presentation/download_home_content.dart';
+import 'package:framefetch/features/download/presentation/download_intake_workspace.dart';
+import 'package:framefetch/features/download/presentation/download_status.dart';
+import 'package:framefetch/features/download/presentation/intake_failure_message.dart';
+import 'package:framefetch/features/history/application/download_history_provider.dart';
+import 'package:framefetch/features/history/presentation/download_history_screen.dart';
+import 'package:framefetch/features/providers/presentation/provider_status_screen.dart';
+import 'package:framefetch/features/settings/presentation/settings_screen.dart';
+import 'package:framefetch/features/upload/application/content_upload_controller.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/app_navigation_bar.dart';
 
 final class DownloadHomeScreen extends ConsumerStatefulWidget {
   const DownloadHomeScreen({

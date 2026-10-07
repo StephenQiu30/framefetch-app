@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/app/router/app_router.dart';
-import 'package:framegrab/features/history/application/download_detail_provider.dart';
-import 'package:framegrab/features/history/application/download_history_provider.dart';
-import 'package:framegrab/features/history/application/download_retry.dart';
-import 'package:framegrab/features/history/data/download_history_repository.dart';
-import 'package:framegrab/features/history/presentation/download_presentation_labels.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/deletion_failure_message.dart';
-import 'package:framegrab/shared/presentation/destructive_confirmation.dart';
+import 'package:framefetch/app/router/app_router.dart';
+import 'package:framefetch/features/history/application/download_detail_provider.dart';
+import 'package:framefetch/features/history/application/download_history_provider.dart';
+import 'package:framefetch/features/history/application/download_retry.dart';
+import 'package:framefetch/features/history/data/download_history_repository.dart';
+import 'package:framefetch/features/history/presentation/download_presentation_labels.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/deletion_failure_message.dart';
+import 'package:framefetch/shared/presentation/destructive_confirmation.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 final class DownloadTaskActions extends ConsumerStatefulWidget {
   const DownloadTaskActions({required this.job, super.key});

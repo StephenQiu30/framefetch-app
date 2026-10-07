@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/app/app.dart';
-import 'package:framegrab/core/theme/theme_preference_store.dart';
-import 'package:framegrab/features/analysis/data/analysis_repository.dart';
-import 'package:framegrab/features/auth/data/native_auth_gateway.dart';
-import 'package:framegrab/features/auth/data/refresh_credential_store.dart';
-import 'package:framegrab/features/documents/data/document_repository.dart';
-import 'package:framegrab/features/download/data/download_intake_repository.dart';
-import 'package:framegrab/features/download/data/download_intent_repository.dart';
-import 'package:framegrab/features/history/data/activity_history_repository.dart';
-import 'package:framegrab/features/history/data/download_history_repository.dart';
-import 'package:framegrab/features/providers/data/provider_status_repository.dart';
-import 'package:framegrab/features/upload/data/content_upload_repository.dart';
-import 'package:framegrab/features/upload/data/local_content_picker.dart';
+import 'package:framefetch/app/app.dart';
+import 'package:framefetch/core/theme/theme_preference_store.dart';
+import 'package:framefetch/features/analysis/data/analysis_repository.dart';
+import 'package:framefetch/features/auth/data/native_auth_gateway.dart';
+import 'package:framefetch/features/auth/data/refresh_credential_store.dart';
+import 'package:framefetch/features/documents/data/document_repository.dart';
+import 'package:framefetch/features/download/data/download_intake_repository.dart';
+import 'package:framefetch/features/download/data/download_intent_repository.dart';
+import 'package:framefetch/features/history/data/activity_history_repository.dart';
+import 'package:framefetch/features/history/data/download_history_repository.dart';
+import 'package:framefetch/features/providers/data/provider_status_repository.dart';
+import 'package:framefetch/features/upload/data/content_upload_repository.dart';
+import 'package:framefetch/features/upload/data/local_content_picker.dart';
 
 import '../../support/analysis_fakes.dart';
 import '../../support/auth_fakes.dart';
@@ -22,7 +22,7 @@ import '../../support/intake_fakes.dart';
 import '../../support/theme_fakes.dart';
 import '../../support/upload_fakes.dart';
 
-Future<void> pumpFramegrabApp(
+Future<void> pumpFramefetchApp(
   WidgetTester tester, {
   ActivityHistoryRepository? activityHistoryRepository,
   AnalysisRepository? analysisRepository,
@@ -81,7 +81,7 @@ Future<void> pumpFramegrabApp(
           localContentPicker ?? FakeLocalContentPicker(),
         ),
       ],
-      child: FramegrabApp(locale: locale),
+      child: FramefetchApp(locale: locale),
     ),
   );
   await tester.pumpAndSettle();

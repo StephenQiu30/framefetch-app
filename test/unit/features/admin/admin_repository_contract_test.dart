@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/admin/data/admin_repository.dart';
-import 'package:framegrab/features/auth/application/authenticated_request.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/admin/data/admin_repository.dart';
+import 'package:framefetch/features/auth/application/authenticated_request.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import '../../../support/admin_fixtures.dart';
 
 void main() {
   test(
     'admin repositories use the generated analytics, logs, and deletion contract',
     () async {
-      final client = VideoServerApi();
+      final client = FramefetchServerApi();
       final sent = <RequestOptions>[];
       client.dio.interceptors.add(
         InterceptorsWrapper(

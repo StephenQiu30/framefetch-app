@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/app/router/app_router.dart';
-import 'package:framegrab/features/auth/application/auth_session_controller.dart';
+import 'package:framefetch/app/router/app_router.dart';
+import 'package:framefetch/features/auth/application/auth_session_controller.dart';
 
 void main() {
   group('authRedirect', () {

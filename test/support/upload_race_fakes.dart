@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:framegrab/features/upload/data/content_upload_repository.dart';
-import 'package:framegrab/features/upload/data/local_content_picker.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
+import 'package:framefetch/features/upload/data/content_upload_repository.dart';
+import 'package:framefetch/features/upload/data/local_content_picker.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
 
 const uploadTestFile = LocalContentFile(
   name: 'clip.mp4',

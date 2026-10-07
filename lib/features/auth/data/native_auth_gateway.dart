@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/core/config/app_config.dart';
-import 'package:framegrab/core/network/dio_http_client.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/core/config/app_config.dart';
+import 'package:framefetch/core/network/dio_http_client.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 final dioHttpClientProvider = Provider<DioHttpClient>((ref) {
   final client = DioHttpClient(
@@ -14,12 +14,12 @@ final dioHttpClientProvider = Provider<DioHttpClient>((ref) {
   return client;
 });
 
-final videoServerApiProvider = Provider<VideoServerApi>(
+final framefetchServerApiProvider = Provider<FramefetchServerApi>(
   (ref) => ref.watch(dioHttpClientProvider).api,
 );
 
 final nativeAuthGatewayProvider = Provider<NativeAuthGateway>(
-  (ref) => GeneratedNativeAuthGateway(ref.watch(videoServerApiProvider)),
+  (ref) => GeneratedNativeAuthGateway(ref.watch(framefetchServerApiProvider)),
 );
 
 enum AuthFailureKind {
@@ -68,7 +68,7 @@ abstract interface class NativeAuthGateway {
 final class GeneratedNativeAuthGateway implements NativeAuthGateway {
   GeneratedNativeAuthGateway(this._client);
 
-  final VideoServerApi _client;
+  final FramefetchServerApi _client;
 
   AppAuthApi get _api => _client.getAppAuthApi();
 

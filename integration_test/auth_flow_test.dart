@@ -2,15 +2,15 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/core/config/app_config.dart';
-import 'package:framegrab/core/network/data_request_failure.dart';
-import 'package:framegrab/features/analysis/data/analysis_repository.dart';
-import 'package:framegrab/features/auth/application/authenticated_request.dart';
-import 'package:framegrab/features/auth/data/native_auth_gateway.dart';
-import 'package:framegrab/main.dart' as app;
+import 'package:framefetch/core/config/app_config.dart';
+import 'package:framefetch/core/network/data_request_failure.dart';
+import 'package:framefetch/features/analysis/data/analysis_repository.dart';
+import 'package:framefetch/features/auth/application/authenticated_request.dart';
+import 'package:framefetch/features/auth/data/native_auth_gateway.dart';
+import 'package:framefetch/main.dart' as app;
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:go_router/go_router.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 import 'registration_mailbox.dart';
 
@@ -167,7 +167,7 @@ void main() {
   testWidgets('uses the generated Analysis client against the local service', (
     _,
   ) async {
-    final client = VideoServerApi(
+    final client = FramefetchServerApi(
       dio: Dio(BaseOptions(baseUrl: AppConfig.serverBaseUrl)),
     );
     final gateway = GeneratedNativeAuthGateway(client);

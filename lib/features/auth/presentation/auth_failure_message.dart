@@ -1,5 +1,5 @@
-import 'package:framegrab/features/auth/data/native_auth_gateway.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/features/auth/data/native_auth_gateway.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 
 String authFailureMessage(
   AppLocalizations localizations,

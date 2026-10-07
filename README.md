@@ -1,19 +1,19 @@
 <p align="center">
-  <img src="assets/readme/hero.svg" width="100%" alt="帧取 · FrameFetch App — 帧取工作站的 iOS / Android 原生客户端" />
+  <img src="assets/readme/hero.svg" width="100%" alt="帧取 · Framefetch App — 帧取工作站的 iOS / Android 原生客户端" />
 </p>
 
-# <img src="assets/brand/logo.png" width="36" alt="帧取正式 Logo" /> 帧取 · FrameFetch App
+# <img src="assets/brand/logo.png" width="36" alt="帧取正式 Logo" /> 帧取 · Framefetch App
 
-**帧取工作站的 iOS / Android 原生客户端。** 接入素材、跟踪任务，在手机上播放视频、阅读报告、保存文件与系统分享。连接你部署的 FrameFetch Server，和 Web、桌面共享账户、素材与报告。
+**帧取工作站的 iOS / Android 原生客户端。** 接入素材、跟踪任务，在手机上播放视频、阅读报告、保存文件与系统分享。连接你部署的 Framefetch Server，和 Web、桌面共享账户、素材与报告。
 
-[![Flutter quality](https://github.com/StephenQiu30/video-app/actions/workflows/flutter-quality.yml/badge.svg)](https://github.com/StephenQiu30/video-app/actions/workflows/flutter-quality.yml)
+[![Flutter quality](https://github.com/StephenQiu30/framefetch-app/actions/workflows/flutter-quality.yml/badge.svg)](https://github.com/StephenQiu30/framefetch-app/actions/workflows/flutter-quality.yml)
 [![Platforms](https://img.shields.io/badge/platform-iOS%20%7C%20Android-171717)](#平台与安装)
-[![Source preview](https://img.shields.io/github/v/release/StephenQiu30/video-app?include_prereleases&color=171717)](https://github.com/StephenQiu30/video-app/releases)
+[![Source preview](https://img.shields.io/github/v/release/StephenQiu30/framefetch-app?include_prereleases&color=171717)](https://github.com/StephenQiu30/framefetch-app/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-171717.svg)](LICENSE)
 
-[开始使用](#开始使用) · [可以做什么](#可以用它做什么) · [平台与安装](#平台与安装) · [Server / Web](https://github.com/StephenQiu30/video-server) · [桌面端](https://github.com/StephenQiu30/video-electron) · [English](README.en.md)
+[开始使用](#开始使用) · [可以做什么](#可以用它做什么) · [平台与安装](#平台与安装) · [Server / Web](https://github.com/StephenQiu30/framefetch-server) · [桌面端](https://github.com/StephenQiu30/framefetch-electron) · [English](README.en.md)
 
-> **源码预览**：[v0.2.0-beta.1](https://github.com/StephenQiu30/video-app/releases/tag/v0.2.0-beta.1) 未提供 APK / IPA 或商店安装包。先部署 Server，再从源码运行原生客户端。
+> **源码预览**：[v0.2.0-beta.1](https://github.com/StephenQiu30/framefetch-app/releases/tag/v0.2.0-beta.1) 未提供 APK / IPA 或商店安装包。先部署 Server，再从源码运行原生客户端。
 
 ## App 预览
 
@@ -28,18 +28,18 @@
 
 ### 1. 准备服务与工具链
 
-先按 [video-server 快速开始](https://github.com/StephenQiu30/video-server#快速开始) 部署 API、Web 与 Worker，准备手机可访问的服务地址。
+先按 [framefetch-server 快速开始](https://github.com/StephenQiu30/framefetch-server#快速开始) 部署 API、Web 与 Worker，准备手机可访问的服务地址。
 
 | 环境           | 要求                                            |
 | -------------- | ----------------------------------------------- |
 | Flutter / Dart | Flutter 3.44.7 stable / Dart 3.12.2             |
 | iOS            | Xcode 27、iOS 16+、CocoaPods                    |
 | Android        | JDK 21、Android API 24+，JVM target 17          |
-| 服务端         | 设备可访问的 `video-server`；生产使用有效 HTTPS |
+| 服务端         | 设备可访问的 `framefetch-server`；生产使用有效 HTTPS |
 
 ```bash
-git clone https://github.com/StephenQiu30/video-app.git
-cd video-app
+git clone https://github.com/StephenQiu30/framefetch-app.git
+cd framefetch-app
 git checkout v0.2.0-beta.1
 flutter doctor -v
 flutter pub get --enforce-lockfile
@@ -51,33 +51,33 @@ iOS Simulator 连接电脑上的本地服务：
 
 ```bash
 flutter run \
-  --dart-define=VIDEO_SERVER_BASE_URL=http://127.0.0.1:8111
+  --dart-define=FRAMEFETCH_SERVER_BASE_URL=http://127.0.0.1:8111
 ```
 
 Android Emulator 连接宿主机：
 
 ```bash
 flutter run \
-  --dart-define=VIDEO_SERVER_BASE_URL=http://10.0.2.2:8111
+  --dart-define=FRAMEFETCH_SERVER_BASE_URL=http://10.0.2.2:8111
 ```
 
 真机与生产实例：
 
 ```bash
 flutter run \
-  --dart-define=VIDEO_SERVER_BASE_URL=https://your-framefetch.example.com
+  --dart-define=FRAMEFETCH_SERVER_BASE_URL=https://your-framefetch.example.com
 ```
 
-`VIDEO_SERVER_BASE_URL` 指向 API 服务。手机上的 `localhost` 是手机自身；真机请使用设备可达的服务地址。App 登录该服务后即可使用已有账户和素材。
+`FRAMEFETCH_SERVER_BASE_URL` 指向 API 服务。手机上的 `localhost` 是手机自身；真机请使用设备可达的服务地址。App 登录该服务后即可使用已有账户和素材。
 
 ### 3. 构建客户端
 
 ```bash
 flutter build apk --debug \
-  --dart-define=VIDEO_SERVER_BASE_URL=https://your-framefetch.example.com
+  --dart-define=FRAMEFETCH_SERVER_BASE_URL=https://your-framefetch.example.com
 
 flutter build ios --simulator --no-codesign \
-  --dart-define=VIDEO_SERVER_BASE_URL=https://your-framefetch.example.com
+  --dart-define=FRAMEFETCH_SERVER_BASE_URL=https://your-framefetch.example.com
 ```
 
 调试 APK 位于 `build/app/outputs/flutter-apk/app-debug.apk`，iOS Simulator 制品位于 `build/ios/iphonesimulator/`。当前 Xcode 27 环境的通用双架构 Simulator 构建问题及 arm64 运行方式见[可访问性与质量](docs/design/11-可访问性与质量.md)。真机和商店分发需配置各平台正式签名，签名材料不进入仓库。
@@ -100,7 +100,7 @@ flutter build ios --simulator --no-codesign \
 
 ### 在手机上阅读完整 AI 结果
 
-App 继续使用原有视频／剧本文档分析入口：选择 Skill、中文／英文输出，编辑分析重点或恢复该方法的默认要求。可调用方法以服务端目录为准；本轮优化成片审阅（`video-review`）、素材拆解（`video-breakdown`）、剧本审阅（`screenplay-analysis`），以及文章／公众号／小红书整理（`article-format`、`wechat-format`、`xhs-format`）。原有报告阅读、运行历史及 Markdown／DOCX 导出保持原页面和操作。方法与结果契约见 [服务端 Skill 设计](https://github.com/StephenQiu30/video-server/blob/main/workspace/content/design/09-AI分析.md)。
+App 继续使用原有视频／剧本文档分析入口：选择 Skill、中文／英文输出，编辑分析重点或恢复该方法的默认要求。可调用方法以服务端目录为准；本轮优化成片审阅（`video-review`）、素材拆解（`video-breakdown`）、剧本审阅（`screenplay-analysis`），以及文章／公众号／小红书整理（`article-format`、`wechat-format`、`xhs-format`）。原有报告阅读、运行历史及 Markdown／DOCX 导出保持原页面和操作。方法与结果契约见 [服务端 Skill 设计](https://github.com/StephenQiu30/framefetch-server/blob/main/workspace/content/design/09-AI分析.md)。
 
 方法数量表示当前目录，不表示所有方法的真实模型与设备业务验收均已通过。
 
@@ -143,7 +143,7 @@ App 继续使用原有视频／剧本文档分析入口：选择 Skill、中文�
 5. **分析**：对视频或剧本选择 Skill、输出语言和关注重点，启动服务端分析；分析状态独立于素材获取。
 6. **交付**：结合视频时间或剧本场景依据阅读结果，保存 Markdown／DOCX，或分享完整 Markdown 报告继续编辑。
 
-已有本地 MP4 时，从“本地视频”入口上传后直接进入素材详情，继续第 5 步。工作站共用流程与交付规则见 [Server 完整工作流](https://github.com/StephenQiu30/video-server#从素材到报告)。
+已有本地 MP4 时，从“本地视频”入口上传后直接进入素材详情，继续第 5 步。工作站共用流程与交付规则见 [Server 完整工作流](https://github.com/StephenQiu30/framefetch-server#从素材到报告)。
 
 ### 管理自己的服务
 
@@ -153,15 +153,15 @@ App 继续使用原有视频／剧本文档分析入口：选择 Skill、中文�
 
 | 项目                                                               | 入口与职责                                                                                       |
 | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| [`video-server`](https://github.com/StephenQiu30/video-server)     | FastAPI API、Next.js Web、解析与下载、AI Worker、账户权限、队列、存储和报告                      |
-| [`video-electron`](https://github.com/StephenQiu30/video-electron) | Electron 桌面入口，随包 React 页面复用 Web 业务源码，连接同一 Server，提供原生窗口和系统文件保存 |
-| **`video-app`**                                                    | Flutter iOS／Android 原生页面、Bearer 会话、系统文件入口、播放和移动管理                         |
+| [`framefetch-server`](https://github.com/StephenQiu30/framefetch-server)     | FastAPI API、Next.js Web、解析与下载、AI Worker、账户权限、队列、存储和报告                      |
+| [`framefetch-electron`](https://github.com/StephenQiu30/framefetch-electron) | Electron 桌面入口，随包 React 页面复用 Web 业务源码，连接同一 Server，提供原生窗口和系统文件保存 |
+| **`framefetch-app`**                                                    | Flutter iOS／Android 原生页面、Bearer 会话、系统文件入口、播放和移动管理                         |
 
 三端共享同一服务端业务数据，切换客户端无需建立另一套媒体任务或业务库。App 通过经评审的 App 专用 OpenAPI 快照生成客户端，不维护另一套服务端 DTO。活动解析、下载、文档和分析状态以 REST 查询收敛，历史与结果以服务端事实为准；当前 App 未接入 WebSocket 实时状态。
 
 ## 平台与安装
 
-当前客户端面向 **iOS 16+ 与 Android API 24+**，从源码构建。[v0.2.0-beta.1](https://github.com/StephenQiu30/video-app/releases/tag/v0.2.0-beta.1) 是公开源码预览，GitHub tag 标识源码快照；源码内嵌 App 构建版本仍为 **`0.1.0+1`**。该 Release 未附加 APK／IPA，也没有 App Store／Google Play 预构建安装包。本仓库不启用 Flutter Web；桌面入口见 [`video-electron`](https://github.com/StephenQiu30/video-electron)。
+当前客户端面向 **iOS 16+ 与 Android API 24+**，从源码构建。[v0.2.0-beta.1](https://github.com/StephenQiu30/framefetch-app/releases/tag/v0.2.0-beta.1) 是公开源码预览，GitHub tag 标识源码快照；源码内嵌 App 构建版本仍为 **`0.1.0+1`**。该 Release 未附加 APK／IPA，也没有 App Store／Google Play 预构建安装包。本仓库不启用 Flutter Web；桌面入口见 [`framefetch-electron`](https://github.com/StephenQiu30/framefetch-electron)。
 
 App 依赖在线自托管服务。媒体解析、下载和 AI 分析在服务端运行；离线 AI、后台常驻下载、离线媒体库与批量任务不在当前范围内。平台链接的访问决策与可用格式以服务端检查为准。
 
@@ -203,7 +203,7 @@ lib/features/                 素材、下载、文档、分析、账户和管�
 lib/l10n/                     ARB 本地化
 lib/shared/                   复用展示组件与模型
 contracts/openapi/            App 专用 OpenAPI 快照
-packages/video_server_api/    自动生成的 Dart API 客户端
+packages/framefetch_server_api/    自动生成的 Dart API 客户端
 test/ · integration_test/     单元、Widget 与原生流程测试
 tool/                         契约生成、质量检查与主题同步
 docs/design/                  产品、架构与验证条件
@@ -227,7 +227,7 @@ dart run tool/check.dart
 
 ## 参与项目
 
-欢迎提交 [Issues](https://github.com/StephenQiu30/video-app/issues) 和改进建议；贡献前阅读 [`CONTRIBUTING.md`](CONTRIBUTING.md) 与 [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)。移动 UI、原生会话和设备行为在本仓库反馈；API、Web、解析、存储与 AI Worker 问题提交到 [video-server](https://github.com/StephenQiu30/video-server/issues)。
+欢迎提交 [Issues](https://github.com/StephenQiu30/framefetch-app/issues) 和改进建议；贡献前阅读 [`CONTRIBUTING.md`](CONTRIBUTING.md) 与 [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)。移动 UI、原生会话和设备行为在本仓库反馈；API、Web、解析、存储与 AI Worker 问题提交到 [framefetch-server](https://github.com/StephenQiu30/framefetch-server/issues)。
 
 如果你在论文、报告或课程中使用帧取，可以引用 [`CITATION.cff`](CITATION.cff)。
 

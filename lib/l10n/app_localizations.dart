@@ -707,7 +707,7 @@ abstract class AppLocalizations {
   /// No description provided for @publicHomeEyebrow.
   ///
   /// In zh, this message translates to:
-  /// **'帧取 FrameFetch · 开源视频工作流'**
+  /// **'帧取 Framefetch · 开源视频工作流'**
   String get publicHomeEyebrow;
 
   /// No description provided for @publicHomeTitle.
@@ -851,7 +851,7 @@ abstract class AppLocalizations {
   /// No description provided for @publicFaqWhatQuestion.
   ///
   /// In zh, this message translates to:
-  /// **'帧取 FrameFetch 是什么？'**
+  /// **'帧取 Framefetch 是什么？'**
   String get publicFaqWhatQuestion;
 
   /// No description provided for @publicFaqWhatAnswer.
@@ -917,7 +917,7 @@ abstract class AppLocalizations {
   /// No description provided for @publicFaqMobileAnswer.
   ///
   /// In zh, this message translates to:
-  /// **'iOS 和 Android 客户端位于独立的 video-app 仓库，使用 Flutter 构建并连接自托管 video-server。媒体处理与 AI 推理由服务端执行，手机端不内置离线提取器或离线 AI 模型。'**
+  /// **'iOS 和 Android 客户端位于独立的 framefetch-app 仓库，使用 Flutter 构建并连接自托管 framefetch-server。媒体处理与 AI 推理由服务端执行，手机端不内置离线提取器或离线 AI 模型。'**
   String get publicFaqMobileAnswer;
 
   /// No description provided for @publicGuideAction.
@@ -929,7 +929,7 @@ abstract class AppLocalizations {
   /// No description provided for @publicStartTitle.
   ///
   /// In zh, this message translates to:
-  /// **'在自己的基础设施上运行 FrameFetch'**
+  /// **'在自己的基础设施上运行 Framefetch'**
   String get publicStartTitle;
 
   /// No description provided for @publicDeploymentAction.
@@ -1007,7 +1007,7 @@ abstract class AppLocalizations {
   /// No description provided for @publicGuideDeploymentParagraphOne.
   ///
   /// In zh, this message translates to:
-  /// **'video-server 包含 Next.js Web 页面、FastAPI API，以及独立的下载、媒体处理与 AI Worker。Docker Compose 管理业务服务，并连接部署者已有的 PostgreSQL、RabbitMQ、Redis 和 MinIO。默认 Web 端口为 8101，API 端口为 8111。'**
+  /// **'framefetch-server 包含 Next.js Web 页面、FastAPI API，以及独立的下载、媒体处理与 AI Worker。Docker Compose 管理业务服务，并连接部署者已有的 PostgreSQL、RabbitMQ、Redis 和 MinIO。默认 Web 端口为 8101，API 端口为 8111。'**
   String get publicGuideDeploymentParagraphOne;
 
   /// No description provided for @publicGuideDeploymentParagraphTwo.
@@ -1037,7 +1037,7 @@ abstract class AppLocalizations {
   /// No description provided for @publicGuideClientsParagraphOne.
   ///
   /// In zh, this message translates to:
-  /// **'Web 随 video-server 部署，适合在浏览器中管理素材、任务、分析报告与管理员配置。video-app 是单独维护的 Flutter 原生客户端，面向 iOS 和 Android，需要连接可访问的 video-server。'**
+  /// **'Web 随 framefetch-server 部署，适合在浏览器中管理素材、任务、分析报告与管理员配置。framefetch-app 是单独维护的 Flutter 原生客户端，面向 iOS 和 Android，需要连接可访问的 framefetch-server。'**
   String get publicGuideClientsParagraphOne;
 
   /// No description provided for @publicGuideClientsParagraphTwo.
@@ -3713,13 +3713,13 @@ abstract class AppLocalizations {
   /// No description provided for @aboutContent.
   ///
   /// In zh, this message translates to:
-  /// **'## 帧取为谁而做？\n\n### 创作者\n\n整理自己拥有或已获授权的素材，用分镜、场景与关键帧证据复盘作品结构。\n\n### 内容研究者\n\n把视频与剧本文档组织为可追踪的任务，并导出 Markdown / DOCX 报告用于审阅。\n\n### 开发者与团队\n\n在自己的基础设施上运行 FastAPI、Next.js 与 Worker，通过 OpenAPI 契约扩展 Web 或移动端。\n\n## 为什么采用异步工作流架构？\n\n### 可恢复\n\nPostgreSQL 保存任务事实，Transactional Outbox 保证数据库状态与消息意图一致；实时连接只用于展示进度。\n\n### 可隔离\n\n下载、媒体命令与 AI 长任务不在 HTTP 请求进程中执行，Runner 经过阻断私网的受控出口代理。\n\n### 可验证\n\nProvider 返回值不会直接成为最终文件；Worker 重新解析并校验格式、时长、大小与 SHA-256 后才写入存储。\n\n### 可自托管\n\n数据保存在部署者配置的基础设施中，项目不依赖官方托管服务，也不内置第三方追踪器。\n\n## 帧取不做什么？\n\n帧取不是规避平台限制的下载脚本。默认只处理用户有权使用、公开、免费且非 DRM 的 HTTP(S) 内容；受保护、会员、私密、购买或地域限制内容不属于项目目标。私网 URL、任意 yt-dlp 参数和 shell 输入始终禁止。\n\nMIT 许可证授予软件的使用、修改和分发权，不代表授予任何第三方媒体内容的下载、复制或分析权。项目不提供官方 SaaS、公共演示站或服务可用性 SLA。\n\n## 源码在哪里？\n\n[video-server](https://github.com/StephenQiu30/video-server)：FastAPI API、Next.js Web、下载 / 文档 / 报告 Worker、隔离 Media Runner 与 Docker Compose 部署。\n\n[video-app](https://github.com/StephenQiu30/video-app)：连接自托管 video-server 的 Flutter iOS / Android 客户端；媒体处理与 AI 推理仍在服务端执行。\n\n项目由 [StephenQiu](https://github.com/StephenQiu30) 维护，欢迎通过 Issue 或 Pull Request 参与。安全问题请按[安全策略](https://github.com/StephenQiu30/video-server/blob/main/SECURITY.md)私下报告。'**
+  /// **'## 帧取为谁而做？\n\n### 创作者\n\n整理自己拥有或已获授权的素材，用分镜、场景与关键帧证据复盘作品结构。\n\n### 内容研究者\n\n把视频与剧本文档组织为可追踪的任务，并导出 Markdown / DOCX 报告用于审阅。\n\n### 开发者与团队\n\n在自己的基础设施上运行 FastAPI、Next.js 与 Worker，通过 OpenAPI 契约扩展 Web 或移动端。\n\n## 为什么采用异步工作流架构？\n\n### 可恢复\n\nPostgreSQL 保存任务事实，Transactional Outbox 保证数据库状态与消息意图一致；实时连接只用于展示进度。\n\n### 可隔离\n\n下载、媒体命令与 AI 长任务不在 HTTP 请求进程中执行，Runner 经过阻断私网的受控出口代理。\n\n### 可验证\n\nProvider 返回值不会直接成为最终文件；Worker 重新解析并校验格式、时长、大小与 SHA-256 后才写入存储。\n\n### 可自托管\n\n数据保存在部署者配置的基础设施中，项目不依赖官方托管服务，也不内置第三方追踪器。\n\n## 帧取不做什么？\n\n帧取不是规避平台限制的下载脚本。默认只处理用户有权使用、公开、免费且非 DRM 的 HTTP(S) 内容；受保护、会员、私密、购买或地域限制内容不属于项目目标。私网 URL、任意 yt-dlp 参数和 shell 输入始终禁止。\n\nMIT 许可证授予软件的使用、修改和分发权，不代表授予任何第三方媒体内容的下载、复制或分析权。项目不提供官方 SaaS、公共演示站或服务可用性 SLA。\n\n## 源码在哪里？\n\n[framefetch-server](https://github.com/StephenQiu30/framefetch-server)：FastAPI API、Next.js Web、下载 / 文档 / 报告 Worker、隔离 Media Runner 与 Docker Compose 部署。\n\n[framefetch-app](https://github.com/StephenQiu30/framefetch-app)：连接自托管 framefetch-server 的 Flutter iOS / Android 客户端；媒体处理与 AI 推理仍在服务端执行。\n\n项目由 [StephenQiu](https://github.com/StephenQiu30) 维护，欢迎通过 Issue 或 Pull Request 参与。安全问题请按[安全策略](https://github.com/StephenQiu30/framefetch-server/blob/main/SECURITY.md)私下报告。'**
   String get aboutContent;
 
   /// No description provided for @selfHostingContent.
   ///
   /// In zh, this message translates to:
-  /// **'本页摘录当前部署流程。命令与配置以仓库 README 为准；平台登录、换机与故障恢复请阅读对应设计文档。\n\n## 运行帧取需要准备什么？\n\n- Docker Engine 与 Docker Compose。\n- 部署者已有的 PostgreSQL、RabbitMQ、Redis 与 MinIO；Compose 只管理帧取自身的业务服务并复用这些基础环境。\n- macOS 平台会话来源需要 uv（Python 3.12）、日常 Chrome 与帧取扩展。\n- 生产部署需要强随机密钥、稳定的 HTTPS 访问地址和规划好的对象存储容量。\n\n## 如何用 Docker Compose 部署？\n\n### 克隆仓库并准备环境文件\n\n复制示例配置后，把 .env 中的连接信息改为本机已运行的 PostgreSQL、RabbitMQ、Redis 与 MinIO。真实密钥只写入未提交的 .env 或 Secret Manager。\n\n```sh\ngit clone https://github.com/StephenQiu30/video-server.git\ncd video-server\ntest -f .env || cp .env.example .env\n```\n\n### 为空数据库加载当前态结构\n\n首次使用空项目数据库时，以该库的 DDL 账号加载 schema.sql。已有数据库升级前先备份。\n\n```sh\npsql -X -v ON_ERROR_STOP=1 -W -h 127.0.0.1 -U video -d video \\\n  -f backend/sql/schema.sql\n```\n\n### 安装登录来源并启动业务服务\n\nmacOS 上安装 Chrome 会话来源，并在 chrome://extensions 加载命令输出目录中的扩展。复用日常 Chrome 已有平台登录；Compose 启动 Web、API、Worker、Runner 与出口代理。公开链接优先匿名解析。生产配置见 README。\n\n```sh\nuv run --project backend python -m app.workers.session.source_cli install --env-file .env\ndocker compose up -d --build --wait --remove-orphans\n```\n\n### 初始化首个管理员\n\n全新空库在部署机终端执行一次，密码交互输入。命令只在用户表为空时创建管理员，不开放 HTTP 初始化接口。\n\n```sh\nuv run --project backend python -m app.workers.bootstrap_admin \\\n  --env-file .env --username your-admin --email you@example.com\n```\n\n### 检查服务健康状态\n\n默认 Web 端口为 8101，API 端口为 8111，Swagger UI 位于 :8111/docs。健康检查只证明服务可运行，不代表每个平台都有可下载的媒体。\n\n```sh\ncurl --fail http://127.0.0.1:8111/health/live\ncurl --fail http://127.0.0.1:8111/health/ready\ncurl --fail --head http://127.0.0.1:8101/\n```\n\n## AI 视频分析是否必须启用？\n\n不是。AI Worker 独立于业务 Compose 运行，可复用宿主机已登录的 Codex App Server，或由管理员配置受支持的模型 Provider。只需要下载与剧本文档导入时，在 .env 中设置 ANALYSIS_ENABLED=false；关闭 AI 不影响下载和文档导入。\n\n使用外部模型时，分析所需内容会发送到该服务，并可能产生费用。启用前应确认素材授权和模型服务的数据处理约定。\n\n## 公开上线前应检查什么？\n\n- 替换 .env.prod 中所有占位凭据，并确认密钥来源可在换机时恢复。\n- 外部媒体访问必须经过阻断私网的出口代理；入口 URL 校验不能替代网络隔离。\n- 为 MinIO 规划容量、备份与显式清理策略；预签名链接过期不会删除最终文件。\n- 只在计划公开介绍项目的网站设置 SITE_INDEXABLE=true，并把 SITE_URL 设为稳定的 HTTPS 域名。\n- 更新代码后执行 git pull --ff-only 并按 README 重新安装来源并执行 Compose 构建启动；docker compose restart 不会应用新镜像或环境配置。\n\n[README 快速开始](https://github.com/StephenQiu30/video-server#快速开始) · [系统设计](https://github.com/StephenQiu30/video-server/blob/main/docs/design/README.md)'**
+  /// **'本页摘录当前部署流程。命令与配置以仓库 README 为准；平台登录、换机与故障恢复请阅读对应设计文档。\n\n## 运行帧取需要准备什么？\n\n- Docker Engine 与 Docker Compose。\n- 部署者已有的 PostgreSQL、RabbitMQ、Redis 与 MinIO；Compose 只管理帧取自身的业务服务并复用这些基础环境。\n- macOS 平台会话来源需要 uv（Python 3.12）、日常 Chrome 与帧取扩展。\n- 生产部署需要强随机密钥、稳定的 HTTPS 访问地址和规划好的对象存储容量。\n\n## 如何用 Docker Compose 部署？\n\n### 克隆仓库并准备环境文件\n\n复制示例配置后，把 .env 中的连接信息改为本机已运行的 PostgreSQL、RabbitMQ、Redis 与 MinIO。真实密钥只写入未提交的 .env 或 Secret Manager。\n\n```sh\ngit clone https://github.com/StephenQiu30/framefetch-server.git\ncd framefetch-server\ntest -f .env || cp .env.example .env\n```\n\n### 为空数据库加载当前态结构\n\n首次使用空项目数据库时，以该库的 DDL 账号加载 schema.sql。已有数据库升级前先备份。\n\n```sh\npsql -X -v ON_ERROR_STOP=1 -W -h 127.0.0.1 -U video -d video \\\n  -f backend/sql/schema.sql\n```\n\n### 安装登录来源并启动业务服务\n\nmacOS 上安装 Chrome 会话来源，并在 chrome://extensions 加载命令输出目录中的扩展。复用日常 Chrome 已有平台登录；Compose 启动 Web、API、Worker、Runner 与出口代理。公开链接优先匿名解析。生产配置见 README。\n\n```sh\nuv run --project backend python -m app.workers.session.source_cli install --env-file .env\ndocker compose up -d --build --wait --remove-orphans\n```\n\n### 初始化首个管理员\n\n全新空库在部署机终端执行一次，密码交互输入。命令只在用户表为空时创建管理员，不开放 HTTP 初始化接口。\n\n```sh\nuv run --project backend python -m app.workers.bootstrap_admin \\\n  --env-file .env --username your-admin --email you@example.com\n```\n\n### 检查服务健康状态\n\n默认 Web 端口为 8101，API 端口为 8111，Swagger UI 位于 :8111/docs。健康检查只证明服务可运行，不代表每个平台都有可下载的媒体。\n\n```sh\ncurl --fail http://127.0.0.1:8111/health/live\ncurl --fail http://127.0.0.1:8111/health/ready\ncurl --fail --head http://127.0.0.1:8101/\n```\n\n## AI 视频分析是否必须启用？\n\n不是。AI Worker 独立于业务 Compose 运行，可复用宿主机已登录的 Codex App Server，或由管理员配置受支持的模型 Provider。只需要下载与剧本文档导入时，在 .env 中设置 ANALYSIS_ENABLED=false；关闭 AI 不影响下载和文档导入。\n\n使用外部模型时，分析所需内容会发送到该服务，并可能产生费用。启用前应确认素材授权和模型服务的数据处理约定。\n\n## 公开上线前应检查什么？\n\n- 替换 .env.prod 中所有占位凭据，并确认密钥来源可在换机时恢复。\n- 外部媒体访问必须经过阻断私网的出口代理；入口 URL 校验不能替代网络隔离。\n- 为 MinIO 规划容量、备份与显式清理策略；预签名链接过期不会删除最终文件。\n- 只在计划公开介绍项目的网站设置 SITE_INDEXABLE=true，并把 SITE_URL 设为稳定的 HTTPS 域名。\n- 更新代码后执行 git pull --ff-only 并按 README 重新安装来源并执行 Compose 构建启动；docker compose restart 不会应用新镜像或环境配置。\n\n[README 快速开始](https://github.com/StephenQiu30/framefetch-server#快速开始) · [系统设计](https://github.com/StephenQiu30/framefetch-server/blob/main/docs/design/README.md)'**
   String get selfHostingContent;
 
   /// No description provided for @activityHistoryFrom.

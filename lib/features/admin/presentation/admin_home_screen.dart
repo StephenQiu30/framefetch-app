@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/features/admin/presentation/admin_page.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
+import 'package:framefetch/features/admin/presentation/admin_page.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 

@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/auth/application/authenticated_request.dart';
-import 'package:framegrab/features/history/data/download_history_repository.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/auth/application/authenticated_request.dart';
+import 'package:framefetch/features/history/data/download_history_repository.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 void main() {
   test('unwraps the current API envelope into download history data', () async {
@@ -37,7 +37,7 @@ void main() {
       ),
     );
     final request = AuthenticatedRequest(
-      client: VideoServerApi(dio: dio),
+      client: FramefetchServerApi(dio: dio),
       accessToken: () => 'test-access-token',
       sessionGeneration: () => 0,
       refreshSession: () async => false,

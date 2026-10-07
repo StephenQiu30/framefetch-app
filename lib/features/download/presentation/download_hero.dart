@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/features/download/presentation/content_intake_selector.dart';
-import 'package:framegrab/features/download/presentation/link_intake_form.dart';
-import 'package:framegrab/features/upload/application/content_upload_controller.dart';
-import 'package:framegrab/features/upload/domain/content_upload.dart';
-import 'package:framegrab/features/upload/presentation/upload_intake_panel.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/app_page_intro.dart';
+import 'package:framefetch/core/theme/app_spacing.dart';
+import 'package:framefetch/features/download/presentation/content_intake_selector.dart';
+import 'package:framefetch/features/download/presentation/link_intake_form.dart';
+import 'package:framefetch/features/upload/application/content_upload_controller.dart';
+import 'package:framefetch/features/upload/domain/content_upload.dart';
+import 'package:framefetch/features/upload/presentation/upload_intake_panel.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/app_page_intro.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 
 final class DownloadHero extends StatelessWidget {

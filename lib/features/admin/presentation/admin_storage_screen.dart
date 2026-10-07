@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/features/admin/application/admin_mutation_controller.dart';
-import 'package:framegrab/features/admin/application/admin_providers.dart';
-import 'package:framegrab/features/admin/data/admin_repository.dart';
-import 'package:framegrab/features/admin/presentation/admin_edit_sheet.dart';
-import 'package:framegrab/features/admin/presentation/admin_page.dart';
-import 'package:framegrab/l10n/app_localizations.dart';
-import 'package:framegrab/shared/presentation/data_formatters.dart';
-import 'package:framegrab/shared/presentation/data_page_view.dart';
-import 'package:framegrab/shared/presentation/data_request_failure_message.dart';
-import 'package:framegrab/shared/presentation/list_query.dart';
+import 'package:framefetch/core/theme/app_spacing.dart';
+import 'package:framefetch/features/admin/application/admin_mutation_controller.dart';
+import 'package:framefetch/features/admin/application/admin_providers.dart';
+import 'package:framefetch/features/admin/data/admin_repository.dart';
+import 'package:framefetch/features/admin/presentation/admin_edit_sheet.dart';
+import 'package:framefetch/features/admin/presentation/admin_page.dart';
+import 'package:framefetch/l10n/app_localizations.dart';
+import 'package:framefetch/shared/presentation/data_formatters.dart';
+import 'package:framefetch/shared/presentation/data_page_view.dart';
+import 'package:framefetch/shared/presentation/data_request_failure_message.dart';
+import 'package:framefetch/shared/presentation/list_query.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:video_server_api/video_server_api.dart';
 
 final class AdminStorageScreen extends ConsumerStatefulWidget {
   const AdminStorageScreen({super.key});

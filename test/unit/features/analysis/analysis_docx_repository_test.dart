@@ -1,13 +1,13 @@
 import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/analysis/data/analysis_docx_repository.dart';
-import 'package:framegrab/features/auth/application/authenticated_request.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/analysis/data/analysis_docx_repository.dart';
+import 'package:framefetch/features/auth/application/authenticated_request.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 void main() {
   test('DOCX export uses generated authenticated binary request', () async {
-    final client = VideoServerApi();
+    final client = FramefetchServerApi();
     RequestOptions? sent;
     client.dio.interceptors.add(
       InterceptorsWrapper(

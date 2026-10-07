@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:framegrab/core/theme/app_spacing.dart';
-import 'package:framegrab/shared/presentation/app_navigation_bar.dart';
+import 'package:framefetch/core/theme/app_spacing.dart';
+import 'package:framefetch/shared/presentation/app_navigation_bar.dart';
 
 final class AuthPageScaffold extends StatelessWidget {
   const AuthPageScaffold({

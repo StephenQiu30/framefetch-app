@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:framegrab/features/documents/application/document_list_provider.dart';
-import 'package:framegrab/features/documents/data/document_repository.dart';
-import 'package:video_server_api/video_server_api.dart';
+import 'package:framefetch/features/documents/application/document_list_provider.dart';
+import 'package:framefetch/features/documents/data/document_repository.dart';
+import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 import '../../../support/data_fakes.dart';
 
