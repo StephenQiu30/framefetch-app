@@ -1,4 +1,4 @@
-package com.stephenqiu.framegrab
+package com.stephenqiu.framefetch
 
 import io.flutter.embedding.android.FlutterActivity
 
