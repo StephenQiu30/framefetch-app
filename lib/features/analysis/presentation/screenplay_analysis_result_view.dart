@@ -30,6 +30,9 @@ final class _ScreenplayAnalysisResultViewState
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final result = widget.result;
+    final textUnits = result.scenes.any(
+      (scene) => scene.sourceSceneId.startsWith('unit-'),
+    );
     return Column(
       key: const Key('screenplay-analysis-result'),
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -49,7 +52,9 @@ final class _ScreenplayAnalysisResultViewState
           metrics: [
             DataMetricValue(
               key: 'scenes',
-              label: l10n.screenplaySceneCoverageLabel,
+              label: textUnits
+                  ? l10n.screenplayTextUnitLabel
+                  : l10n.screenplaySceneCoverageLabel,
               value: '${result.scenes.length}',
             ),
             DataMetricValue(
@@ -87,7 +92,12 @@ final class _ScreenplayAnalysisResultViewState
               label: l10n.analysisCharacters,
             ),
             AppDropdownOption(value: 'dialogue', label: l10n.analysisDialogue),
-            AppDropdownOption(value: 'scenes', label: l10n.analysisScenesTab),
+            AppDropdownOption(
+              value: 'scenes',
+              label: textUnits
+                  ? l10n.screenplayTextUnitLabel
+                  : l10n.analysisScenesTab,
+            ),
             if (_report(widget.reportMarkdown) != null)
               AppDropdownOption(value: 'report', label: l10n.analysisReportTab),
           ],

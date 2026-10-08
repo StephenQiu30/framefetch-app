@@ -1149,6 +1149,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get analysisResultSectionLabel => 'Result section';
 
   @override
+  String get screenplayTextUnitLabel => 'Text units';
+
+  @override
   String get analysisScenesTab => 'Scenes';
 
   @override

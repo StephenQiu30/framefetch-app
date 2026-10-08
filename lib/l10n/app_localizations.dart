@@ -2156,6 +2156,12 @@ abstract class AppLocalizations {
   /// **'结果分类'**
   String get analysisResultSectionLabel;
 
+  /// No description provided for @screenplayTextUnitLabel.
+  ///
+  /// In zh, this message translates to:
+  /// **'文本单元'**
+  String get screenplayTextUnitLabel;
+
   /// No description provided for @analysisScenesTab.
   ///
   /// In zh, this message translates to:

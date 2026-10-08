@@ -1069,6 +1069,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get analysisResultSectionLabel => '结果分类';
 
   @override
+  String get screenplayTextUnitLabel => '文本单元';
+
+  @override
   String get analysisScenesTab => '场景';
 
   @override
