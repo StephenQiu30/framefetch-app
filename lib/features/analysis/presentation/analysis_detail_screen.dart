@@ -78,6 +78,16 @@ final class _AnalysisDetail extends ConsumerWidget {
         item.sourceAvailability == HistoryAvailability.available,
         item.cancelRequestedAt != null,
       ),
+      final ContentCreationHistoryRecordResponse item => (
+        item.id,
+        item.title,
+        AnalysisInputKind.content,
+        null,
+        item.outputLanguage,
+        item.skillId,
+        item.sourceAvailability == HistoryAvailability.available,
+        item.cancelRequestedAt != null,
+      ),
       final VideoAnalysisHistoryRecordResponse item => (
         item.id,
         item.title,

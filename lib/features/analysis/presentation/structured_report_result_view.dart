@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:framefetch/core/theme/app_spacing.dart';
 import 'package:framefetch/features/analysis/presentation/analysis_report_preview.dart';
 import 'package:framefetch/features/analysis/presentation/analysis_result_details.dart';
+import 'package:framefetch/features/analysis/presentation/editorial_review_view.dart';
 import 'package:framefetch/l10n/app_localizations.dart';
 import 'package:framefetch/shared/presentation/data_formatters.dart';
 import 'package:framefetch/shared/presentation/data_page_view.dart';
@@ -39,6 +40,10 @@ final class StructuredReportResultView extends StatelessWidget {
       key: const Key('structured-report-result'),
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        EditorialReviewView(
+          reviews: result.reviewHistory ?? const [],
+          status: result.reviewStatus?.name,
+        ),
         Text(result.title, style: Theme.of(context).textTheme.headlineSmall),
         const SizedBox(height: AppSpacing.xLarge),
         DataMetricGrid(

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:framefetch/core/theme/app_spacing.dart';
 import 'package:framefetch/features/analysis/presentation/analysis_report_preview.dart';
+import 'package:framefetch/features/analysis/presentation/editorial_review_view.dart';
 import 'package:framefetch/l10n/app_localizations.dart';
 import 'package:framefetch/shared/presentation/data_formatters.dart';
 import 'package:framefetch_server_api/framefetch_server_api.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
 final class VideoArticleResultView extends StatelessWidget {
   const VideoArticleResultView({
@@ -24,73 +26,47 @@ final class VideoArticleResultView extends StatelessWidget {
       key: const Key('video-article-result'),
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(result.title, style: Theme.of(context).textTheme.headlineMedium),
-        const SizedBox(height: AppSpacing.medium),
-        SelectableText(result.lead),
-        for (final section in result.sections) ...[
-          const SizedBox(height: AppSpacing.xLarge),
-          Text(section.title, style: Theme.of(context).textTheme.titleMedium),
-          const SizedBox(height: AppSpacing.xSmall),
-          SelectableText(section.body),
-          if (section.evidence.isNotEmpty) ...[
-            const SizedBox(height: AppSpacing.xSmall),
-            Text(
-              '${l10n.articleEvidenceLabel} · '
-              '${section.evidence.map(_evidence).join(' · ')}',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
+        AnalysisReportPreview(
+          markdown:
+              reportMarkdown ??
+              [
+                '# ${result.title}',
+                if (result.lead.isNotEmpty) result.lead,
+                for (final section in result.sections)
+                  '${section.title.isEmpty ? '' : '## ${section.title}\n\n'}${section.body}',
+                if (result.closing.isNotEmpty) result.closing,
+              ].join('\n\n'),
+          scrollable: false,
+        ),
+        EditorialReviewView(
+          reviews: result.reviewHistory ?? const [],
+          status: result.reviewStatus?.name,
+        ),
+        const SizedBox(height: AppSpacing.large),
+        ShadAccordion<String>(
+          children: [
+            ShadAccordionItem(
+              value: 'sources',
+              title: Text(l10n.contentSourceTitle),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  for (final section in result.sections)
+                    for (final evidence in section.evidence)
+                      Text(_evidence(evidence)),
+                  for (final limitation in result.limitations) Text(limitation),
+                ],
               ),
             ),
           ],
-        ],
-        _StringList(title: l10n.articleKeyPointsTitle, items: result.keyPoints),
-        const SizedBox(height: AppSpacing.xLarge),
-        Text(
-          l10n.articleClosingTitle,
-          style: Theme.of(context).textTheme.titleMedium,
         ),
-        const SizedBox(height: AppSpacing.xSmall),
-        SelectableText(result.closing),
-        _StringList(
-          title: l10n.articleLimitationsTitle,
-          items: result.limitations,
-        ),
-        if (reportMarkdown case final report?) ...[
-          const SizedBox(height: AppSpacing.xLarge),
+        if (reportMarkdown case final report?)
           AnalysisReportLauncher(
             analysisId: analysisId,
             markdown: report,
             title: result.title,
           ),
-        ],
       ],
-    );
-  }
-}
-
-final class _StringList extends StatelessWidget {
-  const _StringList({required this.items, required this.title});
-
-  final Iterable<String> items;
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    if (items.isEmpty) return const SizedBox.shrink();
-    return Padding(
-      padding: const EdgeInsets.only(top: AppSpacing.xLarge),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: Theme.of(context).textTheme.titleMedium),
-          const SizedBox(height: AppSpacing.xSmall),
-          for (final item in items)
-            Padding(
-              padding: const EdgeInsets.only(top: AppSpacing.xSmall),
-              child: Text('• $item'),
-            ),
-        ],
-      ),
     );
   }
 }

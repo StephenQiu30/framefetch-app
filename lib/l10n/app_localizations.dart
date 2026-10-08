@@ -1778,10 +1778,22 @@ abstract class AppLocalizations {
   /// **'剧本分析与改写'**
   String get screenplayAnalysisTitle;
 
+  /// No description provided for @analysisNewTask.
+  ///
+  /// In zh, this message translates to:
+  /// **'新建创作任务'**
+  String get analysisNewTask;
+
+  /// No description provided for @analysisCloseNewTask.
+  ///
+  /// In zh, this message translates to:
+  /// **'收起新建任务'**
+  String get analysisCloseNewTask;
+
   /// No description provided for @analysisSkillLabel.
   ///
   /// In zh, this message translates to:
-  /// **'分析 Skill'**
+  /// **'创作任务'**
   String get analysisSkillLabel;
 
   /// No description provided for @analysisOutputLanguageLabel.
@@ -1829,7 +1841,7 @@ abstract class AppLocalizations {
   /// No description provided for @analysisSkillsEmpty.
   ///
   /// In zh, this message translates to:
-  /// **'当前没有可用的分析 Skill，请检查 AI 服务配置后重试。'**
+  /// **'当前没有可用的创作任务，请检查 AI 服务配置后重试。'**
   String get analysisSkillsEmpty;
 
   /// No description provided for @analysisLoadFailed.
@@ -3737,7 +3749,7 @@ abstract class AppLocalizations {
   /// No description provided for @activityHistorySkill.
   ///
   /// In zh, this message translates to:
-  /// **'分析 Skill'**
+  /// **'创作任务'**
   String get activityHistorySkill;
 
   /// No description provided for @activitySourceUnavailable.
@@ -3883,6 +3895,66 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'统计周期'**
   String get adminPeriodLabel;
+
+  /// No description provided for @contentCreationTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'内容创作'**
+  String get contentCreationTitle;
+
+  /// No description provided for @contentReviewTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'查看审校记录'**
+  String get contentReviewTitle;
+
+  /// No description provided for @contentSourceTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'查看材料引用'**
+  String get contentSourceTitle;
+
+  /// No description provided for @contentNeedsReview.
+  ///
+  /// In zh, this message translates to:
+  /// **'审校发现问题，请补充材料或调整创作要求后新建任务。'**
+  String get contentNeedsReview;
+
+  /// No description provided for @contentNeedsMaterial.
+  ///
+  /// In zh, this message translates to:
+  /// **'材料不足以支持部分内容，请补充材料后再采用。'**
+  String get contentNeedsMaterial;
+
+  /// No description provided for @analysisStageDrafting.
+  ///
+  /// In zh, this message translates to:
+  /// **'正在起草'**
+  String get analysisStageDrafting;
+
+  /// No description provided for @analysisStageReviewing.
+  ///
+  /// In zh, this message translates to:
+  /// **'正在审校'**
+  String get analysisStageReviewing;
+
+  /// No description provided for @analysisStageRevising.
+  ///
+  /// In zh, this message translates to:
+  /// **'正在修订'**
+  String get analysisStageRevising;
+
+  /// No description provided for @analysisConfigurationChanged.
+  ///
+  /// In zh, this message translates to:
+  /// **'生成配置已变更，请重新创建任务。'**
+  String get analysisConfigurationChanged;
+
+  /// No description provided for @contentHistoricalDraft.
+  ///
+  /// In zh, this message translates to:
+  /// **'这是一份历史人工稿，原自动审校结论不适用于改动后的正文。'**
+  String get contentHistoricalDraft;
 
   /// No description provided for @analysisOutcomeUnknown.
   ///

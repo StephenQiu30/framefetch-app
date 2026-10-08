@@ -71,5 +71,14 @@ HistoryRecordPresentation presentHistoryRecord(
     sourceUnavailable:
         item.sourceAvailability == HistoryAvailability.unavailable,
   ),
+  final ContentCreationHistoryRecordResponse item => (
+    id: item.id,
+    title: item.title,
+    kind: l.contentCreationTitle,
+    status: analysisStatusLabel(l, item.status),
+    createdAt: item.createdAt,
+    sourceUnavailable:
+        item.sourceAvailability == HistoryAvailability.unavailable,
+  ),
   _ => throw StateError('Unsupported history record'),
 };

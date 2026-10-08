@@ -11,6 +11,7 @@ final activitySkillsProvider =
     FutureProvider.autoDispose<List<AnalysisSkillResponse>>((ref) async {
       final repository = ref.watch(analysisRepositoryProvider);
       final kinds = await Future.wait([
+        repository.fetchSkills(AnalysisInputKind.content),
         repository.fetchSkills(AnalysisInputKind.video),
         repository.fetchSkills(AnalysisInputKind.screenplay),
       ]);
@@ -44,6 +45,8 @@ final activityHistoryProvider = FutureProvider.autoDispose
 
 bool _processing(ItemsInner item) => switch (item.oneOf.value) {
   final SkillAnalysisHistoryRecordResponse record =>
+    record.statusGroup == HistoryStatusGroup.processing,
+  final ContentCreationHistoryRecordResponse record =>
     record.statusGroup == HistoryStatusGroup.processing,
   final ParseHistoryRecordResponse record =>
     record.statusGroup == HistoryStatusGroup.processing,

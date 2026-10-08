@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:framefetch/features/analysis/presentation/analysis_report_preview.dart';
+import 'package:framefetch/features/analysis/presentation/content_document_result_view.dart';
 import 'package:framefetch/features/analysis/presentation/screenplay_analysis_result_view.dart';
 import 'package:framefetch/features/analysis/presentation/structured_report_result_view.dart';
 import 'package:framefetch/features/analysis/presentation/video_analysis_result_view.dart';
@@ -22,6 +23,12 @@ final class AnalysisResultView extends StatelessWidget {
         markdown: job.reportMarkdown?.trim().isNotEmpty == true
             ? job.reportMarkdown!
             : report.body,
+      ),
+      final ContentDocumentResult content => ContentDocumentResultView(
+        result: content,
+        historicalEdit: job.runTrigger == 'manual_edit',
+        reportMarkdown: job.reportMarkdown,
+        analysisId: job.id,
       ),
       final VideoAnalysisResultResponse visual => VideoAnalysisResultView(
         reportMarkdown: job.reportMarkdown,

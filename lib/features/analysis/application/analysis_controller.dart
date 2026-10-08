@@ -52,6 +52,14 @@ final class AnalysisController extends AsyncNotifier<AnalysisState> {
     );
   }
 
+  Future<void> prepareNewTask() async {
+    if (target.isRecord || isActiveAnalysis(state.value?.job)) return;
+    await _runAction(AnalysisAction.refresh, (current, generation) async {
+      final skills = await _repository.fetchSkills(target.inputKind);
+      return current.copyWith(skills: skills);
+    });
+  }
+
   Future<void> start({
     required String customPrompt,
     required String outputLanguage,

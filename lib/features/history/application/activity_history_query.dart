@@ -1,6 +1,6 @@
 import 'package:framefetch_server_api/framefetch_server_api.dart';
 
-enum ActivityCategory { all, parse, video, screenplay }
+enum ActivityCategory { all, parse, video, screenplay, content }
 
 enum ScreenplayHistoryMode { all, basic, analysis, rewrite }
 
@@ -36,6 +36,7 @@ final class ActivityHistoryQuery {
   List<HistoryRecordKind> get recordTypes => switch (category) {
     ActivityCategory.all => const [],
     ActivityCategory.parse => [HistoryRecordKind.parse],
+    ActivityCategory.content => [HistoryRecordKind.contentCreation],
     ActivityCategory.video => [HistoryRecordKind.videoAnalysis],
     ActivityCategory.screenplay => switch (screenplayMode) {
       ScreenplayHistoryMode.basic => [HistoryRecordKind.documentParse],
