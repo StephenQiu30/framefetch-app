@@ -50,6 +50,8 @@ final class _ActivityHistoryScreenState
         '/download-intents/${Uri.encodeComponent(item.id)}',
       final DocumentParseHistoryRecordResponse item =>
         '/documents/${Uri.encodeComponent(item.documentId)}',
+      final ContentCreationHistoryRecordResponse item =>
+        '/analyses/${Uri.encodeComponent(item.id)}',
       final VideoAnalysisHistoryRecordResponse item =>
         '/analyses/${Uri.encodeComponent(item.id)}',
       final ScreenplayAnalysisHistoryRecordResponse item =>

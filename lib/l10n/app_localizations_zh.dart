@@ -876,7 +876,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get screenplayAnalysisTitle => '剧本分析与改写';
 
   @override
-  String get analysisSkillLabel => '分析 Skill';
+  String get analysisNewTask => '新建创作任务';
+
+  @override
+  String get analysisCloseNewTask => '收起新建任务';
+
+  @override
+  String get analysisSkillLabel => '创作任务';
 
   @override
   String get analysisOutputLanguageLabel => '输出语言';
@@ -900,7 +906,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get startingAnalysis => '正在创建分析…';
 
   @override
-  String get analysisSkillsEmpty => '当前没有可用的分析 Skill，请检查 AI 服务配置后重试。';
+  String get analysisSkillsEmpty => '当前没有可用的创作任务，请检查 AI 服务配置后重试。';
 
   @override
   String get analysisLoadFailed => '暂时无法读取 AI 分析服务。';
@@ -1874,7 +1880,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get activityHistoryTo => '结束日期';
 
   @override
-  String get activityHistorySkill => '分析 Skill';
+  String get activityHistorySkill => '创作任务';
 
   @override
   String get activitySourceUnavailable => '源文件不可用，已有结果仍可查看。';
@@ -1953,6 +1959,36 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get adminPeriodLabel => '统计周期';
+
+  @override
+  String get contentCreationTitle => '内容创作';
+
+  @override
+  String get contentReviewTitle => '查看审校记录';
+
+  @override
+  String get contentSourceTitle => '查看材料引用';
+
+  @override
+  String get contentNeedsReview => '审校发现问题，请补充材料或调整创作要求后新建任务。';
+
+  @override
+  String get contentNeedsMaterial => '材料不足以支持部分内容，请补充材料后再采用。';
+
+  @override
+  String get analysisStageDrafting => '正在起草';
+
+  @override
+  String get analysisStageReviewing => '正在审校';
+
+  @override
+  String get analysisStageRevising => '正在修订';
+
+  @override
+  String get analysisConfigurationChanged => '生成配置已变更，请重新创建任务。';
+
+  @override
+  String get contentHistoricalDraft => '这是一份历史人工稿，原自动审校结论不适用于改动后的正文。';
 
   @override
   String get analysisOutcomeUnknown => '执行回执未知，请先刷新或在处理记录中核对；暂不能重复执行。';

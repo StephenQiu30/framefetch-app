@@ -223,7 +223,11 @@ AnalysisResponse analysisJobFixture({
     'result': succeeded
         ? (resultKind == 'video_article' ? _articleResult : _visualResult)
         : null,
-    'report_markdown': succeeded ? '# 已验证分析报告' : null,
+    'report_markdown': succeeded
+        ? (resultKind == 'video_article'
+              ? '# 舞台表演如何建立开场吸引力\n\n这段表演通过主体动作与灯光同步快速建立注意力。\n\n## 从定格动作开始\n\n开场镜头把人物和舞台空间同时交代清楚。\n\n稳定的视觉锚点让后续节奏更容易建立。'
+              : '# 已验证分析报告')
+        : null,
     'current_report_id': succeeded
         ? '00000000-0000-0000-0000-000000000403'
         : null,

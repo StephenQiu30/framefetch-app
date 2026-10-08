@@ -30,7 +30,8 @@ final class GeneratedAnalysisHistoryRepository
     );
     final record = response.data?.data.oneOf.value;
     if (record is! VideoAnalysisHistoryRecordResponse &&
-        record is! ScreenplayAnalysisHistoryRecordResponse) {
+        record is! ScreenplayAnalysisHistoryRecordResponse &&
+        record is! ContentCreationHistoryRecordResponse) {
       throw const DataRequestFailure(DataRequestFailureKind.invalidResponse);
     }
     return record!;

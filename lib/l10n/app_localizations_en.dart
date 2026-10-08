@@ -943,7 +943,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get screenplayAnalysisTitle => 'Screenplay analysis and rewriting';
 
   @override
-  String get analysisSkillLabel => 'Analysis skill';
+  String get analysisNewTask => 'New creative task';
+
+  @override
+  String get analysisCloseNewTask => 'Close new task';
+
+  @override
+  String get analysisSkillLabel => 'Creative task';
 
   @override
   String get analysisOutputLanguageLabel => 'Output language';
@@ -968,7 +974,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get analysisSkillsEmpty =>
-      'No analysis skills are available. Check the AI service configuration and retry.';
+      'No creative tasks are available. Check the AI service configuration and retry.';
 
   @override
   String get analysisLoadFailed => 'AI analysis is temporarily unavailable.';
@@ -1986,7 +1992,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get activityHistoryTo => 'To date';
 
   @override
-  String get activityHistorySkill => 'Analysis Skill';
+  String get activityHistorySkill => 'Creative task';
 
   @override
   String get activitySourceUnavailable =>
@@ -2068,6 +2074,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminPeriodLabel => 'Period';
+
+  @override
+  String get contentCreationTitle => 'Content creation';
+
+  @override
+  String get contentReviewTitle => 'Review notes';
+
+  @override
+  String get contentSourceTitle => 'Source references';
+
+  @override
+  String get contentNeedsReview =>
+      'Review found issues. Update the source material or writing requirements and create a new task.';
+
+  @override
+  String get contentNeedsMaterial =>
+      'Some statements need more source material before use.';
+
+  @override
+  String get analysisStageDrafting => 'Drafting';
+
+  @override
+  String get analysisStageReviewing => 'Reviewing';
+
+  @override
+  String get analysisStageRevising => 'Revising';
+
+  @override
+  String get analysisConfigurationChanged =>
+      'The generation settings changed. Create a new task.';
+
+  @override
+  String get contentHistoricalDraft =>
+      'This is a retained historical draft. The automatic review does not apply to its manually changed prose.';
 
   @override
   String get analysisOutcomeUnknown =>

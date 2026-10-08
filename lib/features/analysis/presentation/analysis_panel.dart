@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:framefetch/core/theme/app_spacing.dart';
 import 'package:framefetch/features/analysis/application/analysis_controller.dart';
+import 'package:framefetch/features/analysis/application/analysis_job_snapshot.dart';
 import 'package:framefetch/features/analysis/application/analysis_state.dart';
 import 'package:framefetch/features/analysis/application/analysis_target.dart';
 import 'package:framefetch/features/analysis/presentation/analysis_configurator.dart';
@@ -12,8 +13,9 @@ import 'package:framefetch/shared/presentation/app_spinner.dart';
 import 'package:framefetch/shared/presentation/data_page_view.dart';
 import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
-final class AnalysisPanel extends ConsumerWidget {
+final class AnalysisPanel extends ConsumerStatefulWidget {
   AnalysisPanel({
     required String downloadId,
     this.sourceAvailable = true,
@@ -30,7 +32,15 @@ final class AnalysisPanel extends ConsumerWidget {
   final bool sourceAvailable;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<AnalysisPanel> createState() => _AnalysisPanelState();
+}
+
+final class _AnalysisPanelState extends ConsumerState<AnalysisPanel> {
+  bool _creating = false;
+  AnalysisTarget get target => widget.target;
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final result = ref.watch(analysisControllerProvider(target));
     final controller = ref.read(analysisControllerProvider(target).notifier);
@@ -94,7 +104,61 @@ final class AnalysisPanel extends ConsumerWidget {
           ),
           const SizedBox(height: AppSpacing.medium),
         ],
-        if (state.job case final job?)
+        if (state.job case final job?) ...[
+          if (!isActiveAnalysis(job)) ...[
+            ShadButton.outline(
+              enabled:
+                  !state.busy &&
+                  widget.sourceAvailable &&
+                  !state.submissionUnknown &&
+                  job.errorCode != AnalysisErrorCode.analysisOutcomeUnknown,
+              onPressed: () async {
+                if (_creating) {
+                  setState(() => _creating = false);
+                  return;
+                }
+                await controller.prepareNewTask();
+                if (mounted &&
+                    ref
+                            .read(analysisControllerProvider(target))
+                            .value
+                            ?.skills
+                            .isNotEmpty ==
+                        true) {
+                  setState(() => _creating = true);
+                }
+              },
+              child: Flexible(
+                child: Text(
+                  _creating ? l10n.analysisCloseNewTask : l10n.analysisNewTask,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ),
+            if (_creating) ...[
+              const SizedBox(height: AppSpacing.large),
+              AnalysisConfigurator(
+                busy: state.busy,
+                blocked: state.submissionUnknown || !widget.sourceAvailable,
+                skills: state.skills,
+                onStart:
+                    ({
+                      required customPrompt,
+                      required outputLanguage,
+                      required skillId,
+                    }) async {
+                      setState(() => _creating = false);
+                      await controller.start(
+                        customPrompt: customPrompt,
+                        outputLanguage: outputLanguage,
+                        skillId: skillId,
+                      );
+                    },
+              ),
+            ],
+            const SizedBox(height: AppSpacing.large),
+          ],
           AnalysisJobState(
             action: state.action,
             isScreenplay: target.isScreenplay,
@@ -103,15 +167,15 @@ final class AnalysisPanel extends ConsumerWidget {
             onDelete: controller.delete,
             onRefresh: controller.refresh,
             canRetry:
-                sourceAvailable &&
+                widget.sourceAvailable &&
                 !state.submissionUnknown &&
                 job.errorCode != AnalysisErrorCode.analysisOutcomeUnknown,
             onRetry: controller.retry,
-          )
-        else
+          ),
+        ] else
           AnalysisConfigurator(
             busy: state.action == AnalysisAction.start,
-            blocked: state.submissionUnknown || !sourceAvailable,
+            blocked: state.submissionUnknown || !widget.sourceAvailable,
             skills: state.skills,
             onStart: controller.start,
           ),

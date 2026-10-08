@@ -58,6 +58,12 @@ final class _ActivityHistoryFiltersState extends State<ActivityHistoryFilters> {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final query = widget.query;
+    final inputKind = switch (query.category) {
+      ActivityCategory.video => AnalysisInputKind.video,
+      ActivityCategory.screenplay => AnalysisInputKind.screenplay,
+      ActivityCategory.content => AnalysisInputKind.content,
+      _ => null,
+    };
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -79,6 +85,7 @@ final class _ActivityHistoryFiltersState extends State<ActivityHistoryFilters> {
                     ? Theme.of(context).colorScheme.surfaceContainerHighest
                     : null,
                 child: Text(switch (category) {
+                  ActivityCategory.content => l.contentCreationTitle,
                   ActivityCategory.all => l.activityHistoryAll,
                   ActivityCategory.parse => l.activityHistoryLink,
                   ActivityCategory.video => l.activityHistoryVideo,
@@ -212,13 +219,7 @@ final class _ActivityHistoryFiltersState extends State<ActivityHistoryFilters> {
                     AppDropdownOption(value: null, label: l.activityHistoryAll),
                     for (final skill in widget.skills.where(
                       (s) =>
-                          query.category != ActivityCategory.video &&
-                              query.category != ActivityCategory.screenplay ||
-                          s.inputKinds.contains(
-                            (query.category == ActivityCategory.video
-                                ? AnalysisInputKind.video
-                                : AnalysisInputKind.screenplay),
-                          ),
+                          inputKind == null || s.inputKinds.contains(inputKind),
                     ))
                       AppDropdownOption(
                         value: skill.id,

@@ -17,6 +17,9 @@ String analysisStatusLabel(AppLocalizations l10n, AnalysisStatus status) =>
 
 String analysisStageLabel(AppLocalizations l10n, AnalysisStage? stage) =>
     switch (stage) {
+      AnalysisStage.drafting => l10n.analysisStageDrafting,
+      AnalysisStage.reviewing => l10n.analysisStageReviewing,
+      AnalysisStage.revising => l10n.analysisStageRevising,
       AnalysisStage.preparing => l10n.analysisStagePreparing,
       AnalysisStage.analyzing => l10n.analysisStageAnalyzing,
       AnalysisStage.validating => l10n.analysisStageValidating,
@@ -73,6 +76,9 @@ String analysisFailureMessage(
     'analysis_provider_rate_limited' => l10n.analysisRateLimited,
     'analysisProviderUsageLimited' ||
     'analysis_provider_usage_limited' => l10n.analysisUsageLimited,
+    'analysis_configuration_changed' ||
+    'configurationChanged' => l10n.analysisConfigurationChanged,
+    'analysis_needs_material' || 'needsMaterial' => l10n.contentNeedsMaterial,
     'analysisOutcomeUnknown' ||
     'analysis_outcome_unknown' => l10n.analysisOutcomeUnknown,
     'workerLost' || 'worker_lost' => l10n.analysisWorkerLost,

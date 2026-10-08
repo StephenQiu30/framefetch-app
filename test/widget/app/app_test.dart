@@ -950,8 +950,16 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byKey(const Key('video-article-result')), findsOneWidget);
-    expect(find.text('舞台表演如何建立开场吸引力'), findsOneWidget);
-    expect(find.text('从定格动作开始'), findsOneWidget);
+    expect(
+      find.textContaining('舞台表演如何建立开场吸引力', findRichText: true),
+      findsOneWidget,
+    );
+    expect(find.textContaining('从定格动作开始', findRichText: true), findsOneWidget);
+    expect(find.textContaining('仅基于可见画面分析'), findsNothing);
+    await tester.ensureVisible(find.text('查看材料引用'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('查看材料引用'));
+    await tester.pumpAndSettle();
     expect(find.textContaining('仅基于可见画面分析'), findsOneWidget);
   });
 

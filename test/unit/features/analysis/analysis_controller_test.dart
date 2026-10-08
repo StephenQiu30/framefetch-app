@@ -29,6 +29,26 @@ void main() {
     },
   );
 
+  test('loads current methods while retaining the completed report', () async {
+    final old = analysisJobFixture(status: AnalysisStatus.succeeded);
+    final repository = FakeAnalysisRepository(latest: old);
+    final container = _container(repository);
+    addTearDown(container.dispose);
+    await container.read(analysisControllerProvider(videoTarget).future);
+    await container
+        .read(analysisControllerProvider(videoTarget).notifier)
+        .prepareNewTask();
+    final state = container
+        .read(analysisControllerProvider(videoTarget))
+        .value!;
+    expect(state.job, same(old));
+    expect(state.skills, repository.skills);
+    expect(repository.skillInputKinds, [AnalysisInputKind.video]);
+    expect(repository.deleteCalls, 0);
+    expect(repository.retryKeys, isEmpty);
+    expect(repository.createKeys, isEmpty);
+  });
+
   test('reuses the create idempotency key after a safe retry', () async {
     final repository = FakeAnalysisRepository(
       createError: StateError('offline'),
