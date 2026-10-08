@@ -713,5 +713,7 @@
   "analysisStageRevising": "正在修订",
   "analysisConfigurationChanged": "生成配置已变更，请重新创建任务。",
   "contentHistoricalDraft": "这是一份历史人工稿，原自动审校结论不适用于改动后的正文。",
-  "analysisOutcomeUnknown": "执行回执未知，请先刷新或在处理记录中核对；暂不能重复执行。"
+  "analysisOutcomeUnknown": "执行回执未知，请先刷新或在处理记录中核对；暂不能重复执行。",
+  "exportWechatHtml": "导出公众号 HTML",
+  "exportNativeShotBundle": "下载原生拉片包"
 }

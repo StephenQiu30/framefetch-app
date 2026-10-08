@@ -3,11 +3,12 @@ import 'package:flutter_file_saver/flutter_file_saver.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:framefetch/features/analysis/data/analysis_docx_repository.dart';
 import 'package:framefetch/features/analysis/data/analysis_markdown_repository.dart';
+import 'package:framefetch/features/analysis/data/analysis_native_report_repository.dart';
 import 'package:framefetch/l10n/app_localizations.dart';
 import 'package:phosphor_icons/phosphor_icons.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-enum AnalysisReportFormat { docx, markdown }
+enum AnalysisReportFormat { docx, markdown, html, zip }
 
 final class AnalysisReportDownloadButton extends ConsumerStatefulWidget {
   const AnalysisReportDownloadButton({
@@ -39,9 +40,15 @@ final class _AnalysisReportDownloadButtonState
           ref.read(analysisDocxRepositoryProvider).fetch(analysisId),
         AnalysisReportFormat.markdown =>
           ref.read(analysisMarkdownRepositoryProvider).fetch(analysisId),
+        AnalysisReportFormat.html || AnalysisReportFormat.zip =>
+          ref
+              .read(analysisNativeReportRepositoryProvider)
+              .fetch(analysisId, format: format.name),
       };
       if (!mounted) return;
-      final extension = format == AnalysisReportFormat.docx ? 'docx' : 'md';
+      final extension = format == AnalysisReportFormat.markdown
+          ? 'md'
+          : format.name;
       await FlutterFileSaver().writeFileAsBytes(
         fileName: 'analysis-report-$analysisId.$extension',
         bytes: bytes,
@@ -72,11 +79,12 @@ final class _AnalysisReportDownloadButtonState
       height: 0,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       child: Flexible(
-        child: Text(
-          widget.format == AnalysisReportFormat.docx
-              ? l10n.exportDocx
-              : l10n.exportMarkdown,
-        ),
+        child: Text(switch (widget.format) {
+          AnalysisReportFormat.docx => l10n.exportDocx,
+          AnalysisReportFormat.markdown => l10n.exportMarkdown,
+          AnalysisReportFormat.html => l10n.exportWechatHtml,
+          AnalysisReportFormat.zip => l10n.exportNativeShotBundle,
+        }),
       ),
     );
   }

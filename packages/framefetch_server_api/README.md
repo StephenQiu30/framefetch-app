@@ -90,6 +90,7 @@ Class | Method | HTTP request | Description
 [*AnalysesApi*](doc/AnalysesApi.md) | [**createDocumentAnalysis**](doc/AnalysesApi.md#createdocumentanalysis) | **POST** /api/documents/{document_id}/analyses | 创建剧本分析任务
 [*AnalysesApi*](doc/AnalysesApi.md) | [**deleteAnalysis**](doc/AnalysesApi.md#deleteanalysis) | **DELETE** /api/analyses/{analysis_id} | 删除视频分析与报告
 [*AnalysesApi*](doc/AnalysesApi.md) | [**exportAnalysisMarkdown**](doc/AnalysesApi.md#exportanalysismarkdown) | **GET** /api/analyses/{analysis_id}/report.md | 导出 Markdown 分析报告
+[*AnalysesApi*](doc/AnalysesApi.md) | [**exportAnalysisNativeReport**](doc/AnalysesApi.md#exportanalysisnativereport) | **GET** /api/analyses/{analysis_id}/report.{report_format} | 导出原生 Skill 报告
 [*AnalysesApi*](doc/AnalysesApi.md) | [**exportAnalysisReport**](doc/AnalysesApi.md#exportanalysisreport) | **GET** /api/analyses/{analysis_id}/report.docx | 导出视频分析报告
 [*AnalysesApi*](doc/AnalysesApi.md) | [**getAnalysis**](doc/AnalysesApi.md#getanalysis) | **GET** /api/analyses/{analysis_id} | 查询分析任务
 [*AnalysesApi*](doc/AnalysesApi.md) | [**getAnalysisHistoryRecord**](doc/AnalysesApi.md#getanalysishistoryrecord) | **GET** /api/analyses/{analysis_id}/history-record | 读取分析来源与历史摘要

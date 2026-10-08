@@ -713,5 +713,7 @@
   "analysisStageRevising": "Revising",
   "analysisConfigurationChanged": "The generation settings changed. Create a new task.",
   "contentHistoricalDraft": "This is a retained historical draft. The automatic review does not apply to its manually changed prose.",
-  "analysisOutcomeUnknown": "The execution receipt is unknown. Refresh or check activity history before running it again."
+  "analysisOutcomeUnknown": "The execution receipt is unknown. Refresh or check activity history before running it again.",
+  "exportWechatHtml": "Export WeChat HTML",
+  "exportNativeShotBundle": "Download shot analysis bundle"
 }

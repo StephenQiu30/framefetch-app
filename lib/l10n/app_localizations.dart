@@ -3967,6 +3967,18 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'执行回执未知，请先刷新或在处理记录中核对；暂不能重复执行。'**
   String get analysisOutcomeUnknown;
+
+  /// No description provided for @exportWechatHtml.
+  ///
+  /// In zh, this message translates to:
+  /// **'导出公众号 HTML'**
+  String get exportWechatHtml;
+
+  /// No description provided for @exportNativeShotBundle.
+  ///
+  /// In zh, this message translates to:
+  /// **'下载原生拉片包'**
+  String get exportNativeShotBundle;
 }
 
 class _AppLocalizationsDelegate
