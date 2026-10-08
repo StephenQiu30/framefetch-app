@@ -100,7 +100,7 @@ Inspection has a persistent record of its own. Opening the app again or entering
 
 ### Read complete AI results on your phone
 
-The existing video and screenplay analysis forms remain in place: select a Skill, Chinese or English output, and a custom focus or the method's default instructions. Available methods come from the server catalog. This update improves video review (`video-review`), video breakdown (`video-breakdown`), screenplay analysis (`screenplay-analysis`), and document, WeChat, and Xiaohongshu formatting (`article-format`, `wechat-format`, `xhs-format`). Report reading, run history, and Markdown/DOCX exports keep the existing pages and controls. See the [server Skill design](https://github.com/StephenQiu30/framefetch-server/blob/main/workspace/content/design/09-AI分析.md) for method and result contracts.
+The existing video and screenplay analysis forms remain in place: select a Skill, Chinese or English output, and a custom focus or the method's default instructions. Available methods come from the server catalog. This update improves video review (`video-review`), video breakdown (`video-breakdown`), screenplay analysis (`screenplay-analysis`), and document, WeChat, and Xiaohongshu formatting (`article-format`, `wechat-format`, `xhs-format`). Report reading, run history, and Markdown/DOCX exports keep the existing pages and controls. See the [server Skill design](https://github.com/StephenQiu30/framefetch-server/blob/main/docs/design/09-AI分析.md) for method and result contracts.
 
 Method counts describe the current catalog; they do not mean every method has passed real-model and device workflow acceptance.
 
