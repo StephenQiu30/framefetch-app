@@ -134,6 +134,18 @@ final class AnalysisJobState extends StatelessWidget {
                 analysisId: job.id,
                 format: AnalysisReportFormat.docx,
               ),
+            for (final format in [
+              AnalysisReportFormat.html,
+              AnalysisReportFormat.zip,
+            ])
+              if (job.report?.status == AnalysisReportStatus.available &&
+                  (job.report?.artifacts.any((a) => a.format == format.name) ??
+                      false))
+                AnalysisReportDownloadButton(
+                  key: ValueKey(format),
+                  analysisId: job.id,
+                  format: format,
+                ),
             if (_active)
               ShadButton.secondary(
                 key: const Key('cancel-analysis-button'),

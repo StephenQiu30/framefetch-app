@@ -91,13 +91,13 @@ void main() {
         (selectedUsers['get'] as Map<String, dynamic>)['parameters']
             as List<dynamic>;
 
-    expect(selectedPaths, hasLength(65));
+    expect(selectedPaths, hasLength(66));
     expect(
       selectedPaths.values.cast<Map<String, dynamic>>().fold<int>(
         0,
         (total, path) => total + path.length,
       ),
-      77,
+      78,
     );
     expect(selectedPaths['/api/users/me'], contains('patch'));
     expect(
@@ -111,6 +111,10 @@ void main() {
       contains('delete'),
     );
     expect(selectedPaths, contains('/api/analyses/{analysis_id}/report.docx'));
+    expect(
+      selectedPaths['/api/analyses/{analysis_id}/report.{report_format}'],
+      contains('get'),
+    );
     expect(selectedPaths, contains('/api/source-discoveries'));
     expect(selectedPaths, contains('/api/source-discoveries/{discovery_id}'));
     expect(selectedPaths, contains('/api/inspections'));

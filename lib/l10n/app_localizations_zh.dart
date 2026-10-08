@@ -1995,4 +1995,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get analysisOutcomeUnknown => '执行回执未知，请先刷新或在处理记录中核对；暂不能重复执行。';
+
+  @override
+  String get exportWechatHtml => '导出公众号 HTML';
+
+  @override
+  String get exportNativeShotBundle => '下载原生拉片包';
 }

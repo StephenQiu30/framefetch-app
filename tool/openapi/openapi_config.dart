@@ -158,6 +158,10 @@ const appOpenApiConfig = AppOpenApiConfig(
       path: '/api/analyses/{analysis_id}/report.md',
     ),
     OpenApiOperationSelection(
+      method: 'get',
+      path: '/api/analyses/{analysis_id}/report.{report_format}',
+    ),
+    OpenApiOperationSelection(
       method: 'post',
       path: '/api/analyses/{analysis_id}/cancel',
     ),

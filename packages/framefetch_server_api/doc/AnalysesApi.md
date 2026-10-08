@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**createDocumentAnalysis**](AnalysesApi.md#createdocumentanalysis) | **POST** /api/documents/{document_id}/analyses | 创建剧本分析任务
 [**deleteAnalysis**](AnalysesApi.md#deleteanalysis) | **DELETE** /api/analyses/{analysis_id} | 删除视频分析与报告
 [**exportAnalysisMarkdown**](AnalysesApi.md#exportanalysismarkdown) | **GET** /api/analyses/{analysis_id}/report.md | 导出 Markdown 分析报告
+[**exportAnalysisNativeReport**](AnalysesApi.md#exportanalysisnativereport) | **GET** /api/analyses/{analysis_id}/report.{report_format} | 导出原生 Skill 报告
 [**exportAnalysisReport**](AnalysesApi.md#exportanalysisreport) | **GET** /api/analyses/{analysis_id}/report.docx | 导出视频分析报告
 [**getAnalysis**](AnalysesApi.md#getanalysis) | **GET** /api/analyses/{analysis_id} | 查询分析任务
 [**getAnalysisHistoryRecord**](AnalysesApi.md#getanalysishistoryrecord) | **GET** /api/analyses/{analysis_id}/history-record | 读取分析来源与历史摘要
@@ -239,6 +240,49 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: text/markdown, application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **exportAnalysisNativeReport**
+> Uint8List exportAnalysisNativeReport(analysisId, reportFormat)
+
+导出原生 Skill 报告
+
+### Example
+```dart
+import 'package:framefetch_server_api/api.dart';
+
+final api = FramefetchServerApi().getAnalysesApi();
+final String analysisId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // String |
+final String reportFormat = reportFormat_example; // String |
+
+try {
+    final response = api.exportAnalysisNativeReport(analysisId, reportFormat);
+    print(response);
+} on DioException catch (e) {
+    print('Exception when calling AnalysesApi->exportAnalysisNativeReport: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **analysisId** | **String**|  |
+ **reportFormat** | **String**|  |
+
+### Return type
+
+[**Uint8List**](Uint8List.md)
+
+### Authorization
+
+[NativeBearerAuth](../README.md#NativeBearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/octet-stream, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
