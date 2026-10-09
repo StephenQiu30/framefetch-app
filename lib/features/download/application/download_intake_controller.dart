@@ -352,10 +352,11 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
   }
 
   Future<IntentResponse?> _submitIntent(
-    String input,
+    String? input,
     String key,
-    int generation,
-  ) async {
+    int generation, {
+    DiscoveredItemInspectionSource? source,
+  }) async {
     if (_uncertainKey == key) {
       try {
         return await _intents.find(key);
@@ -366,7 +367,43 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
       }
     }
     if (generation != _generation) return null;
-    return _intents.create(input: input, idempotencyKey: key);
+    return _intents.create(input: input, source: source, idempotencyKey: key);
+  }
+
+  Future<void> _handleAdmissionError(
+    Object error,
+    String key,
+    int generation,
+  ) async {
+    final definitive =
+        error is DataRequestFailure &&
+        error.statusCode != null &&
+        error.statusCode! >= 400 &&
+        error.statusCode! < 500;
+    if (definitive) {
+      if (generation == _generation) {
+        state = DownloadIntakeState(error: error);
+      }
+      return;
+    }
+    _uncertainKey = key;
+    // A transport failure may follow a committed admission. The next
+    // operation is a read; never repeat the POST in the background.
+    try {
+      final existing = await _intents.find(key);
+      if (generation == _generation) {
+        _uncertainKey = null;
+        await _adopt(existing, generation);
+      }
+    } catch (lookupError) {
+      if (generation == _generation) {
+        if (lookupError is DataRequestFailure &&
+            lookupError.statusCode == 404) {
+          _uncertainKey = null;
+        }
+        state = DownloadIntakeState(error: error);
+      }
+    }
   }
 
   Future<void> inspect(String url) async {
@@ -393,35 +430,7 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
           }
         } catch (error) {
           if (generation != _generation) return;
-          final definitive =
-              error is DataRequestFailure &&
-              error.statusCode != null &&
-              error.statusCode! >= 400 &&
-              error.statusCode! < 500;
-          if (definitive) {
-            if (generation == _generation) {
-              state = DownloadIntakeState(error: error);
-            }
-            return;
-          }
-          _uncertainKey = key;
-          // A transport failure may follow a committed admission. The next
-          // operation is a read; never repeat the POST in the background.
-          try {
-            final existing = await _intents.find(key);
-            if (generation == _generation) {
-              _uncertainKey = null;
-              await _adopt(existing, generation);
-            }
-          } catch (lookupError) {
-            if (generation == _generation) {
-              if (lookupError is DataRequestFailure &&
-                  lookupError.statusCode == 404) {
-                _uncertainKey = null;
-              }
-              state = DownloadIntakeState(error: error);
-            }
-          }
+          await _handleAdmissionError(error, key, generation);
         }
       }
     } catch (error) {
@@ -431,8 +440,15 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
 
   Future<void> inspectItem(String itemRef) async {
     final discovery = state.discovery;
+    final item = discovery?.items
+        .where((item) => item.itemRef == itemRef)
+        .firstOrNull;
     if (state.busy ||
+        state.cancelling ||
         discovery == null ||
+        item == null ||
+        item.status != DiscoveryItemStatus.ready ||
+        item.decisionHint != DiscoveryDecisionHint.candidate ||
         !discovery.expiresAt.isAfter(DateTime.now())) {
       return;
     }
@@ -443,18 +459,26 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
       clearInspection: true,
       clearSelectedFormat: true,
     );
+    final key = _keys.value('intent', '${discovery.id}:$itemRef');
     try {
-      final inspection = await _repository.inspectDiscoveredItem(
-        discoveryId: discovery.id,
-        idempotencyKey: _keys.value('inspect-item', '${discovery.id}:$itemRef'),
-        itemRef: itemRef,
+      final intent = await _submitIntent(
+        null,
+        key,
+        generation,
+        source: DiscoveredItemInspectionSource(
+          (builder) => builder
+            ..kind = DiscoveredItemInspectionSourceKindEnum.discoveredItem
+            ..discoveryId = discovery.id
+            ..itemRef = itemRef,
+        ),
       );
-      if (generation == _generation) {
-        _applyInspection(inspection, discovery: discovery);
+      if (generation == _generation && intent != null) {
+        _uncertainKey = null;
+        await _adopt(intent, generation);
       }
     } catch (error) {
       if (generation == _generation) {
-        state = state.copyWith(error: error, phase: DownloadIntakePhase.idle);
+        await _handleAdmissionError(error, key, generation);
       }
     }
   }
@@ -472,8 +496,6 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
         if (state.intent?.status == IntentStatus.ready) {
           await refreshIntent();
         } else {
-          _keys.forget('inspect');
-          _keys.forget('inspect-item');
           state = state.copyWith(
             error: const DataRequestFailure(
               DataRequestFailureKind.unknown,
@@ -507,8 +529,6 @@ final class DownloadIntakeController extends Notifier<DownloadIntakeState> {
           if (state.intent?.status == IntentStatus.ready) {
             await refreshIntent();
           } else {
-            _keys.forget('inspect');
-            _keys.forget('inspect-item');
             state = state.copyWith(
               clearInspection: true,
               clearSelectedFormat: true,
