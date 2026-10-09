@@ -8,6 +8,7 @@ import 'package:framefetch_server_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**input** | **String** | 媒体地址或包含唯一媒体地址的分享文案。 |
+**input** | **String** | 媒体地址或包含唯一媒体地址的分享文案。 | [optional]
+**source_** | [**DiscoveredItemInspectionSource**](DiscoveredItemInspectionSource.md) |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

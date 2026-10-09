@@ -169,6 +169,33 @@ void main() {
     );
   });
 
+  test(
+    'reconciles a lost selected-item admission without repeating creation',
+    () async {
+      final repository = FakeDownloadIntakeRepository();
+      final container = _container(repository);
+      addTearDown(container.dispose);
+      final controller = container.read(
+        downloadIntakeControllerProvider.notifier,
+      );
+      final intents =
+          container.read(downloadIntentRepositoryProvider)
+              as FakeDownloadIntentRepository;
+      await controller.inspect('https://mp.weixin.qq.com/s/article');
+      intents.createError = const DataRequestFailure(
+        DataRequestFailureKind.unavailable,
+      );
+      await controller.inspectItem('00000000-0000-0000-0000-000000000312');
+      expect(repository.selectedItems, hasLength(1));
+      expect(intents.inputs, isEmpty);
+      expect(intents.reads, ['key:${intents.keys.single}']);
+      expect(
+        container.read(downloadIntakeControllerProvider).intent,
+        isNotNull,
+      );
+    },
+  );
+
   test('creates a download with the selected format', () async {
     final repository = FakeDownloadIntakeRepository();
     final container = _container(repository);

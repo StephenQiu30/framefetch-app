@@ -11,7 +11,8 @@ final downloadIntentRepositoryProvider = Provider<DownloadIntentRepository>(
 
 abstract interface class DownloadIntentRepository {
   Future<IntentResponse> create({
-    required String input,
+    String? input,
+    DiscoveredItemInspectionSource? source,
     required String idempotencyKey,
   });
   Future<IntentResponse> find(String idempotencyKey);
@@ -29,14 +30,18 @@ final class GeneratedDownloadIntentRepository
 
   @override
   Future<IntentResponse> create({
-    required String input,
+    String? input,
+    DiscoveredItemInspectionSource? source,
     required String idempotencyKey,
   }) => _required(
     (client) => client
         .getDownloadIntentsApi()
         .createDownloadIntent(
           idempotencyKey: idempotencyKey,
-          intentRequest: IntentRequest((builder) => builder..input = input),
+          intentRequest: IntentRequest((builder) {
+            builder.input = input;
+            if (source != null) builder.source_.replace(source);
+          }),
         )
         .then((response) => response.data?.data),
   );

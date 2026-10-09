@@ -16177,18 +16177,32 @@
       "IntentRequest": {
         "properties": {
           "input": {
-            "type": "string",
-            "maxLength": 4096,
-            "minLength": 8,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 4096,
+                "minLength": 8
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Input",
             "description": "媒体地址或包含唯一媒体地址的分享文案。"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DiscoveredItemInspectionSource"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": false,
         "type": "object",
-        "required": [
-          "input"
-        ],
         "title": "IntentRequest"
       },
       "IntentResponse": {

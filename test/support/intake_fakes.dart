@@ -44,29 +44,6 @@ final class FakeDownloadIntakeRepository implements DownloadIntakeRepository {
     if (error case final failure?) throw failure;
     return discovery;
   }
-
-  @override
-  Future<InspectionResponse> inspectDiscoveredItem({
-    required String discoveryId,
-    required String idempotencyKey,
-    required String itemRef,
-  }) async {
-    idempotencyKeys.add(idempotencyKey);
-    selectedItems.add(itemRef);
-    if (error case final failure?) throw failure;
-    return inspection;
-  }
-
-  @override
-  Future<InspectionResponse> inspectPublicUrl({
-    required String idempotencyKey,
-    required String url,
-  }) async {
-    idempotencyKeys.add(idempotencyKey);
-    publicUrls.add(url);
-    if (error case final failure?) throw failure;
-    return inspection;
-  }
 }
 
 final class FakeDownloadIntentRepository implements DownloadIntentRepository {
@@ -90,10 +67,12 @@ final class FakeDownloadIntentRepository implements DownloadIntentRepository {
 
   @override
   Future<IntentResponse> create({
-    required String input,
+    String? input,
+    DiscoveredItemInspectionSource? source,
     required String idempotencyKey,
   }) async {
-    inputs.add(input);
+    if (input != null) inputs.add(input);
+    if (source != null) intake.selectedItems.add(source.itemRef);
     keys.add(idempotencyKey);
     if (createError case final failure?) throw failure;
     if (pendingCreate case final pending?) return pending;

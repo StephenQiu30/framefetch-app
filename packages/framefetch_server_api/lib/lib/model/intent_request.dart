@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element, unused_element_parameter
+import 'package:framefetch_server_api/lib/model/discovered_item_inspection_source.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -12,12 +13,16 @@ part 'intent_request.g.dart';
 ///
 /// Properties:
 /// * [input] - 媒体地址或包含唯一媒体地址的分享文案。
+/// * [source_]
 @BuiltValue()
 abstract class IntentRequest
     implements Built<IntentRequest, IntentRequestBuilder> {
   /// 媒体地址或包含唯一媒体地址的分享文案。
   @BuiltValueField(wireName: r'input')
-  String get input;
+  String? get input;
+
+  @BuiltValueField(wireName: r'source')
+  DiscoveredItemInspectionSource? get source_;
 
   IntentRequest._();
 
@@ -44,11 +49,20 @@ class _$IntentRequestSerializer implements PrimitiveSerializer<IntentRequest> {
     IntentRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'input';
-    yield serializers.serialize(
-      object.input,
-      specifiedType: const FullType(String),
-    );
+    if (object.input != null) {
+      yield r'input';
+      yield serializers.serialize(
+        object.input,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.source_ != null) {
+      yield r'source';
+      yield serializers.serialize(
+        object.source_,
+        specifiedType: const FullType.nullable(DiscoveredItemInspectionSource),
+      );
+    }
   }
 
   @override
@@ -77,9 +91,19 @@ class _$IntentRequestSerializer implements PrimitiveSerializer<IntentRequest> {
         case r'input':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(String),
-          ) as String;
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
           result.input = valueDes;
+          break;
+        case r'source':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType:
+                const FullType.nullable(DiscoveredItemInspectionSource),
+          ) as DiscoveredItemInspectionSource?;
+          if (valueDes == null) continue;
+          result.source_.replace(valueDes);
           break;
         default:
           unhandled.add(key);
