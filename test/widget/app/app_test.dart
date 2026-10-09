@@ -215,14 +215,20 @@ void main() {
     tester,
   ) async {
     final repository = FakeDownloadIntakeRepository();
-    await pumpFramefetchApp(tester, downloadIntakeRepository: repository);
+    final intents = FakeDownloadIntentRepository(repository);
+    await pumpFramefetchApp(
+      tester,
+      downloadIntakeRepository: repository,
+      downloadIntentRepository: intents,
+    );
 
     await tester.enterText(find.byKey(const Key('media-url-input')), '');
     await tester.tap(find.byKey(const Key('inspect-media-button')));
     await tester.pump();
 
     expect(find.text('请输入公开链接或完整分享文案。'), findsOneWidget);
-    expect(repository.publicUrls, isEmpty);
+    expect(intents.keys, isEmpty);
+    expect(repository.idempotencyKeys, isEmpty);
   });
 
   testWidgets('renders the live inspection and selectable formats', (
