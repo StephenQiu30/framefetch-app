@@ -48,9 +48,8 @@ void main() {
         container.read(downloadIntakeControllerProvider).selectedFormatId,
         inspectionFixture().formats.first.id,
       );
-      expect(intents.inputs, isEmpty);
-      expect(intake.discoveryUrls, isEmpty);
-      expect(intake.publicUrls, isEmpty);
+      expect(intents.keys, isEmpty);
+      expect(intake.idempotencyKeys, isEmpty);
     },
   );
 }

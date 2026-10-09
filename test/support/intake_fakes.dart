@@ -16,7 +16,6 @@ final class FakeDownloadIntakeRepository implements DownloadIntakeRepository {
   SourceDiscoveryResponse discovery;
   Object? error;
   InspectionResponse inspection;
-  final List<String> publicUrls = [];
   final List<String> discoveryUrls = [];
   final List<String> selectedItems = [];
   final List<String> createdFormats = [];
