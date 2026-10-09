@@ -29,6 +29,19 @@ flutter build ios --simulator --no-codesign
 
 `flutter-quality.yml` 执行锁文件安装、冻结 OpenAPI 客户端重生成、路由与本地化重生成、生成漂移检查、format、analyze、test 与 Android debug 构建；独立 macOS Job 构建 iOS 模拟器应用。冻结快照检查不连接在线 API，不证明与服务端最新提交一致。
 
+缓存只复用依赖下载，不跳过锁文件安装、代码生成、测试或构建。main 的 CI 按提交 SHA 独立运行；PR 的新提交会取消同一 PR 的旧运行。
+
+每次推送后，检查本次提交对应的运行并等待终态：
+
+```bash
+commit_sha=$(git rev-parse HEAD)
+gh run list --commit "$commit_sha" --event push --workflow flutter-quality.yml --json databaseId,headSha,status,conclusion,url
+gh run watch <run_id> --exit-status --interval 30
+gh run view <run_id> --json headSha,status,conclusion,jobs
+```
+
+`<run_id>` 取自列表中的本次推送。确认 `headSha` 与 `commit_sha` 相同，且全部必跑 Job 为 `success`，才报告通过；没有运行、进行中、取消或跳过均不算通过。失败时读取 `gh run view <run_id> --log-failed`，修复后重新检查新 SHA。当前提交验证完成后再推进下一次提交；多个本地提交一次推送只会检查最终提交。
+
 ## 提交规范
 
 提交信息使用 Conventional Commits，类型与作用域为小写英文，描述为中文：
