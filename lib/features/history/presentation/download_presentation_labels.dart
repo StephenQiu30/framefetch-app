@@ -66,7 +66,7 @@ String downloadFailureLabel(AppLocalizations l10n, DownloadErrorCode code) =>
       DownloadErrorCode.loginRequired => l10n.providerLoginRequiredError,
       DownloadErrorCode.identityUnavailable =>
         l10n.providerIdentityUnavailableError,
-      DownloadErrorCode.rateLimited => l10n.rateLimitedError,
+      DownloadErrorCode.rateLimited => l10n.providerRateLimitedError,
       DownloadErrorCode.contextChanged => l10n.providerContextChangedError,
       DownloadErrorCode.contentUnavailable => l10n.providerLinkError,
       DownloadErrorCode.contentProtected => l10n.providerContentProtectedError,

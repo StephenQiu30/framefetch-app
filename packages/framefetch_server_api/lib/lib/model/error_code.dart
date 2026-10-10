@@ -130,6 +130,8 @@ class ErrorCode extends EnumClass {
   static const ErrorCode notFound = _$notFound;
   @BuiltValueEnumConst(wireName: r'ok')
   static const ErrorCode ok = _$ok;
+  @BuiltValueEnumConst(wireName: r'operation_rate_limited')
+  static const ErrorCode operationRateLimited = _$operationRateLimited;
   @BuiltValueEnumConst(wireName: r'provider_catalog_conflict')
   static const ErrorCode providerCatalogConflict = _$providerCatalogConflict;
   @BuiltValueEnumConst(wireName: r'provider_catalog_not_found')

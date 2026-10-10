@@ -51,7 +51,8 @@ void main() {
       'challenge': localizations.providerChallengeError,
       'login_required': localizations.providerLoginRequiredError,
       'identity_unavailable': localizations.providerIdentityUnavailableError,
-      'rate_limited': localizations.rateLimitedError,
+      'rate_limited': localizations.providerRateLimitedError,
+      'operation_rate_limited': localizations.rateLimitedError,
       'content_unavailable': localizations.providerLinkError,
       'content_protected': localizations.providerContentProtectedError,
       'extractor_broken': localizations.providerExtractorError,
@@ -79,7 +80,7 @@ void main() {
     final classes = {
       FailureClass.identityUnavailable:
           localizations.providerIdentityUnavailableError,
-      FailureClass.rateLimited: localizations.rateLimitedError,
+      FailureClass.rateLimited: localizations.providerRateLimitedError,
       FailureClass.contextChanged: localizations.providerContextChangedError,
     };
     for (final entry in classes.entries) {

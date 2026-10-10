@@ -652,6 +652,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get rateLimitedError => '操作过于频繁，请稍后再试。';
 
   @override
+  String get providerRateLimitedError =>
+      '媒体平台暂时限制了当前网络出口的请求，请稍后重试或检查部署主机的网络出口。';
+
+  @override
   String get serviceUnavailableError => '暂时无法连接服务，请检查网络后重试。';
 
   @override

@@ -217,6 +217,7 @@
   "usernameRegisteredError": "该用户名已被使用，请更换后重试。",
   "unauthenticatedError": "登录状态已失效，请重新登录。",
   "rateLimitedError": "操作过于频繁，请稍后再试。",
+  "providerRateLimitedError": "媒体平台暂时限制了当前网络出口的请求，请稍后重试或检查部署主机的网络出口。",
   "serviceUnavailableError": "暂时无法连接服务，请检查网络后重试。",
   "unknownAuthError": "操作未完成，请稍后重试。",
   "logoutAction": "退出登录",
