@@ -217,6 +217,7 @@
   "usernameRegisteredError": "That username is already in use.",
   "unauthenticatedError": "Your session expired. Sign in again.",
   "rateLimitedError": "Too many attempts. Try again later.",
+  "providerRateLimitedError": "The media platform is temporarily limiting requests from the current network. Try again later or check the deployment host’s network egress.",
   "serviceUnavailableError": "The service is unavailable. Check your connection and retry.",
   "unknownAuthError": "The operation did not complete. Try again later.",
   "logoutAction": "Sign out",

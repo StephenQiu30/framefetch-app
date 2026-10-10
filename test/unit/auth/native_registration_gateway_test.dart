@@ -51,9 +51,11 @@ void main() {
     },
   );
 
-  test(
-    'maps a refused native verification without creating a session',
-    () async {
+  for (final (code, status, kind) in [
+    ('invalid_verification_code', 422, AuthFailureKind.invalidVerificationCode),
+    ('operation_rate_limited', 429, AuthFailureKind.rateLimited),
+  ]) {
+    test('maps $code without creating a session', () async {
       final dio = Dio();
       addTearDown(() => dio.close(force: true));
       dio.interceptors.add(
@@ -65,8 +67,8 @@ void main() {
                 type: DioExceptionType.badResponse,
                 response: Response<Map<String, Object?>>(
                   requestOptions: options,
-                  statusCode: 422,
-                  data: {'code': 'invalid_verification_code'},
+                  statusCode: status,
+                  data: {'code': code},
                 ),
               ),
             );
@@ -84,10 +86,10 @@ void main() {
           isA<AuthRequestFailure>().having(
             (failure) => failure.kind,
             'kind',
-            AuthFailureKind.invalidVerificationCode,
+            kind,
           ),
         ),
       );
-    },
-  );
+    });
+  }
 }

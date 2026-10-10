@@ -202,7 +202,7 @@ AuthRequestFailure _failure(DioException error) {
     'email_already_registered' => AuthFailureKind.emailRegistered,
     'username_already_registered' => AuthFailureKind.usernameRegistered,
     'unauthenticated' => AuthFailureKind.unauthenticated,
-    'rate_limited' => AuthFailureKind.rateLimited,
+    'operation_rate_limited' => AuthFailureKind.rateLimited,
     _ when error.response == null => AuthFailureKind.unavailable,
     _ => AuthFailureKind.unknown,
   };

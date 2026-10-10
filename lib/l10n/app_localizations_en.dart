@@ -699,6 +699,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rateLimitedError => 'Too many attempts. Try again later.';
 
   @override
+  String get providerRateLimitedError =>
+      'The media platform is temporarily limiting requests from the current network. Try again later or check the deployment host’s network egress.';
+
+  @override
   String get serviceUnavailableError =>
       'The service is unavailable. Check your connection and retry.';
 

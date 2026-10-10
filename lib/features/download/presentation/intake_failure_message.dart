@@ -18,7 +18,7 @@ String? intentFailureMessage(
     FailureClass.loginRequired => localizations.providerLoginRequiredError,
     FailureClass.identityUnavailable =>
       localizations.providerIdentityUnavailableError,
-    FailureClass.rateLimited => localizations.rateLimitedError,
+    FailureClass.rateLimited => localizations.providerRateLimitedError,
     FailureClass.contextChanged => localizations.providerContextChangedError,
     FailureClass.contentUnavailable => localizations.providerLinkError,
     FailureClass.contentProtected =>
@@ -48,7 +48,8 @@ String intakeFailureMessage(AppLocalizations localizations, Object error) {
     'challenge' => localizations.providerChallengeError,
     'login_required' => localizations.providerLoginRequiredError,
     'identity_unavailable' => localizations.providerIdentityUnavailableError,
-    'rate_limited' => localizations.rateLimitedError,
+    'rate_limited' => localizations.providerRateLimitedError,
+    'operation_rate_limited' => localizations.rateLimitedError,
     'context_changed' => localizations.providerContextChangedError,
     'content_unavailable' => localizations.providerLinkError,
     'content_protected' => localizations.providerContentProtectedError,

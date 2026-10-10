@@ -1340,6 +1340,12 @@ abstract class AppLocalizations {
   /// **'操作过于频繁，请稍后再试。'**
   String get rateLimitedError;
 
+  /// No description provided for @providerRateLimitedError.
+  ///
+  /// In zh, this message translates to:
+  /// **'媒体平台暂时限制了当前网络出口的请求，请稍后重试或检查部署主机的网络出口。'**
+  String get providerRateLimitedError;
+
   /// No description provided for @serviceUnavailableError.
   ///
   /// In zh, this message translates to:

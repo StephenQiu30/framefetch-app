@@ -88,6 +88,8 @@ const ErrorCode _$methodNotAllowed = const ErrorCode._('methodNotAllowed');
 const ErrorCode _$metricsUnavailable = const ErrorCode._('metricsUnavailable');
 const ErrorCode _$notFound = const ErrorCode._('notFound');
 const ErrorCode _$ok = const ErrorCode._('ok');
+const ErrorCode _$operationRateLimited =
+    const ErrorCode._('operationRateLimited');
 const ErrorCode _$providerCatalogConflict =
     const ErrorCode._('providerCatalogConflict');
 const ErrorCode _$providerCatalogNotFound =
@@ -238,6 +240,8 @@ ErrorCode _$valueOf(String name) {
       return _$notFound;
     case 'ok':
       return _$ok;
+    case 'operationRateLimited':
+      return _$operationRateLimited;
     case 'providerCatalogConflict':
       return _$providerCatalogConflict;
     case 'providerCatalogNotFound':
@@ -346,6 +350,7 @@ final BuiltSet<ErrorCode> _$values = BuiltSet<ErrorCode>(const <ErrorCode>[
   _$metricsUnavailable,
   _$notFound,
   _$ok,
+  _$operationRateLimited,
   _$providerCatalogConflict,
   _$providerCatalogNotFound,
   _$providerFailure,
@@ -430,6 +435,7 @@ class _$ErrorCodeMeta {
   ErrorCode get metricsUnavailable => _$metricsUnavailable;
   ErrorCode get notFound => _$notFound;
   ErrorCode get ok => _$ok;
+  ErrorCode get operationRateLimited => _$operationRateLimited;
   ErrorCode get providerCatalogConflict => _$providerCatalogConflict;
   ErrorCode get providerCatalogNotFound => _$providerCatalogNotFound;
   ErrorCode get providerFailure => _$providerFailure;
@@ -523,6 +529,7 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'metricsUnavailable': 'metrics_unavailable',
     'notFound': 'not_found',
     'ok': 'ok',
+    'operationRateLimited': 'operation_rate_limited',
     'providerCatalogConflict': 'provider_catalog_conflict',
     'providerCatalogNotFound': 'provider_catalog_not_found',
     'providerFailure': 'provider_failure',
@@ -605,6 +612,7 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'metrics_unavailable': 'metricsUnavailable',
     'not_found': 'notFound',
     'ok': 'ok',
+    'operation_rate_limited': 'operationRateLimited',
     'provider_catalog_conflict': 'providerCatalogConflict',
     'provider_catalog_not_found': 'providerCatalogNotFound',
     'provider_failure': 'providerFailure',
