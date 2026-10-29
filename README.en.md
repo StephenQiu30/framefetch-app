@@ -11,7 +11,7 @@
 [![Source preview](https://img.shields.io/github/v/release/StephenQiu30/framefetch-app?include_prereleases&color=171717)](https://github.com/StephenQiu30/framefetch-app/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-171717.svg)](LICENSE)
 
-[Get started](#get-started) · [Capabilities](#what-you-can-do) · [Installation](#platforms-and-installation) · [Server / Web](https://github.com/StephenQiu30/framefetch-server) · [Desktop](https://github.com/StephenQiu30/framefetch-electron) · [简体中文](README.md)
+[Get started](#get-started) · [Capabilities](#what-you-can-do) · [Installation](#platforms-and-installation) · [Server / Web](https://github.com/StephenQiu30/framefetch) · [Desktop](https://github.com/StephenQiu30/framefetch-electron) · [简体中文](README.md)
 
 > **Source preview**: [v0.2.0-beta.1](https://github.com/StephenQiu30/framefetch-app/releases/tag/v0.2.0-beta.1) has no APK / IPA or app-store installer. Deploy Server first, then build this native client.
 
@@ -28,7 +28,7 @@
 
 ### 1. Prepare the server and toolchain
 
-Deploy the API, Web and workers with the [framefetch-server quick start](https://github.com/StephenQiu30/framefetch-server/blob/main/README.en.md#quick-start), then obtain a server address reachable from your device.
+Deploy the API, Web and workers with the [framefetch-server quick start](https://github.com/StephenQiu30/framefetch/blob/main/README.en.md#quick-start), then obtain a server address reachable from your device.
 
 | Environment    | Requirement                                           |
 | -------------- | ----------------------------------------------------- |
@@ -100,7 +100,7 @@ Inspection has a persistent record of its own. Opening the app again or entering
 
 ### Read complete AI results on your phone
 
-The existing video and screenplay analysis forms remain in place: select a Skill, Chinese or English output, and a custom focus or the method's default instructions. Available methods come from the server catalog. This update improves video review (`video-review`), video breakdown (`video-breakdown`), screenplay analysis (`screenplay-analysis`), and document, WeChat, and Xiaohongshu formatting (`article-format`, `wechat-format`, `xhs-format`). Report reading, run history, and Markdown/DOCX exports keep the existing pages and controls. See the [server Skill design](https://github.com/StephenQiu30/framefetch-server/blob/main/docs/design/09-AI分析.md) for method and result contracts.
+The existing video and screenplay analysis forms remain in place: select a Skill, Chinese or English output, and a custom focus or the method's default instructions. Available methods come from the server catalog. This update improves video review (`video-review`), video breakdown (`video-breakdown`), screenplay analysis (`screenplay-analysis`), and document, WeChat, and Xiaohongshu formatting (`article-format`, `wechat-format`, `xhs-format`). Report reading, run history, and Markdown/DOCX exports keep the existing pages and controls. See the [server Skill design](https://github.com/StephenQiu30/framefetch/blob/main/docs/design/09-AI分析.md) for method and result contracts.
 
 Method counts describe the current catalog; they do not mean every method has passed real-model and device workflow acceptance.
 
@@ -143,7 +143,7 @@ A historical analysis opens the exact selected analysis ID, including its method
 5. **Analyze:** select a video or screenplay Skill, output language and focus, and start server-side analysis independently of media acquisition.
 6. **Deliver:** read results with video time or screenplay scene references, save Markdown/DOCX, or share the complete Markdown report for further editing.
 
-For an existing MP4, upload it from the local-video entry point, open its media details and continue from step 5. Shared workflow and deliverables are documented in the [server's complete workflow](https://github.com/StephenQiu30/framefetch-server/blob/main/README.en.md#from-material-to-report).
+For an existing MP4, upload it from the local-video entry point, open its media details and continue from step 5. Shared workflow and deliverables are documented in the [server's complete workflow](https://github.com/StephenQiu30/framefetch/blob/main/README.en.md#from-material-to-report).
 
 ### Administer your service
 
@@ -153,7 +153,7 @@ Administrators open the management center from the account tab to inspect downlo
 
 | Project                                                            | Entry point and responsibility                                                                                                            |
 | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| [`framefetch-server`](https://github.com/StephenQiu30/framefetch-server)     | FastAPI API, Next.js Web, inspection/downloads, AI workers, identity, permissions, queues, storage and reports                            |
+| [`framefetch`](https://github.com/StephenQiu30/framefetch)     | FastAPI API, Next.js Web, inspection/downloads, AI workers, identity, permissions, queues, storage and reports                            |
 | [`framefetch-electron`](https://github.com/StephenQiu30/framefetch-electron) | Electron desktop entry point with bundled React pages reusing Web business source, the same server, native windows and system file saving |
 | **`framefetch-app`**                                                    | Native Flutter iOS/Android screens, Bearer sessions, system file entry points, playback and mobile administration                         |
 
@@ -227,7 +227,7 @@ dart run tool/check.dart
 
 ## Contributing
 
-Issues and suggestions are welcome at [GitHub Issues](https://github.com/StephenQiu30/framefetch-app/issues). Read [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) before contributing. Report mobile UI, native sessions and device behavior here; API, Web, inspection, storage and AI worker issues belong in [framefetch-server](https://github.com/StephenQiu30/framefetch-server/issues).
+Issues and suggestions are welcome at [GitHub Issues](https://github.com/StephenQiu30/framefetch-app/issues). Read [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) before contributing. Report mobile UI, native sessions and device behavior here; API, Web, inspection, storage and AI worker issues belong in [framefetch](https://github.com/StephenQiu30/framefetch/issues).
 
 For research, reports or teaching materials, cite [`CITATION.cff`](CITATION.cff).
 

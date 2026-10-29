@@ -64,6 +64,7 @@ void main() {
         l10n.publicFaqCostQuestion,
         l10n.publicFaqPlatformsQuestion,
         l10n.publicFaqMobileQuestion,
+        l10n.publicFaqSourceQuestion,
       ],
       [
         '帧取 Framefetch 是什么？',
@@ -72,6 +73,7 @@ void main() {
         '开源免费是否意味着运行没有成本？',
         '是否支持所有视频平台和所有链接？',
         '手机端是否能独立运行 AI 分析？',
+        '源码在哪里？如何关注项目？',
       ],
     );
     expect(l10n.publicGuideAction, '阅读视频分析与自托管使用指南');
@@ -81,11 +83,15 @@ void main() {
   test('uses the Web repository as the shared project source', () {
     expect(
       PublicHomeLinks.repository.toString(),
-      'https://github.com/StephenQiu30/framefetch-server',
+      'https://github.com/StephenQiu30/framefetch',
     );
     expect(
       PublicHomeLinks.quickStart.toString(),
-      'https://github.com/StephenQiu30/framefetch-server/blob/main/README.md#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B',
+      'https://github.com/StephenQiu30/framefetch/blob/main/README.md#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B',
+    );
+    expect(
+      PublicHomeLinks.desktopRepository.toString(),
+      'https://github.com/StephenQiu30/framefetch-electron',
     );
     expect(
       PublicHomeLinks.mobileRepository.toString(),

@@ -11,7 +11,7 @@
 [![Source preview](https://img.shields.io/github/v/release/StephenQiu30/framefetch-app?include_prereleases&color=171717)](https://github.com/StephenQiu30/framefetch-app/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-171717.svg)](LICENSE)
 
-[开始使用](#开始使用) · [可以做什么](#可以用它做什么) · [平台与安装](#平台与安装) · [Server / Web](https://github.com/StephenQiu30/framefetch-server) · [桌面端](https://github.com/StephenQiu30/framefetch-electron) · [English](README.en.md)
+[开始使用](#开始使用) · [可以做什么](#可以用它做什么) · [平台与安装](#平台与安装) · [Server / Web](https://github.com/StephenQiu30/framefetch) · [桌面端](https://github.com/StephenQiu30/framefetch-electron) · [English](README.en.md)
 
 > **源码预览**：[v0.2.0-beta.1](https://github.com/StephenQiu30/framefetch-app/releases/tag/v0.2.0-beta.1) 未提供 APK / IPA 或商店安装包。先部署 Server，再从源码运行原生客户端。
 
@@ -28,7 +28,7 @@
 
 ### 1. 准备服务与工具链
 
-先按 [framefetch-server 快速开始](https://github.com/StephenQiu30/framefetch-server#快速开始) 部署 API、Web 与 Worker，准备手机可访问的服务地址。
+先按 [framefetch-server 快速开始](https://github.com/StephenQiu30/framefetch#快速开始) 部署 API、Web 与 Worker，准备手机可访问的服务地址。
 
 | 环境           | 要求                                            |
 | -------------- | ----------------------------------------------- |
@@ -100,7 +100,7 @@ flutter build ios --simulator --no-codesign \
 
 ### 在手机上阅读完整 AI 结果
 
-App 继续使用原有视频／剧本文档分析入口：选择 Skill、中文／英文输出，编辑分析重点或恢复该方法的默认要求。可调用方法以服务端目录为准；本轮优化成片审阅（`video-review`）、素材拆解（`video-breakdown`）、剧本审阅（`screenplay-analysis`），以及文章／公众号／小红书整理（`article-format`、`wechat-format`、`xhs-format`）。原有报告阅读、运行历史及 Markdown／DOCX 导出保持原页面和操作。方法与结果契约见 [服务端 Skill 设计](https://github.com/StephenQiu30/framefetch-server/blob/main/docs/design/09-AI分析.md)。
+App 继续使用原有视频／剧本文档分析入口：选择 Skill、中文／英文输出，编辑分析重点或恢复该方法的默认要求。可调用方法以服务端目录为准；本轮优化成片审阅（`video-review`）、素材拆解（`video-breakdown`）、剧本审阅（`screenplay-analysis`），以及文章／公众号／小红书整理（`article-format`、`wechat-format`、`xhs-format`）。原有报告阅读、运行历史及 Markdown／DOCX 导出保持原页面和操作。方法与结果契约见 [服务端 Skill 设计](https://github.com/StephenQiu30/framefetch/blob/main/docs/design/09-AI分析.md)。
 
 方法数量表示当前目录，不表示所有方法的真实模型与设备业务验收均已通过。
 
@@ -143,7 +143,7 @@ App 继续使用原有视频／剧本文档分析入口：选择 Skill、中文�
 5. **分析**：对视频或剧本选择 Skill、输出语言和关注重点，启动服务端分析；分析状态独立于素材获取。
 6. **交付**：结合视频时间或剧本场景依据阅读结果，保存 Markdown／DOCX，或分享完整 Markdown 报告继续编辑。
 
-已有本地 MP4 时，从“本地视频”入口上传后直接进入素材详情，继续第 5 步。工作站共用流程与交付规则见 [Server 完整工作流](https://github.com/StephenQiu30/framefetch-server#从素材到报告)。
+已有本地 MP4 时，从“本地视频”入口上传后直接进入素材详情，继续第 5 步。工作站共用流程与交付规则见 [Server 完整工作流](https://github.com/StephenQiu30/framefetch#从素材到报告)。
 
 ### 管理自己的服务
 
@@ -153,7 +153,7 @@ App 继续使用原有视频／剧本文档分析入口：选择 Skill、中文�
 
 | 项目                                                               | 入口与职责                                                                                       |
 | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| [`framefetch-server`](https://github.com/StephenQiu30/framefetch-server)     | FastAPI API、Next.js Web、解析与下载、AI Worker、账户权限、队列、存储和报告                      |
+| [`framefetch`](https://github.com/StephenQiu30/framefetch)     | FastAPI API、Next.js Web、解析与下载、AI Worker、账户权限、队列、存储和报告                      |
 | [`framefetch-electron`](https://github.com/StephenQiu30/framefetch-electron) | Electron 桌面入口，随包 React 页面复用 Web 业务源码，连接同一 Server，提供原生窗口和系统文件保存 |
 | **`framefetch-app`**                                                    | Flutter iOS／Android 原生页面、Bearer 会话、系统文件入口、播放和移动管理                         |
 
@@ -227,7 +227,7 @@ dart run tool/check.dart
 
 ## 参与项目
 
-欢迎提交 [Issues](https://github.com/StephenQiu30/framefetch-app/issues) 和改进建议；贡献前阅读 [`CONTRIBUTING.md`](CONTRIBUTING.md) 与 [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)。移动 UI、原生会话和设备行为在本仓库反馈；API、Web、解析、存储与 AI Worker 问题提交到 [framefetch-server](https://github.com/StephenQiu30/framefetch-server/issues)。
+欢迎提交 [Issues](https://github.com/StephenQiu30/framefetch-app/issues) 和改进建议；贡献前阅读 [`CONTRIBUTING.md`](CONTRIBUTING.md) 与 [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)。移动 UI、原生会话和设备行为在本仓库反馈；API、Web、解析、存储与 AI Worker 问题提交到 [framefetch](https://github.com/StephenQiu30/framefetch/issues)。
 
 如果你在论文、报告或课程中使用帧取，可以引用 [`CITATION.cff`](CITATION.cff)。
 

@@ -90,6 +90,10 @@ final class PublicHomeContentSections extends StatelessWidget {
                     question: l.publicFaqMobileQuestion,
                     answer: l.publicFaqMobileAnswer,
                   ),
+                  (
+                    question: l.publicFaqSourceQuestion,
+                    answer: l.publicFaqSourceAnswer,
+                  ),
                 ],
               ),
               const SizedBox(height: 40),

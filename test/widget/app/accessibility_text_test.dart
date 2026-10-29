@@ -204,7 +204,7 @@ void main() {
     expect(find.byKey(const Key('public-guide-screen')), findsOneWidget);
     expect(find.text('从素材到分析报告'), findsOneWidget);
     expect(find.text('如何处理剧本文档？'), findsOneWidget);
-    expect(find.text('Web 与 iOS / Android 客户端如何选择？'), findsOneWidget);
+    expect(find.text('Web、桌面与 iOS / Android 如何选择？'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 

@@ -44,7 +44,7 @@ List<PublicGuideSection> publicGuideSections(AppLocalizations l10n) => [
       l10n.publicGuideClientsParagraphOne,
       l10n.publicGuideClientsParagraphTwo,
     ],
-    source: PublicHomeLinks.mobileRepository,
+    source: PublicHomeLinks.clients,
     sourceLabel: l10n.publicGuideClientsSource,
   ),
   (

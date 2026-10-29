@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
-  - name: framefetch-server API、Web 与 Worker 问题
-    url: https://github.com/StephenQiu30/framefetch-server/issues
+  - name: framefetch 服务端 API、Web 与 Worker 问题
+    url: https://github.com/StephenQiu30/framefetch/issues
     about: Provider、解析、下载队列、对象存储、Web 平台或 AI Worker 问题请提交到服务端仓库。
   - name: 安全漏洞报告说明
     url: https://github.com/StephenQiu30/framefetch-app/security/policy
