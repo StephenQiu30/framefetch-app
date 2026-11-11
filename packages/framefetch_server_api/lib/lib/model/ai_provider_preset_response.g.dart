@@ -88,8 +88,6 @@ class _$AiProviderPresetResponse extends AiProviderPresetResponse {
   @override
   final String baseUrl;
   @override
-  final AiProviderAuthMode authMode;
-  @override
   final String defaultModel;
   @override
   final BuiltList<AiProviderSuggestedModelResponse> suggestedModels;
@@ -115,7 +113,6 @@ class _$AiProviderPresetResponse extends AiProviderPresetResponse {
       required this.engine,
       required this.displayName,
       required this.baseUrl,
-      required this.authMode,
       required this.defaultModel,
       required this.suggestedModels,
       required this.supportsVision,
@@ -142,7 +139,6 @@ class _$AiProviderPresetResponse extends AiProviderPresetResponse {
         engine == other.engine &&
         displayName == other.displayName &&
         baseUrl == other.baseUrl &&
-        authMode == other.authMode &&
         defaultModel == other.defaultModel &&
         suggestedModels == other.suggestedModels &&
         supportsVision == other.supportsVision &&
@@ -160,7 +156,6 @@ class _$AiProviderPresetResponse extends AiProviderPresetResponse {
     _$hash = $jc(_$hash, engine.hashCode);
     _$hash = $jc(_$hash, displayName.hashCode);
     _$hash = $jc(_$hash, baseUrl.hashCode);
-    _$hash = $jc(_$hash, authMode.hashCode);
     _$hash = $jc(_$hash, defaultModel.hashCode);
     _$hash = $jc(_$hash, suggestedModels.hashCode);
     _$hash = $jc(_$hash, supportsVision.hashCode);
@@ -180,7 +175,6 @@ class _$AiProviderPresetResponse extends AiProviderPresetResponse {
           ..add('engine', engine)
           ..add('displayName', displayName)
           ..add('baseUrl', baseUrl)
-          ..add('authMode', authMode)
           ..add('defaultModel', defaultModel)
           ..add('suggestedModels', suggestedModels)
           ..add('supportsVision', supportsVision)
@@ -213,10 +207,6 @@ class AiProviderPresetResponseBuilder
   String? _baseUrl;
   String? get baseUrl => _$this._baseUrl;
   set baseUrl(String? baseUrl) => _$this._baseUrl = baseUrl;
-
-  AiProviderAuthMode? _authMode;
-  AiProviderAuthMode? get authMode => _$this._authMode;
-  set authMode(AiProviderAuthMode? authMode) => _$this._authMode = authMode;
 
   String? _defaultModel;
   String? get defaultModel => _$this._defaultModel;
@@ -273,7 +263,6 @@ class AiProviderPresetResponseBuilder
       _engine = $v.engine;
       _displayName = $v.displayName;
       _baseUrl = $v.baseUrl;
-      _authMode = $v.authMode;
       _defaultModel = $v.defaultModel;
       _suggestedModels = $v.suggestedModels.toBuilder();
       _supportsVision = $v.supportsVision;
@@ -313,8 +302,6 @@ class AiProviderPresetResponseBuilder
                 displayName, r'AiProviderPresetResponse', 'displayName'),
             baseUrl: BuiltValueNullFieldError.checkNotNull(
                 baseUrl, r'AiProviderPresetResponse', 'baseUrl'),
-            authMode: BuiltValueNullFieldError.checkNotNull(
-                authMode, r'AiProviderPresetResponse', 'authMode'),
             defaultModel: BuiltValueNullFieldError.checkNotNull(
                 defaultModel, r'AiProviderPresetResponse', 'defaultModel'),
             suggestedModels: suggestedModels.build(),

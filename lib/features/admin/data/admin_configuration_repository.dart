@@ -28,20 +28,17 @@ final class AdminConfigurationRepository {
   Future<void> deleteCatalog(String key) => request.execute((client) async {
     await client.getAdminApi().deleteProviderCatalogEntry(providerKey: key);
   });
-  Future<void> createAi(CreateAiProviderProfileRequest body) =>
-      request.execute((client) async {
-        await client.getAdminApi().createAiProviderProfile(
-          createAiProviderProfileRequest: body,
-        );
-      });
-  Future<void> updateAi(String key, UpdateAiProviderProfileRequest body) =>
-      request.execute((client) async {
-        await client.getAdminApi().updateAiProviderProfile(
-          providerKey: key,
-          updateAiProviderProfileRequest: body,
-        );
-      });
-  Future<void> deleteAi(String key) => request.execute((client) async {
-    await client.getAdminApi().deleteAiProviderProfile(providerKey: key);
+  Future<void> configureAi(
+    AiProviderEngine engine,
+    ConfigureAiProviderRequest body,
+  ) => request.execute((client) async {
+    await client.getAdminApi().configureAiProvider(
+      engine: engine,
+      configureAiProviderRequest: body,
+    );
   });
+  Future<void> deleteAi(AiProviderEngine engine) =>
+      request.execute((client) async {
+        await client.getAdminApi().deleteAiProviderProfile(engine: engine);
+      });
 }

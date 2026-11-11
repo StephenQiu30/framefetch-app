@@ -29,89 +29,72 @@ void main() {
     },
   );
 
-  test(
-    'official engines require API key, validate HTTPS or explicit loopback, and match presets',
-    () {
-      for (final engine in [
+  test('recognizes official engines, default URLs, and preset matching', () {
+    for (final engine in [
+      AiProviderEngine.volcengine,
+      AiProviderEngine.deepseek,
+      AiProviderEngine.openai,
+    ]) {
+      expect(isDirectAiEngine(engine), isTrue);
+    }
+    expect(isDirectAiEngine(AiProviderEngine.unknownDefaultOpenApi), isFalse);
+    expect(
+      aiProviderBaseUrl(AiProviderEngine.volcengine),
+      'https://ark.cn-beijing.volces.com/api/v3',
+    );
+    expect(
+      aiProviderBaseUrl(AiProviderEngine.deepseek),
+      'https://api.deepseek.com',
+    );
+    expect(
+      aiProviderBaseUrl(AiProviderEngine.openai),
+      'https://api.openai.com/v1',
+    );
+    final payg = AiProviderPresetResponse(
+      (b) => b
+        ..id = 'volcengine-ark-v3'
+        ..engine = AiProviderEngine.volcengine
+        ..displayName = '按量付费 V3'
+        ..baseUrl = 'https://ark.cn-beijing.volces.com/api/v3'
+        ..defaultModel = 'doubao-seed-2-0-lite'
+        ..supportsVision = true
+        ..supportsModelsEndpoint = true
+        ..structuredOutputMode =
+            AiProviderPresetResponseStructuredOutputModeEnum.jsonSchema
+        ..endpointKind = 'payg'
+        ..supportsCustomModelId = true
+        ..keyIsolationNotice = '按量 Key 专属',
+    );
+    final coding = AiProviderPresetResponse(
+      (b) => b
+        ..id = 'volcengine-coding-v3'
+        ..engine = AiProviderEngine.volcengine
+        ..displayName = 'Coding Plan V3'
+        ..baseUrl = 'https://ark.cn-beijing.volces.com/api/coding/v3'
+        ..defaultModel = 'ark-code-latest'
+        ..supportsVision = false
+        ..supportsModelsEndpoint = false
+        ..structuredOutputMode =
+            AiProviderPresetResponseStructuredOutputModeEnum.jsonSchema
+        ..endpointKind = 'coding_plan'
+        ..supportsCustomModelId = true
+        ..keyIsolationNotice = 'Coding Plan Key 专属',
+    );
+    expect(
+      matchAiProviderPreset(
+        [payg, coding],
         AiProviderEngine.volcengine,
-        AiProviderEngine.deepseek,
-        AiProviderEngine.openai,
-      ]) {
-        expect(isDirectAiEngine(engine), isTrue);
-      }
-      expect(isDirectAiEngine(AiProviderEngine.unknownDefaultOpenApi), isFalse);
-      expect(isValidAiBaseUrl('http://localhost:8080/v1'), isTrue);
-      expect(isValidAiBaseUrl('https://api.example.com/v1'), isTrue);
-      expect(isValidAiBaseUrl('http://api.example.com/v1'), isFalse);
-      expect(
-        isValidAiBaseUrl('https://key:secret@api.example.com/v1'),
-        isFalse,
-      );
-      expect(
-        isValidAiBaseUrl('https://api.example.com/v1?key=secret'),
-        isFalse,
-      );
-      expect(isValidAiBaseUrl('https://api.example.com/v1#fragment'), isFalse);
-      expect(
-        aiProviderBaseUrl(AiProviderEngine.volcengine),
-        'https://ark.cn-beijing.volces.com/api/v3',
-      );
-      expect(
-        aiProviderBaseUrl(AiProviderEngine.deepseek),
-        'https://api.deepseek.com',
-      );
-      expect(
-        aiProviderBaseUrl(AiProviderEngine.openai),
-        'https://api.openai.com/v1',
-      );
-      final payg = AiProviderPresetResponse(
-        (b) => b
-          ..id = 'volcengine-ark-v3'
-          ..engine = AiProviderEngine.volcengine
-          ..displayName = '方舟按量 V3'
-          ..baseUrl = 'https://ark.cn-beijing.volces.com/api/v3'
-          ..authMode = AiProviderAuthMode.apiKey
-          ..defaultModel = 'doubao-seed-2-0-lite'
-          ..supportsVision = true
-          ..supportsModelsEndpoint = true
-          ..structuredOutputMode =
-              AiProviderPresetResponseStructuredOutputModeEnum.jsonSchema
-          ..endpointKind = 'payg'
-          ..supportsCustomModelId = true
-          ..keyIsolationNotice = '按量 Key 专属',
-      );
-      final coding = AiProviderPresetResponse(
-        (b) => b
-          ..id = 'volcengine-coding-v3'
-          ..engine = AiProviderEngine.volcengine
-          ..displayName = '方舟 Coding Plan V3'
-          ..baseUrl = 'https://ark.cn-beijing.volces.com/api/coding/v3'
-          ..authMode = AiProviderAuthMode.apiKey
-          ..defaultModel = 'ark-code-latest'
-          ..supportsVision = false
-          ..supportsModelsEndpoint = false
-          ..structuredOutputMode =
-              AiProviderPresetResponseStructuredOutputModeEnum.jsonSchema
-          ..endpointKind = 'coding_plan'
-          ..supportsCustomModelId = true
-          ..keyIsolationNotice = 'Coding Plan Key 专属',
-      );
-      expect(
-        matchAiProviderPreset(
-          [payg, coding],
-          AiProviderEngine.volcengine,
-          'https://ark.cn-beijing.volces.com/api/coding/v3/',
-        )?.id,
-        'volcengine-coding-v3',
-      );
-      expect(
-        matchAiProviderPreset(
-          [payg, coding],
-          AiProviderEngine.volcengine,
-          '',
-        )?.id,
-        'volcengine-ark-v3',
-      );
-    },
-  );
+        'https://ark.cn-beijing.volces.com/api/coding/v3/',
+      )?.id,
+      'volcengine-coding-v3',
+    );
+    expect(
+      matchAiProviderPreset(
+        [payg, coding],
+        AiProviderEngine.volcengine,
+        '',
+      )?.id,
+      'volcengine-ark-v3',
+    );
+  });
 }

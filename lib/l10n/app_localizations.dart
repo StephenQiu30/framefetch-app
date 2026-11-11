@@ -2810,35 +2810,11 @@ abstract class AppLocalizations {
   /// **'请检查此字段的格式和取值。'**
   String get invalidConfiguration;
 
-  /// No description provided for @createAiProvider.
-  ///
-  /// In zh, this message translates to:
-  /// **'新增 AI 服务'**
-  String get createAiProvider;
-
-  /// No description provided for @engineLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'执行引擎'**
-  String get engineLabel;
-
-  /// No description provided for @authModeLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'认证方式'**
-  String get authModeLabel;
-
   /// No description provided for @modelLabel.
   ///
   /// In zh, this message translates to:
   /// **'模型'**
   String get modelLabel;
-
-  /// No description provided for @baseUrlLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'服务地址'**
-  String get baseUrlLabel;
 
   /// No description provided for @apiKeyLabel.
   ///
@@ -3632,54 +3608,6 @@ abstract class AppLocalizations {
   /// **'没有匹配的平台'**
   String get adminPlatformsEmpty;
 
-  /// No description provided for @adminAiSearch.
-  ///
-  /// In zh, this message translates to:
-  /// **'搜索 AI 配置'**
-  String get adminAiSearch;
-
-  /// No description provided for @adminAiEmpty.
-  ///
-  /// In zh, this message translates to:
-  /// **'没有匹配的 AI 配置'**
-  String get adminAiEmpty;
-
-  /// No description provided for @adminEngineVolcengine.
-  ///
-  /// In zh, this message translates to:
-  /// **'火山引擎方舟'**
-  String get adminEngineVolcengine;
-
-  /// No description provided for @adminEngineOpenAi.
-  ///
-  /// In zh, this message translates to:
-  /// **'OpenAI 官方'**
-  String get adminEngineOpenAi;
-
-  /// No description provided for @adminEngineDeepSeek.
-  ///
-  /// In zh, this message translates to:
-  /// **'DeepSeek 官方'**
-  String get adminEngineDeepSeek;
-
-  /// No description provided for @adminFallbackLine.
-  ///
-  /// In zh, this message translates to:
-  /// **'兜底线路'**
-  String get adminFallbackLine;
-
-  /// No description provided for @adminSetFallbackAction.
-  ///
-  /// In zh, this message translates to:
-  /// **'设为兜底'**
-  String get adminSetFallbackAction;
-
-  /// No description provided for @adminClearFallbackAction.
-  ///
-  /// In zh, this message translates to:
-  /// **'取消兜底'**
-  String get adminClearFallbackAction;
-
   /// No description provided for @adminEndpointPresetLabel.
   ///
   /// In zh, this message translates to:
@@ -3722,12 +3650,6 @@ abstract class AppLocalizations {
   /// **'耗时 {ms} ms'**
   String adminTestConnectionLatency(int ms);
 
-  /// No description provided for @adminApiUrlHint.
-  ///
-  /// In zh, this message translates to:
-  /// **'公网地址必须使用 HTTPS；本机 localhost 可使用 HTTP。'**
-  String get adminApiUrlHint;
-
   /// No description provided for @adminModelsHint.
   ///
   /// In zh, this message translates to:
@@ -3745,12 +3667,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'仅文本'**
   String get adminTextOnly;
-
-  /// No description provided for @adminModelsEmpty.
-  ///
-  /// In zh, this message translates to:
-  /// **'没有匹配的模型'**
-  String get adminModelsEmpty;
 
   /// No description provided for @pageSizeOption.
   ///
@@ -3875,7 +3791,7 @@ abstract class AppLocalizations {
   /// No description provided for @adminDeleteAiDescription.
   ///
   /// In zh, this message translates to:
-  /// **'所选 AI 配置与凭据将永久删除。当前线路和系统兜底线路不可删除。'**
+  /// **'所选 AI 配置与凭据将永久删除。当前启用线路不可删除。'**
   String get adminDeleteAiDescription;
 
   /// No description provided for @adminDeleteCatalogDescription.

@@ -3,10 +3,8 @@ README.md
 analysis_options.yaml
 doc/AccessDecision.md
 doc/AdminApi.md
-doc/AiProviderAuthMode.md
 doc/AiProviderConnectionTestResponse.md
 doc/AiProviderEngine.md
-doc/AiProviderPresetListResponse.md
 doc/AiProviderPresetResponse.md
 doc/AiProviderProfileListResponse.md
 doc/AiProviderProfileResponse.md
@@ -32,7 +30,6 @@ doc/AnalysisSkillResponse.md
 doc/AnalysisStage.md
 doc/AnalysisStatus.md
 doc/ApiResponseAiProviderConnectionTestResponse.md
-doc/ApiResponseAiProviderPresetListResponse.md
 doc/ApiResponseAiProviderProfileListResponse.md
 doc/ApiResponseAiProviderProfileResponse.md
 doc/ApiResponseAnalysisAnalyticsResponse.md
@@ -73,13 +70,13 @@ doc/CompatibilityProfile.md
 doc/CompleteDocumentImportRequest.md
 doc/CompleteMediaImportRequest.md
 doc/CompletedPartRequest.md
+doc/ConfigureAiProviderRequest.md
 doc/ContainerPreference.md
 doc/ContentCitation.md
 doc/ContentCreationHistoryRecordResponse.md
 doc/ContentDocumentResult.md
 doc/ContentFinding.md
 doc/ContentReview.md
-doc/CreateAiProviderProfileRequest.md
 doc/CreateProviderCatalogEntryRequest.md
 doc/Data.md
 doc/DeclaredOrigin.md
@@ -212,7 +209,6 @@ doc/StructuredReportCitationResponse.md
 doc/StructuredReportResultResponse.md
 doc/StructuredReportSectionResponse.md
 doc/TestAiProviderConnectionRequest.md
-doc/UpdateAiProviderProfileRequest.md
 doc/UpdateProfileRequest.md
 doc/UpdateProviderCatalogEntryRequest.md
 doc/UpdateUserAccessRequest.md
@@ -250,10 +246,8 @@ lib/lib/auth/bearer_auth.dart
 lib/lib/auth/oauth.dart
 lib/lib/date_serializer.dart
 lib/lib/model/access_decision.dart
-lib/lib/model/ai_provider_auth_mode.dart
 lib/lib/model/ai_provider_connection_test_response.dart
 lib/lib/model/ai_provider_engine.dart
-lib/lib/model/ai_provider_preset_list_response.dart
 lib/lib/model/ai_provider_preset_response.dart
 lib/lib/model/ai_provider_profile_list_response.dart
 lib/lib/model/ai_provider_profile_response.dart
@@ -278,7 +272,6 @@ lib/lib/model/analysis_skill_response.dart
 lib/lib/model/analysis_stage.dart
 lib/lib/model/analysis_status.dart
 lib/lib/model/api_response_ai_provider_connection_test_response.dart
-lib/lib/model/api_response_ai_provider_preset_list_response.dart
 lib/lib/model/api_response_ai_provider_profile_list_response.dart
 lib/lib/model/api_response_ai_provider_profile_response.dart
 lib/lib/model/api_response_analysis_analytics_response.dart
@@ -318,13 +311,13 @@ lib/lib/model/compatibility_profile.dart
 lib/lib/model/complete_document_import_request.dart
 lib/lib/model/complete_media_import_request.dart
 lib/lib/model/completed_part_request.dart
+lib/lib/model/configure_ai_provider_request.dart
 lib/lib/model/container_preference.dart
 lib/lib/model/content_citation.dart
 lib/lib/model/content_creation_history_record_response.dart
 lib/lib/model/content_document_result.dart
 lib/lib/model/content_finding.dart
 lib/lib/model/content_review.dart
-lib/lib/model/create_ai_provider_profile_request.dart
 lib/lib/model/create_provider_catalog_entry_request.dart
 lib/lib/model/data.dart
 lib/lib/model/date.dart
@@ -451,7 +444,6 @@ lib/lib/model/structured_report_citation_response.dart
 lib/lib/model/structured_report_result_response.dart
 lib/lib/model/structured_report_section_response.dart
 lib/lib/model/test_ai_provider_connection_request.dart
-lib/lib/model/update_ai_provider_profile_request.dart
 lib/lib/model/update_profile_request.dart
 lib/lib/model/update_provider_catalog_entry_request.dart
 lib/lib/model/update_user_access_request.dart
@@ -471,10 +463,8 @@ lib/lib/serializers.dart
 pubspec.yaml
 test/access_decision_test.dart
 test/admin_api_test.dart
-test/ai_provider_auth_mode_test.dart
 test/ai_provider_connection_test_response_test.dart
 test/ai_provider_engine_test.dart
-test/ai_provider_preset_list_response_test.dart
 test/ai_provider_preset_response_test.dart
 test/ai_provider_profile_list_response_test.dart
 test/ai_provider_profile_response_test.dart
@@ -500,7 +490,6 @@ test/analysis_skill_response_test.dart
 test/analysis_stage_test.dart
 test/analysis_status_test.dart
 test/api_response_ai_provider_connection_test_response_test.dart
-test/api_response_ai_provider_preset_list_response_test.dart
 test/api_response_ai_provider_profile_list_response_test.dart
 test/api_response_ai_provider_profile_response_test.dart
 test/api_response_analysis_analytics_response_test.dart
@@ -541,13 +530,13 @@ test/compatibility_profile_test.dart
 test/complete_document_import_request_test.dart
 test/complete_media_import_request_test.dart
 test/completed_part_request_test.dart
+test/configure_ai_provider_request_test.dart
 test/container_preference_test.dart
 test/content_citation_test.dart
 test/content_creation_history_record_response_test.dart
 test/content_document_result_test.dart
 test/content_finding_test.dart
 test/content_review_test.dart
-test/create_ai_provider_profile_request_test.dart
 test/create_provider_catalog_entry_request_test.dart
 test/data_test.dart
 test/declared_origin_test.dart
@@ -680,7 +669,6 @@ test/structured_report_citation_response_test.dart
 test/structured_report_result_response_test.dart
 test/structured_report_section_response_test.dart
 test/test_ai_provider_connection_request_test.dart
-test/update_ai_provider_profile_request_test.dart
 test/update_profile_request_test.dart
 test/update_provider_catalog_entry_request_test.dart
 test/update_user_access_request_test.dart

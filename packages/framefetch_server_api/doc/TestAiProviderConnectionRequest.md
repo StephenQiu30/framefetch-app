@@ -8,10 +8,8 @@ import 'package:framefetch_server_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**providerKey** | **String** |  | [optional]
-**engine** | [**AiProviderEngine**](AiProviderEngine.md) |  | [optional]
-**authMode** | [**AiProviderAuthMode**](AiProviderAuthMode.md) |  | [optional]
-**baseUrl** | **String** |  | [optional]
+**engine** | [**AiProviderEngine**](AiProviderEngine.md) |  |
+**presetId** | **String** |  | [optional]
 **model** | **String** |  | [optional]
 **apiKey** | **String** |  | [optional]
 

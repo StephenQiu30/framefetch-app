@@ -1225,543 +1225,6 @@
         }
       }
     },
-    "/api/admin/ai-providers": {
-      "post": {
-        "tags": [
-          "admin"
-        ],
-        "summary": "新增 AI 分析 Provider",
-        "operationId": "createAiProviderProfile",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateAiProviderProfileRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse_AiProviderProfileResponse_"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "未登录或会话已经失效",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "当前用户没有操作权限",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "资源不存在、已清理或临时解析状态已过期",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "资源状态或幂等键冲突",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "请求频率超过限制",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "请求参数或业务输入无效",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "服务内部错误",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "上游媒体或模型服务失败",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "运行依赖暂时不可用",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "504": {
-            "description": "上游操作超时",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "NativeBearerAuth": []
-          }
-        ],
-        "parameters": []
-      },
-      "get": {
-        "tags": [
-          "admin"
-        ],
-        "summary": "查询 AI 分析 Provider",
-        "operationId": "listAiProviderProfiles",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse_AiProviderProfileListResponse_"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "未登录或会话已经失效",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "当前用户没有操作权限",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "资源不存在、已清理或临时解析状态已过期",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "资源状态或幂等键冲突",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "请求频率超过限制",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "请求参数或业务输入无效",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "服务内部错误",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "上游媒体或模型服务失败",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "运行依赖暂时不可用",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "504": {
-            "description": "上游操作超时",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "NativeBearerAuth": []
-          }
-        ],
-        "parameters": []
-      }
-    },
-    "/api/admin/ai-providers/{provider_key}": {
-      "patch": {
-        "tags": [
-          "admin"
-        ],
-        "summary": "更新 AI 分析 Provider",
-        "operationId": "updateAiProviderProfile",
-        "security": [
-          {
-            "NativeBearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "provider_key",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Provider Key"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateAiProviderProfileRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse_AiProviderProfileResponse_"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "未登录或会话已经失效",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "当前用户没有操作权限",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "资源不存在、已清理或临时解析状态已过期",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "资源状态或幂等键冲突",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "请求频率超过限制",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "请求参数或业务输入无效",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "服务内部错误",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "上游媒体或模型服务失败",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "运行依赖暂时不可用",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "504": {
-            "description": "上游操作超时",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "admin"
-        ],
-        "summary": "删除 AI 分析 Provider",
-        "operationId": "deleteAiProviderProfile",
-        "security": [
-          {
-            "NativeBearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "provider_key",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Provider Key"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Successful Response"
-          },
-          "401": {
-            "description": "未登录或会话已经失效",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "当前用户没有操作权限",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "资源不存在、已清理或临时解析状态已过期",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "资源状态或幂等键冲突",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "请求频率超过限制",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "请求参数或业务输入无效",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "服务内部错误",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "上游媒体或模型服务失败",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "运行依赖暂时不可用",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "504": {
-            "description": "上游操作超时",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/app/v1/auth/register": {
       "post": {
         "tags": [
@@ -11006,20 +10469,20 @@
         }
       }
     },
-    "/api/admin/ai-providers/presets": {
+    "/api/admin/ai-providers": {
       "get": {
         "tags": [
           "admin"
         ],
-        "summary": "查询官方 AI 渠道预设与能力目录",
-        "operationId": "listAiProviderPresets",
+        "summary": "查看内置官方 AI 服务配置状态",
+        "operationId": "listAiProviderProfiles",
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiResponse_AiProviderPresetListResponse_"
+                  "$ref": "#/components/schemas/ApiResponse_AiProviderProfileListResponse_"
                 }
               }
             }
@@ -11133,12 +10596,285 @@
         "parameters": []
       }
     },
+    "/api/admin/ai-providers/{engine}": {
+      "put": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "配置并启用内置官方 AI 服务",
+        "operationId": "configureAiProvider",
+        "security": [
+          {
+            "NativeBearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "engine",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AiProviderEngine"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfigureAiProviderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_AiProviderProfileResponse_"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未登录或会话已经失效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "当前用户没有操作权限",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在、已清理或临时解析状态已过期",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "资源状态或幂等键冲突",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "请求频率超过限制",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "请求参数或业务输入无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "服务内部错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "上游媒体或模型服务失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "运行依赖暂时不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "上游操作超时",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "清除官方 AI 服务已保存密钥与配置",
+        "operationId": "deleteAiProviderProfile",
+        "security": [
+          {
+            "NativeBearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "engine",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AiProviderEngine"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "401": {
+            "description": "未登录或会话已经失效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "当前用户没有操作权限",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在、已清理或临时解析状态已过期",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "资源状态或幂等键冲突",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "请求频率超过限制",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "请求参数或业务输入无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "服务内部错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "上游媒体或模型服务失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "运行依赖暂时不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "上游操作超时",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/admin/ai-providers/test": {
       "post": {
         "tags": [
           "admin"
         ],
-        "summary": "测试官方 AI 渠道连通性与模型能力",
+        "summary": "探测官方 AI 服务端点与模型可用性",
         "operationId": "testAiProviderConnection",
         "requestBody": {
           "content": {
@@ -11270,12 +11006,12 @@
         "parameters": []
       }
     },
-    "/api/admin/ai-providers/{provider_key}/activate": {
+    "/api/admin/ai-providers/{engine}/activate": {
       "post": {
         "tags": [
           "admin"
         ],
-        "summary": "启用 AI 分析 Provider",
+        "summary": "启用已配置的官方 AI 服务",
         "operationId": "activateAiProviderProfile",
         "security": [
           {
@@ -11284,284 +11020,11 @@
         ],
         "parameters": [
           {
-            "name": "provider_key",
+            "name": "engine",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "title": "Provider Key"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse_AiProviderProfileResponse_"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "未登录或会话已经失效",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "当前用户没有操作权限",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "资源不存在、已清理或临时解析状态已过期",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "资源状态或幂等键冲突",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "请求频率超过限制",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "请求参数或业务输入无效",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "服务内部错误",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "上游媒体或模型服务失败",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "运行依赖暂时不可用",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "504": {
-            "description": "上游操作超时",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/admin/ai-providers/{provider_key}/fallback": {
-      "post": {
-        "tags": [
-          "admin"
-        ],
-        "summary": "设为备用兜底 AI Provider",
-        "operationId": "setFallbackAiProviderProfile",
-        "security": [
-          {
-            "NativeBearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "provider_key",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Provider Key"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse_AiProviderProfileResponse_"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "未登录或会话已经失效",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "当前用户没有操作权限",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "资源不存在、已清理或临时解析状态已过期",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "资源状态或幂等键冲突",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "请求频率超过限制",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "请求参数或业务输入无效",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "服务内部错误",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "上游媒体或模型服务失败",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "运行依赖暂时不可用",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "504": {
-            "description": "上游操作超时",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "admin"
-        ],
-        "summary": "取消备用兜底 AI Provider",
-        "operationId": "clearFallbackAiProviderProfile",
-        "security": [
-          {
-            "NativeBearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "provider_key",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Provider Key"
+              "$ref": "#/components/schemas/AiProviderEngine"
             }
           }
         ],
@@ -11693,13 +11156,6 @@
         ],
         "title": "AccessDecision"
       },
-      "AiProviderAuthMode": {
-        "type": "string",
-        "enum": [
-          "api_key"
-        ],
-        "title": "AiProviderAuthMode"
-      },
       "AiProviderConnectionTestResponse": {
         "properties": {
           "ok": {
@@ -11821,23 +11277,6 @@
         ],
         "title": "AiProviderEngine"
       },
-      "AiProviderPresetListResponse": {
-        "properties": {
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/AiProviderPresetResponse"
-            },
-            "type": "array",
-            "title": "Items"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "items"
-        ],
-        "title": "AiProviderPresetListResponse"
-      },
       "AiProviderPresetResponse": {
         "properties": {
           "id": {
@@ -11854,9 +11293,6 @@
           "base_url": {
             "type": "string",
             "title": "Base Url"
-          },
-          "auth_mode": {
-            "$ref": "#/components/schemas/AiProviderAuthMode"
           },
           "default_model": {
             "type": "string",
@@ -11905,7 +11341,6 @@
           "engine",
           "display_name",
           "base_url",
-          "auth_mode",
           "default_model",
           "suggested_models",
           "supports_vision",
@@ -11941,34 +11376,12 @@
       },
       "AiProviderProfileResponse": {
         "properties": {
-          "key": {
-            "type": "string",
-            "title": "Key"
+          "engine": {
+            "$ref": "#/components/schemas/AiProviderEngine"
           },
           "display_name": {
             "type": "string",
             "title": "Display Name"
-          },
-          "engine": {
-            "$ref": "#/components/schemas/AiProviderEngine"
-          },
-          "auth_mode": {
-            "$ref": "#/components/schemas/AiProviderAuthMode"
-          },
-          "base_url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Base Url"
-          },
-          "model": {
-            "type": "string",
-            "title": "Model"
           },
           "credential_configured": {
             "type": "boolean",
@@ -11978,20 +11391,17 @@
             "type": "boolean",
             "title": "Is Active"
           },
-          "is_fallback": {
-            "type": "boolean",
-            "title": "Is Fallback"
-          },
           "preset_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Preset Id"
+          },
+          "base_url": {
+            "type": "string",
+            "title": "Base Url"
+          },
+          "model": {
+            "type": "string",
+            "title": "Model"
           },
           "supports_vision": {
             "type": "boolean",
@@ -12009,34 +11419,40 @@
             ],
             "title": "Structured Output Mode"
           },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At"
+          "presets": {
+            "items": {
+              "$ref": "#/components/schemas/AiProviderPresetResponse"
+            },
+            "type": "array",
+            "title": "Presets"
           },
           "updated_at": {
-            "type": "string",
-            "format": "date-time",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Updated At"
           }
         },
         "additionalProperties": false,
         "type": "object",
         "required": [
-          "key",
-          "display_name",
           "engine",
-          "auth_mode",
-          "base_url",
-          "model",
+          "display_name",
           "credential_configured",
           "is_active",
-          "is_fallback",
           "preset_id",
+          "base_url",
+          "model",
           "supports_vision",
           "supports_models_endpoint",
           "structured_output_mode",
-          "created_at",
+          "presets",
           "updated_at"
         ],
         "title": "AiProviderProfileResponse"
@@ -12847,31 +12263,6 @@
           "data"
         ],
         "title": "ApiResponse[AiProviderConnectionTestResponse]"
-      },
-      "ApiResponse_AiProviderPresetListResponse_": {
-        "properties": {
-          "code": {
-            "$ref": "#/components/schemas/ErrorCode",
-            "description": "稳定的业务结果码。"
-          },
-          "message": {
-            "type": "string",
-            "title": "Message",
-            "description": "安全的结果说明。"
-          },
-          "data": {
-            "$ref": "#/components/schemas/AiProviderPresetListResponse",
-            "description": "成功时为业务数据，错误时为 null。"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "code",
-          "message",
-          "data"
-        ],
-        "title": "ApiResponse[AiProviderPresetListResponse]"
       },
       "ApiResponse_AiProviderProfileListResponse_": {
         "properties": {
@@ -13814,6 +13205,58 @@
         ],
         "title": "CompletedPartRequest"
       },
+      "ConfigureAiProviderRequest": {
+        "properties": {
+          "preset_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 64,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preset Id"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "api_key": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 4096,
+                "format": "password",
+                "writeOnly": true
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Key"
+          },
+          "activate": {
+            "type": "boolean",
+            "title": "Activate",
+            "default": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ConfigureAiProviderRequest"
+      },
       "ContainerPreference": {
         "type": "string",
         "enum": [
@@ -14227,71 +13670,6 @@
           "findings"
         ],
         "title": "ContentReview"
-      },
-      "CreateAiProviderProfileRequest": {
-        "properties": {
-          "key": {
-            "type": "string",
-            "maxLength": 32,
-            "minLength": 1,
-            "pattern": "^[a-z][a-z0-9_-]*$",
-            "title": "Key"
-          },
-          "display_name": {
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 1,
-            "title": "Display Name"
-          },
-          "engine": {
-            "$ref": "#/components/schemas/AiProviderEngine"
-          },
-          "auth_mode": {
-            "$ref": "#/components/schemas/AiProviderAuthMode"
-          },
-          "base_url": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 2048
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Base Url"
-          },
-          "model": {
-            "type": "string",
-            "maxLength": 128,
-            "minLength": 1,
-            "title": "Model"
-          },
-          "api_key": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 4096,
-                "format": "password",
-                "writeOnly": true
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Api Key"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "key",
-          "display_name",
-          "engine",
-          "auth_mode",
-          "model"
-        ],
-        "title": "CreateAiProviderProfileRequest"
       },
       "CreateProviderCatalogEntryRequest": {
         "properties": {
@@ -15899,11 +15277,9 @@
           "transient",
           "invalid_input",
           "runtime_unavailable",
-          "active_ai_provider_delete",
           "active_task_quota_exceeded",
           "admin_bootstrap_required",
           "ai_model_catalog_unavailable",
-          "ai_provider_conflict",
           "ai_provider_not_found",
           "analysis_already_active",
           "analysis_artifact_unavailable",
@@ -19581,87 +18957,10 @@
       },
       "TestAiProviderConnectionRequest": {
         "properties": {
-          "provider_key": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 32,
-                "minLength": 1,
-                "pattern": "^[a-z][a-z0-9_-]*$"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Provider Key"
-          },
           "engine": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AiProviderEngine"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/AiProviderEngine"
           },
-          "auth_mode": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AiProviderAuthMode"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "base_url": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 2048
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Base Url"
-          },
-          "model": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 128,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Model"
-          },
-          "api_key": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 4096,
-                "format": "password",
-                "writeOnly": true
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Api Key"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "title": "TestAiProviderConnectionRequest"
-      },
-      "UpdateAiProviderProfileRequest": {
-        "properties": {
-          "display_name": {
+          "preset_id": {
             "anyOf": [
               {
                 "type": "string",
@@ -19672,39 +18971,7 @@
                 "type": "null"
               }
             ],
-            "title": "Display Name"
-          },
-          "engine": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AiProviderEngine"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "auth_mode": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AiProviderAuthMode"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "base_url": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 2048
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Base Url"
+            "title": "Preset Id"
           },
           "model": {
             "anyOf": [
@@ -19736,7 +19003,10 @@
         },
         "additionalProperties": false,
         "type": "object",
-        "title": "UpdateAiProviderProfileRequest"
+        "required": [
+          "engine"
+        ],
+        "title": "TestAiProviderConnectionRequest"
       },
       "UpdateProfileRequest": {
         "properties": {

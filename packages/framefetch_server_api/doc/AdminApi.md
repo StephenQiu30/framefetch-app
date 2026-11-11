@@ -9,45 +9,41 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**activateAiProviderProfile**](AdminApi.md#activateaiproviderprofile) | **POST** /api/admin/ai-providers/{provider_key}/activate | 启用 AI 分析 Provider
+[**activateAiProviderProfile**](AdminApi.md#activateaiproviderprofile) | **POST** /api/admin/ai-providers/{engine}/activate | 启用已配置的官方 AI 服务
 [**cleanupStoredFiles**](AdminApi.md#cleanupstoredfiles) | **POST** /api/admin/files/cleanup | 手动清理指定天数前的文件
-[**clearFallbackAiProviderProfile**](AdminApi.md#clearfallbackaiproviderprofile) | **DELETE** /api/admin/ai-providers/{provider_key}/fallback | 取消备用兜底 AI Provider
-[**createAiProviderProfile**](AdminApi.md#createaiproviderprofile) | **POST** /api/admin/ai-providers | 新增 AI 分析 Provider
+[**configureAiProvider**](AdminApi.md#configureaiprovider) | **PUT** /api/admin/ai-providers/{engine} | 配置并启用内置官方 AI 服务
 [**createProviderCatalogEntry**](AdminApi.md#createprovidercatalogentry) | **POST** /api/admin/providers | 新增平台目录条目
-[**deleteAiProviderProfile**](AdminApi.md#deleteaiproviderprofile) | **DELETE** /api/admin/ai-providers/{provider_key} | 删除 AI 分析 Provider
+[**deleteAiProviderProfile**](AdminApi.md#deleteaiproviderprofile) | **DELETE** /api/admin/ai-providers/{engine} | 清除官方 AI 服务已保存密钥与配置
 [**deleteProviderCatalogEntry**](AdminApi.md#deleteprovidercatalogentry) | **DELETE** /api/admin/providers/{provider_key} | 删除平台目录条目
 [**deleteStoredFile**](AdminApi.md#deletestoredfile) | **DELETE** /api/admin/files/{category}/{file_id} | 删除指定持久文件
 [**deleteUser**](AdminApi.md#deleteuser) | **DELETE** /api/admin/users/{user_id} | 删除用户
 [**getAdminEngineCatalog**](AdminApi.md#getadminenginecatalog) | **GET** /api/admin/provider-runtime/engine-catalog | 读取媒体 Runner 实际安装的引擎候选清单
 [**getAnalysisAnalytics**](AdminApi.md#getanalysisanalytics) | **GET** /api/admin/analyses/analytics | 查询 AI 分析执行统计
 [**getDownloadAnalytics**](AdminApi.md#getdownloadanalytics) | **GET** /api/admin/downloads/analytics | 查询下载分析
-[**listAiProviderPresets**](AdminApi.md#listaiproviderpresets) | **GET** /api/admin/ai-providers/presets | 查询官方 AI 渠道预设与能力目录
-[**listAiProviderProfiles**](AdminApi.md#listaiproviderprofiles) | **GET** /api/admin/ai-providers | 查询 AI 分析 Provider
+[**listAiProviderProfiles**](AdminApi.md#listaiproviderprofiles) | **GET** /api/admin/ai-providers | 查看内置官方 AI 服务配置状态
 [**listOperationLogs**](AdminApi.md#listoperationlogs) | **GET** /api/admin/operation-logs | 查询全系统操作日志
 [**listProviderCatalogEntries**](AdminApi.md#listprovidercatalogentries) | **GET** /api/admin/providers | 查询平台目录
 [**listStoredFiles**](AdminApi.md#liststoredfiles) | **GET** /api/admin/files | 分页查询持久文件
 [**listUsers**](AdminApi.md#listusers) | **GET** /api/admin/users | 查询用户列表
-[**setFallbackAiProviderProfile**](AdminApi.md#setfallbackaiproviderprofile) | **POST** /api/admin/ai-providers/{provider_key}/fallback | 设为备用兜底 AI Provider
-[**testAiProviderConnection**](AdminApi.md#testaiproviderconnection) | **POST** /api/admin/ai-providers/test | 测试官方 AI 渠道连通性与模型能力
-[**updateAiProviderProfile**](AdminApi.md#updateaiproviderprofile) | **PATCH** /api/admin/ai-providers/{provider_key} | 更新 AI 分析 Provider
+[**testAiProviderConnection**](AdminApi.md#testaiproviderconnection) | **POST** /api/admin/ai-providers/test | 探测官方 AI 服务端点与模型可用性
 [**updateProviderCatalogEntry**](AdminApi.md#updateprovidercatalogentry) | **PATCH** /api/admin/providers/{provider_key} | 更新平台目录条目
 [**updateUserAccess**](AdminApi.md#updateuseraccess) | **PATCH** /api/admin/users/{user_id} | 更新用户角色与账号状态
 
 
 # **activateAiProviderProfile**
-> ApiResponseAiProviderProfileResponse activateAiProviderProfile(providerKey)
+> ApiResponseAiProviderProfileResponse activateAiProviderProfile(engine)
 
-启用 AI 分析 Provider
+启用已配置的官方 AI 服务
 
 ### Example
 ```dart
 import 'package:framefetch_server_api/api.dart';
 
 final api = FramefetchServerApi().getAdminApi();
-final String providerKey = providerKey_example; // String |
+final AiProviderEngine engine = ; // AiProviderEngine |
 
 try {
-    final response = api.activateAiProviderProfile(providerKey);
+    final response = api.activateAiProviderProfile(engine);
     print(response);
 } on DioException catch (e) {
     print('Exception when calling AdminApi->activateAiProviderProfile: $e\n');
@@ -58,7 +54,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **providerKey** | **String**|  |
+ **engine** | [**AiProviderEngine**](.md)|  |
 
 ### Return type
 
@@ -116,23 +112,24 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **clearFallbackAiProviderProfile**
-> ApiResponseAiProviderProfileResponse clearFallbackAiProviderProfile(providerKey)
+# **configureAiProvider**
+> ApiResponseAiProviderProfileResponse configureAiProvider(engine, configureAiProviderRequest)
 
-取消备用兜底 AI Provider
+配置并启用内置官方 AI 服务
 
 ### Example
 ```dart
 import 'package:framefetch_server_api/api.dart';
 
 final api = FramefetchServerApi().getAdminApi();
-final String providerKey = providerKey_example; // String |
+final AiProviderEngine engine = ; // AiProviderEngine |
+final ConfigureAiProviderRequest configureAiProviderRequest = ; // ConfigureAiProviderRequest |
 
 try {
-    final response = api.clearFallbackAiProviderProfile(providerKey);
+    final response = api.configureAiProvider(engine, configureAiProviderRequest);
     print(response);
 } on DioException catch (e) {
-    print('Exception when calling AdminApi->clearFallbackAiProviderProfile: $e\n');
+    print('Exception when calling AdminApi->configureAiProvider: $e\n');
 }
 ```
 
@@ -140,48 +137,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **providerKey** | **String**|  |
-
-### Return type
-
-[**ApiResponseAiProviderProfileResponse**](ApiResponseAiProviderProfileResponse.md)
-
-### Authorization
-
-[NativeBearerAuth](../README.md#NativeBearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **createAiProviderProfile**
-> ApiResponseAiProviderProfileResponse createAiProviderProfile(createAiProviderProfileRequest)
-
-新增 AI 分析 Provider
-
-### Example
-```dart
-import 'package:framefetch_server_api/api.dart';
-
-final api = FramefetchServerApi().getAdminApi();
-final CreateAiProviderProfileRequest createAiProviderProfileRequest = ; // CreateAiProviderProfileRequest |
-
-try {
-    final response = api.createAiProviderProfile(createAiProviderProfileRequest);
-    print(response);
-} on DioException catch (e) {
-    print('Exception when calling AdminApi->createAiProviderProfile: $e\n');
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **createAiProviderProfileRequest** | [**CreateAiProviderProfileRequest**](CreateAiProviderProfileRequest.md)|  |
+ **engine** | [**AiProviderEngine**](.md)|  |
+ **configureAiProviderRequest** | [**ConfigureAiProviderRequest**](ConfigureAiProviderRequest.md)|  |
 
 ### Return type
 
@@ -240,19 +197,19 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deleteAiProviderProfile**
-> deleteAiProviderProfile(providerKey)
+> deleteAiProviderProfile(engine)
 
-删除 AI 分析 Provider
+清除官方 AI 服务已保存密钥与配置
 
 ### Example
 ```dart
 import 'package:framefetch_server_api/api.dart';
 
 final api = FramefetchServerApi().getAdminApi();
-final String providerKey = providerKey_example; // String |
+final AiProviderEngine engine = ; // AiProviderEngine |
 
 try {
-    api.deleteAiProviderProfile(providerKey);
+    api.deleteAiProviderProfile(engine);
 } on DioException catch (e) {
     print('Exception when calling AdminApi->deleteAiProviderProfile: $e\n');
 }
@@ -262,7 +219,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **providerKey** | **String**|  |
+ **engine** | [**AiProviderEngine**](.md)|  |
 
 ### Return type
 
@@ -524,47 +481,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **listAiProviderPresets**
-> ApiResponseAiProviderPresetListResponse listAiProviderPresets()
-
-查询官方 AI 渠道预设与能力目录
-
-### Example
-```dart
-import 'package:framefetch_server_api/api.dart';
-
-final api = FramefetchServerApi().getAdminApi();
-
-try {
-    final response = api.listAiProviderPresets();
-    print(response);
-} on DioException catch (e) {
-    print('Exception when calling AdminApi->listAiProviderPresets: $e\n');
-}
-```
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-[**ApiResponseAiProviderPresetListResponse**](ApiResponseAiProviderPresetListResponse.md)
-
-### Authorization
-
-[NativeBearerAuth](../README.md#NativeBearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **listAiProviderProfiles**
 > ApiResponseAiProviderProfileListResponse listAiProviderProfiles()
 
-查询 AI 分析 Provider
+查看内置官方 AI 服务配置状态
 
 ### Example
 ```dart
@@ -782,51 +702,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **setFallbackAiProviderProfile**
-> ApiResponseAiProviderProfileResponse setFallbackAiProviderProfile(providerKey)
-
-设为备用兜底 AI Provider
-
-### Example
-```dart
-import 'package:framefetch_server_api/api.dart';
-
-final api = FramefetchServerApi().getAdminApi();
-final String providerKey = providerKey_example; // String |
-
-try {
-    final response = api.setFallbackAiProviderProfile(providerKey);
-    print(response);
-} on DioException catch (e) {
-    print('Exception when calling AdminApi->setFallbackAiProviderProfile: $e\n');
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **providerKey** | **String**|  |
-
-### Return type
-
-[**ApiResponseAiProviderProfileResponse**](ApiResponseAiProviderProfileResponse.md)
-
-### Authorization
-
-[NativeBearerAuth](../README.md#NativeBearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **testAiProviderConnection**
 > ApiResponseAiProviderConnectionTestResponse testAiProviderConnection(testAiProviderConnectionRequest)
 
-测试官方 AI 渠道连通性与模型能力
+探测官方 AI 服务端点与模型可用性
 
 ### Example
 ```dart
@@ -852,49 +731,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ApiResponseAiProviderConnectionTestResponse**](ApiResponseAiProviderConnectionTestResponse.md)
-
-### Authorization
-
-[NativeBearerAuth](../README.md#NativeBearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **updateAiProviderProfile**
-> ApiResponseAiProviderProfileResponse updateAiProviderProfile(providerKey, updateAiProviderProfileRequest)
-
-更新 AI 分析 Provider
-
-### Example
-```dart
-import 'package:framefetch_server_api/api.dart';
-
-final api = FramefetchServerApi().getAdminApi();
-final String providerKey = providerKey_example; // String |
-final UpdateAiProviderProfileRequest updateAiProviderProfileRequest = ; // UpdateAiProviderProfileRequest |
-
-try {
-    final response = api.updateAiProviderProfile(providerKey, updateAiProviderProfileRequest);
-    print(response);
-} on DioException catch (e) {
-    print('Exception when calling AdminApi->updateAiProviderProfile: $e\n');
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **providerKey** | **String**|  |
- **updateAiProviderProfileRequest** | [**UpdateAiProviderProfileRequest**](UpdateAiProviderProfileRequest.md)|  |
-
-### Return type
-
-[**ApiResponseAiProviderProfileResponse**](ApiResponseAiProviderProfileResponse.md)
 
 ### Authorization
 

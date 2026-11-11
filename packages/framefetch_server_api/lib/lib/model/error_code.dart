@@ -32,8 +32,6 @@ class ErrorCode extends EnumClass {
   static const ErrorCode invalidInput = _$invalidInput;
   @BuiltValueEnumConst(wireName: r'runtime_unavailable')
   static const ErrorCode runtimeUnavailable = _$runtimeUnavailable;
-  @BuiltValueEnumConst(wireName: r'active_ai_provider_delete')
-  static const ErrorCode activeAiProviderDelete = _$activeAiProviderDelete;
   @BuiltValueEnumConst(wireName: r'active_task_quota_exceeded')
   static const ErrorCode activeTaskQuotaExceeded = _$activeTaskQuotaExceeded;
   @BuiltValueEnumConst(wireName: r'admin_bootstrap_required')
@@ -41,8 +39,6 @@ class ErrorCode extends EnumClass {
   @BuiltValueEnumConst(wireName: r'ai_model_catalog_unavailable')
   static const ErrorCode aiModelCatalogUnavailable =
       _$aiModelCatalogUnavailable;
-  @BuiltValueEnumConst(wireName: r'ai_provider_conflict')
-  static const ErrorCode aiProviderConflict = _$aiProviderConflict;
   @BuiltValueEnumConst(wireName: r'ai_provider_not_found')
   static const ErrorCode aiProviderNotFound = _$aiProviderNotFound;
   @BuiltValueEnumConst(wireName: r'analysis_already_active')

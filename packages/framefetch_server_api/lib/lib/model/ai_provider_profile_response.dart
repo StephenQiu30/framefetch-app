@@ -4,7 +4,7 @@
 
 // ignore_for_file: unused_element, unused_element_parameter
 import 'package:built_collection/built_collection.dart';
-import 'package:framefetch_server_api/lib/model/ai_provider_auth_mode.dart';
+import 'package:framefetch_server_api/lib/model/ai_provider_preset_response.dart';
 import 'package:framefetch_server_api/lib/model/ai_provider_engine.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -14,44 +14,28 @@ part 'ai_provider_profile_response.g.dart';
 /// AiProviderProfileResponse
 ///
 /// Properties:
-/// * [key]
-/// * [displayName]
 /// * [engine]
-/// * [authMode]
-/// * [baseUrl]
-/// * [model]
+/// * [displayName]
 /// * [credentialConfigured]
 /// * [isActive]
-/// * [isFallback]
 /// * [presetId]
+/// * [baseUrl]
+/// * [model]
 /// * [supportsVision]
 /// * [supportsModelsEndpoint]
 /// * [structuredOutputMode]
-/// * [createdAt]
+/// * [presets]
 /// * [updatedAt]
 @BuiltValue()
 abstract class AiProviderProfileResponse
     implements
         Built<AiProviderProfileResponse, AiProviderProfileResponseBuilder> {
-  @BuiltValueField(wireName: r'key')
-  String get key;
-
-  @BuiltValueField(wireName: r'display_name')
-  String get displayName;
-
   @BuiltValueField(wireName: r'engine')
   AiProviderEngine get engine;
   // enum engineEnum {  volcengine,  deepseek,  openai,  };
 
-  @BuiltValueField(wireName: r'auth_mode')
-  AiProviderAuthMode get authMode;
-  // enum authModeEnum {  api_key,  };
-
-  @BuiltValueField(wireName: r'base_url')
-  String? get baseUrl;
-
-  @BuiltValueField(wireName: r'model')
-  String get model;
+  @BuiltValueField(wireName: r'display_name')
+  String get displayName;
 
   @BuiltValueField(wireName: r'credential_configured')
   bool get credentialConfigured;
@@ -59,11 +43,14 @@ abstract class AiProviderProfileResponse
   @BuiltValueField(wireName: r'is_active')
   bool get isActive;
 
-  @BuiltValueField(wireName: r'is_fallback')
-  bool get isFallback;
-
   @BuiltValueField(wireName: r'preset_id')
-  String? get presetId;
+  String get presetId;
+
+  @BuiltValueField(wireName: r'base_url')
+  String get baseUrl;
+
+  @BuiltValueField(wireName: r'model')
+  String get model;
 
   @BuiltValueField(wireName: r'supports_vision')
   bool get supportsVision;
@@ -75,11 +62,11 @@ abstract class AiProviderProfileResponse
   AiProviderProfileResponseStructuredOutputModeEnum get structuredOutputMode;
   // enum structuredOutputModeEnum {  json_schema,  json_object,  };
 
-  @BuiltValueField(wireName: r'created_at')
-  DateTime get createdAt;
+  @BuiltValueField(wireName: r'presets')
+  BuiltList<AiProviderPresetResponse> get presets;
 
   @BuiltValueField(wireName: r'updated_at')
-  DateTime get updatedAt;
+  DateTime? get updatedAt;
 
   AiProviderProfileResponse._();
 
@@ -111,36 +98,14 @@ class _$AiProviderProfileResponseSerializer
     AiProviderProfileResponse object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'key';
-    yield serializers.serialize(
-      object.key,
-      specifiedType: const FullType(String),
-    );
-    yield r'display_name';
-    yield serializers.serialize(
-      object.displayName,
-      specifiedType: const FullType(String),
-    );
     yield r'engine';
     yield serializers.serialize(
       object.engine,
       specifiedType: const FullType(AiProviderEngine),
     );
-    yield r'auth_mode';
+    yield r'display_name';
     yield serializers.serialize(
-      object.authMode,
-      specifiedType: const FullType(AiProviderAuthMode),
-    );
-    yield r'base_url';
-    yield object.baseUrl == null
-        ? null
-        : serializers.serialize(
-            object.baseUrl,
-            specifiedType: const FullType.nullable(String),
-          );
-    yield r'model';
-    yield serializers.serialize(
-      object.model,
+      object.displayName,
       specifiedType: const FullType(String),
     );
     yield r'credential_configured';
@@ -153,18 +118,21 @@ class _$AiProviderProfileResponseSerializer
       object.isActive,
       specifiedType: const FullType(bool),
     );
-    yield r'is_fallback';
-    yield serializers.serialize(
-      object.isFallback,
-      specifiedType: const FullType(bool),
-    );
     yield r'preset_id';
-    yield object.presetId == null
-        ? null
-        : serializers.serialize(
-            object.presetId,
-            specifiedType: const FullType.nullable(String),
-          );
+    yield serializers.serialize(
+      object.presetId,
+      specifiedType: const FullType(String),
+    );
+    yield r'base_url';
+    yield serializers.serialize(
+      object.baseUrl,
+      specifiedType: const FullType(String),
+    );
+    yield r'model';
+    yield serializers.serialize(
+      object.model,
+      specifiedType: const FullType(String),
+    );
     yield r'supports_vision';
     yield serializers.serialize(
       object.supportsVision,
@@ -181,16 +149,19 @@ class _$AiProviderProfileResponseSerializer
       specifiedType:
           const FullType(AiProviderProfileResponseStructuredOutputModeEnum),
     );
-    yield r'created_at';
+    yield r'presets';
     yield serializers.serialize(
-      object.createdAt,
-      specifiedType: const FullType(DateTime),
+      object.presets,
+      specifiedType:
+          const FullType(BuiltList, [FullType(AiProviderPresetResponse)]),
     );
     yield r'updated_at';
-    yield serializers.serialize(
-      object.updatedAt,
-      specifiedType: const FullType(DateTime),
-    );
+    yield object.updatedAt == null
+        ? null
+        : serializers.serialize(
+            object.updatedAt,
+            specifiedType: const FullType.nullable(DateTime),
+          );
   }
 
   @override
@@ -216,20 +187,6 @@ class _$AiProviderProfileResponseSerializer
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
-          result.key = valueDes;
-          break;
-        case r'display_name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
-          result.displayName = valueDes;
-          break;
         case r'engine':
           final valueDes = serializers.deserialize(
             value,
@@ -237,27 +194,12 @@ class _$AiProviderProfileResponseSerializer
           ) as AiProviderEngine;
           result.engine = valueDes;
           break;
-        case r'auth_mode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AiProviderAuthMode),
-          ) as AiProviderAuthMode;
-          result.authMode = valueDes;
-          break;
-        case r'base_url':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.baseUrl = valueDes;
-          break;
-        case r'model':
+        case r'display_name':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.model = valueDes;
+          result.displayName = valueDes;
           break;
         case r'credential_configured':
           final valueDes = serializers.deserialize(
@@ -273,20 +215,26 @@ class _$AiProviderProfileResponseSerializer
           ) as bool;
           result.isActive = valueDes;
           break;
-        case r'is_fallback':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
-          result.isFallback = valueDes;
-          break;
         case r'preset_id':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
+            specifiedType: const FullType(String),
+          ) as String;
           result.presetId = valueDes;
+          break;
+        case r'base_url':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.baseUrl = valueDes;
+          break;
+        case r'model':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.model = valueDes;
           break;
         case r'supports_vision':
           final valueDes = serializers.deserialize(
@@ -310,18 +258,20 @@ class _$AiProviderProfileResponseSerializer
           ) as AiProviderProfileResponseStructuredOutputModeEnum;
           result.structuredOutputMode = valueDes;
           break;
-        case r'created_at':
+        case r'presets':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(DateTime),
-          ) as DateTime;
-          result.createdAt = valueDes;
+            specifiedType:
+                const FullType(BuiltList, [FullType(AiProviderPresetResponse)]),
+          ) as BuiltList<AiProviderPresetResponse>;
+          result.presets.replace(valueDes);
           break;
         case r'updated_at':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(DateTime),
-          ) as DateTime;
+            specifiedType: const FullType.nullable(DateTime),
+          ) as DateTime?;
+          if (valueDes == null) continue;
           result.updatedAt = valueDes;
           break;
         default:

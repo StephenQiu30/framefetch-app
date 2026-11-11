@@ -9,13 +9,9 @@ part of 'test_ai_provider_connection_request.dart';
 class _$TestAiProviderConnectionRequest
     extends TestAiProviderConnectionRequest {
   @override
-  final String? providerKey;
+  final AiProviderEngine engine;
   @override
-  final AiProviderEngine? engine;
-  @override
-  final AiProviderAuthMode? authMode;
-  @override
-  final String? baseUrl;
+  final String? presetId;
   @override
   final String? model;
   @override
@@ -26,12 +22,7 @@ class _$TestAiProviderConnectionRequest
       (TestAiProviderConnectionRequestBuilder()..update(updates))._build();
 
   _$TestAiProviderConnectionRequest._(
-      {this.providerKey,
-      this.engine,
-      this.authMode,
-      this.baseUrl,
-      this.model,
-      this.apiKey})
+      {required this.engine, this.presetId, this.model, this.apiKey})
       : super._();
   @override
   TestAiProviderConnectionRequest rebuild(
@@ -46,10 +37,8 @@ class _$TestAiProviderConnectionRequest
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is TestAiProviderConnectionRequest &&
-        providerKey == other.providerKey &&
         engine == other.engine &&
-        authMode == other.authMode &&
-        baseUrl == other.baseUrl &&
+        presetId == other.presetId &&
         model == other.model &&
         apiKey == other.apiKey;
   }
@@ -57,10 +46,8 @@ class _$TestAiProviderConnectionRequest
   @override
   int get hashCode {
     var _$hash = 0;
-    _$hash = $jc(_$hash, providerKey.hashCode);
     _$hash = $jc(_$hash, engine.hashCode);
-    _$hash = $jc(_$hash, authMode.hashCode);
-    _$hash = $jc(_$hash, baseUrl.hashCode);
+    _$hash = $jc(_$hash, presetId.hashCode);
     _$hash = $jc(_$hash, model.hashCode);
     _$hash = $jc(_$hash, apiKey.hashCode);
     _$hash = $jf(_$hash);
@@ -70,10 +57,8 @@ class _$TestAiProviderConnectionRequest
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'TestAiProviderConnectionRequest')
-          ..add('providerKey', providerKey)
           ..add('engine', engine)
-          ..add('authMode', authMode)
-          ..add('baseUrl', baseUrl)
+          ..add('presetId', presetId)
           ..add('model', model)
           ..add('apiKey', apiKey))
         .toString();
@@ -86,21 +71,13 @@ class TestAiProviderConnectionRequestBuilder
             TestAiProviderConnectionRequestBuilder> {
   _$TestAiProviderConnectionRequest? _$v;
 
-  String? _providerKey;
-  String? get providerKey => _$this._providerKey;
-  set providerKey(String? providerKey) => _$this._providerKey = providerKey;
-
   AiProviderEngine? _engine;
   AiProviderEngine? get engine => _$this._engine;
   set engine(AiProviderEngine? engine) => _$this._engine = engine;
 
-  AiProviderAuthMode? _authMode;
-  AiProviderAuthMode? get authMode => _$this._authMode;
-  set authMode(AiProviderAuthMode? authMode) => _$this._authMode = authMode;
-
-  String? _baseUrl;
-  String? get baseUrl => _$this._baseUrl;
-  set baseUrl(String? baseUrl) => _$this._baseUrl = baseUrl;
+  String? _presetId;
+  String? get presetId => _$this._presetId;
+  set presetId(String? presetId) => _$this._presetId = presetId;
 
   String? _model;
   String? get model => _$this._model;
@@ -117,10 +94,8 @@ class TestAiProviderConnectionRequestBuilder
   TestAiProviderConnectionRequestBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _providerKey = $v.providerKey;
       _engine = $v.engine;
-      _authMode = $v.authMode;
-      _baseUrl = $v.baseUrl;
+      _presetId = $v.presetId;
       _model = $v.model;
       _apiKey = $v.apiKey;
       _$v = null;
@@ -144,10 +119,9 @@ class TestAiProviderConnectionRequestBuilder
   _$TestAiProviderConnectionRequest _build() {
     final _$result = _$v ??
         _$TestAiProviderConnectionRequest._(
-          providerKey: providerKey,
-          engine: engine,
-          authMode: authMode,
-          baseUrl: baseUrl,
+          engine: BuiltValueNullFieldError.checkNotNull(
+              engine, r'TestAiProviderConnectionRequest', 'engine'),
+          presetId: presetId,
           model: model,
           apiKey: apiKey,
         );

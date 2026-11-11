@@ -2,21 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:framefetch/core/theme/app_spacing.dart';
 import 'package:framefetch/features/admin/application/admin_providers.dart';
-import 'package:framefetch/features/admin/application/ai_provider_protocol.dart';
 import 'package:framefetch/features/admin/data/admin_configuration_repository.dart';
 import 'package:framefetch/features/admin/data/admin_repository.dart';
 import 'package:framefetch/features/admin/presentation/admin_edit_sheet.dart';
-import 'package:framefetch/features/admin/presentation/ai_engine_label.dart';
 import 'package:framefetch/l10n/app_localizations.dart';
 import 'package:framefetch/shared/presentation/app_dropdown_field.dart';
 import 'package:framefetch_server_api/framefetch_server_api.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-Future<void> editAiProvider(
+Future<void> configureAiService(
   BuildContext context,
-  WidgetRef ref, [
-  AiProviderProfileResponse? item,
-]) async {
+  WidgetRef ref,
+  AiProviderProfileResponse item,
+) async {
   final saved = await showShadSheet<bool>(
     context: context,
     isDismissible: false,
@@ -33,30 +31,17 @@ Future<void> editAiProvider(
 }
 
 final class _AiProviderEditor extends ConsumerStatefulWidget {
-  const _AiProviderEditor({this.item});
+  const _AiProviderEditor({required this.item});
 
-  final AiProviderProfileResponse? item;
+  final AiProviderProfileResponse item;
 
   @override
   ConsumerState<_AiProviderEditor> createState() => _AiProviderEditorState();
 }
 
 final class _AiProviderEditorState extends ConsumerState<_AiProviderEditor> {
-  late final _key = TextEditingController(text: widget.item?.key ?? '');
-  late final _name = TextEditingController(
-    text: widget.item?.displayName ?? '',
-  );
-  late var _engine =
-      widget.item?.engine != null &&
-          widget.item!.engine != AiProviderEngine.unknownDefaultOpenApi
-      ? widget.item!.engine
-      : AiProviderEngine.volcengine;
-  late final _model = TextEditingController(
-    text: widget.item?.model ?? aiProviderDefaultModel(_engine),
-  );
-  late final _url = TextEditingController(
-    text: widget.item?.baseUrl ?? aiProviderBaseUrl(_engine),
-  );
+  late String _presetId = widget.item.presetId;
+  late final _model = TextEditingController(text: widget.item.model);
   final _apiKey = TextEditingController();
   bool _testing = false;
   AiProviderConnectionTestResponse? _testResult;
@@ -64,12 +49,23 @@ final class _AiProviderEditorState extends ConsumerState<_AiProviderEditor> {
 
   @override
   void dispose() {
-    _key.dispose();
-    _name.dispose();
     _model.dispose();
-    _url.dispose();
     _apiKey.dispose();
     super.dispose();
+  }
+
+  AiProviderPresetResponse? get _activePreset {
+    for (final preset in widget.item.presets) {
+      if (preset.id == _presetId) return preset;
+    }
+    return widget.item.presets.isEmpty ? null : widget.item.presets.first;
+  }
+
+  bool get _endpointChanged {
+    final preset = _activePreset;
+    return widget.item.credentialConfigured &&
+        preset != null &&
+        preset.baseUrl != widget.item.baseUrl;
   }
 
   void _clearProbe() {
@@ -77,26 +73,13 @@ final class _AiProviderEditorState extends ConsumerState<_AiProviderEditor> {
     _testError = null;
   }
 
-  void _changeEngine(
-    AiProviderEngine value,
-    List<AiProviderPresetResponse> presets,
-  ) {
-    setState(() {
-      _engine = value;
-      final primary = matchAiProviderPreset(presets, value, '');
-      _url.text = primary?.baseUrl ?? aiProviderBaseUrl(value);
-      _model.text = primary?.defaultModel ?? aiProviderDefaultModel(value);
-      _clearProbe();
-    });
-  }
-
   void _selectPreset(AiProviderPresetResponse preset) {
     setState(() {
-      _url.text = preset.baseUrl;
-      final modelIds = preset.suggestedModels.map((m) => m.id).toSet();
-      if (_model.text.trim().isEmpty ||
-          (modelIds.isNotEmpty && !modelIds.contains(_model.text.trim()))) {
-        _model.text = preset.defaultModel;
+      _presetId = preset.id;
+      _model.text = preset.defaultModel;
+      if (widget.item.credentialConfigured &&
+          preset.baseUrl != widget.item.baseUrl) {
+        _apiKey.clear();
       }
       _clearProbe();
     });
@@ -116,10 +99,8 @@ final class _AiProviderEditorState extends ConsumerState<_AiProviderEditor> {
           .testAiProviderConnection(
             TestAiProviderConnectionRequest(
               (b) => b
-                ..providerKey = widget.item?.key
-                ..engine = _engine
-                ..authMode = AiProviderAuthMode.apiKey
-                ..baseUrl = _url.text.trim()
+                ..engine = widget.item.engine
+                ..presetId = _presetId
                 ..model = _model.text.trim()
                 ..apiKey = apiKeyText.isEmpty ? null : apiKeyText,
             ),
@@ -141,90 +122,52 @@ final class _AiProviderEditorState extends ConsumerState<_AiProviderEditor> {
   Future<void> _save() async {
     final repository = ref.read(adminConfigurationRepositoryProvider);
     final apiKeyText = _apiKey.text.trim();
-    if (widget.item == null) {
-      await repository.createAi(
-        CreateAiProviderProfileRequest(
-          (b) => b
-            ..key = _key.text.trim()
-            ..displayName = _name.text.trim()
-            ..engine = _engine
-            ..authMode = AiProviderAuthMode.apiKey
-            ..baseUrl = _url.text.trim()
-            ..model = _model.text.trim()
-            ..apiKey = apiKeyText,
-        ),
-      );
-    } else {
-      await repository.updateAi(
-        widget.item!.key,
-        UpdateAiProviderProfileRequest(
-          (b) => b
-            ..displayName = _name.text.trim()
-            ..engine = _engine
-            ..authMode = AiProviderAuthMode.apiKey
-            ..baseUrl = _url.text.trim()
-            ..model = _model.text.trim()
-            ..apiKey = apiKeyText.isEmpty ? null : apiKeyText,
-        ),
-      );
-    }
+    final modelText = _model.text.trim();
+    await repository.configureAi(
+      widget.item.engine,
+      ConfigureAiProviderRequest(
+        (b) => b
+          ..presetId = _presetId
+          ..model = modelText.isEmpty ? _activePreset?.defaultModel : modelText
+          ..apiKey = apiKeyText.isEmpty ? null : apiKeyText
+          ..activate = true,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
-    final presets =
-        ref
-            .watch(adminAiProviderPresetsProvider)
-            .asData
-            ?.value
-            .items
-            .toList() ??
-        const <AiProviderPresetResponse>[];
-    final enginePresets = presets.where((p) => p.engine == _engine).toList();
-    final activePreset = matchAiProviderPreset(presets, _engine, _url.text);
-    final engines = AiProviderEngine.values
-        .where((v) => v != AiProviderEngine.unknownDefaultOpenApi)
-        .toList();
-    final requiresKey =
-        widget.item == null || !(widget.item?.credentialConfigured ?? false);
+    final presets = widget.item.presets.toList();
+    final activePreset = _activePreset;
+    final requiresKey = !widget.item.credentialConfigured || _endpointChanged;
 
     return AdminEditSheet(
-      title: widget.item == null ? l.createAiProvider : l.editAction,
+      title: widget.item.displayName,
       onSave: _save,
       fields: [
+        if (activePreset != null)
+          Text(
+            activePreset.baseUrl,
+            style: ShadTheme.of(context).textTheme.muted,
+          ),
         ShadInputFormField(
-          controller: _key,
-          enabled: widget.item == null,
-          validator: (v) => RegExp(r'^[a-z][a-z0-9_-]{0,31}$').hasMatch(v)
-              ? null
-              : l.invalidConfiguration,
-          label: Text(l.configurationKey),
+          controller: _apiKey,
+          enabled: !_testing,
+          obscureText: true,
+          label: Text(l.apiKeyLabel),
+          description: !requiresKey ? Text(l.apiKeyKeepHint) : null,
+          validator: (v) =>
+              requiresKey && v.trim().isEmpty ? l.invalidConfiguration : null,
+          onChanged: (_) => setState(_clearProbe),
         ),
-        ShadInputFormField(
-          controller: _name,
-          maxLength: 64,
-          validator: (v) => v.trim().isEmpty ? l.invalidConfiguration : null,
-          label: Text(l.displayName),
-        ),
-        AppDropdownField<AiProviderEngine>(
-          label: l.engineLabel,
-          value: _engine,
-          onSelected: (v) {
-            if (v != null) _changeEngine(v, presets);
-          },
-          options: [
-            for (final engine in engines)
-              AppDropdownOption(value: engine, label: aiEngineLabel(l, engine)),
-          ],
-        ),
-        if (enginePresets.length > 1 && activePreset != null)
+        if (presets.length > 1 && activePreset != null)
           AppDropdownField<String>(
             label: l.adminEndpointPresetLabel,
             value: activePreset.id,
             onSelected: (id) {
               if (id == null) return;
-              for (final preset in enginePresets) {
+              for (final preset in presets) {
                 if (preset.id == id) {
                   _selectPreset(preset);
                   break;
@@ -232,20 +175,12 @@ final class _AiProviderEditorState extends ConsumerState<_AiProviderEditor> {
               }
             },
             options: [
-              for (final preset in enginePresets)
+              for (final preset in presets)
                 AppDropdownOption(value: preset.id, label: preset.displayName),
             ],
           ),
         if (activePreset != null && activePreset.keyIsolationNotice.isNotEmpty)
           ShadAlert(description: Text(activePreset.keyIsolationNotice)),
-        ShadInputFormField(
-          controller: _url,
-          enabled: !_testing,
-          validator: (v) => isValidAiBaseUrl(v) ? null : l.invalidConfiguration,
-          label: Text(l.baseUrlLabel),
-          description: Text(l.adminApiUrlHint),
-          onChanged: (_) => setState(_clearProbe),
-        ),
         ShadInputFormField(
           controller: _model,
           enabled: !_testing,
@@ -293,16 +228,6 @@ final class _AiProviderEditorState extends ConsumerState<_AiProviderEditor> {
               ),
             ],
           ),
-        ShadInputFormField(
-          controller: _apiKey,
-          enabled: !_testing,
-          obscureText: true,
-          label: Text(l.apiKeyLabel),
-          description: widget.item != null ? Text(l.apiKeyKeepHint) : null,
-          validator: (v) =>
-              requiresKey && v.trim().isEmpty ? l.invalidConfiguration : null,
-          onChanged: (_) => setState(_clearProbe),
-        ),
         ShadButton.outline(
           height: 0,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),

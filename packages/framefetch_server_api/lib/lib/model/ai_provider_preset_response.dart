@@ -4,7 +4,6 @@
 
 // ignore_for_file: unused_element, unused_element_parameter
 import 'package:built_collection/built_collection.dart';
-import 'package:framefetch_server_api/lib/model/ai_provider_auth_mode.dart';
 import 'package:framefetch_server_api/lib/model/ai_provider_suggested_model_response.dart';
 import 'package:framefetch_server_api/lib/model/ai_provider_engine.dart';
 import 'package:built_value/built_value.dart';
@@ -19,7 +18,6 @@ part 'ai_provider_preset_response.g.dart';
 /// * [engine]
 /// * [displayName]
 /// * [baseUrl]
-/// * [authMode]
 /// * [defaultModel]
 /// * [suggestedModels]
 /// * [supportsVision]
@@ -44,10 +42,6 @@ abstract class AiProviderPresetResponse
 
   @BuiltValueField(wireName: r'base_url')
   String get baseUrl;
-
-  @BuiltValueField(wireName: r'auth_mode')
-  AiProviderAuthMode get authMode;
-  // enum authModeEnum {  api_key,  };
 
   @BuiltValueField(wireName: r'default_model')
   String get defaultModel;
@@ -123,11 +117,6 @@ class _$AiProviderPresetResponseSerializer
     yield serializers.serialize(
       object.baseUrl,
       specifiedType: const FullType(String),
-    );
-    yield r'auth_mode';
-    yield serializers.serialize(
-      object.authMode,
-      specifiedType: const FullType(AiProviderAuthMode),
     );
     yield r'default_model';
     yield serializers.serialize(
@@ -223,13 +212,6 @@ class _$AiProviderPresetResponseSerializer
             specifiedType: const FullType(String),
           ) as String;
           result.baseUrl = valueDes;
-          break;
-        case r'auth_mode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AiProviderAuthMode),
-          ) as AiProviderAuthMode;
-          result.authMode = valueDes;
           break;
         case r'default_model':
           final valueDes = serializers.deserialize(

@@ -48,10 +48,10 @@ import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 
 final api = FramefetchServerApi().getAdminApi();
-final String providerKey = providerKey_example; // String |
+final AiProviderEngine engine = ; // AiProviderEngine |
 
 try {
-    final response = await api.activateAiProviderProfile(providerKey);
+    final response = await api.activateAiProviderProfile(engine);
     print(response);
 } on DioException catch (e) {
     print("Exception when calling AdminApi->activateAiProviderProfile: $e\n");
@@ -65,27 +65,23 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-[*AdminApi*](doc/AdminApi.md) | [**activateAiProviderProfile**](doc/AdminApi.md#activateaiproviderprofile) | **POST** /api/admin/ai-providers/{provider_key}/activate | 启用 AI 分析 Provider
+[*AdminApi*](doc/AdminApi.md) | [**activateAiProviderProfile**](doc/AdminApi.md#activateaiproviderprofile) | **POST** /api/admin/ai-providers/{engine}/activate | 启用已配置的官方 AI 服务
 [*AdminApi*](doc/AdminApi.md) | [**cleanupStoredFiles**](doc/AdminApi.md#cleanupstoredfiles) | **POST** /api/admin/files/cleanup | 手动清理指定天数前的文件
-[*AdminApi*](doc/AdminApi.md) | [**clearFallbackAiProviderProfile**](doc/AdminApi.md#clearfallbackaiproviderprofile) | **DELETE** /api/admin/ai-providers/{provider_key}/fallback | 取消备用兜底 AI Provider
-[*AdminApi*](doc/AdminApi.md) | [**createAiProviderProfile**](doc/AdminApi.md#createaiproviderprofile) | **POST** /api/admin/ai-providers | 新增 AI 分析 Provider
+[*AdminApi*](doc/AdminApi.md) | [**configureAiProvider**](doc/AdminApi.md#configureaiprovider) | **PUT** /api/admin/ai-providers/{engine} | 配置并启用内置官方 AI 服务
 [*AdminApi*](doc/AdminApi.md) | [**createProviderCatalogEntry**](doc/AdminApi.md#createprovidercatalogentry) | **POST** /api/admin/providers | 新增平台目录条目
-[*AdminApi*](doc/AdminApi.md) | [**deleteAiProviderProfile**](doc/AdminApi.md#deleteaiproviderprofile) | **DELETE** /api/admin/ai-providers/{provider_key} | 删除 AI 分析 Provider
+[*AdminApi*](doc/AdminApi.md) | [**deleteAiProviderProfile**](doc/AdminApi.md#deleteaiproviderprofile) | **DELETE** /api/admin/ai-providers/{engine} | 清除官方 AI 服务已保存密钥与配置
 [*AdminApi*](doc/AdminApi.md) | [**deleteProviderCatalogEntry**](doc/AdminApi.md#deleteprovidercatalogentry) | **DELETE** /api/admin/providers/{provider_key} | 删除平台目录条目
 [*AdminApi*](doc/AdminApi.md) | [**deleteStoredFile**](doc/AdminApi.md#deletestoredfile) | **DELETE** /api/admin/files/{category}/{file_id} | 删除指定持久文件
 [*AdminApi*](doc/AdminApi.md) | [**deleteUser**](doc/AdminApi.md#deleteuser) | **DELETE** /api/admin/users/{user_id} | 删除用户
 [*AdminApi*](doc/AdminApi.md) | [**getAdminEngineCatalog**](doc/AdminApi.md#getadminenginecatalog) | **GET** /api/admin/provider-runtime/engine-catalog | 读取媒体 Runner 实际安装的引擎候选清单
 [*AdminApi*](doc/AdminApi.md) | [**getAnalysisAnalytics**](doc/AdminApi.md#getanalysisanalytics) | **GET** /api/admin/analyses/analytics | 查询 AI 分析执行统计
 [*AdminApi*](doc/AdminApi.md) | [**getDownloadAnalytics**](doc/AdminApi.md#getdownloadanalytics) | **GET** /api/admin/downloads/analytics | 查询下载分析
-[*AdminApi*](doc/AdminApi.md) | [**listAiProviderPresets**](doc/AdminApi.md#listaiproviderpresets) | **GET** /api/admin/ai-providers/presets | 查询官方 AI 渠道预设与能力目录
-[*AdminApi*](doc/AdminApi.md) | [**listAiProviderProfiles**](doc/AdminApi.md#listaiproviderprofiles) | **GET** /api/admin/ai-providers | 查询 AI 分析 Provider
+[*AdminApi*](doc/AdminApi.md) | [**listAiProviderProfiles**](doc/AdminApi.md#listaiproviderprofiles) | **GET** /api/admin/ai-providers | 查看内置官方 AI 服务配置状态
 [*AdminApi*](doc/AdminApi.md) | [**listOperationLogs**](doc/AdminApi.md#listoperationlogs) | **GET** /api/admin/operation-logs | 查询全系统操作日志
 [*AdminApi*](doc/AdminApi.md) | [**listProviderCatalogEntries**](doc/AdminApi.md#listprovidercatalogentries) | **GET** /api/admin/providers | 查询平台目录
 [*AdminApi*](doc/AdminApi.md) | [**listStoredFiles**](doc/AdminApi.md#liststoredfiles) | **GET** /api/admin/files | 分页查询持久文件
 [*AdminApi*](doc/AdminApi.md) | [**listUsers**](doc/AdminApi.md#listusers) | **GET** /api/admin/users | 查询用户列表
-[*AdminApi*](doc/AdminApi.md) | [**setFallbackAiProviderProfile**](doc/AdminApi.md#setfallbackaiproviderprofile) | **POST** /api/admin/ai-providers/{provider_key}/fallback | 设为备用兜底 AI Provider
-[*AdminApi*](doc/AdminApi.md) | [**testAiProviderConnection**](doc/AdminApi.md#testaiproviderconnection) | **POST** /api/admin/ai-providers/test | 测试官方 AI 渠道连通性与模型能力
-[*AdminApi*](doc/AdminApi.md) | [**updateAiProviderProfile**](doc/AdminApi.md#updateaiproviderprofile) | **PATCH** /api/admin/ai-providers/{provider_key} | 更新 AI 分析 Provider
+[*AdminApi*](doc/AdminApi.md) | [**testAiProviderConnection**](doc/AdminApi.md#testaiproviderconnection) | **POST** /api/admin/ai-providers/test | 探测官方 AI 服务端点与模型可用性
 [*AdminApi*](doc/AdminApi.md) | [**updateProviderCatalogEntry**](doc/AdminApi.md#updateprovidercatalogentry) | **PATCH** /api/admin/providers/{provider_key} | 更新平台目录条目
 [*AdminApi*](doc/AdminApi.md) | [**updateUserAccess**](doc/AdminApi.md#updateuseraccess) | **PATCH** /api/admin/users/{user_id} | 更新用户角色与账号状态
 [*AnalysesApi*](doc/AnalysesApi.md) | [**cancelAnalysis**](doc/AnalysesApi.md#cancelanalysis) | **POST** /api/analyses/{analysis_id}/cancel | 取消视频分析任务
@@ -151,10 +147,8 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [AccessDecision](doc/AccessDecision.md)
- - [AiProviderAuthMode](doc/AiProviderAuthMode.md)
  - [AiProviderConnectionTestResponse](doc/AiProviderConnectionTestResponse.md)
  - [AiProviderEngine](doc/AiProviderEngine.md)
- - [AiProviderPresetListResponse](doc/AiProviderPresetListResponse.md)
  - [AiProviderPresetResponse](doc/AiProviderPresetResponse.md)
  - [AiProviderProfileListResponse](doc/AiProviderProfileListResponse.md)
  - [AiProviderProfileResponse](doc/AiProviderProfileResponse.md)
@@ -179,7 +173,6 @@ Class | Method | HTTP request | Description
  - [AnalysisStage](doc/AnalysisStage.md)
  - [AnalysisStatus](doc/AnalysisStatus.md)
  - [ApiResponseAiProviderConnectionTestResponse](doc/ApiResponseAiProviderConnectionTestResponse.md)
- - [ApiResponseAiProviderPresetListResponse](doc/ApiResponseAiProviderPresetListResponse.md)
  - [ApiResponseAiProviderProfileListResponse](doc/ApiResponseAiProviderProfileListResponse.md)
  - [ApiResponseAiProviderProfileResponse](doc/ApiResponseAiProviderProfileResponse.md)
  - [ApiResponseAnalysisAnalyticsResponse](doc/ApiResponseAnalysisAnalyticsResponse.md)
@@ -219,13 +212,13 @@ Class | Method | HTTP request | Description
  - [CompleteDocumentImportRequest](doc/CompleteDocumentImportRequest.md)
  - [CompleteMediaImportRequest](doc/CompleteMediaImportRequest.md)
  - [CompletedPartRequest](doc/CompletedPartRequest.md)
+ - [ConfigureAiProviderRequest](doc/ConfigureAiProviderRequest.md)
  - [ContainerPreference](doc/ContainerPreference.md)
  - [ContentCitation](doc/ContentCitation.md)
  - [ContentCreationHistoryRecordResponse](doc/ContentCreationHistoryRecordResponse.md)
  - [ContentDocumentResult](doc/ContentDocumentResult.md)
  - [ContentFinding](doc/ContentFinding.md)
  - [ContentReview](doc/ContentReview.md)
- - [CreateAiProviderProfileRequest](doc/CreateAiProviderProfileRequest.md)
  - [CreateProviderCatalogEntryRequest](doc/CreateProviderCatalogEntryRequest.md)
  - [Data](doc/Data.md)
  - [DeclaredOrigin](doc/DeclaredOrigin.md)
@@ -351,7 +344,6 @@ Class | Method | HTTP request | Description
  - [StructuredReportResultResponse](doc/StructuredReportResultResponse.md)
  - [StructuredReportSectionResponse](doc/StructuredReportSectionResponse.md)
  - [TestAiProviderConnectionRequest](doc/TestAiProviderConnectionRequest.md)
- - [UpdateAiProviderProfileRequest](doc/UpdateAiProviderProfileRequest.md)
  - [UpdateProfileRequest](doc/UpdateProfileRequest.md)
  - [UpdateProviderCatalogEntryRequest](doc/UpdateProviderCatalogEntryRequest.md)
  - [UpdateUserAccessRequest](doc/UpdateUserAccessRequest.md)

@@ -18,15 +18,12 @@ const ErrorCode _$extractorBroken = const ErrorCode._('extractorBroken');
 const ErrorCode _$transient = const ErrorCode._('transient');
 const ErrorCode _$invalidInput = const ErrorCode._('invalidInput');
 const ErrorCode _$runtimeUnavailable = const ErrorCode._('runtimeUnavailable');
-const ErrorCode _$activeAiProviderDelete =
-    const ErrorCode._('activeAiProviderDelete');
 const ErrorCode _$activeTaskQuotaExceeded =
     const ErrorCode._('activeTaskQuotaExceeded');
 const ErrorCode _$adminBootstrapRequired =
     const ErrorCode._('adminBootstrapRequired');
 const ErrorCode _$aiModelCatalogUnavailable =
     const ErrorCode._('aiModelCatalogUnavailable');
-const ErrorCode _$aiProviderConflict = const ErrorCode._('aiProviderConflict');
 const ErrorCode _$aiProviderNotFound = const ErrorCode._('aiProviderNotFound');
 const ErrorCode _$analysisAlreadyActive =
     const ErrorCode._('analysisAlreadyActive');
@@ -144,16 +141,12 @@ ErrorCode _$valueOf(String name) {
       return _$invalidInput;
     case 'runtimeUnavailable':
       return _$runtimeUnavailable;
-    case 'activeAiProviderDelete':
-      return _$activeAiProviderDelete;
     case 'activeTaskQuotaExceeded':
       return _$activeTaskQuotaExceeded;
     case 'adminBootstrapRequired':
       return _$adminBootstrapRequired;
     case 'aiModelCatalogUnavailable':
       return _$aiModelCatalogUnavailable;
-    case 'aiProviderConflict':
-      return _$aiProviderConflict;
     case 'aiProviderNotFound':
       return _$aiProviderNotFound;
     case 'analysisAlreadyActive':
@@ -299,11 +292,9 @@ final BuiltSet<ErrorCode> _$values = BuiltSet<ErrorCode>(const <ErrorCode>[
   _$transient,
   _$invalidInput,
   _$runtimeUnavailable,
-  _$activeAiProviderDelete,
   _$activeTaskQuotaExceeded,
   _$adminBootstrapRequired,
   _$aiModelCatalogUnavailable,
-  _$aiProviderConflict,
   _$aiProviderNotFound,
   _$analysisAlreadyActive,
   _$analysisArtifactUnavailable,
@@ -383,11 +374,9 @@ class _$ErrorCodeMeta {
   ErrorCode get transient => _$transient;
   ErrorCode get invalidInput => _$invalidInput;
   ErrorCode get runtimeUnavailable => _$runtimeUnavailable;
-  ErrorCode get activeAiProviderDelete => _$activeAiProviderDelete;
   ErrorCode get activeTaskQuotaExceeded => _$activeTaskQuotaExceeded;
   ErrorCode get adminBootstrapRequired => _$adminBootstrapRequired;
   ErrorCode get aiModelCatalogUnavailable => _$aiModelCatalogUnavailable;
-  ErrorCode get aiProviderConflict => _$aiProviderConflict;
   ErrorCode get aiProviderNotFound => _$aiProviderNotFound;
   ErrorCode get analysisAlreadyActive => _$analysisAlreadyActive;
   ErrorCode get analysisArtifactUnavailable => _$analysisArtifactUnavailable;
@@ -476,11 +465,9 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'transient': 'transient',
     'invalidInput': 'invalid_input',
     'runtimeUnavailable': 'runtime_unavailable',
-    'activeAiProviderDelete': 'active_ai_provider_delete',
     'activeTaskQuotaExceeded': 'active_task_quota_exceeded',
     'adminBootstrapRequired': 'admin_bootstrap_required',
     'aiModelCatalogUnavailable': 'ai_model_catalog_unavailable',
-    'aiProviderConflict': 'ai_provider_conflict',
     'aiProviderNotFound': 'ai_provider_not_found',
     'analysisAlreadyActive': 'analysis_already_active',
     'analysisArtifactUnavailable': 'analysis_artifact_unavailable',
@@ -558,11 +545,9 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'transient': 'transient',
     'invalid_input': 'invalidInput',
     'runtime_unavailable': 'runtimeUnavailable',
-    'active_ai_provider_delete': 'activeAiProviderDelete',
     'active_task_quota_exceeded': 'activeTaskQuotaExceeded',
     'admin_bootstrap_required': 'adminBootstrapRequired',
     'ai_model_catalog_unavailable': 'aiModelCatalogUnavailable',
-    'ai_provider_conflict': 'aiProviderConflict',
     'ai_provider_not_found': 'aiProviderNotFound',
     'analysis_already_active': 'analysisAlreadyActive',
     'analysis_artifact_unavailable': 'analysisArtifactUnavailable',

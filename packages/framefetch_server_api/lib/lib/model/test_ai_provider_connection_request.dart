@@ -3,7 +3,6 @@
 //
 
 // ignore_for_file: unused_element, unused_element_parameter
-import 'package:framefetch_server_api/lib/model/ai_provider_auth_mode.dart';
 import 'package:framefetch_server_api/lib/model/ai_provider_engine.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -13,10 +12,8 @@ part 'test_ai_provider_connection_request.g.dart';
 /// TestAiProviderConnectionRequest
 ///
 /// Properties:
-/// * [providerKey]
 /// * [engine]
-/// * [authMode]
-/// * [baseUrl]
+/// * [presetId]
 /// * [model]
 /// * [apiKey]
 @BuiltValue()
@@ -24,19 +21,12 @@ abstract class TestAiProviderConnectionRequest
     implements
         Built<TestAiProviderConnectionRequest,
             TestAiProviderConnectionRequestBuilder> {
-  @BuiltValueField(wireName: r'provider_key')
-  String? get providerKey;
-
   @BuiltValueField(wireName: r'engine')
-  AiProviderEngine? get engine;
+  AiProviderEngine get engine;
   // enum engineEnum {  volcengine,  deepseek,  openai,  };
 
-  @BuiltValueField(wireName: r'auth_mode')
-  AiProviderAuthMode? get authMode;
-  // enum authModeEnum {  api_key,  };
-
-  @BuiltValueField(wireName: r'base_url')
-  String? get baseUrl;
+  @BuiltValueField(wireName: r'preset_id')
+  String? get presetId;
 
   @BuiltValueField(wireName: r'model')
   String? get model;
@@ -74,31 +64,15 @@ class _$TestAiProviderConnectionRequestSerializer
     TestAiProviderConnectionRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    if (object.providerKey != null) {
-      yield r'provider_key';
+    yield r'engine';
+    yield serializers.serialize(
+      object.engine,
+      specifiedType: const FullType(AiProviderEngine),
+    );
+    if (object.presetId != null) {
+      yield r'preset_id';
       yield serializers.serialize(
-        object.providerKey,
-        specifiedType: const FullType.nullable(String),
-      );
-    }
-    if (object.engine != null) {
-      yield r'engine';
-      yield serializers.serialize(
-        object.engine,
-        specifiedType: const FullType.nullable(AiProviderEngine),
-      );
-    }
-    if (object.authMode != null) {
-      yield r'auth_mode';
-      yield serializers.serialize(
-        object.authMode,
-        specifiedType: const FullType.nullable(AiProviderAuthMode),
-      );
-    }
-    if (object.baseUrl != null) {
-      yield r'base_url';
-      yield serializers.serialize(
-        object.baseUrl,
+        object.presetId,
         specifiedType: const FullType.nullable(String),
       );
     }
@@ -141,37 +115,20 @@ class _$TestAiProviderConnectionRequestSerializer
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'provider_key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.providerKey = valueDes;
-          break;
         case r'engine':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(AiProviderEngine),
-          ) as AiProviderEngine?;
-          if (valueDes == null) continue;
+            specifiedType: const FullType(AiProviderEngine),
+          ) as AiProviderEngine;
           result.engine = valueDes;
           break;
-        case r'auth_mode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AiProviderAuthMode),
-          ) as AiProviderAuthMode?;
-          if (valueDes == null) continue;
-          result.authMode = valueDes;
-          break;
-        case r'base_url':
+        case r'preset_id':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType.nullable(String),
           ) as String?;
           if (valueDes == null) continue;
-          result.baseUrl = valueDes;
+          result.presetId = valueDes;
           break;
         case r'model':
           final valueDes = serializers.deserialize(

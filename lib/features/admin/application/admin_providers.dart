@@ -16,12 +16,6 @@ final adminAnalysisAnalyticsProvider = FutureProvider.autoDispose
       return ref.watch(adminRepositoryProvider).fetchAnalysisAnalytics(days);
     }, retry: (_, _) => null);
 
-final adminAiProviderPresetsProvider =
-    FutureProvider.autoDispose<AiProviderPresetListResponse>((ref) {
-      _watchSession(ref);
-      return ref.watch(adminRepositoryProvider).fetchAiProviderPresets();
-    }, retry: (_, _) => null);
-
 final adminFilesProvider = FutureProvider.autoDispose<StoredFileListResponse>((
   ref,
 ) {

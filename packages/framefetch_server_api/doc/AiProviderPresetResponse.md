@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 **engine** | [**AiProviderEngine**](AiProviderEngine.md) |  |
 **displayName** | **String** |  |
 **baseUrl** | **String** |  |
-**authMode** | [**AiProviderAuthMode**](AiProviderAuthMode.md) |  |
 **defaultModel** | **String** |  |
 **suggestedModels** | [**BuiltList&lt;AiProviderSuggestedModelResponse&gt;**](AiProviderSuggestedModelResponse.md) |  |
 **supportsVision** | **bool** |  |

@@ -91,24 +91,27 @@ void main() {
         (selectedUsers['get'] as Map<String, dynamic>)['parameters']
             as List<dynamic>;
 
-    expect(selectedPaths, hasLength(68));
+    expect(selectedPaths, hasLength(66));
     expect(
       selectedPaths.values.cast<Map<String, dynamic>>().fold<int>(
         0,
         (total, path) => total + path.length,
       ),
-      81,
+      77,
     );
     expect(selectedPaths['/api/users/me'], contains('patch'));
     expect(
       (selectedPaths['/api/users/me/avatar'] as Map<String, dynamic>).keys,
       containsAll(['get', 'put', 'delete']),
     );
-    expect(selectedPaths['/api/admin/ai-providers'], contains('post'));
+    expect(selectedPaths['/api/admin/ai-providers'], contains('get'));
+    expect(selectedPaths['/api/admin/ai-providers'], isNot(contains('post')));
     expect(selectedPaths, isNot(contains('/api/admin/provider-runtime')));
     expect(
-      selectedPaths['/api/admin/ai-providers/{provider_key}'],
-      contains('delete'),
+      (selectedPaths['/api/admin/ai-providers/{engine}']
+              as Map<String, dynamic>)
+          .keys,
+      containsAll(['put', 'delete']),
     );
     expect(selectedPaths, contains('/api/analyses/{analysis_id}/report.docx'));
     expect(
@@ -169,11 +172,15 @@ void main() {
     expect(selectedPaths, contains('/api/admin/files/{category}/{file_id}'));
     expect(selectedPaths, contains('/api/admin/operation-logs'));
     expect(selectedPaths, contains('/api/admin/analyses/analytics'));
-    expect(selectedPaths, contains('/api/admin/ai-providers/presets'));
+    expect(selectedPaths, isNot(contains('/api/admin/ai-providers/presets')));
     expect(selectedPaths, contains('/api/admin/ai-providers/test'));
     expect(
       selectedPaths,
-      contains('/api/admin/ai-providers/{provider_key}/fallback'),
+      contains('/api/admin/ai-providers/{engine}/activate'),
+    );
+    expect(
+      selectedPaths,
+      isNot(contains('/api/admin/ai-providers/{provider_key}/fallback')),
     );
     expect(
       selectedPaths,
@@ -229,7 +236,7 @@ void main() {
     expect(schemas, contains('DocumentUploadSessionResponse'));
     expect(schemas, contains('AnalysisAnalyticsResponse'));
     expect(schemas, contains('OperationLogPageResponse'));
-    expect(schemas, contains('AiProviderPresetListResponse'));
+    expect(schemas, contains('ConfigureAiProviderRequest'));
     expect(schemas, contains('AiProviderConnectionTestResponse'));
     expect(schemas, contains('EngineCatalogResponse'));
     expect(schemas, contains('HistoryRecordPageResponse'));

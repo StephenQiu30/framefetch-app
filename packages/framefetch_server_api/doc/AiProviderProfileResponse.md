@@ -8,20 +8,17 @@ import 'package:framefetch_server_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **String** |  |
-**displayName** | **String** |  |
 **engine** | [**AiProviderEngine**](AiProviderEngine.md) |  |
-**authMode** | [**AiProviderAuthMode**](AiProviderAuthMode.md) |  |
-**baseUrl** | **String** |  |
-**model** | **String** |  |
+**displayName** | **String** |  |
 **credentialConfigured** | **bool** |  |
 **isActive** | **bool** |  |
-**isFallback** | **bool** |  |
 **presetId** | **String** |  |
+**baseUrl** | **String** |  |
+**model** | **String** |  |
 **supportsVision** | **bool** |  |
 **supportsModelsEndpoint** | **bool** |  |
 **structuredOutputMode** | **String** |  |
-**createdAt** | [**DateTime**](DateTime.md) |  |
+**presets** | [**BuiltList&lt;AiProviderPresetResponse&gt;**](AiProviderPresetResponse.md) |  |
 **updatedAt** | [**DateTime**](DateTime.md) |  |
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

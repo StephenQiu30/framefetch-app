@@ -37,8 +37,8 @@ void main() {
     ),
     (
       screen: const AdminAiProvidersScreen(),
-      rowKey: 'ai-synthetic-ai',
-      path: '/api/admin/ai-providers/synthetic-ai',
+      rowKey: 'ai-openai',
+      path: '/api/admin/ai-providers/openai',
     ),
   ];
   for (final item in cases) {

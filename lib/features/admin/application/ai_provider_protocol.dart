@@ -41,16 +41,3 @@ AiProviderPresetResponse? matchAiProviderPreset(
   }
   return candidates.first;
 }
-
-bool isValidAiBaseUrl(String value) {
-  final uri = Uri.tryParse(value.trim());
-  if (uri == null ||
-      uri.host.isEmpty ||
-      uri.userInfo.isNotEmpty ||
-      uri.hasQuery ||
-      uri.hasFragment) {
-    return false;
-  }
-  final loopback = {'localhost', '127.0.0.1', '::1'}.contains(uri.host);
-  return uri.scheme == 'https' || (uri.scheme == 'http' && loopback);
-}

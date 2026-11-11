@@ -80,25 +80,19 @@ class _$AiProviderProfileResponseStructuredOutputModeEnumSerializer
 
 class _$AiProviderProfileResponse extends AiProviderProfileResponse {
   @override
-  final String key;
-  @override
-  final String displayName;
-  @override
   final AiProviderEngine engine;
   @override
-  final AiProviderAuthMode authMode;
-  @override
-  final String? baseUrl;
-  @override
-  final String model;
+  final String displayName;
   @override
   final bool credentialConfigured;
   @override
   final bool isActive;
   @override
-  final bool isFallback;
+  final String presetId;
   @override
-  final String? presetId;
+  final String baseUrl;
+  @override
+  final String model;
   @override
   final bool supportsVision;
   @override
@@ -106,30 +100,27 @@ class _$AiProviderProfileResponse extends AiProviderProfileResponse {
   @override
   final AiProviderProfileResponseStructuredOutputModeEnum structuredOutputMode;
   @override
-  final DateTime createdAt;
+  final BuiltList<AiProviderPresetResponse> presets;
   @override
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
 
   factory _$AiProviderProfileResponse(
           [void Function(AiProviderProfileResponseBuilder)? updates]) =>
       (AiProviderProfileResponseBuilder()..update(updates))._build();
 
   _$AiProviderProfileResponse._(
-      {required this.key,
+      {required this.engine,
       required this.displayName,
-      required this.engine,
-      required this.authMode,
-      this.baseUrl,
-      required this.model,
       required this.credentialConfigured,
       required this.isActive,
-      required this.isFallback,
-      this.presetId,
+      required this.presetId,
+      required this.baseUrl,
+      required this.model,
       required this.supportsVision,
       required this.supportsModelsEndpoint,
       required this.structuredOutputMode,
-      required this.createdAt,
-      required this.updatedAt})
+      required this.presets,
+      this.updatedAt})
       : super._();
   @override
   AiProviderProfileResponse rebuild(
@@ -144,40 +135,34 @@ class _$AiProviderProfileResponse extends AiProviderProfileResponse {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is AiProviderProfileResponse &&
-        key == other.key &&
-        displayName == other.displayName &&
         engine == other.engine &&
-        authMode == other.authMode &&
-        baseUrl == other.baseUrl &&
-        model == other.model &&
+        displayName == other.displayName &&
         credentialConfigured == other.credentialConfigured &&
         isActive == other.isActive &&
-        isFallback == other.isFallback &&
         presetId == other.presetId &&
+        baseUrl == other.baseUrl &&
+        model == other.model &&
         supportsVision == other.supportsVision &&
         supportsModelsEndpoint == other.supportsModelsEndpoint &&
         structuredOutputMode == other.structuredOutputMode &&
-        createdAt == other.createdAt &&
+        presets == other.presets &&
         updatedAt == other.updatedAt;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
-    _$hash = $jc(_$hash, key.hashCode);
-    _$hash = $jc(_$hash, displayName.hashCode);
     _$hash = $jc(_$hash, engine.hashCode);
-    _$hash = $jc(_$hash, authMode.hashCode);
-    _$hash = $jc(_$hash, baseUrl.hashCode);
-    _$hash = $jc(_$hash, model.hashCode);
+    _$hash = $jc(_$hash, displayName.hashCode);
     _$hash = $jc(_$hash, credentialConfigured.hashCode);
     _$hash = $jc(_$hash, isActive.hashCode);
-    _$hash = $jc(_$hash, isFallback.hashCode);
     _$hash = $jc(_$hash, presetId.hashCode);
+    _$hash = $jc(_$hash, baseUrl.hashCode);
+    _$hash = $jc(_$hash, model.hashCode);
     _$hash = $jc(_$hash, supportsVision.hashCode);
     _$hash = $jc(_$hash, supportsModelsEndpoint.hashCode);
     _$hash = $jc(_$hash, structuredOutputMode.hashCode);
-    _$hash = $jc(_$hash, createdAt.hashCode);
+    _$hash = $jc(_$hash, presets.hashCode);
     _$hash = $jc(_$hash, updatedAt.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -186,20 +171,17 @@ class _$AiProviderProfileResponse extends AiProviderProfileResponse {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'AiProviderProfileResponse')
-          ..add('key', key)
-          ..add('displayName', displayName)
           ..add('engine', engine)
-          ..add('authMode', authMode)
-          ..add('baseUrl', baseUrl)
-          ..add('model', model)
+          ..add('displayName', displayName)
           ..add('credentialConfigured', credentialConfigured)
           ..add('isActive', isActive)
-          ..add('isFallback', isFallback)
           ..add('presetId', presetId)
+          ..add('baseUrl', baseUrl)
+          ..add('model', model)
           ..add('supportsVision', supportsVision)
           ..add('supportsModelsEndpoint', supportsModelsEndpoint)
           ..add('structuredOutputMode', structuredOutputMode)
-          ..add('createdAt', createdAt)
+          ..add('presets', presets)
           ..add('updatedAt', updatedAt))
         .toString();
   }
@@ -210,29 +192,13 @@ class AiProviderProfileResponseBuilder
         Builder<AiProviderProfileResponse, AiProviderProfileResponseBuilder> {
   _$AiProviderProfileResponse? _$v;
 
-  String? _key;
-  String? get key => _$this._key;
-  set key(String? key) => _$this._key = key;
-
-  String? _displayName;
-  String? get displayName => _$this._displayName;
-  set displayName(String? displayName) => _$this._displayName = displayName;
-
   AiProviderEngine? _engine;
   AiProviderEngine? get engine => _$this._engine;
   set engine(AiProviderEngine? engine) => _$this._engine = engine;
 
-  AiProviderAuthMode? _authMode;
-  AiProviderAuthMode? get authMode => _$this._authMode;
-  set authMode(AiProviderAuthMode? authMode) => _$this._authMode = authMode;
-
-  String? _baseUrl;
-  String? get baseUrl => _$this._baseUrl;
-  set baseUrl(String? baseUrl) => _$this._baseUrl = baseUrl;
-
-  String? _model;
-  String? get model => _$this._model;
-  set model(String? model) => _$this._model = model;
+  String? _displayName;
+  String? get displayName => _$this._displayName;
+  set displayName(String? displayName) => _$this._displayName = displayName;
 
   bool? _credentialConfigured;
   bool? get credentialConfigured => _$this._credentialConfigured;
@@ -243,13 +209,17 @@ class AiProviderProfileResponseBuilder
   bool? get isActive => _$this._isActive;
   set isActive(bool? isActive) => _$this._isActive = isActive;
 
-  bool? _isFallback;
-  bool? get isFallback => _$this._isFallback;
-  set isFallback(bool? isFallback) => _$this._isFallback = isFallback;
-
   String? _presetId;
   String? get presetId => _$this._presetId;
   set presetId(String? presetId) => _$this._presetId = presetId;
+
+  String? _baseUrl;
+  String? get baseUrl => _$this._baseUrl;
+  set baseUrl(String? baseUrl) => _$this._baseUrl = baseUrl;
+
+  String? _model;
+  String? get model => _$this._model;
+  set model(String? model) => _$this._model = model;
 
   bool? _supportsVision;
   bool? get supportsVision => _$this._supportsVision;
@@ -269,9 +239,11 @@ class AiProviderProfileResponseBuilder
               structuredOutputMode) =>
       _$this._structuredOutputMode = structuredOutputMode;
 
-  DateTime? _createdAt;
-  DateTime? get createdAt => _$this._createdAt;
-  set createdAt(DateTime? createdAt) => _$this._createdAt = createdAt;
+  ListBuilder<AiProviderPresetResponse>? _presets;
+  ListBuilder<AiProviderPresetResponse> get presets =>
+      _$this._presets ??= ListBuilder<AiProviderPresetResponse>();
+  set presets(ListBuilder<AiProviderPresetResponse>? presets) =>
+      _$this._presets = presets;
 
   DateTime? _updatedAt;
   DateTime? get updatedAt => _$this._updatedAt;
@@ -284,20 +256,17 @@ class AiProviderProfileResponseBuilder
   AiProviderProfileResponseBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _key = $v.key;
-      _displayName = $v.displayName;
       _engine = $v.engine;
-      _authMode = $v.authMode;
-      _baseUrl = $v.baseUrl;
-      _model = $v.model;
+      _displayName = $v.displayName;
       _credentialConfigured = $v.credentialConfigured;
       _isActive = $v.isActive;
-      _isFallback = $v.isFallback;
       _presetId = $v.presetId;
+      _baseUrl = $v.baseUrl;
+      _model = $v.model;
       _supportsVision = $v.supportsVision;
       _supportsModelsEndpoint = $v.supportsModelsEndpoint;
       _structuredOutputMode = $v.structuredOutputMode;
-      _createdAt = $v.createdAt;
+      _presets = $v.presets.toBuilder();
       _updatedAt = $v.updatedAt;
       _$v = null;
     }
@@ -318,43 +287,50 @@ class AiProviderProfileResponseBuilder
   AiProviderProfileResponse build() => _build();
 
   _$AiProviderProfileResponse _build() {
-    final _$result = _$v ??
-        _$AiProviderProfileResponse._(
-          key: BuiltValueNullFieldError.checkNotNull(
-              key, r'AiProviderProfileResponse', 'key'),
-          displayName: BuiltValueNullFieldError.checkNotNull(
-              displayName, r'AiProviderProfileResponse', 'displayName'),
-          engine: BuiltValueNullFieldError.checkNotNull(
-              engine, r'AiProviderProfileResponse', 'engine'),
-          authMode: BuiltValueNullFieldError.checkNotNull(
-              authMode, r'AiProviderProfileResponse', 'authMode'),
-          baseUrl: baseUrl,
-          model: BuiltValueNullFieldError.checkNotNull(
-              model, r'AiProviderProfileResponse', 'model'),
-          credentialConfigured: BuiltValueNullFieldError.checkNotNull(
-              credentialConfigured,
-              r'AiProviderProfileResponse',
-              'credentialConfigured'),
-          isActive: BuiltValueNullFieldError.checkNotNull(
-              isActive, r'AiProviderProfileResponse', 'isActive'),
-          isFallback: BuiltValueNullFieldError.checkNotNull(
-              isFallback, r'AiProviderProfileResponse', 'isFallback'),
-          presetId: presetId,
-          supportsVision: BuiltValueNullFieldError.checkNotNull(
-              supportsVision, r'AiProviderProfileResponse', 'supportsVision'),
-          supportsModelsEndpoint: BuiltValueNullFieldError.checkNotNull(
-              supportsModelsEndpoint,
-              r'AiProviderProfileResponse',
-              'supportsModelsEndpoint'),
-          structuredOutputMode: BuiltValueNullFieldError.checkNotNull(
-              structuredOutputMode,
-              r'AiProviderProfileResponse',
-              'structuredOutputMode'),
-          createdAt: BuiltValueNullFieldError.checkNotNull(
-              createdAt, r'AiProviderProfileResponse', 'createdAt'),
-          updatedAt: BuiltValueNullFieldError.checkNotNull(
-              updatedAt, r'AiProviderProfileResponse', 'updatedAt'),
-        );
+    _$AiProviderProfileResponse _$result;
+    try {
+      _$result = _$v ??
+          _$AiProviderProfileResponse._(
+            engine: BuiltValueNullFieldError.checkNotNull(
+                engine, r'AiProviderProfileResponse', 'engine'),
+            displayName: BuiltValueNullFieldError.checkNotNull(
+                displayName, r'AiProviderProfileResponse', 'displayName'),
+            credentialConfigured: BuiltValueNullFieldError.checkNotNull(
+                credentialConfigured,
+                r'AiProviderProfileResponse',
+                'credentialConfigured'),
+            isActive: BuiltValueNullFieldError.checkNotNull(
+                isActive, r'AiProviderProfileResponse', 'isActive'),
+            presetId: BuiltValueNullFieldError.checkNotNull(
+                presetId, r'AiProviderProfileResponse', 'presetId'),
+            baseUrl: BuiltValueNullFieldError.checkNotNull(
+                baseUrl, r'AiProviderProfileResponse', 'baseUrl'),
+            model: BuiltValueNullFieldError.checkNotNull(
+                model, r'AiProviderProfileResponse', 'model'),
+            supportsVision: BuiltValueNullFieldError.checkNotNull(
+                supportsVision, r'AiProviderProfileResponse', 'supportsVision'),
+            supportsModelsEndpoint: BuiltValueNullFieldError.checkNotNull(
+                supportsModelsEndpoint,
+                r'AiProviderProfileResponse',
+                'supportsModelsEndpoint'),
+            structuredOutputMode: BuiltValueNullFieldError.checkNotNull(
+                structuredOutputMode,
+                r'AiProviderProfileResponse',
+                'structuredOutputMode'),
+            presets: presets.build(),
+            updatedAt: updatedAt,
+          );
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'presets';
+        presets.build();
+      } catch (e) {
+        throw BuiltValueNestedFieldError(
+            r'AiProviderProfileResponse', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

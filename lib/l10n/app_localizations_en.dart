@@ -1502,19 +1502,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get invalidConfiguration => 'Check this field’s format and value.';
 
   @override
-  String get createAiProvider => 'Add AI service';
-
-  @override
-  String get engineLabel => 'Engine';
-
-  @override
-  String get authModeLabel => 'Authentication';
-
-  @override
   String get modelLabel => 'Model';
-
-  @override
-  String get baseUrlLabel => 'Service URL';
 
   @override
   String get apiKeyLabel => 'API Key';
@@ -1930,30 +1918,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminPlatformsEmpty => 'No matching platforms';
 
   @override
-  String get adminAiSearch => 'Search AI configurations';
-
-  @override
-  String get adminAiEmpty => 'No matching AI configurations';
-
-  @override
-  String get adminEngineVolcengine => 'Volcano Engine Ark';
-
-  @override
-  String get adminEngineOpenAi => 'OpenAI Official';
-
-  @override
-  String get adminEngineDeepSeek => 'DeepSeek Official';
-
-  @override
-  String get adminFallbackLine => 'Fallback route';
-
-  @override
-  String get adminSetFallbackAction => 'Set fallback';
-
-  @override
-  String get adminClearFallbackAction => 'Clear fallback';
-
-  @override
   String get adminEndpointPresetLabel => 'Endpoint preset';
 
   @override
@@ -1979,10 +1943,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get adminApiUrlHint =>
-      'Public endpoints require HTTPS; localhost endpoints may use HTTP.';
-
-  @override
   String get adminModelsHint =>
       'Choose an image-capable model for video analysis.';
 
@@ -1991,9 +1951,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminTextOnly => 'Text only';
-
-  @override
-  String get adminModelsEmpty => 'No matching models';
 
   @override
   String pageSizeOption(int size) {
@@ -2065,7 +2022,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminDeleteAiDescription =>
-      'Selected AI configurations and credentials will be permanently deleted. Active and fallback routes cannot be deleted.';
+      'Selected AI configurations and credentials will be permanently deleted. The active route cannot be deleted.';
 
   @override
   String get adminDeleteCatalogDescription =>

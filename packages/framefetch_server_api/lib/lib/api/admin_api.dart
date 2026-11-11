@@ -8,8 +8,8 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:framefetch_server_api/lib/api_util.dart';
+import 'package:framefetch_server_api/lib/model/ai_provider_engine.dart';
 import 'package:framefetch_server_api/lib/model/api_response_ai_provider_connection_test_response.dart';
-import 'package:framefetch_server_api/lib/model/api_response_ai_provider_preset_list_response.dart';
 import 'package:framefetch_server_api/lib/model/api_response_ai_provider_profile_list_response.dart';
 import 'package:framefetch_server_api/lib/model/api_response_ai_provider_profile_response.dart';
 import 'package:framefetch_server_api/lib/model/api_response_analysis_analytics_response.dart';
@@ -22,11 +22,10 @@ import 'package:framefetch_server_api/lib/model/api_response_provider_catalog_en
 import 'package:framefetch_server_api/lib/model/api_response_provider_catalog_list_response.dart';
 import 'package:framefetch_server_api/lib/model/api_response_storage_cleanup_response.dart';
 import 'package:framefetch_server_api/lib/model/api_response_stored_file_list_response.dart';
-import 'package:framefetch_server_api/lib/model/create_ai_provider_profile_request.dart';
+import 'package:framefetch_server_api/lib/model/configure_ai_provider_request.dart';
 import 'package:framefetch_server_api/lib/model/create_provider_catalog_entry_request.dart';
 import 'package:framefetch_server_api/lib/model/storage_cleanup_request.dart';
 import 'package:framefetch_server_api/lib/model/test_ai_provider_connection_request.dart';
-import 'package:framefetch_server_api/lib/model/update_ai_provider_profile_request.dart';
 import 'package:framefetch_server_api/lib/model/update_provider_catalog_entry_request.dart';
 import 'package:framefetch_server_api/lib/model/update_user_access_request.dart';
 import 'package:framefetch_server_api/lib/model/user_role.dart';
@@ -38,11 +37,11 @@ class AdminApi {
 
   const AdminApi(this._dio, this._serializers);
 
-  /// 启用 AI 分析 Provider
+  /// 启用已配置的官方 AI 服务
   ///
   ///
   /// Parameters:
-  /// * [providerKey]
+  /// * [engine]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -54,7 +53,7 @@ class AdminApi {
   /// Throws [DioException] if API call or serialization fails
   Future<Response<ApiResponseAiProviderProfileResponse>>
       activateAiProviderProfile({
-    required String providerKey,
+    required AiProviderEngine engine,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -62,9 +61,10 @@ class AdminApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api/admin/ai-providers/{provider_key}/activate'.replaceAll(
-        '{' r'provider_key' '}',
-        encodeQueryParameter(_serializers, providerKey, const FullType(String))
+    final _path = r'/api/admin/ai-providers/{engine}/activate'.replaceAll(
+        '{' r'engine' '}',
+        encodeQueryParameter(
+                _serializers, engine, const FullType(AiProviderEngine))
             .toString());
     final _options = Options(
       method: r'POST',
@@ -227,11 +227,12 @@ class AdminApi {
     );
   }
 
-  /// 取消备用兜底 AI Provider
+  /// 配置并启用内置官方 AI 服务
   ///
   ///
   /// Parameters:
-  /// * [providerKey]
+  /// * [engine]
+  /// * [configureAiProviderRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -241,9 +242,9 @@ class AdminApi {
   ///
   /// Returns a [Future] containing a [Response] with a [ApiResponseAiProviderProfileResponse] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<ApiResponseAiProviderProfileResponse>>
-      clearFallbackAiProviderProfile({
-    required String providerKey,
+  Future<Response<ApiResponseAiProviderProfileResponse>> configureAiProvider({
+    required AiProviderEngine engine,
+    required ConfigureAiProviderRequest configureAiProviderRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -251,96 +252,13 @@ class AdminApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api/admin/ai-providers/{provider_key}/fallback'.replaceAll(
-        '{' r'provider_key' '}',
-        encodeQueryParameter(_serializers, providerKey, const FullType(String))
+    final _path = r'/api/admin/ai-providers/{engine}'.replaceAll(
+        '{' r'engine' '}',
+        encodeQueryParameter(
+                _serializers, engine, const FullType(AiProviderEngine))
             .toString());
     final _options = Options(
-      method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[
-          {
-            'type': 'http',
-            'scheme': 'bearer',
-            'name': 'NativeBearerAuth',
-          },
-        ],
-        ...?extra,
-      },
-      validateStatus: validateStatus,
-    );
-
-    final _response = await _dio.request<Object>(
-      _path,
-      options: _options,
-      cancelToken: cancelToken,
-      onSendProgress: onSendProgress,
-      onReceiveProgress: onReceiveProgress,
-    );
-
-    ApiResponseAiProviderProfileResponse? _responseData;
-
-    try {
-      final rawResponse = _response.data;
-      _responseData = rawResponse == null
-          ? null
-          : _serializers.deserialize(
-              rawResponse,
-              specifiedType:
-                  const FullType(ApiResponseAiProviderProfileResponse),
-            ) as ApiResponseAiProviderProfileResponse;
-    } catch (error, stackTrace) {
-      throw DioException(
-        requestOptions: _response.requestOptions,
-        response: _response,
-        type: DioExceptionType.unknown,
-        error: error,
-        stackTrace: stackTrace,
-      );
-    }
-
-    return Response<ApiResponseAiProviderProfileResponse>(
-      data: _responseData,
-      headers: _response.headers,
-      isRedirect: _response.isRedirect,
-      requestOptions: _response.requestOptions,
-      redirects: _response.redirects,
-      statusCode: _response.statusCode,
-      statusMessage: _response.statusMessage,
-      extra: _response.extra,
-    );
-  }
-
-  /// 新增 AI 分析 Provider
-  ///
-  ///
-  /// Parameters:
-  /// * [createAiProviderProfileRequest]
-  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
-  /// * [headers] - Can be used to add additional headers to the request
-  /// * [extras] - Can be used to add flags to the request
-  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
-  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
-  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
-  ///
-  /// Returns a [Future] containing a [Response] with a [ApiResponseAiProviderProfileResponse] as data
-  /// Throws [DioException] if API call or serialization fails
-  Future<Response<ApiResponseAiProviderProfileResponse>>
-      createAiProviderProfile({
-    required CreateAiProviderProfileRequest createAiProviderProfileRequest,
-    CancelToken? cancelToken,
-    Map<String, dynamic>? headers,
-    Map<String, dynamic>? extra,
-    ValidateStatus? validateStatus,
-    ProgressCallback? onSendProgress,
-    ProgressCallback? onReceiveProgress,
-  }) async {
-    final _path = r'/api/admin/ai-providers';
-    final _options = Options(
-      method: r'POST',
+      method: r'PUT',
       headers: <String, dynamic>{
         ...?headers,
       },
@@ -361,8 +279,8 @@ class AdminApi {
     dynamic _bodyData;
 
     try {
-      const _type = FullType(CreateAiProviderProfileRequest);
-      _bodyData = _serializers.serialize(createAiProviderProfileRequest,
+      const _type = FullType(ConfigureAiProviderRequest);
+      _bodyData = _serializers.serialize(configureAiProviderRequest,
           specifiedType: _type);
     } catch (error, stackTrace) {
       throw DioException(
@@ -523,11 +441,11 @@ class AdminApi {
     );
   }
 
-  /// 删除 AI 分析 Provider
+  /// 清除官方 AI 服务已保存密钥与配置
   ///
   ///
   /// Parameters:
-  /// * [providerKey]
+  /// * [engine]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -538,7 +456,7 @@ class AdminApi {
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
   Future<Response<void>> deleteAiProviderProfile({
-    required String providerKey,
+    required AiProviderEngine engine,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -546,9 +464,10 @@ class AdminApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api/admin/ai-providers/{provider_key}'.replaceAll(
-        '{' r'provider_key' '}',
-        encodeQueryParameter(_serializers, providerKey, const FullType(String))
+    final _path = r'/api/admin/ai-providers/{engine}'.replaceAll(
+        '{' r'engine' '}',
+        encodeQueryParameter(
+                _serializers, engine, const FullType(AiProviderEngine))
             .toString());
     final _options = Options(
       method: r'DELETE',
@@ -1012,89 +931,7 @@ class AdminApi {
     );
   }
 
-  /// 查询官方 AI 渠道预设与能力目录
-  ///
-  ///
-  /// Parameters:
-  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
-  /// * [headers] - Can be used to add additional headers to the request
-  /// * [extras] - Can be used to add flags to the request
-  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
-  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
-  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
-  ///
-  /// Returns a [Future] containing a [Response] with a [ApiResponseAiProviderPresetListResponse] as data
-  /// Throws [DioException] if API call or serialization fails
-  Future<Response<ApiResponseAiProviderPresetListResponse>>
-      listAiProviderPresets({
-    CancelToken? cancelToken,
-    Map<String, dynamic>? headers,
-    Map<String, dynamic>? extra,
-    ValidateStatus? validateStatus,
-    ProgressCallback? onSendProgress,
-    ProgressCallback? onReceiveProgress,
-  }) async {
-    final _path = r'/api/admin/ai-providers/presets';
-    final _options = Options(
-      method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[
-          {
-            'type': 'http',
-            'scheme': 'bearer',
-            'name': 'NativeBearerAuth',
-          },
-        ],
-        ...?extra,
-      },
-      validateStatus: validateStatus,
-    );
-
-    final _response = await _dio.request<Object>(
-      _path,
-      options: _options,
-      cancelToken: cancelToken,
-      onSendProgress: onSendProgress,
-      onReceiveProgress: onReceiveProgress,
-    );
-
-    ApiResponseAiProviderPresetListResponse? _responseData;
-
-    try {
-      final rawResponse = _response.data;
-      _responseData = rawResponse == null
-          ? null
-          : _serializers.deserialize(
-              rawResponse,
-              specifiedType:
-                  const FullType(ApiResponseAiProviderPresetListResponse),
-            ) as ApiResponseAiProviderPresetListResponse;
-    } catch (error, stackTrace) {
-      throw DioException(
-        requestOptions: _response.requestOptions,
-        response: _response,
-        type: DioExceptionType.unknown,
-        error: error,
-        stackTrace: stackTrace,
-      );
-    }
-
-    return Response<ApiResponseAiProviderPresetListResponse>(
-      data: _responseData,
-      headers: _response.headers,
-      isRedirect: _response.isRedirect,
-      requestOptions: _response.requestOptions,
-      redirects: _response.redirects,
-      statusCode: _response.statusCode,
-      statusMessage: _response.statusMessage,
-      extra: _response.extra,
-    );
-  }
-
-  /// 查询 AI 分析 Provider
+  /// 查看内置官方 AI 服务配置状态
   ///
   ///
   /// Parameters:
@@ -1582,94 +1419,7 @@ class AdminApi {
     );
   }
 
-  /// 设为备用兜底 AI Provider
-  ///
-  ///
-  /// Parameters:
-  /// * [providerKey]
-  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
-  /// * [headers] - Can be used to add additional headers to the request
-  /// * [extras] - Can be used to add flags to the request
-  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
-  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
-  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
-  ///
-  /// Returns a [Future] containing a [Response] with a [ApiResponseAiProviderProfileResponse] as data
-  /// Throws [DioException] if API call or serialization fails
-  Future<Response<ApiResponseAiProviderProfileResponse>>
-      setFallbackAiProviderProfile({
-    required String providerKey,
-    CancelToken? cancelToken,
-    Map<String, dynamic>? headers,
-    Map<String, dynamic>? extra,
-    ValidateStatus? validateStatus,
-    ProgressCallback? onSendProgress,
-    ProgressCallback? onReceiveProgress,
-  }) async {
-    final _path = r'/api/admin/ai-providers/{provider_key}/fallback'.replaceAll(
-        '{' r'provider_key' '}',
-        encodeQueryParameter(_serializers, providerKey, const FullType(String))
-            .toString());
-    final _options = Options(
-      method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[
-          {
-            'type': 'http',
-            'scheme': 'bearer',
-            'name': 'NativeBearerAuth',
-          },
-        ],
-        ...?extra,
-      },
-      validateStatus: validateStatus,
-    );
-
-    final _response = await _dio.request<Object>(
-      _path,
-      options: _options,
-      cancelToken: cancelToken,
-      onSendProgress: onSendProgress,
-      onReceiveProgress: onReceiveProgress,
-    );
-
-    ApiResponseAiProviderProfileResponse? _responseData;
-
-    try {
-      final rawResponse = _response.data;
-      _responseData = rawResponse == null
-          ? null
-          : _serializers.deserialize(
-              rawResponse,
-              specifiedType:
-                  const FullType(ApiResponseAiProviderProfileResponse),
-            ) as ApiResponseAiProviderProfileResponse;
-    } catch (error, stackTrace) {
-      throw DioException(
-        requestOptions: _response.requestOptions,
-        response: _response,
-        type: DioExceptionType.unknown,
-        error: error,
-        stackTrace: stackTrace,
-      );
-    }
-
-    return Response<ApiResponseAiProviderProfileResponse>(
-      data: _responseData,
-      headers: _response.headers,
-      isRedirect: _response.isRedirect,
-      requestOptions: _response.requestOptions,
-      redirects: _response.redirects,
-      statusCode: _response.statusCode,
-      statusMessage: _response.statusMessage,
-      extra: _response.extra,
-    );
-  }
-
-  /// 测试官方 AI 渠道连通性与模型能力
+  /// 探测官方 AI 服务端点与模型可用性
   ///
   ///
   /// Parameters:
@@ -1762,115 +1512,6 @@ class AdminApi {
     }
 
     return Response<ApiResponseAiProviderConnectionTestResponse>(
-      data: _responseData,
-      headers: _response.headers,
-      isRedirect: _response.isRedirect,
-      requestOptions: _response.requestOptions,
-      redirects: _response.redirects,
-      statusCode: _response.statusCode,
-      statusMessage: _response.statusMessage,
-      extra: _response.extra,
-    );
-  }
-
-  /// 更新 AI 分析 Provider
-  ///
-  ///
-  /// Parameters:
-  /// * [providerKey]
-  /// * [updateAiProviderProfileRequest]
-  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
-  /// * [headers] - Can be used to add additional headers to the request
-  /// * [extras] - Can be used to add flags to the request
-  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
-  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
-  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
-  ///
-  /// Returns a [Future] containing a [Response] with a [ApiResponseAiProviderProfileResponse] as data
-  /// Throws [DioException] if API call or serialization fails
-  Future<Response<ApiResponseAiProviderProfileResponse>>
-      updateAiProviderProfile({
-    required String providerKey,
-    required UpdateAiProviderProfileRequest updateAiProviderProfileRequest,
-    CancelToken? cancelToken,
-    Map<String, dynamic>? headers,
-    Map<String, dynamic>? extra,
-    ValidateStatus? validateStatus,
-    ProgressCallback? onSendProgress,
-    ProgressCallback? onReceiveProgress,
-  }) async {
-    final _path = r'/api/admin/ai-providers/{provider_key}'.replaceAll(
-        '{' r'provider_key' '}',
-        encodeQueryParameter(_serializers, providerKey, const FullType(String))
-            .toString());
-    final _options = Options(
-      method: r'PATCH',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[
-          {
-            'type': 'http',
-            'scheme': 'bearer',
-            'name': 'NativeBearerAuth',
-          },
-        ],
-        ...?extra,
-      },
-      contentType: 'application/json',
-      validateStatus: validateStatus,
-    );
-
-    dynamic _bodyData;
-
-    try {
-      const _type = FullType(UpdateAiProviderProfileRequest);
-      _bodyData = _serializers.serialize(updateAiProviderProfileRequest,
-          specifiedType: _type);
-    } catch (error, stackTrace) {
-      throw DioException(
-        requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
-        type: DioExceptionType.unknown,
-        error: error,
-        stackTrace: stackTrace,
-      );
-    }
-
-    final _response = await _dio.request<Object>(
-      _path,
-      data: _bodyData,
-      options: _options,
-      cancelToken: cancelToken,
-      onSendProgress: onSendProgress,
-      onReceiveProgress: onReceiveProgress,
-    );
-
-    ApiResponseAiProviderProfileResponse? _responseData;
-
-    try {
-      final rawResponse = _response.data;
-      _responseData = rawResponse == null
-          ? null
-          : _serializers.deserialize(
-              rawResponse,
-              specifiedType:
-                  const FullType(ApiResponseAiProviderProfileResponse),
-            ) as ApiResponseAiProviderProfileResponse;
-    } catch (error, stackTrace) {
-      throw DioException(
-        requestOptions: _response.requestOptions,
-        response: _response,
-        type: DioExceptionType.unknown,
-        error: error,
-        stackTrace: stackTrace,
-      );
-    }
-
-    return Response<ApiResponseAiProviderProfileResponse>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

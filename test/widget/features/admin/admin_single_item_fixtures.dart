@@ -65,20 +65,43 @@ AiProviderProfileListResponse adminSingleAiFixture() =>
         ..items.replace([
           AiProviderProfileResponse(
             (item) => item
-              ..key = 'synthetic-ai'
-              ..displayName = '测试 AI'
               ..engine = AiProviderEngine.openai
-              ..authMode = AiProviderAuthMode.apiKey
-              ..model = 'synthetic-model'
+              ..displayName = 'OpenAI'
               ..credentialConfigured = true
               ..isActive = false
-              ..isFallback = false
               ..presetId = 'openai-official'
+              ..baseUrl = 'https://api.openai.com/v1'
+              ..model = 'gpt-4.1-mini'
               ..supportsVision = true
               ..supportsModelsEndpoint = true
               ..structuredOutputMode =
                   AiProviderProfileResponseStructuredOutputModeEnum.jsonSchema
-              ..createdAt = _createdAt
+              ..presets.replace([
+                AiProviderPresetResponse(
+                  (p) => p
+                    ..id = 'openai-official'
+                    ..engine = AiProviderEngine.openai
+                    ..displayName = '官方直连'
+                    ..baseUrl = 'https://api.openai.com/v1'
+                    ..defaultModel = 'gpt-4.1-mini'
+                    ..suggestedModels.replace([
+                      AiProviderSuggestedModelResponse(
+                        (m) => m
+                          ..id = 'gpt-4.1-mini'
+                          ..label = 'GPT-4.1 Mini'
+                          ..supportsVision = true,
+                      ),
+                    ])
+                    ..supportsVision = true
+                    ..supportsModelsEndpoint = true
+                    ..structuredOutputMode =
+                        AiProviderPresetResponseStructuredOutputModeEnum
+                            .jsonSchema
+                    ..endpointKind = 'official'
+                    ..supportsCustomModelId = false
+                    ..keyIsolationNotice = 'OpenAI 官方接入。',
+                ),
+              ])
               ..updatedAt = _createdAt,
           ),
         ]),

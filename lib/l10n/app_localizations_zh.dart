@@ -1407,19 +1407,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get invalidConfiguration => '请检查此字段的格式和取值。';
 
   @override
-  String get createAiProvider => '新增 AI 服务';
-
-  @override
-  String get engineLabel => '执行引擎';
-
-  @override
-  String get authModeLabel => '认证方式';
-
-  @override
   String get modelLabel => '模型';
-
-  @override
-  String get baseUrlLabel => '服务地址';
 
   @override
   String get apiKeyLabel => 'API Key';
@@ -1821,30 +1809,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get adminPlatformsEmpty => '没有匹配的平台';
 
   @override
-  String get adminAiSearch => '搜索 AI 配置';
-
-  @override
-  String get adminAiEmpty => '没有匹配的 AI 配置';
-
-  @override
-  String get adminEngineVolcengine => '火山引擎方舟';
-
-  @override
-  String get adminEngineOpenAi => 'OpenAI 官方';
-
-  @override
-  String get adminEngineDeepSeek => 'DeepSeek 官方';
-
-  @override
-  String get adminFallbackLine => '兜底线路';
-
-  @override
-  String get adminSetFallbackAction => '设为兜底';
-
-  @override
-  String get adminClearFallbackAction => '取消兜底';
-
-  @override
   String get adminEndpointPresetLabel => '接入方式';
 
   @override
@@ -1868,9 +1832,6 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get adminApiUrlHint => '公网地址必须使用 HTTPS；本机 localhost 可使用 HTTP。';
-
-  @override
   String get adminModelsHint => '视频分析请选择支持图像的模型。';
 
   @override
@@ -1878,9 +1839,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get adminTextOnly => '仅文本';
-
-  @override
-  String get adminModelsEmpty => '没有匹配的模型';
 
   @override
   String pageSizeOption(int size) {
@@ -1949,7 +1907,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get adminOperationDeleted => '已删除';
 
   @override
-  String get adminDeleteAiDescription => '所选 AI 配置与凭据将永久删除。当前线路和系统兜底线路不可删除。';
+  String get adminDeleteAiDescription => '所选 AI 配置与凭据将永久删除。当前启用线路不可删除。';
 
   @override
   String get adminDeleteCatalogDescription =>
