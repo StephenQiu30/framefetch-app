@@ -10,8 +10,6 @@ import 'package:built_value/serializer.dart';
 part 'ai_provider_auth_mode.g.dart';
 
 class AiProviderAuthMode extends EnumClass {
-  @BuiltValueEnumConst(wireName: r'host_login')
-  static const AiProviderAuthMode hostLogin = _$hostLogin;
   @BuiltValueEnumConst(wireName: r'api_key')
   static const AiProviderAuthMode apiKey = _$apiKey;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)

@@ -16,6 +16,11 @@ Name | Type | Description | Notes
 **model** | **String** |  |
 **credentialConfigured** | **bool** |  |
 **isActive** | **bool** |  |
+**isFallback** | **bool** |  |
+**presetId** | **String** |  |
+**supportsVision** | **bool** |  |
+**supportsModelsEndpoint** | **bool** |  |
+**structuredOutputMode** | **String** |  |
 **createdAt** | [**DateTime**](DateTime.md) |  |
 **updatedAt** | [**DateTime**](DateTime.md) |  |
 

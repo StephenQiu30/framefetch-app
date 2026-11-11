@@ -148,9 +148,6 @@ class ErrorCode extends EnumClass {
   static const ErrorCode requestTimeout = _$requestTimeout;
   @BuiltValueEnumConst(wireName: r'request_too_large')
   static const ErrorCode requestTooLarge = _$requestTooLarge;
-  @BuiltValueEnumConst(wireName: r'reserved_ai_provider_mutation')
-  static const ErrorCode reservedAiProviderMutation =
-      _$reservedAiProviderMutation;
   @BuiltValueEnumConst(wireName: r'resource_expired')
   static const ErrorCode resourceExpired = _$resourceExpired;
   @BuiltValueEnumConst(wireName: r'self_admin_change')

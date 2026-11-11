@@ -29,11 +29,11 @@ abstract class UpdateAiProviderProfileRequest
 
   @BuiltValueField(wireName: r'engine')
   AiProviderEngine? get engine;
-  // enum engineEnum {  codex,  claude,  deepseek,  openrouter,  openai,  };
+  // enum engineEnum {  volcengine,  deepseek,  openai,  };
 
   @BuiltValueField(wireName: r'auth_mode')
   AiProviderAuthMode? get authMode;
-  // enum authModeEnum {  host_login,  api_key,  };
+  // enum authModeEnum {  api_key,  };
 
   @BuiltValueField(wireName: r'base_url')
   String? get baseUrl;

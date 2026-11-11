@@ -8,12 +8,18 @@ part of 'serializers.dart';
 
 Serializers _$serializers = (Serializers().toBuilder()
       ..add(AccessDecision.serializer)
-      ..add(AiModelListResponse.serializer)
-      ..add(AiModelResponse.serializer)
       ..add(AiProviderAuthMode.serializer)
+      ..add(AiProviderConnectionTestResponse.serializer)
+      ..add(AiProviderConnectionTestResponseStatusEnum.serializer)
+      ..add(AiProviderConnectionTestResponseStructuredOutputModeEnum.serializer)
       ..add(AiProviderEngine.serializer)
+      ..add(AiProviderPresetListResponse.serializer)
+      ..add(AiProviderPresetResponse.serializer)
+      ..add(AiProviderPresetResponseStructuredOutputModeEnum.serializer)
       ..add(AiProviderProfileListResponse.serializer)
       ..add(AiProviderProfileResponse.serializer)
+      ..add(AiProviderProfileResponseStructuredOutputModeEnum.serializer)
+      ..add(AiProviderSuggestedModelResponse.serializer)
       ..add(AnalysisAnalyticsDailyResponse.serializer)
       ..add(AnalysisAnalyticsInputResponse.serializer)
       ..add(AnalysisAnalyticsResponse.serializer)
@@ -33,7 +39,8 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(AnalysisSkillResponse.serializer)
       ..add(AnalysisStage.serializer)
       ..add(AnalysisStatus.serializer)
-      ..add(ApiResponseAiModelListResponse.serializer)
+      ..add(ApiResponseAiProviderConnectionTestResponse.serializer)
+      ..add(ApiResponseAiProviderPresetListResponse.serializer)
       ..add(ApiResponseAiProviderProfileListResponse.serializer)
       ..add(ApiResponseAiProviderProfileResponse.serializer)
       ..add(ApiResponseAnalysisAnalyticsResponse.serializer)
@@ -249,6 +256,7 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(StructuredReportResultResponseKindEnum.serializer)
       ..add(StructuredReportResultResponseReviewStatusEnum.serializer)
       ..add(StructuredReportSectionResponse.serializer)
+      ..add(TestAiProviderConnectionRequest.serializer)
       ..add(UpdateAiProviderProfileRequest.serializer)
       ..add(UpdateProfileRequest.serializer)
       ..add(UpdateProviderCatalogEntryRequest.serializer)
@@ -271,12 +279,17 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(VideoSceneResponse.serializer)
       ..add(VisualAssetResponse.serializer)
       ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(AiModelResponse)]),
-          () => ListBuilder<AiModelResponse>())
+          const FullType(
+              BuiltList, const [const FullType(AiProviderPresetResponse)]),
+          () => ListBuilder<AiProviderPresetResponse>())
       ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType(AiProviderProfileResponse)]),
           () => ListBuilder<AiProviderProfileResponse>())
+      ..addBuilderFactory(
+          const FullType(BuiltList,
+              const [const FullType(AiProviderSuggestedModelResponse)]),
+          () => ListBuilder<AiProviderSuggestedModelResponse>())
       ..addBuilderFactory(
           const FullType(BuiltList,
               const [const FullType(AnalysisAnalyticsDailyResponse)]),
@@ -464,12 +477,6 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(StoredFileResponse)]),
           () => ListBuilder<StoredFileResponse>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(String)]),
-          () => ListBuilder<String>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(String)]),
-          () => ListBuilder<String>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => ListBuilder<String>())

@@ -15,6 +15,7 @@ part 'media_import_request.g.dart';
 /// * [fileName]
 /// * [declaredSizeBytes]
 /// * [declaredSha256]
+/// * [removeWatermark]
 /// * [rightsAccepted]
 /// * [declaredOrigin]
 @BuiltValue()
@@ -29,6 +30,9 @@ abstract class MediaImportRequest
   @BuiltValueField(wireName: r'declared_sha256')
   String get declaredSha256;
 
+  @BuiltValueField(wireName: r'remove_watermark')
+  bool? get removeWatermark;
+
   @BuiltValueField(wireName: r'rights_accepted')
   bool get rightsAccepted;
 
@@ -42,8 +46,9 @@ abstract class MediaImportRequest
       _$MediaImportRequest;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(MediaImportRequestBuilder b) =>
-      b..declaredOrigin = DeclaredOrigin.userFile;
+  static void _defaults(MediaImportRequestBuilder b) => b
+    ..removeWatermark = false
+    ..declaredOrigin = DeclaredOrigin.userFile;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<MediaImportRequest> get serializer =>
@@ -78,6 +83,13 @@ class _$MediaImportRequestSerializer
       object.declaredSha256,
       specifiedType: const FullType(String),
     );
+    if (object.removeWatermark != null) {
+      yield r'remove_watermark';
+      yield serializers.serialize(
+        object.removeWatermark,
+        specifiedType: const FullType(bool),
+      );
+    }
     yield r'rights_accepted';
     yield serializers.serialize(
       object.rightsAccepted,
@@ -135,6 +147,13 @@ class _$MediaImportRequestSerializer
             specifiedType: const FullType(String),
           ) as String;
           result.declaredSha256 = valueDes;
+          break;
+        case r'remove_watermark':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.removeWatermark = valueDes;
           break;
         case r'rights_accepted':
           final valueDes = serializers.deserialize(

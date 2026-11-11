@@ -11,6 +11,7 @@ final class AdminAiProviderRow extends StatelessWidget {
     required this.busy,
     required this.onEdit,
     required this.onActivate,
+    required this.onToggleFallback,
     required this.onDelete,
     super.key,
   });
@@ -18,10 +19,17 @@ final class AdminAiProviderRow extends StatelessWidget {
   final bool busy;
   final VoidCallback onEdit;
   final VoidCallback onActivate;
+  final VoidCallback onToggleFallback;
   final VoidCallback onDelete;
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
+    final visionLabel = item.supportsVision
+        ? l.adminImageSupported
+        : l.adminTextOnly;
+    final credentialLabel = item.credentialConfigured
+        ? l.adminCredentialReady
+        : l.adminCredentialMissing;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: AppSpacing.medium),
       child: Column(
@@ -30,10 +38,11 @@ final class AdminAiProviderRow extends StatelessWidget {
           Text(item.displayName, style: ShadTheme.of(context).textTheme.large),
           const SizedBox(height: AppSpacing.xSmall),
           Text(
-            '${aiEngineLabel(l, item.engine)} · ${item.model}\n${item.authMode == AiProviderAuthMode.hostLogin ? l.hostLoginLabel : l.apiKeyLabel} · ${item.credentialConfigured ? l.adminCredentialReady : l.adminCredentialMissing}',
+            '${aiEngineLabel(l, item.engine)} · ${item.model} · $visionLabel\n${l.apiKeyLabel} · $credentialLabel',
             style: ShadTheme.of(context).textTheme.muted,
           ),
           if (item.isActive) Text(l.adminActiveLine),
+          if (item.isFallback) Text(l.adminFallbackLine),
           Wrap(
             spacing: AppSpacing.small,
             children: [
@@ -43,12 +52,22 @@ final class AdminAiProviderRow extends StatelessWidget {
                   onPressed: busy ? null : onActivate,
                   child: Text(l.adminActivateAction),
                 ),
+              if (!item.isActive)
+                ShadButton.ghost(
+                  enabled: !busy,
+                  onPressed: busy ? null : onToggleFallback,
+                  child: Text(
+                    item.isFallback
+                        ? l.adminClearFallbackAction
+                        : l.adminSetFallbackAction,
+                  ),
+                ),
               ShadButton.ghost(
                 enabled: !busy,
                 onPressed: busy ? null : onEdit,
                 child: Text(l.editAction),
               ),
-              if (!item.isActive && item.key != 'local-codex')
+              if (!item.isActive && !item.isFallback)
                 ShadButton.ghost(
                   enabled: !busy,
                   onPressed: busy ? null : onDelete,

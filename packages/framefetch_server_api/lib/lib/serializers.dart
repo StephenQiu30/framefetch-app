@@ -15,12 +15,14 @@ import 'package:framefetch_server_api/lib/date_serializer.dart';
 import 'package:framefetch_server_api/lib/model/date.dart';
 
 import 'package:framefetch_server_api/lib/model/access_decision.dart';
-import 'package:framefetch_server_api/lib/model/ai_model_list_response.dart';
-import 'package:framefetch_server_api/lib/model/ai_model_response.dart';
 import 'package:framefetch_server_api/lib/model/ai_provider_auth_mode.dart';
+import 'package:framefetch_server_api/lib/model/ai_provider_connection_test_response.dart';
 import 'package:framefetch_server_api/lib/model/ai_provider_engine.dart';
+import 'package:framefetch_server_api/lib/model/ai_provider_preset_list_response.dart';
+import 'package:framefetch_server_api/lib/model/ai_provider_preset_response.dart';
 import 'package:framefetch_server_api/lib/model/ai_provider_profile_list_response.dart';
 import 'package:framefetch_server_api/lib/model/ai_provider_profile_response.dart';
+import 'package:framefetch_server_api/lib/model/ai_provider_suggested_model_response.dart';
 import 'package:framefetch_server_api/lib/model/analysis_analytics_daily_response.dart';
 import 'package:framefetch_server_api/lib/model/analysis_analytics_input_response.dart';
 import 'package:framefetch_server_api/lib/model/analysis_analytics_response.dart';
@@ -40,7 +42,8 @@ import 'package:framefetch_server_api/lib/model/analysis_run_history_response.da
 import 'package:framefetch_server_api/lib/model/analysis_skill_response.dart';
 import 'package:framefetch_server_api/lib/model/analysis_stage.dart';
 import 'package:framefetch_server_api/lib/model/analysis_status.dart';
-import 'package:framefetch_server_api/lib/model/api_response_ai_model_list_response.dart';
+import 'package:framefetch_server_api/lib/model/api_response_ai_provider_connection_test_response.dart';
+import 'package:framefetch_server_api/lib/model/api_response_ai_provider_preset_list_response.dart';
 import 'package:framefetch_server_api/lib/model/api_response_ai_provider_profile_list_response.dart';
 import 'package:framefetch_server_api/lib/model/api_response_ai_provider_profile_response.dart';
 import 'package:framefetch_server_api/lib/model/api_response_analysis_analytics_response.dart';
@@ -211,6 +214,7 @@ import 'package:framefetch_server_api/lib/model/stored_file_response.dart';
 import 'package:framefetch_server_api/lib/model/structured_report_citation_response.dart';
 import 'package:framefetch_server_api/lib/model/structured_report_result_response.dart';
 import 'package:framefetch_server_api/lib/model/structured_report_section_response.dart';
+import 'package:framefetch_server_api/lib/model/test_ai_provider_connection_request.dart';
 import 'package:framefetch_server_api/lib/model/update_ai_provider_profile_request.dart';
 import 'package:framefetch_server_api/lib/model/update_profile_request.dart';
 import 'package:framefetch_server_api/lib/model/update_provider_catalog_entry_request.dart';
@@ -232,12 +236,14 @@ part 'serializers.g.dart';
 
 @SerializersFor([
   AccessDecision,
-  AiModelListResponse,
-  AiModelResponse,
   AiProviderAuthMode,
+  AiProviderConnectionTestResponse,
   AiProviderEngine,
+  AiProviderPresetListResponse,
+  AiProviderPresetResponse,
   AiProviderProfileListResponse,
   AiProviderProfileResponse,
+  AiProviderSuggestedModelResponse,
   AnalysisAnalyticsDailyResponse,
   AnalysisAnalyticsInputResponse,
   AnalysisAnalyticsResponse,
@@ -257,7 +263,8 @@ part 'serializers.g.dart';
   AnalysisSkillResponse,
   AnalysisStage,
   AnalysisStatus,
-  ApiResponseAiModelListResponse,
+  ApiResponseAiProviderConnectionTestResponse,
+  ApiResponseAiProviderPresetListResponse,
   ApiResponseAiProviderProfileListResponse,
   ApiResponseAiProviderProfileResponse,
   ApiResponseAnalysisAnalyticsResponse,
@@ -428,6 +435,7 @@ part 'serializers.g.dart';
   StructuredReportCitationResponse,
   StructuredReportResultResponse,
   StructuredReportSectionResponse,
+  TestAiProviderConnectionRequest,
   UpdateAiProviderProfileRequest,
   UpdateProfileRequest,
   UpdateProviderCatalogEntryRequest,

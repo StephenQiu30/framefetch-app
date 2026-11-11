@@ -101,8 +101,6 @@ const ErrorCode _$rateLimiterUnavailable =
 const ErrorCode _$refreshInProgress = const ErrorCode._('refreshInProgress');
 const ErrorCode _$requestTimeout = const ErrorCode._('requestTimeout');
 const ErrorCode _$requestTooLarge = const ErrorCode._('requestTooLarge');
-const ErrorCode _$reservedAiProviderMutation =
-    const ErrorCode._('reservedAiProviderMutation');
 const ErrorCode _$resourceExpired = const ErrorCode._('resourceExpired');
 const ErrorCode _$selfAdminChange = const ErrorCode._('selfAdminChange');
 const ErrorCode _$serviceUnavailable = const ErrorCode._('serviceUnavailable');
@@ -258,8 +256,6 @@ ErrorCode _$valueOf(String name) {
       return _$requestTimeout;
     case 'requestTooLarge':
       return _$requestTooLarge;
-    case 'reservedAiProviderMutation':
-      return _$reservedAiProviderMutation;
     case 'resourceExpired':
       return _$resourceExpired;
     case 'selfAdminChange':
@@ -359,7 +355,6 @@ final BuiltSet<ErrorCode> _$values = BuiltSet<ErrorCode>(const <ErrorCode>[
   _$refreshInProgress,
   _$requestTimeout,
   _$requestTooLarge,
-  _$reservedAiProviderMutation,
   _$resourceExpired,
   _$selfAdminChange,
   _$serviceUnavailable,
@@ -444,7 +439,6 @@ class _$ErrorCodeMeta {
   ErrorCode get refreshInProgress => _$refreshInProgress;
   ErrorCode get requestTimeout => _$requestTimeout;
   ErrorCode get requestTooLarge => _$requestTooLarge;
-  ErrorCode get reservedAiProviderMutation => _$reservedAiProviderMutation;
   ErrorCode get resourceExpired => _$resourceExpired;
   ErrorCode get selfAdminChange => _$selfAdminChange;
   ErrorCode get serviceUnavailable => _$serviceUnavailable;
@@ -538,7 +532,6 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'refreshInProgress': 'refresh_in_progress',
     'requestTimeout': 'request_timeout',
     'requestTooLarge': 'request_too_large',
-    'reservedAiProviderMutation': 'reserved_ai_provider_mutation',
     'resourceExpired': 'resource_expired',
     'selfAdminChange': 'self_admin_change',
     'serviceUnavailable': 'service_unavailable',
@@ -621,7 +614,6 @@ class _$ErrorCodeSerializer implements PrimitiveSerializer<ErrorCode> {
     'refresh_in_progress': 'refreshInProgress',
     'request_timeout': 'requestTimeout',
     'request_too_large': 'requestTooLarge',
-    'reserved_ai_provider_mutation': 'reservedAiProviderMutation',
     'resource_expired': 'resourceExpired',
     'self_admin_change': 'selfAdminChange',
     'service_unavailable': 'serviceUnavailable',

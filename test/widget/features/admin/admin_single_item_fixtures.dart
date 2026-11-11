@@ -72,6 +72,12 @@ AiProviderProfileListResponse adminSingleAiFixture() =>
               ..model = 'synthetic-model'
               ..credentialConfigured = true
               ..isActive = false
+              ..isFallback = false
+              ..presetId = 'openai-official'
+              ..supportsVision = true
+              ..supportsModelsEndpoint = true
+              ..structuredOutputMode =
+                  AiProviderProfileResponseStructuredOutputModeEnum.jsonSchema
               ..createdAt = _createdAt
               ..updatedAt = _createdAt,
           ),

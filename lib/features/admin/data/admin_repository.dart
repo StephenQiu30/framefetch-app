@@ -10,7 +10,10 @@ final adminRepositoryProvider = Provider<AdminRepository>(
 abstract interface class AdminRepository {
   Future<DownloadAnalyticsResponse> fetchAnalytics(int days);
   Future<AnalysisAnalyticsResponse> fetchAnalysisAnalytics(int days);
-  Future<AiModelListResponse> fetchOpenRouterModels();
+  Future<AiProviderPresetListResponse> fetchAiProviderPresets();
+  Future<AiProviderConnectionTestResponse> testAiProviderConnection(
+    TestAiProviderConnectionRequest body,
+  );
   Future<OperationLogPageResponse> fetchOperationLogs({
     int page = 1,
     int pageSize = 10,
@@ -44,6 +47,8 @@ abstract interface class AdminRepository {
     bool visible,
   );
   Future<void> activateAiProvider(String providerKey);
+  Future<void> setFallbackAiProvider(String providerKey);
+  Future<void> clearFallbackAiProvider(String providerKey);
 }
 
 final class GeneratedAdminRepository implements AdminRepository {
@@ -146,8 +151,17 @@ final class GeneratedAdminRepository implements AdminRepository {
       );
 
   @override
-  Future<AiModelListResponse> fetchOpenRouterModels() => _required(
-    (api) => api.listOpenRouterModels().then((value) => value.data?.data),
+  Future<AiProviderPresetListResponse> fetchAiProviderPresets() => _required(
+    (api) => api.listAiProviderPresets().then((value) => value.data?.data),
+  );
+
+  @override
+  Future<AiProviderConnectionTestResponse> testAiProviderConnection(
+    TestAiProviderConnectionRequest body,
+  ) => _required(
+    (api) => api
+        .testAiProviderConnection(testAiProviderConnectionRequest: body)
+        .then((value) => value.data?.data),
   );
 
   @override
@@ -192,6 +206,22 @@ final class GeneratedAdminRepository implements AdminRepository {
   Future<void> activateAiProvider(String providerKey) =>
       _request.execute((client) async {
         await client.getAdminApi().activateAiProviderProfile(
+          providerKey: providerKey,
+        );
+      });
+
+  @override
+  Future<void> setFallbackAiProvider(String providerKey) =>
+      _request.execute((client) async {
+        await client.getAdminApi().setFallbackAiProviderProfile(
+          providerKey: providerKey,
+        );
+      });
+
+  @override
+  Future<void> clearFallbackAiProvider(String providerKey) =>
+      _request.execute((client) async {
+        await client.getAdminApi().clearFallbackAiProviderProfile(
           providerKey: providerKey,
         );
       });

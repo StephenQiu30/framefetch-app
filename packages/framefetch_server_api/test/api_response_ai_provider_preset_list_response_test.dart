@@ -1,12 +1,12 @@
 import 'package:test/test.dart';
 import 'package:framefetch_server_api/framefetch_server_api.dart';
 
-// tests for ApiResponseAiModelListResponse
+// tests for ApiResponseAiProviderPresetListResponse
 void main() {
-  final instance = ApiResponseAiModelListResponseBuilder();
+  final instance = ApiResponseAiProviderPresetListResponseBuilder();
   // TODO add properties to the builder and call build()
 
-  group(ApiResponseAiModelListResponse, () {
+  group(ApiResponseAiProviderPresetListResponse, () {
     // 稳定的业务结果码。
     // ErrorCode code
     test('to test the property `code`', () async {
@@ -20,7 +20,7 @@ void main() {
     });
 
     // 成功时为业务数据，错误时为 null。
-    // AiModelListResponse data
+    // AiProviderPresetListResponse data
     test('to test the property `data`', () async {
       // TODO
     });

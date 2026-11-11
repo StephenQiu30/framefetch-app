@@ -255,11 +255,23 @@ const appOpenApiConfig = AppOpenApiConfig(
     OpenApiOperationSelection(method: 'get', path: '/api/admin/ai-providers'),
     OpenApiOperationSelection(
       method: 'get',
-      path: '/api/admin/ai-providers/models/openrouter',
+      path: '/api/admin/ai-providers/presets',
+    ),
+    OpenApiOperationSelection(
+      method: 'post',
+      path: '/api/admin/ai-providers/test',
     ),
     OpenApiOperationSelection(
       method: 'post',
       path: '/api/admin/ai-providers/{provider_key}/activate',
+    ),
+    OpenApiOperationSelection(
+      method: 'post',
+      path: '/api/admin/ai-providers/{provider_key}/fallback',
+    ),
+    OpenApiOperationSelection(
+      method: 'delete',
+      path: '/api/admin/ai-providers/{provider_key}/fallback',
     ),
   ],
 );

@@ -1082,11 +1082,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get analysisServiceUnavailable =>
-      'AI analysis is temporarily unavailable. Check the local analysis service and retry.';
+      'AI analysis is temporarily unavailable. Check the analysis worker and retry.';
 
   @override
   String get analysisAuthenticationRequired =>
-      'The AI analysis service is not signed in. Sign in to the service and retry.';
+      'AI analysis authentication failed. Check the provider credential configuration.';
 
   @override
   String get analysisTimeoutError => 'AI analysis timed out. Try again later.';
@@ -1313,11 +1313,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminSystemMissing => 'Catalog only';
 
   @override
-  String get adminAgentAvailable => 'The local analysis agent is available.';
+  String get adminAgentAvailable => 'Containerized analysis worker is online.';
 
   @override
   String get adminAgentUnavailable =>
-      'The local analysis agent is currently unavailable.';
+      'Containerized analysis worker is currently offline.';
 
   @override
   String get adminCredentialReady => 'Credential configured';
@@ -1521,13 +1521,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get apiKeyKeepHint => 'Leave blank to keep the existing credential';
-
-  @override
-  String get localCodexRestriction =>
-      'System fallback: only the name and model can be changed.';
-
-  @override
-  String get hostLoginLabel => 'Host login · no API key';
 
   @override
   String get deleteAction => 'Delete';
@@ -1943,33 +1936,51 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminAiEmpty => 'No matching AI configurations';
 
   @override
-  String get adminEngineCodex => 'Codex CLI · Responses';
+  String get adminEngineVolcengine => 'Volcano Engine Ark';
 
   @override
-  String get adminEngineClaude => 'Claude CLI · Messages';
+  String get adminEngineOpenAi => 'OpenAI Official';
 
   @override
-  String get adminEngineOpenRouter => 'OpenRouter API';
+  String get adminEngineDeepSeek => 'DeepSeek Official';
 
   @override
-  String get adminEngineOpenAi => 'OpenAI-compatible API';
+  String get adminFallbackLine => 'Fallback route';
 
   @override
-  String get adminEngineDeepSeek => 'DeepSeek API · LangChain vision';
+  String get adminSetFallbackAction => 'Set fallback';
+
+  @override
+  String get adminClearFallbackAction => 'Clear fallback';
+
+  @override
+  String get adminEndpointPresetLabel => 'Endpoint preset';
+
+  @override
+  String get adminSuggestedModelsLabel => 'Suggested models';
+
+  @override
+  String get adminCustomModelHint =>
+      'Supports official Model IDs or endpoint IDs (such as ep-...).';
+
+  @override
+  String get adminTestConnectionAction => 'Test connection';
+
+  @override
+  String get adminTestingConnection => 'Testing connection…';
+
+  @override
+  String get adminTestConnectionFailed =>
+      'Connection test failed. Check URL, model, and API key.';
+
+  @override
+  String adminTestConnectionLatency(int ms) {
+    return '$ms ms';
+  }
 
   @override
   String get adminApiUrlHint =>
       'Public endpoints require HTTPS; localhost endpoints may use HTTP.';
-
-  @override
-  String get adminHostLoginHint =>
-      'Use the CLI account signed in on the server.';
-
-  @override
-  String get adminReadModels => 'Load OpenRouter models';
-
-  @override
-  String get adminModelSearch => 'Search model name or ID';
 
   @override
   String get adminModelsHint =>
@@ -1985,9 +1996,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminModelsEmpty => 'No matching models';
 
   @override
-  String get adminModelDirectory => 'Catalog models';
-
-  @override
   String pageSizeOption(int size) {
     return '$size per page';
   }
@@ -1998,7 +2006,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get selfHostingContent =>
-      'Commands and configuration follow the repository README. Consult the design documents for platform sign-in and recovery.\n\n## Requirements\n\n- Docker Engine and Docker Compose.\n- Existing PostgreSQL, RabbitMQ, Redis and MinIO. Compose manages Framefetch business services and reuses this infrastructure.\n- macOS platform identity requires uv (Python 3.12), your regular Chrome profile and the Framefetch extension.\n- Production needs strong random secrets, a stable HTTPS address and planned object storage capacity.\n\n## Deploy with Docker Compose\n\n### Clone and configure\n\nConfigure .env to connect to your existing infrastructure. Store real secrets in an untracked .env or a secret manager.\n\n```sh\ngit clone https://github.com/StephenQiu30/framefetch.git\ncd framefetch\ntest -f .env || cp .env.example .env\n```\n\n### Load the current schema\n\nFor an empty project database, load schema.sql using the DDL account. Back up existing databases before upgrades.\n\n```sh\npsql -X -v ON_ERROR_STOP=1 -W -h 127.0.0.1 -U video -d video -f backend/sql/schema.sql\n```\n\n### Install identity source and start services\n\nOn macOS install the identity source and load the printed extension directory in chrome://extensions. Reuse your regular Chrome sign-in. Compose starts Web, API, workers, runner and egress proxy. Public links prefer anonymous parsing. See README for production.\n\n```sh\nuv run --project backend python -m app.workers.session.source_cli install --env-file .env\ndocker compose up -d --build --wait --remove-orphans\n```\n\n### Bootstrap the first administrator\n\nRun once on the deployment host for an empty user table. Enter the password interactively. There is no HTTP bootstrap endpoint.\n\n```sh\nuv run --project backend python -m app.workers.bootstrap_admin --env-file .env --username your-admin --email you@example.com\n```\n\n### Check health\n\nWeb defaults to port 8101, API to 8111 and Swagger to :8111/docs. Health does not prove platform media can be downloaded.\n\n```sh\ncurl --fail http://127.0.0.1:8111/health/live\ncurl --fail http://127.0.0.1:8111/health/ready\ncurl --fail --head http://127.0.0.1:8101/\n```\n\n## Is AI required?\n\nAI workers run independently of business Compose. Use a signed-in host Codex App Server or configure a supported model provider. Set ANALYSIS_ENABLED=false for download/document-only use. This does not disable downloads or document imports.\n\nExternal models receive analysis content and may incur fees. Check media authorization and provider data policies before enabling them.\n\n## Before publishing\n\n- Replace all placeholder .env.prod credentials and make secret recovery possible.\n- Route external media through egress that blocks private networks. URL validation alone is insufficient.\n- Plan MinIO capacity, backup and explicit cleanup. Expired signed URLs do not delete final files.\n- Use SITE_INDEXABLE=true only for a public project introduction site and set SITE_URL to a stable HTTPS domain.\n- Update with git pull --ff-only, reinstall identity source and rebuild/start Compose per README. Restart alone does not apply new images or environment settings.\n\n[Quick Start](https://github.com/StephenQiu30/framefetch#快速开始) · [System design](https://github.com/StephenQiu30/framefetch/blob/main/docs/design/README.md)';
+      'Commands and configuration follow the repository README. Consult the design documents for platform sign-in and recovery.\n\n## Requirements\n\n- Docker Engine and Docker Compose.\n- Existing PostgreSQL, RabbitMQ, Redis and MinIO. Compose manages Framefetch business services and reuses this infrastructure.\n- macOS platform identity requires uv (Python 3.12), your regular Chrome profile and the Framefetch extension.\n- Production needs strong random secrets, a stable HTTPS address and planned object storage capacity.\n\n## Deploy with Docker Compose\n\n### Clone and configure\n\nConfigure .env to connect to your existing infrastructure. Store real secrets in an untracked .env or a secret manager.\n\n```sh\ngit clone https://github.com/StephenQiu30/framefetch.git\ncd framefetch\ntest -f .env || cp .env.example .env\n```\n\n### Load the current schema\n\nFor an empty project database, load schema.sql using the DDL account. Back up existing databases before upgrades.\n\n```sh\npsql -X -v ON_ERROR_STOP=1 -W -h 127.0.0.1 -U video -d video -f backend/sql/schema.sql\n```\n\n### Install identity source and start services\n\nOn macOS install the identity source and load the printed extension directory in chrome://extensions. Reuse your regular Chrome sign-in. Compose starts Web, API, workers, runner and egress proxy. Public links prefer anonymous parsing. See README for production.\n\n```sh\nuv run --project backend python -m app.workers.session.source_cli install --env-file .env\ndocker compose up -d --build --wait --remove-orphans\n```\n\n### Bootstrap the first administrator\n\nRun once on the deployment host for an empty user table. Enter the password interactively. There is no HTTP bootstrap endpoint.\n\n```sh\nuv run --project backend python -m app.workers.bootstrap_admin --env-file .env --username your-admin --email you@example.com\n```\n\n### Check health\n\nWeb defaults to port 8101, API to 8111 and Swagger to :8111/docs. Health does not prove platform media can be downloaded.\n\n```sh\ncurl --fail http://127.0.0.1:8111/health/live\ncurl --fail http://127.0.0.1:8111/health/ready\ncurl --fail --head http://127.0.0.1:8101/\n```\n\n## Is AI required?\n\nAI analysis workers run inside the Compose stack and connect to official Volcano Engine Ark, DeepSeek, or OpenAI APIs configured by an admin. Set ANALYSIS_ENABLED=false for download/document-only use. This does not disable downloads or document imports.\n\nExternal models receive analysis content and may incur fees. Check media authorization and provider data policies before enabling them.\n\n## Before publishing\n\n- Replace all placeholder .env.prod credentials and make secret recovery possible.\n- Route external media through egress that blocks private networks. URL validation alone is insufficient.\n- Plan MinIO capacity, backup and explicit cleanup. Expired signed URLs do not delete final files.\n- Use SITE_INDEXABLE=true only for a public project introduction site and set SITE_URL to a stable HTTPS domain.\n- Update with git pull --ff-only, reinstall identity source and rebuild/start Compose per README. Restart alone does not apply new images or environment settings.\n\n[Quick Start](https://github.com/StephenQiu30/framefetch#快速开始) · [System design](https://github.com/StephenQiu30/framefetch/blob/main/docs/design/README.md)';
 
   @override
   String get activityHistoryFrom => 'From date';

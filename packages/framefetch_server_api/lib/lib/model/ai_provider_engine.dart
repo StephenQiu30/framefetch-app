@@ -10,14 +10,10 @@ import 'package:built_value/serializer.dart';
 part 'ai_provider_engine.g.dart';
 
 class AiProviderEngine extends EnumClass {
-  @BuiltValueEnumConst(wireName: r'codex')
-  static const AiProviderEngine codex = _$codex;
-  @BuiltValueEnumConst(wireName: r'claude')
-  static const AiProviderEngine claude = _$claude;
+  @BuiltValueEnumConst(wireName: r'volcengine')
+  static const AiProviderEngine volcengine = _$volcengine;
   @BuiltValueEnumConst(wireName: r'deepseek')
   static const AiProviderEngine deepseek = _$deepseek;
-  @BuiltValueEnumConst(wireName: r'openrouter')
-  static const AiProviderEngine openrouter = _$openrouter;
   @BuiltValueEnumConst(wireName: r'openai')
   static const AiProviderEngine openai = _$openai;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)

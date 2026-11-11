@@ -14,6 +14,8 @@ class _$MediaImportRequest extends MediaImportRequest {
   @override
   final String declaredSha256;
   @override
+  final bool? removeWatermark;
+  @override
   final bool rightsAccepted;
   @override
   final DeclaredOrigin? declaredOrigin;
@@ -26,6 +28,7 @@ class _$MediaImportRequest extends MediaImportRequest {
       {required this.fileName,
       required this.declaredSizeBytes,
       required this.declaredSha256,
+      this.removeWatermark,
       required this.rightsAccepted,
       this.declaredOrigin})
       : super._();
@@ -45,6 +48,7 @@ class _$MediaImportRequest extends MediaImportRequest {
         fileName == other.fileName &&
         declaredSizeBytes == other.declaredSizeBytes &&
         declaredSha256 == other.declaredSha256 &&
+        removeWatermark == other.removeWatermark &&
         rightsAccepted == other.rightsAccepted &&
         declaredOrigin == other.declaredOrigin;
   }
@@ -55,6 +59,7 @@ class _$MediaImportRequest extends MediaImportRequest {
     _$hash = $jc(_$hash, fileName.hashCode);
     _$hash = $jc(_$hash, declaredSizeBytes.hashCode);
     _$hash = $jc(_$hash, declaredSha256.hashCode);
+    _$hash = $jc(_$hash, removeWatermark.hashCode);
     _$hash = $jc(_$hash, rightsAccepted.hashCode);
     _$hash = $jc(_$hash, declaredOrigin.hashCode);
     _$hash = $jf(_$hash);
@@ -67,6 +72,7 @@ class _$MediaImportRequest extends MediaImportRequest {
           ..add('fileName', fileName)
           ..add('declaredSizeBytes', declaredSizeBytes)
           ..add('declaredSha256', declaredSha256)
+          ..add('removeWatermark', removeWatermark)
           ..add('rightsAccepted', rightsAccepted)
           ..add('declaredOrigin', declaredOrigin))
         .toString();
@@ -91,6 +97,11 @@ class MediaImportRequestBuilder
   set declaredSha256(String? declaredSha256) =>
       _$this._declaredSha256 = declaredSha256;
 
+  bool? _removeWatermark;
+  bool? get removeWatermark => _$this._removeWatermark;
+  set removeWatermark(bool? removeWatermark) =>
+      _$this._removeWatermark = removeWatermark;
+
   bool? _rightsAccepted;
   bool? get rightsAccepted => _$this._rightsAccepted;
   set rightsAccepted(bool? rightsAccepted) =>
@@ -111,6 +122,7 @@ class MediaImportRequestBuilder
       _fileName = $v.fileName;
       _declaredSizeBytes = $v.declaredSizeBytes;
       _declaredSha256 = $v.declaredSha256;
+      _removeWatermark = $v.removeWatermark;
       _rightsAccepted = $v.rightsAccepted;
       _declaredOrigin = $v.declaredOrigin;
       _$v = null;
@@ -140,6 +152,7 @@ class MediaImportRequestBuilder
               declaredSizeBytes, r'MediaImportRequest', 'declaredSizeBytes'),
           declaredSha256: BuiltValueNullFieldError.checkNotNull(
               declaredSha256, r'MediaImportRequest', 'declaredSha256'),
+          removeWatermark: removeWatermark,
           rightsAccepted: BuiltValueNullFieldError.checkNotNull(
               rightsAccepted, r'MediaImportRequest', 'rightsAccepted'),
           declaredOrigin: declaredOrigin,

@@ -3,63 +3,67 @@
 //
 
 // ignore_for_file: unused_element, unused_element_parameter
-import 'package:framefetch_server_api/lib/model/ai_model_response.dart';
 import 'package:built_collection/built_collection.dart';
+import 'package:framefetch_server_api/lib/model/ai_provider_preset_response.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-part 'ai_model_list_response.g.dart';
+part 'ai_provider_preset_list_response.g.dart';
 
-/// AiModelListResponse
+/// AiProviderPresetListResponse
 ///
 /// Properties:
 /// * [items]
 @BuiltValue()
-abstract class AiModelListResponse
-    implements Built<AiModelListResponse, AiModelListResponseBuilder> {
+abstract class AiProviderPresetListResponse
+    implements
+        Built<AiProviderPresetListResponse,
+            AiProviderPresetListResponseBuilder> {
   @BuiltValueField(wireName: r'items')
-  BuiltList<AiModelResponse> get items;
+  BuiltList<AiProviderPresetResponse> get items;
 
-  AiModelListResponse._();
+  AiProviderPresetListResponse._();
 
-  factory AiModelListResponse([void updates(AiModelListResponseBuilder b)]) =
-      _$AiModelListResponse;
+  factory AiProviderPresetListResponse(
+          [void updates(AiProviderPresetListResponseBuilder b)]) =
+      _$AiProviderPresetListResponse;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AiModelListResponseBuilder b) => b;
+  static void _defaults(AiProviderPresetListResponseBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AiModelListResponse> get serializer =>
-      _$AiModelListResponseSerializer();
+  static Serializer<AiProviderPresetListResponse> get serializer =>
+      _$AiProviderPresetListResponseSerializer();
 }
 
-class _$AiModelListResponseSerializer
-    implements PrimitiveSerializer<AiModelListResponse> {
+class _$AiProviderPresetListResponseSerializer
+    implements PrimitiveSerializer<AiProviderPresetListResponse> {
   @override
   final Iterable<Type> types = const [
-    AiModelListResponse,
-    _$AiModelListResponse
+    AiProviderPresetListResponse,
+    _$AiProviderPresetListResponse
   ];
 
   @override
-  final String wireName = r'AiModelListResponse';
+  final String wireName = r'AiProviderPresetListResponse';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
-    AiModelListResponse object, {
+    AiProviderPresetListResponse object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
     yield r'items';
     yield serializers.serialize(
       object.items,
-      specifiedType: const FullType(BuiltList, [FullType(AiModelResponse)]),
+      specifiedType:
+          const FullType(BuiltList, [FullType(AiProviderPresetResponse)]),
     );
   }
 
   @override
   Object serialize(
     Serializers serializers,
-    AiModelListResponse object, {
+    AiProviderPresetListResponse object, {
     FullType specifiedType = FullType.unspecified,
   }) {
     return _serializeProperties(serializers, object,
@@ -72,7 +76,7 @@ class _$AiModelListResponseSerializer
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required AiModelListResponseBuilder result,
+    required AiProviderPresetListResponseBuilder result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
@@ -83,8 +87,8 @@ class _$AiModelListResponseSerializer
           final valueDes = serializers.deserialize(
             value,
             specifiedType:
-                const FullType(BuiltList, [FullType(AiModelResponse)]),
-          ) as BuiltList<AiModelResponse>;
+                const FullType(BuiltList, [FullType(AiProviderPresetResponse)]),
+          ) as BuiltList<AiProviderPresetResponse>;
           result.items.replace(valueDes);
           break;
         default:
@@ -96,12 +100,12 @@ class _$AiModelListResponseSerializer
   }
 
   @override
-  AiModelListResponse deserialize(
+  AiProviderPresetListResponse deserialize(
     Serializers serializers,
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = AiModelListResponseBuilder();
+    final result = AiProviderPresetListResponseBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(

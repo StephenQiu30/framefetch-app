@@ -1,17 +1,46 @@
 import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 bool isDirectAiEngine(AiProviderEngine engine) => const [
-  AiProviderEngine.openrouter,
-  AiProviderEngine.openai,
+  AiProviderEngine.volcengine,
   AiProviderEngine.deepseek,
+  AiProviderEngine.openai,
 ].contains(engine);
 
 String aiProviderBaseUrl(AiProviderEngine engine) => switch (engine) {
-  AiProviderEngine.openrouter => 'https://openrouter.ai/api/v1',
-  AiProviderEngine.claude => 'https://api.anthropic.com',
+  AiProviderEngine.volcengine => 'https://ark.cn-beijing.volces.com/api/v3',
   AiProviderEngine.deepseek => 'https://api.deepseek.com',
   _ => 'https://api.openai.com/v1',
 };
+
+String aiProviderDefaultModel(AiProviderEngine engine) => switch (engine) {
+  AiProviderEngine.volcengine => 'doubao-seed-2-0-lite',
+  AiProviderEngine.deepseek => 'deepseek-chat',
+  _ => 'gpt-4.1-mini',
+};
+
+String _normalizedUrlPath(String rawUrl) {
+  final trimmed = rawUrl.trim();
+  if (trimmed.isEmpty) return '';
+  final parsed = Uri.tryParse(trimmed);
+  final path = (parsed?.path ?? trimmed).replaceAll(RegExp(r'/+$'), '');
+  return path.isEmpty ? '/' : path;
+}
+
+AiProviderPresetResponse? matchAiProviderPreset(
+  Iterable<AiProviderPresetResponse> presets,
+  AiProviderEngine engine,
+  String baseUrl,
+) {
+  final candidates = presets.where((p) => p.engine == engine).toList();
+  if (candidates.isEmpty) return null;
+  final path = _normalizedUrlPath(baseUrl);
+  if (path.isNotEmpty) {
+    for (final preset in candidates) {
+      if (_normalizedUrlPath(preset.baseUrl) == path) return preset;
+    }
+  }
+  return candidates.first;
+}
 
 bool isValidAiBaseUrl(String value) {
   final uri = Uri.tryParse(value.trim());
@@ -25,8 +54,3 @@ bool isValidAiBaseUrl(String value) {
   final loopback = {'localhost', '127.0.0.1', '::1'}.contains(uri.host);
   return uri.scheme == 'https' || (uri.scheme == 'http' && loopback);
 }
-
-bool supportsStructuredText(AiModelResponse model) =>
-    model.inputModalities.contains('text') &&
-    model.outputModalities.contains('text') &&
-    model.supportedParameters.contains('structured_outputs');

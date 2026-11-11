@@ -11006,20 +11006,157 @@
         }
       }
     },
-    "/api/admin/ai-providers/models/openrouter": {
+    "/api/admin/ai-providers/presets": {
       "get": {
         "tags": [
           "admin"
         ],
-        "summary": "查询 OpenRouter 公开模型能力",
-        "operationId": "listOpenRouterModels",
+        "summary": "查询官方 AI 渠道预设与能力目录",
+        "operationId": "listAiProviderPresets",
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiResponse_AiModelListResponse_"
+                  "$ref": "#/components/schemas/ApiResponse_AiProviderPresetListResponse_"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未登录或会话已经失效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "当前用户没有操作权限",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在、已清理或临时解析状态已过期",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "资源状态或幂等键冲突",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "请求频率超过限制",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "请求参数或业务输入无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "服务内部错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "上游媒体或模型服务失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "运行依赖暂时不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "上游操作超时",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "NativeBearerAuth": []
+          }
+        ],
+        "parameters": []
+      }
+    },
+    "/api/admin/ai-providers/test": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "测试官方 AI 渠道连通性与模型能力",
+        "operationId": "testAiProviderConnection",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TestAiProviderConnectionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_AiProviderConnectionTestResponse_"
                 }
               }
             }
@@ -11269,6 +11406,278 @@
           }
         }
       }
+    },
+    "/api/admin/ai-providers/{provider_key}/fallback": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "设为备用兜底 AI Provider",
+        "operationId": "setFallbackAiProviderProfile",
+        "security": [
+          {
+            "NativeBearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "provider_key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Provider Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_AiProviderProfileResponse_"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未登录或会话已经失效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "当前用户没有操作权限",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在、已清理或临时解析状态已过期",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "资源状态或幂等键冲突",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "请求频率超过限制",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "请求参数或业务输入无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "服务内部错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "上游媒体或模型服务失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "运行依赖暂时不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "上游操作超时",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "取消备用兜底 AI Provider",
+        "operationId": "clearFallbackAiProviderProfile",
+        "security": [
+          {
+            "NativeBearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "provider_key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Provider Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_AiProviderProfileResponse_"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未登录或会话已经失效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "当前用户没有操作权限",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不存在、已清理或临时解析状态已过期",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "资源状态或幂等键冲突",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "请求频率超过限制",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "请求参数或业务输入无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "服务内部错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "上游媒体或模型服务失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "运行依赖暂时不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "上游操作超时",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -11284,11 +11693,139 @@
         ],
         "title": "AccessDecision"
       },
-      "AiModelListResponse": {
+      "AiProviderAuthMode": {
+        "type": "string",
+        "enum": [
+          "api_key"
+        ],
+        "title": "AiProviderAuthMode"
+      },
+      "AiProviderConnectionTestResponse": {
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "title": "Ok"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "models_unsupported_chat_ok",
+              "auth_failed",
+              "model_rejected",
+              "rate_limited",
+              "upstream_error",
+              "timeout",
+              "network_error"
+            ],
+            "title": "Status"
+          },
+          "http_status": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Http Status"
+          },
+          "preset_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preset Id"
+          },
+          "supports_vision": {
+            "type": "boolean",
+            "title": "Supports Vision"
+          },
+          "structured_output_mode": {
+            "type": "string",
+            "enum": [
+              "json_schema",
+              "json_object"
+            ],
+            "title": "Structured Output Mode"
+          },
+          "models_endpoint_supported": {
+            "type": "boolean",
+            "title": "Models Endpoint Supported"
+          },
+          "chat_endpoint_reachable": {
+            "type": "boolean",
+            "title": "Chat Endpoint Reachable"
+          },
+          "discovered_models": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Discovered Models"
+          },
+          "latency_ms": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latency Ms"
+          },
+          "vision_notice": {
+            "type": "string",
+            "title": "Vision Notice"
+          },
+          "capability_notice": {
+            "type": "string",
+            "title": "Capability Notice"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "ok",
+          "status",
+          "http_status",
+          "preset_id",
+          "supports_vision",
+          "structured_output_mode",
+          "models_endpoint_supported",
+          "chat_endpoint_reachable",
+          "discovered_models",
+          "latency_ms",
+          "vision_notice",
+          "capability_notice",
+          "message"
+        ],
+        "title": "AiProviderConnectionTestResponse"
+      },
+      "AiProviderEngine": {
+        "type": "string",
+        "enum": [
+          "volcengine",
+          "deepseek",
+          "openai"
+        ],
+        "title": "AiProviderEngine"
+      },
+      "AiProviderPresetListResponse": {
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/AiModelResponse"
+              "$ref": "#/components/schemas/AiProviderPresetResponse"
             },
             "type": "array",
             "title": "Items"
@@ -11299,74 +11836,86 @@
         "required": [
           "items"
         ],
-        "title": "AiModelListResponse"
+        "title": "AiProviderPresetListResponse"
       },
-      "AiModelResponse": {
+      "AiProviderPresetResponse": {
         "properties": {
           "id": {
             "type": "string",
             "title": "Id"
           },
-          "name": {
+          "engine": {
+            "$ref": "#/components/schemas/AiProviderEngine"
+          },
+          "display_name": {
             "type": "string",
-            "title": "Name"
+            "title": "Display Name"
           },
-          "context_length": {
-            "type": "integer",
-            "title": "Context Length"
+          "base_url": {
+            "type": "string",
+            "title": "Base Url"
           },
-          "input_modalities": {
+          "auth_mode": {
+            "$ref": "#/components/schemas/AiProviderAuthMode"
+          },
+          "default_model": {
+            "type": "string",
+            "title": "Default Model"
+          },
+          "suggested_models": {
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/AiProviderSuggestedModelResponse"
             },
             "type": "array",
-            "title": "Input Modalities"
+            "title": "Suggested Models"
           },
-          "output_modalities": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Output Modalities"
+          "supports_vision": {
+            "type": "boolean",
+            "title": "Supports Vision"
           },
-          "supported_parameters": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Supported Parameters"
+          "supports_models_endpoint": {
+            "type": "boolean",
+            "title": "Supports Models Endpoint"
+          },
+          "structured_output_mode": {
+            "type": "string",
+            "enum": [
+              "json_schema",
+              "json_object"
+            ],
+            "title": "Structured Output Mode"
+          },
+          "endpoint_kind": {
+            "type": "string",
+            "title": "Endpoint Kind"
+          },
+          "supports_custom_model_id": {
+            "type": "boolean",
+            "title": "Supports Custom Model Id"
+          },
+          "key_isolation_notice": {
+            "type": "string",
+            "title": "Key Isolation Notice"
           }
         },
         "additionalProperties": false,
         "type": "object",
         "required": [
           "id",
-          "name",
-          "context_length",
-          "input_modalities",
-          "output_modalities",
-          "supported_parameters"
+          "engine",
+          "display_name",
+          "base_url",
+          "auth_mode",
+          "default_model",
+          "suggested_models",
+          "supports_vision",
+          "supports_models_endpoint",
+          "structured_output_mode",
+          "endpoint_kind",
+          "supports_custom_model_id",
+          "key_isolation_notice"
         ],
-        "title": "AiModelResponse"
-      },
-      "AiProviderAuthMode": {
-        "type": "string",
-        "enum": [
-          "host_login",
-          "api_key"
-        ],
-        "title": "AiProviderAuthMode"
-      },
-      "AiProviderEngine": {
-        "type": "string",
-        "enum": [
-          "codex",
-          "claude",
-          "deepseek",
-          "openrouter",
-          "openai"
-        ],
-        "title": "AiProviderEngine"
+        "title": "AiProviderPresetResponse"
       },
       "AiProviderProfileListResponse": {
         "properties": {
@@ -11429,6 +11978,37 @@
             "type": "boolean",
             "title": "Is Active"
           },
+          "is_fallback": {
+            "type": "boolean",
+            "title": "Is Fallback"
+          },
+          "preset_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preset Id"
+          },
+          "supports_vision": {
+            "type": "boolean",
+            "title": "Supports Vision"
+          },
+          "supports_models_endpoint": {
+            "type": "boolean",
+            "title": "Supports Models Endpoint"
+          },
+          "structured_output_mode": {
+            "type": "string",
+            "enum": [
+              "json_schema",
+              "json_object"
+            ],
+            "title": "Structured Output Mode"
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -11451,10 +12031,44 @@
           "model",
           "credential_configured",
           "is_active",
+          "is_fallback",
+          "preset_id",
+          "supports_vision",
+          "supports_models_endpoint",
+          "structured_output_mode",
           "created_at",
           "updated_at"
         ],
         "title": "AiProviderProfileResponse"
+      },
+      "AiProviderSuggestedModelResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "supports_vision": {
+            "type": "boolean",
+            "title": "Supports Vision"
+          },
+          "notes": {
+            "type": "string",
+            "title": "Notes",
+            "default": ""
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "supports_vision"
+        ],
+        "title": "AiProviderSuggestedModelResponse"
       },
       "AnalysisAnalyticsDailyResponse": {
         "properties": {
@@ -12209,7 +12823,7 @@
         ],
         "title": "AnalysisStatus"
       },
-      "ApiResponse_AiModelListResponse_": {
+      "ApiResponse_AiProviderConnectionTestResponse_": {
         "properties": {
           "code": {
             "$ref": "#/components/schemas/ErrorCode",
@@ -12221,7 +12835,7 @@
             "description": "安全的结果说明。"
           },
           "data": {
-            "$ref": "#/components/schemas/AiModelListResponse",
+            "$ref": "#/components/schemas/AiProviderConnectionTestResponse",
             "description": "成功时为业务数据，错误时为 null。"
           }
         },
@@ -12232,7 +12846,32 @@
           "message",
           "data"
         ],
-        "title": "ApiResponse[AiModelListResponse]"
+        "title": "ApiResponse[AiProviderConnectionTestResponse]"
+      },
+      "ApiResponse_AiProviderPresetListResponse_": {
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/ErrorCode",
+            "description": "稳定的业务结果码。"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "安全的结果说明。"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AiProviderPresetListResponse",
+            "description": "成功时为业务数据，错误时为 null。"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "data"
+        ],
+        "title": "ApiResponse[AiProviderPresetListResponse]"
       },
       "ApiResponse_AiProviderProfileListResponse_": {
         "properties": {
@@ -15316,7 +15955,6 @@
           "refresh_in_progress",
           "request_timeout",
           "request_too_large",
-          "reserved_ai_provider_mutation",
           "resource_expired",
           "self_admin_change",
           "service_unavailable",
@@ -16447,6 +17085,11 @@
             "type": "string",
             "pattern": "^[0-9a-f]{64}$",
             "title": "Declared Sha256"
+          },
+          "remove_watermark": {
+            "type": "boolean",
+            "title": "Remove Watermark",
+            "default": false
           },
           "rights_accepted": {
             "type": "boolean",
@@ -18935,6 +19578,86 @@
           "evidence"
         ],
         "title": "StructuredReportSectionResponse"
+      },
+      "TestAiProviderConnectionRequest": {
+        "properties": {
+          "provider_key": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 32,
+                "minLength": 1,
+                "pattern": "^[a-z][a-z0-9_-]*$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Provider Key"
+          },
+          "engine": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AiProviderEngine"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "auth_mode": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AiProviderAuthMode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "base_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2048
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Base Url"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "api_key": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 4096,
+                "format": "password",
+                "writeOnly": true
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Key"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "TestAiProviderConnectionRequest"
       },
       "UpdateAiProviderProfileRequest": {
         "properties": {

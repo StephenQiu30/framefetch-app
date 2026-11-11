@@ -6,15 +6,12 @@ part of 'ai_provider_auth_mode.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-const AiProviderAuthMode _$hostLogin = const AiProviderAuthMode._('hostLogin');
 const AiProviderAuthMode _$apiKey = const AiProviderAuthMode._('apiKey');
 const AiProviderAuthMode _$unknownDefaultOpenApi =
     const AiProviderAuthMode._('unknownDefaultOpenApi');
 
 AiProviderAuthMode _$valueOf(String name) {
   switch (name) {
-    case 'hostLogin':
-      return _$hostLogin;
     case 'apiKey':
       return _$apiKey;
     case 'unknownDefaultOpenApi':
@@ -26,14 +23,12 @@ AiProviderAuthMode _$valueOf(String name) {
 
 final BuiltSet<AiProviderAuthMode> _$values =
     BuiltSet<AiProviderAuthMode>(const <AiProviderAuthMode>[
-  _$hostLogin,
   _$apiKey,
   _$unknownDefaultOpenApi,
 ]);
 
 class _$AiProviderAuthModeMeta {
   const _$AiProviderAuthModeMeta();
-  AiProviderAuthMode get hostLogin => _$hostLogin;
   AiProviderAuthMode get apiKey => _$apiKey;
   AiProviderAuthMode get unknownDefaultOpenApi => _$unknownDefaultOpenApi;
   AiProviderAuthMode valueOf(String name) => _$valueOf(name);
@@ -52,12 +47,10 @@ Serializer<AiProviderAuthMode> _$aiProviderAuthModeSerializer =
 class _$AiProviderAuthModeSerializer
     implements PrimitiveSerializer<AiProviderAuthMode> {
   static const Map<String, Object> _toWire = const <String, Object>{
-    'hostLogin': 'host_login',
     'apiKey': 'api_key',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
-    'host_login': 'hostLogin',
     'api_key': 'apiKey',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };

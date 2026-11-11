@@ -3,10 +3,8 @@ import 'package:framefetch_server_api/framefetch_server_api.dart';
 
 String aiEngineLabel(AppLocalizations l, AiProviderEngine engine) =>
     switch (engine) {
-      AiProviderEngine.codex => l.adminEngineCodex,
-      AiProviderEngine.claude => l.adminEngineClaude,
-      AiProviderEngine.openrouter => l.adminEngineOpenRouter,
-      AiProviderEngine.openai => l.adminEngineOpenAi,
+      AiProviderEngine.volcengine => l.adminEngineVolcengine,
       AiProviderEngine.deepseek => l.adminEngineDeepSeek,
+      AiProviderEngine.openai => l.adminEngineOpenAi,
       _ => engine.name,
     };

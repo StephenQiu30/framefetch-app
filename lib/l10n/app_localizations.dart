@@ -2039,7 +2039,7 @@ abstract class AppLocalizations {
   /// No description provided for @analysisAuthenticationRequired.
   ///
   /// In zh, this message translates to:
-  /// **'AI 分析服务未登录，请完成登录后重试。'**
+  /// **'AI 分析服务鉴权失败，请检查模型凭据配置。'**
   String get analysisAuthenticationRequired;
 
   /// No description provided for @analysisTimeoutError.
@@ -2465,13 +2465,13 @@ abstract class AppLocalizations {
   /// No description provided for @adminAgentAvailable.
   ///
   /// In zh, this message translates to:
-  /// **'本机分析 Agent 可用。'**
+  /// **'容器化分析 Worker 在线。'**
   String get adminAgentAvailable;
 
   /// No description provided for @adminAgentUnavailable.
   ///
   /// In zh, this message translates to:
-  /// **'本机分析 Agent 当前不可用。'**
+  /// **'容器化分析 Worker 当前离线。'**
   String get adminAgentUnavailable;
 
   /// No description provided for @adminCredentialReady.
@@ -2851,18 +2851,6 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'留空保留已有凭据'**
   String get apiKeyKeepHint;
-
-  /// No description provided for @localCodexRestriction.
-  ///
-  /// In zh, this message translates to:
-  /// **'系统兜底线路，仅可修改名称和模型。'**
-  String get localCodexRestriction;
-
-  /// No description provided for @hostLoginLabel.
-  ///
-  /// In zh, this message translates to:
-  /// **'本机账号登录 · 免 Key'**
-  String get hostLoginLabel;
 
   /// No description provided for @deleteAction.
   ///
@@ -3656,59 +3644,89 @@ abstract class AppLocalizations {
   /// **'没有匹配的 AI 配置'**
   String get adminAiEmpty;
 
-  /// No description provided for @adminEngineCodex.
+  /// No description provided for @adminEngineVolcengine.
   ///
   /// In zh, this message translates to:
-  /// **'Codex CLI · Responses'**
-  String get adminEngineCodex;
-
-  /// No description provided for @adminEngineClaude.
-  ///
-  /// In zh, this message translates to:
-  /// **'Claude CLI · Messages'**
-  String get adminEngineClaude;
-
-  /// No description provided for @adminEngineOpenRouter.
-  ///
-  /// In zh, this message translates to:
-  /// **'OpenRouter API'**
-  String get adminEngineOpenRouter;
+  /// **'火山引擎方舟'**
+  String get adminEngineVolcengine;
 
   /// No description provided for @adminEngineOpenAi.
   ///
   /// In zh, this message translates to:
-  /// **'OpenAI 兼容 API'**
+  /// **'OpenAI 官方'**
   String get adminEngineOpenAi;
 
   /// No description provided for @adminEngineDeepSeek.
   ///
   /// In zh, this message translates to:
-  /// **'DeepSeek API · LangChain 视觉'**
+  /// **'DeepSeek 官方'**
   String get adminEngineDeepSeek;
+
+  /// No description provided for @adminFallbackLine.
+  ///
+  /// In zh, this message translates to:
+  /// **'兜底线路'**
+  String get adminFallbackLine;
+
+  /// No description provided for @adminSetFallbackAction.
+  ///
+  /// In zh, this message translates to:
+  /// **'设为兜底'**
+  String get adminSetFallbackAction;
+
+  /// No description provided for @adminClearFallbackAction.
+  ///
+  /// In zh, this message translates to:
+  /// **'取消兜底'**
+  String get adminClearFallbackAction;
+
+  /// No description provided for @adminEndpointPresetLabel.
+  ///
+  /// In zh, this message translates to:
+  /// **'接入方式'**
+  String get adminEndpointPresetLabel;
+
+  /// No description provided for @adminSuggestedModelsLabel.
+  ///
+  /// In zh, this message translates to:
+  /// **'推荐模型'**
+  String get adminSuggestedModelsLabel;
+
+  /// No description provided for @adminCustomModelHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'支持官方 Model ID 或接入点 ID（如 ep-...）。'**
+  String get adminCustomModelHint;
+
+  /// No description provided for @adminTestConnectionAction.
+  ///
+  /// In zh, this message translates to:
+  /// **'测试连接'**
+  String get adminTestConnectionAction;
+
+  /// No description provided for @adminTestingConnection.
+  ///
+  /// In zh, this message translates to:
+  /// **'正在测试连接…'**
+  String get adminTestingConnection;
+
+  /// No description provided for @adminTestConnectionFailed.
+  ///
+  /// In zh, this message translates to:
+  /// **'连接测试失败，请检查地址、模型与 API Key。'**
+  String get adminTestConnectionFailed;
+
+  /// No description provided for @adminTestConnectionLatency.
+  ///
+  /// In zh, this message translates to:
+  /// **'耗时 {ms} ms'**
+  String adminTestConnectionLatency(int ms);
 
   /// No description provided for @adminApiUrlHint.
   ///
   /// In zh, this message translates to:
   /// **'公网地址必须使用 HTTPS；本机 localhost 可使用 HTTP。'**
   String get adminApiUrlHint;
-
-  /// No description provided for @adminHostLoginHint.
-  ///
-  /// In zh, this message translates to:
-  /// **'使用服务端已登录的 CLI 账号。'**
-  String get adminHostLoginHint;
-
-  /// No description provided for @adminReadModels.
-  ///
-  /// In zh, this message translates to:
-  /// **'读取 OpenRouter 模型'**
-  String get adminReadModels;
-
-  /// No description provided for @adminModelSearch.
-  ///
-  /// In zh, this message translates to:
-  /// **'搜索模型名称或 ID'**
-  String get adminModelSearch;
 
   /// No description provided for @adminModelsHint.
   ///
@@ -3734,12 +3752,6 @@ abstract class AppLocalizations {
   /// **'没有匹配的模型'**
   String get adminModelsEmpty;
 
-  /// No description provided for @adminModelDirectory.
-  ///
-  /// In zh, this message translates to:
-  /// **'目录中的模型'**
-  String get adminModelDirectory;
-
   /// No description provided for @pageSizeOption.
   ///
   /// In zh, this message translates to:
@@ -3755,7 +3767,7 @@ abstract class AppLocalizations {
   /// No description provided for @selfHostingContent.
   ///
   /// In zh, this message translates to:
-  /// **'本页摘录当前部署流程。命令与配置以仓库 README 为准；平台登录、换机与故障恢复请阅读对应设计文档。\n\n## 运行帧取需要准备什么？\n\n- Docker Engine 与 Docker Compose。\n- 部署者已有的 PostgreSQL、RabbitMQ、Redis 与 MinIO；Compose 只管理帧取自身的业务服务并复用这些基础环境。\n- macOS 平台会话来源需要 uv（Python 3.12）、日常 Chrome 与帧取扩展。\n- 生产部署需要强随机密钥、稳定的 HTTPS 访问地址和规划好的对象存储容量。\n\n## 如何用 Docker Compose 部署？\n\n### 克隆仓库并准备环境文件\n\n复制示例配置后，把 .env 中的连接信息改为本机已运行的 PostgreSQL、RabbitMQ、Redis 与 MinIO。真实密钥只写入未提交的 .env 或 Secret Manager。\n\n```sh\ngit clone https://github.com/StephenQiu30/framefetch.git\ncd framefetch\ntest -f .env || cp .env.example .env\n```\n\n### 为空数据库加载当前态结构\n\n首次使用空项目数据库时，以该库的 DDL 账号加载 schema.sql。已有数据库升级前先备份。\n\n```sh\npsql -X -v ON_ERROR_STOP=1 -W -h 127.0.0.1 -U video -d video \\\n  -f backend/sql/schema.sql\n```\n\n### 安装登录来源并启动业务服务\n\nmacOS 上安装 Chrome 会话来源，并在 chrome://extensions 加载命令输出目录中的扩展。复用日常 Chrome 已有平台登录；Compose 启动 Web、API、Worker、Runner 与出口代理。公开链接优先匿名解析。生产配置见 README。\n\n```sh\nuv run --project backend python -m app.workers.session.source_cli install --env-file .env\ndocker compose up -d --build --wait --remove-orphans\n```\n\n### 初始化首个管理员\n\n全新空库在部署机终端执行一次，密码交互输入。命令只在用户表为空时创建管理员，不开放 HTTP 初始化接口。\n\n```sh\nuv run --project backend python -m app.workers.bootstrap_admin \\\n  --env-file .env --username your-admin --email you@example.com\n```\n\n### 检查服务健康状态\n\n默认 Web 端口为 8101，API 端口为 8111，Swagger UI 位于 :8111/docs。健康检查只证明服务可运行，不代表每个平台都有可下载的媒体。\n\n```sh\ncurl --fail http://127.0.0.1:8111/health/live\ncurl --fail http://127.0.0.1:8111/health/ready\ncurl --fail --head http://127.0.0.1:8101/\n```\n\n## AI 视频分析是否必须启用？\n\n不是。AI Worker 独立于业务 Compose 运行，可复用宿主机已登录的 Codex App Server，或由管理员配置受支持的模型 Provider。只需要下载与剧本文档导入时，在 .env 中设置 ANALYSIS_ENABLED=false；关闭 AI 不影响下载和文档导入。\n\n使用外部模型时，分析所需内容会发送到该服务，并可能产生费用。启用前应确认素材授权和模型服务的数据处理约定。\n\n## 公开上线前应检查什么？\n\n- 替换 .env.prod 中所有占位凭据，并确认密钥来源可在换机时恢复。\n- 外部媒体访问必须经过阻断私网的出口代理；入口 URL 校验不能替代网络隔离。\n- 为 MinIO 规划容量、备份与显式清理策略；预签名链接过期不会删除最终文件。\n- 只在计划公开介绍项目的网站设置 SITE_INDEXABLE=true，并把 SITE_URL 设为稳定的 HTTPS 域名。\n- 更新代码后执行 git pull --ff-only 并按 README 重新安装来源并执行 Compose 构建启动；docker compose restart 不会应用新镜像或环境配置。\n\n[README 快速开始](https://github.com/StephenQiu30/framefetch#快速开始) · [系统设计](https://github.com/StephenQiu30/framefetch/blob/main/docs/design/README.md)'**
+  /// **'本页摘录当前部署流程。命令与配置以仓库 README 为准；平台登录、换机与故障恢复请阅读对应设计文档。\n\n## 运行帧取需要准备什么？\n\n- Docker Engine 与 Docker Compose。\n- 部署者已有的 PostgreSQL、RabbitMQ、Redis 与 MinIO；Compose 只管理帧取自身的业务服务并复用这些基础环境。\n- macOS 平台会话来源需要 uv（Python 3.12）、日常 Chrome 与帧取扩展。\n- 生产部署需要强随机密钥、稳定的 HTTPS 访问地址和规划好的对象存储容量。\n\n## 如何用 Docker Compose 部署？\n\n### 克隆仓库并准备环境文件\n\n复制示例配置后，把 .env 中的连接信息改为本机已运行的 PostgreSQL、RabbitMQ、Redis 与 MinIO。真实密钥只写入未提交的 .env 或 Secret Manager。\n\n```sh\ngit clone https://github.com/StephenQiu30/framefetch.git\ncd framefetch\ntest -f .env || cp .env.example .env\n```\n\n### 为空数据库加载当前态结构\n\n首次使用空项目数据库时，以该库的 DDL 账号加载 schema.sql。已有数据库升级前先备份。\n\n```sh\npsql -X -v ON_ERROR_STOP=1 -W -h 127.0.0.1 -U video -d video \\\n  -f backend/sql/schema.sql\n```\n\n### 安装登录来源并启动业务服务\n\nmacOS 上安装 Chrome 会话来源，并在 chrome://extensions 加载命令输出目录中的扩展。复用日常 Chrome 已有平台登录；Compose 启动 Web、API、Worker、Runner 与出口代理。公开链接优先匿名解析。生产配置见 README。\n\n```sh\nuv run --project backend python -m app.workers.session.source_cli install --env-file .env\ndocker compose up -d --build --wait --remove-orphans\n```\n\n### 初始化首个管理员\n\n全新空库在部署机终端执行一次，密码交互输入。命令只在用户表为空时创建管理员，不开放 HTTP 初始化接口。\n\n```sh\nuv run --project backend python -m app.workers.bootstrap_admin \\\n  --env-file .env --username your-admin --email you@example.com\n```\n\n### 检查服务健康状态\n\n默认 Web 端口为 8101，API 端口为 8111，Swagger UI 位于 :8111/docs。健康检查只证明服务可运行，不代表每个平台都有可下载的媒体。\n\n```sh\ncurl --fail http://127.0.0.1:8111/health/live\ncurl --fail http://127.0.0.1:8111/health/ready\ncurl --fail --head http://127.0.0.1:8101/\n```\n\n## AI 视频分析是否必须启用？\n\n不是。AI 分析 Worker 随业务 Compose 一起启动，支持在管理后台配置火山引擎方舟、DeepSeek 或 OpenAI 官方 API Key。只需要下载与剧本文档导入时，在 .env 中设置 ANALYSIS_ENABLED=false；关闭 AI 不影响下载和文档导入。\n\n使用外部模型时，分析所需内容会发送到该服务，并可能产生费用。启用前应确认素材授权和模型服务的数据处理约定。\n\n## 公开上线前应检查什么？\n\n- 替换 .env.prod 中所有占位凭据，并确认密钥来源可在换机时恢复。\n- 外部媒体访问必须经过阻断私网的出口代理；入口 URL 校验不能替代网络隔离。\n- 为 MinIO 规划容量、备份与显式清理策略；预签名链接过期不会删除最终文件。\n- 只在计划公开介绍项目的网站设置 SITE_INDEXABLE=true，并把 SITE_URL 设为稳定的 HTTPS 域名。\n- 更新代码后执行 git pull --ff-only 并按 README 重新安装来源并执行 Compose 构建启动；docker compose restart 不会应用新镜像或环境配置。\n\n[README 快速开始](https://github.com/StephenQiu30/framefetch#快速开始) · [系统设计](https://github.com/StephenQiu30/framefetch/blob/main/docs/design/README.md)'**
   String get selfHostingContent;
 
   /// No description provided for @activityHistoryFrom.

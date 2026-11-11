@@ -91,13 +91,13 @@ void main() {
         (selectedUsers['get'] as Map<String, dynamic>)['parameters']
             as List<dynamic>;
 
-    expect(selectedPaths, hasLength(66));
+    expect(selectedPaths, hasLength(68));
     expect(
       selectedPaths.values.cast<Map<String, dynamic>>().fold<int>(
         0,
         (total, path) => total + path.length,
       ),
-      78,
+      81,
     );
     expect(selectedPaths['/api/users/me'], contains('patch'));
     expect(
@@ -169,9 +169,11 @@ void main() {
     expect(selectedPaths, contains('/api/admin/files/{category}/{file_id}'));
     expect(selectedPaths, contains('/api/admin/operation-logs'));
     expect(selectedPaths, contains('/api/admin/analyses/analytics'));
+    expect(selectedPaths, contains('/api/admin/ai-providers/presets'));
+    expect(selectedPaths, contains('/api/admin/ai-providers/test'));
     expect(
       selectedPaths,
-      contains('/api/admin/ai-providers/models/openrouter'),
+      contains('/api/admin/ai-providers/{provider_key}/fallback'),
     );
     expect(
       selectedPaths,
@@ -227,7 +229,8 @@ void main() {
     expect(schemas, contains('DocumentUploadSessionResponse'));
     expect(schemas, contains('AnalysisAnalyticsResponse'));
     expect(schemas, contains('OperationLogPageResponse'));
-    expect(schemas, contains('AiModelListResponse'));
+    expect(schemas, contains('AiProviderPresetListResponse'));
+    expect(schemas, contains('AiProviderConnectionTestResponse'));
     expect(schemas, contains('EngineCatalogResponse'));
     expect(schemas, contains('HistoryRecordPageResponse'));
     expect(schemas, contains('AnalysisRunHistoryPageResponse'));

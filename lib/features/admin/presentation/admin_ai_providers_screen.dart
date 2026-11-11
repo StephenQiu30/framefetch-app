@@ -50,6 +50,31 @@ final class _AdminAiProvidersScreenState
     }
   }
 
+  Future<void> _toggleFallback(AiProviderProfileResponse item) async {
+    setState(() => _busyKey = item.key);
+    try {
+      final repo = ref.read(adminRepositoryProvider);
+      if (item.isFallback) {
+        await repo.clearFallbackAiProvider(item.key);
+      } else {
+        await repo.setFallbackAiProvider(item.key);
+      }
+      if (mounted) {
+        ref.invalidate(adminAiProvidersProvider);
+      }
+    } catch (_) {
+      if (mounted) {
+        ShadSonner.of(context).show(
+          ShadToast(
+            description: Text(AppLocalizations.of(context).adminActionFailed),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _busyKey = null);
+    }
+  }
+
   Future<void> _delete(AiProviderProfileResponse item) async {
     final l = AppLocalizations.of(context);
     if (!await confirmAdminDelete(
@@ -133,6 +158,7 @@ final class _AdminAiProvidersScreenState
                   item: item,
                   busy: busy,
                   onActivate: () => _activate(item.key),
+                  onToggleFallback: () => _toggleFallback(item),
                   onEdit: () => editAiProvider(context, ref, item),
                   onDelete: () => _delete(item),
                 ),

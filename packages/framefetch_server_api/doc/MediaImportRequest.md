@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **fileName** | **String** |  |
 **declaredSizeBytes** | **int** |  |
 **declaredSha256** | **String** |  |
+**removeWatermark** | **bool** |  | [optional] [default to false]
 **rightsAccepted** | **bool** |  |
 **declaredOrigin** | [**DeclaredOrigin**](DeclaredOrigin.md) |  | [optional] [default to DeclaredOrigin.userFile]
 

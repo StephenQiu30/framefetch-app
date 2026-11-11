@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element, unused_element_parameter
+import 'package:built_collection/built_collection.dart';
 import 'package:framefetch_server_api/lib/model/ai_provider_auth_mode.dart';
 import 'package:framefetch_server_api/lib/model/ai_provider_engine.dart';
 import 'package:built_value/built_value.dart';
@@ -21,6 +22,11 @@ part 'ai_provider_profile_response.g.dart';
 /// * [model]
 /// * [credentialConfigured]
 /// * [isActive]
+/// * [isFallback]
+/// * [presetId]
+/// * [supportsVision]
+/// * [supportsModelsEndpoint]
+/// * [structuredOutputMode]
 /// * [createdAt]
 /// * [updatedAt]
 @BuiltValue()
@@ -35,11 +41,11 @@ abstract class AiProviderProfileResponse
 
   @BuiltValueField(wireName: r'engine')
   AiProviderEngine get engine;
-  // enum engineEnum {  codex,  claude,  deepseek,  openrouter,  openai,  };
+  // enum engineEnum {  volcengine,  deepseek,  openai,  };
 
   @BuiltValueField(wireName: r'auth_mode')
   AiProviderAuthMode get authMode;
-  // enum authModeEnum {  host_login,  api_key,  };
+  // enum authModeEnum {  api_key,  };
 
   @BuiltValueField(wireName: r'base_url')
   String? get baseUrl;
@@ -52,6 +58,22 @@ abstract class AiProviderProfileResponse
 
   @BuiltValueField(wireName: r'is_active')
   bool get isActive;
+
+  @BuiltValueField(wireName: r'is_fallback')
+  bool get isFallback;
+
+  @BuiltValueField(wireName: r'preset_id')
+  String? get presetId;
+
+  @BuiltValueField(wireName: r'supports_vision')
+  bool get supportsVision;
+
+  @BuiltValueField(wireName: r'supports_models_endpoint')
+  bool get supportsModelsEndpoint;
+
+  @BuiltValueField(wireName: r'structured_output_mode')
+  AiProviderProfileResponseStructuredOutputModeEnum get structuredOutputMode;
+  // enum structuredOutputModeEnum {  json_schema,  json_object,  };
 
   @BuiltValueField(wireName: r'created_at')
   DateTime get createdAt;
@@ -130,6 +152,34 @@ class _$AiProviderProfileResponseSerializer
     yield serializers.serialize(
       object.isActive,
       specifiedType: const FullType(bool),
+    );
+    yield r'is_fallback';
+    yield serializers.serialize(
+      object.isFallback,
+      specifiedType: const FullType(bool),
+    );
+    yield r'preset_id';
+    yield object.presetId == null
+        ? null
+        : serializers.serialize(
+            object.presetId,
+            specifiedType: const FullType.nullable(String),
+          );
+    yield r'supports_vision';
+    yield serializers.serialize(
+      object.supportsVision,
+      specifiedType: const FullType(bool),
+    );
+    yield r'supports_models_endpoint';
+    yield serializers.serialize(
+      object.supportsModelsEndpoint,
+      specifiedType: const FullType(bool),
+    );
+    yield r'structured_output_mode';
+    yield serializers.serialize(
+      object.structuredOutputMode,
+      specifiedType:
+          const FullType(AiProviderProfileResponseStructuredOutputModeEnum),
     );
     yield r'created_at';
     yield serializers.serialize(
@@ -223,6 +273,43 @@ class _$AiProviderProfileResponseSerializer
           ) as bool;
           result.isActive = valueDes;
           break;
+        case r'is_fallback':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.isFallback = valueDes;
+          break;
+        case r'preset_id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.presetId = valueDes;
+          break;
+        case r'supports_vision':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.supportsVision = valueDes;
+          break;
+        case r'supports_models_endpoint':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.supportsModelsEndpoint = valueDes;
+          break;
+        case r'structured_output_mode':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(
+                AiProviderProfileResponseStructuredOutputModeEnum),
+          ) as AiProviderProfileResponseStructuredOutputModeEnum;
+          result.structuredOutputMode = valueDes;
+          break;
         case r'created_at':
           final valueDes = serializers.deserialize(
             value,
@@ -264,4 +351,30 @@ class _$AiProviderProfileResponseSerializer
     );
     return result.build();
   }
+}
+
+class AiProviderProfileResponseStructuredOutputModeEnum extends EnumClass {
+  @BuiltValueEnumConst(wireName: r'json_schema')
+  static const AiProviderProfileResponseStructuredOutputModeEnum jsonSchema =
+      _$aiProviderProfileResponseStructuredOutputModeEnum_jsonSchema;
+  @BuiltValueEnumConst(wireName: r'json_object')
+  static const AiProviderProfileResponseStructuredOutputModeEnum jsonObject =
+      _$aiProviderProfileResponseStructuredOutputModeEnum_jsonObject;
+  @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
+  static const AiProviderProfileResponseStructuredOutputModeEnum
+      unknownDefaultOpenApi =
+      _$aiProviderProfileResponseStructuredOutputModeEnum_unknownDefaultOpenApi;
+
+  static Serializer<AiProviderProfileResponseStructuredOutputModeEnum>
+      get serializer =>
+          _$aiProviderProfileResponseStructuredOutputModeEnumSerializer;
+
+  const AiProviderProfileResponseStructuredOutputModeEnum._(String name)
+      : super(name);
+
+  static BuiltSet<AiProviderProfileResponseStructuredOutputModeEnum>
+      get values => _$aiProviderProfileResponseStructuredOutputModeEnumValues;
+  static AiProviderProfileResponseStructuredOutputModeEnum valueOf(
+          String name) =>
+      _$aiProviderProfileResponseStructuredOutputModeEnumValueOf(name);
 }

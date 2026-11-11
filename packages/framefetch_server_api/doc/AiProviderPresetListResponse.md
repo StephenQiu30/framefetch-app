@@ -1,4 +1,4 @@
-# framefetch_server_api.model.AiModelListResponse
+# framefetch_server_api.model.AiProviderPresetListResponse
 
 ## Load the model package
 ```dart
@@ -8,6 +8,6 @@ import 'package:framefetch_server_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | [**BuiltList&lt;AiModelResponse&gt;**](AiModelResponse.md) |  |
+**items** | [**BuiltList&lt;AiProviderPresetResponse&gt;**](AiProviderPresetResponse.md) |  |
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
